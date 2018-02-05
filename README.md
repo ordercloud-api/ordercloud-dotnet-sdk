@@ -22,7 +22,8 @@ var client = new OrderCloudClient(new OrderCloudClientConfig {
 
 var orders = await client.Orders.ListAsync(OrderDirection.Incoming, filters: new { Status = OrderStatus.Open });
 
-Console.WriteLine($"{orders.Meta.TotalCount} open orders found. Fetched page {orders.Meta.Page} of {orders.Meta.TotalPages}.");
+Console.WriteLine($"{orders.Meta.TotalCount} open orders found.");
+Console.WriteLine($"Fetched page {orders.Meta.Page} of {orders.Meta.TotalPages}.");
 foreach (var order in orders.Items) {
     Console.WriteLine($"ID: {order.ID}, Total: {order.Total:C}");
 }
