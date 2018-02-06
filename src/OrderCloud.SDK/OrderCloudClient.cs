@@ -57,7 +57,7 @@ namespace OrderCloud.SDK
 	{
 		private static readonly IFlurlClientFactory _clientFac = new PerBaseUrlFlurlClientFactory();
 
-		private static readonly ISerializer _serializer = new NewtonsoftJsonSerializer(new JsonSerializerSettings {
+		internal static readonly ISerializer Serializer = new NewtonsoftJsonSerializer(new JsonSerializerSettings {
 			ContractResolver = new OrderCloudContractResolver(),
 			Converters = {
 				new StringEnumConverter(),
@@ -127,7 +127,7 @@ namespace OrderCloud.SDK
 			.ConfigureRequest(settings => {
 				settings.BeforeCallAsync = EnsureTokenAsync;
 				settings.OnError = ThrowOcException;
-				settings.JsonSerializer = _serializer;
+				settings.JsonSerializer = Serializer;
 			});
 
 		private void ThrowOcException(HttpCall call) {
