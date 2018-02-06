@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<!-- https://docs.microsoft.com/en-us/dotnet/core/tools/csproj -->
+		<TargetFrameworks>net45;netstandard1.3;netstandard2.0</TargetFrameworks>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<Version>0.1.1</Version>
+
+		<PackageId>OrderCloud.SDK</PackageId>
+		<Title>OrderCloud SDK</Title>
+		<Authors>Four51</Authors>
+		<Description>The official .NET SDK for interacting with the OrderClould.io platform. OrderCloud.io is a cloud-hosted headless B2B eCommerce platform.</Description>
+		<Copyright>Copyright 2018 Four51, Inc.</Copyright>
+		<PackageProjectUrl>https://ordercloud.io/</PackageProjectUrl>
+		<PackageIconUrl>https://ordercloud.io/wp-content/uploads/2018/01/oc-circle-logo-2018.png</PackageIconUrl>
+		<PackageTags>ecommerce b2b four51 ordercloud cloud api headless</PackageTags>
+		<PackageReleaseNotes>https://ordercloud-api.github.io/release-notes/</PackageReleaseNotes>
+		<PackageLicenseUrl>https://raw.githubusercontent.com/ordercloud-api/ordercloud-dotnet-sdk/master/LICENSE</PackageLicenseUrl>
+		<RepositoryUrl>https://github.com/ordercloud-api/ordercloud-dotnet-sdk</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+	  <DocumentationFile>bin\Debug\netstandard1.3\OrderCloud.SDK.xml</DocumentationFile>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+	  <DocumentationFile>bin\Release\netstandard1.3\OrderCloud.SDK.xml</DocumentationFile>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="Flurl.Http" Version="2.1.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Reference Include="Microsoft.CSharp" />
+	</ItemGroup>
+
+</Project>
