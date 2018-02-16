@@ -77,11 +77,11 @@ OrderCloud.io supports PATCH endpoints for partially updating a resource. The id
 await client.Users.PatchAsync(buyerId, userId, new PartialUser { Active = true });
 ```
 
-`PartialUser` is type provided out of the box by the SDK (and similarly for all models with a corresponding PATCH endpoint). A couple things to note about `PartialUser`:
+`PartialUser` is a type provided out of the box by the SDK (and similarly for all models with a corresponding PATCH endpoint). A couple things to note about `PartialUser`:
 
 1. It has all the same strongly-typed properties as `User`; in fact, it inherits from `User`.
 
-2. What makes it different from `User` is how it gets serialized to JSON when the the API call is made. Instead of serializing _all_ properties, it only serializes those that are _explicitly set_. (In this example, `{"Active":true}` is sent in the request body.) This behavior is important to understand - once you set a property, you cannot "remove" it, even by setting it to `null`, for example.
+2. What makes it different from `User` is how it gets serialized to JSON when the the API call is made. Instead of serializing _all_ properties, it only serializes those that are _explicitly set_. (In this example, `{"Active":true}` is all that's sent in the request body.) This behavior is important to understand - once you set a property, you cannot "remove" it, even by setting it to `null`.
 
 ## FAQ
 
