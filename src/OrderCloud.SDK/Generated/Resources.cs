@@ -91,12 +91,12 @@ namespace OrderCloud.SDK
 		/// <summary>Partially update an address.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="addressID">ID of the address.</param>
-		Task<Address> PatchAsync(string buyerID, string addressID, Address partialAddress);
+		Task<Address> PatchAsync(string buyerID, string addressID, PartialAddress partialAddress);
 		/// <summary>Partially update an address.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="addressID">ID of the address.</param>
-		Task<Address<Txp>> PatchAsync<Txp>(string buyerID, string addressID, Address partialAddress);
+		Task<Address<Txp>> PatchAsync<Txp>(string buyerID, string addressID, PartialAddress partialAddress);
 		/// <summary>Get a list of address assignments.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="addressID">ID of the address.</param>
@@ -162,11 +162,11 @@ namespace OrderCloud.SDK
 		Task DeleteAsync(string addressID);
 		/// <summary>Partially update an admin address.</summary>
 		/// <param name="addressID">ID of the address.</param>
-		Task<Address> PatchAsync(string addressID, Address partialAddress);
+		Task<Address> PatchAsync(string addressID, PartialAddress partialAddress);
 		/// <summary>Partially update an admin address.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="addressID">ID of the address.</param>
-		Task<Address<Txp>> PatchAsync<Txp>(string addressID, Address partialAddress);
+		Task<Address<Txp>> PatchAsync<Txp>(string addressID, PartialAddress partialAddress);
 	}
 
 	public interface IAdminUserGroupsResource
@@ -212,11 +212,11 @@ namespace OrderCloud.SDK
 		Task DeleteAsync(string userGroupID);
 		/// <summary>Partially update an admin user group.</summary>
 		/// <param name="userGroupID">ID of the user group.</param>
-		Task<UserGroup> PatchAsync(string userGroupID, UserGroup partialUserGroup);
+		Task<UserGroup> PatchAsync(string userGroupID, PartialUserGroup partialUserGroup);
 		/// <summary>Partially update an admin user group.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="userGroupID">ID of the user group.</param>
-		Task<UserGroup<Txp>> PatchAsync<Txp>(string userGroupID, UserGroup partialUserGroup);
+		Task<UserGroup<Txp>> PatchAsync<Txp>(string userGroupID, PartialUserGroup partialUserGroup);
 		/// <summary>Get a list of admin user group user assignments.</summary>
 		/// <param name="userGroupID">ID of the user group.</param>
 		/// <param name="userID">ID of the user.</param>
@@ -274,11 +274,11 @@ namespace OrderCloud.SDK
 		Task DeleteAsync(string userID);
 		/// <summary>Partially update an admin user.</summary>
 		/// <param name="userID">ID of the user.</param>
-		Task<User> PatchAsync(string userID, User partialUser);
+		Task<User> PatchAsync(string userID, PartialUser partialUser);
 		/// <summary>Partially update an admin user.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="userID">ID of the user.</param>
-		Task<User<Txp>> PatchAsync<Txp>(string userID, User partialUser);
+		Task<User<Txp>> PatchAsync<Txp>(string userID, PartialUser partialUser);
 	}
 
 	public interface IApprovalRulesResource
@@ -334,12 +334,12 @@ namespace OrderCloud.SDK
 		/// <summary>Partially update an approval rule.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="approvalRuleID">ID of the approval rule.</param>
-		Task<ApprovalRule> PatchAsync(string buyerID, string approvalRuleID, ApprovalRule partialApprovalRule);
+		Task<ApprovalRule> PatchAsync(string buyerID, string approvalRuleID, PartialApprovalRule partialApprovalRule);
 		/// <summary>Partially update an approval rule.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="approvalRuleID">ID of the approval rule.</param>
-		Task<ApprovalRule<Txp>> PatchAsync<Txp>(string buyerID, string approvalRuleID, ApprovalRule partialApprovalRule);
+		Task<ApprovalRule<Txp>> PatchAsync<Txp>(string buyerID, string approvalRuleID, PartialApprovalRule partialApprovalRule);
 	}
 
 	public interface IBuyersResource
@@ -385,11 +385,11 @@ namespace OrderCloud.SDK
 		Task DeleteAsync(string buyerID);
 		/// <summary>Partially update a buyer.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
-		Task<Buyer> PatchAsync(string buyerID, Buyer partialBuyer);
+		Task<Buyer> PatchAsync(string buyerID, PartialBuyer partialBuyer);
 		/// <summary>Partially update a buyer.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="buyerID">ID of the buyer.</param>
-		Task<Buyer<Txp>> PatchAsync<Txp>(string buyerID, Buyer partialBuyer);
+		Task<Buyer<Txp>> PatchAsync<Txp>(string buyerID, PartialBuyer partialBuyer);
 	}
 
 	public interface ICatalogsResource
@@ -435,11 +435,11 @@ namespace OrderCloud.SDK
 		Task DeleteAsync(string catalogID);
 		/// <summary>Partially update a catalog.</summary>
 		/// <param name="catalogID">ID of the catalog.</param>
-		Task<Catalog> PatchAsync(string catalogID, Catalog partialCatalog);
+		Task<Catalog> PatchAsync(string catalogID, PartialCatalog partialCatalog);
 		/// <summary>Partially update a catalog.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="catalogID">ID of the catalog.</param>
-		Task<Catalog<Txp>> PatchAsync<Txp>(string catalogID, Catalog partialCatalog);
+		Task<Catalog<Txp>> PatchAsync<Txp>(string catalogID, PartialCatalog partialCatalog);
 		/// <summary>Get a list of catalog assignments.</summary>
 		/// <param name="catalogID">ID of the catalog.</param>
 		/// <param name="buyerID">ID of the buyer.</param>
@@ -521,12 +521,12 @@ namespace OrderCloud.SDK
 		/// <summary>Partially update a category.</summary>
 		/// <param name="catalogID">ID of the catalog.</param>
 		/// <param name="categoryID">ID of the category.</param>
-		Task<Category> PatchAsync(string catalogID, string categoryID, Category partialCategory);
+		Task<Category> PatchAsync(string catalogID, string categoryID, PartialCategory partialCategory);
 		/// <summary>Partially update a category.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="catalogID">ID of the catalog.</param>
 		/// <param name="categoryID">ID of the category.</param>
-		Task<Category<Txp>> PatchAsync<Txp>(string catalogID, string categoryID, Category partialCategory);
+		Task<Category<Txp>> PatchAsync<Txp>(string catalogID, string categoryID, PartialCategory partialCategory);
 		/// <summary>Get a list of category assignments.</summary>
 		/// <param name="catalogID">ID of the catalog.</param>
 		/// <param name="categoryID">ID of the category.</param>
@@ -617,12 +617,12 @@ namespace OrderCloud.SDK
 		/// <summary>Partially update a cost center.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="costCenterID">ID of the cost center.</param>
-		Task<CostCenter> PatchAsync(string buyerID, string costCenterID, CostCenter partialCostCenter);
+		Task<CostCenter> PatchAsync(string buyerID, string costCenterID, PartialCostCenter partialCostCenter);
 		/// <summary>Partially update a cost center.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="costCenterID">ID of the cost center.</param>
-		Task<CostCenter<Txp>> PatchAsync<Txp>(string buyerID, string costCenterID, CostCenter partialCostCenter);
+		Task<CostCenter<Txp>> PatchAsync<Txp>(string buyerID, string costCenterID, PartialCostCenter partialCostCenter);
 		/// <summary>Get a list of cost center assignments.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="costCenterID">ID of the cost center.</param>
@@ -696,12 +696,12 @@ namespace OrderCloud.SDK
 		/// <summary>Partially update a credit card.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="creditCardID">ID of the credit card.</param>
-		Task<CreditCard> PatchAsync(string buyerID, string creditCardID, CreditCard partialCreditCard);
+		Task<CreditCard> PatchAsync(string buyerID, string creditCardID, PartialCreditCard partialCreditCard);
 		/// <summary>Partially update a credit card.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="creditCardID">ID of the credit card.</param>
-		Task<CreditCard<Txp>> PatchAsync<Txp>(string buyerID, string creditCardID, CreditCard partialCreditCard);
+		Task<CreditCard<Txp>> PatchAsync<Txp>(string buyerID, string creditCardID, PartialCreditCard partialCreditCard);
 		/// <summary>Get a list of credit card assignments.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="creditCardID">ID of the credit card.</param>
@@ -745,7 +745,7 @@ namespace OrderCloud.SDK
 		Task DeleteAsync(string impersonationConfigID);
 		/// <summary>Partially update an impersonation config.</summary>
 		/// <param name="impersonationConfigID">ID of the impersonation config.</param>
-		Task<ImpersonationConfig> PatchAsync(string impersonationConfigID, ImpersonationConfig partialImpersonationConfig);
+		Task<ImpersonationConfig> PatchAsync(string impersonationConfigID, PartialImpersonationConfig partialImpersonationConfig);
 	}
 
 	public interface IIncrementorsResource
@@ -771,7 +771,7 @@ namespace OrderCloud.SDK
 		Task DeleteAsync(string incrementorID);
 		/// <summary>Partially update an incrementor.</summary>
 		/// <param name="incrementorID">ID of the incrementor.</param>
-		Task<Incrementor> PatchAsync(string incrementorID, Incrementor partialIncrementor);
+		Task<Incrementor> PatchAsync(string incrementorID, PartialIncrementor partialIncrementor);
 	}
 
 	public interface ILineItemsResource
@@ -837,13 +837,13 @@ namespace OrderCloud.SDK
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="lineItemID">ID of the line item.</param>
-		Task<LineItem> PatchAsync(OrderDirection direction, string orderID, string lineItemID, LineItem partialLineItem);
+		Task<LineItem> PatchAsync(OrderDirection direction, string orderID, string lineItemID, PartialLineItem partialLineItem);
 		/// <summary>Partially update a line item.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="lineItemID">ID of the line item.</param>
-		Task<LineItem<Txp>> PatchAsync<Txp>(OrderDirection direction, string orderID, string lineItemID, LineItem partialLineItem);
+		Task<LineItem<Txp>> PatchAsync<Txp>(OrderDirection direction, string orderID, string lineItemID, PartialLineItem partialLineItem);
 		/// <summary>Set a shipping address.</summary>
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing.</param>
 		/// <param name="orderID">ID of the order.</param>
@@ -859,13 +859,13 @@ namespace OrderCloud.SDK
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="lineItemID">ID of the line item.</param>
-		Task<LineItem> PatchShippingAddressAsync(OrderDirection direction, string orderID, string lineItemID, Address partialAddress);
+		Task<LineItem> PatchShippingAddressAsync(OrderDirection direction, string orderID, string lineItemID, PartialAddress partialAddress);
 		/// <summary>Partially update a line item shipping address.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="lineItemID">ID of the line item.</param>
-		Task<LineItem<Txp>> PatchShippingAddressAsync<Txp>(OrderDirection direction, string orderID, string lineItemID, Address partialAddress);
+		Task<LineItem<Txp>> PatchShippingAddressAsync<Txp>(OrderDirection direction, string orderID, string lineItemID, PartialAddress partialAddress);
 	}
 
 	public interface IMeResource
@@ -881,10 +881,10 @@ namespace OrderCloud.SDK
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		Task<MeUser<Txp>> UpdateAsync<Txp>(MeUser meUser);
 		/// <summary>Patch the Currently Authenticated User.</summary>
-		Task<MeUser> PatchAsync(MeUser partialMeUser);
+		Task<MeUser> PatchAsync(PartialMeUser partialMeUser);
 		/// <summary>Patch the Currently Authenticated User.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
-		Task<MeUser<Txp>> PatchAsync<Txp>(MeUser partialMeUser);
+		Task<MeUser<Txp>> PatchAsync<Txp>(PartialMeUser partialMeUser);
 		/// <summary>Get a list of cost centers visible to this user.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
@@ -957,7 +957,7 @@ namespace OrderCloud.SDK
 		Task<BuyerAddress<Txp>> UpdateAddressAsync<Txp>(string addressID, BuyerAddress buyerAddress);
 		/// <summary>Partially update an address.</summary>
 		/// <param name="addressID">ID of the address.</param>
-		Task PatchAddressAsync(string addressID, BuyerAddress partialBuyerAddress);
+		Task PatchAddressAsync(string addressID, PartialBuyerAddress partialBuyerAddress);
 		/// <summary>Delete an address.</summary>
 		/// <param name="addressID">ID of the address.</param>
 		Task DeleteAddressAsync(string addressID);
@@ -999,7 +999,7 @@ namespace OrderCloud.SDK
 		Task<BuyerCreditCard<Txp>> UpdateCreditCardAsync<Txp>(string creditcardID, BuyerCreditCard buyerCreditCard);
 		/// <summary>Partially update a credit card.</summary>
 		/// <param name="creditcardID">ID of the creditcard.</param>
-		Task PatchCreditCardAsync(string creditcardID, BuyerCreditCard partialBuyerCreditCard);
+		Task PatchCreditCardAsync(string creditcardID, PartialBuyerCreditCard partialBuyerCreditCard);
 		/// <summary>Delete a credit card.</summary>
 		/// <param name="creditcardID">ID of the creditcard.</param>
 		Task DeleteCreditCardAsync(string creditcardID);
@@ -1367,12 +1367,12 @@ namespace OrderCloud.SDK
 		/// <summary>Partially update an order.</summary>
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing.</param>
 		/// <param name="orderID">ID of the order.</param>
-		Task<Order> PatchAsync(OrderDirection direction, string orderID, Order partialOrder);
+		Task<Order> PatchAsync(OrderDirection direction, string orderID, PartialOrder partialOrder);
 		/// <summary>Partially update an order.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing.</param>
 		/// <param name="orderID">ID of the order.</param>
-		Task<Order<Txp>> PatchAsync<Txp>(OrderDirection direction, string orderID, Order partialOrder);
+		Task<Order<Txp>> PatchAsync<Txp>(OrderDirection direction, string orderID, PartialOrder partialOrder);
 		/// <summary>Submit an order submit.</summary>
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing.</param>
 		/// <param name="orderID">ID of the order.</param>
@@ -1430,12 +1430,12 @@ namespace OrderCloud.SDK
 		/// <summary>Partially update an order shipping address.</summary>
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing.</param>
 		/// <param name="orderID">ID of the order.</param>
-		Task<Order> PatchShippingAddressAsync(OrderDirection direction, string orderID, Address partialAddress);
+		Task<Order> PatchShippingAddressAsync(OrderDirection direction, string orderID, PartialAddress partialAddress);
 		/// <summary>Partially update an order shipping address.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing.</param>
 		/// <param name="orderID">ID of the order.</param>
-		Task<Order<Txp>> PatchShippingAddressAsync<Txp>(OrderDirection direction, string orderID, Address partialAddress);
+		Task<Order<Txp>> PatchShippingAddressAsync<Txp>(OrderDirection direction, string orderID, PartialAddress partialAddress);
 		/// <summary>Set an billing address.</summary>
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing.</param>
 		/// <param name="orderID">ID of the order.</param>
@@ -1448,21 +1448,21 @@ namespace OrderCloud.SDK
 		/// <summary>Partially update an order billing address.</summary>
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing.</param>
 		/// <param name="orderID">ID of the order.</param>
-		Task<Order> PatchBillingAddressAsync(OrderDirection direction, string orderID, Address partialAddress);
+		Task<Order> PatchBillingAddressAsync(OrderDirection direction, string orderID, PartialAddress partialAddress);
 		/// <summary>Partially update an order billing address.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing.</param>
 		/// <param name="orderID">ID of the order.</param>
-		Task<Order<Txp>> PatchBillingAddressAsync<Txp>(OrderDirection direction, string orderID, Address partialAddress);
+		Task<Order<Txp>> PatchBillingAddressAsync<Txp>(OrderDirection direction, string orderID, PartialAddress partialAddress);
 		/// <summary>Partially update an order from user.</summary>
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing.</param>
 		/// <param name="orderID">ID of the order.</param>
-		Task<Order> PatchFromUserAsync(OrderDirection direction, string orderID, User partialUser);
+		Task<Order> PatchFromUserAsync(OrderDirection direction, string orderID, PartialUser partialUser);
 		/// <summary>Partially update an order from user.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing.</param>
 		/// <param name="orderID">ID of the order.</param>
-		Task<Order<Txp>> PatchFromUserAsync<Txp>(OrderDirection direction, string orderID, User partialUser);
+		Task<Order<Txp>> PatchFromUserAsync<Txp>(OrderDirection direction, string orderID, PartialUser partialUser);
 		/// <summary>Add an promotion.</summary>
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing.</param>
 		/// <param name="orderID">ID of the order.</param>
@@ -1569,13 +1569,13 @@ namespace OrderCloud.SDK
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="paymentID">ID of the payment.</param>
-		Task<Payment> PatchAsync(OrderDirection direction, string orderID, string paymentID, Payment partialPayment);
+		Task<Payment> PatchAsync(OrderDirection direction, string orderID, string paymentID, PartialPayment partialPayment);
 		/// <summary>Partially update a payment.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="paymentID">ID of the payment.</param>
-		Task<Payment<Txp>> PatchAsync<Txp>(OrderDirection direction, string orderID, string paymentID, Payment partialPayment);
+		Task<Payment<Txp>> PatchAsync<Txp>(OrderDirection direction, string orderID, string paymentID, PartialPayment partialPayment);
 		/// <summary>Create a new payment transaction.</summary>
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing.</param>
 		/// <param name="orderID">ID of the order.</param>
@@ -1638,11 +1638,11 @@ namespace OrderCloud.SDK
 		Task DeleteAsync(string priceScheduleID);
 		/// <summary>Partially update a price schedule.</summary>
 		/// <param name="priceScheduleID">ID of the price schedule.</param>
-		Task<PriceSchedule> PatchAsync(string priceScheduleID, PriceSchedule partialPriceSchedule);
+		Task<PriceSchedule> PatchAsync(string priceScheduleID, PartialPriceSchedule partialPriceSchedule);
 		/// <summary>Partially update a price schedule.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="priceScheduleID">ID of the price schedule.</param>
-		Task<PriceSchedule<Txp>> PatchAsync<Txp>(string priceScheduleID, PriceSchedule partialPriceSchedule);
+		Task<PriceSchedule<Txp>> PatchAsync<Txp>(string priceScheduleID, PartialPriceSchedule partialPriceSchedule);
 		/// <summary>Save a price schedule price break.</summary>
 		/// <param name="priceScheduleID">ID of the price schedule.</param>
 		Task<PriceSchedule> SavePriceBreakAsync(string priceScheduleID, PriceBreak priceBreak);
@@ -1705,11 +1705,11 @@ namespace OrderCloud.SDK
 		Task DeleteAsync(string productID);
 		/// <summary>Partially update a product.</summary>
 		/// <param name="productID">ID of the product.</param>
-		Task<Product> PatchAsync(string productID, Product partialProduct);
+		Task<Product> PatchAsync(string productID, PartialProduct partialProduct);
 		/// <summary>Partially update a product.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="productID">ID of the product.</param>
-		Task<Product<Txp>> PatchAsync<Txp>(string productID, Product partialProduct);
+		Task<Product<Txp>> PatchAsync<Txp>(string productID, PartialProduct partialProduct);
 		/// <summary>Generate a variants.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="overwriteExisting">Overwrite existing of the product.</param>
@@ -1750,12 +1750,12 @@ namespace OrderCloud.SDK
 		/// <summary>Partially update a product variant.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="variantID">ID of the variant.</param>
-		Task<Variant> PatchVariantAsync(string productID, string variantID, Variant partialVariant);
+		Task<Variant> PatchVariantAsync(string productID, string variantID, PartialVariant partialVariant);
 		/// <summary>Partially update a product variant.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="variantID">ID of the variant.</param>
-		Task<Variant<Txp>> PatchVariantAsync<Txp>(string productID, string variantID, Variant partialVariant);
+		Task<Variant<Txp>> PatchVariantAsync<Txp>(string productID, string variantID, PartialVariant partialVariant);
 		/// <summary>Get a single product variant.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="variantID">ID of the variant.</param>
@@ -1855,11 +1855,11 @@ namespace OrderCloud.SDK
 		Task DeleteAsync(string promotionID);
 		/// <summary>Partially update a promotion.</summary>
 		/// <param name="promotionID">ID of the promotion.</param>
-		Task<Promotion> PatchAsync(string promotionID, Promotion partialPromotion);
+		Task<Promotion> PatchAsync(string promotionID, PartialPromotion partialPromotion);
 		/// <summary>Partially update a promotion.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="promotionID">ID of the promotion.</param>
-		Task<Promotion<Txp>> PatchAsync<Txp>(string promotionID, Promotion partialPromotion);
+		Task<Promotion<Txp>> PatchAsync<Txp>(string promotionID, PartialPromotion partialPromotion);
 		/// <summary>Get a list of promotion assignments.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="promotionID">ID of the promotion.</param>
@@ -1958,11 +1958,11 @@ namespace OrderCloud.SDK
 		Task DeleteAsync(string shipmentID);
 		/// <summary>Partially update a shipment.</summary>
 		/// <param name="shipmentID">ID of the shipment.</param>
-		Task<Shipment> PatchAsync(string shipmentID, Shipment partialShipment);
+		Task<Shipment> PatchAsync(string shipmentID, PartialShipment partialShipment);
 		/// <summary>Partially update a shipment.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="shipmentID">ID of the shipment.</param>
-		Task<Shipment<Txp>> PatchAsync<Txp>(string shipmentID, Shipment partialShipment);
+		Task<Shipment<Txp>> PatchAsync<Txp>(string shipmentID, PartialShipment partialShipment);
 		/// <summary>Get a list of shipment items.</summary>
 		/// <param name="shipmentID">ID of the shipment.</param>
 		/// <param name="search">Word or phrase to search for.</param>
@@ -2050,11 +2050,11 @@ namespace OrderCloud.SDK
 		Task DeleteAsync(string specID);
 		/// <summary>Partially update a spec.</summary>
 		/// <param name="specID">ID of the spec.</param>
-		Task<Spec> PatchAsync(string specID, Spec partialSpec);
+		Task<Spec> PatchAsync(string specID, PartialSpec partialSpec);
 		/// <summary>Partially update a spec.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="specID">ID of the spec.</param>
-		Task<Spec<Txp>> PatchAsync<Txp>(string specID, Spec partialSpec);
+		Task<Spec<Txp>> PatchAsync<Txp>(string specID, PartialSpec partialSpec);
 		/// <summary>Get a list of spec product assignments.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
@@ -2107,12 +2107,12 @@ namespace OrderCloud.SDK
 		/// <summary>Partially update a spec option.</summary>
 		/// <param name="specID">ID of the spec.</param>
 		/// <param name="optionID">ID of the option.</param>
-		Task<SpecOption> PatchOptionAsync(string specID, string optionID, SpecOption partialSpecOption);
+		Task<SpecOption> PatchOptionAsync(string specID, string optionID, PartialSpecOption partialSpecOption);
 		/// <summary>Partially update a spec option.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="specID">ID of the spec.</param>
 		/// <param name="optionID">ID of the option.</param>
-		Task<SpecOption<Txp>> PatchOptionAsync<Txp>(string specID, string optionID, SpecOption partialSpecOption);
+		Task<SpecOption<Txp>> PatchOptionAsync<Txp>(string specID, string optionID, PartialSpecOption partialSpecOption);
 		/// <summary>Get a single spec option.</summary>
 		/// <param name="specID">ID of the spec.</param>
 		/// <param name="optionID">ID of the option.</param>
@@ -2181,12 +2181,12 @@ namespace OrderCloud.SDK
 		/// <summary>Partially update a spending account.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="spendingAccountID">ID of the spending account.</param>
-		Task<SpendingAccount> PatchAsync(string buyerID, string spendingAccountID, SpendingAccount partialSpendingAccount);
+		Task<SpendingAccount> PatchAsync(string buyerID, string spendingAccountID, PartialSpendingAccount partialSpendingAccount);
 		/// <summary>Partially update a spending account.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="spendingAccountID">ID of the spending account.</param>
-		Task<SpendingAccount<Txp>> PatchAsync<Txp>(string buyerID, string spendingAccountID, SpendingAccount partialSpendingAccount);
+		Task<SpendingAccount<Txp>> PatchAsync<Txp>(string buyerID, string spendingAccountID, PartialSpendingAccount partialSpendingAccount);
 		/// <summary>Get a list of spending account assignments.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="spendingAccountID">ID of the spending account.</param>
@@ -2250,11 +2250,11 @@ namespace OrderCloud.SDK
 		Task DeleteAsync(string supplierID);
 		/// <summary>Partially update a supplier.</summary>
 		/// <param name="supplierID">ID of the supplier.</param>
-		Task<Supplier> PatchAsync(string supplierID, Supplier partialSupplier);
+		Task<Supplier> PatchAsync(string supplierID, PartialSupplier partialSupplier);
 		/// <summary>Partially update a supplier.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="supplierID">ID of the supplier.</param>
-		Task<Supplier<Txp>> PatchAsync<Txp>(string supplierID, Supplier partialSupplier);
+		Task<Supplier<Txp>> PatchAsync<Txp>(string supplierID, PartialSupplier partialSupplier);
 	}
 
 	public interface ISupplierUserGroupsResource
@@ -2310,12 +2310,12 @@ namespace OrderCloud.SDK
 		/// <summary>Partially update a supplier user group.</summary>
 		/// <param name="supplierID">ID of the supplier.</param>
 		/// <param name="userGroupID">ID of the user group.</param>
-		Task<UserGroup> PatchAsync(string supplierID, string userGroupID, UserGroup partialUserGroup);
+		Task<UserGroup> PatchAsync(string supplierID, string userGroupID, PartialUserGroup partialUserGroup);
 		/// <summary>Partially update a supplier user group.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="supplierID">ID of the supplier.</param>
 		/// <param name="userGroupID">ID of the user group.</param>
-		Task<UserGroup<Txp>> PatchAsync<Txp>(string supplierID, string userGroupID, UserGroup partialUserGroup);
+		Task<UserGroup<Txp>> PatchAsync<Txp>(string supplierID, string userGroupID, PartialUserGroup partialUserGroup);
 		/// <summary>Get a list of supplier user group user assignments.</summary>
 		/// <param name="supplierID">ID of the supplier.</param>
 		/// <param name="userGroupID">ID of the user group.</param>
@@ -2388,12 +2388,12 @@ namespace OrderCloud.SDK
 		/// <summary>Partially update a supplier user.</summary>
 		/// <param name="supplierID">ID of the supplier.</param>
 		/// <param name="userID">ID of the user.</param>
-		Task<User> PatchAsync(string supplierID, string userID, User partialUser);
+		Task<User> PatchAsync(string supplierID, string userID, PartialUser partialUser);
 		/// <summary>Partially update a supplier user.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="supplierID">ID of the supplier.</param>
 		/// <param name="userID">ID of the user.</param>
-		Task<User<Txp>> PatchAsync<Txp>(string supplierID, string userID, User partialUser);
+		Task<User<Txp>> PatchAsync<Txp>(string supplierID, string userID, PartialUser partialUser);
 		/// <summary>Get a single supplier user access token.</summary>
 		/// <param name="supplierID">ID of the supplier.</param>
 		/// <param name="userID">ID of the user.</param>
@@ -2453,12 +2453,12 @@ namespace OrderCloud.SDK
 		/// <summary>Partially update a user group.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="userGroupID">ID of the user group.</param>
-		Task<UserGroup> PatchAsync(string buyerID, string userGroupID, UserGroup partialUserGroup);
+		Task<UserGroup> PatchAsync(string buyerID, string userGroupID, PartialUserGroup partialUserGroup);
 		/// <summary>Partially update a user group.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="userGroupID">ID of the user group.</param>
-		Task<UserGroup<Txp>> PatchAsync<Txp>(string buyerID, string userGroupID, UserGroup partialUserGroup);
+		Task<UserGroup<Txp>> PatchAsync<Txp>(string buyerID, string userGroupID, PartialUserGroup partialUserGroup);
 		/// <summary>Get a list of user group user assignments.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="userGroupID">ID of the user group.</param>
@@ -2531,12 +2531,12 @@ namespace OrderCloud.SDK
 		/// <summary>Partially update a user.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="userID">ID of the user.</param>
-		Task<User> PatchAsync(string buyerID, string userID, User partialUser);
+		Task<User> PatchAsync(string buyerID, string userID, PartialUser partialUser);
 		/// <summary>Partially update a user.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="userID">ID of the user.</param>
-		Task<User<Txp>> PatchAsync<Txp>(string buyerID, string userID, User partialUser);
+		Task<User<Txp>> PatchAsync<Txp>(string buyerID, string userID, PartialUser partialUser);
 		/// <summary>Move a user to a different buyer</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="userID">ID of the user.</param>
@@ -2635,8 +2635,8 @@ namespace OrderCloud.SDK
 		public Task<Address> UpdateAsync(string buyerID, string addressID, Address address) => Request("v1", "buyers", buyerID, "addresses", addressID).PutJsonAsync(ValidateModel(address)).ReceiveJson<Address>();
 		public Task<Address<Txp>> UpdateAsync<Txp>(string buyerID, string addressID, Address address) => Request("v1", "buyers", buyerID, "addresses", addressID).PutJsonAsync(ValidateModel(address)).ReceiveJson<Address<Txp>>();
 		public Task DeleteAsync(string buyerID, string addressID) => Request("v1", "buyers", buyerID, "addresses", addressID).DeleteAsync();
-		public Task<Address> PatchAsync(string buyerID, string addressID, Address partialAddress) => Request("v1", "buyers", buyerID, "addresses", addressID).PatchJsonAsync(ValidateModel(partialAddress)).ReceiveJson<Address>();
-		public Task<Address<Txp>> PatchAsync<Txp>(string buyerID, string addressID, Address partialAddress) => Request("v1", "buyers", buyerID, "addresses", addressID).PatchJsonAsync(ValidateModel(partialAddress)).ReceiveJson<Address<Txp>>();
+		public Task<Address> PatchAsync(string buyerID, string addressID, PartialAddress partialAddress) => Request("v1", "buyers", buyerID, "addresses", addressID).PatchJsonAsync(ValidateModel(partialAddress)).ReceiveJson<Address>();
+		public Task<Address<Txp>> PatchAsync<Txp>(string buyerID, string addressID, PartialAddress partialAddress) => Request("v1", "buyers", buyerID, "addresses", addressID).PatchJsonAsync(ValidateModel(partialAddress)).ReceiveJson<Address<Txp>>();
 		public Task<ListPage<AddressAssignment>> ListAssignmentsAsync(string buyerID, string addressID = null, string userID = null, string userGroupID = null, PartyType? level = null, bool? isShipping = null, bool? isBilling = null, int? page = null, int? pageSize = null) => Request("v1", "buyers", buyerID, "addresses", "assignments").SetQueryParams(new { addressID, userID, userGroupID, level, isShipping, isBilling, page, pageSize }).GetJsonAsync<ListPage<AddressAssignment>>();
 		public Task DeleteAssignmentAsync(string buyerID, string addressID, string userID = null, string userGroupID = null) => Request("v1", "buyers", buyerID, "addresses", addressID, "assignments").SetQueryParams(new { userID, userGroupID }).DeleteAsync();
 		public Task SaveAssignmentAsync(string buyerID, AddressAssignment addressAssignment) => Request("v1", "buyers", buyerID, "addresses", "assignments").PostJsonAsync(ValidateModel(addressAssignment));
@@ -2654,8 +2654,8 @@ namespace OrderCloud.SDK
 		public Task<Address> UpdateAsync(string addressID, Address address) => Request("v1", "addresses", addressID).PutJsonAsync(ValidateModel(address)).ReceiveJson<Address>();
 		public Task<Address<Txp>> UpdateAsync<Txp>(string addressID, Address address) => Request("v1", "addresses", addressID).PutJsonAsync(ValidateModel(address)).ReceiveJson<Address<Txp>>();
 		public Task DeleteAsync(string addressID) => Request("v1", "addresses", addressID).DeleteAsync();
-		public Task<Address> PatchAsync(string addressID, Address partialAddress) => Request("v1", "addresses", addressID).PatchJsonAsync(ValidateModel(partialAddress)).ReceiveJson<Address>();
-		public Task<Address<Txp>> PatchAsync<Txp>(string addressID, Address partialAddress) => Request("v1", "addresses", addressID).PatchJsonAsync(ValidateModel(partialAddress)).ReceiveJson<Address<Txp>>();
+		public Task<Address> PatchAsync(string addressID, PartialAddress partialAddress) => Request("v1", "addresses", addressID).PatchJsonAsync(ValidateModel(partialAddress)).ReceiveJson<Address>();
+		public Task<Address<Txp>> PatchAsync<Txp>(string addressID, PartialAddress partialAddress) => Request("v1", "addresses", addressID).PatchJsonAsync(ValidateModel(partialAddress)).ReceiveJson<Address<Txp>>();
 	}
 
 	public class AdminUserGroupsResource : OrderCloudResource, IAdminUserGroupsResource
@@ -2670,8 +2670,8 @@ namespace OrderCloud.SDK
 		public Task<UserGroup> UpdateAsync(string userGroupID, UserGroup userGroup) => Request("v1", "usergroups", userGroupID).PutJsonAsync(ValidateModel(userGroup)).ReceiveJson<UserGroup>();
 		public Task<UserGroup<Txp>> UpdateAsync<Txp>(string userGroupID, UserGroup userGroup) => Request("v1", "usergroups", userGroupID).PutJsonAsync(ValidateModel(userGroup)).ReceiveJson<UserGroup<Txp>>();
 		public Task DeleteAsync(string userGroupID) => Request("v1", "usergroups", userGroupID).DeleteAsync();
-		public Task<UserGroup> PatchAsync(string userGroupID, UserGroup partialUserGroup) => Request("v1", "usergroups", userGroupID).PatchJsonAsync(ValidateModel(partialUserGroup)).ReceiveJson<UserGroup>();
-		public Task<UserGroup<Txp>> PatchAsync<Txp>(string userGroupID, UserGroup partialUserGroup) => Request("v1", "usergroups", userGroupID).PatchJsonAsync(ValidateModel(partialUserGroup)).ReceiveJson<UserGroup<Txp>>();
+		public Task<UserGroup> PatchAsync(string userGroupID, PartialUserGroup partialUserGroup) => Request("v1", "usergroups", userGroupID).PatchJsonAsync(ValidateModel(partialUserGroup)).ReceiveJson<UserGroup>();
+		public Task<UserGroup<Txp>> PatchAsync<Txp>(string userGroupID, PartialUserGroup partialUserGroup) => Request("v1", "usergroups", userGroupID).PatchJsonAsync(ValidateModel(partialUserGroup)).ReceiveJson<UserGroup<Txp>>();
 		public Task<ListPage<UserGroupAssignment>> ListUserAssignmentsAsync(string userGroupID = null, string userID = null, int page = 1, int pageSize = 20) => Request("v1", "usergroups", "assignments").SetQueryParams(new { userGroupID, userID, page, pageSize }).GetJsonAsync<ListPage<UserGroupAssignment>>();
 		public Task DeleteUserAssignmentAsync(string userGroupID, string userID) => Request("v1", "usergroups", userGroupID, "assignments", userID).DeleteAsync();
 		public Task SaveUserAssignmentAsync(UserGroupAssignment userGroupAssignment) => Request("v1", "usergroups", "assignments").PostJsonAsync(ValidateModel(userGroupAssignment));
@@ -2689,8 +2689,8 @@ namespace OrderCloud.SDK
 		public Task<User> UpdateAsync(string userID, User user) => Request("v1", "adminusers", userID).PutJsonAsync(ValidateModel(user)).ReceiveJson<User>();
 		public Task<User<Txp>> UpdateAsync<Txp>(string userID, User user) => Request("v1", "adminusers", userID).PutJsonAsync(ValidateModel(user)).ReceiveJson<User<Txp>>();
 		public Task DeleteAsync(string userID) => Request("v1", "adminusers", userID).DeleteAsync();
-		public Task<User> PatchAsync(string userID, User partialUser) => Request("v1", "adminusers", userID).PatchJsonAsync(ValidateModel(partialUser)).ReceiveJson<User>();
-		public Task<User<Txp>> PatchAsync<Txp>(string userID, User partialUser) => Request("v1", "adminusers", userID).PatchJsonAsync(ValidateModel(partialUser)).ReceiveJson<User<Txp>>();
+		public Task<User> PatchAsync(string userID, PartialUser partialUser) => Request("v1", "adminusers", userID).PatchJsonAsync(ValidateModel(partialUser)).ReceiveJson<User>();
+		public Task<User<Txp>> PatchAsync<Txp>(string userID, PartialUser partialUser) => Request("v1", "adminusers", userID).PatchJsonAsync(ValidateModel(partialUser)).ReceiveJson<User<Txp>>();
 	}
 
 	public class ApprovalRulesResource : OrderCloudResource, IApprovalRulesResource
@@ -2705,8 +2705,8 @@ namespace OrderCloud.SDK
 		public Task<ApprovalRule> UpdateAsync(string buyerID, string approvalRuleID, ApprovalRule approvalRule) => Request("v1", "buyers", buyerID, "approvalrules", approvalRuleID).PutJsonAsync(ValidateModel(approvalRule)).ReceiveJson<ApprovalRule>();
 		public Task<ApprovalRule<Txp>> UpdateAsync<Txp>(string buyerID, string approvalRuleID, ApprovalRule approvalRule) => Request("v1", "buyers", buyerID, "approvalrules", approvalRuleID).PutJsonAsync(ValidateModel(approvalRule)).ReceiveJson<ApprovalRule<Txp>>();
 		public Task DeleteAsync(string buyerID, string approvalRuleID) => Request("v1", "buyers", buyerID, "approvalrules", approvalRuleID).DeleteAsync();
-		public Task<ApprovalRule> PatchAsync(string buyerID, string approvalRuleID, ApprovalRule partialApprovalRule) => Request("v1", "buyers", buyerID, "approvalrules", approvalRuleID).PatchJsonAsync(ValidateModel(partialApprovalRule)).ReceiveJson<ApprovalRule>();
-		public Task<ApprovalRule<Txp>> PatchAsync<Txp>(string buyerID, string approvalRuleID, ApprovalRule partialApprovalRule) => Request("v1", "buyers", buyerID, "approvalrules", approvalRuleID).PatchJsonAsync(ValidateModel(partialApprovalRule)).ReceiveJson<ApprovalRule<Txp>>();
+		public Task<ApprovalRule> PatchAsync(string buyerID, string approvalRuleID, PartialApprovalRule partialApprovalRule) => Request("v1", "buyers", buyerID, "approvalrules", approvalRuleID).PatchJsonAsync(ValidateModel(partialApprovalRule)).ReceiveJson<ApprovalRule>();
+		public Task<ApprovalRule<Txp>> PatchAsync<Txp>(string buyerID, string approvalRuleID, PartialApprovalRule partialApprovalRule) => Request("v1", "buyers", buyerID, "approvalrules", approvalRuleID).PatchJsonAsync(ValidateModel(partialApprovalRule)).ReceiveJson<ApprovalRule<Txp>>();
 	}
 
 	public class BuyersResource : OrderCloudResource, IBuyersResource
@@ -2721,8 +2721,8 @@ namespace OrderCloud.SDK
 		public Task<Buyer> UpdateAsync(string buyerID, Buyer buyer) => Request("v1", "buyers", buyerID).PutJsonAsync(ValidateModel(buyer)).ReceiveJson<Buyer>();
 		public Task<Buyer<Txp>> UpdateAsync<Txp>(string buyerID, Buyer buyer) => Request("v1", "buyers", buyerID).PutJsonAsync(ValidateModel(buyer)).ReceiveJson<Buyer<Txp>>();
 		public Task DeleteAsync(string buyerID) => Request("v1", "buyers", buyerID).DeleteAsync();
-		public Task<Buyer> PatchAsync(string buyerID, Buyer partialBuyer) => Request("v1", "buyers", buyerID).PatchJsonAsync(ValidateModel(partialBuyer)).ReceiveJson<Buyer>();
-		public Task<Buyer<Txp>> PatchAsync<Txp>(string buyerID, Buyer partialBuyer) => Request("v1", "buyers", buyerID).PatchJsonAsync(ValidateModel(partialBuyer)).ReceiveJson<Buyer<Txp>>();
+		public Task<Buyer> PatchAsync(string buyerID, PartialBuyer partialBuyer) => Request("v1", "buyers", buyerID).PatchJsonAsync(ValidateModel(partialBuyer)).ReceiveJson<Buyer>();
+		public Task<Buyer<Txp>> PatchAsync<Txp>(string buyerID, PartialBuyer partialBuyer) => Request("v1", "buyers", buyerID).PatchJsonAsync(ValidateModel(partialBuyer)).ReceiveJson<Buyer<Txp>>();
 	}
 
 	public class CatalogsResource : OrderCloudResource, ICatalogsResource
@@ -2737,8 +2737,8 @@ namespace OrderCloud.SDK
 		public Task<Catalog> UpdateAsync(string catalogID, Catalog catalog) => Request("v1", "catalogs", catalogID).PutJsonAsync(ValidateModel(catalog)).ReceiveJson<Catalog>();
 		public Task<Catalog<Txp>> UpdateAsync<Txp>(string catalogID, Catalog catalog) => Request("v1", "catalogs", catalogID).PutJsonAsync(ValidateModel(catalog)).ReceiveJson<Catalog<Txp>>();
 		public Task DeleteAsync(string catalogID) => Request("v1", "catalogs", catalogID).DeleteAsync();
-		public Task<Catalog> PatchAsync(string catalogID, Catalog partialCatalog) => Request("v1", "catalogs", catalogID).PatchJsonAsync(ValidateModel(partialCatalog)).ReceiveJson<Catalog>();
-		public Task<Catalog<Txp>> PatchAsync<Txp>(string catalogID, Catalog partialCatalog) => Request("v1", "catalogs", catalogID).PatchJsonAsync(ValidateModel(partialCatalog)).ReceiveJson<Catalog<Txp>>();
+		public Task<Catalog> PatchAsync(string catalogID, PartialCatalog partialCatalog) => Request("v1", "catalogs", catalogID).PatchJsonAsync(ValidateModel(partialCatalog)).ReceiveJson<Catalog>();
+		public Task<Catalog<Txp>> PatchAsync<Txp>(string catalogID, PartialCatalog partialCatalog) => Request("v1", "catalogs", catalogID).PatchJsonAsync(ValidateModel(partialCatalog)).ReceiveJson<Catalog<Txp>>();
 		public Task<ListPage<CatalogAssignment>> ListAssignmentsAsync(string catalogID = null, string buyerID = null, int page = 1, int pageSize = 20) => Request("v1", "catalogs", "assignments").SetQueryParams(new { catalogID, buyerID, page, pageSize }).GetJsonAsync<ListPage<CatalogAssignment>>();
 		public Task SaveAssignmentAsync(CatalogAssignment catalogAssignment) => Request("v1", "catalogs", "assignments").PostJsonAsync(ValidateModel(catalogAssignment));
 		public Task DeleteAssignmentAsync(string catalogID, string buyerID) => Request("v1", "catalogs", catalogID, "assignments").SetQueryParams(new { buyerID }).DeleteAsync();
@@ -2759,8 +2759,8 @@ namespace OrderCloud.SDK
 		public Task<Category> UpdateAsync(string catalogID, string categoryID, Category category) => Request("v1", "catalogs", catalogID, "categories", categoryID).PutJsonAsync(ValidateModel(category)).ReceiveJson<Category>();
 		public Task<Category<Txp>> UpdateAsync<Txp>(string catalogID, string categoryID, Category category) => Request("v1", "catalogs", catalogID, "categories", categoryID).PutJsonAsync(ValidateModel(category)).ReceiveJson<Category<Txp>>();
 		public Task DeleteAsync(string catalogID, string categoryID) => Request("v1", "catalogs", catalogID, "categories", categoryID).DeleteAsync();
-		public Task<Category> PatchAsync(string catalogID, string categoryID, Category partialCategory) => Request("v1", "catalogs", catalogID, "categories", categoryID).PatchJsonAsync(ValidateModel(partialCategory)).ReceiveJson<Category>();
-		public Task<Category<Txp>> PatchAsync<Txp>(string catalogID, string categoryID, Category partialCategory) => Request("v1", "catalogs", catalogID, "categories", categoryID).PatchJsonAsync(ValidateModel(partialCategory)).ReceiveJson<Category<Txp>>();
+		public Task<Category> PatchAsync(string catalogID, string categoryID, PartialCategory partialCategory) => Request("v1", "catalogs", catalogID, "categories", categoryID).PatchJsonAsync(ValidateModel(partialCategory)).ReceiveJson<Category>();
+		public Task<Category<Txp>> PatchAsync<Txp>(string catalogID, string categoryID, PartialCategory partialCategory) => Request("v1", "catalogs", catalogID, "categories", categoryID).PatchJsonAsync(ValidateModel(partialCategory)).ReceiveJson<Category<Txp>>();
 		public Task<ListPage<CategoryAssignment>> ListAssignmentsAsync(string catalogID, string categoryID = null, string buyerID = null, string userID = null, string userGroupID = null, PartyType? level = null, int? page = null, int? pageSize = null) => Request("v1", "catalogs", catalogID, "categories", "assignments").SetQueryParams(new { categoryID, buyerID, userID, userGroupID, level, page, pageSize }).GetJsonAsync<ListPage<CategoryAssignment>>();
 		public Task DeleteAssignmentAsync(string catalogID, string categoryID, string buyerID, string userID = null, string userGroupID = null) => Request("v1", "catalogs", catalogID, "categories", categoryID, "assignments").SetQueryParams(new { buyerID, userID, userGroupID }).DeleteAsync();
 		public Task SaveAssignmentAsync(string catalogID, CategoryAssignment categoryAssignment) => Request("v1", "catalogs", catalogID, "categories", "assignments").PostJsonAsync(ValidateModel(categoryAssignment));
@@ -2781,8 +2781,8 @@ namespace OrderCloud.SDK
 		public Task<CostCenter> UpdateAsync(string buyerID, string costCenterID, CostCenter costCenter) => Request("v1", "buyers", buyerID, "costcenters", costCenterID).PutJsonAsync(ValidateModel(costCenter)).ReceiveJson<CostCenter>();
 		public Task<CostCenter<Txp>> UpdateAsync<Txp>(string buyerID, string costCenterID, CostCenter costCenter) => Request("v1", "buyers", buyerID, "costcenters", costCenterID).PutJsonAsync(ValidateModel(costCenter)).ReceiveJson<CostCenter<Txp>>();
 		public Task DeleteAsync(string buyerID, string costCenterID) => Request("v1", "buyers", buyerID, "costcenters", costCenterID).DeleteAsync();
-		public Task<CostCenter> PatchAsync(string buyerID, string costCenterID, CostCenter partialCostCenter) => Request("v1", "buyers", buyerID, "costcenters", costCenterID).PatchJsonAsync(ValidateModel(partialCostCenter)).ReceiveJson<CostCenter>();
-		public Task<CostCenter<Txp>> PatchAsync<Txp>(string buyerID, string costCenterID, CostCenter partialCostCenter) => Request("v1", "buyers", buyerID, "costcenters", costCenterID).PatchJsonAsync(ValidateModel(partialCostCenter)).ReceiveJson<CostCenter<Txp>>();
+		public Task<CostCenter> PatchAsync(string buyerID, string costCenterID, PartialCostCenter partialCostCenter) => Request("v1", "buyers", buyerID, "costcenters", costCenterID).PatchJsonAsync(ValidateModel(partialCostCenter)).ReceiveJson<CostCenter>();
+		public Task<CostCenter<Txp>> PatchAsync<Txp>(string buyerID, string costCenterID, PartialCostCenter partialCostCenter) => Request("v1", "buyers", buyerID, "costcenters", costCenterID).PatchJsonAsync(ValidateModel(partialCostCenter)).ReceiveJson<CostCenter<Txp>>();
 		public Task<ListPage<CostCenterAssignment>> ListAssignmentsAsync(string buyerID, string costCenterID = null, string userID = null, string userGroupID = null, PartyType? level = null, int? page = null, int? pageSize = null) => Request("v1", "buyers", buyerID, "costcenters", "assignments").SetQueryParams(new { costCenterID, userID, userGroupID, level, page, pageSize }).GetJsonAsync<ListPage<CostCenterAssignment>>();
 		public Task DeleteAssignmentAsync(string buyerID, string costCenterID, string userID = null, string userGroupID = null) => Request("v1", "buyers", buyerID, "costcenters", costCenterID, "assignments").SetQueryParams(new { userID, userGroupID }).DeleteAsync();
 		public Task SaveAssignmentAsync(string buyerID, CostCenterAssignment costCenterAssignment) => Request("v1", "buyers", buyerID, "costcenters", "assignments").PostJsonAsync(ValidateModel(costCenterAssignment));
@@ -2800,8 +2800,8 @@ namespace OrderCloud.SDK
 		public Task<CreditCard> UpdateAsync(string buyerID, string creditCardID, CreditCard creditCard) => Request("v1", "buyers", buyerID, "creditcards", creditCardID).PutJsonAsync(ValidateModel(creditCard)).ReceiveJson<CreditCard>();
 		public Task<CreditCard<Txp>> UpdateAsync<Txp>(string buyerID, string creditCardID, CreditCard creditCard) => Request("v1", "buyers", buyerID, "creditcards", creditCardID).PutJsonAsync(ValidateModel(creditCard)).ReceiveJson<CreditCard<Txp>>();
 		public Task DeleteAsync(string buyerID, string creditCardID) => Request("v1", "buyers", buyerID, "creditcards", creditCardID).DeleteAsync();
-		public Task<CreditCard> PatchAsync(string buyerID, string creditCardID, CreditCard partialCreditCard) => Request("v1", "buyers", buyerID, "creditcards", creditCardID).PatchJsonAsync(ValidateModel(partialCreditCard)).ReceiveJson<CreditCard>();
-		public Task<CreditCard<Txp>> PatchAsync<Txp>(string buyerID, string creditCardID, CreditCard partialCreditCard) => Request("v1", "buyers", buyerID, "creditcards", creditCardID).PatchJsonAsync(ValidateModel(partialCreditCard)).ReceiveJson<CreditCard<Txp>>();
+		public Task<CreditCard> PatchAsync(string buyerID, string creditCardID, PartialCreditCard partialCreditCard) => Request("v1", "buyers", buyerID, "creditcards", creditCardID).PatchJsonAsync(ValidateModel(partialCreditCard)).ReceiveJson<CreditCard>();
+		public Task<CreditCard<Txp>> PatchAsync<Txp>(string buyerID, string creditCardID, PartialCreditCard partialCreditCard) => Request("v1", "buyers", buyerID, "creditcards", creditCardID).PatchJsonAsync(ValidateModel(partialCreditCard)).ReceiveJson<CreditCard<Txp>>();
 		public Task<ListPage<CreditCardAssignment>> ListAssignmentsAsync(string buyerID, string creditCardID = null, string userID = null, string userGroupID = null, PartyType? level = null, int? page = null, int? pageSize = null) => Request("v1", "buyers", buyerID, "creditcards", "assignments").SetQueryParams(new { creditCardID, userID, userGroupID, level, page, pageSize }).GetJsonAsync<ListPage<CreditCardAssignment>>();
 		public Task SaveAssignmentAsync(string buyerID, CreditCardAssignment creditCardAssignment) => Request("v1", "buyers", buyerID, "creditcards", "assignments").PostJsonAsync(ValidateModel(creditCardAssignment));
 		public Task DeleteAssignmentAsync(string buyerID, string creditCardID, string userID = null, string userGroupID = null) => Request("v1", "buyers", buyerID, "creditcards", creditCardID, "assignments").SetQueryParams(new { userID, userGroupID }).DeleteAsync();
@@ -2815,7 +2815,7 @@ namespace OrderCloud.SDK
 		public Task<ImpersonationConfig> CreateAsync(ImpersonationConfig impersonationConfig) => Request("v1", "impersonationconfig").PostJsonAsync(ValidateModel(impersonationConfig)).ReceiveJson<ImpersonationConfig>();
 		public Task<ImpersonationConfig> UpdateAsync(string impersonationConfigID, ImpersonationConfig impersonationConfig) => Request("v1", "impersonationconfig", impersonationConfigID).PutJsonAsync(ValidateModel(impersonationConfig)).ReceiveJson<ImpersonationConfig>();
 		public Task DeleteAsync(string impersonationConfigID) => Request("v1", "impersonationconfig", impersonationConfigID).DeleteAsync();
-		public Task<ImpersonationConfig> PatchAsync(string impersonationConfigID, ImpersonationConfig partialImpersonationConfig) => Request("v1", "impersonationconfig", impersonationConfigID).PatchJsonAsync(ValidateModel(partialImpersonationConfig)).ReceiveJson<ImpersonationConfig>();
+		public Task<ImpersonationConfig> PatchAsync(string impersonationConfigID, PartialImpersonationConfig partialImpersonationConfig) => Request("v1", "impersonationconfig", impersonationConfigID).PatchJsonAsync(ValidateModel(partialImpersonationConfig)).ReceiveJson<ImpersonationConfig>();
 	}
 
 	public class IncrementorsResource : OrderCloudResource, IIncrementorsResource
@@ -2826,7 +2826,7 @@ namespace OrderCloud.SDK
 		public Task<Incrementor> CreateAsync(Incrementor incrementor) => Request("v1", "incrementors").PostJsonAsync(ValidateModel(incrementor)).ReceiveJson<Incrementor>();
 		public Task<Incrementor> UpdateAsync(string incrementorID, Incrementor incrementor) => Request("v1", "incrementors", incrementorID).PutJsonAsync(ValidateModel(incrementor)).ReceiveJson<Incrementor>();
 		public Task DeleteAsync(string incrementorID) => Request("v1", "incrementors", incrementorID).DeleteAsync();
-		public Task<Incrementor> PatchAsync(string incrementorID, Incrementor partialIncrementor) => Request("v1", "incrementors", incrementorID).PatchJsonAsync(ValidateModel(partialIncrementor)).ReceiveJson<Incrementor>();
+		public Task<Incrementor> PatchAsync(string incrementorID, PartialIncrementor partialIncrementor) => Request("v1", "incrementors", incrementorID).PatchJsonAsync(ValidateModel(partialIncrementor)).ReceiveJson<Incrementor>();
 	}
 
 	public class LineItemsResource : OrderCloudResource, ILineItemsResource
@@ -2841,12 +2841,12 @@ namespace OrderCloud.SDK
 		public Task<LineItem> UpdateAsync(OrderDirection direction, string orderID, string lineItemID, LineItem lineItem) => Request("v1", "orders", direction, orderID, "lineitems", lineItemID).PutJsonAsync(ValidateModel(lineItem)).ReceiveJson<LineItem>();
 		public Task<LineItem<Txp>> UpdateAsync<Txp>(OrderDirection direction, string orderID, string lineItemID, LineItem lineItem) => Request("v1", "orders", direction, orderID, "lineitems", lineItemID).PutJsonAsync(ValidateModel(lineItem)).ReceiveJson<LineItem<Txp>>();
 		public Task DeleteAsync(OrderDirection direction, string orderID, string lineItemID) => Request("v1", "orders", direction, orderID, "lineitems", lineItemID).DeleteAsync();
-		public Task<LineItem> PatchAsync(OrderDirection direction, string orderID, string lineItemID, LineItem partialLineItem) => Request("v1", "orders", direction, orderID, "lineitems", lineItemID).PatchJsonAsync(ValidateModel(partialLineItem)).ReceiveJson<LineItem>();
-		public Task<LineItem<Txp>> PatchAsync<Txp>(OrderDirection direction, string orderID, string lineItemID, LineItem partialLineItem) => Request("v1", "orders", direction, orderID, "lineitems", lineItemID).PatchJsonAsync(ValidateModel(partialLineItem)).ReceiveJson<LineItem<Txp>>();
+		public Task<LineItem> PatchAsync(OrderDirection direction, string orderID, string lineItemID, PartialLineItem partialLineItem) => Request("v1", "orders", direction, orderID, "lineitems", lineItemID).PatchJsonAsync(ValidateModel(partialLineItem)).ReceiveJson<LineItem>();
+		public Task<LineItem<Txp>> PatchAsync<Txp>(OrderDirection direction, string orderID, string lineItemID, PartialLineItem partialLineItem) => Request("v1", "orders", direction, orderID, "lineitems", lineItemID).PatchJsonAsync(ValidateModel(partialLineItem)).ReceiveJson<LineItem<Txp>>();
 		public Task<LineItem> SetShippingAddressAsync(OrderDirection direction, string orderID, string lineItemID, Address address) => Request("v1", "orders", direction, orderID, "lineitems", lineItemID, "shipto").PutJsonAsync(ValidateModel(address)).ReceiveJson<LineItem>();
 		public Task<LineItem<Txp>> SetShippingAddressAsync<Txp>(OrderDirection direction, string orderID, string lineItemID, Address address) => Request("v1", "orders", direction, orderID, "lineitems", lineItemID, "shipto").PutJsonAsync(ValidateModel(address)).ReceiveJson<LineItem<Txp>>();
-		public Task<LineItem> PatchShippingAddressAsync(OrderDirection direction, string orderID, string lineItemID, Address partialAddress) => Request("v1", "orders", direction, orderID, "lineitems", lineItemID, "shipto").PatchJsonAsync(ValidateModel(partialAddress)).ReceiveJson<LineItem>();
-		public Task<LineItem<Txp>> PatchShippingAddressAsync<Txp>(OrderDirection direction, string orderID, string lineItemID, Address partialAddress) => Request("v1", "orders", direction, orderID, "lineitems", lineItemID, "shipto").PatchJsonAsync(ValidateModel(partialAddress)).ReceiveJson<LineItem<Txp>>();
+		public Task<LineItem> PatchShippingAddressAsync(OrderDirection direction, string orderID, string lineItemID, PartialAddress partialAddress) => Request("v1", "orders", direction, orderID, "lineitems", lineItemID, "shipto").PatchJsonAsync(ValidateModel(partialAddress)).ReceiveJson<LineItem>();
+		public Task<LineItem<Txp>> PatchShippingAddressAsync<Txp>(OrderDirection direction, string orderID, string lineItemID, PartialAddress partialAddress) => Request("v1", "orders", direction, orderID, "lineitems", lineItemID, "shipto").PatchJsonAsync(ValidateModel(partialAddress)).ReceiveJson<LineItem<Txp>>();
 	}
 
 	public class MeResource : OrderCloudResource, IMeResource
@@ -2856,8 +2856,8 @@ namespace OrderCloud.SDK
 		public Task<MeUser<Txp>> GetAsync<Txp>() => Request("v1", "me").GetJsonAsync<MeUser<Txp>>();
 		public Task<MeUser> UpdateAsync(MeUser meUser) => Request("v1", "me").PutJsonAsync(ValidateModel(meUser)).ReceiveJson<MeUser>();
 		public Task<MeUser<Txp>> UpdateAsync<Txp>(MeUser meUser) => Request("v1", "me").PutJsonAsync(ValidateModel(meUser)).ReceiveJson<MeUser<Txp>>();
-		public Task<MeUser> PatchAsync(MeUser partialMeUser) => Request("v1", "me").PatchJsonAsync(ValidateModel(partialMeUser)).ReceiveJson<MeUser>();
-		public Task<MeUser<Txp>> PatchAsync<Txp>(MeUser partialMeUser) => Request("v1", "me").PatchJsonAsync(ValidateModel(partialMeUser)).ReceiveJson<MeUser<Txp>>();
+		public Task<MeUser> PatchAsync(PartialMeUser partialMeUser) => Request("v1", "me").PatchJsonAsync(ValidateModel(partialMeUser)).ReceiveJson<MeUser>();
+		public Task<MeUser<Txp>> PatchAsync<Txp>(PartialMeUser partialMeUser) => Request("v1", "me").PatchJsonAsync(ValidateModel(partialMeUser)).ReceiveJson<MeUser<Txp>>();
 		public Task<ListPage<CostCenter>> ListCostCentersAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null) => Request("v1", "me", "costcenters").SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<CostCenter>>();
 		public Task<ListPage<CostCenter<Txp>>> ListCostCentersAsync<Txp>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null) => Request("v1", "me", "costcenters").SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<CostCenter<Txp>>>();
 		public Task<ListPage<UserGroup>> ListUserGroupsAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null) => Request("v1", "me", "usergroups").SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<UserGroup>>();
@@ -2870,7 +2870,7 @@ namespace OrderCloud.SDK
 		public Task<BuyerAddress<Txp>> GetAddressAsync<Txp>(string addressID) => Request("v1", "me", "addresses", addressID).GetJsonAsync<BuyerAddress<Txp>>();
 		public Task<BuyerAddress> UpdateAddressAsync(string addressID, BuyerAddress buyerAddress) => Request("v1", "me", "addresses", addressID).PutJsonAsync(ValidateModel(buyerAddress)).ReceiveJson<BuyerAddress>();
 		public Task<BuyerAddress<Txp>> UpdateAddressAsync<Txp>(string addressID, BuyerAddress buyerAddress) => Request("v1", "me", "addresses", addressID).PutJsonAsync(ValidateModel(buyerAddress)).ReceiveJson<BuyerAddress<Txp>>();
-		public Task PatchAddressAsync(string addressID, BuyerAddress partialBuyerAddress) => Request("v1", "me", "addresses", addressID).PatchJsonAsync(ValidateModel(partialBuyerAddress));
+		public Task PatchAddressAsync(string addressID, PartialBuyerAddress partialBuyerAddress) => Request("v1", "me", "addresses", addressID).PatchJsonAsync(ValidateModel(partialBuyerAddress));
 		public Task DeleteAddressAsync(string addressID) => Request("v1", "me", "addresses", addressID).DeleteAsync();
 		public Task<BuyerCreditCard> CreateCreditCardAsync(BuyerCreditCard buyerCreditCard) => Request("v1", "me", "creditcards").PostJsonAsync(ValidateModel(buyerCreditCard)).ReceiveJson<BuyerCreditCard>();
 		public Task<BuyerCreditCard<Txp>> CreateCreditCardAsync<Txp>(BuyerCreditCard buyerCreditCard) => Request("v1", "me", "creditcards").PostJsonAsync(ValidateModel(buyerCreditCard)).ReceiveJson<BuyerCreditCard<Txp>>();
@@ -2880,7 +2880,7 @@ namespace OrderCloud.SDK
 		public Task<BuyerCreditCard<Txp>> GetCreditCardAsync<Txp>(string creditcardID) => Request("v1", "me", "creditcards", creditcardID).GetJsonAsync<BuyerCreditCard<Txp>>();
 		public Task<BuyerCreditCard> UpdateCreditCardAsync(string creditcardID, BuyerCreditCard buyerCreditCard) => Request("v1", "me", "creditcards", creditcardID).PutJsonAsync(ValidateModel(buyerCreditCard)).ReceiveJson<BuyerCreditCard>();
 		public Task<BuyerCreditCard<Txp>> UpdateCreditCardAsync<Txp>(string creditcardID, BuyerCreditCard buyerCreditCard) => Request("v1", "me", "creditcards", creditcardID).PutJsonAsync(ValidateModel(buyerCreditCard)).ReceiveJson<BuyerCreditCard<Txp>>();
-		public Task PatchCreditCardAsync(string creditcardID, BuyerCreditCard partialBuyerCreditCard) => Request("v1", "me", "creditcards", creditcardID).PatchJsonAsync(ValidateModel(partialBuyerCreditCard));
+		public Task PatchCreditCardAsync(string creditcardID, PartialBuyerCreditCard partialBuyerCreditCard) => Request("v1", "me", "creditcards", creditcardID).PatchJsonAsync(ValidateModel(partialBuyerCreditCard));
 		public Task DeleteCreditCardAsync(string creditcardID) => Request("v1", "me", "creditcards", creditcardID).DeleteAsync();
 		public Task<ListPage<Category>> ListCategoriesAsync(string depth = "1", string catalogID = null, string productID = null, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null) => Request("v1", "me", "categories").SetQueryParams(new { depth, catalogID, productID, search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<Category>>();
 		public Task<Category> GetCategoryAsync(string categoryID, string catalogID) => Request("v1", "me", "categories", categoryID).SetQueryParams(new { catalogID }).GetJsonAsync<Category>();
@@ -2945,8 +2945,8 @@ namespace OrderCloud.SDK
 		public Task<ListPage<OrderApproval>> ListApprovalsAsync(OrderDirection direction, string orderID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null) => Request("v1", "orders", direction, orderID, "approvals").SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<OrderApproval>>();
 		public Task<ListPage<User>> ListEligibleApproversAsync(OrderDirection direction, string orderID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null) => Request("v1", "orders", direction, orderID, "eligibleapprovers").SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<User>>();
 		public Task<ListPage<User<Txp>>> ListEligibleApproversAsync<Txp>(OrderDirection direction, string orderID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null) => Request("v1", "orders", direction, orderID, "eligibleapprovers").SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<User<Txp>>>();
-		public Task<Order> PatchAsync(OrderDirection direction, string orderID, Order partialOrder) => Request("v1", "orders", direction, orderID).PatchJsonAsync(ValidateModel(partialOrder)).ReceiveJson<Order>();
-		public Task<Order<Txp>> PatchAsync<Txp>(OrderDirection direction, string orderID, Order partialOrder) => Request("v1", "orders", direction, orderID).PatchJsonAsync(ValidateModel(partialOrder)).ReceiveJson<Order<Txp>>();
+		public Task<Order> PatchAsync(OrderDirection direction, string orderID, PartialOrder partialOrder) => Request("v1", "orders", direction, orderID).PatchJsonAsync(ValidateModel(partialOrder)).ReceiveJson<Order>();
+		public Task<Order<Txp>> PatchAsync<Txp>(OrderDirection direction, string orderID, PartialOrder partialOrder) => Request("v1", "orders", direction, orderID).PatchJsonAsync(ValidateModel(partialOrder)).ReceiveJson<Order<Txp>>();
 		public Task<Order> SubmitAsync(OrderDirection direction, string orderID) => Request("v1", "orders", direction, orderID, "submit").PostAsync(null).ReceiveJson<Order>();
 		public Task<Order<Txp>> SubmitAsync<Txp>(OrderDirection direction, string orderID) => Request("v1", "orders", direction, orderID, "submit").PostAsync(null).ReceiveJson<Order<Txp>>();
 		public Task<Order> ApproveAsync(OrderDirection direction, string orderID, OrderApprovalInfo orderApprovalInfo) => Request("v1", "orders", direction, orderID, "approve").PostJsonAsync(ValidateModel(orderApprovalInfo)).ReceiveJson<Order>();
@@ -2959,14 +2959,14 @@ namespace OrderCloud.SDK
 		public Task<Order<Txp>> ShipAsync<Txp>(OrderDirection direction, string orderID, Shipment shipment) => Request("v1", "orders", direction, orderID, "ship").PostJsonAsync(ValidateModel(shipment)).ReceiveJson<Order<Txp>>();
 		public Task<Order> SetShippingAddressAsync(OrderDirection direction, string orderID, Address address) => Request("v1", "orders", direction, orderID, "shipto").PutJsonAsync(ValidateModel(address)).ReceiveJson<Order>();
 		public Task<Order<Txp>> SetShippingAddressAsync<Txp>(OrderDirection direction, string orderID, Address address) => Request("v1", "orders", direction, orderID, "shipto").PutJsonAsync(ValidateModel(address)).ReceiveJson<Order<Txp>>();
-		public Task<Order> PatchShippingAddressAsync(OrderDirection direction, string orderID, Address partialAddress) => Request("v1", "orders", direction, orderID, "shipto").PatchJsonAsync(ValidateModel(partialAddress)).ReceiveJson<Order>();
-		public Task<Order<Txp>> PatchShippingAddressAsync<Txp>(OrderDirection direction, string orderID, Address partialAddress) => Request("v1", "orders", direction, orderID, "shipto").PatchJsonAsync(ValidateModel(partialAddress)).ReceiveJson<Order<Txp>>();
+		public Task<Order> PatchShippingAddressAsync(OrderDirection direction, string orderID, PartialAddress partialAddress) => Request("v1", "orders", direction, orderID, "shipto").PatchJsonAsync(ValidateModel(partialAddress)).ReceiveJson<Order>();
+		public Task<Order<Txp>> PatchShippingAddressAsync<Txp>(OrderDirection direction, string orderID, PartialAddress partialAddress) => Request("v1", "orders", direction, orderID, "shipto").PatchJsonAsync(ValidateModel(partialAddress)).ReceiveJson<Order<Txp>>();
 		public Task<Order> SetBillingAddressAsync(OrderDirection direction, string orderID, Address address) => Request("v1", "orders", direction, orderID, "billto").PutJsonAsync(ValidateModel(address)).ReceiveJson<Order>();
 		public Task<Order<Txp>> SetBillingAddressAsync<Txp>(OrderDirection direction, string orderID, Address address) => Request("v1", "orders", direction, orderID, "billto").PutJsonAsync(ValidateModel(address)).ReceiveJson<Order<Txp>>();
-		public Task<Order> PatchBillingAddressAsync(OrderDirection direction, string orderID, Address partialAddress) => Request("v1", "orders", direction, orderID, "billto").PatchJsonAsync(ValidateModel(partialAddress)).ReceiveJson<Order>();
-		public Task<Order<Txp>> PatchBillingAddressAsync<Txp>(OrderDirection direction, string orderID, Address partialAddress) => Request("v1", "orders", direction, orderID, "billto").PatchJsonAsync(ValidateModel(partialAddress)).ReceiveJson<Order<Txp>>();
-		public Task<Order> PatchFromUserAsync(OrderDirection direction, string orderID, User partialUser) => Request("v1", "orders", direction, orderID, "fromuser").PatchJsonAsync(ValidateModel(partialUser)).ReceiveJson<Order>();
-		public Task<Order<Txp>> PatchFromUserAsync<Txp>(OrderDirection direction, string orderID, User partialUser) => Request("v1", "orders", direction, orderID, "fromuser").PatchJsonAsync(ValidateModel(partialUser)).ReceiveJson<Order<Txp>>();
+		public Task<Order> PatchBillingAddressAsync(OrderDirection direction, string orderID, PartialAddress partialAddress) => Request("v1", "orders", direction, orderID, "billto").PatchJsonAsync(ValidateModel(partialAddress)).ReceiveJson<Order>();
+		public Task<Order<Txp>> PatchBillingAddressAsync<Txp>(OrderDirection direction, string orderID, PartialAddress partialAddress) => Request("v1", "orders", direction, orderID, "billto").PatchJsonAsync(ValidateModel(partialAddress)).ReceiveJson<Order<Txp>>();
+		public Task<Order> PatchFromUserAsync(OrderDirection direction, string orderID, PartialUser partialUser) => Request("v1", "orders", direction, orderID, "fromuser").PatchJsonAsync(ValidateModel(partialUser)).ReceiveJson<Order>();
+		public Task<Order<Txp>> PatchFromUserAsync<Txp>(OrderDirection direction, string orderID, PartialUser partialUser) => Request("v1", "orders", direction, orderID, "fromuser").PatchJsonAsync(ValidateModel(partialUser)).ReceiveJson<Order<Txp>>();
 		public Task<Promotion> AddPromotionAsync(OrderDirection direction, string orderID, string promoCode) => Request("v1", "orders", direction, orderID, "promotions", promoCode).PostAsync(null).ReceiveJson<Promotion>();
 		public Task<Promotion<Txp>> AddPromotionAsync<Txp>(OrderDirection direction, string orderID, string promoCode) => Request("v1", "orders", direction, orderID, "promotions", promoCode).PostAsync(null).ReceiveJson<Promotion<Txp>>();
 		public Task<ListPage<OrderPromotion>> ListPromotionsAsync(OrderDirection direction, string orderID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null) => Request("v1", "orders", direction, orderID, "promotions").SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<OrderPromotion>>();
@@ -2992,8 +2992,8 @@ namespace OrderCloud.SDK
 		public Task<Payment> CreateAsync(OrderDirection direction, string orderID, Payment payment) => Request("v1", "orders", direction, orderID, "payments").PostJsonAsync(ValidateModel(payment)).ReceiveJson<Payment>();
 		public Task<Payment<Txp>> CreateAsync<Txp>(OrderDirection direction, string orderID, Payment payment) => Request("v1", "orders", direction, orderID, "payments").PostJsonAsync(ValidateModel(payment)).ReceiveJson<Payment<Txp>>();
 		public Task DeleteAsync(OrderDirection direction, string orderID, string paymentID) => Request("v1", "orders", direction, orderID, "payments", paymentID).DeleteAsync();
-		public Task<Payment> PatchAsync(OrderDirection direction, string orderID, string paymentID, Payment partialPayment) => Request("v1", "orders", direction, orderID, "payments", paymentID).PatchJsonAsync(ValidateModel(partialPayment)).ReceiveJson<Payment>();
-		public Task<Payment<Txp>> PatchAsync<Txp>(OrderDirection direction, string orderID, string paymentID, Payment partialPayment) => Request("v1", "orders", direction, orderID, "payments", paymentID).PatchJsonAsync(ValidateModel(partialPayment)).ReceiveJson<Payment<Txp>>();
+		public Task<Payment> PatchAsync(OrderDirection direction, string orderID, string paymentID, PartialPayment partialPayment) => Request("v1", "orders", direction, orderID, "payments", paymentID).PatchJsonAsync(ValidateModel(partialPayment)).ReceiveJson<Payment>();
+		public Task<Payment<Txp>> PatchAsync<Txp>(OrderDirection direction, string orderID, string paymentID, PartialPayment partialPayment) => Request("v1", "orders", direction, orderID, "payments", paymentID).PatchJsonAsync(ValidateModel(partialPayment)).ReceiveJson<Payment<Txp>>();
 		public Task<Payment> CreateTransactionAsync(OrderDirection direction, string orderID, string paymentID, PaymentTransaction paymentTransaction) => Request("v1", "orders", direction, orderID, "payments", paymentID, "transactions").PostJsonAsync(ValidateModel(paymentTransaction)).ReceiveJson<Payment>();
 		public Task<Payment<Txp>> CreateTransactionAsync<Txp>(OrderDirection direction, string orderID, string paymentID, PaymentTransaction paymentTransaction) => Request("v1", "orders", direction, orderID, "payments", paymentID, "transactions").PostJsonAsync(ValidateModel(paymentTransaction)).ReceiveJson<Payment<Txp>>();
 		public Task DeleteTransactionAsync(OrderDirection direction, string orderID, string paymentID, string transactionID) => Request("v1", "orders", direction, orderID, "payments", paymentID, "transactions", transactionID).DeleteAsync();
@@ -3011,8 +3011,8 @@ namespace OrderCloud.SDK
 		public Task<PriceSchedule> UpdateAsync(string priceScheduleID, PriceSchedule priceSchedule) => Request("v1", "priceschedules", priceScheduleID).PutJsonAsync(ValidateModel(priceSchedule)).ReceiveJson<PriceSchedule>();
 		public Task<PriceSchedule<Txp>> UpdateAsync<Txp>(string priceScheduleID, PriceSchedule priceSchedule) => Request("v1", "priceschedules", priceScheduleID).PutJsonAsync(ValidateModel(priceSchedule)).ReceiveJson<PriceSchedule<Txp>>();
 		public Task DeleteAsync(string priceScheduleID) => Request("v1", "priceschedules", priceScheduleID).DeleteAsync();
-		public Task<PriceSchedule> PatchAsync(string priceScheduleID, PriceSchedule partialPriceSchedule) => Request("v1", "priceschedules", priceScheduleID).PatchJsonAsync(ValidateModel(partialPriceSchedule)).ReceiveJson<PriceSchedule>();
-		public Task<PriceSchedule<Txp>> PatchAsync<Txp>(string priceScheduleID, PriceSchedule partialPriceSchedule) => Request("v1", "priceschedules", priceScheduleID).PatchJsonAsync(ValidateModel(partialPriceSchedule)).ReceiveJson<PriceSchedule<Txp>>();
+		public Task<PriceSchedule> PatchAsync(string priceScheduleID, PartialPriceSchedule partialPriceSchedule) => Request("v1", "priceschedules", priceScheduleID).PatchJsonAsync(ValidateModel(partialPriceSchedule)).ReceiveJson<PriceSchedule>();
+		public Task<PriceSchedule<Txp>> PatchAsync<Txp>(string priceScheduleID, PartialPriceSchedule partialPriceSchedule) => Request("v1", "priceschedules", priceScheduleID).PatchJsonAsync(ValidateModel(partialPriceSchedule)).ReceiveJson<PriceSchedule<Txp>>();
 		public Task<PriceSchedule> SavePriceBreakAsync(string priceScheduleID, PriceBreak priceBreak) => Request("v1", "priceschedules", priceScheduleID, "PriceBreaks").PostJsonAsync(ValidateModel(priceBreak)).ReceiveJson<PriceSchedule>();
 		public Task<PriceSchedule<Txp>> SavePriceBreakAsync<Txp>(string priceScheduleID, PriceBreak priceBreak) => Request("v1", "priceschedules", priceScheduleID, "PriceBreaks").PostJsonAsync(ValidateModel(priceBreak)).ReceiveJson<PriceSchedule<Txp>>();
 		public Task DeletePriceBreakAsync(string priceScheduleID, int quantity) => Request("v1", "priceschedules", priceScheduleID, "PriceBreaks").SetQueryParams(new { quantity }).DeleteAsync();
@@ -3030,16 +3030,16 @@ namespace OrderCloud.SDK
 		public Task<Product> UpdateAsync(string productID, Product product) => Request("v1", "products", productID).PutJsonAsync(ValidateModel(product)).ReceiveJson<Product>();
 		public Task<Product<Txp>> UpdateAsync<Txp>(string productID, Product product) => Request("v1", "products", productID).PutJsonAsync(ValidateModel(product)).ReceiveJson<Product<Txp>>();
 		public Task DeleteAsync(string productID) => Request("v1", "products", productID).DeleteAsync();
-		public Task<Product> PatchAsync(string productID, Product partialProduct) => Request("v1", "products", productID).PatchJsonAsync(ValidateModel(partialProduct)).ReceiveJson<Product>();
-		public Task<Product<Txp>> PatchAsync<Txp>(string productID, Product partialProduct) => Request("v1", "products", productID).PatchJsonAsync(ValidateModel(partialProduct)).ReceiveJson<Product<Txp>>();
+		public Task<Product> PatchAsync(string productID, PartialProduct partialProduct) => Request("v1", "products", productID).PatchJsonAsync(ValidateModel(partialProduct)).ReceiveJson<Product>();
+		public Task<Product<Txp>> PatchAsync<Txp>(string productID, PartialProduct partialProduct) => Request("v1", "products", productID).PatchJsonAsync(ValidateModel(partialProduct)).ReceiveJson<Product<Txp>>();
 		public Task<Product> GenerateVariantsAsync(string productID, bool overwriteExisting = false) => Request("v1", "products", productID, "variants", "generate").SetQueryParams(new { overwriteExisting }).PostAsync(null).ReceiveJson<Product>();
 		public Task<Product<Txp>> GenerateVariantsAsync<Txp>(string productID, bool overwriteExisting = false) => Request("v1", "products", productID, "variants", "generate").SetQueryParams(new { overwriteExisting }).PostAsync(null).ReceiveJson<Product<Txp>>();
 		public Task<ListPage<Variant>> ListVariantsAsync(string productID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null) => Request("v1", "products", productID, "variants").SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<Variant>>();
 		public Task<ListPage<Variant<Txp>>> ListVariantsAsync<Txp>(string productID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null) => Request("v1", "products", productID, "variants").SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<Variant<Txp>>>();
 		public Task<Variant> UpdateVariantAsync(string productID, string variantID, Variant variant) => Request("v1", "products", productID, "variants", variantID).PutJsonAsync(ValidateModel(variant)).ReceiveJson<Variant>();
 		public Task<Variant<Txp>> UpdateVariantAsync<Txp>(string productID, string variantID, Variant variant) => Request("v1", "products", productID, "variants", variantID).PutJsonAsync(ValidateModel(variant)).ReceiveJson<Variant<Txp>>();
-		public Task<Variant> PatchVariantAsync(string productID, string variantID, Variant partialVariant) => Request("v1", "products", productID, "variants", variantID).PatchJsonAsync(ValidateModel(partialVariant)).ReceiveJson<Variant>();
-		public Task<Variant<Txp>> PatchVariantAsync<Txp>(string productID, string variantID, Variant partialVariant) => Request("v1", "products", productID, "variants", variantID).PatchJsonAsync(ValidateModel(partialVariant)).ReceiveJson<Variant<Txp>>();
+		public Task<Variant> PatchVariantAsync(string productID, string variantID, PartialVariant partialVariant) => Request("v1", "products", productID, "variants", variantID).PatchJsonAsync(ValidateModel(partialVariant)).ReceiveJson<Variant>();
+		public Task<Variant<Txp>> PatchVariantAsync<Txp>(string productID, string variantID, PartialVariant partialVariant) => Request("v1", "products", productID, "variants", variantID).PatchJsonAsync(ValidateModel(partialVariant)).ReceiveJson<Variant<Txp>>();
 		public Task<Variant> GetVariantAsync(string productID, string variantID) => Request("v1", "products", productID, "variants", variantID).GetJsonAsync<Variant>();
 		public Task<Variant<Txp>> GetVariantAsync<Txp>(string productID, string variantID) => Request("v1", "products", productID, "variants", variantID).GetJsonAsync<Variant<Txp>>();
 		public Task<ListPage<Supplier>> ListSuppliersAsync(string productID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null) => Request("v1", "products", productID, "suppliers").SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<Supplier>>();
@@ -3063,8 +3063,8 @@ namespace OrderCloud.SDK
 		public Task<Promotion> UpdateAsync(string promotionID, Promotion promotion) => Request("v1", "promotions", promotionID).PutJsonAsync(ValidateModel(promotion)).ReceiveJson<Promotion>();
 		public Task<Promotion<Txp>> UpdateAsync<Txp>(string promotionID, Promotion promotion) => Request("v1", "promotions", promotionID).PutJsonAsync(ValidateModel(promotion)).ReceiveJson<Promotion<Txp>>();
 		public Task DeleteAsync(string promotionID) => Request("v1", "promotions", promotionID).DeleteAsync();
-		public Task<Promotion> PatchAsync(string promotionID, Promotion partialPromotion) => Request("v1", "promotions", promotionID).PatchJsonAsync(ValidateModel(partialPromotion)).ReceiveJson<Promotion>();
-		public Task<Promotion<Txp>> PatchAsync<Txp>(string promotionID, Promotion partialPromotion) => Request("v1", "promotions", promotionID).PatchJsonAsync(ValidateModel(partialPromotion)).ReceiveJson<Promotion<Txp>>();
+		public Task<Promotion> PatchAsync(string promotionID, PartialPromotion partialPromotion) => Request("v1", "promotions", promotionID).PatchJsonAsync(ValidateModel(partialPromotion)).ReceiveJson<Promotion>();
+		public Task<Promotion<Txp>> PatchAsync<Txp>(string promotionID, PartialPromotion partialPromotion) => Request("v1", "promotions", promotionID).PatchJsonAsync(ValidateModel(partialPromotion)).ReceiveJson<Promotion<Txp>>();
 		public Task<ListPage<PromotionAssignment>> ListAssignmentsAsync(string buyerID = null, string promotionID = null, string userID = null, string userGroupID = null, PartyType? level = null, int? page = null, int? pageSize = null) => Request("v1", "promotions", "assignments").SetQueryParams(new { buyerID, promotionID, userID, userGroupID, level, page, pageSize }).GetJsonAsync<ListPage<PromotionAssignment>>();
 		public Task SaveAssignmentAsync(PromotionAssignment promotionAssignment) => Request("v1", "promotions", "assignments").PostJsonAsync(ValidateModel(promotionAssignment));
 		public Task DeleteAssignmentAsync(string promotionID, string buyerID, string userID = null, string userGroupID = null) => Request("v1", "promotions", promotionID, "assignments").SetQueryParams(new { buyerID, userID, userGroupID }).DeleteAsync();
@@ -3092,8 +3092,8 @@ namespace OrderCloud.SDK
 		public Task<Shipment> UpdateAsync(string shipmentID, Shipment shipment) => Request("v1", "shipments", shipmentID).PutJsonAsync(ValidateModel(shipment)).ReceiveJson<Shipment>();
 		public Task<Shipment<Txp>> UpdateAsync<Txp>(string shipmentID, Shipment shipment) => Request("v1", "shipments", shipmentID).PutJsonAsync(ValidateModel(shipment)).ReceiveJson<Shipment<Txp>>();
 		public Task DeleteAsync(string shipmentID) => Request("v1", "shipments", shipmentID).DeleteAsync();
-		public Task<Shipment> PatchAsync(string shipmentID, Shipment partialShipment) => Request("v1", "shipments", shipmentID).PatchJsonAsync(ValidateModel(partialShipment)).ReceiveJson<Shipment>();
-		public Task<Shipment<Txp>> PatchAsync<Txp>(string shipmentID, Shipment partialShipment) => Request("v1", "shipments", shipmentID).PatchJsonAsync(ValidateModel(partialShipment)).ReceiveJson<Shipment<Txp>>();
+		public Task<Shipment> PatchAsync(string shipmentID, PartialShipment partialShipment) => Request("v1", "shipments", shipmentID).PatchJsonAsync(ValidateModel(partialShipment)).ReceiveJson<Shipment>();
+		public Task<Shipment<Txp>> PatchAsync<Txp>(string shipmentID, PartialShipment partialShipment) => Request("v1", "shipments", shipmentID).PatchJsonAsync(ValidateModel(partialShipment)).ReceiveJson<Shipment<Txp>>();
 		public Task<ListPage<ShipmentItem>> ListItemsAsync(string shipmentID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null) => Request("v1", "shipments", shipmentID, "items").SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<ShipmentItem>>();
 		public Task<ListPage<ShipmentItem<Txp>>> ListItemsAsync<Txp>(string shipmentID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null) => Request("v1", "shipments", shipmentID, "items").SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<ShipmentItem<Txp>>>();
 		public Task<ShipmentItem> GetItemAsync(string shipmentID, string orderID, string lineItemID) => Request("v1", "shipments", shipmentID, "items", orderID, lineItemID).GetJsonAsync<ShipmentItem>();
@@ -3115,8 +3115,8 @@ namespace OrderCloud.SDK
 		public Task<Spec> UpdateAsync(string specID, Spec spec) => Request("v1", "specs", specID).PutJsonAsync(ValidateModel(spec)).ReceiveJson<Spec>();
 		public Task<Spec<Txp>> UpdateAsync<Txp>(string specID, Spec spec) => Request("v1", "specs", specID).PutJsonAsync(ValidateModel(spec)).ReceiveJson<Spec<Txp>>();
 		public Task DeleteAsync(string specID) => Request("v1", "specs", specID).DeleteAsync();
-		public Task<Spec> PatchAsync(string specID, Spec partialSpec) => Request("v1", "specs", specID).PatchJsonAsync(ValidateModel(partialSpec)).ReceiveJson<Spec>();
-		public Task<Spec<Txp>> PatchAsync<Txp>(string specID, Spec partialSpec) => Request("v1", "specs", specID).PatchJsonAsync(ValidateModel(partialSpec)).ReceiveJson<Spec<Txp>>();
+		public Task<Spec> PatchAsync(string specID, PartialSpec partialSpec) => Request("v1", "specs", specID).PatchJsonAsync(ValidateModel(partialSpec)).ReceiveJson<Spec>();
+		public Task<Spec<Txp>> PatchAsync<Txp>(string specID, PartialSpec partialSpec) => Request("v1", "specs", specID).PatchJsonAsync(ValidateModel(partialSpec)).ReceiveJson<Spec<Txp>>();
 		public Task<ListPage<SpecProductAssignment>> ListProductAssignmentsAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null) => Request("v1", "specs", "productassignments").SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<SpecProductAssignment>>();
 		public Task DeleteProductAssignmentAsync(string specID, string productID) => Request("v1", "specs", specID, "productassignments", productID).DeleteAsync();
 		public Task SaveProductAssignmentAsync(SpecProductAssignment specProductAssignment) => Request("v1", "specs", "productassignments").PostJsonAsync(ValidateModel(specProductAssignment));
@@ -3126,8 +3126,8 @@ namespace OrderCloud.SDK
 		public Task<ListPage<SpecOption<Txp>>> ListOptionsAsync<Txp>(string specID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null) => Request("v1", "specs", specID, "options").SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<SpecOption<Txp>>>();
 		public Task<SpecOption> UpdateOptionAsync(string specID, string optionID, SpecOption specOption) => Request("v1", "specs", specID, "options", optionID).PutJsonAsync(ValidateModel(specOption)).ReceiveJson<SpecOption>();
 		public Task<SpecOption<Txp>> UpdateOptionAsync<Txp>(string specID, string optionID, SpecOption specOption) => Request("v1", "specs", specID, "options", optionID).PutJsonAsync(ValidateModel(specOption)).ReceiveJson<SpecOption<Txp>>();
-		public Task<SpecOption> PatchOptionAsync(string specID, string optionID, SpecOption partialSpecOption) => Request("v1", "specs", specID, "options", optionID).PatchJsonAsync(ValidateModel(partialSpecOption)).ReceiveJson<SpecOption>();
-		public Task<SpecOption<Txp>> PatchOptionAsync<Txp>(string specID, string optionID, SpecOption partialSpecOption) => Request("v1", "specs", specID, "options", optionID).PatchJsonAsync(ValidateModel(partialSpecOption)).ReceiveJson<SpecOption<Txp>>();
+		public Task<SpecOption> PatchOptionAsync(string specID, string optionID, PartialSpecOption partialSpecOption) => Request("v1", "specs", specID, "options", optionID).PatchJsonAsync(ValidateModel(partialSpecOption)).ReceiveJson<SpecOption>();
+		public Task<SpecOption<Txp>> PatchOptionAsync<Txp>(string specID, string optionID, PartialSpecOption partialSpecOption) => Request("v1", "specs", specID, "options", optionID).PatchJsonAsync(ValidateModel(partialSpecOption)).ReceiveJson<SpecOption<Txp>>();
 		public Task<SpecOption> GetOptionAsync(string specID, string optionID) => Request("v1", "specs", specID, "options", optionID).GetJsonAsync<SpecOption>();
 		public Task<SpecOption<Txp>> GetOptionAsync<Txp>(string specID, string optionID) => Request("v1", "specs", specID, "options", optionID).GetJsonAsync<SpecOption<Txp>>();
 		public Task DeleteOptionAsync(string specID, string optionID) => Request("v1", "specs", specID, "options", optionID).DeleteAsync();
@@ -3145,8 +3145,8 @@ namespace OrderCloud.SDK
 		public Task<SpendingAccount> UpdateAsync(string buyerID, string spendingAccountID, SpendingAccount spendingAccount) => Request("v1", "buyers", buyerID, "spendingaccounts", spendingAccountID).PutJsonAsync(ValidateModel(spendingAccount)).ReceiveJson<SpendingAccount>();
 		public Task<SpendingAccount<Txp>> UpdateAsync<Txp>(string buyerID, string spendingAccountID, SpendingAccount spendingAccount) => Request("v1", "buyers", buyerID, "spendingaccounts", spendingAccountID).PutJsonAsync(ValidateModel(spendingAccount)).ReceiveJson<SpendingAccount<Txp>>();
 		public Task DeleteAsync(string buyerID, string spendingAccountID) => Request("v1", "buyers", buyerID, "spendingaccounts", spendingAccountID).DeleteAsync();
-		public Task<SpendingAccount> PatchAsync(string buyerID, string spendingAccountID, SpendingAccount partialSpendingAccount) => Request("v1", "buyers", buyerID, "spendingaccounts", spendingAccountID).PatchJsonAsync(ValidateModel(partialSpendingAccount)).ReceiveJson<SpendingAccount>();
-		public Task<SpendingAccount<Txp>> PatchAsync<Txp>(string buyerID, string spendingAccountID, SpendingAccount partialSpendingAccount) => Request("v1", "buyers", buyerID, "spendingaccounts", spendingAccountID).PatchJsonAsync(ValidateModel(partialSpendingAccount)).ReceiveJson<SpendingAccount<Txp>>();
+		public Task<SpendingAccount> PatchAsync(string buyerID, string spendingAccountID, PartialSpendingAccount partialSpendingAccount) => Request("v1", "buyers", buyerID, "spendingaccounts", spendingAccountID).PatchJsonAsync(ValidateModel(partialSpendingAccount)).ReceiveJson<SpendingAccount>();
+		public Task<SpendingAccount<Txp>> PatchAsync<Txp>(string buyerID, string spendingAccountID, PartialSpendingAccount partialSpendingAccount) => Request("v1", "buyers", buyerID, "spendingaccounts", spendingAccountID).PatchJsonAsync(ValidateModel(partialSpendingAccount)).ReceiveJson<SpendingAccount<Txp>>();
 		public Task<ListPage<SpendingAccountAssignment>> ListAssignmentsAsync(string buyerID, string spendingAccountID = null, string userID = null, string userGroupID = null, PartyType? level = null, int? page = null, int? pageSize = null) => Request("v1", "buyers", buyerID, "spendingaccounts", "assignments").SetQueryParams(new { spendingAccountID, userID, userGroupID, level, page, pageSize }).GetJsonAsync<ListPage<SpendingAccountAssignment>>();
 		public Task SaveAssignmentAsync(string buyerID, SpendingAccountAssignment spendingAccountAssignment) => Request("v1", "buyers", buyerID, "spendingaccounts", "assignments").PostJsonAsync(ValidateModel(spendingAccountAssignment));
 		public Task DeleteAssignmentAsync(string buyerID, string spendingAccountID, string userID = null, string userGroupID = null) => Request("v1", "buyers", buyerID, "spendingaccounts", spendingAccountID, "assignments").SetQueryParams(new { userID, userGroupID }).DeleteAsync();
@@ -3164,8 +3164,8 @@ namespace OrderCloud.SDK
 		public Task<Supplier> UpdateAsync(string supplierID, Supplier supplier) => Request("v1", "suppliers", supplierID).PutJsonAsync(ValidateModel(supplier)).ReceiveJson<Supplier>();
 		public Task<Supplier<Txp>> UpdateAsync<Txp>(string supplierID, Supplier supplier) => Request("v1", "suppliers", supplierID).PutJsonAsync(ValidateModel(supplier)).ReceiveJson<Supplier<Txp>>();
 		public Task DeleteAsync(string supplierID) => Request("v1", "suppliers", supplierID).DeleteAsync();
-		public Task<Supplier> PatchAsync(string supplierID, Supplier partialSupplier) => Request("v1", "suppliers", supplierID).PatchJsonAsync(ValidateModel(partialSupplier)).ReceiveJson<Supplier>();
-		public Task<Supplier<Txp>> PatchAsync<Txp>(string supplierID, Supplier partialSupplier) => Request("v1", "suppliers", supplierID).PatchJsonAsync(ValidateModel(partialSupplier)).ReceiveJson<Supplier<Txp>>();
+		public Task<Supplier> PatchAsync(string supplierID, PartialSupplier partialSupplier) => Request("v1", "suppliers", supplierID).PatchJsonAsync(ValidateModel(partialSupplier)).ReceiveJson<Supplier>();
+		public Task<Supplier<Txp>> PatchAsync<Txp>(string supplierID, PartialSupplier partialSupplier) => Request("v1", "suppliers", supplierID).PatchJsonAsync(ValidateModel(partialSupplier)).ReceiveJson<Supplier<Txp>>();
 	}
 
 	public class SupplierUserGroupsResource : OrderCloudResource, ISupplierUserGroupsResource
@@ -3180,8 +3180,8 @@ namespace OrderCloud.SDK
 		public Task<UserGroup> UpdateAsync(string supplierID, string userGroupID, UserGroup userGroup) => Request("v1", "suppliers", supplierID, "usergroups", userGroupID).PutJsonAsync(ValidateModel(userGroup)).ReceiveJson<UserGroup>();
 		public Task<UserGroup<Txp>> UpdateAsync<Txp>(string supplierID, string userGroupID, UserGroup userGroup) => Request("v1", "suppliers", supplierID, "usergroups", userGroupID).PutJsonAsync(ValidateModel(userGroup)).ReceiveJson<UserGroup<Txp>>();
 		public Task DeleteAsync(string supplierID, string userGroupID) => Request("v1", "suppliers", supplierID, "usergroups", userGroupID).DeleteAsync();
-		public Task<UserGroup> PatchAsync(string supplierID, string userGroupID, UserGroup partialUserGroup) => Request("v1", "suppliers", supplierID, "usergroups", userGroupID).PatchJsonAsync(ValidateModel(partialUserGroup)).ReceiveJson<UserGroup>();
-		public Task<UserGroup<Txp>> PatchAsync<Txp>(string supplierID, string userGroupID, UserGroup partialUserGroup) => Request("v1", "suppliers", supplierID, "usergroups", userGroupID).PatchJsonAsync(ValidateModel(partialUserGroup)).ReceiveJson<UserGroup<Txp>>();
+		public Task<UserGroup> PatchAsync(string supplierID, string userGroupID, PartialUserGroup partialUserGroup) => Request("v1", "suppliers", supplierID, "usergroups", userGroupID).PatchJsonAsync(ValidateModel(partialUserGroup)).ReceiveJson<UserGroup>();
+		public Task<UserGroup<Txp>> PatchAsync<Txp>(string supplierID, string userGroupID, PartialUserGroup partialUserGroup) => Request("v1", "suppliers", supplierID, "usergroups", userGroupID).PatchJsonAsync(ValidateModel(partialUserGroup)).ReceiveJson<UserGroup<Txp>>();
 		public Task<ListPage<UserGroupAssignment>> ListUserAssignmentsAsync(string supplierID, string userGroupID = null, string userID = null, int page = 1, int pageSize = 20) => Request("v1", "suppliers", supplierID, "usergroups", "assignments").SetQueryParams(new { userGroupID, userID, page, pageSize }).GetJsonAsync<ListPage<UserGroupAssignment>>();
 		public Task DeleteUserAssignmentAsync(string supplierID, string userGroupID, string userID) => Request("v1", "suppliers", supplierID, "usergroups", userGroupID, "assignments", userID).DeleteAsync();
 		public Task SaveUserAssignmentAsync(string supplierID, UserGroupAssignment userGroupAssignment) => Request("v1", "suppliers", supplierID, "usergroups", "assignments").PostJsonAsync(ValidateModel(userGroupAssignment));
@@ -3199,8 +3199,8 @@ namespace OrderCloud.SDK
 		public Task<User> UpdateAsync(string supplierID, string userID, User user) => Request("v1", "suppliers", supplierID, "users", userID).PutJsonAsync(ValidateModel(user)).ReceiveJson<User>();
 		public Task<User<Txp>> UpdateAsync<Txp>(string supplierID, string userID, User user) => Request("v1", "suppliers", supplierID, "users", userID).PutJsonAsync(ValidateModel(user)).ReceiveJson<User<Txp>>();
 		public Task DeleteAsync(string supplierID, string userID) => Request("v1", "suppliers", supplierID, "users", userID).DeleteAsync();
-		public Task<User> PatchAsync(string supplierID, string userID, User partialUser) => Request("v1", "suppliers", supplierID, "users", userID).PatchJsonAsync(ValidateModel(partialUser)).ReceiveJson<User>();
-		public Task<User<Txp>> PatchAsync<Txp>(string supplierID, string userID, User partialUser) => Request("v1", "suppliers", supplierID, "users", userID).PatchJsonAsync(ValidateModel(partialUser)).ReceiveJson<User<Txp>>();
+		public Task<User> PatchAsync(string supplierID, string userID, PartialUser partialUser) => Request("v1", "suppliers", supplierID, "users", userID).PatchJsonAsync(ValidateModel(partialUser)).ReceiveJson<User>();
+		public Task<User<Txp>> PatchAsync<Txp>(string supplierID, string userID, PartialUser partialUser) => Request("v1", "suppliers", supplierID, "users", userID).PatchJsonAsync(ValidateModel(partialUser)).ReceiveJson<User<Txp>>();
 		public Task<AccessToken> GetAccessTokenAsync(string supplierID, string userID, ImpersonateTokenRequest impersonateTokenRequest) => Request("v1", "suppliers", supplierID, "users", userID, "accesstoken").PostJsonAsync(ValidateModel(impersonateTokenRequest)).ReceiveJson<AccessToken>();
 	}
 
@@ -3216,8 +3216,8 @@ namespace OrderCloud.SDK
 		public Task<UserGroup> UpdateAsync(string buyerID, string userGroupID, UserGroup userGroup) => Request("v1", "buyers", buyerID, "usergroups", userGroupID).PutJsonAsync(ValidateModel(userGroup)).ReceiveJson<UserGroup>();
 		public Task<UserGroup<Txp>> UpdateAsync<Txp>(string buyerID, string userGroupID, UserGroup userGroup) => Request("v1", "buyers", buyerID, "usergroups", userGroupID).PutJsonAsync(ValidateModel(userGroup)).ReceiveJson<UserGroup<Txp>>();
 		public Task DeleteAsync(string buyerID, string userGroupID) => Request("v1", "buyers", buyerID, "usergroups", userGroupID).DeleteAsync();
-		public Task<UserGroup> PatchAsync(string buyerID, string userGroupID, UserGroup partialUserGroup) => Request("v1", "buyers", buyerID, "usergroups", userGroupID).PatchJsonAsync(ValidateModel(partialUserGroup)).ReceiveJson<UserGroup>();
-		public Task<UserGroup<Txp>> PatchAsync<Txp>(string buyerID, string userGroupID, UserGroup partialUserGroup) => Request("v1", "buyers", buyerID, "usergroups", userGroupID).PatchJsonAsync(ValidateModel(partialUserGroup)).ReceiveJson<UserGroup<Txp>>();
+		public Task<UserGroup> PatchAsync(string buyerID, string userGroupID, PartialUserGroup partialUserGroup) => Request("v1", "buyers", buyerID, "usergroups", userGroupID).PatchJsonAsync(ValidateModel(partialUserGroup)).ReceiveJson<UserGroup>();
+		public Task<UserGroup<Txp>> PatchAsync<Txp>(string buyerID, string userGroupID, PartialUserGroup partialUserGroup) => Request("v1", "buyers", buyerID, "usergroups", userGroupID).PatchJsonAsync(ValidateModel(partialUserGroup)).ReceiveJson<UserGroup<Txp>>();
 		public Task<ListPage<UserGroupAssignment>> ListUserAssignmentsAsync(string buyerID, string userGroupID = null, string userID = null, int page = 1, int pageSize = 20) => Request("v1", "buyers", buyerID, "usergroups", "assignments").SetQueryParams(new { userGroupID, userID, page, pageSize }).GetJsonAsync<ListPage<UserGroupAssignment>>();
 		public Task DeleteUserAssignmentAsync(string buyerID, string userGroupID, string userID) => Request("v1", "buyers", buyerID, "usergroups", userGroupID, "assignments", userID).DeleteAsync();
 		public Task SaveUserAssignmentAsync(string buyerID, UserGroupAssignment userGroupAssignment) => Request("v1", "buyers", buyerID, "usergroups", "assignments").PostJsonAsync(ValidateModel(userGroupAssignment));
@@ -3235,8 +3235,8 @@ namespace OrderCloud.SDK
 		public Task<User> UpdateAsync(string buyerID, string userID, User user) => Request("v1", "buyers", buyerID, "users", userID).PutJsonAsync(ValidateModel(user)).ReceiveJson<User>();
 		public Task<User<Txp>> UpdateAsync<Txp>(string buyerID, string userID, User user) => Request("v1", "buyers", buyerID, "users", userID).PutJsonAsync(ValidateModel(user)).ReceiveJson<User<Txp>>();
 		public Task DeleteAsync(string buyerID, string userID) => Request("v1", "buyers", buyerID, "users", userID).DeleteAsync();
-		public Task<User> PatchAsync(string buyerID, string userID, User partialUser) => Request("v1", "buyers", buyerID, "users", userID).PatchJsonAsync(ValidateModel(partialUser)).ReceiveJson<User>();
-		public Task<User<Txp>> PatchAsync<Txp>(string buyerID, string userID, User partialUser) => Request("v1", "buyers", buyerID, "users", userID).PatchJsonAsync(ValidateModel(partialUser)).ReceiveJson<User<Txp>>();
+		public Task<User> PatchAsync(string buyerID, string userID, PartialUser partialUser) => Request("v1", "buyers", buyerID, "users", userID).PatchJsonAsync(ValidateModel(partialUser)).ReceiveJson<User>();
+		public Task<User<Txp>> PatchAsync<Txp>(string buyerID, string userID, PartialUser partialUser) => Request("v1", "buyers", buyerID, "users", userID).PatchJsonAsync(ValidateModel(partialUser)).ReceiveJson<User<Txp>>();
 		public Task<User> MoveAsync(string buyerID, string userID, string newBuyerID, UserOrderMoveOption orders) => Request("v1", "buyers", buyerID, "users", userID, "moveto", newBuyerID).SetQueryParams(new { orders }).PostAsync(null).ReceiveJson<User>();
 		public Task<User<Txp>> MoveAsync<Txp>(string buyerID, string userID, string newBuyerID, UserOrderMoveOption orders) => Request("v1", "buyers", buyerID, "users", userID, "moveto", newBuyerID).SetQueryParams(new { orders }).PostAsync(null).ReceiveJson<User<Txp>>();
 		public Task<AccessToken> GetAccessTokenAsync(string buyerID, string userID, ImpersonateTokenRequest impersonateTokenRequest) => Request("v1", "buyers", buyerID, "users", userID, "accesstoken").PostJsonAsync(ValidateModel(impersonateTokenRequest)).ReceiveJson<AccessToken>();

@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using Flurl.Http.Testing;
-using Newtonsoft.Json.Linq;
 
 namespace OrderCloud.SDK.Tests
 {
@@ -34,9 +33,6 @@ namespace OrderCloud.SDK.Tests
 
 		[Test]
 		public void can_serialize_partial() {
-			// get the JSON serializer that would be used in a request
-			var serializer = GetClient().Request().Settings.JsonSerializer;
-
 			// good test case - xp and a nested object
 			var p = new PartialProduct {
 				Name = "MyProduct",
@@ -47,19 +43,29 @@ namespace OrderCloud.SDK.Tests
 				}
 			};
 
-			var expected = "{\"Name\":\"MyProduct\",\"xp\":{\"foo\":1},\"Description\":\"blah\",\"Inventory\":{\"QuantityAvailable\":999}}";
-			Assert.AreEqual(expected, serializer.Serialize(p));
+			JsonAssert.AreEquivalent(new {
+				Name = "MyProduct",
+				xp = new { foo = 1 },
+				Description = "blah",
+				Inventory = new { QuantityAvailable = 999 }
+			}, p);
 
 			// another good one - collection property
 			var li = new PartialLineItem {
 				ID = "id",
-				Specs = new[] {
+				Specs = new LineItemSpec[] {
 					new PartialLineItemSpec { SpecID = "spec1", Value = "foo" },
 					new PartialLineItemSpec { SpecID = "spec2", OptionID = "3" }
 				}
 			};
-			expected = "{\"ID\":\"id\",\"Specs\":[{\"SpecID\":\"spec1\",\"Value\":\"foo\"},{\"SpecID\":\"spec2\",\"OptionID\":\"3\"}]}";
-			Assert.AreEqual(expected, serializer.Serialize(li));
+
+			JsonAssert.AreEquivalent(new {
+				ID = "id",
+				Specs = new object[] {
+					new { SpecID = "spec1", Value = "foo" },
+					new { SpecID = "spec2", OptionID = "3" }
+				}
+			}, li);
 		}
 
 		private OrderCloudClient GetClient() => new OrderCloudClient(new OrderCloudClientConfig {
@@ -77,11 +83,11 @@ namespace OrderCloud.SDK.Tests
 	    }
 
 		private static class JsonAssert
-	    {
-		    public static void AreEquivalent(object expected, object actual, string message = null) {
-			    var j1 = JObject.FromObject(expected);
-			    var j2 = JObject.FromObject(actual);
-			    Assert.That(JToken.DeepEquals(j1, j2), message);
+		{
+			public static void AreEquivalent(object expected, object actual) {
+				var j1 = OrderCloudClient.Serializer.Serialize(expected);
+				var j2 = OrderCloudClient.Serializer.Serialize(actual);
+				Assert.AreEqual(j1, j2);
 		    }
 	    }
     }
