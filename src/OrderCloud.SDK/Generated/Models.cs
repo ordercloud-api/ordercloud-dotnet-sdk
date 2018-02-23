@@ -15,7 +15,6 @@ namespace OrderCloud.SDK
 	public enum PriceMarkupType { NoMarkup, AmountPerQuantity, AmountTotal, Percentage }
 	public enum UserOrderMoveOption { None, Unsubmitted, All }
 
-
 	public class AccessToken : OrderCloudModel
 	{
 		/// <summary>Access token of the access token.</summary>
@@ -27,7 +26,6 @@ namespace OrderCloud.SDK
 		/// <summary>Refresh token of the access token.</summary>
 		public string refresh_token { get => GetProp<string>("refresh_token"); set => SetProp<string>("refresh_token", value); }
 	}
-	public class PartialAccessToken : AccessToken, IPartial { }
 
 	public class Address : OrderCloudModel
 	{
@@ -64,8 +62,6 @@ namespace OrderCloud.SDK
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
 	public class Address<Txp> : Address { public new Txp xp { get; set; } }
-	public class PartialAddress : Address, IPartial { }
-	public class PartialAddress<Txp> : Address<Txp>, IPartial { }
 
 	public class AddressAssignment : OrderCloudModel
 	{
@@ -81,7 +77,6 @@ namespace OrderCloud.SDK
 		/// <summary>Is billing of the address assignment.</summary>
 		public bool IsBilling { get => GetProp<bool>("IsBilling"); set => SetProp<bool>("IsBilling", value); }
 	}
-	public class PartialAddressAssignment : AddressAssignment, IPartial { }
 
 	public class ApprovalRule : OrderCloudModel
 	{
@@ -101,8 +96,6 @@ namespace OrderCloud.SDK
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
 	public class ApprovalRule<Txp> : ApprovalRule { public new Txp xp { get; set; } }
-	public class PartialApprovalRule : ApprovalRule, IPartial { }
-	public class PartialApprovalRule<Txp> : ApprovalRule<Txp>, IPartial { }
 
 	public class Buyer : OrderCloudModel
 	{
@@ -119,8 +112,6 @@ namespace OrderCloud.SDK
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
 	public class Buyer<Txp> : Buyer { public new Txp xp { get; set; } }
-	public class PartialBuyer : Buyer, IPartial { }
-	public class PartialBuyer<Txp> : Buyer<Txp>, IPartial { }
 
 	public class BuyerAddress : OrderCloudModel
 	{
@@ -163,8 +154,6 @@ namespace OrderCloud.SDK
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
 	public class BuyerAddress<Txp> : BuyerAddress { public new Txp xp { get; set; } }
-	public class PartialBuyerAddress : BuyerAddress, IPartial { }
-	public class PartialBuyerAddress<Txp> : BuyerAddress<Txp>, IPartial { }
 
 	public class BuyerCreditCard : OrderCloudModel
 	{
@@ -188,8 +177,6 @@ namespace OrderCloud.SDK
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
 	public class BuyerCreditCard<Txp> : BuyerCreditCard { public new Txp xp { get; set; } }
-	public class PartialBuyerCreditCard : BuyerCreditCard, IPartial { }
-	public class PartialBuyerCreditCard<Txp> : BuyerCreditCard<Txp>, IPartial { }
 
 	public class BuyerProduct : OrderCloudModel
 	{
@@ -229,8 +216,6 @@ namespace OrderCloud.SDK
 		public string AutoForwardSupplierID { get => GetProp<string>("AutoForwardSupplierID"); set => SetProp<string>("AutoForwardSupplierID", value); }
 	}
 	public class BuyerProduct<Txp> : BuyerProduct { public new Txp xp { get; set; } }
-	public class PartialBuyerProduct : BuyerProduct, IPartial { }
-	public class PartialBuyerProduct<Txp> : BuyerProduct<Txp>, IPartial { }
 
 	public class BuyerSpec : OrderCloudModel
 	{
@@ -257,8 +242,6 @@ namespace OrderCloud.SDK
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
 	public class BuyerSpec<Txp> : BuyerSpec { public new Txp xp { get; set; } }
-	public class PartialBuyerSpec : BuyerSpec, IPartial { }
-	public class PartialBuyerSpec<Txp> : BuyerSpec<Txp>, IPartial { }
 
 	public class Catalog : OrderCloudModel
 	{
@@ -277,8 +260,6 @@ namespace OrderCloud.SDK
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
 	public class Catalog<Txp> : Catalog { public new Txp xp { get; set; } }
-	public class PartialCatalog : Catalog, IPartial { }
-	public class PartialCatalog<Txp> : Catalog<Txp>, IPartial { }
 
 	public class CatalogAssignment : OrderCloudModel
 	{
@@ -293,7 +274,6 @@ namespace OrderCloud.SDK
 		/// <summary>View all products of the catalog assignment.</summary>
 		public bool ViewAllProducts { get => GetProp<bool>("ViewAllProducts"); set => SetProp<bool>("ViewAllProducts", value); }
 	}
-	public class PartialCatalogAssignment : CatalogAssignment, IPartial { }
 
 	public class Category : OrderCloudModel
 	{
@@ -316,8 +296,6 @@ namespace OrderCloud.SDK
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
 	public class Category<Txp> : Category { public new Txp xp { get; set; } }
-	public class PartialCategory : Category, IPartial { }
-	public class PartialCategory<Txp> : Category<Txp>, IPartial { }
 
 	public class CategoryAssignment : OrderCloudModel
 	{
@@ -334,7 +312,6 @@ namespace OrderCloud.SDK
 		/// <summary>Optional. Set to null to inherit from parent category or catlog level.</summary>
 		public bool? ViewAllProducts { get => GetProp<bool?>("ViewAllProducts"); set => SetProp<bool?>("ViewAllProducts", value); }
 	}
-	public class PartialCategoryAssignment : CategoryAssignment, IPartial { }
 
 	public class CategoryProductAssignment : OrderCloudModel
 	{
@@ -347,7 +324,6 @@ namespace OrderCloud.SDK
 		/// <summary>List order of the category product assignment.</summary>
 		public int? ListOrder { get => GetProp<int?>("ListOrder"); set => SetProp<int?>("ListOrder", value); }
 	}
-	public class PartialCategoryProductAssignment : CategoryProductAssignment, IPartial { }
 
 	public class CostCenter : OrderCloudModel
 	{
@@ -362,8 +338,6 @@ namespace OrderCloud.SDK
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
 	public class CostCenter<Txp> : CostCenter { public new Txp xp { get; set; } }
-	public class PartialCostCenter : CostCenter, IPartial { }
-	public class PartialCostCenter<Txp> : CostCenter<Txp>, IPartial { }
 
 	public class CostCenterAssignment : OrderCloudModel
 	{
@@ -373,7 +347,6 @@ namespace OrderCloud.SDK
 		/// <summary>ID of the user group. Sortable: priority level 3.</summary>
 		public string UserGroupID { get => GetProp<string>("UserGroupID"); set => SetProp<string>("UserGroupID", value); }
 	}
-	public class PartialCostCenterAssignment : CostCenterAssignment, IPartial { }
 
 	public class CreditCard : OrderCloudModel
 	{
@@ -395,8 +368,6 @@ namespace OrderCloud.SDK
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
 	public class CreditCard<Txp> : CreditCard { public new Txp xp { get; set; } }
-	public class PartialCreditCard : CreditCard, IPartial { }
-	public class PartialCreditCard<Txp> : CreditCard<Txp>, IPartial { }
 
 	public class CreditCardAssignment : OrderCloudModel
 	{
@@ -408,7 +379,6 @@ namespace OrderCloud.SDK
 		/// <summary>ID of the user group. Sortable: priority level 3.</summary>
 		public string UserGroupID { get => GetProp<string>("UserGroupID"); set => SetProp<string>("UserGroupID", value); }
 	}
-	public class PartialCreditCardAssignment : CreditCardAssignment, IPartial { }
 
 	public class ImpersonateTokenRequest : OrderCloudModel
 	{
@@ -417,7 +387,6 @@ namespace OrderCloud.SDK
 		/// <summary>Roles of the impersonate token request.</summary>
 		public IList<ApiRole> Roles { get => GetProp<IList<ApiRole>>("Roles", new List<ApiRole>()); set => SetProp<IList<ApiRole>>("Roles", value); }
 	}
-	public class PartialImpersonateTokenRequest : ImpersonateTokenRequest, IPartial { }
 
 	public class ImpersonationConfig : OrderCloudModel
 	{
@@ -443,7 +412,6 @@ namespace OrderCloud.SDK
 		[Required]
 		public string ClientID { get => GetProp<string>("ClientID"); set => SetProp<string>("ClientID", value); }
 	}
-	public class PartialImpersonationConfig : ImpersonationConfig, IPartial { }
 
 	public class Incrementor : OrderCloudModel
 	{
@@ -458,7 +426,6 @@ namespace OrderCloud.SDK
 		[Required]
 		public int LeftPaddingCount { get => GetProp<int>("LeftPaddingCount"); set => SetProp<int>("LeftPaddingCount", value); }
 	}
-	public class PartialIncrementor : Incrementor, IPartial { }
 
 	public class Inventory : OrderCloudModel
 	{
@@ -475,7 +442,6 @@ namespace OrderCloud.SDK
 		/// <summary>Last updated of the inventory.</summary>
 		public DateTimeOffset? LastUpdated { get; internal set; }
 	}
-	public class PartialInventory : Inventory, IPartial { }
 
 	public class LineItem : OrderCloudModel
 	{
@@ -517,8 +483,6 @@ namespace OrderCloud.SDK
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
 	public class LineItem<Txp> : LineItem { public new Txp xp { get; set; } }
-	public class PartialLineItem : LineItem, IPartial { }
-	public class PartialLineItem<Txp> : LineItem<Txp>, IPartial { }
 
 	public class LineItemProduct : OrderCloudModel
 	{
@@ -542,8 +506,6 @@ namespace OrderCloud.SDK
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
 	public class LineItemProduct<Txp> : LineItemProduct { public new Txp xp { get; set; } }
-	public class PartialLineItemProduct : LineItemProduct, IPartial { }
-	public class PartialLineItemProduct<Txp> : LineItemProduct<Txp>, IPartial { }
 
 	public class LineItemSpec : OrderCloudModel
 	{
@@ -557,7 +519,6 @@ namespace OrderCloud.SDK
 		/// <summary>Value of the line item spec. Max length 2000 characters.</summary>
 		public string Value { get => GetProp<string>("Value"); set => SetProp<string>("Value", value); }
 	}
-	public class PartialLineItemSpec : LineItemSpec, IPartial { }
 
 	public class MeBuyer : OrderCloudModel
 	{
@@ -566,7 +527,6 @@ namespace OrderCloud.SDK
 		/// <summary>ID of the default catalog.</summary>
 		public string DefaultCatalogID { get; internal set; }
 	}
-	public class PartialMeBuyer : MeBuyer, IPartial { }
 
 	public class MessageCCListenerAssignment : OrderCloudModel
 	{
@@ -585,7 +545,6 @@ namespace OrderCloud.SDK
 		/// <summary>ID of the user. Searchable: priority level 2. Sortable: priority level 2.</summary>
 		public string UserID { get => GetProp<string>("UserID"); set => SetProp<string>("UserID", value); }
 	}
-	public class PartialMessageCCListenerAssignment : MessageCCListenerAssignment, IPartial { }
 
 	public class MessageSender : OrderCloudModel
 	{
@@ -599,7 +558,6 @@ namespace OrderCloud.SDK
 		/// <summary>Description of the message sender.</summary>
 		public string Description { get => GetProp<string>("Description"); set => SetProp<string>("Description", value); }
 	}
-	public class PartialMessageSender : MessageSender, IPartial { }
 
 	public class MessageSenderAssignment : OrderCloudModel
 	{
@@ -615,7 +573,6 @@ namespace OrderCloud.SDK
 		/// <summary>Message config description of the message sender assignment.</summary>
 		public string MessageConfigDescription { get; internal set; }
 	}
-	public class PartialMessageSenderAssignment : MessageSenderAssignment, IPartial { }
 
 	public class MeUser : OrderCloudModel
 	{
@@ -650,8 +607,6 @@ namespace OrderCloud.SDK
 		public IReadOnlyList<string> AvailableRoles { get; internal set; }
 	}
 	public class MeUser<Txp> : MeUser { public new Txp xp { get; set; } }
-	public class PartialMeUser : MeUser, IPartial { }
-	public class PartialMeUser<Txp> : MeUser<Txp>, IPartial { }
 
 	public class Order : OrderCloudModel
 	{
@@ -703,8 +658,6 @@ namespace OrderCloud.SDK
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
 	public class Order<Txp> : Order { public new Txp xp { get; set; } }
-	public class PartialOrder : Order, IPartial { }
-	public class PartialOrder<Txp> : Order<Txp>, IPartial { }
 
 	public class OrderApproval : OrderCloudModel
 	{
@@ -723,7 +676,6 @@ namespace OrderCloud.SDK
 		/// <summary>Comments of the order approval. Searchable: priority level 4.</summary>
 		public string Comments { get; internal set; }
 	}
-	public class PartialOrderApproval : OrderApproval, IPartial { }
 
 	public class OrderApprovalInfo : OrderCloudModel
 	{
@@ -732,7 +684,6 @@ namespace OrderCloud.SDK
 		/// <summary>Allow resubmit of the order approval info.</summary>
 		public bool AllowResubmit { get => GetProp<bool>("AllowResubmit"); set => SetProp<bool>("AllowResubmit", value); }
 	}
-	public class PartialOrderApprovalInfo : OrderApprovalInfo, IPartial { }
 
 	public class OrderPromotion : OrderCloudModel
 	{
@@ -771,8 +722,6 @@ namespace OrderCloud.SDK
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
 	public class OrderPromotion<Txp> : OrderPromotion { public new Txp xp { get; set; } }
-	public class PartialOrderPromotion : OrderPromotion, IPartial { }
-	public class PartialOrderPromotion<Txp> : OrderPromotion<Txp>, IPartial { }
 
 	public class PasswordReset : OrderCloudModel
 	{
@@ -784,7 +733,6 @@ namespace OrderCloud.SDK
 		/// <summary>Password of the password reset.</summary>
 		public string Password { get => GetProp<string>("Password"); set => SetProp<string>("Password", value); }
 	}
-	public class PartialPasswordReset : PasswordReset, IPartial { }
 
 	public class PasswordResetRequest : OrderCloudModel
 	{
@@ -798,7 +746,6 @@ namespace OrderCloud.SDK
 		/// <summary>URL of the password reset request.</summary>
 		public string URL { get => GetProp<string>("URL"); set => SetProp<string>("URL", value); }
 	}
-	public class PartialPasswordResetRequest : PasswordResetRequest, IPartial { }
 
 	public class Payment : OrderCloudModel
 	{
@@ -824,8 +771,6 @@ namespace OrderCloud.SDK
 		public IReadOnlyList<PaymentTransaction> Transactions { get; internal set; }
 	}
 	public class Payment<Txp> : Payment { public new Txp xp { get; set; } }
-	public class PartialPayment : Payment, IPartial { }
-	public class PartialPayment<Txp> : Payment<Txp>, IPartial { }
 
 	public class PaymentTransaction : OrderCloudModel
 	{
@@ -849,8 +794,6 @@ namespace OrderCloud.SDK
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
 	public class PaymentTransaction<Txp> : PaymentTransaction { public new Txp xp { get; set; } }
-	public class PartialPaymentTransaction : PaymentTransaction, IPartial { }
-	public class PartialPaymentTransaction<Txp> : PaymentTransaction<Txp>, IPartial { }
 
 	public class PriceBreak : OrderCloudModel
 	{
@@ -861,7 +804,6 @@ namespace OrderCloud.SDK
 		[Required]
 		public decimal Price { get => GetProp<decimal>("Price"); set => SetProp<decimal>("Price", value); }
 	}
-	public class PartialPriceBreak : PriceBreak, IPartial { }
 
 	public class PriceSchedule : OrderCloudModel
 	{
@@ -888,8 +830,6 @@ namespace OrderCloud.SDK
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
 	public class PriceSchedule<Txp> : PriceSchedule { public new Txp xp { get; set; } }
-	public class PartialPriceSchedule : PriceSchedule, IPartial { }
-	public class PartialPriceSchedule<Txp> : PriceSchedule<Txp>, IPartial { }
 
 	public class Product : OrderCloudModel
 	{
@@ -929,8 +869,6 @@ namespace OrderCloud.SDK
 		public string AutoForwardSupplierID { get => GetProp<string>("AutoForwardSupplierID"); set => SetProp<string>("AutoForwardSupplierID", value); }
 	}
 	public class Product<Txp> : Product { public new Txp xp { get; set; } }
-	public class PartialProduct : Product, IPartial { }
-	public class PartialProduct<Txp> : Product<Txp>, IPartial { }
 
 	public class ProductAssignment : OrderCloudModel
 	{
@@ -945,7 +883,6 @@ namespace OrderCloud.SDK
 		/// <summary>ID of the price schedule.</summary>
 		public string PriceScheduleID { get => GetProp<string>("PriceScheduleID"); set => SetProp<string>("PriceScheduleID", value); }
 	}
-	public class PartialProductAssignment : ProductAssignment, IPartial { }
 
 	public class ProductCatalogAssignment : OrderCloudModel
 	{
@@ -956,7 +893,6 @@ namespace OrderCloud.SDK
 		[Required]
 		public string ProductID { get => GetProp<string>("ProductID"); set => SetProp<string>("ProductID", value); }
 	}
-	public class PartialProductCatalogAssignment : ProductCatalogAssignment, IPartial { }
 
 	public class Promotion : OrderCloudModel
 	{
@@ -993,8 +929,6 @@ namespace OrderCloud.SDK
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
 	public class Promotion<Txp> : Promotion { public new Txp xp { get; set; } }
-	public class PartialPromotion : Promotion, IPartial { }
-	public class PartialPromotion<Txp> : Promotion<Txp>, IPartial { }
 
 	public class PromotionAssignment : OrderCloudModel
 	{
@@ -1007,7 +941,6 @@ namespace OrderCloud.SDK
 		/// <summary>ID of the user group. Sortable: priority level 4.</summary>
 		public string UserGroupID { get => GetProp<string>("UserGroupID"); set => SetProp<string>("UserGroupID", value); }
 	}
-	public class PartialPromotionAssignment : PromotionAssignment, IPartial { }
 
 	public class SecurityProfile : OrderCloudModel
 	{
@@ -1019,7 +952,6 @@ namespace OrderCloud.SDK
 		/// <summary>Roles of the security profile.</summary>
 		public IList<ApiRole> Roles { get => GetProp<IList<ApiRole>>("Roles", new List<ApiRole>()); set => SetProp<IList<ApiRole>>("Roles", value); }
 	}
-	public class PartialSecurityProfile : SecurityProfile, IPartial { }
 
 	public class SecurityProfileAssignment : OrderCloudModel
 	{
@@ -1035,7 +967,6 @@ namespace OrderCloud.SDK
 		/// <summary>ID of the user group.</summary>
 		public string UserGroupID { get => GetProp<string>("UserGroupID"); set => SetProp<string>("UserGroupID", value); }
 	}
-	public class PartialSecurityProfileAssignment : SecurityProfileAssignment, IPartial { }
 
 	public class Shipment : OrderCloudModel
 	{
@@ -1067,8 +998,6 @@ namespace OrderCloud.SDK
 		public Address ToAddress { get; internal set; }
 	}
 	public class Shipment<Txp> : Shipment { public new Txp xp { get; set; } }
-	public class PartialShipment : Shipment, IPartial { }
-	public class PartialShipment<Txp> : Shipment<Txp>, IPartial { }
 
 	public class ShipmentItem : OrderCloudModel
 	{
@@ -1095,8 +1024,6 @@ namespace OrderCloud.SDK
 		public dynamic xp { get; internal set; } = new ExpandoObject();
 	}
 	public class ShipmentItem<Txp> : ShipmentItem { public new Txp xp { get; set; } }
-	public class PartialShipmentItem : ShipmentItem, IPartial { }
-	public class PartialShipmentItem<Txp> : ShipmentItem<Txp>, IPartial { }
 
 	public class Spec : OrderCloudModel
 	{
@@ -1123,8 +1050,6 @@ namespace OrderCloud.SDK
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
 	public class Spec<Txp> : Spec { public new Txp xp { get; set; } }
-	public class PartialSpec : Spec, IPartial { }
-	public class PartialSpec<Txp> : Spec<Txp>, IPartial { }
 
 	public class SpecOption : OrderCloudModel
 	{
@@ -1145,8 +1070,6 @@ namespace OrderCloud.SDK
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
 	public class SpecOption<Txp> : SpecOption { public new Txp xp { get; set; } }
-	public class PartialSpecOption : SpecOption, IPartial { }
-	public class PartialSpecOption<Txp> : SpecOption<Txp>, IPartial { }
 
 	public class SpecProductAssignment : OrderCloudModel
 	{
@@ -1159,7 +1082,6 @@ namespace OrderCloud.SDK
 		/// <summary>Optional. When defined, overrides the DefaultOptionID set on the Spec for just this Product.</summary>
 		public string DefaultOptionID { get => GetProp<string>("DefaultOptionID"); set => SetProp<string>("DefaultOptionID", value); }
 	}
-	public class PartialSpecProductAssignment : SpecProductAssignment, IPartial { }
 
 	public class SpendingAccount : OrderCloudModel
 	{
@@ -1183,8 +1105,6 @@ namespace OrderCloud.SDK
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
 	public class SpendingAccount<Txp> : SpendingAccount { public new Txp xp { get; set; } }
-	public class PartialSpendingAccount : SpendingAccount, IPartial { }
-	public class PartialSpendingAccount<Txp> : SpendingAccount<Txp>, IPartial { }
 
 	public class SpendingAccountAssignment : OrderCloudModel
 	{
@@ -1198,7 +1118,6 @@ namespace OrderCloud.SDK
 		/// <summary>Allow exceed of the spending account assignment.</summary>
 		public bool AllowExceed { get => GetProp<bool>("AllowExceed"); set => SetProp<bool>("AllowExceed", value); }
 	}
-	public class PartialSpendingAccountAssignment : SpendingAccountAssignment, IPartial { }
 
 	public class Supplier : OrderCloudModel
 	{
@@ -1213,8 +1132,6 @@ namespace OrderCloud.SDK
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
 	public class Supplier<Txp> : Supplier { public new Txp xp { get; set; } }
-	public class PartialSupplier : Supplier, IPartial { }
-	public class PartialSupplier<Txp> : Supplier<Txp>, IPartial { }
 
 	public class TokenPasswordReset : OrderCloudModel
 	{
@@ -1222,7 +1139,6 @@ namespace OrderCloud.SDK
 		[Required]
 		public string NewPassword { get => GetProp<string>("NewPassword"); set => SetProp<string>("NewPassword", value); }
 	}
-	public class PartialTokenPasswordReset : TokenPasswordReset, IPartial { }
 
 	public class User : OrderCloudModel
 	{
@@ -1255,8 +1171,6 @@ namespace OrderCloud.SDK
 		public IReadOnlyList<string> AvailableRoles { get; internal set; }
 	}
 	public class User<Txp> : User { public new Txp xp { get; set; } }
-	public class PartialUser : User, IPartial { }
-	public class PartialUser<Txp> : User<Txp>, IPartial { }
 
 	public class UserGroup : OrderCloudModel
 	{
@@ -1271,8 +1185,6 @@ namespace OrderCloud.SDK
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
 	public class UserGroup<Txp> : UserGroup { public new Txp xp { get; set; } }
-	public class PartialUserGroup : UserGroup, IPartial { }
-	public class PartialUserGroup<Txp> : UserGroup<Txp>, IPartial { }
 
 	public class UserGroupAssignment : OrderCloudModel
 	{
@@ -1281,7 +1193,6 @@ namespace OrderCloud.SDK
 		/// <summary>ID of the user.</summary>
 		public string UserID { get => GetProp<string>("UserID"); set => SetProp<string>("UserID", value); }
 	}
-	public class PartialUserGroupAssignment : UserGroupAssignment, IPartial { }
 
 	public class Variant : OrderCloudModel
 	{
@@ -1297,6 +1208,63 @@ namespace OrderCloud.SDK
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
 	public class Variant<Txp> : Variant { public new Txp xp { get; set; } }
+
+	public class PartialAddress : Address, IPartial { }
+	public class PartialAddress<Txp> : Address<Txp>, IPartial { }
+	public class PartialApprovalRule : ApprovalRule, IPartial { }
+	public class PartialApprovalRule<Txp> : ApprovalRule<Txp>, IPartial { }
+	public class PartialBuyer : Buyer, IPartial { }
+	public class PartialBuyer<Txp> : Buyer<Txp>, IPartial { }
+	public class PartialBuyerAddress : BuyerAddress, IPartial { }
+	public class PartialBuyerAddress<Txp> : BuyerAddress<Txp>, IPartial { }
+	public class PartialBuyerCreditCard : BuyerCreditCard, IPartial { }
+	public class PartialBuyerCreditCard<Txp> : BuyerCreditCard<Txp>, IPartial { }
+	public class PartialCatalog : Catalog, IPartial { }
+	public class PartialCatalog<Txp> : Catalog<Txp>, IPartial { }
+	public class PartialCategory : Category, IPartial { }
+	public class PartialCategory<Txp> : Category<Txp>, IPartial { }
+	public class PartialCostCenter : CostCenter, IPartial { }
+	public class PartialCostCenter<Txp> : CostCenter<Txp>, IPartial { }
+	public class PartialCreditCard : CreditCard, IPartial { }
+	public class PartialCreditCard<Txp> : CreditCard<Txp>, IPartial { }
+	public class PartialImpersonationConfig : ImpersonationConfig, IPartial { }
+	public class PartialIncrementor : Incrementor, IPartial { }
+	public class PartialInventory : Inventory, IPartial { }
+	public class PartialLineItem : LineItem, IPartial { }
+	public class PartialLineItem<Txp> : LineItem<Txp>, IPartial { }
+	public class PartialLineItemProduct : LineItemProduct, IPartial { }
+	public class PartialLineItemProduct<Txp> : LineItemProduct<Txp>, IPartial { }
+	public class PartialLineItemSpec : LineItemSpec, IPartial { }
+	public class PartialMeBuyer : MeBuyer, IPartial { }
+	public class PartialMeUser : MeUser, IPartial { }
+	public class PartialMeUser<Txp> : MeUser<Txp>, IPartial { }
+	public class PartialOrder : Order, IPartial { }
+	public class PartialOrder<Txp> : Order<Txp>, IPartial { }
+	public class PartialPayment : Payment, IPartial { }
+	public class PartialPayment<Txp> : Payment<Txp>, IPartial { }
+	public class PartialPaymentTransaction : PaymentTransaction, IPartial { }
+	public class PartialPaymentTransaction<Txp> : PaymentTransaction<Txp>, IPartial { }
+	public class PartialPriceBreak : PriceBreak, IPartial { }
+	public class PartialPriceSchedule : PriceSchedule, IPartial { }
+	public class PartialPriceSchedule<Txp> : PriceSchedule<Txp>, IPartial { }
+	public class PartialProduct : Product, IPartial { }
+	public class PartialProduct<Txp> : Product<Txp>, IPartial { }
+	public class PartialPromotion : Promotion, IPartial { }
+	public class PartialPromotion<Txp> : Promotion<Txp>, IPartial { }
+	public class PartialShipment : Shipment, IPartial { }
+	public class PartialShipment<Txp> : Shipment<Txp>, IPartial { }
+	public class PartialSpec : Spec, IPartial { }
+	public class PartialSpec<Txp> : Spec<Txp>, IPartial { }
+	public class PartialSpecOption : SpecOption, IPartial { }
+	public class PartialSpecOption<Txp> : SpecOption<Txp>, IPartial { }
+	public class PartialSpendingAccount : SpendingAccount, IPartial { }
+	public class PartialSpendingAccount<Txp> : SpendingAccount<Txp>, IPartial { }
+	public class PartialSupplier : Supplier, IPartial { }
+	public class PartialSupplier<Txp> : Supplier<Txp>, IPartial { }
+	public class PartialUser : User, IPartial { }
+	public class PartialUser<Txp> : User<Txp>, IPartial { }
+	public class PartialUserGroup : UserGroup, IPartial { }
+	public class PartialUserGroup<Txp> : UserGroup<Txp>, IPartial { }
 	public class PartialVariant : Variant, IPartial { }
 	public class PartialVariant<Txp> : Variant<Txp>, IPartial { }
 }
