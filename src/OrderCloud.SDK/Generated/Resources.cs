@@ -68,22 +68,22 @@ namespace OrderCloud.SDK
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		Task<ListPage<Address<Txp>>> ListAsync<Txp>(string buyerID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null);
-		/// <summary>Create a new address.</summary>
+		/// <summary>Create a new address. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		Task<Address> CreateAsync(string buyerID, Address address);
-		/// <summary>Create a new address.</summary>
+		/// <summary>Create a new address. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="buyerID">ID of the buyer.</param>
 		Task<Address<Txp>> CreateAsync<Txp>(string buyerID, Address address);
-		/// <summary>Create or update an address.</summary>
+		/// <summary>Create or update an address. If an object with the same ID already exists, it will be overwritten.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="addressID">ID of the address.</param>
-		Task<Address> UpdateAsync(string buyerID, string addressID, Address address);
-		/// <summary>Create or update an address.</summary>
+		Task<Address> SaveAsync(string buyerID, string addressID, Address address);
+		/// <summary>Create or update an address. If an object with the same ID already exists, it will be overwritten.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="addressID">ID of the address.</param>
-		Task<Address<Txp>> UpdateAsync<Txp>(string buyerID, string addressID, Address address);
+		Task<Address<Txp>> SaveAsync<Txp>(string buyerID, string addressID, Address address);
 		/// <summary>Delete an address.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="addressID">ID of the address.</param>
@@ -114,7 +114,7 @@ namespace OrderCloud.SDK
 		/// <param name="userID">ID of the user.</param>
 		/// <param name="userGroupID">ID of the user group.</param>
 		Task DeleteAssignmentAsync(string buyerID, string addressID, string userID = null, string userGroupID = null);
-		/// <summary>Save an address assignment.</summary>
+		/// <summary>Create or update an address assignment.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		Task SaveAssignmentAsync(string buyerID, AddressAssignment addressAssignment);
 	}
@@ -145,18 +145,18 @@ namespace OrderCloud.SDK
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		Task<ListPage<Address<Txp>>> ListAsync<Txp>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null);
-		/// <summary>Create a new admin address.</summary>
+		/// <summary>Create a new admin address. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
 		Task<Address> CreateAsync(Address address);
-		/// <summary>Create a new admin address.</summary>
+		/// <summary>Create a new admin address. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		Task<Address<Txp>> CreateAsync<Txp>(Address address);
-		/// <summary>Create or update an admin address.</summary>
+		/// <summary>Create or update an admin address. If an object with the same ID already exists, it will be overwritten.</summary>
 		/// <param name="addressID">ID of the address.</param>
-		Task<Address> UpdateAsync(string addressID, Address address);
-		/// <summary>Create or update an admin address.</summary>
+		Task<Address> SaveAsync(string addressID, Address address);
+		/// <summary>Create or update an admin address. If an object with the same ID already exists, it will be overwritten.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="addressID">ID of the address.</param>
-		Task<Address<Txp>> UpdateAsync<Txp>(string addressID, Address address);
+		Task<Address<Txp>> SaveAsync<Txp>(string addressID, Address address);
 		/// <summary>Delete an admin address.</summary>
 		/// <param name="addressID">ID of the address.</param>
 		Task DeleteAsync(string addressID);
@@ -195,18 +195,18 @@ namespace OrderCloud.SDK
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		Task<ListPage<UserGroup<Txp>>> ListAsync<Txp>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null);
-		/// <summary>Create a new admin user group.</summary>
+		/// <summary>Create a new admin user group. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
 		Task<UserGroup> CreateAsync(UserGroup userGroup);
-		/// <summary>Create a new admin user group.</summary>
+		/// <summary>Create a new admin user group. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		Task<UserGroup<Txp>> CreateAsync<Txp>(UserGroup userGroup);
-		/// <summary>Create or update an admin user group.</summary>
+		/// <summary>Create or update an admin user group. If an object with the same ID already exists, it will be overwritten.</summary>
 		/// <param name="userGroupID">ID of the user group.</param>
-		Task<UserGroup> UpdateAsync(string userGroupID, UserGroup userGroup);
-		/// <summary>Create or update an admin user group.</summary>
+		Task<UserGroup> SaveAsync(string userGroupID, UserGroup userGroup);
+		/// <summary>Create or update an admin user group. If an object with the same ID already exists, it will be overwritten.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="userGroupID">ID of the user group.</param>
-		Task<UserGroup<Txp>> UpdateAsync<Txp>(string userGroupID, UserGroup userGroup);
+		Task<UserGroup<Txp>> SaveAsync<Txp>(string userGroupID, UserGroup userGroup);
 		/// <summary>Delete an admin user group.</summary>
 		/// <param name="userGroupID">ID of the user group.</param>
 		Task DeleteAsync(string userGroupID);
@@ -227,7 +227,7 @@ namespace OrderCloud.SDK
 		/// <param name="userGroupID">ID of the user group.</param>
 		/// <param name="userID">ID of the user.</param>
 		Task DeleteUserAssignmentAsync(string userGroupID, string userID);
-		/// <summary>Save an admin user group user assignment.</summary>
+		/// <summary>Create or update an admin user group user assignment.</summary>
 		Task SaveUserAssignmentAsync(UserGroupAssignment userGroupAssignment);
 	}
 
@@ -257,18 +257,18 @@ namespace OrderCloud.SDK
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		Task<ListPage<User<Txp>>> ListAsync<Txp>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null);
-		/// <summary>Create a new admin user.</summary>
+		/// <summary>Create a new admin user. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
 		Task<User> CreateAsync(User user);
-		/// <summary>Create a new admin user.</summary>
+		/// <summary>Create a new admin user. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		Task<User<Txp>> CreateAsync<Txp>(User user);
-		/// <summary>Create or update an admin user.</summary>
+		/// <summary>Create or update an admin user. If an object with the same ID already exists, it will be overwritten.</summary>
 		/// <param name="userID">ID of the user.</param>
-		Task<User> UpdateAsync(string userID, User user);
-		/// <summary>Create or update an admin user.</summary>
+		Task<User> SaveAsync(string userID, User user);
+		/// <summary>Create or update an admin user. If an object with the same ID already exists, it will be overwritten.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="userID">ID of the user.</param>
-		Task<User<Txp>> UpdateAsync<Txp>(string userID, User user);
+		Task<User<Txp>> SaveAsync<Txp>(string userID, User user);
 		/// <summary>Delete an admin user.</summary>
 		/// <param name="userID">ID of the user.</param>
 		Task DeleteAsync(string userID);
@@ -311,22 +311,22 @@ namespace OrderCloud.SDK
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		Task<ListPage<ApprovalRule<Txp>>> ListAsync<Txp>(string buyerID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null);
-		/// <summary>Create a new approval rule.</summary>
+		/// <summary>Create a new approval rule. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		Task<ApprovalRule> CreateAsync(string buyerID, ApprovalRule approvalRule);
-		/// <summary>Create a new approval rule.</summary>
+		/// <summary>Create a new approval rule. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="buyerID">ID of the buyer.</param>
 		Task<ApprovalRule<Txp>> CreateAsync<Txp>(string buyerID, ApprovalRule approvalRule);
-		/// <summary>Create or update an approval rule.</summary>
+		/// <summary>Create or update an approval rule. If an object with the same ID already exists, it will be overwritten.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="approvalRuleID">ID of the approval rule.</param>
-		Task<ApprovalRule> UpdateAsync(string buyerID, string approvalRuleID, ApprovalRule approvalRule);
-		/// <summary>Create or update an approval rule.</summary>
+		Task<ApprovalRule> SaveAsync(string buyerID, string approvalRuleID, ApprovalRule approvalRule);
+		/// <summary>Create or update an approval rule. If an object with the same ID already exists, it will be overwritten.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="approvalRuleID">ID of the approval rule.</param>
-		Task<ApprovalRule<Txp>> UpdateAsync<Txp>(string buyerID, string approvalRuleID, ApprovalRule approvalRule);
+		Task<ApprovalRule<Txp>> SaveAsync<Txp>(string buyerID, string approvalRuleID, ApprovalRule approvalRule);
 		/// <summary>Delete an approval rule.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="approvalRuleID">ID of the approval rule.</param>
@@ -368,21 +368,21 @@ namespace OrderCloud.SDK
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		Task<ListPage<Buyer<Txp>>> ListAsync<Txp>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null);
-		/// <summary>Create a new buyer.</summary>
+		/// <summary>Create a new buyer. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
 		Task<Buyer> CreateAsync(Buyer buyer);
-		/// <summary>Create a new buyer.</summary>
+		/// <summary>Create a new buyer. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		Task<Buyer<Txp>> CreateAsync<Txp>(Buyer buyer);
-		/// <summary>Create or update a buyer.</summary>
-		/// <param name="buyerID">ID of the buyer.</param>
-		Task<Buyer> UpdateAsync(string buyerID, Buyer buyer);
-		/// <summary>Create or update a buyer.</summary>
-		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
-		/// <param name="buyerID">ID of the buyer.</param>
-		Task<Buyer<Txp>> UpdateAsync<Txp>(string buyerID, Buyer buyer);
 		/// <summary>Delete a buyer.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		Task DeleteAsync(string buyerID);
+		/// <summary>Create or update a buyer. If an object with the same ID already exists, it will be overwritten.</summary>
+		/// <param name="buyerID">ID of the buyer.</param>
+		Task<Buyer> SaveAsync(string buyerID, Buyer buyer);
+		/// <summary>Create or update a buyer. If an object with the same ID already exists, it will be overwritten.</summary>
+		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
+		/// <param name="buyerID">ID of the buyer.</param>
+		Task<Buyer<Txp>> SaveAsync<Txp>(string buyerID, Buyer buyer);
 		/// <summary>Partially update a buyer.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		Task<Buyer> PatchAsync(string buyerID, PartialBuyer partialBuyer);
@@ -418,18 +418,18 @@ namespace OrderCloud.SDK
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		Task<ListPage<Catalog<Txp>>> ListAsync<Txp>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null);
-		/// <summary>Create a new catalog.</summary>
+		/// <summary>Create a new catalog. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
 		Task<Catalog> CreateAsync(Catalog catalog);
-		/// <summary>Create a new catalog.</summary>
+		/// <summary>Create a new catalog. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		Task<Catalog<Txp>> CreateAsync<Txp>(Catalog catalog);
-		/// <summary>Create or update a catalog.</summary>
+		/// <summary>Create or update a catalog. If an object with the same ID already exists, it will be overwritten.</summary>
 		/// <param name="catalogID">ID of the catalog.</param>
-		Task<Catalog> UpdateAsync(string catalogID, Catalog catalog);
-		/// <summary>Create or update a catalog.</summary>
+		Task<Catalog> SaveAsync(string catalogID, Catalog catalog);
+		/// <summary>Create or update a catalog. If an object with the same ID already exists, it will be overwritten.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="catalogID">ID of the catalog.</param>
-		Task<Catalog<Txp>> UpdateAsync<Txp>(string catalogID, Catalog catalog);
+		Task<Catalog<Txp>> SaveAsync<Txp>(string catalogID, Catalog catalog);
 		/// <summary>Delete a catalog.</summary>
 		/// <param name="catalogID">ID of the catalog.</param>
 		Task DeleteAsync(string catalogID);
@@ -446,7 +446,7 @@ namespace OrderCloud.SDK
 		/// <param name="page">Page of results to return. Default: 1</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		Task<ListPage<CatalogAssignment>> ListAssignmentsAsync(string catalogID = null, string buyerID = null, int page = 1, int pageSize = 20);
-		/// <summary>Save a catalog assignment.</summary>
+		/// <summary>Create or update a catalog assignment.</summary>
 		Task SaveAssignmentAsync(CatalogAssignment catalogAssignment);
 		/// <summary>Delete a catalog assignment.</summary>
 		/// <param name="catalogID">ID of the catalog.</param>
@@ -458,7 +458,7 @@ namespace OrderCloud.SDK
 		/// <param name="page">Page of results to return. Default: 1</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		Task<ListPage<ProductCatalogAssignment>> ListProductAssignmentsAsync(string catalogID = null, string productID = null, int page = 1, int pageSize = 20);
-		/// <summary>Save a catalog product assignment.</summary>
+		/// <summary>Create or update a catalog product assignment.</summary>
 		Task SaveProductAssignmentAsync(ProductCatalogAssignment productCatalogAssignment);
 		/// <summary>Delete a catalog product assignment.</summary>
 		/// <param name="catalogID">ID of the catalog.</param>
@@ -498,23 +498,23 @@ namespace OrderCloud.SDK
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		Task<ListPage<Category<Txp>>> ListAsync<Txp>(string catalogID, string depth = "1", string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null);
-		/// <summary>Create a new category.</summary>
+		/// <summary>Create a new category. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
 		/// <param name="catalogID">ID of the catalog.</param>
 		Task<Category> CreateAsync(string catalogID, Category category);
-		/// <summary>Create a new category.</summary>
+		/// <summary>Create a new category. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="catalogID">ID of the catalog.</param>
 		Task<Category<Txp>> CreateAsync<Txp>(string catalogID, Category category);
-		/// <summary>Create or update a category.</summary>
+		/// <summary>Create or update a category. If an object with the same ID already exists, it will be overwritten.</summary>
 		/// <param name="catalogID">ID of the catalog.</param>
 		/// <param name="categoryID">ID of the category.</param>
-		Task<Category> UpdateAsync(string catalogID, string categoryID, Category category);
-		/// <summary>Create or update a category.</summary>
+		Task<Category> SaveAsync(string catalogID, string categoryID, Category category);
+		/// <summary>Create or update a category. If an object with the same ID already exists, it will be overwritten.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="catalogID">ID of the catalog.</param>
 		/// <param name="categoryID">ID of the category.</param>
-		Task<Category<Txp>> UpdateAsync<Txp>(string catalogID, string categoryID, Category category);
-		/// <summary>Delete a category.</summary>
+		Task<Category<Txp>> SaveAsync<Txp>(string catalogID, string categoryID, Category category);
+		/// <summary>Delete a category. Deleting a parent category will also delete all of that category's children.</summary>
 		/// <param name="catalogID">ID of the catalog.</param>
 		/// <param name="categoryID">ID of the category.</param>
 		Task DeleteAsync(string catalogID, string categoryID);
@@ -544,7 +544,7 @@ namespace OrderCloud.SDK
 		/// <param name="userID">ID of the user.</param>
 		/// <param name="userGroupID">ID of the user group.</param>
 		Task DeleteAssignmentAsync(string catalogID, string categoryID, string buyerID, string userID = null, string userGroupID = null);
-		/// <summary>Save a category assignment.</summary>
+		/// <summary>Create or update a category assignment.</summary>
 		/// <param name="catalogID">ID of the catalog.</param>
 		Task SaveAssignmentAsync(string catalogID, CategoryAssignment categoryAssignment);
 		/// <summary>Get a list of category product assignments.</summary>
@@ -554,7 +554,7 @@ namespace OrderCloud.SDK
 		/// <param name="page">Page of results to return. Default: 1</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		Task<ListPage<CategoryProductAssignment>> ListProductAssignmentsAsync(string catalogID, string categoryID = null, string productID = null, int page = 1, int pageSize = 20);
-		/// <summary>Save a category product assignment.</summary>
+		/// <summary>Create or update a category product assignment.</summary>
 		/// <param name="catalogID">ID of the catalog.</param>
 		Task SaveProductAssignmentAsync(string catalogID, CategoryProductAssignment categoryProductAssignment);
 		/// <summary>Delete a category product assignment.</summary>
@@ -594,22 +594,22 @@ namespace OrderCloud.SDK
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		Task<ListPage<CostCenter<Txp>>> ListAsync<Txp>(string buyerID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null);
-		/// <summary>Create a new cost center.</summary>
+		/// <summary>Create a new cost center. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		Task<CostCenter> CreateAsync(string buyerID, CostCenter costCenter);
-		/// <summary>Create a new cost center.</summary>
+		/// <summary>Create a new cost center. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="buyerID">ID of the buyer.</param>
 		Task<CostCenter<Txp>> CreateAsync<Txp>(string buyerID, CostCenter costCenter);
-		/// <summary>Create or update a cost center.</summary>
+		/// <summary>Create or update a cost center. If an object with the same ID already exists, it will be overwritten.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="costCenterID">ID of the cost center.</param>
-		Task<CostCenter> UpdateAsync(string buyerID, string costCenterID, CostCenter costCenter);
-		/// <summary>Create or update a cost center.</summary>
+		Task<CostCenter> SaveAsync(string buyerID, string costCenterID, CostCenter costCenter);
+		/// <summary>Create or update a cost center. If an object with the same ID already exists, it will be overwritten.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="costCenterID">ID of the cost center.</param>
-		Task<CostCenter<Txp>> UpdateAsync<Txp>(string buyerID, string costCenterID, CostCenter costCenter);
+		Task<CostCenter<Txp>> SaveAsync<Txp>(string buyerID, string costCenterID, CostCenter costCenter);
 		/// <summary>Delete a cost center.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="costCenterID">ID of the cost center.</param>
@@ -638,7 +638,7 @@ namespace OrderCloud.SDK
 		/// <param name="userID">ID of the user.</param>
 		/// <param name="userGroupID">ID of the user group.</param>
 		Task DeleteAssignmentAsync(string buyerID, string costCenterID, string userID = null, string userGroupID = null);
-		/// <summary>Save a cost center assignment.</summary>
+		/// <summary>Create or update a cost center assignment.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		Task SaveAssignmentAsync(string buyerID, CostCenterAssignment costCenterAssignment);
 	}
@@ -673,22 +673,22 @@ namespace OrderCloud.SDK
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		Task<ListPage<CreditCard<Txp>>> ListAsync<Txp>(string buyerID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null);
-		/// <summary>Create a new credit card.</summary>
+		/// <summary>Create a new credit card. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		Task<CreditCard> CreateAsync(string buyerID, CreditCard creditCard);
-		/// <summary>Create a new credit card.</summary>
+		/// <summary>Create a new credit card. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="buyerID">ID of the buyer.</param>
 		Task<CreditCard<Txp>> CreateAsync<Txp>(string buyerID, CreditCard creditCard);
-		/// <summary>Create or update a credit card.</summary>
+		/// <summary>Create or update a credit card. If an object with the same ID already exists, it will be overwritten.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="creditCardID">ID of the credit card.</param>
-		Task<CreditCard> UpdateAsync(string buyerID, string creditCardID, CreditCard creditCard);
-		/// <summary>Create or update a credit card.</summary>
+		Task<CreditCard> SaveAsync(string buyerID, string creditCardID, CreditCard creditCard);
+		/// <summary>Create or update a credit card. If an object with the same ID already exists, it will be overwritten.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="creditCardID">ID of the credit card.</param>
-		Task<CreditCard<Txp>> UpdateAsync<Txp>(string buyerID, string creditCardID, CreditCard creditCard);
+		Task<CreditCard<Txp>> SaveAsync<Txp>(string buyerID, string creditCardID, CreditCard creditCard);
 		/// <summary>Delete a credit card.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="creditCardID">ID of the credit card.</param>
@@ -711,7 +711,7 @@ namespace OrderCloud.SDK
 		/// <param name="page">Page of results to return. Default: 1</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		Task<ListPage<CreditCardAssignment>> ListAssignmentsAsync(string buyerID, string creditCardID = null, string userID = null, string userGroupID = null, PartyType? level = null, int? page = null, int? pageSize = null);
-		/// <summary>Save a credit card assignment.</summary>
+		/// <summary>Create or update a credit card assignment.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		Task SaveAssignmentAsync(string buyerID, CreditCardAssignment creditCardAssignment);
 		/// <summary>Delete a credit card assignment.</summary>
@@ -735,14 +735,14 @@ namespace OrderCloud.SDK
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		Task<ListPage<ImpersonationConfig>> ListAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null);
-		/// <summary>Create a new impersonation config.</summary>
+		/// <summary>Create a new impersonation config. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
 		Task<ImpersonationConfig> CreateAsync(ImpersonationConfig impersonationConfig);
-		/// <summary>Create or update an impersonation config.</summary>
-		/// <param name="impersonationConfigID">ID of the impersonation config.</param>
-		Task<ImpersonationConfig> UpdateAsync(string impersonationConfigID, ImpersonationConfig impersonationConfig);
 		/// <summary>Delete an impersonation config.</summary>
 		/// <param name="impersonationConfigID">ID of the impersonation config.</param>
 		Task DeleteAsync(string impersonationConfigID);
+		/// <summary>Create or update an impersonation config. If an object with the same ID already exists, it will be overwritten.</summary>
+		/// <param name="impersonationConfigID">ID of the impersonation config.</param>
+		Task<ImpersonationConfig> SaveAsync(string impersonationConfigID, ImpersonationConfig impersonationConfig);
 		/// <summary>Partially update an impersonation config.</summary>
 		/// <param name="impersonationConfigID">ID of the impersonation config.</param>
 		Task<ImpersonationConfig> PatchAsync(string impersonationConfigID, PartialImpersonationConfig partialImpersonationConfig);
@@ -761,11 +761,11 @@ namespace OrderCloud.SDK
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		Task<ListPage<Incrementor>> ListAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null);
-		/// <summary>Create a new incrementor.</summary>
+		/// <summary>Create a new incrementor. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
 		Task<Incrementor> CreateAsync(Incrementor incrementor);
-		/// <summary>Create or update an incrementor.</summary>
+		/// <summary>Create or update an incrementor. If an object with the same ID already exists, it will be overwritten.</summary>
 		/// <param name="incrementorID">ID of the incrementor.</param>
-		Task<Incrementor> UpdateAsync(string incrementorID, Incrementor incrementor);
+		Task<Incrementor> SaveAsync(string incrementorID, Incrementor incrementor);
 		/// <summary>Delete an incrementor.</summary>
 		/// <param name="incrementorID">ID of the incrementor.</param>
 		Task DeleteAsync(string incrementorID);
@@ -808,26 +808,26 @@ namespace OrderCloud.SDK
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		Task<ListPage<LineItem<Txp>>> ListAsync<Txp>(OrderDirection direction, string orderID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null);
-		/// <summary>Create a new line item.</summary>
+		/// <summary>Create a new line item. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing.</param>
 		/// <param name="orderID">ID of the order.</param>
 		Task<LineItem> CreateAsync(OrderDirection direction, string orderID, LineItem lineItem);
-		/// <summary>Create a new line item.</summary>
+		/// <summary>Create a new line item. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing.</param>
 		/// <param name="orderID">ID of the order.</param>
 		Task<LineItem<Txp>> CreateAsync<Txp>(OrderDirection direction, string orderID, LineItem lineItem);
-		/// <summary>Create or update a line item.</summary>
+		/// <summary>Create or update a line item. If an object with the same ID already exists, it will be overwritten.</summary>
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="lineItemID">ID of the line item.</param>
-		Task<LineItem> UpdateAsync(OrderDirection direction, string orderID, string lineItemID, LineItem lineItem);
-		/// <summary>Create or update a line item.</summary>
+		Task<LineItem> SaveAsync(OrderDirection direction, string orderID, string lineItemID, LineItem lineItem);
+		/// <summary>Create or update a line item. If an object with the same ID already exists, it will be overwritten.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="lineItemID">ID of the line item.</param>
-		Task<LineItem<Txp>> UpdateAsync<Txp>(OrderDirection direction, string orderID, string lineItemID, LineItem lineItem);
+		Task<LineItem<Txp>> SaveAsync<Txp>(OrderDirection direction, string orderID, string lineItemID, LineItem lineItem);
 		/// <summary>Delete a line item.</summary>
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing.</param>
 		/// <param name="orderID">ID of the order.</param>
@@ -875,17 +875,17 @@ namespace OrderCloud.SDK
 		/// <summary>Get the Current Authenticated User</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		Task<MeUser<Txp>> GetAsync<Txp>();
-		/// <summary>Update the Currently Authenticated User</summary>
-		Task<MeUser> UpdateAsync(MeUser meUser);
-		/// <summary>Update the Currently Authenticated User</summary>
+		/// <summary>Update the Currently Authenticated User If an object with the same ID already exists, it will be overwritten.</summary>
+		Task<MeUser> SaveAsync(MeUser meUser);
+		/// <summary>Update the Currently Authenticated User If an object with the same ID already exists, it will be overwritten.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
-		Task<MeUser<Txp>> UpdateAsync<Txp>(MeUser meUser);
+		Task<MeUser<Txp>> SaveAsync<Txp>(MeUser meUser);
 		/// <summary>Patch the Currently Authenticated User.</summary>
 		Task<MeUser> PatchAsync(PartialMeUser partialMeUser);
 		/// <summary>Patch the Currently Authenticated User.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		Task<MeUser<Txp>> PatchAsync<Txp>(PartialMeUser partialMeUser);
-		/// <summary>Get a list of cost centers visible to this user.</summary>
+		/// <summary>Get a list of cost centers visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
@@ -893,7 +893,7 @@ namespace OrderCloud.SDK
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		Task<ListPage<CostCenter>> ListCostCentersAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null);
-		/// <summary>Get a list of cost centers visible to this user.</summary>
+		/// <summary>Get a list of cost centers visible to this user. Only available to Buyer Users.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
@@ -902,7 +902,7 @@ namespace OrderCloud.SDK
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		Task<ListPage<CostCenter<Txp>>> ListCostCentersAsync<Txp>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null);
-		/// <summary>Get a list of user groups visible to this user.</summary>
+		/// <summary>Get a list of user groups visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
@@ -910,7 +910,7 @@ namespace OrderCloud.SDK
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		Task<ListPage<UserGroup>> ListUserGroupsAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null);
-		/// <summary>Get a list of user groups visible to this user.</summary>
+		/// <summary>Get a list of user groups visible to this user. Only available to Buyer Users.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
@@ -919,7 +919,7 @@ namespace OrderCloud.SDK
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		Task<ListPage<UserGroup<Txp>>> ListUserGroupsAsync<Txp>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null);
-		/// <summary>Get a list of addresses visible to this user.</summary>
+		/// <summary>Get a list of addresses visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
@@ -927,7 +927,7 @@ namespace OrderCloud.SDK
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		Task<ListPage<BuyerAddress>> ListAddressesAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null);
-		/// <summary>Get a list of addresses visible to this user.</summary>
+		/// <summary>Get a list of addresses visible to this user. Only available to Buyer Users.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
@@ -936,37 +936,37 @@ namespace OrderCloud.SDK
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		Task<ListPage<BuyerAddress<Txp>>> ListAddressesAsync<Txp>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null);
-		/// <summary>Create a new address.</summary>
+		/// <summary>Create a new address. Only available to Buyer Users.</summary>
 		Task<BuyerAddress> CreateAddressAsync(BuyerAddress buyerAddress);
-		/// <summary>Create a new address.</summary>
+		/// <summary>Create a new address. Only available to Buyer Users.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		Task<BuyerAddress<Txp>> CreateAddressAsync<Txp>(BuyerAddress buyerAddress);
-		/// <summary>Get a single address.</summary>
+		/// <summary>Get a single address. Only available to Buyer Users.</summary>
 		/// <param name="addressID">ID of the address.</param>
 		Task<BuyerAddress> GetAddressAsync(string addressID);
-		/// <summary>Get a single address.</summary>
+		/// <summary>Get a single address. Only available to Buyer Users.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="addressID">ID of the address.</param>
 		Task<BuyerAddress<Txp>> GetAddressAsync<Txp>(string addressID);
-		/// <summary>Create or update an address.</summary>
+		/// <summary>Create or update an address. Only available to Buyer Users.</summary>
 		/// <param name="addressID">ID of the address.</param>
-		Task<BuyerAddress> UpdateAddressAsync(string addressID, BuyerAddress buyerAddress);
-		/// <summary>Create or update an address.</summary>
+		Task<BuyerAddress> SaveAddressAsync(string addressID, BuyerAddress buyerAddress);
+		/// <summary>Create or update an address. Only available to Buyer Users.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="addressID">ID of the address.</param>
-		Task<BuyerAddress<Txp>> UpdateAddressAsync<Txp>(string addressID, BuyerAddress buyerAddress);
-		/// <summary>Partially update an address.</summary>
+		Task<BuyerAddress<Txp>> SaveAddressAsync<Txp>(string addressID, BuyerAddress buyerAddress);
+		/// <summary>Partially update an address. Only available to Buyer Users.</summary>
 		/// <param name="addressID">ID of the address.</param>
 		Task PatchAddressAsync(string addressID, PartialBuyerAddress partialBuyerAddress);
-		/// <summary>Delete an address.</summary>
+		/// <summary>Delete an address. Only available to Buyer Users.</summary>
 		/// <param name="addressID">ID of the address.</param>
 		Task DeleteAddressAsync(string addressID);
-		/// <summary>Create a new credit card.</summary>
+		/// <summary>Create a new credit card. Only available to Buyer Users.</summary>
 		Task<BuyerCreditCard> CreateCreditCardAsync(BuyerCreditCard buyerCreditCard);
-		/// <summary>Create a new credit card.</summary>
+		/// <summary>Create a new credit card. Only available to Buyer Users.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		Task<BuyerCreditCard<Txp>> CreateCreditCardAsync<Txp>(BuyerCreditCard buyerCreditCard);
-		/// <summary>Get a list of credit cards visible to this user.</summary>
+		/// <summary>Get a list of credit cards visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
@@ -974,7 +974,7 @@ namespace OrderCloud.SDK
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		Task<ListPage<BuyerCreditCard>> ListCreditCardsAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null);
-		/// <summary>Get a list of credit cards visible to this user.</summary>
+		/// <summary>Get a list of credit cards visible to this user. Only available to Buyer Users.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
@@ -983,27 +983,27 @@ namespace OrderCloud.SDK
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		Task<ListPage<BuyerCreditCard<Txp>>> ListCreditCardsAsync<Txp>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null);
-		/// <summary>Get a single credit card.</summary>
+		/// <summary>Get a single credit card. Only available to Buyer Users.</summary>
 		/// <param name="creditcardID">ID of the creditcard.</param>
 		Task<BuyerCreditCard> GetCreditCardAsync(string creditcardID);
-		/// <summary>Get a single credit card.</summary>
+		/// <summary>Get a single credit card. Only available to Buyer Users.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="creditcardID">ID of the creditcard.</param>
 		Task<BuyerCreditCard<Txp>> GetCreditCardAsync<Txp>(string creditcardID);
-		/// <summary>Create or update a credit card.</summary>
+		/// <summary>Create or update a credit card. Only available to Buyer Users.</summary>
 		/// <param name="creditcardID">ID of the creditcard.</param>
-		Task<BuyerCreditCard> UpdateCreditCardAsync(string creditcardID, BuyerCreditCard buyerCreditCard);
-		/// <summary>Create or update a credit card.</summary>
+		Task<BuyerCreditCard> SaveCreditCardAsync(string creditcardID, BuyerCreditCard buyerCreditCard);
+		/// <summary>Create or update a credit card. Only available to Buyer Users.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="creditcardID">ID of the creditcard.</param>
-		Task<BuyerCreditCard<Txp>> UpdateCreditCardAsync<Txp>(string creditcardID, BuyerCreditCard buyerCreditCard);
-		/// <summary>Partially update a credit card.</summary>
+		Task<BuyerCreditCard<Txp>> SaveCreditCardAsync<Txp>(string creditcardID, BuyerCreditCard buyerCreditCard);
+		/// <summary>Partially update a credit card. Only available to Buyer Users.</summary>
 		/// <param name="creditcardID">ID of the creditcard.</param>
 		Task PatchCreditCardAsync(string creditcardID, PartialBuyerCreditCard partialBuyerCreditCard);
-		/// <summary>Delete a credit card.</summary>
+		/// <summary>Delete a credit card. Only available to Buyer Users.</summary>
 		/// <param name="creditcardID">ID of the creditcard.</param>
 		Task DeleteCreditCardAsync(string creditcardID);
-		/// <summary>Get a list of categories visible to this user.</summary>
+		/// <summary>Get a list of categories visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="depth">Depth of the category.</param>
 		/// <param name="catalogID">ID of the catalog.</param>
 		/// <param name="productID">ID of the product.</param>
@@ -1014,16 +1014,16 @@ namespace OrderCloud.SDK
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		Task<ListPage<Category>> ListCategoriesAsync(string depth = "1", string catalogID = null, string productID = null, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null);
-		/// <summary>Get a single category.</summary>
+		/// <summary>Get a single category. Only available to Buyer Users.</summary>
 		/// <param name="categoryID">ID of the category.</param>
 		/// <param name="catalogID">ID of the catalog.</param>
 		Task<Category> GetCategoryAsync(string categoryID, string catalogID);
-		/// <summary>Get a single category.</summary>
+		/// <summary>Get a single category. Only available to Buyer Users.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="categoryID">ID of the category.</param>
 		/// <param name="catalogID">ID of the catalog.</param>
 		Task<Category<Txp>> GetCategoryAsync<Txp>(string categoryID, string catalogID);
-		/// <summary>Get a list of products visible to this user.</summary>
+		/// <summary>Get a list of products visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="catalogID">ID of the catalog.</param>
 		/// <param name="categoryID">ID of the category.</param>
 		/// <param name="depth">Depth of the product.</param>
@@ -1034,14 +1034,14 @@ namespace OrderCloud.SDK
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		Task<ListPage<BuyerProduct>> ListProductsAsync(string catalogID = null, string categoryID = null, string depth = null, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null);
-		/// <summary>Get a single product.</summary>
+		/// <summary>Get a single product. Only available to Buyer Users.</summary>
 		/// <param name="productID">ID of the product.</param>
 		Task<BuyerProduct> GetProductAsync(string productID);
-		/// <summary>Get a single product.</summary>
+		/// <summary>Get a single product. Only available to Buyer Users.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="productID">ID of the product.</param>
 		Task<BuyerProduct<Txp>> GetProductAsync<Txp>(string productID);
-		/// <summary>Get a list of specs visible to this user.</summary>
+		/// <summary>Get a list of specs visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="catalogID">ID of the catalog.</param>
 		/// <param name="search">Word or phrase to search for.</param>
@@ -1051,18 +1051,18 @@ namespace OrderCloud.SDK
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		Task<ListPage<BuyerSpec>> ListSpecsAsync(string productID, string catalogID = null, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null);
-		/// <summary>Get a single spec.</summary>
+		/// <summary>Get a single spec. Only available to Buyer Users.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="specID">ID of the spec.</param>
 		/// <param name="catalogID">ID of the catalog.</param>
 		Task<BuyerSpec> GetSpecAsync(string productID, string specID, string catalogID = null);
-		/// <summary>Get a single spec.</summary>
+		/// <summary>Get a single spec. Only available to Buyer Users.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="specID">ID of the spec.</param>
 		/// <param name="catalogID">ID of the catalog.</param>
 		Task<BuyerSpec<Txp>> GetSpecAsync<Txp>(string productID, string specID, string catalogID = null);
-		/// <summary>Get a list of orders visible to this user.</summary>
+		/// <summary>Get a list of orders visible to this user. List orders created by this user.</summary>
 		/// <param name="from">Lower bound of date range that the order was created (if outgoing) or submitted (if incoming).</param>
 		/// <param name="to">Upper bound of date range that the order was created (if outgoing) or submitted (if incoming).</param>
 		/// <param name="search">Word or phrase to search for.</param>
@@ -1072,7 +1072,7 @@ namespace OrderCloud.SDK
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		Task<ListPage<Order>> ListOrdersAsync(DateTimeOffset? from = null, DateTimeOffset? to = null, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null);
-		/// <summary>Get a list of orders visible to this user.</summary>
+		/// <summary>Get a list of orders visible to this user. List orders created by this user.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="from">Lower bound of date range that the order was created (if outgoing) or submitted (if incoming).</param>
 		/// <param name="to">Upper bound of date range that the order was created (if outgoing) or submitted (if incoming).</param>
@@ -1104,7 +1104,7 @@ namespace OrderCloud.SDK
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		Task<ListPage<Order<Txp>>> ListApprovableOrdersAsync<Txp>(DateTimeOffset? from = null, DateTimeOffset? to = null, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null);
-		/// <summary>Get a list of promotions visible to this user.</summary>
+		/// <summary>Get a list of promotions visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
@@ -1112,7 +1112,7 @@ namespace OrderCloud.SDK
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		Task<ListPage<Promotion>> ListPromotionsAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null);
-		/// <summary>Get a list of promotions visible to this user.</summary>
+		/// <summary>Get a list of promotions visible to this user. Only available to Buyer Users.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
@@ -1121,14 +1121,14 @@ namespace OrderCloud.SDK
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		Task<ListPage<Promotion<Txp>>> ListPromotionsAsync<Txp>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null);
-		/// <summary>Get a single promotion.</summary>
+		/// <summary>Get a single promotion. Only available to Buyer Users.</summary>
 		/// <param name="promotionID">ID of the promotion.</param>
 		Task<Promotion> GetPromotionAsync(string promotionID);
-		/// <summary>Get a single promotion.</summary>
+		/// <summary>Get a single promotion. Only available to Buyer Users.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="promotionID">ID of the promotion.</param>
 		Task<Promotion<Txp>> GetPromotionAsync<Txp>(string promotionID);
-		/// <summary>Get a list of spending accounts visible to this user.</summary>
+		/// <summary>Get a list of spending accounts visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
@@ -1136,7 +1136,7 @@ namespace OrderCloud.SDK
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		Task<ListPage<SpendingAccount>> ListSpendingAccountsAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null);
-		/// <summary>Get a list of spending accounts visible to this user.</summary>
+		/// <summary>Get a list of spending accounts visible to this user. Only available to Buyer Users.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
@@ -1145,14 +1145,14 @@ namespace OrderCloud.SDK
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		Task<ListPage<SpendingAccount<Txp>>> ListSpendingAccountsAsync<Txp>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null);
-		/// <summary>Get a single spending account.</summary>
+		/// <summary>Get a single spending account. Only available to Buyer Users.</summary>
 		/// <param name="spendingAccountID">ID of the spending account.</param>
 		Task<SpendingAccount> GetSpendingAccountAsync(string spendingAccountID);
-		/// <summary>Get a single spending account.</summary>
+		/// <summary>Get a single spending account. Only available to Buyer Users.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="spendingAccountID">ID of the spending account.</param>
 		Task<SpendingAccount<Txp>> GetSpendingAccountAsync<Txp>(string spendingAccountID);
-		/// <summary>Get a list of shipments visible to this user.</summary>
+		/// <summary>Get a list of shipments visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
@@ -1161,7 +1161,7 @@ namespace OrderCloud.SDK
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		Task<ListPage<Shipment>> ListShipmentsAsync(string orderID = null, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null);
-		/// <summary>Get a list of shipments visible to this user.</summary>
+		/// <summary>Get a list of shipments visible to this user. Only available to Buyer Users.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="search">Word or phrase to search for.</param>
@@ -1171,14 +1171,14 @@ namespace OrderCloud.SDK
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		Task<ListPage<Shipment<Txp>>> ListShipmentsAsync<Txp>(string orderID = null, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null);
-		/// <summary>Get a single shipment.</summary>
+		/// <summary>Get a single shipment. Only available to Buyer Users.</summary>
 		/// <param name="shipmentID">ID of the shipment.</param>
 		Task<Shipment> GetShipmentAsync(string shipmentID);
-		/// <summary>Get a single shipment.</summary>
+		/// <summary>Get a single shipment. Only available to Buyer Users.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="shipmentID">ID of the shipment.</param>
 		Task<Shipment<Txp>> GetShipmentAsync<Txp>(string shipmentID);
-		/// <summary>Get a list of shipment items visible to this user.</summary>
+		/// <summary>Get a list of shipment items visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="shipmentID">ID of the shipment.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="search">Word or phrase to search for.</param>
@@ -1188,7 +1188,7 @@ namespace OrderCloud.SDK
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		Task<ListPage<ShipmentItem>> ListShipmentItemsAsync(string shipmentID, string orderID = null, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null);
-		/// <summary>Get a list of shipment items visible to this user.</summary>
+		/// <summary>Get a list of shipment items visible to this user. Only available to Buyer Users.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="shipmentID">ID of the shipment.</param>
 		/// <param name="orderID">ID of the order.</param>
@@ -1202,12 +1202,12 @@ namespace OrderCloud.SDK
 		/// <summary>Register a register.</summary>
 		/// <param name="anonUserToken">Anon user token of the user.</param>
 		Task<dynamic> RegisterAsync(MeUser meUser, string anonUserToken);
-		/// <summary>Transfer a anon user order.</summary>
+		/// <summary>Transfer an anon user order.</summary>
 		/// <param name="anonUserToken">Anon user token of the me.</param>
 		Task TransferAnonUserOrderAsync(string anonUserToken);
 		/// <summary>Reset a password by token.</summary>
 		Task ResetPasswordByTokenAsync(TokenPasswordReset tokenPasswordReset);
-		/// <summary>Get a list of catalogs visible to this user.</summary>
+		/// <summary>Get a list of catalogs visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
@@ -1215,7 +1215,7 @@ namespace OrderCloud.SDK
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		Task<ListPage<Catalog>> ListCatalogsAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null);
-		/// <summary>Get a list of catalogs visible to this user.</summary>
+		/// <summary>Get a list of catalogs visible to this user. Only available to Buyer Users.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
@@ -1224,10 +1224,10 @@ namespace OrderCloud.SDK
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		Task<ListPage<Catalog<Txp>>> ListCatalogsAsync<Txp>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null);
-		/// <summary>Get a single catalog.</summary>
+		/// <summary>Get a single catalog. Only available to Buyer Users.</summary>
 		/// <param name="catalogID">ID of the catalog.</param>
 		Task<Catalog> GetCatalogAsync(string catalogID);
-		/// <summary>Get a single catalog.</summary>
+		/// <summary>Get a single catalog. Only available to Buyer Users.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="catalogID">ID of the catalog.</param>
 		Task<Catalog<Txp>> GetCatalogAsync<Txp>(string catalogID);
@@ -1261,7 +1261,7 @@ namespace OrderCloud.SDK
 		/// <param name="userID">ID of the user.</param>
 		/// <param name="userGroupID">ID of the user group.</param>
 		Task DeleteAssignmentAsync(string messageSenderID, string buyerID = null, string userID = null, string userGroupID = null);
-		/// <summary>Save a message sender assignment.</summary>
+		/// <summary>Create or update a message sender assignment.</summary>
 		Task SaveAssignmentAsync(MessageSenderAssignment messageSenderAssignment);
 		/// <summary>Get a list of message sender cc listener assignments.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
@@ -1271,7 +1271,7 @@ namespace OrderCloud.SDK
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		Task<ListPage<MessageCCListenerAssignment>> ListCCListenerAssignmentsAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null);
-		/// <summary>Save a message sender cc listener assignment.</summary>
+		/// <summary>Create or update a message sender cc listener assignment.</summary>
 		Task SaveCCListenerAssignmentAsync(MessageCCListenerAssignment messageCCListenerAssignment);
 	}
 
@@ -1313,27 +1313,27 @@ namespace OrderCloud.SDK
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		Task<ListPage<Order<Txp>>> ListAsync<Txp>(OrderDirection direction, string buyerID = null, string supplierID = null, DateTimeOffset? from = null, DateTimeOffset? to = null, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null);
-		/// <summary>Create a new order.</summary>
+		/// <summary>Create a new order. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing.</param>
 		Task<Order> CreateAsync(OrderDirection direction, Order order);
-		/// <summary>Create a new order.</summary>
+		/// <summary>Create a new order. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing.</param>
 		Task<Order<Txp>> CreateAsync<Txp>(OrderDirection direction, Order order);
-		/// <summary>Create or update an order.</summary>
+		/// <summary>Create or update an order. If an object with the same ID already exists, it will be overwritten.</summary>
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing.</param>
 		/// <param name="orderID">ID of the order.</param>
-		Task<Order> UpdateAsync(OrderDirection direction, string orderID, Order order);
-		/// <summary>Create or update an order.</summary>
+		Task<Order> SaveAsync(OrderDirection direction, string orderID, Order order);
+		/// <summary>Create or update an order. If an object with the same ID already exists, it will be overwritten.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing.</param>
 		/// <param name="orderID">ID of the order.</param>
-		Task<Order<Txp>> UpdateAsync<Txp>(OrderDirection direction, string orderID, Order order);
+		Task<Order<Txp>> SaveAsync<Txp>(OrderDirection direction, string orderID, Order order);
 		/// <summary>Delete an order.</summary>
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing.</param>
 		/// <param name="orderID">ID of the order.</param>
 		Task DeleteAsync(OrderDirection direction, string orderID);
-		/// <summary>Get a list of order approvals.</summary>
+		/// <summary>Get a list of order approvals. Returns all Approvals associated with the Order.</summary>
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="search">Word or phrase to search for.</param>
@@ -1343,7 +1343,7 @@ namespace OrderCloud.SDK
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		Task<ListPage<OrderApproval>> ListApprovalsAsync(OrderDirection direction, string orderID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null);
-		/// <summary>Get a list of order eligible approvers.</summary>
+		/// <summary>Get a list of order eligible approvers. Returns all Users who can approve or decline this order (but have not done so).</summary>
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="search">Word or phrase to search for.</param>
@@ -1353,7 +1353,7 @@ namespace OrderCloud.SDK
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		Task<ListPage<User>> ListEligibleApproversAsync(OrderDirection direction, string orderID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null);
-		/// <summary>Get a list of order eligible approvers.</summary>
+		/// <summary>Get a list of order eligible approvers. Returns all Users who can approve or decline this order (but have not done so).</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing.</param>
 		/// <param name="orderID">ID of the order.</param>
@@ -1409,66 +1409,66 @@ namespace OrderCloud.SDK
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing.</param>
 		/// <param name="orderID">ID of the order.</param>
 		Task<Order<Txp>> CancelAsync<Txp>(OrderDirection direction, string orderID);
-		/// <summary>Ship an order ship.</summary>
+		/// <summary>Create a new shipment containing all items on an order.</summary>
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing.</param>
 		/// <param name="orderID">ID of the order.</param>
 		Task<Order> ShipAsync(OrderDirection direction, string orderID, Shipment shipment);
-		/// <summary>Ship an order ship.</summary>
+		/// <summary>Create a new shipment containing all items on an order.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing.</param>
 		/// <param name="orderID">ID of the order.</param>
 		Task<Order<Txp>> ShipAsync<Txp>(OrderDirection direction, string orderID, Shipment shipment);
-		/// <summary>Set an shipping address.</summary>
+		/// <summary>Set a shipping address. Use only when the address is not to be saved/reused. To use a saved address (i.e. from the Addresses resource), PATCH the order's ShippingAddressID property instead.</summary>
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing.</param>
 		/// <param name="orderID">ID of the order.</param>
 		Task<Order> SetShippingAddressAsync(OrderDirection direction, string orderID, Address address);
-		/// <summary>Set an shipping address.</summary>
+		/// <summary>Set a shipping address. Use only when the address is not to be saved/reused. To use a saved address (i.e. from the Addresses resource), PATCH the order's ShippingAddressID property instead.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing.</param>
 		/// <param name="orderID">ID of the order.</param>
 		Task<Order<Txp>> SetShippingAddressAsync<Txp>(OrderDirection direction, string orderID, Address address);
-		/// <summary>Partially update an order shipping address.</summary>
+		/// <summary>Partially update an order shipping address. Not allowed on unsubmitted orders where ShippingAddressID has been set. In that case, use the Addresses resource to update the saved address.</summary>
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing.</param>
 		/// <param name="orderID">ID of the order.</param>
 		Task<Order> PatchShippingAddressAsync(OrderDirection direction, string orderID, PartialAddress partialAddress);
-		/// <summary>Partially update an order shipping address.</summary>
+		/// <summary>Partially update an order shipping address. Not allowed on unsubmitted orders where ShippingAddressID has been set. In that case, use the Addresses resource to update the saved address.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing.</param>
 		/// <param name="orderID">ID of the order.</param>
 		Task<Order<Txp>> PatchShippingAddressAsync<Txp>(OrderDirection direction, string orderID, PartialAddress partialAddress);
-		/// <summary>Set an billing address.</summary>
+		/// <summary>Set a billing address. Use only when the address is not to be saved/reused. To use a saved address (i.e. from the Addresses resource), PATCH the order's BillingAddressID property instead.</summary>
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing.</param>
 		/// <param name="orderID">ID of the order.</param>
 		Task<Order> SetBillingAddressAsync(OrderDirection direction, string orderID, Address address);
-		/// <summary>Set an billing address.</summary>
+		/// <summary>Set a billing address. Use only when the address is not to be saved/reused. To use a saved address (i.e. from the Addresses resource), PATCH the order's BillingAddressID property instead.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing.</param>
 		/// <param name="orderID">ID of the order.</param>
 		Task<Order<Txp>> SetBillingAddressAsync<Txp>(OrderDirection direction, string orderID, Address address);
-		/// <summary>Partially update an order billing address.</summary>
+		/// <summary>Partially update an order billing address. Not allowed on unsubmitted orders where BillingAddressID has been set. In that case, use the Addresses resource to update the saved address.</summary>
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing.</param>
 		/// <param name="orderID">ID of the order.</param>
 		Task<Order> PatchBillingAddressAsync(OrderDirection direction, string orderID, PartialAddress partialAddress);
-		/// <summary>Partially update an order billing address.</summary>
+		/// <summary>Partially update an order billing address. Not allowed on unsubmitted orders where BillingAddressID has been set. In that case, use the Addresses resource to update the saved address.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing.</param>
 		/// <param name="orderID">ID of the order.</param>
 		Task<Order<Txp>> PatchBillingAddressAsync<Txp>(OrderDirection direction, string orderID, PartialAddress partialAddress);
-		/// <summary>Partially update an order from user.</summary>
+		/// <summary>Override order creator details. Only FirstName, LastName, and Email can be updated. Primarily used to facilitate guest checkout scenarios.</summary>
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing.</param>
 		/// <param name="orderID">ID of the order.</param>
 		Task<Order> PatchFromUserAsync(OrderDirection direction, string orderID, PartialUser partialUser);
-		/// <summary>Partially update an order from user.</summary>
+		/// <summary>Override order creator details. Only FirstName, LastName, and Email can be updated. Primarily used to facilitate guest checkout scenarios.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing.</param>
 		/// <param name="orderID">ID of the order.</param>
 		Task<Order<Txp>> PatchFromUserAsync<Txp>(OrderDirection direction, string orderID, PartialUser partialUser);
-		/// <summary>Add an promotion.</summary>
+		/// <summary>Add a promotion to an order</summary>
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="promoCode">Promo code of the promotion.</param>
 		Task<Promotion> AddPromotionAsync(OrderDirection direction, string orderID, string promoCode);
-		/// <summary>Add an promotion.</summary>
+		/// <summary>Add a promotion to an order</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing.</param>
 		/// <param name="orderID">ID of the order.</param>
@@ -1495,12 +1495,12 @@ namespace OrderCloud.SDK
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		Task<ListPage<OrderPromotion<Txp>>> ListPromotionsAsync<Txp>(OrderDirection direction, string orderID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null);
-		/// <summary>Remove an promotion.</summary>
+		/// <summary>Remove a promotion from an order</summary>
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="promoCode">Promo code of the order.</param>
 		Task<Order> RemovePromotionAsync(OrderDirection direction, string orderID, string promoCode);
-		/// <summary>Remove an promotion.</summary>
+		/// <summary>Remove a promotion from an order</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing.</param>
 		/// <param name="orderID">ID of the order.</param>
@@ -1510,7 +1510,7 @@ namespace OrderCloud.SDK
 
 	public interface IPasswordResetsResource
 	{
-		/// <summary>Send a verification code.</summary>
+		/// <summary>Send a verification code. Sends a temporary verification code via email, which must subsequently be passed in a Reset Password call.</summary>
 		Task SendVerificationCodeAsync(PasswordResetRequest passwordResetRequest);
 		/// <summary>Reset a password by verification code.</summary>
 		/// <param name="verificationCode">Verification code of the password reset.</param>
@@ -1551,11 +1551,11 @@ namespace OrderCloud.SDK
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		Task<ListPage<Payment<Txp>>> ListAsync<Txp>(OrderDirection direction, string orderID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null);
-		/// <summary>Create a new payment.</summary>
+		/// <summary>Create a new payment. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing.</param>
 		/// <param name="orderID">ID of the order.</param>
 		Task<Payment> CreateAsync(OrderDirection direction, string orderID, Payment payment);
-		/// <summary>Create a new payment.</summary>
+		/// <summary>Create a new payment. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing.</param>
 		/// <param name="orderID">ID of the order.</param>
@@ -1621,18 +1621,18 @@ namespace OrderCloud.SDK
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		Task<ListPage<PriceSchedule<Txp>>> ListAsync<Txp>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null);
-		/// <summary>Create a new price schedule.</summary>
+		/// <summary>Create a new price schedule. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
 		Task<PriceSchedule> CreateAsync(PriceSchedule priceSchedule);
-		/// <summary>Create a new price schedule.</summary>
+		/// <summary>Create a new price schedule. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		Task<PriceSchedule<Txp>> CreateAsync<Txp>(PriceSchedule priceSchedule);
-		/// <summary>Create or update a price schedule.</summary>
+		/// <summary>Create or update a price schedule. If an object with the same ID already exists, it will be overwritten.</summary>
 		/// <param name="priceScheduleID">ID of the price schedule.</param>
-		Task<PriceSchedule> UpdateAsync(string priceScheduleID, PriceSchedule priceSchedule);
-		/// <summary>Create or update a price schedule.</summary>
+		Task<PriceSchedule> SaveAsync(string priceScheduleID, PriceSchedule priceSchedule);
+		/// <summary>Create or update a price schedule. If an object with the same ID already exists, it will be overwritten.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="priceScheduleID">ID of the price schedule.</param>
-		Task<PriceSchedule<Txp>> UpdateAsync<Txp>(string priceScheduleID, PriceSchedule priceSchedule);
+		Task<PriceSchedule<Txp>> SaveAsync<Txp>(string priceScheduleID, PriceSchedule priceSchedule);
 		/// <summary>Delete a price schedule.</summary>
 		/// <param name="priceScheduleID">ID of the price schedule.</param>
 		Task DeleteAsync(string priceScheduleID);
@@ -1643,10 +1643,10 @@ namespace OrderCloud.SDK
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="priceScheduleID">ID of the price schedule.</param>
 		Task<PriceSchedule<Txp>> PatchAsync<Txp>(string priceScheduleID, PartialPriceSchedule partialPriceSchedule);
-		/// <summary>Save a price schedule price break.</summary>
+		/// <summary>Create or update a price schedule price break.</summary>
 		/// <param name="priceScheduleID">ID of the price schedule.</param>
 		Task<PriceSchedule> SavePriceBreakAsync(string priceScheduleID, PriceBreak priceBreak);
-		/// <summary>Save a price schedule price break.</summary>
+		/// <summary>Create or update a price schedule price break.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="priceScheduleID">ID of the price schedule.</param>
 		Task<PriceSchedule<Txp>> SavePriceBreakAsync<Txp>(string priceScheduleID, PriceBreak priceBreak);
@@ -1688,18 +1688,18 @@ namespace OrderCloud.SDK
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		Task<ListPage<Product<Txp>>> ListAsync<Txp>(string catalogID = null, string categoryID = null, string supplierID = null, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null);
-		/// <summary>Create a new product.</summary>
+		/// <summary>Create a new product. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
 		Task<Product> CreateAsync(Product product);
-		/// <summary>Create a new product.</summary>
+		/// <summary>Create a new product. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		Task<Product<Txp>> CreateAsync<Txp>(Product product);
-		/// <summary>Create or update a product.</summary>
+		/// <summary>Create or update a product. If an object with the same ID already exists, it will be overwritten.</summary>
 		/// <param name="productID">ID of the product.</param>
-		Task<Product> UpdateAsync(string productID, Product product);
-		/// <summary>Create or update a product.</summary>
+		Task<Product> SaveAsync(string productID, Product product);
+		/// <summary>Create or update a product. If an object with the same ID already exists, it will be overwritten.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="productID">ID of the product.</param>
-		Task<Product<Txp>> UpdateAsync<Txp>(string productID, Product product);
+		Task<Product<Txp>> SaveAsync<Txp>(string productID, Product product);
 		/// <summary>Delete a product.</summary>
 		/// <param name="productID">ID of the product.</param>
 		Task DeleteAsync(string productID);
@@ -1741,12 +1741,12 @@ namespace OrderCloud.SDK
 		/// <summary>Create or update a product variant.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="variantID">ID of the variant.</param>
-		Task<Variant> UpdateVariantAsync(string productID, string variantID, Variant variant);
+		Task<Variant> SaveVariantAsync(string productID, string variantID, Variant variant);
 		/// <summary>Create or update a product variant.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="variantID">ID of the variant.</param>
-		Task<Variant<Txp>> UpdateVariantAsync<Txp>(string productID, string variantID, Variant variant);
+		Task<Variant<Txp>> SaveVariantAsync<Txp>(string productID, string variantID, Variant variant);
 		/// <summary>Partially update a product variant.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="variantID">ID of the variant.</param>
@@ -1784,7 +1784,7 @@ namespace OrderCloud.SDK
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		Task<ListPage<Supplier<Txp>>> ListSuppliersAsync<Txp>(string productID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null);
-		/// <summary>Save a product supplier.</summary>
+		/// <summary>Create or update a product supplier.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="supplierID">ID of the supplier.</param>
 		Task SaveSupplierAsync(string productID, string supplierID);
@@ -1792,7 +1792,7 @@ namespace OrderCloud.SDK
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="supplierID">ID of the supplier.</param>
 		Task RemoveSupplierAsync(string productID, string supplierID);
-		/// <summary>Save a product assignment.</summary>
+		/// <summary>Create or update a product assignment.</summary>
 		Task SaveAssignmentAsync(ProductAssignment productAssignment);
 		/// <summary>Get a list of product assignments.</summary>
 		/// <param name="productID">ID of the product.</param>
@@ -1838,18 +1838,18 @@ namespace OrderCloud.SDK
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		Task<ListPage<Promotion<Txp>>> ListAsync<Txp>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null);
-		/// <summary>Create a new promotion.</summary>
+		/// <summary>Create a new promotion. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
 		Task<Promotion> CreateAsync(Promotion promotion);
-		/// <summary>Create a new promotion.</summary>
+		/// <summary>Create a new promotion. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		Task<Promotion<Txp>> CreateAsync<Txp>(Promotion promotion);
-		/// <summary>Create or update a promotion.</summary>
+		/// <summary>Create or update a promotion. If an object with the same ID already exists, it will be overwritten.</summary>
 		/// <param name="promotionID">ID of the promotion.</param>
-		Task<Promotion> UpdateAsync(string promotionID, Promotion promotion);
-		/// <summary>Create or update a promotion.</summary>
+		Task<Promotion> SaveAsync(string promotionID, Promotion promotion);
+		/// <summary>Create or update a promotion. If an object with the same ID already exists, it will be overwritten.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="promotionID">ID of the promotion.</param>
-		Task<Promotion<Txp>> UpdateAsync<Txp>(string promotionID, Promotion promotion);
+		Task<Promotion<Txp>> SaveAsync<Txp>(string promotionID, Promotion promotion);
 		/// <summary>Delete a promotion.</summary>
 		/// <param name="promotionID">ID of the promotion.</param>
 		Task DeleteAsync(string promotionID);
@@ -1869,7 +1869,7 @@ namespace OrderCloud.SDK
 		/// <param name="page">Page of results to return. Default: 1</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		Task<ListPage<PromotionAssignment>> ListAssignmentsAsync(string buyerID = null, string promotionID = null, string userID = null, string userGroupID = null, PartyType? level = null, int? page = null, int? pageSize = null);
-		/// <summary>Save a promotion assignment.</summary>
+		/// <summary>Create or update a promotion assignment.</summary>
 		Task SaveAssignmentAsync(PromotionAssignment promotionAssignment);
 		/// <summary>Delete a promotion assignment.</summary>
 		/// <param name="promotionID">ID of the promotion.</param>
@@ -1909,7 +1909,7 @@ namespace OrderCloud.SDK
 		/// <param name="userID">ID of the user.</param>
 		/// <param name="userGroupID">ID of the user group.</param>
 		Task DeleteAssignmentAsync(string securityProfileID, string buyerID = null, string userID = null, string userGroupID = null);
-		/// <summary>Save a security profile assignment.</summary>
+		/// <summary>Create or update a security profile assignment.</summary>
 		Task SaveAssignmentAsync(SecurityProfileAssignment securityProfileAssignment);
 	}
 
@@ -1941,18 +1941,18 @@ namespace OrderCloud.SDK
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		Task<ListPage<Shipment<Txp>>> ListAsync<Txp>(string orderID = null, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null);
-		/// <summary>Create a new shipment.</summary>
+		/// <summary>Create a new shipment. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
 		Task<Shipment> CreateAsync(Shipment shipment);
-		/// <summary>Create a new shipment.</summary>
+		/// <summary>Create a new shipment. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		Task<Shipment<Txp>> CreateAsync<Txp>(Shipment shipment);
-		/// <summary>Create or update a shipment.</summary>
+		/// <summary>Create or update a shipment. If an object with the same ID already exists, it will be overwritten.</summary>
 		/// <param name="shipmentID">ID of the shipment.</param>
-		Task<Shipment> UpdateAsync(string shipmentID, Shipment shipment);
-		/// <summary>Create or update a shipment.</summary>
+		Task<Shipment> SaveAsync(string shipmentID, Shipment shipment);
+		/// <summary>Create or update a shipment. If an object with the same ID already exists, it will be overwritten.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="shipmentID">ID of the shipment.</param>
-		Task<Shipment<Txp>> UpdateAsync<Txp>(string shipmentID, Shipment shipment);
+		Task<Shipment<Txp>> SaveAsync<Txp>(string shipmentID, Shipment shipment);
 		/// <summary>Delete a shipment.</summary>
 		/// <param name="shipmentID">ID of the shipment.</param>
 		Task DeleteAsync(string shipmentID);
@@ -1993,10 +1993,10 @@ namespace OrderCloud.SDK
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="lineItemID">ID of the line item.</param>
 		Task<ShipmentItem<Txp>> GetItemAsync<Txp>(string shipmentID, string orderID, string lineItemID);
-		/// <summary>Save a shipment item.</summary>
+		/// <summary>Create or update a shipment item.</summary>
 		/// <param name="shipmentID">ID of the shipment.</param>
 		Task<ShipmentItem> SaveItemAsync(string shipmentID, ShipmentItem shipmentItem);
-		/// <summary>Save a shipment item.</summary>
+		/// <summary>Create or update a shipment item.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="shipmentID">ID of the shipment.</param>
 		Task<ShipmentItem<Txp>> SaveItemAsync<Txp>(string shipmentID, ShipmentItem shipmentItem);
@@ -2033,18 +2033,18 @@ namespace OrderCloud.SDK
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		Task<ListPage<Spec<Txp>>> ListAsync<Txp>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null);
-		/// <summary>Create a new spec.</summary>
+		/// <summary>Create a new spec. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
 		Task<Spec> CreateAsync(Spec spec);
-		/// <summary>Create a new spec.</summary>
+		/// <summary>Create a new spec. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		Task<Spec<Txp>> CreateAsync<Txp>(Spec spec);
-		/// <summary>Create or update a spec.</summary>
+		/// <summary>Create or update a spec. If an object with the same ID already exists, it will be overwritten.</summary>
 		/// <param name="specID">ID of the spec.</param>
-		Task<Spec> UpdateAsync(string specID, Spec spec);
-		/// <summary>Create or update a spec.</summary>
+		Task<Spec> SaveAsync(string specID, Spec spec);
+		/// <summary>Create or update a spec. If an object with the same ID already exists, it will be overwritten.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="specID">ID of the spec.</param>
-		Task<Spec<Txp>> UpdateAsync<Txp>(string specID, Spec spec);
+		Task<Spec<Txp>> SaveAsync<Txp>(string specID, Spec spec);
 		/// <summary>Delete a spec.</summary>
 		/// <param name="specID">ID of the spec.</param>
 		Task DeleteAsync(string specID);
@@ -2067,12 +2067,12 @@ namespace OrderCloud.SDK
 		/// <param name="specID">ID of the spec.</param>
 		/// <param name="productID">ID of the product.</param>
 		Task DeleteProductAssignmentAsync(string specID, string productID);
-		/// <summary>Save a spec product assignment.</summary>
+		/// <summary>Create or update a spec product assignment.</summary>
 		Task SaveProductAssignmentAsync(SpecProductAssignment specProductAssignment);
-		/// <summary>Create a new spec option.</summary>
+		/// <summary>Create a new spec option. A Spec can have multiple Options-- for example, if the spec is called 'Color', the options might be 'Blue', 'Red', and 'Green'. </summary>
 		/// <param name="specID">ID of the spec.</param>
 		Task<SpecOption> CreateOptionAsync(string specID, SpecOption specOption);
-		/// <summary>Create a new spec option.</summary>
+		/// <summary>Create a new spec option. A Spec can have multiple Options-- for example, if the spec is called 'Color', the options might be 'Blue', 'Red', and 'Green'. </summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="specID">ID of the spec.</param>
 		Task<SpecOption<Txp>> CreateOptionAsync<Txp>(string specID, SpecOption specOption);
@@ -2098,12 +2098,12 @@ namespace OrderCloud.SDK
 		/// <summary>Create or update a spec option.</summary>
 		/// <param name="specID">ID of the spec.</param>
 		/// <param name="optionID">ID of the option.</param>
-		Task<SpecOption> UpdateOptionAsync(string specID, string optionID, SpecOption specOption);
+		Task<SpecOption> SaveOptionAsync(string specID, string optionID, SpecOption specOption);
 		/// <summary>Create or update a spec option.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="specID">ID of the spec.</param>
 		/// <param name="optionID">ID of the option.</param>
-		Task<SpecOption<Txp>> UpdateOptionAsync<Txp>(string specID, string optionID, SpecOption specOption);
+		Task<SpecOption<Txp>> SaveOptionAsync<Txp>(string specID, string optionID, SpecOption specOption);
 		/// <summary>Partially update a spec option.</summary>
 		/// <param name="specID">ID of the spec.</param>
 		/// <param name="optionID">ID of the option.</param>
@@ -2158,22 +2158,22 @@ namespace OrderCloud.SDK
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		Task<ListPage<SpendingAccount<Txp>>> ListAsync<Txp>(string buyerID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null);
-		/// <summary>Create a new spending account.</summary>
+		/// <summary>Create a new spending account. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		Task<SpendingAccount> CreateAsync(string buyerID, SpendingAccount spendingAccount);
-		/// <summary>Create a new spending account.</summary>
+		/// <summary>Create a new spending account. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="buyerID">ID of the buyer.</param>
 		Task<SpendingAccount<Txp>> CreateAsync<Txp>(string buyerID, SpendingAccount spendingAccount);
-		/// <summary>Create or update a spending account.</summary>
+		/// <summary>Create or update a spending account. If an object with the same ID already exists, it will be overwritten.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="spendingAccountID">ID of the spending account.</param>
-		Task<SpendingAccount> UpdateAsync(string buyerID, string spendingAccountID, SpendingAccount spendingAccount);
-		/// <summary>Create or update a spending account.</summary>
+		Task<SpendingAccount> SaveAsync(string buyerID, string spendingAccountID, SpendingAccount spendingAccount);
+		/// <summary>Create or update a spending account. If an object with the same ID already exists, it will be overwritten.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="spendingAccountID">ID of the spending account.</param>
-		Task<SpendingAccount<Txp>> UpdateAsync<Txp>(string buyerID, string spendingAccountID, SpendingAccount spendingAccount);
+		Task<SpendingAccount<Txp>> SaveAsync<Txp>(string buyerID, string spendingAccountID, SpendingAccount spendingAccount);
 		/// <summary>Delete a spending account.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="spendingAccountID">ID of the spending account.</param>
@@ -2196,7 +2196,7 @@ namespace OrderCloud.SDK
 		/// <param name="page">Page of results to return. Default: 1</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		Task<ListPage<SpendingAccountAssignment>> ListAssignmentsAsync(string buyerID, string spendingAccountID = null, string userID = null, string userGroupID = null, PartyType? level = null, int? page = null, int? pageSize = null);
-		/// <summary>Save a spending account assignment.</summary>
+		/// <summary>Create or update a spending account assignment.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		Task SaveAssignmentAsync(string buyerID, SpendingAccountAssignment spendingAccountAssignment);
 		/// <summary>Delete a spending account assignment.</summary>
@@ -2233,21 +2233,21 @@ namespace OrderCloud.SDK
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		Task<ListPage<Supplier<Txp>>> ListAsync<Txp>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null);
-		/// <summary>Create a new supplier.</summary>
+		/// <summary>Create a new supplier. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
 		Task<Supplier> CreateAsync(Supplier supplier);
-		/// <summary>Create a new supplier.</summary>
+		/// <summary>Create a new supplier. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		Task<Supplier<Txp>> CreateAsync<Txp>(Supplier supplier);
-		/// <summary>Create or update a supplier.</summary>
-		/// <param name="supplierID">ID of the supplier.</param>
-		Task<Supplier> UpdateAsync(string supplierID, Supplier supplier);
-		/// <summary>Create or update a supplier.</summary>
-		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
-		/// <param name="supplierID">ID of the supplier.</param>
-		Task<Supplier<Txp>> UpdateAsync<Txp>(string supplierID, Supplier supplier);
 		/// <summary>Delete a supplier.</summary>
 		/// <param name="supplierID">ID of the supplier.</param>
 		Task DeleteAsync(string supplierID);
+		/// <summary>Create or update a supplier. If an object with the same ID already exists, it will be overwritten.</summary>
+		/// <param name="supplierID">ID of the supplier.</param>
+		Task<Supplier> SaveAsync(string supplierID, Supplier supplier);
+		/// <summary>Create or update a supplier. If an object with the same ID already exists, it will be overwritten.</summary>
+		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
+		/// <param name="supplierID">ID of the supplier.</param>
+		Task<Supplier<Txp>> SaveAsync<Txp>(string supplierID, Supplier supplier);
 		/// <summary>Partially update a supplier.</summary>
 		/// <param name="supplierID">ID of the supplier.</param>
 		Task<Supplier> PatchAsync(string supplierID, PartialSupplier partialSupplier);
@@ -2287,22 +2287,22 @@ namespace OrderCloud.SDK
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		Task<ListPage<UserGroup<Txp>>> ListAsync<Txp>(string supplierID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null);
-		/// <summary>Create a new supplier user group.</summary>
+		/// <summary>Create a new supplier user group. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
 		/// <param name="supplierID">ID of the supplier.</param>
 		Task<UserGroup> CreateAsync(string supplierID, UserGroup userGroup);
-		/// <summary>Create a new supplier user group.</summary>
+		/// <summary>Create a new supplier user group. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="supplierID">ID of the supplier.</param>
 		Task<UserGroup<Txp>> CreateAsync<Txp>(string supplierID, UserGroup userGroup);
-		/// <summary>Create or update a supplier user group.</summary>
+		/// <summary>Create or update a supplier user group. If an object with the same ID already exists, it will be overwritten.</summary>
 		/// <param name="supplierID">ID of the supplier.</param>
 		/// <param name="userGroupID">ID of the user group.</param>
-		Task<UserGroup> UpdateAsync(string supplierID, string userGroupID, UserGroup userGroup);
-		/// <summary>Create or update a supplier user group.</summary>
+		Task<UserGroup> SaveAsync(string supplierID, string userGroupID, UserGroup userGroup);
+		/// <summary>Create or update a supplier user group. If an object with the same ID already exists, it will be overwritten.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="supplierID">ID of the supplier.</param>
 		/// <param name="userGroupID">ID of the user group.</param>
-		Task<UserGroup<Txp>> UpdateAsync<Txp>(string supplierID, string userGroupID, UserGroup userGroup);
+		Task<UserGroup<Txp>> SaveAsync<Txp>(string supplierID, string userGroupID, UserGroup userGroup);
 		/// <summary>Delete a supplier user group.</summary>
 		/// <param name="supplierID">ID of the supplier.</param>
 		/// <param name="userGroupID">ID of the user group.</param>
@@ -2328,7 +2328,7 @@ namespace OrderCloud.SDK
 		/// <param name="userGroupID">ID of the user group.</param>
 		/// <param name="userID">ID of the user.</param>
 		Task DeleteUserAssignmentAsync(string supplierID, string userGroupID, string userID);
-		/// <summary>Save a supplier user group user assignment.</summary>
+		/// <summary>Create or update a supplier user group user assignment.</summary>
 		/// <param name="supplierID">ID of the supplier.</param>
 		Task SaveUserAssignmentAsync(string supplierID, UserGroupAssignment userGroupAssignment);
 	}
@@ -2365,22 +2365,22 @@ namespace OrderCloud.SDK
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		Task<ListPage<User<Txp>>> ListAsync<Txp>(string supplierID, string userGroupID = null, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null);
-		/// <summary>Create a new supplier user.</summary>
+		/// <summary>Create a new supplier user. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
 		/// <param name="supplierID">ID of the supplier.</param>
 		Task<User> CreateAsync(string supplierID, User user);
-		/// <summary>Create a new supplier user.</summary>
+		/// <summary>Create a new supplier user. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="supplierID">ID of the supplier.</param>
 		Task<User<Txp>> CreateAsync<Txp>(string supplierID, User user);
-		/// <summary>Create or update a supplier user.</summary>
+		/// <summary>Create or update a supplier user. If an object with the same ID already exists, it will be overwritten.</summary>
 		/// <param name="supplierID">ID of the supplier.</param>
 		/// <param name="userID">ID of the user.</param>
-		Task<User> UpdateAsync(string supplierID, string userID, User user);
-		/// <summary>Create or update a supplier user.</summary>
+		Task<User> SaveAsync(string supplierID, string userID, User user);
+		/// <summary>Create or update a supplier user. If an object with the same ID already exists, it will be overwritten.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="supplierID">ID of the supplier.</param>
 		/// <param name="userID">ID of the user.</param>
-		Task<User<Txp>> UpdateAsync<Txp>(string supplierID, string userID, User user);
+		Task<User<Txp>> SaveAsync<Txp>(string supplierID, string userID, User user);
 		/// <summary>Delete a supplier user.</summary>
 		/// <param name="supplierID">ID of the supplier.</param>
 		/// <param name="userID">ID of the user.</param>
@@ -2430,22 +2430,22 @@ namespace OrderCloud.SDK
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		Task<ListPage<UserGroup<Txp>>> ListAsync<Txp>(string buyerID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null);
-		/// <summary>Create a new user group.</summary>
+		/// <summary>Create a new user group. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		Task<UserGroup> CreateAsync(string buyerID, UserGroup userGroup);
-		/// <summary>Create a new user group.</summary>
+		/// <summary>Create a new user group. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="buyerID">ID of the buyer.</param>
 		Task<UserGroup<Txp>> CreateAsync<Txp>(string buyerID, UserGroup userGroup);
-		/// <summary>Create or update a user group.</summary>
+		/// <summary>Create or update a user group. If an object with the same ID already exists, it will be overwritten.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="userGroupID">ID of the user group.</param>
-		Task<UserGroup> UpdateAsync(string buyerID, string userGroupID, UserGroup userGroup);
-		/// <summary>Create or update a user group.</summary>
+		Task<UserGroup> SaveAsync(string buyerID, string userGroupID, UserGroup userGroup);
+		/// <summary>Create or update a user group. If an object with the same ID already exists, it will be overwritten.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="userGroupID">ID of the user group.</param>
-		Task<UserGroup<Txp>> UpdateAsync<Txp>(string buyerID, string userGroupID, UserGroup userGroup);
+		Task<UserGroup<Txp>> SaveAsync<Txp>(string buyerID, string userGroupID, UserGroup userGroup);
 		/// <summary>Delete a user group.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="userGroupID">ID of the user group.</param>
@@ -2471,7 +2471,7 @@ namespace OrderCloud.SDK
 		/// <param name="userGroupID">ID of the user group.</param>
 		/// <param name="userID">ID of the user.</param>
 		Task DeleteUserAssignmentAsync(string buyerID, string userGroupID, string userID);
-		/// <summary>Save a user group user assignment.</summary>
+		/// <summary>Create or update a user group user assignment.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		Task SaveUserAssignmentAsync(string buyerID, UserGroupAssignment userGroupAssignment);
 	}
@@ -2508,22 +2508,22 @@ namespace OrderCloud.SDK
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		Task<ListPage<User<Txp>>> ListAsync<Txp>(string buyerID, string userGroupID = null, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null);
-		/// <summary>Create a new user.</summary>
+		/// <summary>Create a new user. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		Task<User> CreateAsync(string buyerID, User user);
-		/// <summary>Create a new user.</summary>
+		/// <summary>Create a new user. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="buyerID">ID of the buyer.</param>
 		Task<User<Txp>> CreateAsync<Txp>(string buyerID, User user);
-		/// <summary>Create or update a user.</summary>
+		/// <summary>Create or update a user. If an object with the same ID already exists, it will be overwritten.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="userID">ID of the user.</param>
-		Task<User> UpdateAsync(string buyerID, string userID, User user);
-		/// <summary>Create or update a user.</summary>
+		Task<User> SaveAsync(string buyerID, string userID, User user);
+		/// <summary>Create or update a user. If an object with the same ID already exists, it will be overwritten.</summary>
 		/// <typeparam name="Txp">Type used as a container for extended properties (xp).</typeparam>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="userID">ID of the user.</param>
-		Task<User<Txp>> UpdateAsync<Txp>(string buyerID, string userID, User user);
+		Task<User<Txp>> SaveAsync<Txp>(string buyerID, string userID, User user);
 		/// <summary>Delete a user.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="userID">ID of the user.</param>
@@ -2632,8 +2632,8 @@ namespace OrderCloud.SDK
 		public Task<ListPage<Address<Txp>>> ListAsync<Txp>(string buyerID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null) => Request("v1", "buyers", buyerID, "addresses").SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<Address<Txp>>>();
 		public Task<Address> CreateAsync(string buyerID, Address address) => Request("v1", "buyers", buyerID, "addresses").PostJsonAsync(ValidateModel(address)).ReceiveJson<Address>();
 		public Task<Address<Txp>> CreateAsync<Txp>(string buyerID, Address address) => Request("v1", "buyers", buyerID, "addresses").PostJsonAsync(ValidateModel(address)).ReceiveJson<Address<Txp>>();
-		public Task<Address> UpdateAsync(string buyerID, string addressID, Address address) => Request("v1", "buyers", buyerID, "addresses", addressID).PutJsonAsync(ValidateModel(address)).ReceiveJson<Address>();
-		public Task<Address<Txp>> UpdateAsync<Txp>(string buyerID, string addressID, Address address) => Request("v1", "buyers", buyerID, "addresses", addressID).PutJsonAsync(ValidateModel(address)).ReceiveJson<Address<Txp>>();
+		public Task<Address> SaveAsync(string buyerID, string addressID, Address address) => Request("v1", "buyers", buyerID, "addresses", addressID).PutJsonAsync(ValidateModel(address)).ReceiveJson<Address>();
+		public Task<Address<Txp>> SaveAsync<Txp>(string buyerID, string addressID, Address address) => Request("v1", "buyers", buyerID, "addresses", addressID).PutJsonAsync(ValidateModel(address)).ReceiveJson<Address<Txp>>();
 		public Task DeleteAsync(string buyerID, string addressID) => Request("v1", "buyers", buyerID, "addresses", addressID).DeleteAsync();
 		public Task<Address> PatchAsync(string buyerID, string addressID, PartialAddress partialAddress) => Request("v1", "buyers", buyerID, "addresses", addressID).PatchJsonAsync(ValidateModel(partialAddress)).ReceiveJson<Address>();
 		public Task<Address<Txp>> PatchAsync<Txp>(string buyerID, string addressID, PartialAddress partialAddress) => Request("v1", "buyers", buyerID, "addresses", addressID).PatchJsonAsync(ValidateModel(partialAddress)).ReceiveJson<Address<Txp>>();
@@ -2651,8 +2651,8 @@ namespace OrderCloud.SDK
 		public Task<ListPage<Address<Txp>>> ListAsync<Txp>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null) => Request("v1", "addresses").SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<Address<Txp>>>();
 		public Task<Address> CreateAsync(Address address) => Request("v1", "addresses").PostJsonAsync(ValidateModel(address)).ReceiveJson<Address>();
 		public Task<Address<Txp>> CreateAsync<Txp>(Address address) => Request("v1", "addresses").PostJsonAsync(ValidateModel(address)).ReceiveJson<Address<Txp>>();
-		public Task<Address> UpdateAsync(string addressID, Address address) => Request("v1", "addresses", addressID).PutJsonAsync(ValidateModel(address)).ReceiveJson<Address>();
-		public Task<Address<Txp>> UpdateAsync<Txp>(string addressID, Address address) => Request("v1", "addresses", addressID).PutJsonAsync(ValidateModel(address)).ReceiveJson<Address<Txp>>();
+		public Task<Address> SaveAsync(string addressID, Address address) => Request("v1", "addresses", addressID).PutJsonAsync(ValidateModel(address)).ReceiveJson<Address>();
+		public Task<Address<Txp>> SaveAsync<Txp>(string addressID, Address address) => Request("v1", "addresses", addressID).PutJsonAsync(ValidateModel(address)).ReceiveJson<Address<Txp>>();
 		public Task DeleteAsync(string addressID) => Request("v1", "addresses", addressID).DeleteAsync();
 		public Task<Address> PatchAsync(string addressID, PartialAddress partialAddress) => Request("v1", "addresses", addressID).PatchJsonAsync(ValidateModel(partialAddress)).ReceiveJson<Address>();
 		public Task<Address<Txp>> PatchAsync<Txp>(string addressID, PartialAddress partialAddress) => Request("v1", "addresses", addressID).PatchJsonAsync(ValidateModel(partialAddress)).ReceiveJson<Address<Txp>>();
@@ -2667,8 +2667,8 @@ namespace OrderCloud.SDK
 		public Task<ListPage<UserGroup<Txp>>> ListAsync<Txp>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null) => Request("v1", "usergroups").SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<UserGroup<Txp>>>();
 		public Task<UserGroup> CreateAsync(UserGroup userGroup) => Request("v1", "usergroups").PostJsonAsync(ValidateModel(userGroup)).ReceiveJson<UserGroup>();
 		public Task<UserGroup<Txp>> CreateAsync<Txp>(UserGroup userGroup) => Request("v1", "usergroups").PostJsonAsync(ValidateModel(userGroup)).ReceiveJson<UserGroup<Txp>>();
-		public Task<UserGroup> UpdateAsync(string userGroupID, UserGroup userGroup) => Request("v1", "usergroups", userGroupID).PutJsonAsync(ValidateModel(userGroup)).ReceiveJson<UserGroup>();
-		public Task<UserGroup<Txp>> UpdateAsync<Txp>(string userGroupID, UserGroup userGroup) => Request("v1", "usergroups", userGroupID).PutJsonAsync(ValidateModel(userGroup)).ReceiveJson<UserGroup<Txp>>();
+		public Task<UserGroup> SaveAsync(string userGroupID, UserGroup userGroup) => Request("v1", "usergroups", userGroupID).PutJsonAsync(ValidateModel(userGroup)).ReceiveJson<UserGroup>();
+		public Task<UserGroup<Txp>> SaveAsync<Txp>(string userGroupID, UserGroup userGroup) => Request("v1", "usergroups", userGroupID).PutJsonAsync(ValidateModel(userGroup)).ReceiveJson<UserGroup<Txp>>();
 		public Task DeleteAsync(string userGroupID) => Request("v1", "usergroups", userGroupID).DeleteAsync();
 		public Task<UserGroup> PatchAsync(string userGroupID, PartialUserGroup partialUserGroup) => Request("v1", "usergroups", userGroupID).PatchJsonAsync(ValidateModel(partialUserGroup)).ReceiveJson<UserGroup>();
 		public Task<UserGroup<Txp>> PatchAsync<Txp>(string userGroupID, PartialUserGroup partialUserGroup) => Request("v1", "usergroups", userGroupID).PatchJsonAsync(ValidateModel(partialUserGroup)).ReceiveJson<UserGroup<Txp>>();
@@ -2686,8 +2686,8 @@ namespace OrderCloud.SDK
 		public Task<ListPage<User<Txp>>> ListAsync<Txp>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null) => Request("v1", "adminusers").SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<User<Txp>>>();
 		public Task<User> CreateAsync(User user) => Request("v1", "adminusers").PostJsonAsync(ValidateModel(user)).ReceiveJson<User>();
 		public Task<User<Txp>> CreateAsync<Txp>(User user) => Request("v1", "adminusers").PostJsonAsync(ValidateModel(user)).ReceiveJson<User<Txp>>();
-		public Task<User> UpdateAsync(string userID, User user) => Request("v1", "adminusers", userID).PutJsonAsync(ValidateModel(user)).ReceiveJson<User>();
-		public Task<User<Txp>> UpdateAsync<Txp>(string userID, User user) => Request("v1", "adminusers", userID).PutJsonAsync(ValidateModel(user)).ReceiveJson<User<Txp>>();
+		public Task<User> SaveAsync(string userID, User user) => Request("v1", "adminusers", userID).PutJsonAsync(ValidateModel(user)).ReceiveJson<User>();
+		public Task<User<Txp>> SaveAsync<Txp>(string userID, User user) => Request("v1", "adminusers", userID).PutJsonAsync(ValidateModel(user)).ReceiveJson<User<Txp>>();
 		public Task DeleteAsync(string userID) => Request("v1", "adminusers", userID).DeleteAsync();
 		public Task<User> PatchAsync(string userID, PartialUser partialUser) => Request("v1", "adminusers", userID).PatchJsonAsync(ValidateModel(partialUser)).ReceiveJson<User>();
 		public Task<User<Txp>> PatchAsync<Txp>(string userID, PartialUser partialUser) => Request("v1", "adminusers", userID).PatchJsonAsync(ValidateModel(partialUser)).ReceiveJson<User<Txp>>();
@@ -2702,8 +2702,8 @@ namespace OrderCloud.SDK
 		public Task<ListPage<ApprovalRule<Txp>>> ListAsync<Txp>(string buyerID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null) => Request("v1", "buyers", buyerID, "approvalrules").SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<ApprovalRule<Txp>>>();
 		public Task<ApprovalRule> CreateAsync(string buyerID, ApprovalRule approvalRule) => Request("v1", "buyers", buyerID, "approvalrules").PostJsonAsync(ValidateModel(approvalRule)).ReceiveJson<ApprovalRule>();
 		public Task<ApprovalRule<Txp>> CreateAsync<Txp>(string buyerID, ApprovalRule approvalRule) => Request("v1", "buyers", buyerID, "approvalrules").PostJsonAsync(ValidateModel(approvalRule)).ReceiveJson<ApprovalRule<Txp>>();
-		public Task<ApprovalRule> UpdateAsync(string buyerID, string approvalRuleID, ApprovalRule approvalRule) => Request("v1", "buyers", buyerID, "approvalrules", approvalRuleID).PutJsonAsync(ValidateModel(approvalRule)).ReceiveJson<ApprovalRule>();
-		public Task<ApprovalRule<Txp>> UpdateAsync<Txp>(string buyerID, string approvalRuleID, ApprovalRule approvalRule) => Request("v1", "buyers", buyerID, "approvalrules", approvalRuleID).PutJsonAsync(ValidateModel(approvalRule)).ReceiveJson<ApprovalRule<Txp>>();
+		public Task<ApprovalRule> SaveAsync(string buyerID, string approvalRuleID, ApprovalRule approvalRule) => Request("v1", "buyers", buyerID, "approvalrules", approvalRuleID).PutJsonAsync(ValidateModel(approvalRule)).ReceiveJson<ApprovalRule>();
+		public Task<ApprovalRule<Txp>> SaveAsync<Txp>(string buyerID, string approvalRuleID, ApprovalRule approvalRule) => Request("v1", "buyers", buyerID, "approvalrules", approvalRuleID).PutJsonAsync(ValidateModel(approvalRule)).ReceiveJson<ApprovalRule<Txp>>();
 		public Task DeleteAsync(string buyerID, string approvalRuleID) => Request("v1", "buyers", buyerID, "approvalrules", approvalRuleID).DeleteAsync();
 		public Task<ApprovalRule> PatchAsync(string buyerID, string approvalRuleID, PartialApprovalRule partialApprovalRule) => Request("v1", "buyers", buyerID, "approvalrules", approvalRuleID).PatchJsonAsync(ValidateModel(partialApprovalRule)).ReceiveJson<ApprovalRule>();
 		public Task<ApprovalRule<Txp>> PatchAsync<Txp>(string buyerID, string approvalRuleID, PartialApprovalRule partialApprovalRule) => Request("v1", "buyers", buyerID, "approvalrules", approvalRuleID).PatchJsonAsync(ValidateModel(partialApprovalRule)).ReceiveJson<ApprovalRule<Txp>>();
@@ -2718,9 +2718,9 @@ namespace OrderCloud.SDK
 		public Task<ListPage<Buyer<Txp>>> ListAsync<Txp>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null) => Request("v1", "buyers").SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<Buyer<Txp>>>();
 		public Task<Buyer> CreateAsync(Buyer buyer) => Request("v1", "buyers").PostJsonAsync(ValidateModel(buyer)).ReceiveJson<Buyer>();
 		public Task<Buyer<Txp>> CreateAsync<Txp>(Buyer buyer) => Request("v1", "buyers").PostJsonAsync(ValidateModel(buyer)).ReceiveJson<Buyer<Txp>>();
-		public Task<Buyer> UpdateAsync(string buyerID, Buyer buyer) => Request("v1", "buyers", buyerID).PutJsonAsync(ValidateModel(buyer)).ReceiveJson<Buyer>();
-		public Task<Buyer<Txp>> UpdateAsync<Txp>(string buyerID, Buyer buyer) => Request("v1", "buyers", buyerID).PutJsonAsync(ValidateModel(buyer)).ReceiveJson<Buyer<Txp>>();
 		public Task DeleteAsync(string buyerID) => Request("v1", "buyers", buyerID).DeleteAsync();
+		public Task<Buyer> SaveAsync(string buyerID, Buyer buyer) => Request("v1", "buyers", buyerID).PutJsonAsync(ValidateModel(buyer)).ReceiveJson<Buyer>();
+		public Task<Buyer<Txp>> SaveAsync<Txp>(string buyerID, Buyer buyer) => Request("v1", "buyers", buyerID).PutJsonAsync(ValidateModel(buyer)).ReceiveJson<Buyer<Txp>>();
 		public Task<Buyer> PatchAsync(string buyerID, PartialBuyer partialBuyer) => Request("v1", "buyers", buyerID).PatchJsonAsync(ValidateModel(partialBuyer)).ReceiveJson<Buyer>();
 		public Task<Buyer<Txp>> PatchAsync<Txp>(string buyerID, PartialBuyer partialBuyer) => Request("v1", "buyers", buyerID).PatchJsonAsync(ValidateModel(partialBuyer)).ReceiveJson<Buyer<Txp>>();
 	}
@@ -2734,8 +2734,8 @@ namespace OrderCloud.SDK
 		public Task<ListPage<Catalog<Txp>>> ListAsync<Txp>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null) => Request("v1", "catalogs").SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<Catalog<Txp>>>();
 		public Task<Catalog> CreateAsync(Catalog catalog) => Request("v1", "catalogs").PostJsonAsync(ValidateModel(catalog)).ReceiveJson<Catalog>();
 		public Task<Catalog<Txp>> CreateAsync<Txp>(Catalog catalog) => Request("v1", "catalogs").PostJsonAsync(ValidateModel(catalog)).ReceiveJson<Catalog<Txp>>();
-		public Task<Catalog> UpdateAsync(string catalogID, Catalog catalog) => Request("v1", "catalogs", catalogID).PutJsonAsync(ValidateModel(catalog)).ReceiveJson<Catalog>();
-		public Task<Catalog<Txp>> UpdateAsync<Txp>(string catalogID, Catalog catalog) => Request("v1", "catalogs", catalogID).PutJsonAsync(ValidateModel(catalog)).ReceiveJson<Catalog<Txp>>();
+		public Task<Catalog> SaveAsync(string catalogID, Catalog catalog) => Request("v1", "catalogs", catalogID).PutJsonAsync(ValidateModel(catalog)).ReceiveJson<Catalog>();
+		public Task<Catalog<Txp>> SaveAsync<Txp>(string catalogID, Catalog catalog) => Request("v1", "catalogs", catalogID).PutJsonAsync(ValidateModel(catalog)).ReceiveJson<Catalog<Txp>>();
 		public Task DeleteAsync(string catalogID) => Request("v1", "catalogs", catalogID).DeleteAsync();
 		public Task<Catalog> PatchAsync(string catalogID, PartialCatalog partialCatalog) => Request("v1", "catalogs", catalogID).PatchJsonAsync(ValidateModel(partialCatalog)).ReceiveJson<Catalog>();
 		public Task<Catalog<Txp>> PatchAsync<Txp>(string catalogID, PartialCatalog partialCatalog) => Request("v1", "catalogs", catalogID).PatchJsonAsync(ValidateModel(partialCatalog)).ReceiveJson<Catalog<Txp>>();
@@ -2756,8 +2756,8 @@ namespace OrderCloud.SDK
 		public Task<ListPage<Category<Txp>>> ListAsync<Txp>(string catalogID, string depth = "1", string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null) => Request("v1", "catalogs", catalogID, "categories").SetQueryParams(new { depth, search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<Category<Txp>>>();
 		public Task<Category> CreateAsync(string catalogID, Category category) => Request("v1", "catalogs", catalogID, "categories").PostJsonAsync(ValidateModel(category)).ReceiveJson<Category>();
 		public Task<Category<Txp>> CreateAsync<Txp>(string catalogID, Category category) => Request("v1", "catalogs", catalogID, "categories").PostJsonAsync(ValidateModel(category)).ReceiveJson<Category<Txp>>();
-		public Task<Category> UpdateAsync(string catalogID, string categoryID, Category category) => Request("v1", "catalogs", catalogID, "categories", categoryID).PutJsonAsync(ValidateModel(category)).ReceiveJson<Category>();
-		public Task<Category<Txp>> UpdateAsync<Txp>(string catalogID, string categoryID, Category category) => Request("v1", "catalogs", catalogID, "categories", categoryID).PutJsonAsync(ValidateModel(category)).ReceiveJson<Category<Txp>>();
+		public Task<Category> SaveAsync(string catalogID, string categoryID, Category category) => Request("v1", "catalogs", catalogID, "categories", categoryID).PutJsonAsync(ValidateModel(category)).ReceiveJson<Category>();
+		public Task<Category<Txp>> SaveAsync<Txp>(string catalogID, string categoryID, Category category) => Request("v1", "catalogs", catalogID, "categories", categoryID).PutJsonAsync(ValidateModel(category)).ReceiveJson<Category<Txp>>();
 		public Task DeleteAsync(string catalogID, string categoryID) => Request("v1", "catalogs", catalogID, "categories", categoryID).DeleteAsync();
 		public Task<Category> PatchAsync(string catalogID, string categoryID, PartialCategory partialCategory) => Request("v1", "catalogs", catalogID, "categories", categoryID).PatchJsonAsync(ValidateModel(partialCategory)).ReceiveJson<Category>();
 		public Task<Category<Txp>> PatchAsync<Txp>(string catalogID, string categoryID, PartialCategory partialCategory) => Request("v1", "catalogs", catalogID, "categories", categoryID).PatchJsonAsync(ValidateModel(partialCategory)).ReceiveJson<Category<Txp>>();
@@ -2778,8 +2778,8 @@ namespace OrderCloud.SDK
 		public Task<ListPage<CostCenter<Txp>>> ListAsync<Txp>(string buyerID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null) => Request("v1", "buyers", buyerID, "costcenters").SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<CostCenter<Txp>>>();
 		public Task<CostCenter> CreateAsync(string buyerID, CostCenter costCenter) => Request("v1", "buyers", buyerID, "costcenters").PostJsonAsync(ValidateModel(costCenter)).ReceiveJson<CostCenter>();
 		public Task<CostCenter<Txp>> CreateAsync<Txp>(string buyerID, CostCenter costCenter) => Request("v1", "buyers", buyerID, "costcenters").PostJsonAsync(ValidateModel(costCenter)).ReceiveJson<CostCenter<Txp>>();
-		public Task<CostCenter> UpdateAsync(string buyerID, string costCenterID, CostCenter costCenter) => Request("v1", "buyers", buyerID, "costcenters", costCenterID).PutJsonAsync(ValidateModel(costCenter)).ReceiveJson<CostCenter>();
-		public Task<CostCenter<Txp>> UpdateAsync<Txp>(string buyerID, string costCenterID, CostCenter costCenter) => Request("v1", "buyers", buyerID, "costcenters", costCenterID).PutJsonAsync(ValidateModel(costCenter)).ReceiveJson<CostCenter<Txp>>();
+		public Task<CostCenter> SaveAsync(string buyerID, string costCenterID, CostCenter costCenter) => Request("v1", "buyers", buyerID, "costcenters", costCenterID).PutJsonAsync(ValidateModel(costCenter)).ReceiveJson<CostCenter>();
+		public Task<CostCenter<Txp>> SaveAsync<Txp>(string buyerID, string costCenterID, CostCenter costCenter) => Request("v1", "buyers", buyerID, "costcenters", costCenterID).PutJsonAsync(ValidateModel(costCenter)).ReceiveJson<CostCenter<Txp>>();
 		public Task DeleteAsync(string buyerID, string costCenterID) => Request("v1", "buyers", buyerID, "costcenters", costCenterID).DeleteAsync();
 		public Task<CostCenter> PatchAsync(string buyerID, string costCenterID, PartialCostCenter partialCostCenter) => Request("v1", "buyers", buyerID, "costcenters", costCenterID).PatchJsonAsync(ValidateModel(partialCostCenter)).ReceiveJson<CostCenter>();
 		public Task<CostCenter<Txp>> PatchAsync<Txp>(string buyerID, string costCenterID, PartialCostCenter partialCostCenter) => Request("v1", "buyers", buyerID, "costcenters", costCenterID).PatchJsonAsync(ValidateModel(partialCostCenter)).ReceiveJson<CostCenter<Txp>>();
@@ -2797,8 +2797,8 @@ namespace OrderCloud.SDK
 		public Task<ListPage<CreditCard<Txp>>> ListAsync<Txp>(string buyerID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null) => Request("v1", "buyers", buyerID, "creditcards").SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<CreditCard<Txp>>>();
 		public Task<CreditCard> CreateAsync(string buyerID, CreditCard creditCard) => Request("v1", "buyers", buyerID, "creditcards").PostJsonAsync(ValidateModel(creditCard)).ReceiveJson<CreditCard>();
 		public Task<CreditCard<Txp>> CreateAsync<Txp>(string buyerID, CreditCard creditCard) => Request("v1", "buyers", buyerID, "creditcards").PostJsonAsync(ValidateModel(creditCard)).ReceiveJson<CreditCard<Txp>>();
-		public Task<CreditCard> UpdateAsync(string buyerID, string creditCardID, CreditCard creditCard) => Request("v1", "buyers", buyerID, "creditcards", creditCardID).PutJsonAsync(ValidateModel(creditCard)).ReceiveJson<CreditCard>();
-		public Task<CreditCard<Txp>> UpdateAsync<Txp>(string buyerID, string creditCardID, CreditCard creditCard) => Request("v1", "buyers", buyerID, "creditcards", creditCardID).PutJsonAsync(ValidateModel(creditCard)).ReceiveJson<CreditCard<Txp>>();
+		public Task<CreditCard> SaveAsync(string buyerID, string creditCardID, CreditCard creditCard) => Request("v1", "buyers", buyerID, "creditcards", creditCardID).PutJsonAsync(ValidateModel(creditCard)).ReceiveJson<CreditCard>();
+		public Task<CreditCard<Txp>> SaveAsync<Txp>(string buyerID, string creditCardID, CreditCard creditCard) => Request("v1", "buyers", buyerID, "creditcards", creditCardID).PutJsonAsync(ValidateModel(creditCard)).ReceiveJson<CreditCard<Txp>>();
 		public Task DeleteAsync(string buyerID, string creditCardID) => Request("v1", "buyers", buyerID, "creditcards", creditCardID).DeleteAsync();
 		public Task<CreditCard> PatchAsync(string buyerID, string creditCardID, PartialCreditCard partialCreditCard) => Request("v1", "buyers", buyerID, "creditcards", creditCardID).PatchJsonAsync(ValidateModel(partialCreditCard)).ReceiveJson<CreditCard>();
 		public Task<CreditCard<Txp>> PatchAsync<Txp>(string buyerID, string creditCardID, PartialCreditCard partialCreditCard) => Request("v1", "buyers", buyerID, "creditcards", creditCardID).PatchJsonAsync(ValidateModel(partialCreditCard)).ReceiveJson<CreditCard<Txp>>();
@@ -2813,8 +2813,8 @@ namespace OrderCloud.SDK
 		public Task<ImpersonationConfig> GetAsync(string impersonationConfigID) => Request("v1", "impersonationconfig", impersonationConfigID).GetJsonAsync<ImpersonationConfig>();
 		public Task<ListPage<ImpersonationConfig>> ListAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null) => Request("v1", "impersonationconfig").SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<ImpersonationConfig>>();
 		public Task<ImpersonationConfig> CreateAsync(ImpersonationConfig impersonationConfig) => Request("v1", "impersonationconfig").PostJsonAsync(ValidateModel(impersonationConfig)).ReceiveJson<ImpersonationConfig>();
-		public Task<ImpersonationConfig> UpdateAsync(string impersonationConfigID, ImpersonationConfig impersonationConfig) => Request("v1", "impersonationconfig", impersonationConfigID).PutJsonAsync(ValidateModel(impersonationConfig)).ReceiveJson<ImpersonationConfig>();
 		public Task DeleteAsync(string impersonationConfigID) => Request("v1", "impersonationconfig", impersonationConfigID).DeleteAsync();
+		public Task<ImpersonationConfig> SaveAsync(string impersonationConfigID, ImpersonationConfig impersonationConfig) => Request("v1", "impersonationconfig", impersonationConfigID).PutJsonAsync(ValidateModel(impersonationConfig)).ReceiveJson<ImpersonationConfig>();
 		public Task<ImpersonationConfig> PatchAsync(string impersonationConfigID, PartialImpersonationConfig partialImpersonationConfig) => Request("v1", "impersonationconfig", impersonationConfigID).PatchJsonAsync(ValidateModel(partialImpersonationConfig)).ReceiveJson<ImpersonationConfig>();
 	}
 
@@ -2824,7 +2824,7 @@ namespace OrderCloud.SDK
 		public Task<Incrementor> GetAsync(string incrementorID) => Request("v1", "incrementors", incrementorID).GetJsonAsync<Incrementor>();
 		public Task<ListPage<Incrementor>> ListAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null) => Request("v1", "incrementors").SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<Incrementor>>();
 		public Task<Incrementor> CreateAsync(Incrementor incrementor) => Request("v1", "incrementors").PostJsonAsync(ValidateModel(incrementor)).ReceiveJson<Incrementor>();
-		public Task<Incrementor> UpdateAsync(string incrementorID, Incrementor incrementor) => Request("v1", "incrementors", incrementorID).PutJsonAsync(ValidateModel(incrementor)).ReceiveJson<Incrementor>();
+		public Task<Incrementor> SaveAsync(string incrementorID, Incrementor incrementor) => Request("v1", "incrementors", incrementorID).PutJsonAsync(ValidateModel(incrementor)).ReceiveJson<Incrementor>();
 		public Task DeleteAsync(string incrementorID) => Request("v1", "incrementors", incrementorID).DeleteAsync();
 		public Task<Incrementor> PatchAsync(string incrementorID, PartialIncrementor partialIncrementor) => Request("v1", "incrementors", incrementorID).PatchJsonAsync(ValidateModel(partialIncrementor)).ReceiveJson<Incrementor>();
 	}
@@ -2838,8 +2838,8 @@ namespace OrderCloud.SDK
 		public Task<ListPage<LineItem<Txp>>> ListAsync<Txp>(OrderDirection direction, string orderID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null) => Request("v1", "orders", direction, orderID, "lineitems").SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<LineItem<Txp>>>();
 		public Task<LineItem> CreateAsync(OrderDirection direction, string orderID, LineItem lineItem) => Request("v1", "orders", direction, orderID, "lineitems").PostJsonAsync(ValidateModel(lineItem)).ReceiveJson<LineItem>();
 		public Task<LineItem<Txp>> CreateAsync<Txp>(OrderDirection direction, string orderID, LineItem lineItem) => Request("v1", "orders", direction, orderID, "lineitems").PostJsonAsync(ValidateModel(lineItem)).ReceiveJson<LineItem<Txp>>();
-		public Task<LineItem> UpdateAsync(OrderDirection direction, string orderID, string lineItemID, LineItem lineItem) => Request("v1", "orders", direction, orderID, "lineitems", lineItemID).PutJsonAsync(ValidateModel(lineItem)).ReceiveJson<LineItem>();
-		public Task<LineItem<Txp>> UpdateAsync<Txp>(OrderDirection direction, string orderID, string lineItemID, LineItem lineItem) => Request("v1", "orders", direction, orderID, "lineitems", lineItemID).PutJsonAsync(ValidateModel(lineItem)).ReceiveJson<LineItem<Txp>>();
+		public Task<LineItem> SaveAsync(OrderDirection direction, string orderID, string lineItemID, LineItem lineItem) => Request("v1", "orders", direction, orderID, "lineitems", lineItemID).PutJsonAsync(ValidateModel(lineItem)).ReceiveJson<LineItem>();
+		public Task<LineItem<Txp>> SaveAsync<Txp>(OrderDirection direction, string orderID, string lineItemID, LineItem lineItem) => Request("v1", "orders", direction, orderID, "lineitems", lineItemID).PutJsonAsync(ValidateModel(lineItem)).ReceiveJson<LineItem<Txp>>();
 		public Task DeleteAsync(OrderDirection direction, string orderID, string lineItemID) => Request("v1", "orders", direction, orderID, "lineitems", lineItemID).DeleteAsync();
 		public Task<LineItem> PatchAsync(OrderDirection direction, string orderID, string lineItemID, PartialLineItem partialLineItem) => Request("v1", "orders", direction, orderID, "lineitems", lineItemID).PatchJsonAsync(ValidateModel(partialLineItem)).ReceiveJson<LineItem>();
 		public Task<LineItem<Txp>> PatchAsync<Txp>(OrderDirection direction, string orderID, string lineItemID, PartialLineItem partialLineItem) => Request("v1", "orders", direction, orderID, "lineitems", lineItemID).PatchJsonAsync(ValidateModel(partialLineItem)).ReceiveJson<LineItem<Txp>>();
@@ -2854,8 +2854,8 @@ namespace OrderCloud.SDK
 		internal MeResource(OrderCloudClient client) : base(client) { }
 		public Task<MeUser> GetAsync() => Request("v1", "me").GetJsonAsync<MeUser>();
 		public Task<MeUser<Txp>> GetAsync<Txp>() => Request("v1", "me").GetJsonAsync<MeUser<Txp>>();
-		public Task<MeUser> UpdateAsync(MeUser meUser) => Request("v1", "me").PutJsonAsync(ValidateModel(meUser)).ReceiveJson<MeUser>();
-		public Task<MeUser<Txp>> UpdateAsync<Txp>(MeUser meUser) => Request("v1", "me").PutJsonAsync(ValidateModel(meUser)).ReceiveJson<MeUser<Txp>>();
+		public Task<MeUser> SaveAsync(MeUser meUser) => Request("v1", "me").PutJsonAsync(ValidateModel(meUser)).ReceiveJson<MeUser>();
+		public Task<MeUser<Txp>> SaveAsync<Txp>(MeUser meUser) => Request("v1", "me").PutJsonAsync(ValidateModel(meUser)).ReceiveJson<MeUser<Txp>>();
 		public Task<MeUser> PatchAsync(PartialMeUser partialMeUser) => Request("v1", "me").PatchJsonAsync(ValidateModel(partialMeUser)).ReceiveJson<MeUser>();
 		public Task<MeUser<Txp>> PatchAsync<Txp>(PartialMeUser partialMeUser) => Request("v1", "me").PatchJsonAsync(ValidateModel(partialMeUser)).ReceiveJson<MeUser<Txp>>();
 		public Task<ListPage<CostCenter>> ListCostCentersAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null) => Request("v1", "me", "costcenters").SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<CostCenter>>();
@@ -2868,8 +2868,8 @@ namespace OrderCloud.SDK
 		public Task<BuyerAddress<Txp>> CreateAddressAsync<Txp>(BuyerAddress buyerAddress) => Request("v1", "me", "addresses").PostJsonAsync(ValidateModel(buyerAddress)).ReceiveJson<BuyerAddress<Txp>>();
 		public Task<BuyerAddress> GetAddressAsync(string addressID) => Request("v1", "me", "addresses", addressID).GetJsonAsync<BuyerAddress>();
 		public Task<BuyerAddress<Txp>> GetAddressAsync<Txp>(string addressID) => Request("v1", "me", "addresses", addressID).GetJsonAsync<BuyerAddress<Txp>>();
-		public Task<BuyerAddress> UpdateAddressAsync(string addressID, BuyerAddress buyerAddress) => Request("v1", "me", "addresses", addressID).PutJsonAsync(ValidateModel(buyerAddress)).ReceiveJson<BuyerAddress>();
-		public Task<BuyerAddress<Txp>> UpdateAddressAsync<Txp>(string addressID, BuyerAddress buyerAddress) => Request("v1", "me", "addresses", addressID).PutJsonAsync(ValidateModel(buyerAddress)).ReceiveJson<BuyerAddress<Txp>>();
+		public Task<BuyerAddress> SaveAddressAsync(string addressID, BuyerAddress buyerAddress) => Request("v1", "me", "addresses", addressID).PutJsonAsync(ValidateModel(buyerAddress)).ReceiveJson<BuyerAddress>();
+		public Task<BuyerAddress<Txp>> SaveAddressAsync<Txp>(string addressID, BuyerAddress buyerAddress) => Request("v1", "me", "addresses", addressID).PutJsonAsync(ValidateModel(buyerAddress)).ReceiveJson<BuyerAddress<Txp>>();
 		public Task PatchAddressAsync(string addressID, PartialBuyerAddress partialBuyerAddress) => Request("v1", "me", "addresses", addressID).PatchJsonAsync(ValidateModel(partialBuyerAddress));
 		public Task DeleteAddressAsync(string addressID) => Request("v1", "me", "addresses", addressID).DeleteAsync();
 		public Task<BuyerCreditCard> CreateCreditCardAsync(BuyerCreditCard buyerCreditCard) => Request("v1", "me", "creditcards").PostJsonAsync(ValidateModel(buyerCreditCard)).ReceiveJson<BuyerCreditCard>();
@@ -2878,8 +2878,8 @@ namespace OrderCloud.SDK
 		public Task<ListPage<BuyerCreditCard<Txp>>> ListCreditCardsAsync<Txp>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null) => Request("v1", "me", "creditcards").SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<BuyerCreditCard<Txp>>>();
 		public Task<BuyerCreditCard> GetCreditCardAsync(string creditcardID) => Request("v1", "me", "creditcards", creditcardID).GetJsonAsync<BuyerCreditCard>();
 		public Task<BuyerCreditCard<Txp>> GetCreditCardAsync<Txp>(string creditcardID) => Request("v1", "me", "creditcards", creditcardID).GetJsonAsync<BuyerCreditCard<Txp>>();
-		public Task<BuyerCreditCard> UpdateCreditCardAsync(string creditcardID, BuyerCreditCard buyerCreditCard) => Request("v1", "me", "creditcards", creditcardID).PutJsonAsync(ValidateModel(buyerCreditCard)).ReceiveJson<BuyerCreditCard>();
-		public Task<BuyerCreditCard<Txp>> UpdateCreditCardAsync<Txp>(string creditcardID, BuyerCreditCard buyerCreditCard) => Request("v1", "me", "creditcards", creditcardID).PutJsonAsync(ValidateModel(buyerCreditCard)).ReceiveJson<BuyerCreditCard<Txp>>();
+		public Task<BuyerCreditCard> SaveCreditCardAsync(string creditcardID, BuyerCreditCard buyerCreditCard) => Request("v1", "me", "creditcards", creditcardID).PutJsonAsync(ValidateModel(buyerCreditCard)).ReceiveJson<BuyerCreditCard>();
+		public Task<BuyerCreditCard<Txp>> SaveCreditCardAsync<Txp>(string creditcardID, BuyerCreditCard buyerCreditCard) => Request("v1", "me", "creditcards", creditcardID).PutJsonAsync(ValidateModel(buyerCreditCard)).ReceiveJson<BuyerCreditCard<Txp>>();
 		public Task PatchCreditCardAsync(string creditcardID, PartialBuyerCreditCard partialBuyerCreditCard) => Request("v1", "me", "creditcards", creditcardID).PatchJsonAsync(ValidateModel(partialBuyerCreditCard));
 		public Task DeleteCreditCardAsync(string creditcardID) => Request("v1", "me", "creditcards", creditcardID).DeleteAsync();
 		public Task<ListPage<Category>> ListCategoriesAsync(string depth = "1", string catalogID = null, string productID = null, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null) => Request("v1", "me", "categories").SetQueryParams(new { depth, catalogID, productID, search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<Category>>();
@@ -2939,8 +2939,8 @@ namespace OrderCloud.SDK
 		public Task<ListPage<Order<Txp>>> ListAsync<Txp>(OrderDirection direction, string buyerID = null, string supplierID = null, DateTimeOffset? from = null, DateTimeOffset? to = null, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null) => Request("v1", "orders", direction).SetQueryParams(new { buyerID, supplierID, from, to, search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<Order<Txp>>>();
 		public Task<Order> CreateAsync(OrderDirection direction, Order order) => Request("v1", "orders", direction).PostJsonAsync(ValidateModel(order)).ReceiveJson<Order>();
 		public Task<Order<Txp>> CreateAsync<Txp>(OrderDirection direction, Order order) => Request("v1", "orders", direction).PostJsonAsync(ValidateModel(order)).ReceiveJson<Order<Txp>>();
-		public Task<Order> UpdateAsync(OrderDirection direction, string orderID, Order order) => Request("v1", "orders", direction, orderID).PutJsonAsync(ValidateModel(order)).ReceiveJson<Order>();
-		public Task<Order<Txp>> UpdateAsync<Txp>(OrderDirection direction, string orderID, Order order) => Request("v1", "orders", direction, orderID).PutJsonAsync(ValidateModel(order)).ReceiveJson<Order<Txp>>();
+		public Task<Order> SaveAsync(OrderDirection direction, string orderID, Order order) => Request("v1", "orders", direction, orderID).PutJsonAsync(ValidateModel(order)).ReceiveJson<Order>();
+		public Task<Order<Txp>> SaveAsync<Txp>(OrderDirection direction, string orderID, Order order) => Request("v1", "orders", direction, orderID).PutJsonAsync(ValidateModel(order)).ReceiveJson<Order<Txp>>();
 		public Task DeleteAsync(OrderDirection direction, string orderID) => Request("v1", "orders", direction, orderID).DeleteAsync();
 		public Task<ListPage<OrderApproval>> ListApprovalsAsync(OrderDirection direction, string orderID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null) => Request("v1", "orders", direction, orderID, "approvals").SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<OrderApproval>>();
 		public Task<ListPage<User>> ListEligibleApproversAsync(OrderDirection direction, string orderID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null) => Request("v1", "orders", direction, orderID, "eligibleapprovers").SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<User>>();
@@ -3008,8 +3008,8 @@ namespace OrderCloud.SDK
 		public Task<ListPage<PriceSchedule<Txp>>> ListAsync<Txp>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null) => Request("v1", "priceschedules").SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<PriceSchedule<Txp>>>();
 		public Task<PriceSchedule> CreateAsync(PriceSchedule priceSchedule) => Request("v1", "priceschedules").PostJsonAsync(ValidateModel(priceSchedule)).ReceiveJson<PriceSchedule>();
 		public Task<PriceSchedule<Txp>> CreateAsync<Txp>(PriceSchedule priceSchedule) => Request("v1", "priceschedules").PostJsonAsync(ValidateModel(priceSchedule)).ReceiveJson<PriceSchedule<Txp>>();
-		public Task<PriceSchedule> UpdateAsync(string priceScheduleID, PriceSchedule priceSchedule) => Request("v1", "priceschedules", priceScheduleID).PutJsonAsync(ValidateModel(priceSchedule)).ReceiveJson<PriceSchedule>();
-		public Task<PriceSchedule<Txp>> UpdateAsync<Txp>(string priceScheduleID, PriceSchedule priceSchedule) => Request("v1", "priceschedules", priceScheduleID).PutJsonAsync(ValidateModel(priceSchedule)).ReceiveJson<PriceSchedule<Txp>>();
+		public Task<PriceSchedule> SaveAsync(string priceScheduleID, PriceSchedule priceSchedule) => Request("v1", "priceschedules", priceScheduleID).PutJsonAsync(ValidateModel(priceSchedule)).ReceiveJson<PriceSchedule>();
+		public Task<PriceSchedule<Txp>> SaveAsync<Txp>(string priceScheduleID, PriceSchedule priceSchedule) => Request("v1", "priceschedules", priceScheduleID).PutJsonAsync(ValidateModel(priceSchedule)).ReceiveJson<PriceSchedule<Txp>>();
 		public Task DeleteAsync(string priceScheduleID) => Request("v1", "priceschedules", priceScheduleID).DeleteAsync();
 		public Task<PriceSchedule> PatchAsync(string priceScheduleID, PartialPriceSchedule partialPriceSchedule) => Request("v1", "priceschedules", priceScheduleID).PatchJsonAsync(ValidateModel(partialPriceSchedule)).ReceiveJson<PriceSchedule>();
 		public Task<PriceSchedule<Txp>> PatchAsync<Txp>(string priceScheduleID, PartialPriceSchedule partialPriceSchedule) => Request("v1", "priceschedules", priceScheduleID).PatchJsonAsync(ValidateModel(partialPriceSchedule)).ReceiveJson<PriceSchedule<Txp>>();
@@ -3027,8 +3027,8 @@ namespace OrderCloud.SDK
 		public Task<ListPage<Product<Txp>>> ListAsync<Txp>(string catalogID = null, string categoryID = null, string supplierID = null, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null) => Request("v1", "products").SetQueryParams(new { catalogID, categoryID, supplierID, search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<Product<Txp>>>();
 		public Task<Product> CreateAsync(Product product) => Request("v1", "products").PostJsonAsync(ValidateModel(product)).ReceiveJson<Product>();
 		public Task<Product<Txp>> CreateAsync<Txp>(Product product) => Request("v1", "products").PostJsonAsync(ValidateModel(product)).ReceiveJson<Product<Txp>>();
-		public Task<Product> UpdateAsync(string productID, Product product) => Request("v1", "products", productID).PutJsonAsync(ValidateModel(product)).ReceiveJson<Product>();
-		public Task<Product<Txp>> UpdateAsync<Txp>(string productID, Product product) => Request("v1", "products", productID).PutJsonAsync(ValidateModel(product)).ReceiveJson<Product<Txp>>();
+		public Task<Product> SaveAsync(string productID, Product product) => Request("v1", "products", productID).PutJsonAsync(ValidateModel(product)).ReceiveJson<Product>();
+		public Task<Product<Txp>> SaveAsync<Txp>(string productID, Product product) => Request("v1", "products", productID).PutJsonAsync(ValidateModel(product)).ReceiveJson<Product<Txp>>();
 		public Task DeleteAsync(string productID) => Request("v1", "products", productID).DeleteAsync();
 		public Task<Product> PatchAsync(string productID, PartialProduct partialProduct) => Request("v1", "products", productID).PatchJsonAsync(ValidateModel(partialProduct)).ReceiveJson<Product>();
 		public Task<Product<Txp>> PatchAsync<Txp>(string productID, PartialProduct partialProduct) => Request("v1", "products", productID).PatchJsonAsync(ValidateModel(partialProduct)).ReceiveJson<Product<Txp>>();
@@ -3036,8 +3036,8 @@ namespace OrderCloud.SDK
 		public Task<Product<Txp>> GenerateVariantsAsync<Txp>(string productID, bool overwriteExisting = false) => Request("v1", "products", productID, "variants", "generate").SetQueryParams(new { overwriteExisting }).PostAsync(null).ReceiveJson<Product<Txp>>();
 		public Task<ListPage<Variant>> ListVariantsAsync(string productID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null) => Request("v1", "products", productID, "variants").SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<Variant>>();
 		public Task<ListPage<Variant<Txp>>> ListVariantsAsync<Txp>(string productID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null) => Request("v1", "products", productID, "variants").SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<Variant<Txp>>>();
-		public Task<Variant> UpdateVariantAsync(string productID, string variantID, Variant variant) => Request("v1", "products", productID, "variants", variantID).PutJsonAsync(ValidateModel(variant)).ReceiveJson<Variant>();
-		public Task<Variant<Txp>> UpdateVariantAsync<Txp>(string productID, string variantID, Variant variant) => Request("v1", "products", productID, "variants", variantID).PutJsonAsync(ValidateModel(variant)).ReceiveJson<Variant<Txp>>();
+		public Task<Variant> SaveVariantAsync(string productID, string variantID, Variant variant) => Request("v1", "products", productID, "variants", variantID).PutJsonAsync(ValidateModel(variant)).ReceiveJson<Variant>();
+		public Task<Variant<Txp>> SaveVariantAsync<Txp>(string productID, string variantID, Variant variant) => Request("v1", "products", productID, "variants", variantID).PutJsonAsync(ValidateModel(variant)).ReceiveJson<Variant<Txp>>();
 		public Task<Variant> PatchVariantAsync(string productID, string variantID, PartialVariant partialVariant) => Request("v1", "products", productID, "variants", variantID).PatchJsonAsync(ValidateModel(partialVariant)).ReceiveJson<Variant>();
 		public Task<Variant<Txp>> PatchVariantAsync<Txp>(string productID, string variantID, PartialVariant partialVariant) => Request("v1", "products", productID, "variants", variantID).PatchJsonAsync(ValidateModel(partialVariant)).ReceiveJson<Variant<Txp>>();
 		public Task<Variant> GetVariantAsync(string productID, string variantID) => Request("v1", "products", productID, "variants", variantID).GetJsonAsync<Variant>();
@@ -3060,8 +3060,8 @@ namespace OrderCloud.SDK
 		public Task<ListPage<Promotion<Txp>>> ListAsync<Txp>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null) => Request("v1", "promotions").SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<Promotion<Txp>>>();
 		public Task<Promotion> CreateAsync(Promotion promotion) => Request("v1", "promotions").PostJsonAsync(ValidateModel(promotion)).ReceiveJson<Promotion>();
 		public Task<Promotion<Txp>> CreateAsync<Txp>(Promotion promotion) => Request("v1", "promotions").PostJsonAsync(ValidateModel(promotion)).ReceiveJson<Promotion<Txp>>();
-		public Task<Promotion> UpdateAsync(string promotionID, Promotion promotion) => Request("v1", "promotions", promotionID).PutJsonAsync(ValidateModel(promotion)).ReceiveJson<Promotion>();
-		public Task<Promotion<Txp>> UpdateAsync<Txp>(string promotionID, Promotion promotion) => Request("v1", "promotions", promotionID).PutJsonAsync(ValidateModel(promotion)).ReceiveJson<Promotion<Txp>>();
+		public Task<Promotion> SaveAsync(string promotionID, Promotion promotion) => Request("v1", "promotions", promotionID).PutJsonAsync(ValidateModel(promotion)).ReceiveJson<Promotion>();
+		public Task<Promotion<Txp>> SaveAsync<Txp>(string promotionID, Promotion promotion) => Request("v1", "promotions", promotionID).PutJsonAsync(ValidateModel(promotion)).ReceiveJson<Promotion<Txp>>();
 		public Task DeleteAsync(string promotionID) => Request("v1", "promotions", promotionID).DeleteAsync();
 		public Task<Promotion> PatchAsync(string promotionID, PartialPromotion partialPromotion) => Request("v1", "promotions", promotionID).PatchJsonAsync(ValidateModel(partialPromotion)).ReceiveJson<Promotion>();
 		public Task<Promotion<Txp>> PatchAsync<Txp>(string promotionID, PartialPromotion partialPromotion) => Request("v1", "promotions", promotionID).PatchJsonAsync(ValidateModel(partialPromotion)).ReceiveJson<Promotion<Txp>>();
@@ -3089,8 +3089,8 @@ namespace OrderCloud.SDK
 		public Task<ListPage<Shipment<Txp>>> ListAsync<Txp>(string orderID = null, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null) => Request("v1", "shipments").SetQueryParams(new { orderID, search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<Shipment<Txp>>>();
 		public Task<Shipment> CreateAsync(Shipment shipment) => Request("v1", "shipments").PostJsonAsync(ValidateModel(shipment)).ReceiveJson<Shipment>();
 		public Task<Shipment<Txp>> CreateAsync<Txp>(Shipment shipment) => Request("v1", "shipments").PostJsonAsync(ValidateModel(shipment)).ReceiveJson<Shipment<Txp>>();
-		public Task<Shipment> UpdateAsync(string shipmentID, Shipment shipment) => Request("v1", "shipments", shipmentID).PutJsonAsync(ValidateModel(shipment)).ReceiveJson<Shipment>();
-		public Task<Shipment<Txp>> UpdateAsync<Txp>(string shipmentID, Shipment shipment) => Request("v1", "shipments", shipmentID).PutJsonAsync(ValidateModel(shipment)).ReceiveJson<Shipment<Txp>>();
+		public Task<Shipment> SaveAsync(string shipmentID, Shipment shipment) => Request("v1", "shipments", shipmentID).PutJsonAsync(ValidateModel(shipment)).ReceiveJson<Shipment>();
+		public Task<Shipment<Txp>> SaveAsync<Txp>(string shipmentID, Shipment shipment) => Request("v1", "shipments", shipmentID).PutJsonAsync(ValidateModel(shipment)).ReceiveJson<Shipment<Txp>>();
 		public Task DeleteAsync(string shipmentID) => Request("v1", "shipments", shipmentID).DeleteAsync();
 		public Task<Shipment> PatchAsync(string shipmentID, PartialShipment partialShipment) => Request("v1", "shipments", shipmentID).PatchJsonAsync(ValidateModel(partialShipment)).ReceiveJson<Shipment>();
 		public Task<Shipment<Txp>> PatchAsync<Txp>(string shipmentID, PartialShipment partialShipment) => Request("v1", "shipments", shipmentID).PatchJsonAsync(ValidateModel(partialShipment)).ReceiveJson<Shipment<Txp>>();
@@ -3112,8 +3112,8 @@ namespace OrderCloud.SDK
 		public Task<ListPage<Spec<Txp>>> ListAsync<Txp>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null) => Request("v1", "specs").SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<Spec<Txp>>>();
 		public Task<Spec> CreateAsync(Spec spec) => Request("v1", "specs").PostJsonAsync(ValidateModel(spec)).ReceiveJson<Spec>();
 		public Task<Spec<Txp>> CreateAsync<Txp>(Spec spec) => Request("v1", "specs").PostJsonAsync(ValidateModel(spec)).ReceiveJson<Spec<Txp>>();
-		public Task<Spec> UpdateAsync(string specID, Spec spec) => Request("v1", "specs", specID).PutJsonAsync(ValidateModel(spec)).ReceiveJson<Spec>();
-		public Task<Spec<Txp>> UpdateAsync<Txp>(string specID, Spec spec) => Request("v1", "specs", specID).PutJsonAsync(ValidateModel(spec)).ReceiveJson<Spec<Txp>>();
+		public Task<Spec> SaveAsync(string specID, Spec spec) => Request("v1", "specs", specID).PutJsonAsync(ValidateModel(spec)).ReceiveJson<Spec>();
+		public Task<Spec<Txp>> SaveAsync<Txp>(string specID, Spec spec) => Request("v1", "specs", specID).PutJsonAsync(ValidateModel(spec)).ReceiveJson<Spec<Txp>>();
 		public Task DeleteAsync(string specID) => Request("v1", "specs", specID).DeleteAsync();
 		public Task<Spec> PatchAsync(string specID, PartialSpec partialSpec) => Request("v1", "specs", specID).PatchJsonAsync(ValidateModel(partialSpec)).ReceiveJson<Spec>();
 		public Task<Spec<Txp>> PatchAsync<Txp>(string specID, PartialSpec partialSpec) => Request("v1", "specs", specID).PatchJsonAsync(ValidateModel(partialSpec)).ReceiveJson<Spec<Txp>>();
@@ -3124,8 +3124,8 @@ namespace OrderCloud.SDK
 		public Task<SpecOption<Txp>> CreateOptionAsync<Txp>(string specID, SpecOption specOption) => Request("v1", "specs", specID, "options").PostJsonAsync(ValidateModel(specOption)).ReceiveJson<SpecOption<Txp>>();
 		public Task<ListPage<SpecOption>> ListOptionsAsync(string specID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null) => Request("v1", "specs", specID, "options").SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<SpecOption>>();
 		public Task<ListPage<SpecOption<Txp>>> ListOptionsAsync<Txp>(string specID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null) => Request("v1", "specs", specID, "options").SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<SpecOption<Txp>>>();
-		public Task<SpecOption> UpdateOptionAsync(string specID, string optionID, SpecOption specOption) => Request("v1", "specs", specID, "options", optionID).PutJsonAsync(ValidateModel(specOption)).ReceiveJson<SpecOption>();
-		public Task<SpecOption<Txp>> UpdateOptionAsync<Txp>(string specID, string optionID, SpecOption specOption) => Request("v1", "specs", specID, "options", optionID).PutJsonAsync(ValidateModel(specOption)).ReceiveJson<SpecOption<Txp>>();
+		public Task<SpecOption> SaveOptionAsync(string specID, string optionID, SpecOption specOption) => Request("v1", "specs", specID, "options", optionID).PutJsonAsync(ValidateModel(specOption)).ReceiveJson<SpecOption>();
+		public Task<SpecOption<Txp>> SaveOptionAsync<Txp>(string specID, string optionID, SpecOption specOption) => Request("v1", "specs", specID, "options", optionID).PutJsonAsync(ValidateModel(specOption)).ReceiveJson<SpecOption<Txp>>();
 		public Task<SpecOption> PatchOptionAsync(string specID, string optionID, PartialSpecOption partialSpecOption) => Request("v1", "specs", specID, "options", optionID).PatchJsonAsync(ValidateModel(partialSpecOption)).ReceiveJson<SpecOption>();
 		public Task<SpecOption<Txp>> PatchOptionAsync<Txp>(string specID, string optionID, PartialSpecOption partialSpecOption) => Request("v1", "specs", specID, "options", optionID).PatchJsonAsync(ValidateModel(partialSpecOption)).ReceiveJson<SpecOption<Txp>>();
 		public Task<SpecOption> GetOptionAsync(string specID, string optionID) => Request("v1", "specs", specID, "options", optionID).GetJsonAsync<SpecOption>();
@@ -3142,8 +3142,8 @@ namespace OrderCloud.SDK
 		public Task<ListPage<SpendingAccount<Txp>>> ListAsync<Txp>(string buyerID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null) => Request("v1", "buyers", buyerID, "spendingaccounts").SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<SpendingAccount<Txp>>>();
 		public Task<SpendingAccount> CreateAsync(string buyerID, SpendingAccount spendingAccount) => Request("v1", "buyers", buyerID, "spendingaccounts").PostJsonAsync(ValidateModel(spendingAccount)).ReceiveJson<SpendingAccount>();
 		public Task<SpendingAccount<Txp>> CreateAsync<Txp>(string buyerID, SpendingAccount spendingAccount) => Request("v1", "buyers", buyerID, "spendingaccounts").PostJsonAsync(ValidateModel(spendingAccount)).ReceiveJson<SpendingAccount<Txp>>();
-		public Task<SpendingAccount> UpdateAsync(string buyerID, string spendingAccountID, SpendingAccount spendingAccount) => Request("v1", "buyers", buyerID, "spendingaccounts", spendingAccountID).PutJsonAsync(ValidateModel(spendingAccount)).ReceiveJson<SpendingAccount>();
-		public Task<SpendingAccount<Txp>> UpdateAsync<Txp>(string buyerID, string spendingAccountID, SpendingAccount spendingAccount) => Request("v1", "buyers", buyerID, "spendingaccounts", spendingAccountID).PutJsonAsync(ValidateModel(spendingAccount)).ReceiveJson<SpendingAccount<Txp>>();
+		public Task<SpendingAccount> SaveAsync(string buyerID, string spendingAccountID, SpendingAccount spendingAccount) => Request("v1", "buyers", buyerID, "spendingaccounts", spendingAccountID).PutJsonAsync(ValidateModel(spendingAccount)).ReceiveJson<SpendingAccount>();
+		public Task<SpendingAccount<Txp>> SaveAsync<Txp>(string buyerID, string spendingAccountID, SpendingAccount spendingAccount) => Request("v1", "buyers", buyerID, "spendingaccounts", spendingAccountID).PutJsonAsync(ValidateModel(spendingAccount)).ReceiveJson<SpendingAccount<Txp>>();
 		public Task DeleteAsync(string buyerID, string spendingAccountID) => Request("v1", "buyers", buyerID, "spendingaccounts", spendingAccountID).DeleteAsync();
 		public Task<SpendingAccount> PatchAsync(string buyerID, string spendingAccountID, PartialSpendingAccount partialSpendingAccount) => Request("v1", "buyers", buyerID, "spendingaccounts", spendingAccountID).PatchJsonAsync(ValidateModel(partialSpendingAccount)).ReceiveJson<SpendingAccount>();
 		public Task<SpendingAccount<Txp>> PatchAsync<Txp>(string buyerID, string spendingAccountID, PartialSpendingAccount partialSpendingAccount) => Request("v1", "buyers", buyerID, "spendingaccounts", spendingAccountID).PatchJsonAsync(ValidateModel(partialSpendingAccount)).ReceiveJson<SpendingAccount<Txp>>();
@@ -3161,9 +3161,9 @@ namespace OrderCloud.SDK
 		public Task<ListPage<Supplier<Txp>>> ListAsync<Txp>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null) => Request("v1", "suppliers").SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<Supplier<Txp>>>();
 		public Task<Supplier> CreateAsync(Supplier supplier) => Request("v1", "suppliers").PostJsonAsync(ValidateModel(supplier)).ReceiveJson<Supplier>();
 		public Task<Supplier<Txp>> CreateAsync<Txp>(Supplier supplier) => Request("v1", "suppliers").PostJsonAsync(ValidateModel(supplier)).ReceiveJson<Supplier<Txp>>();
-		public Task<Supplier> UpdateAsync(string supplierID, Supplier supplier) => Request("v1", "suppliers", supplierID).PutJsonAsync(ValidateModel(supplier)).ReceiveJson<Supplier>();
-		public Task<Supplier<Txp>> UpdateAsync<Txp>(string supplierID, Supplier supplier) => Request("v1", "suppliers", supplierID).PutJsonAsync(ValidateModel(supplier)).ReceiveJson<Supplier<Txp>>();
 		public Task DeleteAsync(string supplierID) => Request("v1", "suppliers", supplierID).DeleteAsync();
+		public Task<Supplier> SaveAsync(string supplierID, Supplier supplier) => Request("v1", "suppliers", supplierID).PutJsonAsync(ValidateModel(supplier)).ReceiveJson<Supplier>();
+		public Task<Supplier<Txp>> SaveAsync<Txp>(string supplierID, Supplier supplier) => Request("v1", "suppliers", supplierID).PutJsonAsync(ValidateModel(supplier)).ReceiveJson<Supplier<Txp>>();
 		public Task<Supplier> PatchAsync(string supplierID, PartialSupplier partialSupplier) => Request("v1", "suppliers", supplierID).PatchJsonAsync(ValidateModel(partialSupplier)).ReceiveJson<Supplier>();
 		public Task<Supplier<Txp>> PatchAsync<Txp>(string supplierID, PartialSupplier partialSupplier) => Request("v1", "suppliers", supplierID).PatchJsonAsync(ValidateModel(partialSupplier)).ReceiveJson<Supplier<Txp>>();
 	}
@@ -3177,8 +3177,8 @@ namespace OrderCloud.SDK
 		public Task<ListPage<UserGroup<Txp>>> ListAsync<Txp>(string supplierID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null) => Request("v1", "suppliers", supplierID, "usergroups").SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<UserGroup<Txp>>>();
 		public Task<UserGroup> CreateAsync(string supplierID, UserGroup userGroup) => Request("v1", "suppliers", supplierID, "usergroups").PostJsonAsync(ValidateModel(userGroup)).ReceiveJson<UserGroup>();
 		public Task<UserGroup<Txp>> CreateAsync<Txp>(string supplierID, UserGroup userGroup) => Request("v1", "suppliers", supplierID, "usergroups").PostJsonAsync(ValidateModel(userGroup)).ReceiveJson<UserGroup<Txp>>();
-		public Task<UserGroup> UpdateAsync(string supplierID, string userGroupID, UserGroup userGroup) => Request("v1", "suppliers", supplierID, "usergroups", userGroupID).PutJsonAsync(ValidateModel(userGroup)).ReceiveJson<UserGroup>();
-		public Task<UserGroup<Txp>> UpdateAsync<Txp>(string supplierID, string userGroupID, UserGroup userGroup) => Request("v1", "suppliers", supplierID, "usergroups", userGroupID).PutJsonAsync(ValidateModel(userGroup)).ReceiveJson<UserGroup<Txp>>();
+		public Task<UserGroup> SaveAsync(string supplierID, string userGroupID, UserGroup userGroup) => Request("v1", "suppliers", supplierID, "usergroups", userGroupID).PutJsonAsync(ValidateModel(userGroup)).ReceiveJson<UserGroup>();
+		public Task<UserGroup<Txp>> SaveAsync<Txp>(string supplierID, string userGroupID, UserGroup userGroup) => Request("v1", "suppliers", supplierID, "usergroups", userGroupID).PutJsonAsync(ValidateModel(userGroup)).ReceiveJson<UserGroup<Txp>>();
 		public Task DeleteAsync(string supplierID, string userGroupID) => Request("v1", "suppliers", supplierID, "usergroups", userGroupID).DeleteAsync();
 		public Task<UserGroup> PatchAsync(string supplierID, string userGroupID, PartialUserGroup partialUserGroup) => Request("v1", "suppliers", supplierID, "usergroups", userGroupID).PatchJsonAsync(ValidateModel(partialUserGroup)).ReceiveJson<UserGroup>();
 		public Task<UserGroup<Txp>> PatchAsync<Txp>(string supplierID, string userGroupID, PartialUserGroup partialUserGroup) => Request("v1", "suppliers", supplierID, "usergroups", userGroupID).PatchJsonAsync(ValidateModel(partialUserGroup)).ReceiveJson<UserGroup<Txp>>();
@@ -3196,8 +3196,8 @@ namespace OrderCloud.SDK
 		public Task<ListPage<User<Txp>>> ListAsync<Txp>(string supplierID, string userGroupID = null, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null) => Request("v1", "suppliers", supplierID, "users").SetQueryParams(new { userGroupID, search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<User<Txp>>>();
 		public Task<User> CreateAsync(string supplierID, User user) => Request("v1", "suppliers", supplierID, "users").PostJsonAsync(ValidateModel(user)).ReceiveJson<User>();
 		public Task<User<Txp>> CreateAsync<Txp>(string supplierID, User user) => Request("v1", "suppliers", supplierID, "users").PostJsonAsync(ValidateModel(user)).ReceiveJson<User<Txp>>();
-		public Task<User> UpdateAsync(string supplierID, string userID, User user) => Request("v1", "suppliers", supplierID, "users", userID).PutJsonAsync(ValidateModel(user)).ReceiveJson<User>();
-		public Task<User<Txp>> UpdateAsync<Txp>(string supplierID, string userID, User user) => Request("v1", "suppliers", supplierID, "users", userID).PutJsonAsync(ValidateModel(user)).ReceiveJson<User<Txp>>();
+		public Task<User> SaveAsync(string supplierID, string userID, User user) => Request("v1", "suppliers", supplierID, "users", userID).PutJsonAsync(ValidateModel(user)).ReceiveJson<User>();
+		public Task<User<Txp>> SaveAsync<Txp>(string supplierID, string userID, User user) => Request("v1", "suppliers", supplierID, "users", userID).PutJsonAsync(ValidateModel(user)).ReceiveJson<User<Txp>>();
 		public Task DeleteAsync(string supplierID, string userID) => Request("v1", "suppliers", supplierID, "users", userID).DeleteAsync();
 		public Task<User> PatchAsync(string supplierID, string userID, PartialUser partialUser) => Request("v1", "suppliers", supplierID, "users", userID).PatchJsonAsync(ValidateModel(partialUser)).ReceiveJson<User>();
 		public Task<User<Txp>> PatchAsync<Txp>(string supplierID, string userID, PartialUser partialUser) => Request("v1", "suppliers", supplierID, "users", userID).PatchJsonAsync(ValidateModel(partialUser)).ReceiveJson<User<Txp>>();
@@ -3213,8 +3213,8 @@ namespace OrderCloud.SDK
 		public Task<ListPage<UserGroup<Txp>>> ListAsync<Txp>(string buyerID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null) => Request("v1", "buyers", buyerID, "usergroups").SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<UserGroup<Txp>>>();
 		public Task<UserGroup> CreateAsync(string buyerID, UserGroup userGroup) => Request("v1", "buyers", buyerID, "usergroups").PostJsonAsync(ValidateModel(userGroup)).ReceiveJson<UserGroup>();
 		public Task<UserGroup<Txp>> CreateAsync<Txp>(string buyerID, UserGroup userGroup) => Request("v1", "buyers", buyerID, "usergroups").PostJsonAsync(ValidateModel(userGroup)).ReceiveJson<UserGroup<Txp>>();
-		public Task<UserGroup> UpdateAsync(string buyerID, string userGroupID, UserGroup userGroup) => Request("v1", "buyers", buyerID, "usergroups", userGroupID).PutJsonAsync(ValidateModel(userGroup)).ReceiveJson<UserGroup>();
-		public Task<UserGroup<Txp>> UpdateAsync<Txp>(string buyerID, string userGroupID, UserGroup userGroup) => Request("v1", "buyers", buyerID, "usergroups", userGroupID).PutJsonAsync(ValidateModel(userGroup)).ReceiveJson<UserGroup<Txp>>();
+		public Task<UserGroup> SaveAsync(string buyerID, string userGroupID, UserGroup userGroup) => Request("v1", "buyers", buyerID, "usergroups", userGroupID).PutJsonAsync(ValidateModel(userGroup)).ReceiveJson<UserGroup>();
+		public Task<UserGroup<Txp>> SaveAsync<Txp>(string buyerID, string userGroupID, UserGroup userGroup) => Request("v1", "buyers", buyerID, "usergroups", userGroupID).PutJsonAsync(ValidateModel(userGroup)).ReceiveJson<UserGroup<Txp>>();
 		public Task DeleteAsync(string buyerID, string userGroupID) => Request("v1", "buyers", buyerID, "usergroups", userGroupID).DeleteAsync();
 		public Task<UserGroup> PatchAsync(string buyerID, string userGroupID, PartialUserGroup partialUserGroup) => Request("v1", "buyers", buyerID, "usergroups", userGroupID).PatchJsonAsync(ValidateModel(partialUserGroup)).ReceiveJson<UserGroup>();
 		public Task<UserGroup<Txp>> PatchAsync<Txp>(string buyerID, string userGroupID, PartialUserGroup partialUserGroup) => Request("v1", "buyers", buyerID, "usergroups", userGroupID).PatchJsonAsync(ValidateModel(partialUserGroup)).ReceiveJson<UserGroup<Txp>>();
@@ -3232,8 +3232,8 @@ namespace OrderCloud.SDK
 		public Task<ListPage<User<Txp>>> ListAsync<Txp>(string buyerID, string userGroupID = null, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null) => Request("v1", "buyers", buyerID, "users").SetQueryParams(new { userGroupID, search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<User<Txp>>>();
 		public Task<User> CreateAsync(string buyerID, User user) => Request("v1", "buyers", buyerID, "users").PostJsonAsync(ValidateModel(user)).ReceiveJson<User>();
 		public Task<User<Txp>> CreateAsync<Txp>(string buyerID, User user) => Request("v1", "buyers", buyerID, "users").PostJsonAsync(ValidateModel(user)).ReceiveJson<User<Txp>>();
-		public Task<User> UpdateAsync(string buyerID, string userID, User user) => Request("v1", "buyers", buyerID, "users", userID).PutJsonAsync(ValidateModel(user)).ReceiveJson<User>();
-		public Task<User<Txp>> UpdateAsync<Txp>(string buyerID, string userID, User user) => Request("v1", "buyers", buyerID, "users", userID).PutJsonAsync(ValidateModel(user)).ReceiveJson<User<Txp>>();
+		public Task<User> SaveAsync(string buyerID, string userID, User user) => Request("v1", "buyers", buyerID, "users", userID).PutJsonAsync(ValidateModel(user)).ReceiveJson<User>();
+		public Task<User<Txp>> SaveAsync<Txp>(string buyerID, string userID, User user) => Request("v1", "buyers", buyerID, "users", userID).PutJsonAsync(ValidateModel(user)).ReceiveJson<User<Txp>>();
 		public Task DeleteAsync(string buyerID, string userID) => Request("v1", "buyers", buyerID, "users", userID).DeleteAsync();
 		public Task<User> PatchAsync(string buyerID, string userID, PartialUser partialUser) => Request("v1", "buyers", buyerID, "users", userID).PatchJsonAsync(ValidateModel(partialUser)).ReceiveJson<User>();
 		public Task<User<Txp>> PatchAsync<Txp>(string buyerID, string userID, PartialUser partialUser) => Request("v1", "buyers", buyerID, "users", userID).PatchJsonAsync(ValidateModel(partialUser)).ReceiveJson<User<Txp>>();

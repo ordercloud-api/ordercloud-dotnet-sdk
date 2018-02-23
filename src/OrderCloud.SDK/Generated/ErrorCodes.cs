@@ -77,6 +77,8 @@ namespace OrderCloud.SDK
 			public const string CannotEdit = "Catalog.CannotEdit";
 			/// <summary>The Catalog is not active.</summary>
 			public const string NotActive = "Catalog.NotActive";
+			/// <summary>This catalog is a default catalog for one or more buyers and cannot currently be deleted.</summary>
+			public const string CannotDelete = "Catalog.CannotDelete";
 		}
 		public static class Category
 		{
