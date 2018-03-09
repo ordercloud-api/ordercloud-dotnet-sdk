@@ -68,6 +68,20 @@ namespace OrderCloud.SDK.Tests
 			}, li);
 		}
 
+	    [Test]
+	    public async Task can_provide_alternative_token() {
+			// prove that auth credentials are no longer required like in earlier versions
+			var cli = new OrderCloudClient(new OrderCloudClientConfig {
+				ApiUrl = "https://fake.com",
+				AuthUrl = "https://fake.com"
+			});
+
+			using (var httpTest = new HttpTest()) {
+			    var products = await GetClient().Me.ListProductsAsync(accessToken: "some-other-token");
+			    httpTest.ShouldHaveMadeACall().WithHeader("Authorization", "Bearer some-other-token");
+		    }
+	    }
+
 		private OrderCloudClient GetClient() => new OrderCloudClient(new OrderCloudClientConfig {
 		    ApiUrl = "https://fake.com",
 			AuthUrl = "https://fake.com",
