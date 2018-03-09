@@ -11,6 +11,7 @@ namespace OrderCloud.SDK
 	/// </summary>
 	public enum GrantType
 	{
+		None,
 		/// <summary>
 		/// Requires that a username and password be provided. Appropriate for end-user applications where a human is entering their personal OrderCloud credentials.
 		/// </summary>

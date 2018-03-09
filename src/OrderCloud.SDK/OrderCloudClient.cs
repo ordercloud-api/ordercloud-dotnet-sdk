@@ -137,7 +137,11 @@ namespace OrderCloud.SDK
 		}
 
 		private async Task EnsureTokenAsync(HttpCall call) {
-			if (!call.FlurlRequest.Headers.ContainsKey("Authorization")) {
+			var hasToken =
+				call.FlurlRequest.Headers.TryGetValue("Authorization", out var value) &&
+				(value as string) != "Bearer ";
+
+			if (!hasToken) {
 				if (!IsAuthenticated)
 					await AuthenticateAsync().ConfigureAwait(false);
 				call.FlurlRequest.WithOAuthBearerToken(TokenResponse.AccessToken);
@@ -161,12 +165,13 @@ namespace OrderCloud.SDK
 		}
 
 		private void ValidateConfig() {
-			RequireConfigProp(c => c.ClientId);
 			if (Config.GrantType == GrantType.Password) {
+				RequireConfigProp(c => c.ClientId);
 				RequireConfigProp(c => c.Username);
 				RequireConfigProp(c => c.Password);
 			}
-			else {
+			else if (Config.GrantType == GrantType.Password) {
+				RequireConfigProp(c => c.ClientId);
 				RequireConfigProp(c => c.ClientSecret);
 			}
 		}
