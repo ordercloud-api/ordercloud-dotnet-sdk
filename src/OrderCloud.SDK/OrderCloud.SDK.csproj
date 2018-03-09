@@ -4,7 +4,7 @@
 		<!-- https://docs.microsoft.com/en-us/dotnet/core/tools/csproj -->
 		<TargetFrameworks>net45;netstandard1.3;netstandard2.0</TargetFrameworks>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<Version>0.2.0</Version>
+		<Version>0.2.1</Version>
 
 		<PackageId>OrderCloud.SDK</PackageId>
 		<Title>OrderCloud SDK</Title>
@@ -20,20 +20,13 @@
 		<RepositoryType>git</RepositoryType>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-	  <DocumentationFile>bin\Debug\netstandard1.3\OrderCloud.SDK.xml</DocumentationFile>
-	</PropertyGroup>
-
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-	  <DocumentationFile>bin\Release\netstandard1.3\OrderCloud.SDK.xml</DocumentationFile>
+	  <DocumentationFile>bin\Release\OrderCloud.SDK.xml</DocumentationFile>
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="Flurl.Http" Version="2.1.1" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Reference Include="Microsoft.CSharp" />
+	  <PackageReference Include="Flurl.Http" Version="2.2.1" />
+	  <PackageReference Include="Microsoft.CSharp" Version="4.4.1" />
 	</ItemGroup>
 
 </Project>
