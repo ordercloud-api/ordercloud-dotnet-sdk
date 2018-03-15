@@ -116,13 +116,15 @@ namespace OrderCloud.SDK
 	public class BuyerAddress : OrderCloudModel
 	{
 		/// <summary>ID of the address. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 2.</summary>
-		public string ID { get; internal set; }
+		[ApiReadOnly]
+		public string ID { get; set; }
 		/// <summary>Shipping of the address. Searchable: priority level 6.</summary>
 		public bool Shipping { get => GetProp<bool>("Shipping"); set => SetProp<bool>("Shipping", value); }
 		/// <summary>Billing of the address. Searchable: priority level 7.</summary>
 		public bool Billing { get => GetProp<bool>("Billing"); set => SetProp<bool>("Billing", value); }
 		/// <summary>Editable of the address. Searchable: priority level 8.</summary>
-		public bool Editable { get; internal set; }
+		[ApiReadOnly]
+		public bool Editable { get; set; }
 		/// <summary>Company name of the address. Max length 100 characters. Sortable.</summary>
 		public string CompanyName { get => GetProp<string>("CompanyName"); set => SetProp<string>("CompanyName", value); }
 		/// <summary>First name of the address. Max length 100 characters. Searchable: priority level 7. Sortable.</summary>
@@ -158,13 +160,16 @@ namespace OrderCloud.SDK
 	public class BuyerCreditCard : OrderCloudModel
 	{
 		/// <summary>ID of the credit card. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 1.</summary>
-		public string ID { get; internal set; }
+		[ApiReadOnly]
+		public string ID { get; set; }
 		/// <summary>Editable of the credit card. Searchable: priority level 5.</summary>
-		public bool Editable { get; internal set; }
+		[ApiReadOnly]
+		public bool Editable { get; set; }
 		/// <summary>Token of the credit card.</summary>
 		public string Token { get => GetProp<string>("Token"); set => SetProp<string>("Token", value); }
 		/// <summary>Date created of the credit card. Sortable.</summary>
-		public DateTimeOffset? DateCreated { get; internal set; }
+		[ApiReadOnly]
+		public DateTimeOffset? DateCreated { get; set; }
 		/// <summary>Card type of the credit card. Searchable: priority level 3. Sortable: priority level 3.</summary>
 		public string CardType { get => GetProp<string>("CardType"); set => SetProp<string>("CardType", value); }
 		/// <summary>Partial account number of the credit card. Max length 5 characters.</summary>
@@ -181,7 +186,8 @@ namespace OrderCloud.SDK
 	public class BuyerProduct : OrderCloudModel
 	{
 		/// <summary>Price schedule of the product.</summary>
-		public PriceSchedule PriceSchedule { get; internal set; }
+		[ApiReadOnly]
+		public PriceSchedule PriceSchedule { get; set; }
 		/// <summary>ID of the product. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 2.</summary>
 		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
 		/// <summary>Name of the product. Required. Max length 100 characters. Searchable: priority level 2. Sortable: priority level 1.</summary>
@@ -203,11 +209,13 @@ namespace OrderCloud.SDK
 		/// <summary>Active of the product.</summary>
 		public bool Active { get => GetProp<bool>("Active"); set => SetProp<bool>("Active", value); }
 		/// <summary>Spec count of the product.</summary>
-		public int SpecCount { get; internal set; }
+		[ApiReadOnly]
+		public int SpecCount { get; set; }
 		/// <summary>Container for extended (custom) properties of the product.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 		/// <summary>Variant count of the product.</summary>
-		public int VariantCount { get; internal set; }
+		[ApiReadOnly]
+		public int VariantCount { get; set; }
 		/// <summary>ID of the ship from address.</summary>
 		public string ShipFromAddressID { get => GetProp<string>("ShipFromAddressID"); set => SetProp<string>("ShipFromAddressID", value); }
 		/// <summary>Inventory of the product.</summary>
@@ -220,7 +228,8 @@ namespace OrderCloud.SDK
 	public class BuyerSpec : OrderCloudModel
 	{
 		/// <summary>Options of the spec.</summary>
-		public IReadOnlyList<SpecOption> Options { get; internal set; }
+		[ApiReadOnly]
+		public IReadOnlyList<SpecOption> Options { get; set; }
 		/// <summary>ID of the spec. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 3. Sortable: priority level 3.</summary>
 		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
 		/// <summary>List order of the spec. Searchable: priority level 2. Sortable: priority level 1.</summary>
@@ -255,7 +264,8 @@ namespace OrderCloud.SDK
 		/// <summary>Active of the catalog.</summary>
 		public bool Active { get => GetProp<bool>("Active"); set => SetProp<bool>("Active", value); }
 		/// <summary>Category count of the catalog.</summary>
-		public int CategoryCount { get; internal set; }
+		[ApiReadOnly]
+		public int CategoryCount { get; set; }
 		/// <summary>Container for extended (custom) properties of the catalog.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
@@ -291,7 +301,8 @@ namespace OrderCloud.SDK
 		/// <summary>ID of the parent category.</summary>
 		public string ParentID { get => GetProp<string>("ParentID"); set => SetProp<string>("ParentID", value); }
 		/// <summary>Number of categories that are *immediate* children of this category.</summary>
-		public int ChildCount { get; internal set; }
+		[ApiReadOnly]
+		public int ChildCount { get; set; }
 		/// <summary>Container for extended (custom) properties of the category.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
@@ -355,7 +366,8 @@ namespace OrderCloud.SDK
 		/// <summary>Token of the credit card.</summary>
 		public string Token { get => GetProp<string>("Token"); set => SetProp<string>("Token", value); }
 		/// <summary>Date created of the credit card. Sortable.</summary>
-		public DateTimeOffset? DateCreated { get; internal set; }
+		[ApiReadOnly]
+		public DateTimeOffset? DateCreated { get; set; }
 		/// <summary>Card type of the credit card. Searchable: priority level 3. Sortable: priority level 3.</summary>
 		public string CardType { get => GetProp<string>("CardType"); set => SetProp<string>("CardType", value); }
 		/// <summary>Partial account number of the credit card. Max length 5 characters.</summary>
@@ -440,7 +452,8 @@ namespace OrderCloud.SDK
 		/// <summary>Automatically decrements on order submit.</summary>
 		public int? QuantityAvailable { get => GetProp<int?>("QuantityAvailable"); set => SetProp<int?>("QuantityAvailable", value); }
 		/// <summary>Last updated of the inventory.</summary>
-		public DateTimeOffset? LastUpdated { get; internal set; }
+		[ApiReadOnly]
+		public DateTimeOffset? LastUpdated { get; set; }
 	}
 
 	public class LineItem : OrderCloudModel
@@ -454,13 +467,16 @@ namespace OrderCloud.SDK
 		[Required]
 		public int Quantity { get => GetProp<int>("Quantity", 1); set => SetProp<int>("Quantity", value); }
 		/// <summary>Date added of the line item. Sortable: priority level 1.</summary>
-		public DateTimeOffset DateAdded { get; internal set; }
+		[ApiReadOnly]
+		public DateTimeOffset DateAdded { get; set; }
 		/// <summary>Quantity shipped of the line item.</summary>
-		public int QuantityShipped { get; internal set; }
+		[ApiReadOnly]
+		public int QuantityShipped { get; set; }
 		/// <summary>Unit price of the line item. Must be between -9999999999999 and 9999999999999.</summary>
 		public decimal? UnitPrice { get => GetProp<decimal?>("UnitPrice"); set => SetProp<decimal?>("UnitPrice", value); }
 		/// <summary>Line total of the line item.</summary>
-		public decimal LineTotal { get; internal set; }
+		[ApiReadOnly]
+		public decimal LineTotal { get; set; }
 		/// <summary>Cost center of the line item.</summary>
 		public string CostCenter { get => GetProp<string>("CostCenter"); set => SetProp<string>("CostCenter", value); }
 		/// <summary>Date needed of the line item.</summary>
@@ -472,11 +488,14 @@ namespace OrderCloud.SDK
 		/// <summary>ID of the ship from address.</summary>
 		public string ShipFromAddressID { get => GetProp<string>("ShipFromAddressID"); set => SetProp<string>("ShipFromAddressID", value); }
 		/// <summary>Product of the line item.</summary>
-		public LineItemProduct Product { get; internal set; }
+		[ApiReadOnly]
+		public LineItemProduct Product { get; set; }
 		/// <summary>Shipping address of the line item.</summary>
-		public Address ShippingAddress { get; internal set; }
+		[ApiReadOnly]
+		public Address ShippingAddress { get; set; }
 		/// <summary>Ship from address of the line item.</summary>
-		public Address ShipFromAddress { get; internal set; }
+		[ApiReadOnly]
+		public Address ShipFromAddress { get; set; }
 		/// <summary>Specs of the line item.</summary>
 		public IList<LineItemSpec> Specs { get => GetProp<IList<LineItemSpec>>("Specs", new List<LineItemSpec>()); set => SetProp<IList<LineItemSpec>>("Specs", value); }
 		/// <summary>Container for extended (custom) properties of the line item.</summary>
@@ -513,7 +532,8 @@ namespace OrderCloud.SDK
 		[Required]
 		public string SpecID { get => GetProp<string>("SpecID"); set => SetProp<string>("SpecID", value); }
 		/// <summary>Name of the line item spec.</summary>
-		public string Name { get; internal set; }
+		[ApiReadOnly]
+		public string Name { get; set; }
 		/// <summary>ID of the option.</summary>
 		public string OptionID { get => GetProp<string>("OptionID"); set => SetProp<string>("OptionID", value); }
 		/// <summary>Value of the line item spec. Max length 2000 characters.</summary>
@@ -523,9 +543,11 @@ namespace OrderCloud.SDK
 	public class MeBuyer : OrderCloudModel
 	{
 		/// <summary>ID of the buyer. Can only contain characters Aa-Zz, 0-9, -, and _.</summary>
-		public string ID { get; internal set; }
+		[ApiReadOnly]
+		public string ID { get; set; }
 		/// <summary>ID of the default catalog.</summary>
-		public string DefaultCatalogID { get; internal set; }
+		[ApiReadOnly]
+		public string DefaultCatalogID { get; set; }
 	}
 
 	public class MessageCCListenerAssignment : OrderCloudModel
@@ -533,9 +555,11 @@ namespace OrderCloud.SDK
 		/// <summary>Message sender assignment of the message cc listener assignment.</summary>
 		public MessageSenderAssignment MessageSenderAssignment { get => GetProp<MessageSenderAssignment>("MessageSenderAssignment"); set => SetProp<MessageSenderAssignment>("MessageSenderAssignment", value); }
 		/// <summary>Message config name of the message cc listener assignment. Searchable: priority level 3. Sortable: priority level 3.</summary>
-		public string MessageConfigName { get; internal set; }
+		[ApiReadOnly]
+		public string MessageConfigName { get; set; }
 		/// <summary>Message config description of the message cc listener assignment.</summary>
-		public string MessageConfigDescription { get; internal set; }
+		[ApiReadOnly]
+		public string MessageConfigDescription { get; set; }
 		/// <summary>Message type of the message cc listener assignment. Possible values: OrderDeclined, OrderSubmitted, ShipmentCreated, ForgottenPassword, OrderSubmittedForYourApproval, OrderSubmittedForApproval, OrderApproved, OrderSubmittedForYourApprovalHasBeenApproved, OrderSubmittedForYourApprovalHasBeenDeclined, NewUserInvitation.</summary>
 		public MessageType MessageType { get => GetProp<MessageType>("MessageType"); set => SetProp<MessageType>("MessageType", value); }
 		/// <summary>ID of the buyer. Searchable: priority level 0. Sortable: priority level 0.</summary>
@@ -569,15 +593,18 @@ namespace OrderCloud.SDK
 		/// <summary>ID of the user group. Sortable: priority level 3.</summary>
 		public string UserGroupID { get => GetProp<string>("UserGroupID"); set => SetProp<string>("UserGroupID", value); }
 		/// <summary>Message config name of the message sender assignment. Searchable: priority level 1. Sortable: priority level 4.</summary>
-		public string MessageConfigName { get; internal set; }
+		[ApiReadOnly]
+		public string MessageConfigName { get; set; }
 		/// <summary>Message config description of the message sender assignment.</summary>
-		public string MessageConfigDescription { get; internal set; }
+		[ApiReadOnly]
+		public string MessageConfigDescription { get; set; }
 	}
 
 	public class MeUser : OrderCloudModel
 	{
 		/// <summary>Buyer of the user.</summary>
-		public MeBuyer Buyer { get; internal set; }
+		[ApiReadOnly]
+		public MeBuyer Buyer { get; set; }
 		/// <summary>ID of the user. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable.</summary>
 		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
 		/// <summary>Username of the user. Required. Max length 100 characters. Searchable: priority level 2. Sortable: priority level 3.</summary>
@@ -604,7 +631,8 @@ namespace OrderCloud.SDK
 		/// <summary>Container for extended (custom) properties of the user.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 		/// <summary>Available roles of the user.</summary>
-		public IReadOnlyList<string> AvailableRoles { get; internal set; }
+		[ApiReadOnly]
+		public IReadOnlyList<string> AvailableRoles { get; set; }
 	}
 	public class MeUser<Txp> : MeUser { public new Txp xp { get; set; } }
 
@@ -613,7 +641,8 @@ namespace OrderCloud.SDK
 		/// <summary>ID of the order. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable.</summary>
 		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
 		/// <summary>From user of the order. Sortable.</summary>
-		public User FromUser { get; internal set; }
+		[ApiReadOnly]
+		public User FromUser { get; set; }
 		/// <summary>ID of the from company. Searchable: priority level 2. Sortable.</summary>
 		public string FromCompanyID { get => GetProp<string>("FromCompanyID"); set => SetProp<string>("FromCompanyID", value); }
 		/// <summary>ID of the from user. Sortable.</summary>
@@ -621,39 +650,52 @@ namespace OrderCloud.SDK
 		/// <summary>ID of the billing address.</summary>
 		public string BillingAddressID { get => GetProp<string>("BillingAddressID"); set => SetProp<string>("BillingAddressID", value); }
 		/// <summary>Billing address of the order.</summary>
-		public Address BillingAddress { get; internal set; }
+		[ApiReadOnly]
+		public Address BillingAddress { get; set; }
 		/// <summary>ID of the Shipping Address for all LineItems on the Order. Null when there are multiple Shipping Addresses involved.</summary>
 		public string ShippingAddressID { get => GetProp<string>("ShippingAddressID"); set => SetProp<string>("ShippingAddressID", value); }
 		/// <summary>Comments of the order. Max length 2000 characters. Searchable: priority level 4.</summary>
 		public string Comments { get => GetProp<string>("Comments"); set => SetProp<string>("Comments", value); }
 		/// <summary>Line item count of the order.</summary>
-		public int LineItemCount { get; internal set; }
+		[ApiReadOnly]
+		public int LineItemCount { get; set; }
 		/// <summary>Status of the order. Sortable. Possible values: Unsubmitted, AwaitingApproval, Declined, Open, Completed, Canceled.</summary>
-		public OrderStatus Status { get; internal set; }
+		[ApiReadOnly]
+		public OrderStatus Status { get; set; }
 		/// <summary>Date created of the order. Sortable: priority level 2.</summary>
-		public DateTimeOffset? DateCreated { get; internal set; }
+		[ApiReadOnly]
+		public DateTimeOffset? DateCreated { get; set; }
 		/// <summary>Date submitted of the order. Sortable: priority level 1.</summary>
-		public DateTimeOffset? DateSubmitted { get; internal set; }
+		[ApiReadOnly]
+		public DateTimeOffset? DateSubmitted { get; set; }
 		/// <summary>Date approved of the order. Sortable.</summary>
-		public DateTimeOffset? DateApproved { get; internal set; }
+		[ApiReadOnly]
+		public DateTimeOffset? DateApproved { get; set; }
 		/// <summary>Date declined of the order. Sortable.</summary>
-		public DateTimeOffset? DateDeclined { get; internal set; }
+		[ApiReadOnly]
+		public DateTimeOffset? DateDeclined { get; set; }
 		/// <summary>Date canceled of the order. Sortable.</summary>
-		public DateTimeOffset? DateCanceled { get; internal set; }
+		[ApiReadOnly]
+		public DateTimeOffset? DateCanceled { get; set; }
 		/// <summary>Date completed of the order. Sortable.</summary>
-		public DateTimeOffset? DateCompleted { get; internal set; }
+		[ApiReadOnly]
+		public DateTimeOffset? DateCompleted { get; set; }
 		/// <summary>Subtotal of the order. Sortable.</summary>
-		public decimal Subtotal { get; internal set; }
+		[ApiReadOnly]
+		public decimal Subtotal { get; set; }
 		/// <summary>Shipping cost of the order. Sortable.</summary>
 		public decimal ShippingCost { get => GetProp<decimal>("ShippingCost"); set => SetProp<decimal>("ShippingCost", value); }
 		/// <summary>Tax cost of the order. Sortable.</summary>
 		public decimal TaxCost { get => GetProp<decimal>("TaxCost"); set => SetProp<decimal>("TaxCost", value); }
 		/// <summary>Promotion discount of the order. Sortable.</summary>
-		public decimal PromotionDiscount { get; internal set; }
+		[ApiReadOnly]
+		public decimal PromotionDiscount { get; set; }
 		/// <summary>Total of the order. Sortable.</summary>
-		public decimal Total { get; internal set; }
+		[ApiReadOnly]
+		public decimal Total { get; set; }
 		/// <summary>True if this Order has been passed from the Buyer to the Seller.</summary>
-		public bool IsSubmitted { get; internal set; }
+		[ApiReadOnly]
+		public bool IsSubmitted { get; set; }
 		/// <summary>Container for extended (custom) properties of the order.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
@@ -662,19 +704,26 @@ namespace OrderCloud.SDK
 	public class OrderApproval : OrderCloudModel
 	{
 		/// <summary>ID of the approval rule. Searchable: priority level 1. Sortable.</summary>
-		public string ApprovalRuleID { get; internal set; }
+		[ApiReadOnly]
+		public string ApprovalRuleID { get; set; }
 		/// <summary>ID of the approving group. Searchable: priority level 2. Sortable.</summary>
-		public string ApprovingGroupID { get; internal set; }
+		[ApiReadOnly]
+		public string ApprovingGroupID { get; set; }
 		/// <summary>Status of the order approval. Sortable. Possible values: Pending, Approved, Declined.</summary>
-		public ApprovalStatus Status { get; internal set; }
+		[ApiReadOnly]
+		public ApprovalStatus Status { get; set; }
 		/// <summary>Date created of the order approval. Sortable: priority level 1.</summary>
-		public DateTimeOffset DateCreated { get; internal set; }
+		[ApiReadOnly]
+		public DateTimeOffset DateCreated { get; set; }
 		/// <summary>Date completed of the order approval. Sortable.</summary>
-		public DateTimeOffset? DateCompleted { get; internal set; }
+		[ApiReadOnly]
+		public DateTimeOffset? DateCompleted { get; set; }
 		/// <summary>Approver of the order approval. Searchable: priority level 3. Sortable.</summary>
-		public User Approver { get; internal set; }
+		[ApiReadOnly]
+		public User Approver { get; set; }
 		/// <summary>Comments of the order approval. Searchable: priority level 4.</summary>
-		public string Comments { get; internal set; }
+		[ApiReadOnly]
+		public string Comments { get; set; }
 	}
 
 	public class OrderApprovalInfo : OrderCloudModel
@@ -688,7 +737,8 @@ namespace OrderCloud.SDK
 	public class OrderPromotion : OrderCloudModel
 	{
 		/// <summary>Amount of the order promotion.</summary>
-		public decimal Amount { get; internal set; }
+		[ApiReadOnly]
+		public decimal Amount { get; set; }
 		/// <summary>ID of the order promotion. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 2.</summary>
 		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
 		/// <summary>Must be unique. Entered by buyer when adding promo to order.</summary>
@@ -701,7 +751,8 @@ namespace OrderCloud.SDK
 		/// <summary>Redemption limit per user of the order promotion.</summary>
 		public int? RedemptionLimitPerUser { get => GetProp<int?>("RedemptionLimitPerUser"); set => SetProp<int?>("RedemptionLimitPerUser", value); }
 		/// <summary>Redemption count of the order promotion.</summary>
-		public int RedemptionCount { get; internal set; }
+		[ApiReadOnly]
+		public int RedemptionCount { get; set; }
 		/// <summary>Description of the order promotion. Max length 2000 characters. Searchable: priority level 4.</summary>
 		public string Description { get => GetProp<string>("Description"); set => SetProp<string>("Description", value); }
 		/// <summary>Terms, conditions, and other legal jargon.</summary>
@@ -754,7 +805,8 @@ namespace OrderCloud.SDK
 		/// <summary>Type of the payment. Sortable. Possible values: PurchaseOrder, CreditCard, SpendingAccount.</summary>
 		public PaymentType Type { get => GetProp<PaymentType>("Type"); set => SetProp<PaymentType>("Type", value); }
 		/// <summary>Date created of the payment. Sortable: priority level 1.</summary>
-		public DateTimeOffset DateCreated { get; internal set; }
+		[ApiReadOnly]
+		public DateTimeOffset DateCreated { get; set; }
 		/// <summary>ID of the credit card. Sortable.</summary>
 		public string CreditCardID { get => GetProp<string>("CreditCardID"); set => SetProp<string>("CreditCardID", value); }
 		/// <summary>ID of the spending account. Sortable.</summary>
@@ -768,7 +820,8 @@ namespace OrderCloud.SDK
 		/// <summary>Container for extended (custom) properties of the payment.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 		/// <summary>Transactions of the payment.</summary>
-		public IReadOnlyList<PaymentTransaction> Transactions { get; internal set; }
+		[ApiReadOnly]
+		public IReadOnlyList<PaymentTransaction> Transactions { get; set; }
 	}
 	public class Payment<Txp> : Payment { public new Txp xp { get; set; } }
 
@@ -856,11 +909,13 @@ namespace OrderCloud.SDK
 		/// <summary>Active of the product.</summary>
 		public bool Active { get => GetProp<bool>("Active"); set => SetProp<bool>("Active", value); }
 		/// <summary>Spec count of the product.</summary>
-		public int SpecCount { get; internal set; }
+		[ApiReadOnly]
+		public int SpecCount { get; set; }
 		/// <summary>Container for extended (custom) properties of the product.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 		/// <summary>Variant count of the product.</summary>
-		public int VariantCount { get; internal set; }
+		[ApiReadOnly]
+		public int VariantCount { get; set; }
 		/// <summary>ID of the ship from address.</summary>
 		public string ShipFromAddressID { get => GetProp<string>("ShipFromAddressID"); set => SetProp<string>("ShipFromAddressID", value); }
 		/// <summary>Inventory of the product.</summary>
@@ -908,7 +963,8 @@ namespace OrderCloud.SDK
 		/// <summary>Redemption limit per user of the promotion.</summary>
 		public int? RedemptionLimitPerUser { get => GetProp<int?>("RedemptionLimitPerUser"); set => SetProp<int?>("RedemptionLimitPerUser", value); }
 		/// <summary>Redemption count of the promotion.</summary>
-		public int RedemptionCount { get; internal set; }
+		[ApiReadOnly]
+		public int RedemptionCount { get; set; }
 		/// <summary>Description of the promotion. Max length 2000 characters. Searchable: priority level 4.</summary>
 		public string Description { get => GetProp<string>("Description"); set => SetProp<string>("Description", value); }
 		/// <summary>Terms, conditions, and other legal jargon.</summary>
@@ -993,9 +1049,11 @@ namespace OrderCloud.SDK
 		/// <summary>ID of the to address.</summary>
 		public string ToAddressID { get => GetProp<string>("ToAddressID"); set => SetProp<string>("ToAddressID", value); }
 		/// <summary>From address of the shipment.</summary>
-		public Address FromAddress { get; internal set; }
+		[ApiReadOnly]
+		public Address FromAddress { get; set; }
 		/// <summary>To address of the shipment.</summary>
-		public Address ToAddress { get; internal set; }
+		[ApiReadOnly]
+		public Address ToAddress { get; set; }
 	}
 	public class Shipment<Txp> : Shipment { public new Txp xp { get; set; } }
 
@@ -1011,24 +1069,31 @@ namespace OrderCloud.SDK
 		[Required]
 		public int QuantityShipped { get => GetProp<int>("QuantityShipped"); set => SetProp<int>("QuantityShipped", value); }
 		/// <summary>Unit price of the shipment item.</summary>
-		public decimal? UnitPrice { get; internal set; }
+		[ApiReadOnly]
+		public decimal? UnitPrice { get; set; }
 		/// <summary>Cost center of the shipment item.</summary>
-		public string CostCenter { get; internal set; }
+		[ApiReadOnly]
+		public string CostCenter { get; set; }
 		/// <summary>Date needed of the shipment item.</summary>
-		public DateTimeOffset? DateNeeded { get; internal set; }
+		[ApiReadOnly]
+		public DateTimeOffset? DateNeeded { get; set; }
 		/// <summary>Product of the shipment item.</summary>
-		public LineItemProduct Product { get; internal set; }
+		[ApiReadOnly]
+		public LineItemProduct Product { get; set; }
 		/// <summary>Specs of the shipment item.</summary>
-		public IReadOnlyList<LineItemSpec> Specs { get; internal set; }
+		[ApiReadOnly]
+		public IReadOnlyList<LineItemSpec> Specs { get; set; }
 		/// <summary>Container for extended (custom) properties of the shipment item.</summary>
-		public dynamic xp { get; internal set; } = new ExpandoObject();
+		[ApiReadOnly]
+		public dynamic xp { get; set; } = new ExpandoObject();
 	}
 	public class ShipmentItem<Txp> : ShipmentItem { public new Txp xp { get; set; } }
 
 	public class Spec : OrderCloudModel
 	{
 		/// <summary>Option count of the spec.</summary>
-		public int OptionCount { get; internal set; }
+		[ApiReadOnly]
+		public int OptionCount { get; set; }
 		/// <summary>ID of the spec. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 3. Sortable: priority level 3.</summary>
 		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
 		/// <summary>List order of the spec. Searchable: priority level 2. Sortable: priority level 1.</summary>
@@ -1168,7 +1233,8 @@ namespace OrderCloud.SDK
 		/// <summary>Container for extended (custom) properties of the user.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 		/// <summary>Available roles of the user.</summary>
-		public IReadOnlyList<string> AvailableRoles { get; internal set; }
+		[ApiReadOnly]
+		public IReadOnlyList<string> AvailableRoles { get; set; }
 	}
 	public class User<Txp> : User { public new Txp xp { get; set; } }
 

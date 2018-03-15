@@ -7,7 +7,7 @@ using Flurl.Http.Configuration;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-// allows test assemblies to use access intrernal members, such as the Request method
+// allows test assemblies to access intrernal members, such as the Request method
 // https://stackoverflow.com/questions/1211707/how-to-access-classes-in-another-assembly-for-unit-testing-purposes
 [assembly: InternalsVisibleTo("OrderCloud.SDK.Tests")]
 [assembly: InternalsVisibleTo("OC.Tests")]

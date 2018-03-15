@@ -47,4 +47,9 @@ namespace OrderCloud.SDK
 	/// </summary>
 	// Using .NET's RequiredAttribute would require taking a dependency on System.ComponentModel.DataAnnotations (out of band). Doesn't seem worth it.
 	public class RequiredAttribute : Attribute { }
+
+	/// <summary>
+	/// Marker interface for properties that are received on GET but cannot be written to on POST/PUT/PATCH. (OrderCloud.io will ignore them if sent.)
+	/// </summary>
+	public class ApiReadOnlyAttribute : Attribute { }
 }

@@ -78,9 +78,26 @@ namespace OrderCloud.SDK.Tests
 			});
 
 			using (var httpTest = new HttpTest()) {
-				var products = await GetClient().Me.ListProductsAsync(accessToken: "some-other-token");
+				var products = await cli.Me.ListProductsAsync(accessToken: "some-other-token");
 				httpTest.ShouldHaveMadeACall().WithHeader("Authorization", "Bearer some-other-token");
 			}
+		}
+
+		[Test]
+		public void doesnt_serialize_api_readonly_properties() {
+			var catalog = new Catalog { Description = "foo", CategoryCount = 99 };
+			var json = OrderCloudClient.Serializer.Serialize(catalog);
+			StringAssert.Contains("Description", json);
+			StringAssert.Contains("foo", json);
+			StringAssert.DoesNotContain("CategoryCount", json);
+			StringAssert.DoesNotContain("99", json);
+		}
+
+		[Test]
+		public void deserializes_api_readonly_properties() {
+			var json = "{\"CategoryCount\":\"678\"}";
+			var catalog = OrderCloudClient.Serializer.Deserialize<Catalog>(json);
+			Assert.AreEqual(678, catalog.CategoryCount);
 		}
 
 		[Test]
