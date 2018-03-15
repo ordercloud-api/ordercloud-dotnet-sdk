@@ -326,6 +326,11 @@ namespace OrderCloud.SDK
 			/// <summary>This ID is already used by the Admin Company.</summary>
 			public const string UnavailableID = "Supplier.UnavailableID";
 		}
+		public static class SpendingAccount
+		{
+			/// <summary>The redemption code specified is already in use.</summary>
+			public const string InvalidRedemptionCode = "SpendingAccount.InvalidRedemptionCode";
+		}
 		public static class User
 		{
 			/// <summary>User not found.</summary>
