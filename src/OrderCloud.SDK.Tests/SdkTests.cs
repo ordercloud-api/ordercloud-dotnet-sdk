@@ -13,22 +13,40 @@ namespace OrderCloud.SDK.Tests
 	public class SdkTests
 	{
 		[Test]
-		public async Task can_have_strongly_typed_xp() {
+		public async Task can_create_strongly_typed_xp() {
 			var ba = new BuyerAddress<CustomXP> {
 				xp = new CustomXP { Foo = "xyz", Bar = 123 }
 			};
 			JsonAssert.AreEquivalent(new { Foo = "xyz", Bar = 123 }, ba.xp);
+		}
+
+		[Test]
+		public async Task can_get_strongly_typed_xp() {
+			var ba = new {
+				Items = new[] {
+					new {
+						xp = new { Foo = "abc", Bar = 123 },
+						ShipFromAddress = new {
+							xp = new { Foo = "xyz", Bar = 456 }
+						}
+					}
+				}
+			};
 
 			using (var httpTest = new HttpTest()) {
 				httpTest
 					.RespondWith("{}") // auth
 					.RespondWithJson(ba);
 
-				var get = await GetClient().Me.GetAddressAsync<CustomXP>("id");
+				var lineItems = await GetClient().LineItems.ListAsync<CustomXP, dynamic, dynamic, CustomXP>(OrderDirection.Incoming, "orderID");
 
-				Assert.IsInstanceOf<BuyerAddress<CustomXP>>(get);
-				Assert.AreEqual("xyz", get.xp.Foo);
-				Assert.AreEqual(123, get.xp.Bar);
+				Assert.IsInstanceOf<ListPage<LineItem<CustomXP, dynamic, dynamic, CustomXP>>>(lineItems);
+				Assert.IsInstanceOf<LineItem<CustomXP, dynamic, dynamic, CustomXP>>(lineItems.Items[0]);
+				Assert.IsInstanceOf<Address<CustomXP>>(lineItems.Items[0].ShipFromAddress);
+				Assert.AreEqual("abc", lineItems.Items[0].xp.Foo);
+				Assert.AreEqual(123, lineItems.Items[0].xp.Bar);
+				Assert.AreEqual("xyz", lineItems.Items[0].ShipFromAddress.xp.Foo);
+				Assert.AreEqual(456, lineItems.Items[0].ShipFromAddress.xp.Bar);
 			}
 		}
 
