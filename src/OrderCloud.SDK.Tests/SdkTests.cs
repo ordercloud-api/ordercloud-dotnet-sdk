@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using Flurl.Http.Testing;
+using Newtonsoft.Json;
 
 namespace OrderCloud.SDK.Tests
 {
@@ -160,6 +161,22 @@ namespace OrderCloud.SDK.Tests
 			StringAssert.Contains(expectedMessage, ex.Message);
 		}
 
+		[Test]
+		public void can_use_stronly_typed_webhook_payload() {
+			var date = DateTimeOffset.UtcNow;
+
+			var json = OrderCloudClient.Serializer.Serialize(new {
+				Response = new { Body = new { DateSubmitted = date } },
+				RouteParams = new { Direction = "Incoming" },
+				ConfigData = new { Foo = "bar" }
+			});
+			var payload = JsonConvert.DeserializeObject<WebhookPayloads.Orders.Submit<MyConfigData>>(json);
+
+			Assert.AreEqual(date, payload.Response.Body.DateSubmitted);
+			Assert.AreEqual(OrderDirection.Incoming, payload.RouteParams.Direction);
+			Assert.AreEqual("bar", payload.ConfigData.Foo);
+		}
+
 		private OrderCloudClient GetClient() => new OrderCloudClient(new OrderCloudClientConfig {
 			ApiUrl = "https://fake.com",
 			AuthUrl = "https://fake.com",
@@ -169,6 +186,12 @@ namespace OrderCloud.SDK.Tests
 		});
 
 		private class CustomXP
+		{
+			public string Foo { get; set; }
+			public int Bar { get; set; }
+		}
+
+		private class MyConfigData
 		{
 			public string Foo { get; set; }
 			public int Bar { get; set; }
