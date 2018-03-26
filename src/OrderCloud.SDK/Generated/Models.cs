@@ -31,6 +31,9 @@ namespace OrderCloud.SDK
 	{
 		/// <summary>ID of the address. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 2.</summary>
 		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
+		/// <summary>Date created of the address. Sortable.</summary>
+		[ApiReadOnly]
+		public DateTimeOffset? DateCreated { get; set; }
 		/// <summary>Company name of the address. Max length 100 characters. Sortable.</summary>
 		public string CompanyName { get => GetProp<string>("CompanyName"); set => SetProp<string>("CompanyName", value); }
 		/// <summary>First name of the address. Max length 100 characters. Searchable: priority level 7. Sortable.</summary>
@@ -140,6 +143,9 @@ namespace OrderCloud.SDK
 		/// <summary>Editable of the address. Searchable: priority level 8.</summary>
 		[ApiReadOnly]
 		public bool Editable { get; set; }
+		/// <summary>Date created of the address. Sortable.</summary>
+		[ApiReadOnly]
+		public DateTimeOffset? DateCreated { get; set; }
 		/// <summary>Company name of the address. Max length 100 characters. Sortable.</summary>
 		public string CompanyName { get => GetProp<string>("CompanyName"); set => SetProp<string>("CompanyName", value); }
 		/// <summary>First name of the address. Max length 100 characters. Searchable: priority level 7. Sortable.</summary>
