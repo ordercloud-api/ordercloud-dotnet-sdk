@@ -39,10 +39,10 @@ namespace OrderCloud.SDK.Tests
 					.RespondWith("{}") // auth
 					.RespondWithJson(ba);
 
-				var lineItems = await GetClient().LineItems.ListAsync<CustomXP, dynamic, dynamic, CustomXP>(OrderDirection.Incoming, "orderID");
+				var lineItems = await GetClient().LineItems.ListAsync<CustomLineItem>(OrderDirection.Incoming, "orderID");
 
-				Assert.IsInstanceOf<ListPage<LineItem<CustomXP, dynamic, dynamic, CustomXP>>>(lineItems);
-				Assert.IsInstanceOf<LineItem<CustomXP, dynamic, dynamic, CustomXP>>(lineItems.Items[0]);
+				Assert.IsInstanceOf<ListPage<CustomLineItem>>(lineItems);
+				Assert.IsInstanceOf<CustomLineItem>(lineItems.Items[0]);
 				Assert.IsInstanceOf<Address<CustomXP>>(lineItems.Items[0].ShipFromAddress);
 				Assert.AreEqual("abc", lineItems.Items[0].xp.Foo);
 				Assert.AreEqual(123, lineItems.Items[0].xp.Bar);
@@ -50,6 +50,8 @@ namespace OrderCloud.SDK.Tests
 				Assert.AreEqual(456, lineItems.Items[0].ShipFromAddress.xp.Bar);
 			}
 		}
+
+		class CustomLineItem : LineItem<CustomXP, dynamic, dynamic, CustomXP> { }
 
 		[Test]
 		public void can_serialize_partial() {
