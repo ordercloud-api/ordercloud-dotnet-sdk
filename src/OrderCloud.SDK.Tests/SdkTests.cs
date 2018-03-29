@@ -179,6 +179,38 @@ namespace OrderCloud.SDK.Tests
 			Assert.AreEqual("bar", payload.ConfigData.Foo);
 		}
 
+		[Test]
+		public void can_use_weakly_typed_webhook_payload() {
+			var date = DateTimeOffset.UtcNow;
+
+			var json = OrderCloudClient.Serializer.Serialize(new {
+				Response = new { Body = new { DateSubmitted = date } },
+				RouteParams = new { Direction = "Incoming" },
+				ConfigData = new { Foo = "bar" }
+			});
+			var payload = JsonConvert.DeserializeObject<WebhookPayload>(json);
+
+			Assert.AreEqual(date, (DateTimeOffset)payload.Response.Body.DateSubmitted);
+			Assert.AreEqual(OrderDirection.Incoming, (OrderDirection)payload.RouteParams.Direction);
+			Assert.AreEqual("bar", (string)payload.ConfigData.Foo);
+		}
+
+		[Test]
+		public void can_use_strongly_typed_webhook_payload_with_weakly_typed_config_data() {
+			var date = DateTimeOffset.UtcNow;
+
+			var json = OrderCloudClient.Serializer.Serialize(new {
+				Response = new { Body = new { DateSubmitted = date } },
+				RouteParams = new { Direction = "Incoming" },
+				ConfigData = new { Foo = "bar" }
+			});
+			var payload = JsonConvert.DeserializeObject<WebhookPayloads.Orders.Submit>(json);
+
+			Assert.AreEqual(date, payload.Response.Body.DateSubmitted);
+			Assert.AreEqual(OrderDirection.Incoming, payload.RouteParams.Direction);
+			Assert.AreEqual("bar", (string)payload.ConfigData.Foo);
+		}
+
 		private OrderCloudClient GetClient() => new OrderCloudClient(new OrderCloudClientConfig {
 			ApiUrl = "https://fake.com",
 			AuthUrl = "https://fake.com",
