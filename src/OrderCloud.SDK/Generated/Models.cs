@@ -1449,61 +1449,61 @@ namespace OrderCloud.SDK
 		public new Txp xp { get; set; }
 	}
 	public class PartialAddress : Address, IPartial { }
-	public class PartialAddress<Txp> : Address, IPartial { }
+	public class PartialAddress<Txp> : PartialAddress { }
 	public class PartialApprovalRule : ApprovalRule, IPartial { }
-	public class PartialApprovalRule<Txp> : ApprovalRule, IPartial { }
+	public class PartialApprovalRule<Txp> : PartialApprovalRule { }
 	public class PartialBuyer : Buyer, IPartial { }
-	public class PartialBuyer<Txp> : Buyer, IPartial { }
+	public class PartialBuyer<Txp> : PartialBuyer { }
 	public class PartialBuyerAddress : BuyerAddress, IPartial { }
-	public class PartialBuyerAddress<Txp> : BuyerAddress, IPartial { }
+	public class PartialBuyerAddress<Txp> : PartialBuyerAddress { }
 	public class PartialBuyerCreditCard : BuyerCreditCard, IPartial { }
-	public class PartialBuyerCreditCard<Txp> : BuyerCreditCard, IPartial { }
+	public class PartialBuyerCreditCard<Txp> : PartialBuyerCreditCard { }
 	public class PartialCatalog : Catalog, IPartial { }
-	public class PartialCatalog<Txp> : Catalog, IPartial { }
+	public class PartialCatalog<Txp> : PartialCatalog { }
 	public class PartialCategory : Category, IPartial { }
-	public class PartialCategory<Txp> : Category, IPartial { }
+	public class PartialCategory<Txp> : PartialCategory { }
 	public class PartialCostCenter : CostCenter, IPartial { }
-	public class PartialCostCenter<Txp> : CostCenter, IPartial { }
+	public class PartialCostCenter<Txp> : PartialCostCenter { }
 	public class PartialCreditCard : CreditCard, IPartial { }
-	public class PartialCreditCard<Txp> : CreditCard, IPartial { }
+	public class PartialCreditCard<Txp> : PartialCreditCard { }
 	public class PartialImpersonationConfig : ImpersonationConfig, IPartial { }
 	public class PartialIncrementor : Incrementor, IPartial { }
 	public class PartialInventory : Inventory, IPartial { }
 	public class PartialLineItem : LineItem, IPartial { }
-	public class PartialLineItem<Txp, TProductXP, TShippingAddressXP, TShipFromAddressXP> : LineItem, IPartial { }
+	public class PartialLineItem<Txp, TProductXP, TShippingAddressXP, TShipFromAddressXP> : PartialLineItem { }
 	public class PartialLineItemProduct : LineItemProduct, IPartial { }
-	public class PartialLineItemProduct<Txp> : LineItemProduct, IPartial { }
+	public class PartialLineItemProduct<Txp> : PartialLineItemProduct { }
 	public class PartialLineItemSpec : LineItemSpec, IPartial { }
 	public class PartialMeBuyer : MeBuyer, IPartial { }
 	public class PartialMeUser : MeUser, IPartial { }
-	public class PartialMeUser<Txp> : MeUser, IPartial { }
+	public class PartialMeUser<Txp> : PartialMeUser { }
 	public class PartialOrder : Order, IPartial { }
-	public class PartialOrder<Txp, TFromUserXP, TBillingAddressXP> : Order, IPartial { }
+	public class PartialOrder<Txp, TFromUserXP, TBillingAddressXP> : PartialOrder { }
 	public class PartialPayment : Payment, IPartial { }
-	public class PartialPayment<Txp> : Payment, IPartial { }
+	public class PartialPayment<Txp> : PartialPayment { }
 	public class PartialPaymentTransaction : PaymentTransaction, IPartial { }
-	public class PartialPaymentTransaction<Txp> : PaymentTransaction, IPartial { }
+	public class PartialPaymentTransaction<Txp> : PartialPaymentTransaction { }
 	public class PartialPriceBreak : PriceBreak, IPartial { }
 	public class PartialPriceSchedule : PriceSchedule, IPartial { }
-	public class PartialPriceSchedule<Txp> : PriceSchedule, IPartial { }
+	public class PartialPriceSchedule<Txp> : PartialPriceSchedule { }
 	public class PartialProduct : Product, IPartial { }
-	public class PartialProduct<Txp> : Product, IPartial { }
+	public class PartialProduct<Txp> : PartialProduct { }
 	public class PartialPromotion : Promotion, IPartial { }
-	public class PartialPromotion<Txp> : Promotion, IPartial { }
+	public class PartialPromotion<Txp> : PartialPromotion { }
 	public class PartialShipment : Shipment, IPartial { }
-	public class PartialShipment<Txp, TFromAddressXP, TToAddressXP> : Shipment, IPartial { }
+	public class PartialShipment<Txp, TFromAddressXP, TToAddressXP> : PartialShipment { }
 	public class PartialSpec : Spec, IPartial { }
-	public class PartialSpec<Txp> : Spec, IPartial { }
+	public class PartialSpec<Txp> : PartialSpec { }
 	public class PartialSpecOption : SpecOption, IPartial { }
-	public class PartialSpecOption<Txp> : SpecOption, IPartial { }
+	public class PartialSpecOption<Txp> : PartialSpecOption { }
 	public class PartialSpendingAccount : SpendingAccount, IPartial { }
-	public class PartialSpendingAccount<Txp> : SpendingAccount, IPartial { }
+	public class PartialSpendingAccount<Txp> : PartialSpendingAccount { }
 	public class PartialSupplier : Supplier, IPartial { }
-	public class PartialSupplier<Txp> : Supplier, IPartial { }
+	public class PartialSupplier<Txp> : PartialSupplier { }
 	public class PartialUser : User, IPartial { }
-	public class PartialUser<Txp> : User, IPartial { }
+	public class PartialUser<Txp> : PartialUser { }
 	public class PartialUserGroup : UserGroup, IPartial { }
-	public class PartialUserGroup<Txp> : UserGroup, IPartial { }
+	public class PartialUserGroup<Txp> : PartialUserGroup { }
 	public class PartialVariant : Variant, IPartial { }
-	public class PartialVariant<Txp> : Variant, IPartial { }
+	public class PartialVariant<Txp> : PartialVariant { }
 }
