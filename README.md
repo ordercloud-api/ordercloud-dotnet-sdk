@@ -9,6 +9,7 @@ The OrderClould.io SDK for .NET is a client library for building solutions targe
 - [Notable Features](#notable-features)
     - [Strongly Typed xp](#strongly-typed-xp)
     - [Strongly Typed Partials](#strongly-typed-partials)
+    - [Builder and Expressions for Complex Queries](#builder-and-expressions-for-complex-queries)
 - [FAQ](#faq)
 - [Supported Platforms](#supported-platforms)
 - [Getting Help](#getting-help)
@@ -114,6 +115,22 @@ await client.Users.PatchAsync(buyerId, userId, new PartialUser { Active = true }
 1. It has all the same strongly-typed properties as `User`; in fact, it inherits from `User`.
 
 2. What makes it different from `User` is how it gets serialized to JSON when the the API call is made. Instead of serializing _all_ properties, it only serializes those that are _explicitly set_. (In this example, `{"Active":true}` is all that's sent in the request body.) This behavior is important to understand - once you set a property, you cannot "remove" it, even by setting it to `null`.
+
+### Builder and Expressions for Complex Queries
+
+Most OrderCloud.io endpoints that return a list allow a set of optional parameters for searching, sorting, filtering, and paging. Like any optional parameters, these can be specified via option method arguments in the SDK. But an alternative pattern with a fluent query builder and strongly-typed expression support is also provided for list endpoints:
+
+```c#
+await Client.Me.ListProductsAsync(opts => opts
+    .SearchFor("foo")
+    .SearchOn(p => p.Name, p => p.Description)
+    .SortBy(p => p.Name)
+    .AddFilter(p => p.Active && p.ShipWeight < 100)
+    .Page(1)
+    .PageSize(100));
+```
+
+More details [here](https://github.com/ordercloud-api/ordercloud-dotnet-sdk/issues/6).
 
 ## FAQ
 
