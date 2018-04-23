@@ -9,7 +9,7 @@ The OrderClould.io SDK for .NET is a client library for building solutions targe
 - [Notable Features](#notable-features)
     - [Strongly Typed xp](#strongly-typed-xp)
     - [Strongly Typed Partials](#strongly-typed-partials)
-    - [Builder and Expressions for Complex Queries](#builder-and-expressions-for-complex-queries)
+    - [Query DSL](#query-dsl)
 - [FAQ](#faq)
 - [Supported Platforms](#supported-platforms)
 - [Getting Help](#getting-help)
@@ -116,9 +116,9 @@ await client.Users.PatchAsync(buyerId, userId, new PartialUser { Active = true }
 
 2. What makes it different from `User` is how it gets serialized to JSON when the the API call is made. Instead of serializing _all_ properties, it only serializes those that are _explicitly set_. (In this example, `{"Active":true}` is all that's sent in the request body.) This behavior is important to understand - once you set a property, you cannot "remove" it, even by setting it to `null`.
 
-### Builder and Expressions for Complex Queries
+### Query DSL
 
-Most OrderCloud.io endpoints that return a list allow a set of optional parameters for searching, sorting, filtering, and paging. Like any optional parameters, these can be specified via option method arguments in the SDK. But an alternative pattern with a fluent query builder and strongly-typed expression support is also provided for list endpoints:
+Most OrderCloud.io endpoints that return a list allow a set of optional parameters for searching, sorting, filtering, and paging. Like any optional parameters, these can be specified via option method arguments in the SDK. But an alternative pattern with a fluent query builder syntax and strongly-typed expression support is also provided for list endpoints:
 
 ```c#
 await Client.Me.ListProductsAsync(opts => opts
