@@ -9,6 +9,7 @@ The OrderClould.io SDK for .NET is a client library for building solutions targe
 - [Notable Features](#notable-features)
     - [Strongly Typed xp](#strongly-typed-xp)
     - [Strongly Typed Partials](#strongly-typed-partials)
+    - [Strongly Typed Webhook Payloads](#strongly-typed-webhook-payloads)
     - [Query DSL](#query-dsl)
 - [FAQ](#faq)
 - [Supported Platforms](#supported-platforms)
@@ -115,6 +116,20 @@ await client.Users.PatchAsync(buyerId, userId, new PartialUser { Active = true }
 1. It has all the same strongly-typed properties as `User`; in fact, it inherits from `User`.
 
 2. What makes it different from `User` is how it gets serialized to JSON when the the API call is made. Instead of serializing _all_ properties, it only serializes those that are _explicitly set_. (In this example, `{"Active":true}` is all that's sent in the request body.) This behavior is important to understand - once you set a property, you cannot "remove" it, even by setting it to `null`.
+
+### Strongly Typed Webhook Payloads
+
+If you're building custom endpoints that respond to OrderCloud.io webhooks, the SDK provides a rich set of models corresponding to the payloads sent in the request body by OrderCloud. In addition to a general-purpose `WebhookPayload` class, there are types corresponding to each specific webhook, with strongly typed `Request`, `Response`, `RouteParams`, and (optionally) a user-specified type for `ConfigData`. These webhook-specific types are nested under `WebhookPayloads.[Resource].[Endpoint]`, mirroring endpoint methods and making them highly discoverable.
+
+```c#
+[Route("webhooks/orders/onsubmit")]
+public Task HandleOrderSubmit([FromBody] WebhookPayloads.Orders.Submit<MyConfigData> payload)
+{
+    ...
+}
+```
+
+See [here](https://github.com/ordercloud-api/ordercloud-dotnet-sdk/issues/11) for more details.
 
 ### Query DSL
 
