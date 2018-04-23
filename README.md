@@ -50,20 +50,22 @@ OrderCloud.io uses OAuth2 for authentication and authorization. In a nutshell, y
 
 2. Use an existing access token. A typical use case is when a user has already authenticated with OrderCloud in a front-end app and you want some custom endpoint to perform actions on behalf of that user. _Do not pass the user's credentials to your custom endpoint_. Instead, pass their token (always over SSL). Every method in the SDK that calls an OrderCloud endpoint takes an optional `accessToken` argument, allowing you to ignore any configured credentials and use the ad-hoc token:
 
-```c#
-await client.Products.GetAsync(id, theUserToken);
-```
+    ```c#
+    await client.Products.GetAsync(id, theUserToken);
+    ```
+ 
+    _Note: If you're using ASP.NET Core to build endpoints that are passed user tokens, have a look at the OrderCloud user authentication extensions provided by [OrderCloud.AzureApp](https://github.com/ordercloud-api/ordercloud-dotnet-sdk-extensions)._
 
 3. Acquire tokens manually. There should be very few use cases where this is necessary, but authenticating manually is possible. (Please, please, _PLEASE_ keep shared secrets and user credentials securly locked down, such as with [Azure Key Vault](https://azure.microsoft.com/en-us/services/key-vault/).)
 
-```c#
-var response = await AuthenticateAsync(clientID, username, password, ApiRole.ProductReader);
-// or
-var response = await AuthenticateAsync(clientID, secret, ApiRole.ProductReader);
+    ```c#
+    var response = await AuthenticateAsync(clientID, username, password, ApiRole.ProductReader);
+    // or
+    var response = await AuthenticateAsync(clientID, secret, ApiRole.ProductReader);
 
-var token = response.AccessToken; // repsonse also includes ExpiresUtc and RefreshToken.
-client.Products.GetAsync(id, token);
-```
+    var token = response.AccessToken; // repsonse also includes ExpiresUtc and RefreshToken.
+    client.Products.GetAsync(id, token);
+    ```
 
 ## Notable Features
 Here are a few niceties that the SDK provides. Features of the OrderCloud.io _platform_ are documented [here](https://developer.ordercloud.io/documentation).
@@ -130,6 +132,8 @@ public Task HandleOrderSubmit([FromBody] WebhookPayloads.Orders.Submit<MyConfigD
 ```
 
 See [here](https://github.com/ordercloud-api/ordercloud-dotnet-sdk/issues/11) for more details.
+
+_Note: If you're using ASP.NET Core to build endpoints that respond to webhooks, have a look at the OrderCloud webhook authentication extensions provided by [OrderCloud.AzureApp](https://github.com/ordercloud-api/ordercloud-dotnet-sdk-extensions)._
 
 ### Query DSL
 
