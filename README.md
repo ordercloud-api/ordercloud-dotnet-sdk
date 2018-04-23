@@ -65,9 +65,17 @@ user.xp.Gender = "male"; // strongly typed!
 This time `Gender` is strongly typed, so you'll get the compile-time checking, Intellisense, autocomplete, etc. that you get with first-class properties. This is also available on calls that GET an object (or list):
 
 ```c#
-var user = await client.Users.GetAsync<MyUserXp>(buyerId, userId);
+var user = await client.Users.GetAsync<User<MyUserXp>>(buyerId, userId);
 Console.WriteLine(user.xp.Gender); // strongly typed!
 ```
+
+A common alternative to the above example is to first define a custom class that _inherits_ from `User<MyUserXp>`:
+
+```c#
+public class MyUser : User<MyUserXp> { }
+```
+
+Now calls to `GetAsync<User<MyUserXp>>(...)` can be simplified to `GetAsync<MyUser>(...)`. This is especially preferable when working with models that have nested models, each with their own custom xp type, which must all be declared on the top-level model. For example: `Order<Txp, TFromUserXP, TBillingAddressXP>`. Declaring those 3 xp types once on a custom `MyOrder` class is far cleaner than declaring them on every call to `GetAsync` or `ListAsync`.
 
 ### Strongly Typed Partials
 
