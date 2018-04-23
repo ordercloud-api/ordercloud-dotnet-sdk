@@ -126,12 +126,13 @@ namespace OrderCloud.SDK
 			.Request(pathSegments)
 			.ConfigureRequest(settings => {
 				settings.BeforeCallAsync = EnsureTokenAsync;
-				settings.OnError = ThrowOcException;
+				settings.OnErrorAsync = ThrowOcExceptionAsync;
 				settings.JsonSerializer = Serializer;
 			});
 
-		private void ThrowOcException(HttpCall call) {
-			var resp = (call.Exception as FlurlHttpException)?.GetResponseJson<ApiErrorResponse>();
+		private async Task ThrowOcExceptionAsync(HttpCall call) {
+			if (!(call.Exception is FlurlHttpException fex)) return;
+			var resp = await fex.GetResponseJsonAsync<ApiErrorResponse>();
 			if (resp != null)
 				throw new OrderCloudException(call.Exception, call.HttpStatus, resp.Errors);
 		}
