@@ -5,6 +5,7 @@
 The OrderClould.io SDK for .NET is a client library for building solutions targeting the [OrderCloud.io](https://developer.ordercloud.io/documentation/) eCommerce platform using C# or other .NET language. Compared to accessing OrderCloud.io's REST API via direct HTTP calls, the SDK aims to greatly improve developer productivity and reduce errors by providing discoverable, strongly typed wrappers for all public endpoints and request/response models.
 
 - [Example](#example)
+- [Authenticating](#authenticating)
 - [Notable Features](#notable-features)
     - [Strongly Typed xp](#strongly-typed-xp)
     - [Strongly Typed Partials](#strongly-typed-partials)
@@ -37,6 +38,29 @@ foreach (var order in orders.Items) {
     Console.WriteLine($"ID: {order.ID}, Total: {order.Total:C}");
 }
 
+```
+
+## Authenticating
+
+OrderCloud.io uses OAuth2 for authentication and authorization. In a nutshell, you provide a set of credentials, acquire a temporary access token, and provide that token in the HTTP headers on subsequent API calls. Using the SDK, you have a few options to simplify this process, depending on the scenario:
+
+1. Configure `OrderClouldClient` with a set of credentials, as in the [example](#example) above. This is ideal for scheduled batch jobs, and you should prefer the client credentials grant (shared secret) flow since this processing isn't usually triggered by or on behalf of a particular user. With this method, you don't need to explicitly authenticate or keep track of access tokens - the SDK will acquire, cache, and refresh tokens implicitly as needed. Just configure the client and start making calls. (And please, please, _PLEASE_ keep shared secrets and user credentials securly locked down, such as with [Azure Key Vault](https://azure.microsoft.com/en-us/services/key-vault/).)
+
+2. Use an existing access token. A typical use case is when a user has already authenticated with OrderCloud in a front-end app and you want some custom endpoint to perform actions on behalf of that user. _Do not pass the user's credentials to your custom endpoint_. Instead, pass their token (always over SSL). Every method in the SDK that calls an OrderCloud endpoint takes an optional `accessToken` argument, allowing you to ignore any configured credentials and use the ad-hoc token:
+
+```c#
+await client.Products.GetAsync(id, theUserToken);
+```
+
+3. Acquire tokens manually. There should be very few use cases where this is necessary, but authenticating manually is possible. (Please, please, _PLEASE_ keep shared secrets and user credentials securly locked down, such as with [Azure Key Vault](https://azure.microsoft.com/en-us/services/key-vault/).)
+
+```c#
+var response = await AuthenticateAsync(clientID, username, password, ApiRole.ProductReader);
+// or
+var response = await AuthenticateAsync(clientID, secret, ApiRole.ProductReader);
+
+var token = response.AccessToken; // repsonse also includes ExpiresUtc and RefreshToken.
+client.Products.GetAsync(id, token);
 ```
 
 ## Notable Features
@@ -92,9 +116,6 @@ await client.Users.PatchAsync(buyerId, userId, new PartialUser { Active = true }
 2. What makes it different from `User` is how it gets serialized to JSON when the the API call is made. Instead of serializing _all_ properties, it only serializes those that are _explicitly set_. (In this example, `{"Active":true}` is all that's sent in the request body.) This behavior is important to understand - once you set a property, you cannot "remove" it, even by setting it to `null`.
 
 ## FAQ
-
-#### How do I authenticate?
-Although `OrderClouldClient` does provide an `AuthenticateAsync` method, you normally don't need to call it explicitly. As long as you've [configured](#example) `OrderClouldClient` with the correct credentials, authorization will be done implicitly upon your first API call, and the access token will be cached, reused, and refreshed as needed.
 
 #### Do I have to use `async`/`await` when calling endpoints?
 Yes. (Isn't it refreshing when the answer isn't always "it depends"?) The SDK uses [Flurl.Http](https://github.com/tmenier/Flurl), which uses `HttpClient`, which does not support synchronous calls (and for good reason). Do _not_ use `.Result` or `.Wait()` on calls made with this SDK, ever. These will block threads and potentially cause deadlocks. In short, [don't block on async code](https://blog.stephencleary.com/2012/07/dont-block-on-async-code.html). Use `await`.
