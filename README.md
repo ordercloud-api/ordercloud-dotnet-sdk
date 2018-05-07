@@ -5,9 +5,12 @@
 The OrderClould.io SDK for .NET is a client library for building solutions targeting the [OrderCloud.io](https://developer.ordercloud.io/documentation/) eCommerce platform using C# or other .NET language. Compared to accessing OrderCloud.io's REST API via direct HTTP calls, the SDK aims to greatly improve developer productivity and reduce errors by providing discoverable, strongly typed wrappers for all public endpoints and request/response models.
 
 - [Example](#example)
+- [Authenticating](#authenticating)
 - [Notable Features](#notable-features)
     - [Strongly Typed xp](#strongly-typed-xp)
     - [Strongly Typed Partials](#strongly-typed-partials)
+    - [Strongly Typed Webhook Payloads](#strongly-typed-webhook-payloads)
+    - [Query DSL](#query-dsl)
 - [FAQ](#faq)
 - [Supported Platforms](#supported-platforms)
 - [Getting Help](#getting-help)
@@ -39,6 +42,31 @@ foreach (var order in orders.Items) {
 
 ```
 
+## Authenticating
+
+OrderCloud.io uses OAuth2 for authentication and authorization. In a nutshell, you provide a set of credentials, acquire a temporary access token, and provide that token in the HTTP headers on subsequent API calls. Using the SDK, you have a few options to simplify this process, depending on the scenario:
+
+1. Configure `OrderClouldClient` with a set of credentials, as in the [example](#example) above. This is ideal for scheduled batch jobs, and you should prefer the client credentials grant (shared secret) flow since this processing isn't usually triggered by or on behalf of a particular user. With this method, you don't need to explicitly authenticate or keep track of access tokens - the SDK will acquire, cache, and refresh tokens implicitly as needed. Just configure the client and start making calls. (And please, please, _PLEASE_ keep shared secrets and user credentials securly locked down, such as with [Azure Key Vault](https://azure.microsoft.com/en-us/services/key-vault/).)
+
+2. Use an existing access token. A typical use case is when a user has already authenticated with OrderCloud in a front-end app and you want some custom endpoint to perform actions on behalf of that user. _Do not pass the user's credentials to your custom endpoint_. Instead, pass their token (always over SSL). Every method in the SDK that calls an OrderCloud endpoint takes an optional `accessToken` argument, allowing you to ignore any configured credentials and use the ad-hoc token:
+
+    ```c#
+    await client.Products.GetAsync(id, theUserToken);
+    ```
+ 
+    _Note: If you're using ASP.NET Core to build endpoints that are passed user tokens, have a look at the OrderCloud user authentication extensions provided by [OrderCloud.AzureApp](https://github.com/ordercloud-api/ordercloud-dotnet-sdk-extensions)._
+
+3. Acquire tokens manually. There should be very few use cases where this is necessary, but authenticating manually is possible. (Please, please, _PLEASE_ keep shared secrets and user credentials securly locked down, such as with [Azure Key Vault](https://azure.microsoft.com/en-us/services/key-vault/).)
+
+    ```c#
+    var response = await AuthenticateAsync(clientID, username, password, ApiRole.ProductReader);
+    // or
+    var response = await AuthenticateAsync(clientID, secret, ApiRole.ProductReader);
+
+    var token = response.AccessToken; // repsonse also includes ExpiresUtc and RefreshToken.
+    client.Products.GetAsync(id, token);
+    ```
+
 ## Notable Features
 Here are a few niceties that the SDK provides. Features of the OrderCloud.io _platform_ are documented [here](https://developer.ordercloud.io/documentation).
 
@@ -65,9 +93,17 @@ user.xp.Gender = "male"; // strongly typed!
 This time `Gender` is strongly typed, so you'll get the compile-time checking, Intellisense, autocomplete, etc. that you get with first-class properties. This is also available on calls that GET an object (or list):
 
 ```c#
-var user = await client.Users.GetAsync<MyUserXp>(buyerId, userId);
+var user = await client.Users.GetAsync<User<MyUserXp>>(buyerId, userId);
 Console.WriteLine(user.xp.Gender); // strongly typed!
 ```
+
+A common alternative to the above example is to first define a custom class that _inherits_ from `User<MyUserXp>`:
+
+```c#
+public class MyUser : User<MyUserXp> { }
+```
+
+Now calls to `GetAsync<User<MyUserXp>>(...)` can be simplified to `GetAsync<MyUser>(...)`. This is especially preferable when working with models that have nested models, each with their own custom xp type, which must all be declared on the top-level model. For example: `Order<Txp, TFromUserXP, TBillingAddressXP>`. Declaring those 3 xp types once on a custom `MyOrder` class is far cleaner than declaring them on every call to `GetAsync` or `ListAsync`.
 
 ### Strongly Typed Partials
 
@@ -83,10 +119,39 @@ await client.Users.PatchAsync(buyerId, userId, new PartialUser { Active = true }
 
 2. What makes it different from `User` is how it gets serialized to JSON when the the API call is made. Instead of serializing _all_ properties, it only serializes those that are _explicitly set_. (In this example, `{"Active":true}` is all that's sent in the request body.) This behavior is important to understand - once you set a property, you cannot "remove" it, even by setting it to `null`.
 
-## FAQ
+### Strongly Typed Webhook Payloads
 
-#### How do I authenticate?
-Although `OrderClouldClient` does provide an `AuthenticateAsync` method, you normally don't need to call it explicitly. As long as you've [configured](#example) `OrderClouldClient` with the correct credentials, authorization will be done implicitly upon your first API call, and the access token will be cached, reused, and refreshed as needed.
+If you're building custom endpoints that respond to OrderCloud.io webhooks, the SDK provides a rich set of models corresponding to the payloads sent in the request body by OrderCloud. In addition to a general-purpose `WebhookPayload` class, there are types corresponding to each specific webhook, with strongly typed `Request`, `Response`, `RouteParams`, and (optionally) a user-specified type for `ConfigData`. These webhook-specific types are nested under `WebhookPayloads.[Resource].[Endpoint]`, mirroring endpoint methods and making them highly discoverable.
+
+```c#
+[Route("webhooks/orders/onsubmit")]
+public Task HandleOrderSubmit([FromBody] WebhookPayloads.Orders.Submit<MyConfigData> payload)
+{
+    ...
+}
+```
+
+See [here](https://github.com/ordercloud-api/ordercloud-dotnet-sdk/issues/11) for more details.
+
+_Note: If you're using ASP.NET Core to build endpoints that respond to webhooks, have a look at the OrderCloud webhook authentication extensions provided by [OrderCloud.AzureApp](https://github.com/ordercloud-api/ordercloud-dotnet-sdk-extensions)._
+
+### Query DSL
+
+Most OrderCloud.io endpoints that return a list allow a set of optional parameters for searching, sorting, filtering, and paging. Like any optional parameters, these can be specified via option method arguments in the SDK. But an alternative pattern with a fluent query builder syntax and strongly-typed expression support is also provided for list endpoints:
+
+```c#
+await Client.Me.ListProductsAsync(opts => opts
+    .SearchFor("foo")
+    .SearchOn(p => p.Name, p => p.Description)
+    .SortBy(p => p.Name)
+    .AddFilter(p => p.Active && p.ShipWeight < 100)
+    .Page(1)
+    .PageSize(100));
+```
+
+More details [here](https://github.com/ordercloud-api/ordercloud-dotnet-sdk/issues/6).
+
+## FAQ
 
 #### Do I have to use `async`/`await` when calling endpoints?
 Yes. (Isn't it refreshing when the answer isn't always "it depends"?) The SDK uses [Flurl.Http](https://github.com/tmenier/Flurl), which uses `HttpClient`, which does not support synchronous calls (and for good reason). Do _not_ use `.Result` or `.Wait()` on calls made with this SDK, ever. These will block threads and potentially cause deadlocks. In short, [don't block on async code](https://blog.stephencleary.com/2012/07/dont-block-on-async-code.html). Use `await`.
