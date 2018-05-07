@@ -40,15 +40,11 @@ namespace OrderCloud.SDK
 
 		/// <summary>
 		/// Sends a token request to the OrderCloud authorization server using the OAuth2 password grant flow.
-		/// Normally you don't need to call this explicitly; it's called implicitly as needed using credentials set in OrderCloudClient.Config,
-		/// and the token is cached for its stated duration.
 		/// </summary>
 		Task<TokenResponse> AuthenticateAsync(string clientID, string username, string password, params ApiRole[] roles);
 
 		/// <summary>
 		/// Sends a token request to the OrderCloud authorization server using the OAuth2 client credentials grant flow.
-		/// Normally you don't need to call this explicitly; it's called implicitly as needed using credentials set in OrderCloudClient.Config,
-		/// and the token is cached for its stated duration.
 		/// </summary>
 		Task<TokenResponse> AuthenticateAsync(string clientID, string clientSecret, params ApiRole[] roles);
 	}
@@ -101,8 +97,8 @@ namespace OrderCloud.SDK
 
 			var req = new OAuthTokenRequestWithPasswordGrant {
 				client_id = clientID,
-				username = Config.Username,
-				password = Config.Password,
+				username = username,
+				password = password,
 				scope = string.Join(" ", roles)
 			};
 			return AuthenticateAsync(req);
@@ -112,7 +108,7 @@ namespace OrderCloud.SDK
 		public Task<TokenResponse> AuthenticateAsync(string clientID, string clientSecret, params ApiRole[] roles) {
 			var req = new OAuthTokenRequestWithClientCredentialsGrant {
 				client_id = clientID,
-				client_secret = Config.ClientSecret,
+				client_secret = clientSecret,
 				scope = string.Join(" ", roles)
 			};
 			return AuthenticateAsync(req);
