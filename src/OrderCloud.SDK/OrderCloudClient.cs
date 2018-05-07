@@ -82,11 +82,12 @@ namespace OrderCloud.SDK
 		public bool IsAuthenticated => TokenResponse?.AccessToken != null && TokenResponse.ExpiresUtc > DateTime.UtcNow;
 
 		/// <inheritdoc/>
-		public Task<TokenResponse> AuthenticateAsync() {
+		public async Task<TokenResponse> AuthenticateAsync() {
 			ValidateConfig();
-			return (Config.GrantType == GrantType.ClientCredentials) ?
+			var authTask = (Config.GrantType == GrantType.ClientCredentials) ?
 				AuthenticateAsync(Config.ClientId, Config.ClientSecret, Config.Roles ?? new ApiRole[0]) :
 				AuthenticateAsync(Config.ClientId, Config.Username, Config.Password, Config.Roles ?? new ApiRole[0]);
+			return TokenResponse = await authTask;
 		}
 
 		/// <inheritdoc/>
@@ -153,7 +154,7 @@ namespace OrderCloud.SDK
 				.ReceiveJson<OAuthTokenResponse>()
 				.ConfigureAwait(false);
 
-			return TokenResponse = new TokenResponse {
+			return new TokenResponse {
 				AccessToken = resp?.access_token,
 				// a bit arbitrary, but trim 30 seconds off the expiration to allow for latency
 				ExpiresUtc = DateTime.UtcNow + TimeSpan.FromSeconds(resp?.expires_in ?? 0) - TimeSpan.FromSeconds(30),
