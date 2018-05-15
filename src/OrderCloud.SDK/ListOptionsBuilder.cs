@@ -76,8 +76,10 @@ namespace OrderCloud.SDK
 		}
 
 		public ListOptions Build() {
-			_opts.SearchOn = string.Join(",", _searchOn);
-			_opts.SortBy = string.Join(",", _sortBy);
+			if (_searchOn.Any())
+				_opts.SearchOn = string.Join(",", _searchOn);
+			if (_sortBy.Any())
+				_opts.SortBy = string.Join(",", _sortBy);
 			return _opts;
 		}
 
