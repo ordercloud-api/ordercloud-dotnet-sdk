@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using System.Net.Http;
 using NUnit.Framework;
 using Flurl.Http.Testing;
 using Newtonsoft.Json;
@@ -122,7 +123,7 @@ namespace OrderCloud.SDK.Tests
 		}
 
 		[Test]
-		public void can_build_list_options() {
+		public void can_build_list_options_flluently() {
 			int a = 10, b = 20;
 
 			var opts = new ListOptionsBuilder<Product<CustomXP>>()
@@ -145,6 +146,21 @@ namespace OrderCloud.SDK.Tests
 			CollectionAssert.Contains(opts.Filters, new KeyValuePair<string, string>("VariantCount", "!<40"));
 			Assert.AreEqual(5, opts.Page);
 			Assert.AreEqual(100, opts.PageSize);
+		}
+
+		[Test] // #24
+		public async Task searchOn_and_sortBy_are_excluded_from_query_when_not_specified() {
+			using (var httpTest = new HttpTest()) {
+				httpTest.RespondWith("{}"); // auth
+
+				await GetClient().Products.ListAsync(opts => opts.SearchFor("something"));
+
+				httpTest.ShouldHaveCalled("*/products")
+					.WithVerb(HttpMethod.Get)
+					.WithQueryParamValue("search", "something")
+					.WithoutQueryParam("searchOn")
+					.WithoutQueryParam("sortBy");
+			}
 		}
 
 		[Test]
