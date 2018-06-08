@@ -227,6 +227,17 @@ namespace OrderCloud.SDK.Tests
 			Assert.AreEqual("bar", (string)payload.ConfigData.Foo);
 		}
 
+		// OrderCloud.io sends empty bodies as empty objects in webhook payloads (#26)
+		[TestCase("{ \"Request\": { \"Body\": {} }, \"Response\": { \"Body\": {} } }")]
+		// but just in case, make sure null and empty string work too
+		[TestCase("{ \"Request\": { \"Body\": null }, \"Response\": { \"Body\": null } }")]
+		[TestCase("{ \"Request\": { \"Body\": \"\" }, \"Response\": { \"Body\": \"\" } }")]
+		public void can_deserialize_empty_request_response_body_in_wehook_payload(string json) {
+			var payload = JsonConvert.DeserializeObject<WebhookPayloads.Addresses.Delete>(json);
+			Assert.IsNotNull(payload?.Request);
+			Assert.IsNotNull(payload?.Response);
+		}
+
 		private OrderCloudClient GetClient() => new OrderCloudClient(new OrderCloudClientConfig {
 			ApiUrl = "https://fake.com",
 			AuthUrl = "https://fake.com",
