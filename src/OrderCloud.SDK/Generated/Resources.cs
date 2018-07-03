@@ -31,6 +31,7 @@ namespace OrderCloud.SDK
 		IShipmentsResource Shipments { get; }
 		ISpecsResource Specs { get; }
 		ISpendingAccountsResource SpendingAccounts { get; }
+		ISupplierAddressesResource SupplierAddresses { get; }
 		ISuppliersResource Suppliers { get; }
 		ISupplierUserGroupsResource SupplierUserGroups { get; }
 		ISupplierUsersResource SupplierUsers { get; }
@@ -3108,6 +3109,89 @@ namespace OrderCloud.SDK
 		Task DeleteAssignmentAsync(string buyerID, string spendingAccountID, string userID = null, string userGroupID = null, string accessToken = null);
 	}
 
+	public interface ISupplierAddressesResource
+	{
+		/// <summary>Get a single supplier address.</summary>
+		/// <param name="supplierID">ID of the supplier.</param>
+		/// <param name="addressID">ID of the address.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<Address> GetAsync(string supplierID, string addressID, string accessToken = null);
+		/// <summary>Get a single supplier address.</summary>
+		/// <param name="supplierID">ID of the supplier.</param>
+		/// <param name="addressID">ID of the address.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TAddress> GetAsync<TAddress>(string supplierID, string addressID, string accessToken = null) where TAddress : Address;
+		/// <summary>Get a list of supplier addresses.</summary>
+		/// <param name="supplierID">ID of the supplier.</param>
+		/// <param name="search">Word or phrase to search for.</param>
+		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
+		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
+		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<Address>> ListAsync(string supplierID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
+		/// <summary>Get a list of supplier addresses.</summary>
+		/// <param name="supplierID">ID of the supplier.</param>
+		/// <param name="search">Word or phrase to search for.</param>
+		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
+		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
+		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<TAddress>> ListAsync<TAddress>(string supplierID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TAddress : Address;
+		/// <summary>Get a list of supplier addresses.</summary>
+		/// <param name="supplierID">ID of the supplier.</param>
+		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<Address>> ListAsync(string supplierID, Action<ListOptionsBuilder<Address>> buildListOpts, string accessToken = null);
+		/// <summary>Get a list of supplier addresses.</summary>
+		/// <param name="supplierID">ID of the supplier.</param>
+		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<TAddress>> ListAsync<TAddress>(string supplierID, Action<ListOptionsBuilder<TAddress>> buildListOpts, string accessToken = null) where TAddress : Address;
+		/// <summary>Create a new supplier address. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <param name="supplierID">ID of the supplier.</param>
+		/// <param name="address">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<Address> CreateAsync(string supplierID, Address address, string accessToken = null);
+		/// <summary>Create a new supplier address. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <param name="supplierID">ID of the supplier.</param>
+		/// <param name="address">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TAddress> CreateAsync<TAddress>(string supplierID, Address address, string accessToken = null) where TAddress : Address;
+		/// <summary>Create or update a supplier address. If an object with the same ID already exists, it will be overwritten.</summary>
+		/// <param name="supplierID">ID of the supplier.</param>
+		/// <param name="addressID">ID of the address.</param>
+		/// <param name="address">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<Address> SaveAsync(string supplierID, string addressID, Address address, string accessToken = null);
+		/// <summary>Create or update a supplier address. If an object with the same ID already exists, it will be overwritten.</summary>
+		/// <param name="supplierID">ID of the supplier.</param>
+		/// <param name="addressID">ID of the address.</param>
+		/// <param name="address">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TAddress> SaveAsync<TAddress>(string supplierID, string addressID, Address address, string accessToken = null) where TAddress : Address;
+		/// <summary>Delete a supplier address.</summary>
+		/// <param name="supplierID">ID of the supplier.</param>
+		/// <param name="addressID">ID of the address.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task DeleteAsync(string supplierID, string addressID, string accessToken = null);
+		/// <summary>Partially update a supplier address.</summary>
+		/// <param name="supplierID">ID of the supplier.</param>
+		/// <param name="addressID">ID of the address.</param>
+		/// <param name="partialAddress">The object that will be partially serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<Address> PatchAsync(string supplierID, string addressID, PartialAddress partialAddress, string accessToken = null);
+		/// <summary>Partially update a supplier address.</summary>
+		/// <param name="supplierID">ID of the supplier.</param>
+		/// <param name="addressID">ID of the address.</param>
+		/// <param name="partialAddress">The object that will be partially serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TAddress> PatchAsync<TAddress>(string supplierID, string addressID, PartialAddress partialAddress, string accessToken = null) where TAddress : Address;
+	}
+
 	public interface ISuppliersResource
 	{
 		/// <summary>Get a single supplier.</summary>
@@ -3610,6 +3694,7 @@ namespace OrderCloud.SDK
 			Shipments = new ShipmentsResource(this);
 			Specs = new SpecsResource(this);
 			SpendingAccounts = new SpendingAccountsResource(this);
+			SupplierAddresses = new SupplierAddressesResource(this);
 			Suppliers = new SuppliersResource(this);
 			SupplierUserGroups = new SupplierUserGroupsResource(this);
 			SupplierUsers = new SupplierUsersResource(this);
@@ -3642,6 +3727,7 @@ namespace OrderCloud.SDK
 		public IShipmentsResource Shipments { get; private set; }
 		public ISpecsResource Specs { get; private set; }
 		public ISpendingAccountsResource SpendingAccounts { get; private set; }
+		public ISupplierAddressesResource SupplierAddresses { get; private set; }
 		public ISuppliersResource Suppliers { get; private set; }
 		public ISupplierUserGroupsResource SupplierUserGroups { get; private set; }
 		public ISupplierUsersResource SupplierUsers { get; private set; }
@@ -4264,6 +4350,24 @@ namespace OrderCloud.SDK
 		public Task<ListPage<SpendingAccountAssignment>> ListAssignmentsAsync(string buyerID, string spendingAccountID = null, string userID = null, string userGroupID = null, PartyType? level = null, int? page = null, int? pageSize = null, string accessToken = null) => Request("v1", "buyers", buyerID, "spendingaccounts", "assignments").WithOAuthBearerToken(accessToken).SetQueryParams(new { spendingAccountID, userID, userGroupID, level, page, pageSize }).GetJsonAsync<ListPage<SpendingAccountAssignment>>();
 		public Task SaveAssignmentAsync(string buyerID, SpendingAccountAssignment spendingAccountAssignment, string accessToken = null) => Request("v1", "buyers", buyerID, "spendingaccounts", "assignments").WithOAuthBearerToken(accessToken).PostJsonAsync(ValidateModel(spendingAccountAssignment));
 		public Task DeleteAssignmentAsync(string buyerID, string spendingAccountID, string userID = null, string userGroupID = null, string accessToken = null) => Request("v1", "buyers", buyerID, "spendingaccounts", spendingAccountID, "assignments").WithOAuthBearerToken(accessToken).SetQueryParams(new { userID, userGroupID }).DeleteAsync();
+	}
+
+	public class SupplierAddressesResource : OrderCloudResource, ISupplierAddressesResource
+	{
+		internal SupplierAddressesResource(OrderCloudClient client) : base(client) { }
+		public Task<Address> GetAsync(string supplierID, string addressID, string accessToken = null) => GetAsync<Address>(supplierID, addressID, accessToken);
+		public Task<TAddress> GetAsync<TAddress>(string supplierID, string addressID, string accessToken = null) where TAddress : Address => Request("v1", "suppliers", supplierID, "addresses", addressID).WithOAuthBearerToken(accessToken).GetJsonAsync<TAddress>();
+		public Task<ListPage<Address>> ListAsync(string supplierID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) => ListAsync<Address>(supplierID, search, searchOn, sortBy, page, pageSize, filters, accessToken);
+		public Task<ListPage<TAddress>> ListAsync<TAddress>(string supplierID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TAddress : Address => Request("v1", "suppliers", supplierID, "addresses").WithOAuthBearerToken(accessToken).SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<TAddress>>();
+		public Task<ListPage<Address>> ListAsync(string supplierID, Action<ListOptionsBuilder<Address>> buildListOpts, string accessToken = null) => ListAsync<Address>(supplierID, buildListOpts, accessToken);
+		public Task<ListPage<TAddress>> ListAsync<TAddress>(string supplierID, Action<ListOptionsBuilder<TAddress>> buildListOpts, string accessToken = null) where TAddress : Address => Request("v1", "suppliers", supplierID, "addresses").WithOAuthBearerToken(accessToken).SetListOptions(buildListOpts).GetJsonAsync<ListPage<TAddress>>();
+		public Task<Address> CreateAsync(string supplierID, Address address, string accessToken = null) => CreateAsync<Address>(supplierID, address, accessToken);
+		public Task<TAddress> CreateAsync<TAddress>(string supplierID, Address address, string accessToken = null) where TAddress : Address => Request("v1", "suppliers", supplierID, "addresses").WithOAuthBearerToken(accessToken).PostJsonAsync(ValidateModel(address)).ReceiveJson<TAddress>();
+		public Task<Address> SaveAsync(string supplierID, string addressID, Address address, string accessToken = null) => SaveAsync<Address>(supplierID, addressID, address, accessToken);
+		public Task<TAddress> SaveAsync<TAddress>(string supplierID, string addressID, Address address, string accessToken = null) where TAddress : Address => Request("v1", "suppliers", supplierID, "addresses", addressID).WithOAuthBearerToken(accessToken).PutJsonAsync(ValidateModel(address)).ReceiveJson<TAddress>();
+		public Task DeleteAsync(string supplierID, string addressID, string accessToken = null) => Request("v1", "suppliers", supplierID, "addresses", addressID).WithOAuthBearerToken(accessToken).DeleteAsync();
+		public Task<Address> PatchAsync(string supplierID, string addressID, PartialAddress partialAddress, string accessToken = null) => PatchAsync<Address>(supplierID, addressID, partialAddress, accessToken);
+		public Task<TAddress> PatchAsync<TAddress>(string supplierID, string addressID, PartialAddress partialAddress, string accessToken = null) where TAddress : Address => Request("v1", "suppliers", supplierID, "addresses", addressID).WithOAuthBearerToken(accessToken).PatchJsonAsync(ValidateModel(partialAddress)).ReceiveJson<TAddress>();
 	}
 
 	public class SuppliersResource : OrderCloudResource, ISuppliersResource
