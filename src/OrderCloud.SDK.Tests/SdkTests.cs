@@ -131,7 +131,8 @@ namespace OrderCloud.SDK.Tests
 				.SearchOn(p => p.Name, p => p.Description)
 				.SortByReverse(p => p.Active)
 				.SortBy(p => p.ID)
-				.AddFilter(p => p.Active && !p.Inventory.Enabled && (p.xp.Foo == "*zing" || p.xp.Foo == "*zang" || p.xp.Foo == "*zong") && p.VariantCount >= (a * 2) + b)
+				.AddFilter(p => p.Active && !p.Inventory.Enabled && (p.xp.Foo == "*zing" || p.xp.Foo == "*zang" || p.xp.Foo == "*zong"))
+				.AddFilter(p => p.VariantCount >= (a * 2) + b)
 				.Page(5)
 				.PageSize(100)
 				.Build();
@@ -148,10 +149,23 @@ namespace OrderCloud.SDK.Tests
 			Assert.AreEqual(100, opts.PageSize);
 		}
 
+		[Test] // #31
+		public void can_add_multiple_filters_same_key() {
+			var expected = "https://fake.com/endpoint?QuantityMultiplier=%3E0&QuantityMultiplier=%3C10";
+
+			var url = GetClient().Request("endpoint").SetListOptions<Product>(opts => opts
+				.AddFilter(p => p.QuantityMultiplier > 0)
+				.AddFilter(p => p.QuantityMultiplier < 10)).Url;
+
+			Assert.AreEqual(expected, url.ToString());
+		}
+
 		[Test] // #24
 		public async Task searchOn_and_sortBy_are_excluded_from_query_when_not_specified() {
 			using (var httpTest = new HttpTest()) {
 				httpTest.RespondWith("{}"); // auth
+
+				await GetClient().Products.ListAsync(opts => opts.AddFilter(p => p.ID != "foo" && p.ID != "bar"));
 
 				await GetClient().Products.ListAsync(opts => opts.SearchFor("something"));
 
