@@ -18,7 +18,11 @@ namespace OrderCloud.SDK
 		    buildListOpts(builder);
 		    var opts = builder.Build();
 
-		    return req.SetListOptions(opts.Search, opts.SearchOn, opts.SortBy, opts.Page, opts.PageSize, opts.Filters);
+		    var filters = opts.Filters
+			    .GroupBy(f => f.Key, f => f.Value)
+			    .Select(g => new { key = g.Key,  value = g });
+
+		    return req.SetListOptions(opts.Search, opts.SearchOn, opts.SortBy, opts.Page, opts.PageSize, filters);
 	    }
 
 	    public static IFlurlRequest SetListOptions(this IFlurlRequest req, string search, string searchOn, string sortBy, int? page, int? pageSize, object filters) {

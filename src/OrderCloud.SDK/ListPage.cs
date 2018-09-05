@@ -41,4 +41,60 @@ namespace OrderCloud.SDK
 		/// </summary>
 		public int[] ItemRange { get; set; }
 	}
+
+	/// <summary>
+	/// Represents one page of a (potentially) larger data set. Includes a Meta.Facets property, primarily useful for faceted navigation
+	/// associated with premium product search.
+	/// </summary>
+	public class ListPageWithFacets<T>
+	{
+		/// <summary>
+		/// Metadata about this ListPage, including page size, total size of the data set, etc.
+		/// </summary>
+		public ListPageMetaWithFacets Meta { get; set; }
+		/// <summary>
+		/// The actual data items contained in this page.
+		/// </summary>
+		public IList<T> Items { get; set; }
+	}
+
+	public class ListPageMetaWithFacets : ListPageMeta
+	{
+		/// <summary>
+		/// Data for building faceted navigation. Currently only relevant populated for premium product search, otherwise null.
+		/// </summary>
+		public IList<ListFacet> Facets { get; set; }
+	}
+
+	public class ListFacet
+	{
+		/// <summary>
+		/// Name of the facet.
+		/// </summary>
+		public string Name { get; set; }
+		/// <summary>
+		/// The field name (or path in dot notation if nested) to the facet value within product.xp.
+		/// </summary>
+		public string XpPath { get; set; }
+		/// <summary>
+		/// Values of the facet.
+		/// </summary>
+		public IList<ListFacetValue> Values { get; set; }
+		/// <summary>
+		/// Container for extended (custom) properties of the facet.
+		/// </summary>
+		public dynamic xp { get; set; }
+	}
+
+	public class ListFacetValue
+	{
+		/// <summary>
+		/// Text of the facet value.
+		/// </summary>
+		public string Value { get; set; }
+		/// <summary>
+		/// Count of items within the current search context that match the facet value.
+		/// </summary>
+		public int Count { get; set; }
+	}
 }

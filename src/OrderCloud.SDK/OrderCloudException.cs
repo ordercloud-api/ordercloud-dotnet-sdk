@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using Flurl.Http;
 
 namespace OrderCloud.SDK
 {
@@ -10,10 +11,15 @@ namespace OrderCloud.SDK
 		public HttpStatusCode? HttpStatus { get; }
 		public ApiError[] Errors { get; }
 
-		public OrderCloudException(Exception innerException, HttpStatusCode? httpStatus, ApiError[] errors) : base(innerException.Message, innerException) {
-			HttpStatus = httpStatus;
-			Errors = errors;
+		internal OrderCloudException(HttpCall call, ApiErrorResponse resp) : base(BuildMessage(call, resp), call.Exception) {
+			HttpStatus = call.HttpStatus;
+			Errors = resp.Errors;
 		}
+
+		private static string BuildMessage(HttpCall call, ApiErrorResponse resp) =>
+			resp?.Errors?.FirstOrDefault()?.Message ??
+			call?.Exception?.Message ??
+			"An unknown error occurred.";
 	}
 
 	public class ApiErrorResponse

@@ -4,7 +4,7 @@ using System.Dynamic;
 
 namespace OrderCloud.SDK
 {
-	public enum ApiRole { FullAccess, GrantForAnyRole, ProductAdmin, ProductReader, InventoryAdmin, ProductAssignmentAdmin, BuyerAdmin, BuyerReader, CategoryAdmin, CategoryReader, AddressAdmin, AddressReader, AdminAddressAdmin, AdminAddressReader, CostCenterAdmin, CostCenterReader, PromotionAdmin, PromotionReader, CreditCardAdmin, CreditCardReader, OrderAdmin, OrderReader, UnsubmittedOrderReader, PriceScheduleAdmin, PriceScheduleReader, SpendingAccountAdmin, SpendingAccountReader, BuyerUserAdmin, BuyerUserReader, UserGroupAdmin, UserGroupReader, ApprovalRuleAdmin, ApprovalRuleReader, AdminUserAdmin, AdminUserReader, AdminUserGroupAdmin, AdminUserGroupReader, MessageConfigAssignmentAdmin, CatalogReader, CatalogAdmin, ShipmentReader, ShipmentAdmin, IncrementorReader, IncrementorAdmin, PasswordReset, SupplierReader, SupplierAdmin, SupplierUserAdmin, SupplierUserReader, SupplierUserGroupAdmin, SupplierUserGroupReader, SupplierAddressAdmin, SupplierAddressReader, MeAdmin, MeXpAdmin, MeAddressAdmin, MeCreditCardAdmin, Shopper, OverrideUnitPrice, OverrideShipping, OverrideTax, SetSecurityProfile, BuyerImpersonation }
+	public enum ApiRole { AddressAdmin, AddressReader, AdminAddressAdmin, AdminAddressReader, AdminUserAdmin, AdminUserGroupAdmin, AdminUserGroupReader, AdminUserReader, ApprovalRuleAdmin, ApprovalRuleReader, BuyerAdmin, BuyerImpersonation, BuyerReader, BuyerUserAdmin, BuyerUserReader, CatalogAdmin, CatalogReader, CategoryAdmin, CategoryReader, CostCenterAdmin, CostCenterReader, CreditCardAdmin, CreditCardReader, FullAccess, IncrementorAdmin, IncrementorReader, InventoryAdmin, MeAddressAdmin, MeAdmin, MeCreditCardAdmin, MessageConfigAssignmentAdmin, MeXpAdmin, OrderAdmin, OrderReader, OverrideShipping, OverrideTax, OverrideUnitPrice, PasswordReset, PriceScheduleAdmin, PriceScheduleReader, ProductAdmin, ProductAssignmentAdmin, ProductFacetAdmin, ProductFacetReader, ProductReader, PromotionAdmin, PromotionReader, SetSecurityProfile, ShipmentAdmin, ShipmentReader, Shopper, SpendingAccountAdmin, SpendingAccountReader, SupplierAddressAdmin, SupplierAddressReader, SupplierAdmin, SupplierReader, SupplierUserAdmin, SupplierUserGroupAdmin, SupplierUserGroupReader, SupplierUserReader, UnsubmittedOrderReader, UserGroupAdmin, UserGroupReader }
 	public enum ApprovalStatus { Pending, Approved, Declined }
 	public enum CommerceRole { Buyer, Seller, Supplier }
 	public enum MessageType { OrderDeclined, OrderSubmitted, ShipmentCreated, ForgottenPassword, OrderSubmittedForYourApproval, OrderSubmittedForApproval, OrderApproved, OrderSubmittedForYourApprovalHasBeenApproved, OrderSubmittedForYourApprovalHasBeenDeclined, NewUserInvitation }
@@ -1067,6 +1067,30 @@ namespace OrderCloud.SDK
 		public string ProductID { get => GetProp<string>("ProductID"); set => SetProp<string>("ProductID", value); }
 	}
 
+	public class ProductFacet : OrderCloudModel
+	{
+		/// <summary>ID of the product facet. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 2.</summary>
+		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
+		/// <summary>Name of the product facet. Required. Max length 100 characters. Searchable: priority level 2. Sortable.</summary>
+		[Required]
+		public string Name { get => GetProp<string>("Name"); set => SetProp<string>("Name", value); }
+		/// <summary>Optional. Identifies full path to xp field used for this facet. If not provided, facet value assumed to be stored at product.xp.{facet ID}.</summary>
+		public string XpPath { get => GetProp<string>("XpPath"); set => SetProp<string>("XpPath", value); }
+		/// <summary>List order of the product facet. Sortable: priority level 1.</summary>
+		public int ListOrder { get => GetProp<int>("ListOrder"); set => SetProp<int>("ListOrder", value); }
+		/// <summary>Minimum count required or a facet value to be returned in list metadata. Default is 1. If you want zero-count values returned, set this to 0.</summary>
+		[Required]
+		public int MinCount { get => GetProp<int>("MinCount", 1); set => SetProp<int>("MinCount", value); }
+		/// <summary>Container for extended (custom) properties of the product facet.</summary>
+		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
+	}
+
+	/// <typeparam name="Txp">Type used as a container for extended properties (xp) of the ProductFacet.</typeparam>
+	public class ProductFacet<Txp> : ProductFacet
+	{
+		public new Txp xp { get; set; }
+	}
+
 	public class Promotion : OrderCloudModel
 	{
 		/// <summary>ID of the promotion. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 2.</summary>
@@ -1488,6 +1512,8 @@ namespace OrderCloud.SDK
 	public class PartialPriceSchedule<Txp> : PartialPriceSchedule { }
 	public class PartialProduct : Product, IPartial { }
 	public class PartialProduct<Txp> : PartialProduct { }
+	public class PartialProductFacet : ProductFacet, IPartial { }
+	public class PartialProductFacet<Txp> : PartialProductFacet { }
 	public class PartialPromotion : Promotion, IPartial { }
 	public class PartialPromotion<Txp> : PartialPromotion { }
 	public class PartialShipment : Shipment, IPartial { }
