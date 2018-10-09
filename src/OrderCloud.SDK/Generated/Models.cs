@@ -559,6 +559,9 @@ namespace OrderCloud.SDK
 		/// <summary>Ship from address of the line item.</summary>
 		[ApiReadOnly]
 		public Address ShipFromAddress { get; set; }
+		/// <summary>ID of the supplier.</summary>
+		[ApiReadOnly]
+		public string SupplierID { get; set; }
 		/// <summary>Specs of the line item.</summary>
 		public IList<LineItemSpec> Specs { get => GetProp<IList<LineItemSpec>>("Specs", new List<LineItemSpec>()); set => SetProp<IList<LineItemSpec>>("Specs", value); }
 		/// <summary>Container for extended (custom) properties of the line item.</summary>
@@ -805,6 +808,9 @@ namespace OrderCloud.SDK
 		/// <summary>Status of the order approval. Sortable. Possible values: Pending, Approved, Declined.</summary>
 		[ApiReadOnly]
 		public ApprovalStatus Status { get; set; }
+		/// <summary>Allow resubmit of the order approval. Sortable.</summary>
+		[ApiReadOnly]
+		public bool AllowResubmit { get; set; }
 		/// <summary>Date created of the order approval. Sortable: priority level 1.</summary>
 		[ApiReadOnly]
 		public DateTimeOffset DateCreated { get; set; }
