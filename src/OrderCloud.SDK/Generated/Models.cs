@@ -4,7 +4,7 @@ using System.Dynamic;
 
 namespace OrderCloud.SDK
 {
-	public enum ApiRole { AddressAdmin, AddressReader, AdminAddressAdmin, AdminAddressReader, AdminUserAdmin, AdminUserGroupAdmin, AdminUserGroupReader, AdminUserReader, ApprovalRuleAdmin, ApprovalRuleReader, BuyerAdmin, BuyerImpersonation, BuyerReader, BuyerUserAdmin, BuyerUserReader, CatalogAdmin, CatalogReader, CategoryAdmin, CategoryReader, CostCenterAdmin, CostCenterReader, CreditCardAdmin, CreditCardReader, FullAccess, IncrementorAdmin, IncrementorReader, InventoryAdmin, MeAddressAdmin, MeAdmin, MeCreditCardAdmin, MessageConfigAssignmentAdmin, MeXpAdmin, OrderAdmin, OrderReader, OverrideShipping, OverrideTax, OverrideUnitPrice, PasswordReset, PriceScheduleAdmin, PriceScheduleReader, ProductAdmin, ProductAssignmentAdmin, ProductFacetAdmin, ProductFacetReader, ProductReader, PromotionAdmin, PromotionReader, SetSecurityProfile, ShipmentAdmin, ShipmentReader, Shopper, SpendingAccountAdmin, SpendingAccountReader, SupplierAddressAdmin, SupplierAddressReader, SupplierAdmin, SupplierReader, SupplierUserAdmin, SupplierUserGroupAdmin, SupplierUserGroupReader, SupplierUserReader, UnsubmittedOrderReader, UserGroupAdmin, UserGroupReader }
+	public enum ApiRole { ApiClientAdmin, ApiClientReader, AddressAdmin, AddressReader, AdminAddressAdmin, AdminAddressReader, AdminUserAdmin, AdminUserGroupAdmin, AdminUserGroupReader, AdminUserReader, ApprovalRuleAdmin, ApprovalRuleReader, BuyerAdmin, BuyerImpersonation, BuyerReader, BuyerUserAdmin, BuyerUserReader, CatalogAdmin, CatalogReader, CategoryAdmin, CategoryReader, CostCenterAdmin, CostCenterReader, CreditCardAdmin, CreditCardReader, FullAccess, IncrementorAdmin, IncrementorReader, InventoryAdmin, MeAddressAdmin, MeAdmin, MeCreditCardAdmin, MessageConfigAssignmentAdmin, MeXpAdmin, OrderAdmin, OrderReader, OverrideShipping, OverrideTax, OverrideUnitPrice, PasswordReset, PriceScheduleAdmin, PriceScheduleReader, ProductAdmin, ProductAssignmentAdmin, ProductFacetAdmin, ProductFacetReader, ProductReader, PromotionAdmin, PromotionReader, SetSecurityProfile, ShipmentAdmin, ShipmentReader, Shopper, SpendingAccountAdmin, SpendingAccountReader, SupplierAddressAdmin, SupplierAddressReader, SupplierAdmin, SupplierReader, SupplierUserAdmin, SupplierUserGroupAdmin, SupplierUserGroupReader, SupplierUserReader, UnsubmittedOrderReader, UserGroupAdmin, UserGroupReader }
 	public enum ApprovalStatus { Pending, Approved, Declined }
 	public enum CommerceRole { Buyer, Seller, Supplier }
 	public enum MessageType { OrderDeclined, OrderSubmitted, ShipmentCreated, ForgottenPassword, OrderSubmittedForYourApproval, OrderSubmittedForApproval, OrderApproved, OrderSubmittedForYourApprovalHasBeenApproved, OrderSubmittedForYourApprovalHasBeenDeclined, NewUserInvitation }
@@ -84,6 +84,59 @@ namespace OrderCloud.SDK
 		public bool IsShipping { get => GetProp<bool>("IsShipping"); set => SetProp<bool>("IsShipping", value); }
 		/// <summary>Is billing of the address assignment.</summary>
 		public bool IsBilling { get => GetProp<bool>("IsBilling"); set => SetProp<bool>("IsBilling", value); }
+	}
+
+	public class ApiClient : OrderCloudModel
+	{
+		/// <summary>ID of the api client.</summary>
+		[ApiReadOnly]
+		public string ID { get; set; }
+		/// <summary>Client secret of the api client.</summary>
+		public string ClientSecret { get => GetProp<string>("ClientSecret"); set => SetProp<string>("ClientSecret", value); }
+		/// <summary>Access token duration of the api client. Required. Must be between 10 and 600.</summary>
+		[Required]
+		public int AccessTokenDuration { get => GetProp<int>("AccessTokenDuration"); set => SetProp<int>("AccessTokenDuration", value); }
+		/// <summary>Active of the api client.</summary>
+		public bool Active { get => GetProp<bool>("Active"); set => SetProp<bool>("Active", value); }
+		/// <summary>App name of the api client. Required. Searchable: priority level 2. Sortable: priority level 2.</summary>
+		[Required]
+		public string AppName { get => GetProp<string>("AppName"); set => SetProp<string>("AppName", value); }
+		/// <summary>Refresh token duration of the api client. Must be between 0 and 43200.</summary>
+		public int RefreshTokenDuration { get => GetProp<int>("RefreshTokenDuration"); set => SetProp<int>("RefreshTokenDuration", value); }
+		/// <summary>Default context user name of the api client. Searchable: priority level 3. Sortable: priority level 3.</summary>
+		public string DefaultContextUserName { get => GetProp<string>("DefaultContextUserName"); set => SetProp<string>("DefaultContextUserName", value); }
+		/// <summary>Container for extended (custom) properties of the api client.</summary>
+		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
+		/// <summary>Allow any buyer of the api client.</summary>
+		public bool AllowAnyBuyer { get => GetProp<bool>("AllowAnyBuyer"); set => SetProp<bool>("AllowAnyBuyer", value); }
+		/// <summary>Allow any supplier of the api client.</summary>
+		public bool AllowAnySupplier { get => GetProp<bool>("AllowAnySupplier"); set => SetProp<bool>("AllowAnySupplier", value); }
+		/// <summary>Allow seller of the api client.</summary>
+		public bool AllowSeller { get => GetProp<bool>("AllowSeller"); set => SetProp<bool>("AllowSeller", value); }
+		/// <summary>Is anon buyer of the api client.</summary>
+		public bool IsAnonBuyer { get => GetProp<bool>("IsAnonBuyer"); set => SetProp<bool>("IsAnonBuyer", value); }
+		/// <summary>Assigned buyer count of the api client.</summary>
+		[ApiReadOnly]
+		public int AssignedBuyerCount { get; set; }
+		/// <summary>Assigned supplier count of the api client.</summary>
+		[ApiReadOnly]
+		public int AssignedSupplierCount { get; set; }
+	}
+
+	/// <typeparam name="Txp">Type used as a container for extended properties (xp) of the ApiClient.</typeparam>
+	public class ApiClient<Txp> : ApiClient
+	{
+		public new Txp xp { get; set; }
+	}
+
+	public class ApiClientAssignment : OrderCloudModel
+	{
+		/// <summary>ID of the api client.</summary>
+		public string ApiClientID { get => GetProp<string>("ApiClientID"); set => SetProp<string>("ApiClientID", value); }
+		/// <summary>ID of the buyer. Sortable: priority level 0.</summary>
+		public string BuyerID { get => GetProp<string>("BuyerID"); set => SetProp<string>("BuyerID", value); }
+		/// <summary>ID of the supplier. Sortable: priority level 1.</summary>
+		public string SupplierID { get => GetProp<string>("SupplierID"); set => SetProp<string>("SupplierID", value); }
 	}
 
 	public class ApprovalRule : OrderCloudModel
@@ -251,8 +304,8 @@ namespace OrderCloud.SDK
 		public string ShipFromAddressID { get => GetProp<string>("ShipFromAddressID"); set => SetProp<string>("ShipFromAddressID", value); }
 		/// <summary>Inventory of the product.</summary>
 		public Inventory Inventory { get => GetProp<Inventory>("Inventory"); set => SetProp<Inventory>("Inventory", value); }
-		/// <summary>ID of the auto forward supplier.</summary>
-		public string AutoForwardSupplierID { get => GetProp<string>("AutoForwardSupplierID"); set => SetProp<string>("AutoForwardSupplierID", value); }
+		/// <summary>ID of the default supplier. Sortable: priority level 4.</summary>
+		public string DefaultSupplierID { get => GetProp<string>("DefaultSupplierID"); set => SetProp<string>("DefaultSupplierID", value); }
 	}
 
 	/// <typeparam name="Txp">Type used as a container for extended properties (xp) of the BuyerProduct.</typeparam>
@@ -682,11 +735,21 @@ namespace OrderCloud.SDK
 		public string MessageConfigDescription { get; set; }
 	}
 
+	public class MeSupplier : OrderCloudModel
+	{
+		/// <summary>ID of the supplier. Can only contain characters Aa-Zz, 0-9, -, and _.</summary>
+		[ApiReadOnly]
+		public string ID { get; set; }
+	}
+
 	public class MeUser : OrderCloudModel
 	{
 		/// <summary>Buyer of the user.</summary>
 		[ApiReadOnly]
 		public MeBuyer Buyer { get; set; }
+		/// <summary>Supplier of the user.</summary>
+		[ApiReadOnly]
+		public MeSupplier Supplier { get; set; }
 		/// <summary>ID of the user. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable.</summary>
 		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
 		/// <summary>Username of the user. Required. Max length 100 characters. Searchable: priority level 2. Sortable: priority level 3.</summary>
@@ -1039,8 +1102,8 @@ namespace OrderCloud.SDK
 		public string ShipFromAddressID { get => GetProp<string>("ShipFromAddressID"); set => SetProp<string>("ShipFromAddressID", value); }
 		/// <summary>Inventory of the product.</summary>
 		public Inventory Inventory { get => GetProp<Inventory>("Inventory"); set => SetProp<Inventory>("Inventory", value); }
-		/// <summary>ID of the auto forward supplier.</summary>
-		public string AutoForwardSupplierID { get => GetProp<string>("AutoForwardSupplierID"); set => SetProp<string>("AutoForwardSupplierID", value); }
+		/// <summary>ID of the default supplier. Sortable: priority level 4.</summary>
+		public string DefaultSupplierID { get => GetProp<string>("DefaultSupplierID"); set => SetProp<string>("DefaultSupplierID", value); }
 	}
 
 	/// <typeparam name="Txp">Type used as a container for extended properties (xp) of the Product.</typeparam>
@@ -1480,6 +1543,8 @@ namespace OrderCloud.SDK
 	}
 	public class PartialAddress : Address, IPartial { }
 	public class PartialAddress<Txp> : PartialAddress { }
+	public class PartialApiClient : ApiClient, IPartial { }
+	public class PartialApiClient<Txp> : PartialApiClient { }
 	public class PartialApprovalRule : ApprovalRule, IPartial { }
 	public class PartialApprovalRule<Txp> : PartialApprovalRule { }
 	public class PartialBuyer : Buyer, IPartial { }
@@ -1505,6 +1570,7 @@ namespace OrderCloud.SDK
 	public class PartialLineItemProduct<Txp> : PartialLineItemProduct { }
 	public class PartialLineItemSpec : LineItemSpec, IPartial { }
 	public class PartialMeBuyer : MeBuyer, IPartial { }
+	public class PartialMeSupplier : MeSupplier, IPartial { }
 	public class PartialMeUser : MeUser, IPartial { }
 	public class PartialMeUser<Txp> : PartialMeUser { }
 	public class PartialOrder : Order, IPartial { }

@@ -10,6 +10,7 @@ namespace OrderCloud.SDK
 		IAdminAddressesResource AdminAddresses { get; }
 		IAdminUserGroupsResource AdminUserGroups { get; }
 		IAdminUsersResource AdminUsers { get; }
+		IApiClientsResource ApiClients { get; }
 		IApprovalRulesResource ApprovalRules { get; }
 		IBuyersResource Buyers { get; }
 		ICatalogsResource Catalogs { get; }
@@ -371,6 +372,98 @@ namespace OrderCloud.SDK
 		/// <param name="partialUser">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TUser> PatchAsync<TUser>(string userID, PartialUser partialUser, string accessToken = null) where TUser : User;
+	}
+
+	public interface IApiClientsResource
+	{
+		/// <summary>Get a single api client.</summary>
+		/// <param name="apiClientID">ID of the api client.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ApiClient> GetAsync(string apiClientID, string accessToken = null);
+		/// <summary>Get a single api client.</summary>
+		/// <param name="apiClientID">ID of the api client.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TApiClient> GetAsync<TApiClient>(string apiClientID, string accessToken = null) where TApiClient : ApiClient;
+		/// <summary>Get a list of api clients.</summary>
+		/// <param name="search">Word or phrase to search for.</param>
+		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
+		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
+		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<ApiClient>> ListAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
+		/// <summary>Get a list of api clients.</summary>
+		/// <param name="search">Word or phrase to search for.</param>
+		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
+		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
+		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<TApiClient>> ListAsync<TApiClient>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TApiClient : ApiClient;
+		/// <summary>Get a list of api clients.</summary>
+		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<ApiClient>> ListAsync(Action<ListOptionsBuilder<ApiClient>> buildListOpts, string accessToken = null);
+		/// <summary>Get a list of api clients.</summary>
+		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<TApiClient>> ListAsync<TApiClient>(Action<ListOptionsBuilder<TApiClient>> buildListOpts, string accessToken = null) where TApiClient : ApiClient;
+		/// <summary>Create a new api client. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <param name="apiClient">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ApiClient> CreateAsync(ApiClient apiClient, string accessToken = null);
+		/// <summary>Create a new api client. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <param name="apiClient">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TApiClient> CreateAsync<TApiClient>(ApiClient apiClient, string accessToken = null) where TApiClient : ApiClient;
+		/// <summary>Create or update an api client. If an object with the same ID already exists, it will be overwritten.</summary>
+		/// <param name="apiClientID">ID of the api client.</param>
+		/// <param name="apiClient">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ApiClient> SaveAsync(string apiClientID, ApiClient apiClient, string accessToken = null);
+		/// <summary>Create or update an api client. If an object with the same ID already exists, it will be overwritten.</summary>
+		/// <param name="apiClientID">ID of the api client.</param>
+		/// <param name="apiClient">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TApiClient> SaveAsync<TApiClient>(string apiClientID, ApiClient apiClient, string accessToken = null) where TApiClient : ApiClient;
+		/// <summary>Delete an api client.</summary>
+		/// <param name="apiClientID">ID of the api client.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task DeleteAsync(string apiClientID, string accessToken = null);
+		/// <summary>Partially update an api client.</summary>
+		/// <param name="apiClientID">ID of the api client.</param>
+		/// <param name="partialApiClient">The object that will be partially serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ApiClient> PatchAsync(string apiClientID, PartialApiClient partialApiClient, string accessToken = null);
+		/// <summary>Partially update an api client.</summary>
+		/// <param name="apiClientID">ID of the api client.</param>
+		/// <param name="partialApiClient">The object that will be partially serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TApiClient> PatchAsync<TApiClient>(string apiClientID, PartialApiClient partialApiClient, string accessToken = null) where TApiClient : ApiClient;
+		/// <summary>Get a list of api client assignments.</summary>
+		/// <param name="apiClientID">ID of the api client.</param>
+		/// <param name="buyerID">ID of the buyer.</param>
+		/// <param name="supplierID">ID of the supplier.</param>
+		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<ApiClientAssignment>> ListAssignmentsAsync(string apiClientID = null, string buyerID = null, string supplierID = null, int page = 1, int pageSize = 20, string accessToken = null);
+		/// <summary>Create or update an api client assignment.</summary>
+		/// <param name="apiClientAssignment">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task SaveAssignmentAsync(ApiClientAssignment apiClientAssignment, string accessToken = null);
+		/// <summary>Delete an api client buyer assignment.</summary>
+		/// <param name="apiClientID">ID of the api client.</param>
+		/// <param name="buyerID">ID of the buyer.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task DeleteBuyerAssignmentAsync(string apiClientID, string buyerID, string accessToken = null);
+		/// <summary>Delete an api client supplier assignment.</summary>
+		/// <param name="apiClientID">ID of the api client.</param>
+		/// <param name="supplierID">ID of the supplier.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task DeleteSupplierAssignmentAsync(string apiClientID, string supplierID, string accessToken = null);
 	}
 
 	public interface IApprovalRulesResource
@@ -3745,6 +3838,7 @@ namespace OrderCloud.SDK
 			AdminAddresses = new AdminAddressesResource(this);
 			AdminUserGroups = new AdminUserGroupsResource(this);
 			AdminUsers = new AdminUsersResource(this);
+			ApiClients = new ApiClientsResource(this);
 			ApprovalRules = new ApprovalRulesResource(this);
 			Buyers = new BuyersResource(this);
 			Catalogs = new CatalogsResource(this);
@@ -3779,6 +3873,7 @@ namespace OrderCloud.SDK
 		public IAdminAddressesResource AdminAddresses { get; private set; }
 		public IAdminUserGroupsResource AdminUserGroups { get; private set; }
 		public IAdminUsersResource AdminUsers { get; private set; }
+		public IApiClientsResource ApiClients { get; private set; }
 		public IApprovalRulesResource ApprovalRules { get; private set; }
 		public IBuyersResource Buyers { get; private set; }
 		public ICatalogsResource Catalogs { get; private set; }
@@ -3885,6 +3980,28 @@ namespace OrderCloud.SDK
 		public Task DeleteAsync(string userID, string accessToken = null) => Request("v1", "adminusers", userID).WithOAuthBearerToken(accessToken).DeleteAsync();
 		public Task<User> PatchAsync(string userID, PartialUser partialUser, string accessToken = null) => PatchAsync<User>(userID, partialUser, accessToken);
 		public Task<TUser> PatchAsync<TUser>(string userID, PartialUser partialUser, string accessToken = null) where TUser : User => Request("v1", "adminusers", userID).WithOAuthBearerToken(accessToken).PatchJsonAsync(ValidateModel(partialUser)).ReceiveJson<TUser>();
+	}
+
+	public class ApiClientsResource : OrderCloudResource, IApiClientsResource
+	{
+		internal ApiClientsResource(OrderCloudClient client) : base(client) { }
+		public Task<ApiClient> GetAsync(string apiClientID, string accessToken = null) => GetAsync<ApiClient>(apiClientID, accessToken);
+		public Task<TApiClient> GetAsync<TApiClient>(string apiClientID, string accessToken = null) where TApiClient : ApiClient => Request("v1", "apiclients", apiClientID).WithOAuthBearerToken(accessToken).GetJsonAsync<TApiClient>();
+		public Task<ListPage<ApiClient>> ListAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) => ListAsync<ApiClient>(search, searchOn, sortBy, page, pageSize, filters, accessToken);
+		public Task<ListPage<TApiClient>> ListAsync<TApiClient>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TApiClient : ApiClient => Request("v1", "apiclients").WithOAuthBearerToken(accessToken).SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<TApiClient>>();
+		public Task<ListPage<ApiClient>> ListAsync(Action<ListOptionsBuilder<ApiClient>> buildListOpts, string accessToken = null) => ListAsync<ApiClient>(buildListOpts, accessToken);
+		public Task<ListPage<TApiClient>> ListAsync<TApiClient>(Action<ListOptionsBuilder<TApiClient>> buildListOpts, string accessToken = null) where TApiClient : ApiClient => Request("v1", "apiclients").WithOAuthBearerToken(accessToken).SetListOptions(buildListOpts).GetJsonAsync<ListPage<TApiClient>>();
+		public Task<ApiClient> CreateAsync(ApiClient apiClient, string accessToken = null) => CreateAsync<ApiClient>(apiClient, accessToken);
+		public Task<TApiClient> CreateAsync<TApiClient>(ApiClient apiClient, string accessToken = null) where TApiClient : ApiClient => Request("v1", "apiclients").WithOAuthBearerToken(accessToken).PostJsonAsync(ValidateModel(apiClient)).ReceiveJson<TApiClient>();
+		public Task<ApiClient> SaveAsync(string apiClientID, ApiClient apiClient, string accessToken = null) => SaveAsync<ApiClient>(apiClientID, apiClient, accessToken);
+		public Task<TApiClient> SaveAsync<TApiClient>(string apiClientID, ApiClient apiClient, string accessToken = null) where TApiClient : ApiClient => Request("v1", "apiclients", apiClientID).WithOAuthBearerToken(accessToken).PutJsonAsync(ValidateModel(apiClient)).ReceiveJson<TApiClient>();
+		public Task DeleteAsync(string apiClientID, string accessToken = null) => Request("v1", "apiclients", apiClientID).WithOAuthBearerToken(accessToken).DeleteAsync();
+		public Task<ApiClient> PatchAsync(string apiClientID, PartialApiClient partialApiClient, string accessToken = null) => PatchAsync<ApiClient>(apiClientID, partialApiClient, accessToken);
+		public Task<TApiClient> PatchAsync<TApiClient>(string apiClientID, PartialApiClient partialApiClient, string accessToken = null) where TApiClient : ApiClient => Request("v1", "apiclients", apiClientID).WithOAuthBearerToken(accessToken).PatchJsonAsync(ValidateModel(partialApiClient)).ReceiveJson<TApiClient>();
+		public Task<ListPage<ApiClientAssignment>> ListAssignmentsAsync(string apiClientID = null, string buyerID = null, string supplierID = null, int page = 1, int pageSize = 20, string accessToken = null) => Request("v1", "apiclients", "assignments").WithOAuthBearerToken(accessToken).SetQueryParams(new { apiClientID, buyerID, supplierID, page, pageSize }).GetJsonAsync<ListPage<ApiClientAssignment>>();
+		public Task SaveAssignmentAsync(ApiClientAssignment apiClientAssignment, string accessToken = null) => Request("v1", "apiclients", "assignments").WithOAuthBearerToken(accessToken).PostJsonAsync(ValidateModel(apiClientAssignment));
+		public Task DeleteBuyerAssignmentAsync(string apiClientID, string buyerID, string accessToken = null) => Request("v1", "buyers", buyerID, "ApiClients", "Assignments", apiClientID).WithOAuthBearerToken(accessToken).DeleteAsync();
+		public Task DeleteSupplierAssignmentAsync(string apiClientID, string supplierID, string accessToken = null) => Request("v1", "suppliers", supplierID, "ApiClients", "Assignments", apiClientID).WithOAuthBearerToken(accessToken).DeleteAsync();
 	}
 
 	public class ApprovalRulesResource : OrderCloudResource, IApprovalRulesResource
