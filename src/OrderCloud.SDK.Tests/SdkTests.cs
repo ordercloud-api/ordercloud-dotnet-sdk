@@ -15,7 +15,7 @@ namespace OrderCloud.SDK.Tests
 	public class SdkTests
 	{
 		[Test]
-		public async Task can_create_strongly_typed_xp() {
+		public void can_create_strongly_typed_xp() {
 			var ba = new BuyerAddress<CustomXP> {
 				xp = new CustomXP { Foo = "xyz", Bar = 123 }
 			};

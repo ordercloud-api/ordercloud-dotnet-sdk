@@ -253,6 +253,88 @@ namespace OrderCloud.SDK
 			[SentOn("PATCH", "v1/adminusers/{userID}")]
 			public class Patch<TConfigData> : WebhookPayload<User, User, Patch.PatchRouteParams, TConfigData> { }
 		}
+		public static class ApiClients
+		{
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/apiclients.</summary>
+			[SentOn("POST", "v1/apiclients")]
+			public class Create : WebhookPayload<ApiClient, ApiClient, object, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/apiclients, with strongly typed ConfigData.</summary>
+			[SentOn("POST", "v1/apiclients")]
+			public class Create<TConfigData> : WebhookPayload<ApiClient, ApiClient, object, TConfigData> { }
+			/// <summary>Webhook payload sent by OrderCloud on PUT v1/apiclients/{apiClientID}.</summary>
+			[SentOn("PUT", "v1/apiclients/{apiClientID}")]
+			public class Save : WebhookPayload<ApiClient, ApiClient, Save.SaveRouteParams, dynamic>
+			{
+				/// <summary>Type used to represent route parameter name/value pairs for v1/apiclients/{apiClientID}.</summary>
+				public class SaveRouteParams
+				{
+					public string ApiClientID { get; set; }
+				}
+			}
+			/// <summary>Webhook payload sent by OrderCloud on PUT v1/apiclients/{apiClientID}, with strongly typed ConfigData.</summary>
+			[SentOn("PUT", "v1/apiclients/{apiClientID}")]
+			public class Save<TConfigData> : WebhookPayload<ApiClient, ApiClient, Save.SaveRouteParams, TConfigData> { }
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/apiclients/{apiClientID}.</summary>
+			[SentOn("DELETE", "v1/apiclients/{apiClientID}")]
+			public class Delete : WebhookPayload<object, object, Delete.DeleteRouteParams, dynamic>
+			{
+				/// <summary>Type used to represent route parameter name/value pairs for v1/apiclients/{apiClientID}.</summary>
+				public class DeleteRouteParams
+				{
+					public string ApiClientID { get; set; }
+				}
+			}
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/apiclients/{apiClientID}, with strongly typed ConfigData.</summary>
+			[SentOn("DELETE", "v1/apiclients/{apiClientID}")]
+			public class Delete<TConfigData> : WebhookPayload<object, object, Delete.DeleteRouteParams, TConfigData> { }
+			/// <summary>Webhook payload sent by OrderCloud on PATCH v1/apiclients/{apiClientID}.</summary>
+			[SentOn("PATCH", "v1/apiclients/{apiClientID}")]
+			public class Patch : WebhookPayload<ApiClient, ApiClient, Patch.PatchRouteParams, dynamic>
+			{
+				/// <summary>Type used to represent route parameter name/value pairs for v1/apiclients/{apiClientID}.</summary>
+				public class PatchRouteParams
+				{
+					public string ApiClientID { get; set; }
+				}
+			}
+			/// <summary>Webhook payload sent by OrderCloud on PATCH v1/apiclients/{apiClientID}, with strongly typed ConfigData.</summary>
+			[SentOn("PATCH", "v1/apiclients/{apiClientID}")]
+			public class Patch<TConfigData> : WebhookPayload<ApiClient, ApiClient, Patch.PatchRouteParams, TConfigData> { }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/apiclients/assignments.</summary>
+			[SentOn("POST", "v1/apiclients/assignments")]
+			public class SaveAssignment : WebhookPayload<ApiClientAssignment, object, object, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/apiclients/assignments, with strongly typed ConfigData.</summary>
+			[SentOn("POST", "v1/apiclients/assignments")]
+			public class SaveAssignment<TConfigData> : WebhookPayload<ApiClientAssignment, object, object, TConfigData> { }
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/buyers/{buyerID}/ApiClients/Assignments/{apiClientID}.</summary>
+			[SentOn("DELETE", "v1/buyers/{buyerID}/ApiClients/Assignments/{apiClientID}")]
+			public class DeleteBuyerAssignment : WebhookPayload<object, object, DeleteBuyerAssignment.DeleteBuyerAssignmentRouteParams, dynamic>
+			{
+				/// <summary>Type used to represent route parameter name/value pairs for v1/buyers/{buyerID}/ApiClients/Assignments/{apiClientID}.</summary>
+				public class DeleteBuyerAssignmentRouteParams
+				{
+					public string ApiClientID { get; set; }
+					public string BuyerID { get; set; }
+				}
+			}
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/buyers/{buyerID}/ApiClients/Assignments/{apiClientID}, with strongly typed ConfigData.</summary>
+			[SentOn("DELETE", "v1/buyers/{buyerID}/ApiClients/Assignments/{apiClientID}")]
+			public class DeleteBuyerAssignment<TConfigData> : WebhookPayload<object, object, DeleteBuyerAssignment.DeleteBuyerAssignmentRouteParams, TConfigData> { }
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/suppliers/{supplierID}/ApiClients/Assignments/{apiClientID}.</summary>
+			[SentOn("DELETE", "v1/suppliers/{supplierID}/ApiClients/Assignments/{apiClientID}")]
+			public class DeleteSupplierAssignment : WebhookPayload<object, object, DeleteSupplierAssignment.DeleteSupplierAssignmentRouteParams, dynamic>
+			{
+				/// <summary>Type used to represent route parameter name/value pairs for v1/suppliers/{supplierID}/ApiClients/Assignments/{apiClientID}.</summary>
+				public class DeleteSupplierAssignmentRouteParams
+				{
+					public string ApiClientID { get; set; }
+					public string SupplierID { get; set; }
+				}
+			}
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/suppliers/{supplierID}/ApiClients/Assignments/{apiClientID}, with strongly typed ConfigData.</summary>
+			[SentOn("DELETE", "v1/suppliers/{supplierID}/ApiClients/Assignments/{apiClientID}")]
+			public class DeleteSupplierAssignment<TConfigData> : WebhookPayload<object, object, DeleteSupplierAssignment.DeleteSupplierAssignmentRouteParams, TConfigData> { }
+		}
 		public static class ApprovalRules
 		{
 			/// <summary>Webhook payload sent by OrderCloud on POST v1/buyers/{buyerID}/approvalrules.</summary>

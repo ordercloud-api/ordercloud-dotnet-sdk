@@ -298,7 +298,7 @@ namespace OrderCloud.SDK
 		}
 		public static class Seller
 		{
-			/// <summary>AutoForwardingUserID must be set on Seller, or AutoForwardSupplierID cannot be set on any Products.</summary>
+			/// <summary>AutoForwardingUserID must be set on Seller, or AutoForward cannot be set on any Products.</summary>
 			public const string AutoForwardingUserRequired = "Seller.AutoForwardingUserRequired";
 			/// <summary>Feature requires subscription to Premium Search. Please contact your sales rep.</summary>
 			public const string RequiresPremiumSearch = "Seller.RequiresPremiumSearch";
