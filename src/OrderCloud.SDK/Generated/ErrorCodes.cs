@@ -59,8 +59,6 @@ namespace OrderCloud.SDK
 		{
 			/// <summary>Buyer ID is require when API Client is for Anonymous Shopping.</summary>
 			public const string RequiredIDWhenAnon = "Buyer.RequiredIDWhenAnon";
-			/// <summary>This ID is already used by the Admin Company.</summary>
-			public const string UnavailableID = "Buyer.UnavailableID";
 			/// <summary>User was not found in this Buyer company.</summary>
 			public const string UserNotFound = "Buyer.UserNotFound";
 			/// <summary>You must provide the ID of the Buyer User you are creating the order on behalf of.</summary>
@@ -298,7 +296,7 @@ namespace OrderCloud.SDK
 		}
 		public static class Seller
 		{
-			/// <summary>AutoForwardingUserID must be set on Seller, or AutoForwardSupplierID cannot be set on any Products.</summary>
+			/// <summary>AutoForwardingUserID must be set on Seller, or AutoForward cannot be set on any Products.</summary>
 			public const string AutoForwardingUserRequired = "Seller.AutoForwardingUserRequired";
 			/// <summary>Feature requires subscription to Premium Search. Please contact your sales rep.</summary>
 			public const string RequiresPremiumSearch = "Seller.RequiresPremiumSearch";
@@ -322,11 +320,6 @@ namespace OrderCloud.SDK
 			public const string CannotModifyNotFound = "ShippingAddress.CannotModifyNotFound";
 			/// <summary>Cannot PATCH a shipping address that was set by ID. Either PATCH the saved address at /addresses/{{id}}, or PUT a complete address at /shipto.</summary>
 			public const string CannotPatchSetByID = "ShippingAddress.CannotPatchSetByID";
-		}
-		public static class Supplier
-		{
-			/// <summary>This ID is already used by the Admin Company.</summary>
-			public const string UnavailableID = "Supplier.UnavailableID";
 		}
 		public static class SpendingAccount
 		{
