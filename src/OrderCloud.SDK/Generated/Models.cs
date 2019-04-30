@@ -4,7 +4,7 @@ using System.Dynamic;
 
 namespace OrderCloud.SDK
 {
-	public enum ApiRole { ApiClientAdmin, ApiClientReader, AddressAdmin, AddressReader, AdminAddressAdmin, AdminAddressReader, AdminUserAdmin, AdminUserGroupAdmin, AdminUserGroupReader, AdminUserReader, ApprovalRuleAdmin, ApprovalRuleReader, BuyerAdmin, BuyerImpersonation, BuyerReader, BuyerUserAdmin, BuyerUserReader, CatalogAdmin, CatalogReader, CategoryAdmin, CategoryReader, CostCenterAdmin, CostCenterReader, CreditCardAdmin, CreditCardReader, FullAccess, IncrementorAdmin, IncrementorReader, InventoryAdmin, MeAddressAdmin, MeAdmin, MeCreditCardAdmin, MessageConfigAssignmentAdmin, MeXpAdmin, OrderAdmin, OrderReader, OverrideShipping, OverrideTax, OverrideUnitPrice, PasswordReset, PriceScheduleAdmin, PriceScheduleReader, ProductAdmin, ProductAssignmentAdmin, ProductFacetAdmin, ProductFacetReader, ProductReader, PromotionAdmin, PromotionReader, SetSecurityProfile, ShipmentAdmin, ShipmentReader, Shopper, SpendingAccountAdmin, SpendingAccountReader, SupplierAddressAdmin, SupplierAddressReader, SupplierAdmin, SupplierReader, SupplierUserAdmin, SupplierUserGroupAdmin, SupplierUserGroupReader, SupplierUserReader, UnsubmittedOrderReader, UserGroupAdmin, UserGroupReader }
+	public enum ApiRole { ApiClientAdmin, ApiClientReader, AddressAdmin, AddressReader, AdminAddressAdmin, AdminAddressReader, AdminUserAdmin, AdminUserGroupAdmin, AdminUserGroupReader, AdminUserReader, ApprovalRuleAdmin, ApprovalRuleReader, BuyerAdmin, BuyerImpersonation, BuyerReader, BuyerUserAdmin, BuyerUserReader, CatalogAdmin, CatalogReader, CategoryAdmin, CategoryReader, CostCenterAdmin, CostCenterReader, CreditCardAdmin, CreditCardReader, FullAccess, IncrementorAdmin, IncrementorReader, InventoryAdmin, MeAddressAdmin, MeAdmin, MeCreditCardAdmin, MessageConfigAssignmentAdmin, MeXpAdmin, OrderAdmin, OrderReader, OverrideShipping, OverrideTax, OverrideUnitPrice, PasswordReset, PriceScheduleAdmin, PriceScheduleReader, ProductAdmin, ProductAssignmentAdmin, ProductFacetAdmin, ProductFacetReader, ProductReader, PromotionAdmin, PromotionReader, SetSecurityProfile, ShipmentAdmin, ShipmentReader, Shopper, SpendingAccountAdmin, SpendingAccountReader, SupplierAddressAdmin, SupplierAddressReader, SupplierAdmin, SupplierReader, SupplierUserAdmin, SupplierUserGroupAdmin, SupplierUserGroupReader, SupplierUserReader, UnsubmittedOrderReader, UserGroupAdmin, UserGroupReader, OpenIDConnectReader, OpenIDConnectAdmin, MessageSenderReader, MessageSenderAdmin }
 	public enum ApprovalStatus { Pending, Approved, Declined }
 	public enum CommerceRole { Buyer, Seller, Supplier }
 	public enum MessageType { OrderDeclined, OrderSubmitted, ShipmentCreated, ForgottenPassword, OrderSubmittedForYourApproval, OrderSubmittedForApproval, OrderApproved, OrderSubmittedForYourApprovalHasBeenApproved, OrderSubmittedForYourApprovalHasBeenDeclined, NewUserInvitation }
@@ -304,7 +304,7 @@ namespace OrderCloud.SDK
 		public string ShipFromAddressID { get => GetProp<string>("ShipFromAddressID"); set => SetProp<string>("ShipFromAddressID", value); }
 		/// <summary>Inventory of the product.</summary>
 		public Inventory Inventory { get => GetProp<Inventory>("Inventory"); set => SetProp<Inventory>("Inventory", value); }
-		/// <summary>ID of the default supplier. Sortable: priority level 4.</summary>
+		/// <summary>ID of the default supplier.</summary>
 		public string DefaultSupplierID { get => GetProp<string>("DefaultSupplierID"); set => SetProp<string>("DefaultSupplierID", value); }
 	}
 
@@ -606,6 +606,9 @@ namespace OrderCloud.SDK
 		/// <summary>Product of the line item.</summary>
 		[ApiReadOnly]
 		public LineItemProduct Product { get; set; }
+		/// <summary>Variant of the line item.</summary>
+		[ApiReadOnly]
+		public LineItemVariant Variant { get; set; }
 		/// <summary>Shipping address of the line item.</summary>
 		[ApiReadOnly]
 		public Address ShippingAddress { get; set; }
@@ -623,12 +626,14 @@ namespace OrderCloud.SDK
 
 	/// <typeparam name="Txp">Type used as a container for extended properties (xp) of the LineItem.</typeparam>
 	/// <typeparam name="TProductXP">Type used as a container for xp of the nested Product. If weakly typed or unneeded, specify dynamic.</typeparam>
+	/// <typeparam name="TVariantXP">Type used as a container for xp of the nested Variant. If weakly typed or unneeded, specify dynamic.</typeparam>
 	/// <typeparam name="TShippingAddressXP">Type used as a container for xp of the nested ShippingAddress. If weakly typed or unneeded, specify dynamic.</typeparam>
 	/// <typeparam name="TShipFromAddressXP">Type used as a container for xp of the nested ShipFromAddress. If weakly typed or unneeded, specify dynamic.</typeparam>
-	public class LineItem<Txp, TProductXP, TShippingAddressXP, TShipFromAddressXP> : LineItem
+	public class LineItem<Txp, TProductXP, TVariantXP, TShippingAddressXP, TShipFromAddressXP> : LineItem
 	{
 		public new Txp xp { get; set; }
 		public new LineItemProduct<TProductXP> Product { get; set; }
+		public new LineItemVariant<TVariantXP> Variant { get; set; }
 		public new Address<TShippingAddressXP> ShippingAddress { get; set; }
 		public new Address<TShipFromAddressXP> ShipFromAddress { get; set; }
 	}
@@ -675,6 +680,32 @@ namespace OrderCloud.SDK
 		public string Value { get => GetProp<string>("Value"); set => SetProp<string>("Value", value); }
 	}
 
+	public class LineItemVariant : OrderCloudModel
+	{
+		/// <summary>ID of the line item variant. Can only contain characters Aa-Zz, 0-9, -, and _.</summary>
+		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
+		/// <summary>Name of the line item variant.</summary>
+		public string Name { get => GetProp<string>("Name"); set => SetProp<string>("Name", value); }
+		/// <summary>Description of the line item variant.</summary>
+		public string Description { get => GetProp<string>("Description"); set => SetProp<string>("Description", value); }
+		/// <summary>Ship weight of the line item variant.</summary>
+		public decimal? ShipWeight { get => GetProp<decimal?>("ShipWeight"); set => SetProp<decimal?>("ShipWeight", value); }
+		/// <summary>Ship height of the line item variant.</summary>
+		public decimal? ShipHeight { get => GetProp<decimal?>("ShipHeight"); set => SetProp<decimal?>("ShipHeight", value); }
+		/// <summary>Ship width of the line item variant.</summary>
+		public decimal? ShipWidth { get => GetProp<decimal?>("ShipWidth"); set => SetProp<decimal?>("ShipWidth", value); }
+		/// <summary>Ship length of the line item variant.</summary>
+		public decimal? ShipLength { get => GetProp<decimal?>("ShipLength"); set => SetProp<decimal?>("ShipLength", value); }
+		/// <summary>Container for extended (custom) properties of the line item variant.</summary>
+		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
+	}
+
+	/// <typeparam name="Txp">Type used as a container for extended properties (xp) of the LineItemVariant.</typeparam>
+	public class LineItemVariant<Txp> : LineItemVariant
+	{
+		public new Txp xp { get; set; }
+	}
+
 	public class MeBuyer : OrderCloudModel
 	{
 		/// <summary>ID of the buyer. Can only contain characters Aa-Zz, 0-9, -, and _.</summary>
@@ -699,6 +730,8 @@ namespace OrderCloud.SDK
 		public MessageType MessageType { get => GetProp<MessageType>("MessageType"); set => SetProp<MessageType>("MessageType", value); }
 		/// <summary>ID of the buyer. Searchable: priority level 0. Sortable: priority level 0.</summary>
 		public string BuyerID { get => GetProp<string>("BuyerID"); set => SetProp<string>("BuyerID", value); }
+		/// <summary>ID of the supplier. Searchable: priority level 4. Sortable: priority level 4.</summary>
+		public string SupplierID { get => GetProp<string>("SupplierID"); set => SetProp<string>("SupplierID", value); }
 		/// <summary>ID of the user group. Searchable: priority level 1. Sortable: priority level 1.</summary>
 		public string UserGroupID { get => GetProp<string>("UserGroupID"); set => SetProp<string>("UserGroupID", value); }
 		/// <summary>ID of the user. Searchable: priority level 2. Sortable: priority level 2.</summary>
@@ -709,13 +742,30 @@ namespace OrderCloud.SDK
 	{
 		/// <summary>ID of the message sender. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 0. Sortable: priority level 0.</summary>
 		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
-		/// <summary>Name of the message sender. Searchable: priority level 1. Sortable: priority level 1.</summary>
+		/// <summary>Name of the message sender. Required. Searchable: priority level 1. Sortable: priority level 1.</summary>
+		[Required]
 		public string Name { get => GetProp<string>("Name"); set => SetProp<string>("Name", value); }
 		/// <summary>Message types of the message sender. Required.</summary>
 		[Required]
 		public IList<MessageType> MessageTypes { get => GetProp<IList<MessageType>>("MessageTypes", new List<MessageType>()); set => SetProp<IList<MessageType>>("MessageTypes", value); }
 		/// <summary>Description of the message sender.</summary>
 		public string Description { get => GetProp<string>("Description"); set => SetProp<string>("Description", value); }
+		/// <summary>URL of the message sender. Required. Searchable: priority level 2. Sortable: priority level 2.</summary>
+		[Required]
+		public string URL { get => GetProp<string>("URL"); set => SetProp<string>("URL", value); }
+		/// <summary>Elevated roles of the message sender.</summary>
+		public IList<ApiRole> ElevatedRoles { get => GetProp<IList<ApiRole>>("ElevatedRoles", new List<ApiRole>()); set => SetProp<IList<ApiRole>>("ElevatedRoles", value); }
+		/// <summary>Shared key of the message sender. Required.</summary>
+		[Required]
+		public string SharedKey { get => GetProp<string>("SharedKey"); set => SetProp<string>("SharedKey", value); }
+		/// <summary>Container for extended (custom) properties of the message sender.</summary>
+		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
+	}
+
+	/// <typeparam name="Txp">Type used as a container for extended properties (xp) of the MessageSender.</typeparam>
+	public class MessageSender<Txp> : MessageSender
+	{
+		public new Txp xp { get; set; }
 	}
 
 	public class MessageSenderAssignment : OrderCloudModel
@@ -725,6 +775,8 @@ namespace OrderCloud.SDK
 		public string MessageSenderID { get => GetProp<string>("MessageSenderID"); set => SetProp<string>("MessageSenderID", value); }
 		/// <summary>ID of the buyer. Sortable: priority level 2.</summary>
 		public string BuyerID { get => GetProp<string>("BuyerID"); set => SetProp<string>("BuyerID", value); }
+		/// <summary>ID of the supplier. Sortable: priority level 4.</summary>
+		public string SupplierID { get => GetProp<string>("SupplierID"); set => SetProp<string>("SupplierID", value); }
 		/// <summary>ID of the user group. Sortable: priority level 3.</summary>
 		public string UserGroupID { get => GetProp<string>("UserGroupID"); set => SetProp<string>("UserGroupID", value); }
 		/// <summary>Message config name of the message sender assignment. Searchable: priority level 1. Sortable: priority level 4.</summary>
@@ -784,6 +836,30 @@ namespace OrderCloud.SDK
 	public class MeUser<Txp> : MeUser
 	{
 		public new Txp xp { get; set; }
+	}
+
+	public class OpenIdConnect : OrderCloudModel
+	{
+		/// <summary>ID of this OpenID Connect configuration object. Each object allows authentication to one Ordercloud ApiClient through one Identity Providing Party.</summary>
+		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
+		/// <summary>An ID that references an Ordercloud ApiClient.</summary>
+		[Required]
+		public string OrderCloudApiClientID { get => GetProp<string>("OrderCloudApiClientID"); set => SetProp<string>("OrderCloudApiClientID", value); }
+		/// <summary>An app ID from the Identity Provider that is required to get JWT tokens.</summary>
+		[Required]
+		public string ConnectClientID { get => GetProp<string>("ConnectClientID"); set => SetProp<string>("ConnectClientID", value); }
+		/// <summary>A secret string from the Identity Provider that grants access to get JWT tokens.</summary>
+		[Required]
+		public string ConnectClientSecret { get => GetProp<string>("ConnectClientSecret"); set => SetProp<string>("ConnectClientSecret", value); }
+		/// <summary>A URL on your front-end ordering site where users will be redirected after they authenticate through the Identity Provider. The string "{token}" will be replaced with a valid Ordercloud JWT.</summary>
+		[Required]
+		public string AppStartUrl { get => GetProp<string>("AppStartUrl"); set => SetProp<string>("AppStartUrl", value); }
+		/// <summary>A publicly known URL from the Identity Provider that redirects to a resource where users enter personal credentials.</summary>
+		[Required]
+		public string AuthorizationEndpoint { get => GetProp<string>("AuthorizationEndpoint"); set => SetProp<string>("AuthorizationEndpoint", value); }
+		/// <summary>A publicly known URL from the Identity Provider where agents can get JWT tokens.</summary>
+		[Required]
+		public string TokenEndpoint { get => GetProp<string>("TokenEndpoint"); set => SetProp<string>("TokenEndpoint", value); }
 	}
 
 	public class Order : OrderCloudModel
@@ -1102,7 +1178,7 @@ namespace OrderCloud.SDK
 		public string ShipFromAddressID { get => GetProp<string>("ShipFromAddressID"); set => SetProp<string>("ShipFromAddressID", value); }
 		/// <summary>Inventory of the product.</summary>
 		public Inventory Inventory { get => GetProp<Inventory>("Inventory"); set => SetProp<Inventory>("Inventory", value); }
-		/// <summary>ID of the default supplier. Sortable: priority level 4.</summary>
+		/// <summary>ID of the default supplier.</summary>
 		public string DefaultSupplierID { get => GetProp<string>("DefaultSupplierID"); set => SetProp<string>("DefaultSupplierID", value); }
 	}
 
@@ -1305,6 +1381,9 @@ namespace OrderCloud.SDK
 		/// <summary>Product of the shipment item.</summary>
 		[ApiReadOnly]
 		public LineItemProduct Product { get; set; }
+		/// <summary>Variant of the shipment item.</summary>
+		[ApiReadOnly]
+		public LineItemVariant Variant { get; set; }
 		/// <summary>Specs of the shipment item.</summary>
 		[ApiReadOnly]
 		public IReadOnlyList<LineItemSpec> Specs { get; set; }
@@ -1315,10 +1394,12 @@ namespace OrderCloud.SDK
 
 	/// <typeparam name="Txp">Type used as a container for extended properties (xp) of the ShipmentItem.</typeparam>
 	/// <typeparam name="TProductXP">Type used as a container for xp of the nested Product. If weakly typed or unneeded, specify dynamic.</typeparam>
-	public class ShipmentItem<Txp, TProductXP> : ShipmentItem
+	/// <typeparam name="TVariantXP">Type used as a container for xp of the nested Variant. If weakly typed or unneeded, specify dynamic.</typeparam>
+	public class ShipmentItem<Txp, TProductXP, TVariantXP> : ShipmentItem
 	{
 		public new Txp xp { get; set; }
 		public new LineItemProduct<TProductXP> Product { get; set; }
+		public new LineItemVariant<TVariantXP> Variant { get; set; }
 	}
 
 	public class Spec : OrderCloudModel
@@ -1532,6 +1613,16 @@ namespace OrderCloud.SDK
 		public string Description { get => GetProp<string>("Description"); set => SetProp<string>("Description", value); }
 		/// <summary>Active of the variant.</summary>
 		public bool Active { get => GetProp<bool>("Active"); set => SetProp<bool>("Active", value); }
+		/// <summary>Ship weight of the variant.</summary>
+		public decimal? ShipWeight { get => GetProp<decimal?>("ShipWeight"); set => SetProp<decimal?>("ShipWeight", value); }
+		/// <summary>Ship height of the variant.</summary>
+		public decimal? ShipHeight { get => GetProp<decimal?>("ShipHeight"); set => SetProp<decimal?>("ShipHeight", value); }
+		/// <summary>Ship width of the variant.</summary>
+		public decimal? ShipWidth { get => GetProp<decimal?>("ShipWidth"); set => SetProp<decimal?>("ShipWidth", value); }
+		/// <summary>Ship length of the variant.</summary>
+		public decimal? ShipLength { get => GetProp<decimal?>("ShipLength"); set => SetProp<decimal?>("ShipLength", value); }
+		/// <summary>Inventory of the variant.</summary>
+		public VariantInventory Inventory { get => GetProp<VariantInventory>("Inventory"); set => SetProp<VariantInventory>("Inventory", value); }
 		/// <summary>Container for extended (custom) properties of the variant.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
@@ -1540,6 +1631,15 @@ namespace OrderCloud.SDK
 	public class Variant<Txp> : Variant
 	{
 		public new Txp xp { get; set; }
+	}
+
+	public class VariantInventory : OrderCloudModel
+	{
+		/// <summary>Quantity available of the variant inventory.</summary>
+		public int? QuantityAvailable { get => GetProp<int?>("QuantityAvailable"); set => SetProp<int?>("QuantityAvailable", value); }
+		/// <summary>Last updated of the variant inventory.</summary>
+		[ApiReadOnly]
+		public DateTimeOffset LastUpdated { get; set; }
 	}
 	public class PartialAddress : Address, IPartial { }
 	public class PartialAddress<Txp> : PartialAddress { }
@@ -1565,14 +1665,19 @@ namespace OrderCloud.SDK
 	public class PartialIncrementor : Incrementor, IPartial { }
 	public class PartialInventory : Inventory, IPartial { }
 	public class PartialLineItem : LineItem, IPartial { }
-	public class PartialLineItem<Txp, TProductXP, TShippingAddressXP, TShipFromAddressXP> : PartialLineItem { }
+	public class PartialLineItem<Txp, TProductXP, TVariantXP, TShippingAddressXP, TShipFromAddressXP> : PartialLineItem { }
 	public class PartialLineItemProduct : LineItemProduct, IPartial { }
 	public class PartialLineItemProduct<Txp> : PartialLineItemProduct { }
 	public class PartialLineItemSpec : LineItemSpec, IPartial { }
+	public class PartialLineItemVariant : LineItemVariant, IPartial { }
+	public class PartialLineItemVariant<Txp> : PartialLineItemVariant { }
 	public class PartialMeBuyer : MeBuyer, IPartial { }
+	public class PartialMessageSender : MessageSender, IPartial { }
+	public class PartialMessageSender<Txp> : PartialMessageSender { }
 	public class PartialMeSupplier : MeSupplier, IPartial { }
 	public class PartialMeUser : MeUser, IPartial { }
 	public class PartialMeUser<Txp> : PartialMeUser { }
+	public class PartialOpenIdConnect : OpenIdConnect, IPartial { }
 	public class PartialOrder : Order, IPartial { }
 	public class PartialOrder<Txp, TFromUserXP, TBillingAddressXP> : PartialOrder { }
 	public class PartialPayment : Payment, IPartial { }
@@ -1604,4 +1709,5 @@ namespace OrderCloud.SDK
 	public class PartialUserGroup<Txp> : PartialUserGroup { }
 	public class PartialVariant : Variant, IPartial { }
 	public class PartialVariant<Txp> : PartialVariant { }
+	public class PartialVariantInventory : VariantInventory, IPartial { }
 }
