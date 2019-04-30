@@ -137,7 +137,7 @@ _Note: If you're using ASP.NET Core to build endpoints that respond to webhooks,
 
 ### Query DSL
 
-Most OrderCloud.io endpoints that return a list allow a set of optional parameters for searching, sorting, filtering, and paging. Like any optional parameters, these can be specified via option method arguments in the SDK. But an alternative pattern with a fluent query builder syntax and strongly-typed expression support is also provided for list endpoints:
+Most OrderCloud.io endpoints that return a list allow a set of optional parameters for searching, sorting, filtering, and paging. Like any optional parameters, these can be specified via optional method arguments in the SDK. But an alternative pattern with a fluent query builder syntax and strongly-typed expression support is also provided for list endpoints:
 
 ```c#
 await Client.Me.ListProductsAsync(opts => opts
