@@ -1105,10 +1105,10 @@ namespace OrderCloud.SDK
 			public class DeleteCreditCard<TConfigData> : WebhookPayload<object, object, DeleteCreditCard.DeleteCreditCardRouteParams, TConfigData> { }
 			/// <summary>Webhook payload sent by OrderCloud on PUT v1/me/register.</summary>
 			[SentOn("PUT", "v1/me/register")]
-			public class Register : WebhookPayload<MeUser, object, object, dynamic> { }
+			public class Register : WebhookPayload<MeUser, AccessTokenBasic, object, dynamic> { }
 			/// <summary>Webhook payload sent by OrderCloud on PUT v1/me/register, with strongly typed ConfigData.</summary>
 			[SentOn("PUT", "v1/me/register")]
-			public class Register<TConfigData> : WebhookPayload<MeUser, object, object, TConfigData> { }
+			public class Register<TConfigData> : WebhookPayload<MeUser, AccessTokenBasic, object, TConfigData> { }
 			/// <summary>Webhook payload sent by OrderCloud on PUT v1/me/orders.</summary>
 			[SentOn("PUT", "v1/me/orders")]
 			public class TransferAnonUserOrder : WebhookPayload<object, object, object, dynamic> { }
@@ -1899,6 +1899,51 @@ namespace OrderCloud.SDK
 		}
 		public static class SecurityProfiles
 		{
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/securityprofiles.</summary>
+			[SentOn("POST", "v1/securityprofiles")]
+			public class Create : WebhookPayload<SecurityProfile, SecurityProfile, object, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/securityprofiles, with strongly typed ConfigData.</summary>
+			[SentOn("POST", "v1/securityprofiles")]
+			public class Create<TConfigData> : WebhookPayload<SecurityProfile, SecurityProfile, object, TConfigData> { }
+			/// <summary>Webhook payload sent by OrderCloud on PUT v1/securityprofiles/{securityProfileID}.</summary>
+			[SentOn("PUT", "v1/securityprofiles/{securityProfileID}")]
+			public class Save : WebhookPayload<SecurityProfile, SecurityProfile, Save.SaveRouteParams, dynamic>
+			{
+				/// <summary>Type used to represent route parameter name/value pairs for v1/securityprofiles/{securityProfileID}.</summary>
+				public class SaveRouteParams
+				{
+					public string SecurityProfileID { get; set; }
+				}
+			}
+			/// <summary>Webhook payload sent by OrderCloud on PUT v1/securityprofiles/{securityProfileID}, with strongly typed ConfigData.</summary>
+			[SentOn("PUT", "v1/securityprofiles/{securityProfileID}")]
+			public class Save<TConfigData> : WebhookPayload<SecurityProfile, SecurityProfile, Save.SaveRouteParams, TConfigData> { }
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/securityprofiles/{securityProfileID}.</summary>
+			[SentOn("DELETE", "v1/securityprofiles/{securityProfileID}")]
+			public class Delete : WebhookPayload<object, object, Delete.DeleteRouteParams, dynamic>
+			{
+				/// <summary>Type used to represent route parameter name/value pairs for v1/securityprofiles/{securityProfileID}.</summary>
+				public class DeleteRouteParams
+				{
+					public string SecurityProfileID { get; set; }
+				}
+			}
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/securityprofiles/{securityProfileID}, with strongly typed ConfigData.</summary>
+			[SentOn("DELETE", "v1/securityprofiles/{securityProfileID}")]
+			public class Delete<TConfigData> : WebhookPayload<object, object, Delete.DeleteRouteParams, TConfigData> { }
+			/// <summary>Webhook payload sent by OrderCloud on PATCH v1/securityprofiles/{securityProfileID}.</summary>
+			[SentOn("PATCH", "v1/securityprofiles/{securityProfileID}")]
+			public class Patch : WebhookPayload<SecurityProfile, SecurityProfile, Patch.PatchRouteParams, dynamic>
+			{
+				/// <summary>Type used to represent route parameter name/value pairs for v1/securityprofiles/{securityProfileID}.</summary>
+				public class PatchRouteParams
+				{
+					public string SecurityProfileID { get; set; }
+				}
+			}
+			/// <summary>Webhook payload sent by OrderCloud on PATCH v1/securityprofiles/{securityProfileID}, with strongly typed ConfigData.</summary>
+			[SentOn("PATCH", "v1/securityprofiles/{securityProfileID}")]
+			public class Patch<TConfigData> : WebhookPayload<SecurityProfile, SecurityProfile, Patch.PatchRouteParams, TConfigData> { }
 			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/securityprofiles/{securityProfileID}/assignments.</summary>
 			[SentOn("DELETE", "v1/securityprofiles/{securityProfileID}/assignments")]
 			public class DeleteAssignment : WebhookPayload<object, object, DeleteAssignment.DeleteAssignmentRouteParams, dynamic>
@@ -2639,6 +2684,77 @@ namespace OrderCloud.SDK
 			/// <summary>Webhook payload sent by OrderCloud on POST v1/buyers/{buyerID}/users/{userID}/accesstoken, with strongly typed ConfigData.</summary>
 			[SentOn("POST", "v1/buyers/{buyerID}/users/{userID}/accesstoken")]
 			public class GetAccessToken<TConfigData> : WebhookPayload<ImpersonateTokenRequest, AccessToken, GetAccessToken.GetAccessTokenRouteParams, TConfigData> { }
+		}
+		public static class Webhooks
+		{
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/webhooks.</summary>
+			[SentOn("POST", "v1/webhooks")]
+			public class Create : WebhookPayload<Webhook, Webhook, object, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/webhooks, with strongly typed ConfigData.</summary>
+			[SentOn("POST", "v1/webhooks")]
+			public class Create<TConfigData> : WebhookPayload<Webhook, Webhook, object, TConfigData> { }
+			/// <summary>Webhook payload sent by OrderCloud on PUT v1/webhooks/{webhookID}.</summary>
+			[SentOn("PUT", "v1/webhooks/{webhookID}")]
+			public class Save : WebhookPayload<Webhook, Webhook, Save.SaveRouteParams, dynamic>
+			{
+				/// <summary>Type used to represent route parameter name/value pairs for v1/webhooks/{webhookID}.</summary>
+				public class SaveRouteParams
+				{
+					public string WebhookID { get; set; }
+				}
+			}
+			/// <summary>Webhook payload sent by OrderCloud on PUT v1/webhooks/{webhookID}, with strongly typed ConfigData.</summary>
+			[SentOn("PUT", "v1/webhooks/{webhookID}")]
+			public class Save<TConfigData> : WebhookPayload<Webhook, Webhook, Save.SaveRouteParams, TConfigData> { }
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/webhooks/{webhookID}.</summary>
+			[SentOn("DELETE", "v1/webhooks/{webhookID}")]
+			public class Delete : WebhookPayload<object, object, Delete.DeleteRouteParams, dynamic>
+			{
+				/// <summary>Type used to represent route parameter name/value pairs for v1/webhooks/{webhookID}.</summary>
+				public class DeleteRouteParams
+				{
+					public string WebhookID { get; set; }
+				}
+			}
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/webhooks/{webhookID}, with strongly typed ConfigData.</summary>
+			[SentOn("DELETE", "v1/webhooks/{webhookID}")]
+			public class Delete<TConfigData> : WebhookPayload<object, object, Delete.DeleteRouteParams, TConfigData> { }
+			/// <summary>Webhook payload sent by OrderCloud on PATCH v1/webhooks/{webhookID}.</summary>
+			[SentOn("PATCH", "v1/webhooks/{webhookID}")]
+			public class Patch : WebhookPayload<Webhook, Webhook, Patch.PatchRouteParams, dynamic>
+			{
+				/// <summary>Type used to represent route parameter name/value pairs for v1/webhooks/{webhookID}.</summary>
+				public class PatchRouteParams
+				{
+					public string WebhookID { get; set; }
+				}
+			}
+			/// <summary>Webhook payload sent by OrderCloud on PATCH v1/webhooks/{webhookID}, with strongly typed ConfigData.</summary>
+			[SentOn("PATCH", "v1/webhooks/{webhookID}")]
+			public class Patch<TConfigData> : WebhookPayload<Webhook, Webhook, Patch.PatchRouteParams, TConfigData> { }
+		}
+		public static class XpIndices
+		{
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/xpindices/{thingType}/{key}.</summary>
+			[SentOn("DELETE", "v1/xpindices/{thingType}/{key}")]
+			public class Delete : WebhookPayload<object, object, Delete.DeleteRouteParams, dynamic>
+			{
+				/// <summary>Type used to represent route parameter name/value pairs for v1/xpindices/{thingType}/{key}.</summary>
+				public class DeleteRouteParams
+				{
+					public XpThingType ThingType { get; set; }
+					public string Key { get; set; }
+				}
+			}
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/xpindices/{thingType}/{key}, with strongly typed ConfigData.</summary>
+			[SentOn("DELETE", "v1/xpindices/{thingType}/{key}")]
+			public class Delete<TConfigData> : WebhookPayload<object, object, Delete.DeleteRouteParams, TConfigData> { }
+			/// <summary>Webhook payload sent by OrderCloud on PUT v1/xpindices.</summary>
+			[SentOn("PUT", "v1/xpindices")]
+			public class Put : WebhookPayload<XpIndex, object, object, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on PUT v1/xpindices, with strongly typed ConfigData.</summary>
+			[SentOn("PUT", "v1/xpindices")]
+			public class Put<TConfigData> : WebhookPayload<XpIndex, object, object, TConfigData> { }
 		}
 	}
 }

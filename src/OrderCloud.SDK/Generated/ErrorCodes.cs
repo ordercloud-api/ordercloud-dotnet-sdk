@@ -47,6 +47,8 @@ namespace OrderCloud.SDK
 			public const string IncorrectPassword = "Auth.IncorrectPassword";
 			/// <summary>User does not have role(s) required to perform this action.</summary>
 			public const string InsufficientRoles = "Auth.InsufficientRoles";
+			/// <summary>Expired Password.</summary>
+			public const string PasswordExpired = "Auth.PasswordExpired";
 		}
 		public static class BillingAddress
 		{
