@@ -40,6 +40,8 @@ namespace OrderCloud.SDK
 		ISupplierUsersResource SupplierUsers { get; }
 		IUserGroupsResource UserGroups { get; }
 		IUsersResource Users { get; }
+		IWebhooksResource Webhooks { get; }
+		IXpIndicesResource XpIndices { get; }
 	}
 
 	public interface IAddressesResource
@@ -1814,7 +1816,7 @@ namespace OrderCloud.SDK
 		/// <param name="meUser">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="anonUserToken">Anon user token of the user.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
-		Task<dynamic> RegisterAsync(MeUser meUser, string anonUserToken, string accessToken = null);
+		Task<AccessTokenBasic> RegisterAsync(MeUser meUser, string anonUserToken, string accessToken = null);
 		/// <summary>Transfer an anon user order.</summary>
 		/// <param name="anonUserToken">Anon user token of the me.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -2931,6 +2933,24 @@ namespace OrderCloud.SDK
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<SecurityProfile>> ListAsync(Action<ListOptionsBuilder<SecurityProfile>> buildListOpts, string accessToken = null);
+		/// <summary>Create a new security profile. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <param name="securityProfile">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<SecurityProfile> CreateAsync(SecurityProfile securityProfile, string accessToken = null);
+		/// <summary>Create or update a security profile. If an object with the same ID already exists, it will be overwritten.</summary>
+		/// <param name="securityProfileID">ID of the security profile.</param>
+		/// <param name="securityProfile">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<SecurityProfile> SaveAsync(string securityProfileID, SecurityProfile securityProfile, string accessToken = null);
+		/// <summary>Delete a security profile.</summary>
+		/// <param name="securityProfileID">ID of the security profile.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task DeleteAsync(string securityProfileID, string accessToken = null);
+		/// <summary>Partially update a security profile.</summary>
+		/// <param name="securityProfileID">ID of the security profile.</param>
+		/// <param name="partialSecurityProfile">The object that will be partially serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<SecurityProfile> PatchAsync(string securityProfileID, PartialSecurityProfile partialSecurityProfile, string accessToken = null);
 		/// <summary>Get a list of security profile assignments.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="supplierID">ID of the supplier.</param>
@@ -3922,6 +3942,71 @@ namespace OrderCloud.SDK
 		Task<AccessToken> GetAccessTokenAsync(string buyerID, string userID, ImpersonateTokenRequest impersonateTokenRequest, string accessToken = null);
 	}
 
+	public interface IWebhooksResource
+	{
+		/// <summary>Get a single webhook.</summary>
+		/// <param name="webhookID">ID of the webhook.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<Webhook> GetAsync(string webhookID, string accessToken = null);
+		/// <summary>Get a list of webhooks.</summary>
+		/// <param name="search">Word or phrase to search for.</param>
+		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
+		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
+		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<Webhook>> ListAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
+		/// <summary>Get a list of webhooks.</summary>
+		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<Webhook>> ListAsync(Action<ListOptionsBuilder<Webhook>> buildListOpts, string accessToken = null);
+		/// <summary>Create a new webhook. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <param name="webhook">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<Webhook> CreateAsync(Webhook webhook, string accessToken = null);
+		/// <summary>Create or update a webhook. If an object with the same ID already exists, it will be overwritten.</summary>
+		/// <param name="webhookID">ID of the webhook.</param>
+		/// <param name="webhook">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<Webhook> SaveAsync(string webhookID, Webhook webhook, string accessToken = null);
+		/// <summary>Delete a webhook.</summary>
+		/// <param name="webhookID">ID of the webhook.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task DeleteAsync(string webhookID, string accessToken = null);
+		/// <summary>Partially update a webhook.</summary>
+		/// <param name="webhookID">ID of the webhook.</param>
+		/// <param name="partialWebhook">The object that will be partially serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<Webhook> PatchAsync(string webhookID, PartialWebhook partialWebhook, string accessToken = null);
+	}
+
+	public interface IXpIndicesResource
+	{
+		/// <summary>Get a list of xp indices.</summary>
+		/// <param name="search">Word or phrase to search for.</param>
+		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
+		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
+		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<XpIndex>> ListAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
+		/// <summary>Get a list of xp indices.</summary>
+		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<XpIndex>> ListAsync(Action<ListOptionsBuilder<XpIndex>> buildListOpts, string accessToken = null);
+		/// <summary>Delete a xp index.</summary>
+		/// <param name="thingType">Thing type of the xp index. Possible values: Product, Variant, Order, LineItem, Address, CostCenter, CreditCard, Payment, Spec, SpecOption, UserGroup, Company, Category, PriceSchedule, Shipment, SpendingAccount, User, Promotion, ApprovalRule, Catalog, ProductFacet, MessageSender.</param>
+		/// <param name="key">Key of the xp index.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task DeleteAsync(XpThingType thingType, string key, string accessToken = null);
+		/// <summary>Put a xp index put.</summary>
+		/// <param name="xpIndex">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task PutAsync(XpIndex xpIndex, string accessToken = null);
+	}
+
 	public partial class OrderCloudClient : IOrderCloudClient
 	{
 		private void InitResources() {
@@ -3959,6 +4044,8 @@ namespace OrderCloud.SDK
 			SupplierUsers = new SupplierUsersResource(this);
 			UserGroups = new UserGroupsResource(this);
 			Users = new UsersResource(this);
+			Webhooks = new WebhooksResource(this);
+			XpIndices = new XpIndicesResource(this);
 		}
 		
 		public IAddressesResource Addresses { get; private set; }
@@ -3995,6 +4082,8 @@ namespace OrderCloud.SDK
 		public ISupplierUsersResource SupplierUsers { get; private set; }
 		public IUserGroupsResource UserGroups { get; private set; }
 		public IUsersResource Users { get; private set; }
+		public IWebhooksResource Webhooks { get; private set; }
+		public IXpIndicesResource XpIndices { get; private set; }
 	}
 
 	public class AddressesResource : OrderCloudResource, IAddressesResource
@@ -4358,7 +4447,7 @@ namespace OrderCloud.SDK
 		public Task<ListPage<TShipmentItem>> ListShipmentItemsAsync<TShipmentItem>(string shipmentID, string orderID = null, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TShipmentItem : ShipmentItem => Request("v1", "me", "shipments", shipmentID, "items").WithOAuthBearerToken(accessToken).SetQueryParams(new { orderID, search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<TShipmentItem>>();
 		public Task<ListPage<ShipmentItem>> ListShipmentItemsAsync(string shipmentID, Action<ListOptionsBuilder<ShipmentItem>> buildListOpts, string orderID = null, string accessToken = null) => ListShipmentItemsAsync<ShipmentItem>(shipmentID, buildListOpts, orderID, accessToken);
 		public Task<ListPage<TShipmentItem>> ListShipmentItemsAsync<TShipmentItem>(string shipmentID, Action<ListOptionsBuilder<TShipmentItem>> buildListOpts, string orderID = null, string accessToken = null) where TShipmentItem : ShipmentItem => Request("v1", "me", "shipments", shipmentID, "items").WithOAuthBearerToken(accessToken).SetQueryParams(new { orderID }).SetListOptions(buildListOpts).GetJsonAsync<ListPage<TShipmentItem>>();
-		public Task<dynamic> RegisterAsync(MeUser meUser, string anonUserToken, string accessToken = null) => Request("v1", "me", "register").WithOAuthBearerToken(accessToken).SetQueryParams(new { anonUserToken }).PutJsonAsync(ValidateModel(meUser)).ReceiveJson<object>();
+		public Task<AccessTokenBasic> RegisterAsync(MeUser meUser, string anonUserToken, string accessToken = null) => Request("v1", "me", "register").WithOAuthBearerToken(accessToken).SetQueryParams(new { anonUserToken }).PutJsonAsync(ValidateModel(meUser)).ReceiveJson<AccessTokenBasic>();
 		public Task TransferAnonUserOrderAsync(string anonUserToken, string accessToken = null) => Request("v1", "me", "orders").WithOAuthBearerToken(accessToken).SetQueryParams(new { anonUserToken }).PutAsync(null);
 		public Task ResetPasswordByTokenAsync(TokenPasswordReset tokenPasswordReset, string accessToken = null) => Request("v1", "me", "password").WithOAuthBearerToken(accessToken).PostJsonAsync(ValidateModel(tokenPasswordReset));
 		public Task<ListPage<Catalog>> ListCatalogsAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) => ListCatalogsAsync<Catalog>(search, searchOn, sortBy, page, pageSize, filters, accessToken);
@@ -4588,6 +4677,10 @@ namespace OrderCloud.SDK
 		public Task<SecurityProfile> GetAsync(string securityProfileID, string accessToken = null) => Request("v1", "securityprofiles", securityProfileID).WithOAuthBearerToken(accessToken).GetJsonAsync<SecurityProfile>();
 		public Task<ListPage<SecurityProfile>> ListAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) => Request("v1", "securityprofiles").WithOAuthBearerToken(accessToken).SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<SecurityProfile>>();
 		public Task<ListPage<SecurityProfile>> ListAsync(Action<ListOptionsBuilder<SecurityProfile>> buildListOpts, string accessToken = null) => Request("v1", "securityprofiles").WithOAuthBearerToken(accessToken).SetListOptions(buildListOpts).GetJsonAsync<ListPage<SecurityProfile>>();
+		public Task<SecurityProfile> CreateAsync(SecurityProfile securityProfile, string accessToken = null) => Request("v1", "securityprofiles").WithOAuthBearerToken(accessToken).PostJsonAsync(ValidateModel(securityProfile)).ReceiveJson<SecurityProfile>();
+		public Task<SecurityProfile> SaveAsync(string securityProfileID, SecurityProfile securityProfile, string accessToken = null) => Request("v1", "securityprofiles", securityProfileID).WithOAuthBearerToken(accessToken).PutJsonAsync(ValidateModel(securityProfile)).ReceiveJson<SecurityProfile>();
+		public Task DeleteAsync(string securityProfileID, string accessToken = null) => Request("v1", "securityprofiles", securityProfileID).WithOAuthBearerToken(accessToken).DeleteAsync();
+		public Task<SecurityProfile> PatchAsync(string securityProfileID, PartialSecurityProfile partialSecurityProfile, string accessToken = null) => Request("v1", "securityprofiles", securityProfileID).WithOAuthBearerToken(accessToken).PatchJsonAsync(ValidateModel(partialSecurityProfile)).ReceiveJson<SecurityProfile>();
 		public Task<ListPage<SecurityProfileAssignment>> ListAssignmentsAsync(string buyerID = null, string supplierID = null, string securityProfileID = null, string userID = null, string userGroupID = null, CommerceRole? commerceRole = null, PartyType? level = null, int? page = null, int? pageSize = null, string accessToken = null) => Request("v1", "securityprofiles", "assignments").WithOAuthBearerToken(accessToken).SetQueryParams(new { buyerID, supplierID, securityProfileID, userID, userGroupID, commerceRole, level, page, pageSize }).GetJsonAsync<ListPage<SecurityProfileAssignment>>();
 		public Task DeleteAssignmentAsync(string securityProfileID, string buyerID = null, string userID = null, string userGroupID = null, string supplierID = null, string accessToken = null) => Request("v1", "securityprofiles", securityProfileID, "assignments").WithOAuthBearerToken(accessToken).SetQueryParams(new { buyerID, userID, userGroupID, supplierID }).DeleteAsync();
 		public Task SaveAssignmentAsync(SecurityProfileAssignment securityProfileAssignment, string accessToken = null) => Request("v1", "securityprofiles", "assignments").WithOAuthBearerToken(accessToken).PostJsonAsync(ValidateModel(securityProfileAssignment));
@@ -4792,5 +4885,26 @@ namespace OrderCloud.SDK
 		public Task<User> MoveAsync(string buyerID, string userID, string newBuyerID, UserOrderMoveOption orders, string accessToken = null) => MoveAsync<User>(buyerID, userID, newBuyerID, orders, accessToken);
 		public Task<TUser> MoveAsync<TUser>(string buyerID, string userID, string newBuyerID, UserOrderMoveOption orders, string accessToken = null) where TUser : User => Request("v1", "buyers", buyerID, "users", userID, "moveto", newBuyerID).WithOAuthBearerToken(accessToken).SetQueryParams(new { orders }).PostAsync(null).ReceiveJson<TUser>();
 		public Task<AccessToken> GetAccessTokenAsync(string buyerID, string userID, ImpersonateTokenRequest impersonateTokenRequest, string accessToken = null) => Request("v1", "buyers", buyerID, "users", userID, "accesstoken").WithOAuthBearerToken(accessToken).PostJsonAsync(ValidateModel(impersonateTokenRequest)).ReceiveJson<AccessToken>();
+	}
+
+	public class WebhooksResource : OrderCloudResource, IWebhooksResource
+	{
+		internal WebhooksResource(OrderCloudClient client) : base(client) { }
+		public Task<Webhook> GetAsync(string webhookID, string accessToken = null) => Request("v1", "webhooks", webhookID).WithOAuthBearerToken(accessToken).GetJsonAsync<Webhook>();
+		public Task<ListPage<Webhook>> ListAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) => Request("v1", "webhooks").WithOAuthBearerToken(accessToken).SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<Webhook>>();
+		public Task<ListPage<Webhook>> ListAsync(Action<ListOptionsBuilder<Webhook>> buildListOpts, string accessToken = null) => Request("v1", "webhooks").WithOAuthBearerToken(accessToken).SetListOptions(buildListOpts).GetJsonAsync<ListPage<Webhook>>();
+		public Task<Webhook> CreateAsync(Webhook webhook, string accessToken = null) => Request("v1", "webhooks").WithOAuthBearerToken(accessToken).PostJsonAsync(ValidateModel(webhook)).ReceiveJson<Webhook>();
+		public Task<Webhook> SaveAsync(string webhookID, Webhook webhook, string accessToken = null) => Request("v1", "webhooks", webhookID).WithOAuthBearerToken(accessToken).PutJsonAsync(ValidateModel(webhook)).ReceiveJson<Webhook>();
+		public Task DeleteAsync(string webhookID, string accessToken = null) => Request("v1", "webhooks", webhookID).WithOAuthBearerToken(accessToken).DeleteAsync();
+		public Task<Webhook> PatchAsync(string webhookID, PartialWebhook partialWebhook, string accessToken = null) => Request("v1", "webhooks", webhookID).WithOAuthBearerToken(accessToken).PatchJsonAsync(ValidateModel(partialWebhook)).ReceiveJson<Webhook>();
+	}
+
+	public class XpIndicesResource : OrderCloudResource, IXpIndicesResource
+	{
+		internal XpIndicesResource(OrderCloudClient client) : base(client) { }
+		public Task<ListPage<XpIndex>> ListAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) => Request("v1", "xpindices").WithOAuthBearerToken(accessToken).SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<XpIndex>>();
+		public Task<ListPage<XpIndex>> ListAsync(Action<ListOptionsBuilder<XpIndex>> buildListOpts, string accessToken = null) => Request("v1", "xpindices").WithOAuthBearerToken(accessToken).SetListOptions(buildListOpts).GetJsonAsync<ListPage<XpIndex>>();
+		public Task DeleteAsync(XpThingType thingType, string key, string accessToken = null) => Request("v1", "xpindices", thingType, key).WithOAuthBearerToken(accessToken).DeleteAsync();
+		public Task PutAsync(XpIndex xpIndex, string accessToken = null) => Request("v1", "xpindices").WithOAuthBearerToken(accessToken).PutJsonAsync(ValidateModel(xpIndex));
 	}
 }

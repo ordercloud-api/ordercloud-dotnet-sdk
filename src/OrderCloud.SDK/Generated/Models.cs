@@ -4,7 +4,7 @@ using System.Dynamic;
 
 namespace OrderCloud.SDK
 {
-	public enum ApiRole { ApiClientAdmin, ApiClientReader, AddressAdmin, AddressReader, AdminAddressAdmin, AdminAddressReader, AdminUserAdmin, AdminUserGroupAdmin, AdminUserGroupReader, AdminUserReader, ApprovalRuleAdmin, ApprovalRuleReader, BuyerAdmin, BuyerImpersonation, BuyerReader, BuyerUserAdmin, BuyerUserReader, CatalogAdmin, CatalogReader, CategoryAdmin, CategoryReader, CostCenterAdmin, CostCenterReader, CreditCardAdmin, CreditCardReader, FullAccess, IncrementorAdmin, IncrementorReader, InventoryAdmin, MeAddressAdmin, MeAdmin, MeCreditCardAdmin, MessageConfigAssignmentAdmin, MeXpAdmin, OrderAdmin, OrderReader, OverrideShipping, OverrideTax, OverrideUnitPrice, PasswordReset, PriceScheduleAdmin, PriceScheduleReader, ProductAdmin, ProductAssignmentAdmin, ProductFacetAdmin, ProductFacetReader, ProductReader, PromotionAdmin, PromotionReader, SetSecurityProfile, ShipmentAdmin, ShipmentReader, Shopper, SpendingAccountAdmin, SpendingAccountReader, SupplierAddressAdmin, SupplierAddressReader, SupplierAdmin, SupplierReader, SupplierUserAdmin, SupplierUserGroupAdmin, SupplierUserGroupReader, SupplierUserReader, UnsubmittedOrderReader, UserGroupAdmin, UserGroupReader, OpenIDConnectReader, OpenIDConnectAdmin, MessageSenderReader, MessageSenderAdmin }
+	public enum ApiRole { ApiClientAdmin, ApiClientReader, AddressAdmin, AddressReader, AdminAddressAdmin, AdminAddressReader, AdminUserAdmin, AdminUserGroupAdmin, AdminUserGroupReader, AdminUserReader, ApprovalRuleAdmin, ApprovalRuleReader, BuyerAdmin, BuyerImpersonation, BuyerReader, BuyerUserAdmin, BuyerUserReader, CatalogAdmin, CatalogReader, CategoryAdmin, CategoryReader, CostCenterAdmin, CostCenterReader, CreditCardAdmin, CreditCardReader, FullAccess, IncrementorAdmin, IncrementorReader, InventoryAdmin, MeAddressAdmin, MeAdmin, MeCreditCardAdmin, MessageConfigAssignmentAdmin, MeXpAdmin, OrderAdmin, OrderReader, OverrideShipping, OverrideTax, OverrideUnitPrice, PasswordReset, PriceScheduleAdmin, PriceScheduleReader, ProductAdmin, ProductAssignmentAdmin, ProductFacetAdmin, ProductFacetReader, ProductReader, PromotionAdmin, PromotionReader, SecurityProfileAdmin, SecurityProfileReader, SetSecurityProfile, ShipmentAdmin, ShipmentReader, Shopper, SpendingAccountAdmin, SpendingAccountReader, SupplierAddressAdmin, SupplierAddressReader, SupplierAdmin, SupplierReader, SupplierUserAdmin, SupplierUserGroupAdmin, SupplierUserGroupReader, SupplierUserReader, UnsubmittedOrderReader, UserGroupAdmin, UserGroupReader, OpenIDConnectReader, OpenIDConnectAdmin, MessageSenderReader, MessageSenderAdmin, XpIndexAdmin, WebhookReader, WebhookAdmin }
 	public enum ApprovalStatus { Pending, Approved, Declined }
 	public enum CommerceRole { Buyer, Seller, Supplier }
 	public enum MessageType { OrderDeclined, OrderSubmitted, ShipmentCreated, ForgottenPassword, OrderSubmittedForYourApproval, OrderSubmittedForApproval, OrderApproved, OrderSubmittedForYourApprovalHasBeenApproved, OrderSubmittedForYourApprovalHasBeenDeclined, NewUserInvitation }
@@ -14,6 +14,7 @@ namespace OrderCloud.SDK
 	public enum PaymentType { PurchaseOrder, CreditCard, SpendingAccount }
 	public enum PriceMarkupType { NoMarkup, AmountPerQuantity, AmountTotal, Percentage }
 	public enum UserOrderMoveOption { None, Unsubmitted, All }
+	public enum XpThingType { Product, Variant, Order, LineItem, Address, CostCenter, CreditCard, Payment, Spec, SpecOption, UserGroup, Company, Category, PriceSchedule, Shipment, SpendingAccount, User, Promotion, ApprovalRule, Catalog, ProductFacet, MessageSender }
 
 	public class AccessToken : OrderCloudModel
 	{
@@ -25,6 +26,12 @@ namespace OrderCloud.SDK
 		public string token_type { get => GetProp<string>("token_type"); set => SetProp<string>("token_type", value); }
 		/// <summary>Refresh token of the access token.</summary>
 		public string refresh_token { get => GetProp<string>("refresh_token"); set => SetProp<string>("refresh_token", value); }
+	}
+
+	public class AccessTokenBasic : OrderCloudModel
+	{
+		/// <summary>Access token of the access token basic.</summary>
+		public string access_token { get => GetProp<string>("access_token"); set => SetProp<string>("access_token", value); }
 	}
 
 	public class Address : OrderCloudModel
@@ -830,6 +837,12 @@ namespace OrderCloud.SDK
 		/// <summary>Available roles of the user.</summary>
 		[ApiReadOnly]
 		public IReadOnlyList<string> AvailableRoles { get; set; }
+		/// <summary>Date created of the user. Sortable.</summary>
+		[ApiReadOnly]
+		public DateTimeOffset? DateCreated { get; set; }
+		/// <summary>Password last set date of the user. Sortable.</summary>
+		[ApiReadOnly]
+		public DateTimeOffset? PasswordLastSetDate { get; set; }
 	}
 
 	/// <typeparam name="Txp">Type used as a container for extended properties (xp) of the MeUser.</typeparam>
@@ -1007,6 +1020,8 @@ namespace OrderCloud.SDK
 		public string ValueExpression { get => GetProp<string>("ValueExpression"); set => SetProp<string>("ValueExpression", value); }
 		/// <summary>Can combine of the order promotion. Sortable.</summary>
 		public bool CanCombine { get => GetProp<bool>("CanCombine"); set => SetProp<bool>("CanCombine", value); }
+		/// <summary>Allow promo to be used by all buyers without creating assignments.</summary>
+		public bool AllowAllBuyers { get => GetProp<bool>("AllowAllBuyers"); set => SetProp<bool>("AllowAllBuyers", value); }
 		/// <summary>Container for extended (custom) properties of the order promotion.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
@@ -1015,6 +1030,12 @@ namespace OrderCloud.SDK
 	public class OrderPromotion<Txp> : OrderPromotion
 	{
 		public new Txp xp { get; set; }
+	}
+
+	public class PasswordConfig : OrderCloudModel
+	{
+		/// <summary>Expire in days of the password config. Must be at least 1.</summary>
+		public int? ExpireInDays { get => GetProp<int?>("ExpireInDays"); set => SetProp<int?>("ExpireInDays", value); }
 	}
 
 	public class PasswordReset : OrderCloudModel
@@ -1126,9 +1147,9 @@ namespace OrderCloud.SDK
 		public int? MinQuantity { get => GetProp<int?>("MinQuantity", 1); set => SetProp<int?>("MinQuantity", value); }
 		/// <summary>Max quantity of the price schedule.</summary>
 		public int? MaxQuantity { get => GetProp<int?>("MaxQuantity"); set => SetProp<int?>("MaxQuantity", value); }
-		/// <summary>Use cumulative quantity of the price schedule.</summary>
+		/// <summary>If true, LineItem quantities will be aggregated by productID when determining which price break applies. Else, each LineItem is treated separately.</summary>
 		public bool UseCumulativeQuantity { get => GetProp<bool>("UseCumulativeQuantity"); set => SetProp<bool>("UseCumulativeQuantity", value); }
-		/// <summary>Restricted quantity of the price schedule.</summary>
+		/// <summary>If true, this product can only be ordered in quantities that exactly match one of the price breaks on this schedule.</summary>
 		public bool RestrictedQuantity { get => GetProp<bool>("RestrictedQuantity"); set => SetProp<bool>("RestrictedQuantity", value); }
 		/// <summary>Price breaks of the price schedule.</summary>
 		public IList<PriceBreak> PriceBreaks { get => GetProp<IList<PriceBreak>>("PriceBreaks", new List<PriceBreak>()); set => SetProp<IList<PriceBreak>>("PriceBreaks", value); }
@@ -1268,6 +1289,8 @@ namespace OrderCloud.SDK
 		public string ValueExpression { get => GetProp<string>("ValueExpression"); set => SetProp<string>("ValueExpression", value); }
 		/// <summary>Can combine of the promotion. Sortable.</summary>
 		public bool CanCombine { get => GetProp<bool>("CanCombine"); set => SetProp<bool>("CanCombine", value); }
+		/// <summary>Allow promo to be used by all buyers without creating assignments.</summary>
+		public bool AllowAllBuyers { get => GetProp<bool>("AllowAllBuyers"); set => SetProp<bool>("AllowAllBuyers", value); }
 		/// <summary>Container for extended (custom) properties of the promotion.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
@@ -1299,6 +1322,10 @@ namespace OrderCloud.SDK
 		public string Name { get => GetProp<string>("Name"); set => SetProp<string>("Name", value); }
 		/// <summary>Roles of the security profile.</summary>
 		public IList<ApiRole> Roles { get => GetProp<IList<ApiRole>>("Roles", new List<ApiRole>()); set => SetProp<IList<ApiRole>>("Roles", value); }
+		/// <summary>Custom roles of the security profile.</summary>
+		public IList<string> CustomRoles { get => GetProp<IList<string>>("CustomRoles", new List<string>()); set => SetProp<IList<string>>("CustomRoles", value); }
+		/// <summary>Password config of the security profile.</summary>
+		public PasswordConfig PasswordConfig { get => GetProp<PasswordConfig>("PasswordConfig"); set => SetProp<PasswordConfig>("PasswordConfig", value); }
 	}
 
 	public class SecurityProfileAssignment : OrderCloudModel
@@ -1568,6 +1595,12 @@ namespace OrderCloud.SDK
 		/// <summary>Available roles of the user.</summary>
 		[ApiReadOnly]
 		public IReadOnlyList<string> AvailableRoles { get; set; }
+		/// <summary>Date created of the user. Sortable.</summary>
+		[ApiReadOnly]
+		public DateTimeOffset? DateCreated { get; set; }
+		/// <summary>Password last set date of the user. Sortable.</summary>
+		[ApiReadOnly]
+		public DateTimeOffset? PasswordLastSetDate { get; set; }
 	}
 
 	/// <typeparam name="Txp">Type used as a container for extended properties (xp) of the User.</typeparam>
@@ -1641,6 +1674,49 @@ namespace OrderCloud.SDK
 		[ApiReadOnly]
 		public DateTimeOffset LastUpdated { get; set; }
 	}
+
+	public class Webhook : OrderCloudModel
+	{
+		/// <summary>ID of the webhook. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable.</summary>
+		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
+		/// <summary>Name of the webhook. Required. Searchable: priority level 2. Sortable: priority level 1.</summary>
+		[Required]
+		public string Name { get => GetProp<string>("Name"); set => SetProp<string>("Name", value); }
+		/// <summary>Description of the webhook. Max length 2000 characters. Searchable: priority level 3.</summary>
+		public string Description { get => GetProp<string>("Description"); set => SetProp<string>("Description", value); }
+		/// <summary>Url of the webhook. Required. Searchable: priority level 4.</summary>
+		[Required]
+		public string Url { get => GetProp<string>("Url"); set => SetProp<string>("Url", value); }
+		/// <summary>Hash key of the webhook. Required.</summary>
+		[Required]
+		public string HashKey { get => GetProp<string>("HashKey"); set => SetProp<string>("HashKey", value); }
+		/// <summary>Elevated roles of the webhook.</summary>
+		public IList<ApiRole> ElevatedRoles { get => GetProp<IList<ApiRole>>("ElevatedRoles", new List<ApiRole>()); set => SetProp<IList<ApiRole>>("ElevatedRoles", value); }
+		/// <summary>Config data of the webhook.</summary>
+		public object ConfigData { get => GetProp<object>("ConfigData"); set => SetProp<object>("ConfigData", value); }
+		/// <summary>Before process request of the webhook.</summary>
+		public bool BeforeProcessRequest { get => GetProp<bool>("BeforeProcessRequest"); set => SetProp<bool>("BeforeProcessRequest", value); }
+		/// <summary>Api client I ds of the webhook.</summary>
+		public IList<string> ApiClientIDs { get => GetProp<IList<string>>("ApiClientIDs", new List<string>()); set => SetProp<IList<string>>("ApiClientIDs", value); }
+		/// <summary>Webhook routes of the webhook.</summary>
+		public IList<WebhookRoute> WebhookRoutes { get => GetProp<IList<WebhookRoute>>("WebhookRoutes", new List<WebhookRoute>()); set => SetProp<IList<WebhookRoute>>("WebhookRoutes", value); }
+	}
+
+	public class WebhookRoute : OrderCloudModel
+	{
+		/// <summary>Route of the webhook route. Searchable: priority level 1. Sortable: priority level 1.</summary>
+		public string Route { get => GetProp<string>("Route"); set => SetProp<string>("Route", value); }
+		/// <summary>Verb of the webhook route. Searchable: priority level 2. Sortable: priority level 2.</summary>
+		public string Verb { get => GetProp<string>("Verb"); set => SetProp<string>("Verb", value); }
+	}
+
+	public class XpIndex : OrderCloudModel
+	{
+		/// <summary>Thing type of the xp index. Searchable: priority level 0. Sortable: priority level 0. Possible values: Product, Variant, Order, LineItem, Address, CostCenter, CreditCard, Payment, Spec, SpecOption, UserGroup, Company, Category, PriceSchedule, Shipment, SpendingAccount, User, Promotion, ApprovalRule, Catalog, ProductFacet, MessageSender.</summary>
+		public XpThingType ThingType { get => GetProp<XpThingType>("ThingType"); set => SetProp<XpThingType>("ThingType", value); }
+		/// <summary>Key of the xp index. Searchable: priority level 1. Sortable: priority level 1.</summary>
+		public string Key { get => GetProp<string>("Key"); set => SetProp<string>("Key", value); }
+	}
 	public class PartialAddress : Address, IPartial { }
 	public class PartialAddress<Txp> : PartialAddress { }
 	public class PartialApiClient : ApiClient, IPartial { }
@@ -1680,6 +1756,7 @@ namespace OrderCloud.SDK
 	public class PartialOpenIdConnect : OpenIdConnect, IPartial { }
 	public class PartialOrder : Order, IPartial { }
 	public class PartialOrder<Txp, TFromUserXP, TBillingAddressXP> : PartialOrder { }
+	public class PartialPasswordConfig : PasswordConfig, IPartial { }
 	public class PartialPayment : Payment, IPartial { }
 	public class PartialPayment<Txp> : PartialPayment { }
 	public class PartialPaymentTransaction : PaymentTransaction, IPartial { }
@@ -1693,6 +1770,7 @@ namespace OrderCloud.SDK
 	public class PartialProductFacet<Txp> : PartialProductFacet { }
 	public class PartialPromotion : Promotion, IPartial { }
 	public class PartialPromotion<Txp> : PartialPromotion { }
+	public class PartialSecurityProfile : SecurityProfile, IPartial { }
 	public class PartialShipment : Shipment, IPartial { }
 	public class PartialShipment<Txp, TFromAddressXP, TToAddressXP> : PartialShipment { }
 	public class PartialSpec : Spec, IPartial { }
@@ -1710,4 +1788,6 @@ namespace OrderCloud.SDK
 	public class PartialVariant : Variant, IPartial { }
 	public class PartialVariant<Txp> : PartialVariant { }
 	public class PartialVariantInventory : VariantInventory, IPartial { }
+	public class PartialWebhook : Webhook, IPartial { }
+	public class PartialWebhookRoute : WebhookRoute, IPartial { }
 }
