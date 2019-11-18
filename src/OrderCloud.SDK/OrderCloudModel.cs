@@ -43,13 +43,18 @@ namespace OrderCloud.SDK
 	}
 
 	/// <summary>
-	/// Marker interface for required model properties.
+	/// Indicates model property is required on write.
 	/// </summary>
 	// Using .NET's RequiredAttribute would require taking a dependency on System.ComponentModel.DataAnnotations (out of band). Doesn't seem worth it.
 	public class RequiredAttribute : Attribute { }
 
 	/// <summary>
-	/// Marker interface for properties that are received on GET but cannot be written to on POST/PUT/PATCH. (OrderCloud.io will ignore them if sent.)
+	/// Indicates model property is read-only. OrderCloud.io will ignore if sent via POST/PUT/PATCH.
 	/// </summary>
 	public class ApiReadOnlyAttribute : Attribute { }
+
+	/// <summary>
+	/// Indicates model property is write-only. OrderCloud.io will not populate on GET.
+	/// </summary>
+	public class ApiWriteOnlyAttribute : Attribute { }
 }

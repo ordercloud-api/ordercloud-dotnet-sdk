@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
@@ -123,15 +124,21 @@ namespace OrderCloud.SDK
 			.Request(pathSegments)
 			.ConfigureRequest(settings => {
 				settings.BeforeCallAsync = EnsureTokenAsync;
-				settings.OnErrorAsync = ThrowOcExceptionAsync;
+				settings.OnErrorAsync = ThrowApiExceptionAsync;
 				settings.JsonSerializer = Serializer;
 			});
 
-		private async Task ThrowOcExceptionAsync(HttpCall call) {
+		private async Task ThrowApiExceptionAsync(HttpCall call) {
 			if (!(call.Exception is FlurlHttpException fex)) return;
 			var resp = await fex.GetResponseJsonAsync<ApiErrorResponse>();
-			if (resp != null)
-				throw new OrderCloudException(call, resp);
+			throw new OrderCloudException(call, resp.Errors);
+		}
+
+		private async Task ThrowAuthExceptionAsync(HttpCall call) {
+			if (!(call.Exception is FlurlHttpException fex)) return;
+			var resp = await fex.GetResponseJsonAsync<AuthErrorResponse>();
+			var error = new ApiError { ErrorCode = resp.error, Message = resp.error_description };
+			throw new OrderCloudException(call, new[] { error });
 		}
 
 		private async Task EnsureTokenAsync(HttpCall call) {
@@ -150,6 +157,10 @@ namespace OrderCloud.SDK
 			// http://tutorials.jenkov.com/oauth2/resource-owner-credentials-request-response.html
 			var resp = await AuthClient
 				.Request("oauth/token")
+				.ConfigureRequest(settings => {
+					settings.OnErrorAsync = ThrowAuthExceptionAsync;
+					settings.JsonSerializer = Serializer;
+				})
 				.PostUrlEncodedAsync(req)
 				.ReceiveJson<OAuthTokenResponse>()
 				.ConfigureAwait(false);

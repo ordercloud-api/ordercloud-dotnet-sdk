@@ -41,24 +41,24 @@ namespace OrderCloud.SDK
 		/// <summary>Date created of the address. Sortable.</summary>
 		[ApiReadOnly]
 		public DateTimeOffset? DateCreated { get; set; }
-		/// <summary>Company name of the address. Max length 100 characters. Sortable.</summary>
+		/// <summary>Company name of the address. Max length 100 characters. Searchable: priority level 3. Sortable.</summary>
 		public string CompanyName { get => GetProp<string>("CompanyName"); set => SetProp<string>("CompanyName", value); }
-		/// <summary>First name of the address. Max length 100 characters. Searchable: priority level 7. Sortable.</summary>
+		/// <summary>First name of the address. Max length 100 characters. Searchable: priority level 8. Sortable.</summary>
 		public string FirstName { get => GetProp<string>("FirstName"); set => SetProp<string>("FirstName", value); }
-		/// <summary>Last name of the address. Max length 100 characters. Searchable: priority level 6. Sortable.</summary>
+		/// <summary>Last name of the address. Max length 100 characters. Searchable: priority level 7. Sortable.</summary>
 		public string LastName { get => GetProp<string>("LastName"); set => SetProp<string>("LastName", value); }
-		/// <summary>Street 1 of the address. Required. Max length 100 characters. Searchable: priority level 4. Sortable.</summary>
+		/// <summary>Street 1 of the address. Required. Max length 100 characters. Searchable: priority level 5. Sortable.</summary>
 		[Required]
 		public string Street1 { get => GetProp<string>("Street1"); set => SetProp<string>("Street1", value); }
-		/// <summary>Street 2 of the address. Max length 100 characters. Searchable: priority level 5. Sortable.</summary>
+		/// <summary>Street 2 of the address. Max length 100 characters. Searchable: priority level 6. Sortable.</summary>
 		public string Street2 { get => GetProp<string>("Street2"); set => SetProp<string>("Street2", value); }
-		/// <summary>City of the address. Required. Max length 100 characters. Searchable: priority level 3. Sortable.</summary>
+		/// <summary>City of the address. Required. Max length 100 characters. Searchable: priority level 4. Sortable.</summary>
 		[Required]
 		public string City { get => GetProp<string>("City"); set => SetProp<string>("City", value); }
-		/// <summary>State of the address. Required. Max length 100 characters. Searchable: priority level 7. Sortable.</summary>
+		/// <summary>State of the address. Required. Max length 100 characters. Searchable: priority level 9. Sortable.</summary>
 		[Required]
 		public string State { get => GetProp<string>("State"); set => SetProp<string>("State", value); }
-		/// <summary>Zip of the address. Required. Max length 100 characters. Searchable: priority level 6. Sortable.</summary>
+		/// <summary>Zip of the address. Required. Max length 100 characters. Searchable: priority level 10. Sortable.</summary>
 		[Required]
 		public string Zip { get => GetProp<string>("Zip"); set => SetProp<string>("Zip", value); }
 		/// <summary>Country of the address. Required. Max length 2 characters. Sortable.</summary>
@@ -95,7 +95,7 @@ namespace OrderCloud.SDK
 
 	public class ApiClient : OrderCloudModel
 	{
-		/// <summary>ID of the api client.</summary>
+		/// <summary>ID of the api client. Searchable: priority level 1. Sortable: priority level 1.</summary>
 		[ApiReadOnly]
 		public string ID { get; set; }
 		/// <summary>Client secret of the api client.</summary>
@@ -105,12 +105,12 @@ namespace OrderCloud.SDK
 		public int AccessTokenDuration { get => GetProp<int>("AccessTokenDuration"); set => SetProp<int>("AccessTokenDuration", value); }
 		/// <summary>Active of the api client.</summary>
 		public bool Active { get => GetProp<bool>("Active"); set => SetProp<bool>("Active", value); }
-		/// <summary>App name of the api client. Required. Searchable: priority level 2. Sortable: priority level 2.</summary>
+		/// <summary>App name of the api client. Required. Searchable: priority level 2. Sortable.</summary>
 		[Required]
 		public string AppName { get => GetProp<string>("AppName"); set => SetProp<string>("AppName", value); }
 		/// <summary>Refresh token duration of the api client. Must be between 0 and 43200.</summary>
 		public int RefreshTokenDuration { get => GetProp<int>("RefreshTokenDuration"); set => SetProp<int>("RefreshTokenDuration", value); }
-		/// <summary>Default context user name of the api client. Searchable: priority level 3. Sortable: priority level 3.</summary>
+		/// <summary>Default context user name of the api client. Searchable: priority level 3. Sortable.</summary>
 		public string DefaultContextUserName { get => GetProp<string>("DefaultContextUserName"); set => SetProp<string>("DefaultContextUserName", value); }
 		/// <summary>Container for extended (custom) properties of the api client.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
@@ -206,24 +206,24 @@ namespace OrderCloud.SDK
 		/// <summary>Date created of the address. Sortable.</summary>
 		[ApiReadOnly]
 		public DateTimeOffset? DateCreated { get; set; }
-		/// <summary>Company name of the address. Max length 100 characters. Sortable.</summary>
+		/// <summary>Company name of the address. Max length 100 characters. Searchable: priority level 3. Sortable.</summary>
 		public string CompanyName { get => GetProp<string>("CompanyName"); set => SetProp<string>("CompanyName", value); }
-		/// <summary>First name of the address. Max length 100 characters. Searchable: priority level 7. Sortable.</summary>
+		/// <summary>First name of the address. Max length 100 characters. Searchable: priority level 8. Sortable.</summary>
 		public string FirstName { get => GetProp<string>("FirstName"); set => SetProp<string>("FirstName", value); }
-		/// <summary>Last name of the address. Max length 100 characters. Searchable: priority level 6. Sortable.</summary>
+		/// <summary>Last name of the address. Max length 100 characters. Searchable: priority level 7. Sortable.</summary>
 		public string LastName { get => GetProp<string>("LastName"); set => SetProp<string>("LastName", value); }
-		/// <summary>Street 1 of the address. Required. Max length 100 characters. Searchable: priority level 4. Sortable.</summary>
+		/// <summary>Street 1 of the address. Required. Max length 100 characters. Searchable: priority level 5. Sortable.</summary>
 		[Required]
 		public string Street1 { get => GetProp<string>("Street1"); set => SetProp<string>("Street1", value); }
-		/// <summary>Street 2 of the address. Max length 100 characters. Searchable: priority level 5. Sortable.</summary>
+		/// <summary>Street 2 of the address. Max length 100 characters. Searchable: priority level 6. Sortable.</summary>
 		public string Street2 { get => GetProp<string>("Street2"); set => SetProp<string>("Street2", value); }
-		/// <summary>City of the address. Required. Max length 100 characters. Searchable: priority level 3. Sortable.</summary>
+		/// <summary>City of the address. Required. Max length 100 characters. Searchable: priority level 4. Sortable.</summary>
 		[Required]
 		public string City { get => GetProp<string>("City"); set => SetProp<string>("City", value); }
-		/// <summary>State of the address. Required. Max length 100 characters. Searchable: priority level 7. Sortable.</summary>
+		/// <summary>State of the address. Required. Max length 100 characters. Searchable: priority level 9. Sortable.</summary>
 		[Required]
 		public string State { get => GetProp<string>("State"); set => SetProp<string>("State", value); }
-		/// <summary>Zip of the address. Required. Max length 100 characters. Searchable: priority level 6. Sortable.</summary>
+		/// <summary>Zip of the address. Required. Max length 100 characters. Searchable: priority level 10. Sortable.</summary>
 		[Required]
 		public string Zip { get => GetProp<string>("Zip"); set => SetProp<string>("Zip", value); }
 		/// <summary>Country of the address. Required. Max length 2 characters. Sortable.</summary>
@@ -279,9 +279,9 @@ namespace OrderCloud.SDK
 		/// <summary>Price schedule of the product.</summary>
 		[ApiReadOnly]
 		public PriceSchedule PriceSchedule { get; set; }
-		/// <summary>ID of the product. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 2.</summary>
+		/// <summary>ID of the product. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 3.</summary>
 		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
-		/// <summary>Name of the product. Required. Max length 100 characters. Searchable: priority level 2. Sortable: priority level 1.</summary>
+		/// <summary>Name of the product. Required. Max length 100 characters. Searchable: priority level 2. Sortable: priority level 2.</summary>
 		[Required]
 		public string Name { get => GetProp<string>("Name"); set => SetProp<string>("Name", value); }
 		/// <summary>Description of the product. Max length 2000 characters. Searchable: priority level 3.</summary>
@@ -357,9 +357,12 @@ namespace OrderCloud.SDK
 
 	public class Catalog : OrderCloudModel
 	{
-		/// <summary>ID of the catalog. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 2.</summary>
+		/// <summary>ID of the catalog. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 3.</summary>
 		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
-		/// <summary>Name of the catalog. Required. Max length 100 characters. Searchable: priority level 2. Sortable: priority level 1.</summary>
+		/// <summary>ID of the Seller or Supplier org that created the Catalog.</summary>
+		[ApiReadOnly]
+		public string OwnerID { get; set; }
+		/// <summary>Name of the catalog. Required. Max length 100 characters. Searchable: priority level 2. Sortable: priority level 2.</summary>
 		[Required]
 		public string Name { get => GetProp<string>("Name"); set => SetProp<string>("Name", value); }
 		/// <summary>Description of the catalog. Max length 2000 characters. Searchable: priority level 3.</summary>
@@ -521,24 +524,26 @@ namespace OrderCloud.SDK
 		public string ClientID { get => GetProp<string>("ClientID"); set => SetProp<string>("ClientID", value); }
 		/// <summary>Roles of the impersonate token request.</summary>
 		public IList<ApiRole> Roles { get => GetProp<IList<ApiRole>>("Roles", new List<ApiRole>()); set => SetProp<IList<ApiRole>>("Roles", value); }
+		/// <summary>Custom roles of the impersonate token request.</summary>
+		public IList<string> CustomRoles { get => GetProp<IList<string>>("CustomRoles", new List<string>()); set => SetProp<IList<string>>("CustomRoles", value); }
 	}
 
 	public class ImpersonationConfig : OrderCloudModel
 	{
 		/// <summary>ID of the impersonation config. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 8. Sortable: priority level 8.</summary>
 		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
-		/// <summary>ID of the impersonation buyer. Searchable: priority level 0. Sortable: priority level 0.</summary>
+		/// <summary>The Buyer ID of the impersonator group or user (party doing the impersonating)</summary>
 		public string ImpersonationBuyerID { get => GetProp<string>("ImpersonationBuyerID"); set => SetProp<string>("ImpersonationBuyerID", value); }
-		/// <summary>ID of the impersonation group. Searchable: priority level 1. Sortable: priority level 1.</summary>
+		/// <summary>The UserGroupID of the impersonator (party doing the impersonating)</summary>
 		public string ImpersonationGroupID { get => GetProp<string>("ImpersonationGroupID"); set => SetProp<string>("ImpersonationGroupID", value); }
-		/// <summary>ID of the impersonation user. Searchable: priority level 2. Sortable: priority level 2.</summary>
+		/// <summary>The UserID of the impersonator (party doing the impersonating)</summary>
 		public string ImpersonationUserID { get => GetProp<string>("ImpersonationUserID"); set => SetProp<string>("ImpersonationUserID", value); }
-		/// <summary>ID of the buyer. Required. Searchable: priority level 3. Sortable: priority level 3.</summary>
+		/// <summary>The BuyerID of the impersonatee (party being impersonated)</summary>
 		[Required]
 		public string BuyerID { get => GetProp<string>("BuyerID"); set => SetProp<string>("BuyerID", value); }
-		/// <summary>ID of the group. Searchable: priority level 4. Sortable: priority level 4.</summary>
+		/// <summary>The UserGroupID of the impersonatee (party being impersonated)</summary>
 		public string GroupID { get => GetProp<string>("GroupID"); set => SetProp<string>("GroupID", value); }
-		/// <summary>ID of the user. Searchable: priority level 5. Sortable: priority level 5.</summary>
+		/// <summary>The UserID of the impersonatee (party being impersonated)</summary>
 		public string UserID { get => GetProp<string>("UserID"); set => SetProp<string>("UserID", value); }
 		/// <summary>ID of the security profile. Required. Searchable: priority level 6. Sortable: priority level 6.</summary>
 		[Required]
@@ -815,6 +820,7 @@ namespace OrderCloud.SDK
 		[Required]
 		public string Username { get => GetProp<string>("Username"); set => SetProp<string>("Username", value); }
 		/// <summary>Password of the user.</summary>
+		[ApiWriteOnly]
 		public string Password { get => GetProp<string>("Password"); set => SetProp<string>("Password", value); }
 		/// <summary>First name of the user. Required. Max length 100 characters. Searchable: priority level 4. Sortable: priority level 2.</summary>
 		[Required]
@@ -1165,11 +1171,14 @@ namespace OrderCloud.SDK
 
 	public class Product : OrderCloudModel
 	{
+		/// <summary>ID of the Seller or Supplier org that created the Product.</summary>
+		[ApiReadOnly]
+		public string OwnerID { get; set; }
 		/// <summary>ID of the default price schedule.</summary>
 		public string DefaultPriceScheduleID { get => GetProp<string>("DefaultPriceScheduleID"); set => SetProp<string>("DefaultPriceScheduleID", value); }
-		/// <summary>ID of the product. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 2.</summary>
+		/// <summary>ID of the product. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 3.</summary>
 		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
-		/// <summary>Name of the product. Required. Max length 100 characters. Searchable: priority level 2. Sortable: priority level 1.</summary>
+		/// <summary>Name of the product. Required. Max length 100 characters. Searchable: priority level 2. Sortable: priority level 2.</summary>
 		[Required]
 		public string Name { get => GetProp<string>("Name"); set => SetProp<string>("Name", value); }
 		/// <summary>Description of the product. Max length 2000 characters. Searchable: priority level 3.</summary>
@@ -1573,6 +1582,7 @@ namespace OrderCloud.SDK
 		[Required]
 		public string Username { get => GetProp<string>("Username"); set => SetProp<string>("Username", value); }
 		/// <summary>Password of the user.</summary>
+		[ApiWriteOnly]
 		public string Password { get => GetProp<string>("Password"); set => SetProp<string>("Password", value); }
 		/// <summary>First name of the user. Required. Max length 100 characters. Searchable: priority level 4. Sortable: priority level 2.</summary>
 		[Required]
