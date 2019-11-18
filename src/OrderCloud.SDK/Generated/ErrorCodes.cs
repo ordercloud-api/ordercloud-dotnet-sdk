@@ -4,6 +4,11 @@ namespace OrderCloud.SDK
 {
 	public static class ErrorCodes
 	{
+		public static class Api
+		{
+			/// <summary>The API is down briefly for maintenance. Please try again in a few seconds.</summary>
+			public const string Offline = "Api.Offline";
+		}
 		public static class ApiClient
 		{
 			/// <summary>The last full access client cannot be deleted.</summary>
@@ -102,6 +107,8 @@ namespace OrderCloud.SDK
 			public const string BuyerNetworkBuyerIDRequired = "Impersonation.BuyerNetworkBuyerIDRequired";
 			/// <summary>Invalid ApiClient. Not a buyer network and CompanyID is null.</summary>
 			public const string BadApiClient = "Impersonation.BadApiClient";
+			/// <summary>Cannot delete a group or user assigned to an ImpersonationConfig.</summary>
+			public const string CannotDeleteImpersonateeParty = "Impersonation.CannotDeleteImpersonateeParty";
 		}
 		public static class List
 		{
@@ -113,6 +120,8 @@ namespace OrderCloud.SDK
 			public const string InvalidSearchProperty = "List.InvalidSearchProperty";
 			/// <summary>Value passed is not valid for property type.</summary>
 			public const string InvalidType = "List.InvalidType";
+			/// <summary>pageSize is not valid.</summary>
+			public const string InvalidPageSize = "List.InvalidPageSize";
 		}
 		public static class ShipmentItem
 		{
@@ -229,6 +238,8 @@ namespace OrderCloud.SDK
 			public const string CannotCombine = "Promotion.CannotCombine";
 			/// <summary>Promotion ExpirationDate cannot be earlier than StartDate.</summary>
 			public const string ExpirationPrecedsStart = "Promotion.ExpirationPrecedsStart";
+			/// <summary>This code is already in use on another promotion.</summary>
+			public const string CodeInUse = "Promotion.CodeInUse";
 		}
 		public static class Product
 		{
@@ -255,6 +266,8 @@ namespace OrderCloud.SDK
 			public const string InvalidGroupLevel = "PartyAssignment.InvalidGroupLevel";
 			/// <summary>User-level assignments not allowed for this object.</summary>
 			public const string UserLevelNotAllowed = "PartyAssignment.UserLevelNotAllowed";
+			/// <summary>Group-level assignments not allowed for this object.</summary>
+			public const string GroupLevelNotAllowed = "PartyAssignment.GroupLevelNotAllowed";
 			/// <summary>Cannot provide both a BuyerID and SupplierID.</summary>
 			public const string CannotProvideBuyerAndSupplier = "PartyAssignment.CannotProvideBuyerAndSupplier";
 		}

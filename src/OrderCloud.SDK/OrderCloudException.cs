@@ -11,20 +11,31 @@ namespace OrderCloud.SDK
 		public HttpStatusCode? HttpStatus { get; }
 		public ApiError[] Errors { get; }
 
-		internal OrderCloudException(HttpCall call, ApiErrorResponse resp) : base(BuildMessage(call, resp), call.Exception) {
+		internal OrderCloudException(HttpCall call, ApiError[] errors) : base(BuildMessage(call, errors), call.Exception) {
 			HttpStatus = call.HttpStatus;
-			Errors = resp.Errors;
+			Errors = errors;
 		}
 
-		private static string BuildMessage(HttpCall call, ApiErrorResponse resp) =>
-			resp?.Errors?.FirstOrDefault()?.Message ??
-			call?.Exception?.Message ??
-			"An unknown error occurred.";
+		private static string BuildMessage(HttpCall call, ApiError[] errors) {
+			var code = errors?.FirstOrDefault()?.ErrorCode;
+			var msg = errors?.FirstOrDefault()?.Message;
+			if (!string.IsNullOrEmpty(code) && !string.IsNullOrEmpty(msg))
+				return $"{code}: {msg}";
+
+			return new[] { code, msg, call?.Exception?.Message, "An unknown error occurred." }
+				.FirstOrDefault(x => !string.IsNullOrEmpty(x));
+		}
 	}
 
-	public class ApiErrorResponse
+	internal class ApiErrorResponse
 	{
 		public ApiError[] Errors { get; set; }
+	}
+
+	internal class AuthErrorResponse
+	{
+		public string error { get; set; }
+		public string error_description { get; set; }
 	}
 
 	public class ApiError
