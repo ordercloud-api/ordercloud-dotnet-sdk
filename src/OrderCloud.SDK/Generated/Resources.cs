@@ -2202,6 +2202,26 @@ namespace OrderCloud.SDK
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TOrder> CancelAsync<TOrder>(OrderDirection direction, string orderID, string accessToken = null) where TOrder : Order;
+		/// <summary>Split an order split. Creates, but does not submit, 0 or more outgoing Orders to Suppliers, one for each unique Product.DefaultSupplierID on this Order.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing.</param>
+		/// <param name="orderID">ID of the order.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<OrderSplitResult> SplitAsync(OrderDirection direction, string orderID, string accessToken = null);
+		/// <summary>Forward an order forward. Creates and submits 0 or more outgoing Orders to Suppliers, one for each unique Product.DefaultSupplierID on this Order.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing.</param>
+		/// <param name="orderID">ID of the order.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<OrderSplitResult> ForwardAsync(OrderDirection direction, string orderID, string accessToken = null);
+		/// <summary>Complete an order Use only when an order doesn't need a shipment. You will not be able to ship or reopen an order after completing it.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing.</param>
+		/// <param name="orderID">ID of the order.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<Order> CompleteAsync(OrderDirection direction, string orderID, string accessToken = null);
+		/// <summary>Complete an order Use only when an order doesn't need a shipment. You will not be able to ship or reopen an order after completing it.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing.</param>
+		/// <param name="orderID">ID of the order.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TOrder> CompleteAsync<TOrder>(OrderDirection direction, string orderID, string accessToken = null) where TOrder : Order;
 		/// <summary>Create a new shipment containing all items on an order.</summary>
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing.</param>
 		/// <param name="orderID">ID of the order.</param>
@@ -2332,6 +2352,11 @@ namespace OrderCloud.SDK
 		/// <param name="promoCode">Promo code of the order.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TOrder> RemovePromotionAsync<TOrder>(OrderDirection direction, string orderID, string promoCode, string accessToken = null) where TOrder : Order;
+		/// <summary>Validate an order in its current state</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing.</param>
+		/// <param name="orderID">ID of the order.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task ValidateAsync(OrderDirection direction, string orderID, string accessToken = null);
 	}
 
 	public interface IPasswordResetsResource
@@ -4524,6 +4549,10 @@ namespace OrderCloud.SDK
 		public Task<TOrder> DeclineAsync<TOrder>(OrderDirection direction, string orderID, OrderApprovalInfo orderApprovalInfo, string accessToken = null) where TOrder : Order => Request("v1", "orders", direction, orderID, "decline").WithOAuthBearerToken(accessToken).PostJsonAsync(ValidateModel(orderApprovalInfo)).ReceiveJson<TOrder>();
 		public Task<Order> CancelAsync(OrderDirection direction, string orderID, string accessToken = null) => CancelAsync<Order>(direction, orderID, accessToken);
 		public Task<TOrder> CancelAsync<TOrder>(OrderDirection direction, string orderID, string accessToken = null) where TOrder : Order => Request("v1", "orders", direction, orderID, "cancel").WithOAuthBearerToken(accessToken).PostAsync(null).ReceiveJson<TOrder>();
+		public Task<OrderSplitResult> SplitAsync(OrderDirection direction, string orderID, string accessToken = null) => Request("v1", "orders", direction, orderID, "split").WithOAuthBearerToken(accessToken).PostAsync(null).ReceiveJson<OrderSplitResult>();
+		public Task<OrderSplitResult> ForwardAsync(OrderDirection direction, string orderID, string accessToken = null) => Request("v1", "orders", direction, orderID, "forward").WithOAuthBearerToken(accessToken).PostAsync(null).ReceiveJson<OrderSplitResult>();
+		public Task<Order> CompleteAsync(OrderDirection direction, string orderID, string accessToken = null) => CompleteAsync<Order>(direction, orderID, accessToken);
+		public Task<TOrder> CompleteAsync<TOrder>(OrderDirection direction, string orderID, string accessToken = null) where TOrder : Order => Request("v1", "orders", direction, orderID, "complete").WithOAuthBearerToken(accessToken).PostAsync(null).ReceiveJson<TOrder>();
 		public Task<Order> ShipAsync(OrderDirection direction, string orderID, Shipment shipment, string accessToken = null) => ShipAsync<Order>(direction, orderID, shipment, accessToken);
 		public Task<TOrder> ShipAsync<TOrder>(OrderDirection direction, string orderID, Shipment shipment, string accessToken = null) where TOrder : Order => Request("v1", "orders", direction, orderID, "ship").WithOAuthBearerToken(accessToken).PostJsonAsync(ValidateModel(shipment)).ReceiveJson<TOrder>();
 		public Task<Order> SetShippingAddressAsync(OrderDirection direction, string orderID, Address address, string accessToken = null) => SetShippingAddressAsync<Order>(direction, orderID, address, accessToken);
@@ -4544,6 +4573,7 @@ namespace OrderCloud.SDK
 		public Task<ListPage<TOrderPromotion>> ListPromotionsAsync<TOrderPromotion>(OrderDirection direction, string orderID, Action<ListOptionsBuilder<TOrderPromotion>> buildListOpts, string accessToken = null) where TOrderPromotion : OrderPromotion => Request("v1", "orders", direction, orderID, "promotions").WithOAuthBearerToken(accessToken).SetListOptions(buildListOpts).GetJsonAsync<ListPage<TOrderPromotion>>();
 		public Task<Order> RemovePromotionAsync(OrderDirection direction, string orderID, string promoCode, string accessToken = null) => RemovePromotionAsync<Order>(direction, orderID, promoCode, accessToken);
 		public Task<TOrder> RemovePromotionAsync<TOrder>(OrderDirection direction, string orderID, string promoCode, string accessToken = null) where TOrder : Order => Request("v1", "orders", direction, orderID, "promotions", promoCode).WithOAuthBearerToken(accessToken).DeleteAsync().ReceiveJson<TOrder>();
+		public Task ValidateAsync(OrderDirection direction, string orderID, string accessToken = null) => Request("v1", "orders", direction, orderID, "validate").WithOAuthBearerToken(accessToken).PostAsync(null);
 	}
 
 	public class PasswordResetsResource : OrderCloudResource, IPasswordResetsResource

@@ -879,6 +879,8 @@ namespace OrderCloud.SDK
 		/// <summary>A publicly known URL from the Identity Provider where agents can get JWT tokens.</summary>
 		[Required]
 		public string TokenEndpoint { get => GetProp<string>("TokenEndpoint"); set => SetProp<string>("TokenEndpoint", value); }
+		/// <summary>If true, uses a url encoded form post with all auth values. Otherwise, an Authorization header with basic auth is passed with a JSON object in the body.</summary>
+		public bool UrlEncoded { get => GetProp<bool>("UrlEncoded"); set => SetProp<bool>("UrlEncoded", value); }
 	}
 
 	public class Order : OrderCloudModel
@@ -888,8 +890,10 @@ namespace OrderCloud.SDK
 		/// <summary>From user of the order. Sortable.</summary>
 		[ApiReadOnly]
 		public User FromUser { get; set; }
-		/// <summary>ID of the from company. Searchable: priority level 2. Sortable.</summary>
+		/// <summary>ID of the Buyer or Seller placing the order. Mainly useful to the Seller or Supplier receiving it.</summary>
 		public string FromCompanyID { get => GetProp<string>("FromCompanyID"); set => SetProp<string>("FromCompanyID", value); }
+		/// <summary>ID of the Seller or Supplier receiving the order. Mainly useful to the Buyer or Seller placing it.</summary>
+		public string ToCompanyID { get => GetProp<string>("ToCompanyID"); set => SetProp<string>("ToCompanyID", value); }
 		/// <summary>ID of the from user. Sortable.</summary>
 		public string FromUserID { get => GetProp<string>("FromUserID"); set => SetProp<string>("FromUserID", value); }
 		/// <summary>ID of the billing address.</summary>
@@ -1038,6 +1042,14 @@ namespace OrderCloud.SDK
 		public new Txp xp { get; set; }
 	}
 
+	public class OrderSplitResult : OrderCloudModel
+	{
+		/// <summary>The outgoing Orders created, one for each unique Product.DefaultSupplierID on the original Order.</summary>
+		public IList<Order> OutgoingOrders { get => GetProp<IList<Order>>("OutgoingOrders", new List<Order>()); set => SetProp<IList<Order>>("OutgoingOrders", value); }
+		/// <summary>IDs of Line Items not added to an outgoing Order, most likely because Product.DefaultSupplierID is not set.</summary>
+		public IList<string> RemainingLineItemIDs { get => GetProp<IList<string>>("RemainingLineItemIDs", new List<string>()); set => SetProp<IList<string>>("RemainingLineItemIDs", value); }
+	}
+
 	public class PasswordConfig : OrderCloudModel
 	{
 		/// <summary>Expire in days of the password config. Must be at least 1.</summary>
@@ -1176,6 +1188,8 @@ namespace OrderCloud.SDK
 		public string OwnerID { get; set; }
 		/// <summary>ID of the default price schedule.</summary>
 		public string DefaultPriceScheduleID { get => GetProp<string>("DefaultPriceScheduleID"); set => SetProp<string>("DefaultPriceScheduleID", value); }
+		/// <summary>If true, when this product is ordered by a Buyer, it will automatically be added to a new Order from the Seller to the Default Supplier and submitted. Requires a valid DefaultSupplierID.</summary>
+		public bool AutoForward { get => GetProp<bool>("AutoForward"); set => SetProp<bool>("AutoForward", value); }
 		/// <summary>ID of the product. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 3.</summary>
 		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
 		/// <summary>Name of the product. Required. Max length 100 characters. Searchable: priority level 2. Sortable: priority level 2.</summary>

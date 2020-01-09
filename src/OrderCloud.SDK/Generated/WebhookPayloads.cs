@@ -1356,6 +1356,48 @@ namespace OrderCloud.SDK
 			/// <summary>Webhook payload sent by OrderCloud on POST v1/orders/{direction}/{orderID}/cancel, with strongly typed ConfigData.</summary>
 			[SentOn("POST", "v1/orders/{direction}/{orderID}/cancel")]
 			public class Cancel<TConfigData> : WebhookPayload<object, Order, Cancel.CancelRouteParams, TConfigData> { }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/orders/{direction}/{orderID}/split.</summary>
+			[SentOn("POST", "v1/orders/{direction}/{orderID}/split")]
+			public class Split : WebhookPayload<object, OrderSplitResult, Split.SplitRouteParams, dynamic>
+			{
+				/// <summary>Type used to represent route parameter name/value pairs for v1/orders/{direction}/{orderID}/split.</summary>
+				public class SplitRouteParams
+				{
+					public OrderDirection Direction { get; set; }
+					public string OrderID { get; set; }
+				}
+			}
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/orders/{direction}/{orderID}/split, with strongly typed ConfigData.</summary>
+			[SentOn("POST", "v1/orders/{direction}/{orderID}/split")]
+			public class Split<TConfigData> : WebhookPayload<object, OrderSplitResult, Split.SplitRouteParams, TConfigData> { }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/orders/{direction}/{orderID}/forward.</summary>
+			[SentOn("POST", "v1/orders/{direction}/{orderID}/forward")]
+			public class Forward : WebhookPayload<object, OrderSplitResult, Forward.ForwardRouteParams, dynamic>
+			{
+				/// <summary>Type used to represent route parameter name/value pairs for v1/orders/{direction}/{orderID}/forward.</summary>
+				public class ForwardRouteParams
+				{
+					public OrderDirection Direction { get; set; }
+					public string OrderID { get; set; }
+				}
+			}
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/orders/{direction}/{orderID}/forward, with strongly typed ConfigData.</summary>
+			[SentOn("POST", "v1/orders/{direction}/{orderID}/forward")]
+			public class Forward<TConfigData> : WebhookPayload<object, OrderSplitResult, Forward.ForwardRouteParams, TConfigData> { }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/orders/{direction}/{orderID}/complete.</summary>
+			[SentOn("POST", "v1/orders/{direction}/{orderID}/complete")]
+			public class Complete : WebhookPayload<object, Order, Complete.CompleteRouteParams, dynamic>
+			{
+				/// <summary>Type used to represent route parameter name/value pairs for v1/orders/{direction}/{orderID}/complete.</summary>
+				public class CompleteRouteParams
+				{
+					public OrderDirection Direction { get; set; }
+					public string OrderID { get; set; }
+				}
+			}
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/orders/{direction}/{orderID}/complete, with strongly typed ConfigData.</summary>
+			[SentOn("POST", "v1/orders/{direction}/{orderID}/complete")]
+			public class Complete<TConfigData> : WebhookPayload<object, Order, Complete.CompleteRouteParams, TConfigData> { }
 			/// <summary>Webhook payload sent by OrderCloud on POST v1/orders/{direction}/{orderID}/ship.</summary>
 			[SentOn("POST", "v1/orders/{direction}/{orderID}/ship")]
 			public class Ship : WebhookPayload<Shipment, Order, Ship.ShipRouteParams, dynamic>
@@ -1470,6 +1512,20 @@ namespace OrderCloud.SDK
 			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/orders/{direction}/{orderID}/promotions/{promoCode}, with strongly typed ConfigData.</summary>
 			[SentOn("DELETE", "v1/orders/{direction}/{orderID}/promotions/{promoCode}")]
 			public class RemovePromotion<TConfigData> : WebhookPayload<object, Order, RemovePromotion.RemovePromotionRouteParams, TConfigData> { }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/orders/{direction}/{orderID}/validate.</summary>
+			[SentOn("POST", "v1/orders/{direction}/{orderID}/validate")]
+			public class Validate : WebhookPayload<object, object, Validate.ValidateRouteParams, dynamic>
+			{
+				/// <summary>Type used to represent route parameter name/value pairs for v1/orders/{direction}/{orderID}/validate.</summary>
+				public class ValidateRouteParams
+				{
+					public OrderDirection Direction { get; set; }
+					public string OrderID { get; set; }
+				}
+			}
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/orders/{direction}/{orderID}/validate, with strongly typed ConfigData.</summary>
+			[SentOn("POST", "v1/orders/{direction}/{orderID}/validate")]
+			public class Validate<TConfigData> : WebhookPayload<object, object, Validate.ValidateRouteParams, TConfigData> { }
 		}
 		public static class PasswordResets
 		{
