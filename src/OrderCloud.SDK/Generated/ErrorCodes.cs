@@ -156,6 +156,12 @@ namespace OrderCloud.SDK
 			public const string CreateIncomingRequiresFromUser = "Order.CreateIncomingRequiresFromUser";
 			/// <summary>You are not eligible to approve this order.</summary>
 			public const string NotEligibleToApprove = "Order.NotEligibleToApprove";
+			/// <summary>Only Seller users can split and forward orders.</summary>
+			public const string CannotSplitWrongUserType = "Order.CannotSplitWrongUserType";
+			/// <summary>Can only split and forward incoming orders.</summary>
+			public const string CannotSplitOutgoing = "Order.CannotSplitOutgoing";
+			/// <summary>Cannot complete an order with this status. Order status must be Open.</summary>
+			public const string CannotCompleteBadStatus = "Order.CannotCompleteBadStatus";
 		}
 		public static class PriceSchedule
 		{
@@ -251,6 +257,8 @@ namespace OrderCloud.SDK
 			public const string CategoryFilterRequiresCatalogID = "Product.CategoryFilterRequiresCatalogID";
 			/// <summary>Product cannot be assigned directly to Buyer (or User or Group) because it is not in a Catalog that the Buyer can access.</summary>
 			public const string CannotAssignNotInBuyerCatalog = "Product.CannotAssignNotInBuyerCatalog";
+			/// <summary>Product cache is being built. Please try again later.</summary>
+			public const string CacheBuilding = "Product.CacheBuilding";
 		}
 		public static class PartyAssignment
 		{
