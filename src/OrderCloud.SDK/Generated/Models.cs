@@ -323,38 +323,6 @@ namespace OrderCloud.SDK
 		public new PriceSchedule<TPriceScheduleXP> PriceSchedule { get; set; }
 	}
 
-	public class BuyerSpec : OrderCloudModel
-	{
-		/// <summary>Options of the spec.</summary>
-		[ApiReadOnly]
-		public IReadOnlyList<SpecOption> Options { get; set; }
-		/// <summary>ID of the spec. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 3. Sortable: priority level 3.</summary>
-		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
-		/// <summary>List order of the spec. Searchable: priority level 2. Sortable: priority level 1.</summary>
-		public int ListOrder { get => GetProp<int>("ListOrder"); set => SetProp<int>("ListOrder", value); }
-		/// <summary>Name of the spec. Required. Searchable: priority level 1. Sortable: priority level 2.</summary>
-		[Required]
-		public string Name { get => GetProp<string>("Name"); set => SetProp<string>("Name", value); }
-		/// <summary>Default value of the spec. Max length 2000 characters.</summary>
-		public string DefaultValue { get => GetProp<string>("DefaultValue"); set => SetProp<string>("DefaultValue", value); }
-		/// <summary>Required of the spec. Searchable: priority level 4.</summary>
-		public bool Required { get => GetProp<bool>("Required"); set => SetProp<bool>("Required", value); }
-		/// <summary>Allow open text of the spec. Searchable: priority level 5.</summary>
-		public bool AllowOpenText { get => GetProp<bool>("AllowOpenText"); set => SetProp<bool>("AllowOpenText", value); }
-		/// <summary>ID of the default option.</summary>
-		public string DefaultOptionID { get => GetProp<string>("DefaultOptionID"); set => SetProp<string>("DefaultOptionID", value); }
-		/// <summary>True if each unique combinations of this Spec's Options map to unique Product Variants/SKUs.</summary>
-		public bool DefinesVariant { get => GetProp<bool>("DefinesVariant"); set => SetProp<bool>("DefinesVariant", value); }
-		/// <summary>Container for extended (custom) properties of the spec.</summary>
-		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
-	}
-
-	/// <typeparam name="Txp">Type used as a container for extended properties (xp) of the BuyerSpec.</typeparam>
-	public class BuyerSpec<Txp> : BuyerSpec
-	{
-		public new Txp xp { get; set; }
-	}
-
 	public class Catalog : OrderCloudModel
 	{
 		/// <summary>ID of the catalog. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 3.</summary>
@@ -1454,9 +1422,6 @@ namespace OrderCloud.SDK
 
 	public class Spec : OrderCloudModel
 	{
-		/// <summary>Option count of the spec.</summary>
-		[ApiReadOnly]
-		public int OptionCount { get; set; }
 		/// <summary>ID of the spec. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 3. Sortable: priority level 3.</summary>
 		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
 		/// <summary>List order of the spec. Searchable: priority level 2. Sortable: priority level 1.</summary>
@@ -1476,6 +1441,12 @@ namespace OrderCloud.SDK
 		public bool DefinesVariant { get => GetProp<bool>("DefinesVariant"); set => SetProp<bool>("DefinesVariant", value); }
 		/// <summary>Container for extended (custom) properties of the spec.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
+		/// <summary>Option count of the spec.</summary>
+		[ApiReadOnly]
+		public int OptionCount { get; set; }
+		/// <summary>Options of the spec.</summary>
+		[ApiReadOnly]
+		public IReadOnlyList<SpecOption> Options { get; set; }
 	}
 
 	/// <typeparam name="Txp">Type used as a container for extended properties (xp) of the Spec.</typeparam>

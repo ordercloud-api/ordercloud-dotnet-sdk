@@ -4,13 +4,14 @@
 		<!-- https://docs.microsoft.com/en-us/dotnet/core/tools/csproj -->
 		<TargetFrameworks>net45;netstandard1.3;netstandard2.0</TargetFrameworks>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<Version>0.6.14</Version>
+		<Version>0.7.0</Version>
 		<PackageId>OrderCloud.SDK</PackageId>
 		<Title>OrderCloud SDK</Title>
 		<Authors>Todd Menier</Authors>
 		<Description>The official .NET client SDK for OrderClould.io, a cloud-hosted headless B2B eCommerce platform.</Description>
 		<Copyright>Copyright 2020 Four51, Inc.</Copyright>
 		<PackageProjectUrl>https://ordercloud.io/</PackageProjectUrl>
+		<PackageIcon>icon.png</PackageIcon>
 		<PackageIconUrl>https://ordercloud.io/wp-content/uploads/2018/01/oc-circle-logo-2018.png</PackageIconUrl>
 		<PackageTags>ecommerce b2b four51 ordercloud cloud api headless</PackageTags>
 		<PackageReleaseNotes>https://ordercloud-api.github.io/release-notes/</PackageReleaseNotes>
@@ -27,6 +28,7 @@
 	<ItemGroup>
 	  <PackageReference Include="Flurl.Http" Version="2.4.0" />
 	  <PackageReference Include="Microsoft.CSharp" Version="4.5.0" />
+		<None Include="..\..\icon.png" Pack="true" PackagePath="\"/>
 	</ItemGroup>
 
 </Project>
