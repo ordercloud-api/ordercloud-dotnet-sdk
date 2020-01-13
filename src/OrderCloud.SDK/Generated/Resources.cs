@@ -1568,7 +1568,7 @@ namespace OrderCloud.SDK
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
-		Task<ListPage<BuyerSpec>> ListSpecsAsync(string productID, string catalogID = null, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
+		Task<ListPage<Spec>> ListSpecsAsync(string productID, string catalogID = null, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
 		/// <summary>Get a list of specs visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="catalogID">ID of the catalog.</param>
@@ -1579,31 +1579,31 @@ namespace OrderCloud.SDK
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
-		Task<ListPage<TBuyerSpec>> ListSpecsAsync<TBuyerSpec>(string productID, string catalogID = null, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TBuyerSpec : BuyerSpec;
+		Task<ListPage<TSpec>> ListSpecsAsync<TSpec>(string productID, string catalogID = null, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TSpec : Spec;
 		/// <summary>Get a list of specs visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="catalogID">ID of the catalog.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
-		Task<ListPage<BuyerSpec>> ListSpecsAsync(string productID, Action<ListOptionsBuilder<BuyerSpec>> buildListOpts, string catalogID = null, string accessToken = null);
+		Task<ListPage<Spec>> ListSpecsAsync(string productID, Action<ListOptionsBuilder<Spec>> buildListOpts, string catalogID = null, string accessToken = null);
 		/// <summary>Get a list of specs visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="catalogID">ID of the catalog.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
-		Task<ListPage<TBuyerSpec>> ListSpecsAsync<TBuyerSpec>(string productID, Action<ListOptionsBuilder<TBuyerSpec>> buildListOpts, string catalogID = null, string accessToken = null) where TBuyerSpec : BuyerSpec;
+		Task<ListPage<TSpec>> ListSpecsAsync<TSpec>(string productID, Action<ListOptionsBuilder<TSpec>> buildListOpts, string catalogID = null, string accessToken = null) where TSpec : Spec;
 		/// <summary>Get a single spec. Only available to Buyer Users.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="specID">ID of the spec.</param>
 		/// <param name="catalogID">ID of the catalog.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
-		Task<BuyerSpec> GetSpecAsync(string productID, string specID, string catalogID = null, string accessToken = null);
+		Task<Spec> GetSpecAsync(string productID, string specID, string catalogID = null, string accessToken = null);
 		/// <summary>Get a single spec. Only available to Buyer Users.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="specID">ID of the spec.</param>
 		/// <param name="catalogID">ID of the catalog.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
-		Task<TBuyerSpec> GetSpecAsync<TBuyerSpec>(string productID, string specID, string catalogID = null, string accessToken = null) where TBuyerSpec : BuyerSpec;
+		Task<TSpec> GetSpecAsync<TSpec>(string productID, string specID, string catalogID = null, string accessToken = null) where TSpec : Spec;
 		/// <summary>Get a list of orders visible to this user. List orders created by this user.</summary>
 		/// <param name="from">Lower bound of date range that the order was created (if outgoing) or submitted (if incoming).</param>
 		/// <param name="to">Upper bound of date range that the order was created (if outgoing) or submitted (if incoming).</param>
@@ -2784,6 +2784,36 @@ namespace OrderCloud.SDK
 		/// <param name="variantID">ID of the variant.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TVariant> GetVariantAsync<TVariant>(string productID, string variantID, string accessToken = null) where TVariant : Variant;
+		/// <summary>Get a list of product specs.</summary>
+		/// <param name="productID">ID of the product.</param>
+		/// <param name="search">Word or phrase to search for.</param>
+		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
+		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
+		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<Spec>> ListSpecsAsync(string productID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
+		/// <summary>Get a list of product specs.</summary>
+		/// <param name="productID">ID of the product.</param>
+		/// <param name="search">Word or phrase to search for.</param>
+		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
+		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
+		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<TSpec>> ListSpecsAsync<TSpec>(string productID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TSpec : Spec;
+		/// <summary>Get a list of product specs.</summary>
+		/// <param name="productID">ID of the product.</param>
+		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<Spec>> ListSpecsAsync(string productID, Action<ListOptionsBuilder<Spec>> buildListOpts, string accessToken = null);
+		/// <summary>Get a list of product specs.</summary>
+		/// <param name="productID">ID of the product.</param>
+		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<TSpec>> ListSpecsAsync<TSpec>(string productID, Action<ListOptionsBuilder<TSpec>> buildListOpts, string accessToken = null) where TSpec : Spec;
 		/// <summary>Get a list of product suppliers.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="search">Word or phrase to search for.</param>
@@ -4436,12 +4466,12 @@ namespace OrderCloud.SDK
 		public Task<ListPageWithFacets<TBuyerProduct>> ListProductsAsync<TBuyerProduct>(Action<ListOptionsBuilder<TBuyerProduct>> buildListOpts, string catalogID = null, string categoryID = null, string depth = null, string accessToken = null) where TBuyerProduct : BuyerProduct => Request("v1", "me", "products").WithOAuthBearerToken(accessToken).SetQueryParams(new { catalogID, categoryID, depth }).SetListOptions(buildListOpts).GetJsonAsync<ListPageWithFacets<TBuyerProduct>>();
 		public Task<BuyerProduct> GetProductAsync(string productID, string accessToken = null) => GetProductAsync<BuyerProduct>(productID, accessToken);
 		public Task<TBuyerProduct> GetProductAsync<TBuyerProduct>(string productID, string accessToken = null) where TBuyerProduct : BuyerProduct => Request("v1", "me", "products", productID).WithOAuthBearerToken(accessToken).GetJsonAsync<TBuyerProduct>();
-		public Task<ListPage<BuyerSpec>> ListSpecsAsync(string productID, string catalogID = null, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) => ListSpecsAsync<BuyerSpec>(productID, catalogID, search, searchOn, sortBy, page, pageSize, filters, accessToken);
-		public Task<ListPage<TBuyerSpec>> ListSpecsAsync<TBuyerSpec>(string productID, string catalogID = null, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TBuyerSpec : BuyerSpec => Request("v1", "me", "products", productID, "specs").WithOAuthBearerToken(accessToken).SetQueryParams(new { catalogID, search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<TBuyerSpec>>();
-		public Task<ListPage<BuyerSpec>> ListSpecsAsync(string productID, Action<ListOptionsBuilder<BuyerSpec>> buildListOpts, string catalogID = null, string accessToken = null) => ListSpecsAsync<BuyerSpec>(productID, buildListOpts, catalogID, accessToken);
-		public Task<ListPage<TBuyerSpec>> ListSpecsAsync<TBuyerSpec>(string productID, Action<ListOptionsBuilder<TBuyerSpec>> buildListOpts, string catalogID = null, string accessToken = null) where TBuyerSpec : BuyerSpec => Request("v1", "me", "products", productID, "specs").WithOAuthBearerToken(accessToken).SetQueryParams(new { catalogID }).SetListOptions(buildListOpts).GetJsonAsync<ListPage<TBuyerSpec>>();
-		public Task<BuyerSpec> GetSpecAsync(string productID, string specID, string catalogID = null, string accessToken = null) => GetSpecAsync<BuyerSpec>(productID, specID, catalogID, accessToken);
-		public Task<TBuyerSpec> GetSpecAsync<TBuyerSpec>(string productID, string specID, string catalogID = null, string accessToken = null) where TBuyerSpec : BuyerSpec => Request("v1", "me", "products", productID, "specs", specID).WithOAuthBearerToken(accessToken).SetQueryParams(new { catalogID }).GetJsonAsync<TBuyerSpec>();
+		public Task<ListPage<Spec>> ListSpecsAsync(string productID, string catalogID = null, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) => ListSpecsAsync<Spec>(productID, catalogID, search, searchOn, sortBy, page, pageSize, filters, accessToken);
+		public Task<ListPage<TSpec>> ListSpecsAsync<TSpec>(string productID, string catalogID = null, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TSpec : Spec => Request("v1", "me", "products", productID, "specs").WithOAuthBearerToken(accessToken).SetQueryParams(new { catalogID, search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<TSpec>>();
+		public Task<ListPage<Spec>> ListSpecsAsync(string productID, Action<ListOptionsBuilder<Spec>> buildListOpts, string catalogID = null, string accessToken = null) => ListSpecsAsync<Spec>(productID, buildListOpts, catalogID, accessToken);
+		public Task<ListPage<TSpec>> ListSpecsAsync<TSpec>(string productID, Action<ListOptionsBuilder<TSpec>> buildListOpts, string catalogID = null, string accessToken = null) where TSpec : Spec => Request("v1", "me", "products", productID, "specs").WithOAuthBearerToken(accessToken).SetQueryParams(new { catalogID }).SetListOptions(buildListOpts).GetJsonAsync<ListPage<TSpec>>();
+		public Task<Spec> GetSpecAsync(string productID, string specID, string catalogID = null, string accessToken = null) => GetSpecAsync<Spec>(productID, specID, catalogID, accessToken);
+		public Task<TSpec> GetSpecAsync<TSpec>(string productID, string specID, string catalogID = null, string accessToken = null) where TSpec : Spec => Request("v1", "me", "products", productID, "specs", specID).WithOAuthBearerToken(accessToken).SetQueryParams(new { catalogID }).GetJsonAsync<TSpec>();
 		public Task<ListPage<Order>> ListOrdersAsync(DateTimeOffset? from = null, DateTimeOffset? to = null, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) => ListOrdersAsync<Order>(from, to, search, searchOn, sortBy, page, pageSize, filters, accessToken);
 		public Task<ListPage<TOrder>> ListOrdersAsync<TOrder>(DateTimeOffset? from = null, DateTimeOffset? to = null, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TOrder : Order => Request("v1", "me", "orders").WithOAuthBearerToken(accessToken).SetQueryParams(new { from, to, search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<TOrder>>();
 		public Task<ListPage<Order>> ListOrdersAsync(Action<ListOptionsBuilder<Order>> buildListOpts, DateTimeOffset? from = null, DateTimeOffset? to = null, string accessToken = null) => ListOrdersAsync<Order>(buildListOpts, from, to, accessToken);
@@ -4669,6 +4699,10 @@ namespace OrderCloud.SDK
 		public Task<TVariant> PatchVariantAsync<TVariant>(string productID, string variantID, PartialVariant partialVariant, string accessToken = null) where TVariant : Variant => Request("v1", "products", productID, "variants", variantID).WithOAuthBearerToken(accessToken).PatchJsonAsync(ValidateModel(partialVariant)).ReceiveJson<TVariant>();
 		public Task<Variant> GetVariantAsync(string productID, string variantID, string accessToken = null) => GetVariantAsync<Variant>(productID, variantID, accessToken);
 		public Task<TVariant> GetVariantAsync<TVariant>(string productID, string variantID, string accessToken = null) where TVariant : Variant => Request("v1", "products", productID, "variants", variantID).WithOAuthBearerToken(accessToken).GetJsonAsync<TVariant>();
+		public Task<ListPage<Spec>> ListSpecsAsync(string productID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) => ListSpecsAsync<Spec>(productID, search, searchOn, sortBy, page, pageSize, filters, accessToken);
+		public Task<ListPage<TSpec>> ListSpecsAsync<TSpec>(string productID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TSpec : Spec => Request("v1", "products", productID, "specs").WithOAuthBearerToken(accessToken).SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<TSpec>>();
+		public Task<ListPage<Spec>> ListSpecsAsync(string productID, Action<ListOptionsBuilder<Spec>> buildListOpts, string accessToken = null) => ListSpecsAsync<Spec>(productID, buildListOpts, accessToken);
+		public Task<ListPage<TSpec>> ListSpecsAsync<TSpec>(string productID, Action<ListOptionsBuilder<TSpec>> buildListOpts, string accessToken = null) where TSpec : Spec => Request("v1", "products", productID, "specs").WithOAuthBearerToken(accessToken).SetListOptions(buildListOpts).GetJsonAsync<ListPage<TSpec>>();
 		public Task<ListPage<Supplier>> ListSuppliersAsync(string productID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) => ListSuppliersAsync<Supplier>(productID, search, searchOn, sortBy, page, pageSize, filters, accessToken);
 		public Task<ListPage<TSupplier>> ListSuppliersAsync<TSupplier>(string productID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TSupplier : Supplier => Request("v1", "products", productID, "suppliers").WithOAuthBearerToken(accessToken).SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<TSupplier>>();
 		public Task<ListPage<Supplier>> ListSuppliersAsync(string productID, Action<ListOptionsBuilder<Supplier>> buildListOpts, string accessToken = null) => ListSuppliersAsync<Supplier>(productID, buildListOpts, accessToken);
