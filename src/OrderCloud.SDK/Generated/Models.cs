@@ -302,8 +302,6 @@ namespace OrderCloud.SDK
 		/// <summary>Spec count of the product.</summary>
 		[ApiReadOnly]
 		public int SpecCount { get; set; }
-		/// <summary>Container for extended (custom) properties of the product.</summary>
-		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 		/// <summary>Variant count of the product.</summary>
 		[ApiReadOnly]
 		public int VariantCount { get; set; }
@@ -313,6 +311,8 @@ namespace OrderCloud.SDK
 		public Inventory Inventory { get => GetProp<Inventory>("Inventory"); set => SetProp<Inventory>("Inventory", value); }
 		/// <summary>ID of the default supplier.</summary>
 		public string DefaultSupplierID { get => GetProp<string>("DefaultSupplierID"); set => SetProp<string>("DefaultSupplierID", value); }
+		/// <summary>Container for extended (custom) properties of the product.</summary>
+		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
 
 	/// <typeparam name="Txp">Type used as a container for extended properties (xp) of the BuyerProduct.</typeparam>
@@ -402,9 +402,9 @@ namespace OrderCloud.SDK
 		public string BuyerID { get => GetProp<string>("BuyerID"); set => SetProp<string>("BuyerID", value); }
 		/// <summary>ID of the user group.</summary>
 		public string UserGroupID { get => GetProp<string>("UserGroupID"); set => SetProp<string>("UserGroupID", value); }
-		/// <summary>Optional. Set to null to inherit from parent category or catlog level.</summary>
+		/// <summary>Optional. Set to null to inherit from parent category or catalog level.</summary>
 		public bool? Visible { get => GetProp<bool?>("Visible"); set => SetProp<bool?>("Visible", value); }
-		/// <summary>Optional. Set to null to inherit from parent category or catlog level.</summary>
+		/// <summary>Optional. Set to null to inherit from parent category or catalog level.</summary>
 		public bool? ViewAllProducts { get => GetProp<bool?>("ViewAllProducts"); set => SetProp<bool?>("ViewAllProducts", value); }
 	}
 
@@ -488,9 +488,11 @@ namespace OrderCloud.SDK
 
 	public class ImpersonateTokenRequest : OrderCloudModel
 	{
-		/// <summary>ID of the client.</summary>
+		/// <summary>ID of the client. Required.</summary>
+		[Required]
 		public string ClientID { get => GetProp<string>("ClientID"); set => SetProp<string>("ClientID", value); }
-		/// <summary>Roles of the impersonate token request.</summary>
+		/// <summary>Roles of the impersonate token request. Required.</summary>
+		[Required]
 		public IList<ApiRole> Roles { get => GetProp<IList<ApiRole>>("Roles", new List<ApiRole>()); set => SetProp<IList<ApiRole>>("Roles", value); }
 		/// <summary>Custom roles of the impersonate token request.</summary>
 		public IList<string> CustomRoles { get => GetProp<IList<string>>("CustomRoles", new List<string>()); set => SetProp<IList<string>>("CustomRoles", value); }
@@ -1181,8 +1183,6 @@ namespace OrderCloud.SDK
 		/// <summary>Spec count of the product.</summary>
 		[ApiReadOnly]
 		public int SpecCount { get; set; }
-		/// <summary>Container for extended (custom) properties of the product.</summary>
-		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 		/// <summary>Variant count of the product.</summary>
 		[ApiReadOnly]
 		public int VariantCount { get; set; }
@@ -1192,6 +1192,8 @@ namespace OrderCloud.SDK
 		public Inventory Inventory { get => GetProp<Inventory>("Inventory"); set => SetProp<Inventory>("Inventory", value); }
 		/// <summary>ID of the default supplier.</summary>
 		public string DefaultSupplierID { get => GetProp<string>("DefaultSupplierID"); set => SetProp<string>("DefaultSupplierID", value); }
+		/// <summary>Container for extended (custom) properties of the product.</summary>
+		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
 
 	/// <typeparam name="Txp">Type used as a container for extended properties (xp) of the Product.</typeparam>
