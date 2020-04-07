@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 namespace OrderCloud.SDK
 {
 	/// <summary>
-	/// An object used to fluently build a set of optional parameters to send in a GET request against a list endpoint.
+	/// Builder created by the SDK and provided to ListAsync(opts => ...) overloads for fluently specifying optional args to send to list endpoints.
 	/// </summary>
 	public class ListOptionsBuilder<T>
 	{
-		private readonly ListOptions _opts = new ListOptions();
-		private readonly List<string> _searchOn = new List<string>();
-		private readonly List<string> _sortBy = new List<string>();
+		protected readonly ListOptions _opts = new ListOptions();
+		protected readonly List<string> _searchOn = new List<string>();
+		protected readonly List<string> _sortBy = new List<string>();
 
 		/// <summary>
 		/// Specify a word or phrase to search for.
@@ -169,5 +169,51 @@ namespace OrderCloud.SDK
 				default: throw new FilterExpressionException(exp, FilterExpressionErrorMessages.UNSUPPORTED_EXPRESSION);
 			}
 		}
+	}
+
+	/// <summary>
+	/// Builder created by the SDK and provided to ListAsync(opts => ...) overloads for fluently specifying optional args to send to list endpoints.
+	/// This "enhanced" version adds optional searchType arg to SearchFor, which is available only in Premium Search-enabled endpoints.
+	/// </summary>
+	public class ListOptionsBuilder2<T> : ListOptionsBuilder<T>
+	{
+		/// <summary>
+		/// Specify a word or phrase to search for, and a search type to use.
+		/// </summary>
+		public new ListOptionsBuilder2<T> SearchFor(string phrase, SearchType searchType) {
+			_opts.Search = phrase;
+			_opts.SearchType = searchType;
+			return this;
+		}
+
+		/// <summary>
+		/// Specify a word or phrase to search for.
+		/// </summary>
+		public new ListOptionsBuilder2<T> SearchFor(string phrase) => (ListOptionsBuilder2<T>)base.SearchFor(phrase);
+		/// <summary>
+		/// Add one or more properties to apply the search phrase.
+		/// </summary>
+		public ListOptionsBuilder2<T> SearchOn(params Expression<Func<T, object>>[] properties) => (ListOptionsBuilder2<T>)base.SearchOn(properties);
+		/// <summary>
+		/// Add one or more properties to sort by.
+		/// </summary>
+		public new ListOptionsBuilder2<T> SortBy(params Expression<Func<T, object>>[] properties) => (ListOptionsBuilder2<T>)base.SortBy(properties);
+		/// <summary>
+		/// Add one or more properties to sort by in descending order.
+		/// </summary>
+		public new ListOptionsBuilder2<T> SortByReverse(params Expression<Func<T, object>>[] properties) => (ListOptionsBuilder2<T>)base.SortByReverse(properties);
+		/// <summary>
+		/// Specify which page of results to return. 1-based.
+		/// </summary>
+		public new ListOptionsBuilder2<T> Page(int page) => (ListOptionsBuilder2<T>)base.Page(page);
+		/// <summary>
+		/// Specify number of items per page. Default: 20, max: 100.
+		/// </summary>
+		public new ListOptionsBuilder2<T> PageSize(int size) => (ListOptionsBuilder2<T>)base.PageSize(size);
+		/// <summary>
+		/// Add a filter expression. Can contain operators such as ==, &lt;, &gt;, etc. Left side of expression must specify a property, right side
+		/// must evaluate a value. i.e. order => order.Subtotal > 100
+		/// </summary>
+		public new ListOptionsBuilder2<T> AddFilter(Expression<Func<T, bool>> predicate) => (ListOptionsBuilder2<T>)base.AddFilter(predicate);
 	}
 }
