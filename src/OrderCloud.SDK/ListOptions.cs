@@ -13,6 +13,10 @@ namespace OrderCloud.SDK
 	{
 		public string Search { get; set; }
 		public string SearchOn { get; set; }
+		/// <summary>
+		/// Available only for endpoints that support Premium Search.
+		/// </summary>
+		public SearchType? SearchType { get; set; }
 		public string SortBy { get; set; }
 		public int? Page { get; set; }
 		public int? PageSize { get; set; }

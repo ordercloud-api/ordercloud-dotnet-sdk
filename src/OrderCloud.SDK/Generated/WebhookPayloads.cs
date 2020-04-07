@@ -907,6 +907,96 @@ namespace OrderCloud.SDK
 			[SentOn("PATCH", "v1/incrementors/{incrementorID}")]
 			public class Patch<TConfigData> : WebhookPayload<Incrementor, Incrementor, Patch.PatchRouteParams, TConfigData> { }
 		}
+		public static class IntegrationEvents
+		{
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/integrationEvents.</summary>
+			[SentOn("POST", "v1/integrationEvents")]
+			public class Create : WebhookPayload<IntegrationEvent, IntegrationEvent, object, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/integrationEvents, with strongly typed ConfigData.</summary>
+			[SentOn("POST", "v1/integrationEvents")]
+			public class Create<TConfigData> : WebhookPayload<IntegrationEvent, IntegrationEvent, object, TConfigData> { }
+			/// <summary>Webhook payload sent by OrderCloud on PUT v1/integrationEvents/{integrationEventID}.</summary>
+			[SentOn("PUT", "v1/integrationEvents/{integrationEventID}")]
+			public class Save : WebhookPayload<IntegrationEvent, IntegrationEvent, Save.SaveRouteParams, dynamic>
+			{
+				/// <summary>Type used to represent route parameter name/value pairs for v1/integrationEvents/{integrationEventID}.</summary>
+				public class SaveRouteParams
+				{
+					public string IntegrationEventID { get; set; }
+				}
+			}
+			/// <summary>Webhook payload sent by OrderCloud on PUT v1/integrationEvents/{integrationEventID}, with strongly typed ConfigData.</summary>
+			[SentOn("PUT", "v1/integrationEvents/{integrationEventID}")]
+			public class Save<TConfigData> : WebhookPayload<IntegrationEvent, IntegrationEvent, Save.SaveRouteParams, TConfigData> { }
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/integrationEvents/{integrationEventID}.</summary>
+			[SentOn("DELETE", "v1/integrationEvents/{integrationEventID}")]
+			public class Delete : WebhookPayload<object, object, Delete.DeleteRouteParams, dynamic>
+			{
+				/// <summary>Type used to represent route parameter name/value pairs for v1/integrationEvents/{integrationEventID}.</summary>
+				public class DeleteRouteParams
+				{
+					public string IntegrationEventID { get; set; }
+				}
+			}
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/integrationEvents/{integrationEventID}, with strongly typed ConfigData.</summary>
+			[SentOn("DELETE", "v1/integrationEvents/{integrationEventID}")]
+			public class Delete<TConfigData> : WebhookPayload<object, object, Delete.DeleteRouteParams, TConfigData> { }
+			/// <summary>Webhook payload sent by OrderCloud on PATCH v1/integrationEvents/{integrationEventID}.</summary>
+			[SentOn("PATCH", "v1/integrationEvents/{integrationEventID}")]
+			public class Patch : WebhookPayload<IntegrationEvent, IntegrationEvent, Patch.PatchRouteParams, dynamic>
+			{
+				/// <summary>Type used to represent route parameter name/value pairs for v1/integrationEvents/{integrationEventID}.</summary>
+				public class PatchRouteParams
+				{
+					public string IntegrationEventID { get; set; }
+				}
+			}
+			/// <summary>Webhook payload sent by OrderCloud on PATCH v1/integrationEvents/{integrationEventID}, with strongly typed ConfigData.</summary>
+			[SentOn("PATCH", "v1/integrationEvents/{integrationEventID}")]
+			public class Patch<TConfigData> : WebhookPayload<IntegrationEvent, IntegrationEvent, Patch.PatchRouteParams, TConfigData> { }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/orders/{direction}/{orderID}/estimateshipping.</summary>
+			[SentOn("POST", "v1/orders/{direction}/{orderID}/estimateshipping")]
+			public class EstimateShipping : WebhookPayload<object, OrderWorksheet, EstimateShipping.EstimateShippingRouteParams, dynamic>
+			{
+				/// <summary>Type used to represent route parameter name/value pairs for v1/orders/{direction}/{orderID}/estimateshipping.</summary>
+				public class EstimateShippingRouteParams
+				{
+					public OrderDirection Direction { get; set; }
+					public string OrderID { get; set; }
+				}
+			}
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/orders/{direction}/{orderID}/estimateshipping, with strongly typed ConfigData.</summary>
+			[SentOn("POST", "v1/orders/{direction}/{orderID}/estimateshipping")]
+			public class EstimateShipping<TConfigData> : WebhookPayload<object, OrderWorksheet, EstimateShipping.EstimateShippingRouteParams, TConfigData> { }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/orders/{direction}/{orderID}/shipmethods.</summary>
+			[SentOn("POST", "v1/orders/{direction}/{orderID}/shipmethods")]
+			public class SelectShipmethods : WebhookPayload<OrderShipMethodSelection, OrderWorksheet, SelectShipmethods.SelectShipmethodsRouteParams, dynamic>
+			{
+				/// <summary>Type used to represent route parameter name/value pairs for v1/orders/{direction}/{orderID}/shipmethods.</summary>
+				public class SelectShipmethodsRouteParams
+				{
+					public OrderDirection Direction { get; set; }
+					public string OrderID { get; set; }
+				}
+			}
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/orders/{direction}/{orderID}/shipmethods, with strongly typed ConfigData.</summary>
+			[SentOn("POST", "v1/orders/{direction}/{orderID}/shipmethods")]
+			public class SelectShipmethods<TConfigData> : WebhookPayload<OrderShipMethodSelection, OrderWorksheet, SelectShipmethods.SelectShipmethodsRouteParams, TConfigData> { }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/orders/{direction}/{orderID}/calculate.</summary>
+			[SentOn("POST", "v1/orders/{direction}/{orderID}/calculate")]
+			public class Calculate : WebhookPayload<object, OrderWorksheet, Calculate.CalculateRouteParams, dynamic>
+			{
+				/// <summary>Type used to represent route parameter name/value pairs for v1/orders/{direction}/{orderID}/calculate.</summary>
+				public class CalculateRouteParams
+				{
+					public OrderDirection Direction { get; set; }
+					public string OrderID { get; set; }
+				}
+			}
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/orders/{direction}/{orderID}/calculate, with strongly typed ConfigData.</summary>
+			[SentOn("POST", "v1/orders/{direction}/{orderID}/calculate")]
+			public class Calculate<TConfigData> : WebhookPayload<object, OrderWorksheet, Calculate.CalculateRouteParams, TConfigData> { }
+		}
 		public static class LineItems
 		{
 			/// <summary>Webhook payload sent by OrderCloud on POST v1/orders/{direction}/{orderID}/lineitems.</summary>

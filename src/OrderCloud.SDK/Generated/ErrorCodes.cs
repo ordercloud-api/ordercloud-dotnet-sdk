@@ -110,6 +110,17 @@ namespace OrderCloud.SDK
 			/// <summary>Cannot delete a group or user assigned to an ImpersonationConfig.</summary>
 			public const string CannotDeleteImpersonateeParty = "Impersonation.CannotDeleteImpersonateeParty";
 		}
+		public static class IntegrationEvent
+		{
+			/// <summary>The EventType can't be changed once the event is created.</summary>
+			public const string CannotEditType = "IntegrationEvent.CannotEditType";
+			/// <summary>The referenced IntegrationEvent must reference an IntegrationEvent with the correct EventType</summary>
+			public const string IncompatibleEventType = "IntegrationEvent.IncompatibleEventType";
+			/// <summary>The IntegrationEvent cannot be deleted because it is in use.</summary>
+			public const string CannotDeleteInUse = "IntegrationEvent.CannotDeleteInUse";
+			/// <summary>This ApiClient does not have an order calculate event configured.</summary>
+			public const string ApiClientNotConfiguredForOrderCalculate = "IntegrationEvent.ApiClientNotConfiguredForOrderCalculate";
+		}
 		public static class List
 		{
 			/// <summary>Property does not exist.</summary>
@@ -162,6 +173,8 @@ namespace OrderCloud.SDK
 			public const string CannotSplitOutgoing = "Order.CannotSplitOutgoing";
 			/// <summary>Cannot complete an order with this status. Order status must be Open.</summary>
 			public const string CannotCompleteBadStatus = "Order.CannotCompleteBadStatus";
+			/// <summary>Cannot submit an order that has not called the OrderCalculate step of the checkout integration.</summary>
+			public const string CannotSubmitUncalculatedOrder = "Order.CannotSubmitUncalculatedOrder";
 		}
 		public static class PriceSchedule
 		{
@@ -259,6 +272,8 @@ namespace OrderCloud.SDK
 			public const string CannotAssignNotInBuyerCatalog = "Product.CannotAssignNotInBuyerCatalog";
 			/// <summary>Product cache is being built. Please try again later.</summary>
 			public const string CacheBuilding = "Product.CacheBuilding";
+			/// <summary>Not authorized to modify this Product.</summary>
+			public const string CannotModify = "Product.CannotModify";
 		}
 		public static class PartyAssignment
 		{
@@ -336,6 +351,10 @@ namespace OrderCloud.SDK
 			public const string RequiresSelection = "Spec.RequiresSelection";
 			/// <summary>To assign this spec to a product you must either update the default value, allow open text, or assign some spec options to it.</summary>
 			public const string InvalidSpecConfiguration = "Spec.InvalidSpecConfiguration";
+			/// <summary>Any spec where DefinesVariant = true must also have Required = true.</summary>
+			public const string MustBeRequired = "Spec.MustBeRequired";
+			/// <summary>Any spec where DefinesVariant = true must have AllowOpenText = false.</summary>
+			public const string CannotAllowOpenText = "Spec.CannotAllowOpenText";
 		}
 		public static class ShippingAddress
 		{
