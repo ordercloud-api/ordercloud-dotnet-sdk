@@ -68,9 +68,6 @@ namespace OrderCloud.SDK.Tests
 			AssertLineItem(custom);
 		}
 
-		class CustomAddress : Address<CustomXP> { }
-		class CustomLineItem : LineItem<CustomXP, LineItemProduct, LineItemVariant, CustomAddress, CustomAddress> { }
-
 		[Test]
 		public void can_serialize_partial() {
 			// good test case - xp and a nested object
@@ -215,15 +212,17 @@ namespace OrderCloud.SDK.Tests
 			var date = DateTimeOffset.UtcNow;
 
 			var json = OrderCloudClient.Serializer.Serialize(new {
-				Response = new { Body = new { DateSubmitted = date } },
+				Response = new { Body = new { DateSubmitted = date, xp = new { } } },
 				RouteParams = new { Direction = "Incoming" },
 				ConfigData = new { Foo = "bar" }
 			});
-			var payload = JsonConvert.DeserializeObject<WebhookPayloads.Orders.Submit<MyConfigData>>(json);
+			var payload = JsonConvert.DeserializeObject<WebhookPayloads.Orders.Submit<CustomConfigData, CustomOrder>>(json);
 
 			Assert.AreEqual(date, payload.Response.Body.DateSubmitted);
 			Assert.AreEqual(OrderDirection.Incoming, payload.RouteParams.Direction);
 			Assert.AreEqual("bar", payload.ConfigData.Foo);
+			Assert.IsAssignableFrom<CustomOrder>(payload.Response.Body);
+			Assert.IsAssignableFrom<CustomXP>(payload.Response.Body.xp);
 		}
 
 		[Test]
@@ -283,11 +282,16 @@ namespace OrderCloud.SDK.Tests
 			public int Bar { get; set; }
 		}
 
-		private class MyConfigData
+		private class CustomConfigData
 		{
 			public string Foo { get; set; }
 			public int Bar { get; set; }
 		}
+
+		class CustomUser : User<CustomXP> { }
+		class CustomAddress : Address<CustomXP> { }
+		class CustomLineItem : LineItem<CustomXP, LineItemProduct, LineItemVariant, CustomAddress, CustomAddress> { }
+		class CustomOrder : Order<CustomXP, CustomUser, CustomAddress> { }
 
 		private static class JsonAssert
 		{
