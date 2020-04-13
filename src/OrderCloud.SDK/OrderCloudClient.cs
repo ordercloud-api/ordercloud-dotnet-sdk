@@ -120,7 +120,12 @@ namespace OrderCloud.SDK
 
 		internal bool EnableModelValidation { get; set; } = true;
 
-		internal IFlurlRequest Request(params object[] pathSegments) => ApiClient
+		/// <summary>
+		/// Creates an authenticated request that can be sent using Flurl semantics. Normally not needed since the SDK
+		/// provides higher-level strongly-typed methods for all public endpoints, but if there's ever a need to call
+		/// an undocumented endpoint, or the SDK version is behind the API version, this provides lower-level access.
+		/// </summary>
+		public IFlurlRequest Request(params object[] pathSegments) => ApiClient
 			.Request(pathSegments)
 			.ConfigureRequest(settings => {
 				settings.BeforeCallAsync = EnsureTokenAsync;
