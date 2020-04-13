@@ -52,7 +52,21 @@ namespace OrderCloud.SDK.Tests
 			}
 		}
 
-		class CustomLineItem : LineItem<CustomXP, dynamic, dynamic, dynamic, CustomXP> { }
+		[Test]
+		public void strongly_typed_props_backed_by_base_props() {
+			void AssertLineItem(LineItem li) {
+				Assert.IsNotNull(li.ShippingAddress);
+				Assert.IsNotNull(li.ShippingAddress.xp);
+				Assert.AreEqual("hello", li.ShippingAddress.xp.Foo);
+			}
+
+			var custom = new CustomLineItem {
+				ShippingAddress = new CustomAddress {
+					xp = new CustomXP { Foo = "hello" }
+				}
+			};
+			AssertLineItem(custom);
+		}
 
 		[Test]
 		public void can_serialize_partial() {
@@ -198,15 +212,17 @@ namespace OrderCloud.SDK.Tests
 			var date = DateTimeOffset.UtcNow;
 
 			var json = OrderCloudClient.Serializer.Serialize(new {
-				Response = new { Body = new { DateSubmitted = date } },
+				Response = new { Body = new { DateSubmitted = date, xp = new { } } },
 				RouteParams = new { Direction = "Incoming" },
 				ConfigData = new { Foo = "bar" }
 			});
-			var payload = JsonConvert.DeserializeObject<WebhookPayloads.Orders.Submit<MyConfigData>>(json);
+			var payload = JsonConvert.DeserializeObject<WebhookPayloads.Orders.Submit<CustomConfigData, CustomOrder>>(json);
 
 			Assert.AreEqual(date, payload.Response.Body.DateSubmitted);
 			Assert.AreEqual(OrderDirection.Incoming, payload.RouteParams.Direction);
 			Assert.AreEqual("bar", payload.ConfigData.Foo);
+			Assert.IsAssignableFrom<CustomOrder>(payload.Response.Body);
+			Assert.IsAssignableFrom<CustomXP>(payload.Response.Body.xp);
 		}
 
 		[Test]
@@ -266,11 +282,16 @@ namespace OrderCloud.SDK.Tests
 			public int Bar { get; set; }
 		}
 
-		private class MyConfigData
+		private class CustomConfigData
 		{
 			public string Foo { get; set; }
 			public int Bar { get; set; }
 		}
+
+		class CustomUser : User<CustomXP> { }
+		class CustomAddress : Address<CustomXP> { }
+		class CustomLineItem : LineItem<CustomXP, LineItemProduct, LineItemVariant, CustomAddress, CustomAddress> { }
+		class CustomOrder : Order<CustomXP, CustomUser, CustomAddress> { }
 
 		private static class JsonAssert
 		{
