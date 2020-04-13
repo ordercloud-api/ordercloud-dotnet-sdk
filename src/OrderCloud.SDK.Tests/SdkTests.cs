@@ -52,7 +52,8 @@ namespace OrderCloud.SDK.Tests
 			}
 		}
 
-		class CustomLineItem : LineItem<CustomXP, dynamic, dynamic, dynamic, CustomXP> { }
+		class CustomAddress : Address<CustomXP> { }
+		class CustomLineItem : LineItem<CustomXP, LineItemProduct, LineItemVariant, CustomAddress, CustomAddress> { }
 
 		[Test]
 		public void can_serialize_partial() {

@@ -17,7 +17,6 @@ namespace OrderCloud.SDK
 	public enum SearchType { AnyTerm, AllTermsAnyField, AllTermsSameField, ExactPhrase, ExactPhrasePrefix }
 	public enum UserOrderMoveOption { None, Unsubmitted, All }
 	public enum XpThingType { Product, Variant, Order, LineItem, Address, CostCenter, CreditCard, Payment, Spec, SpecOption, UserGroup, Company, Category, PriceSchedule, Shipment, SpendingAccount, User, Promotion, ApprovalRule, Catalog, ProductFacet, MessageSender }
-
 	public class AccessToken : OrderCloudModel
 	{
 		/// <summary>Access token of the access token.</summary>
@@ -29,13 +28,11 @@ namespace OrderCloud.SDK
 		/// <summary>Refresh token of the access token.</summary>
 		public string refresh_token { get => GetProp<string>("refresh_token"); set => SetProp<string>("refresh_token", value); }
 	}
-
 	public class AccessTokenBasic : OrderCloudModel
 	{
 		/// <summary>Access token of the access token basic.</summary>
 		public string access_token { get => GetProp<string>("access_token"); set => SetProp<string>("access_token", value); }
 	}
-
 	public class Address : OrderCloudModel
 	{
 		/// <summary>ID of the address. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 2.</summary>
@@ -73,13 +70,12 @@ namespace OrderCloud.SDK
 		/// <summary>Container for extended (custom) properties of the address.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
-
-	/// <typeparam name="Txp">Type used as a container for extended properties (xp) of the Address.</typeparam>
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic Address class instead.</typeparam>
 	public class Address<Txp> : Address
 	{
-		public new Txp xp { get; set; }
+		/// <summary>Container for extended (custom) properties of the address.</summary>
+		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
 	}
-
 	public class AddressAssignment : OrderCloudModel
 	{
 		/// <summary>ID of the address. Required. Sortable: priority level 1.</summary>
@@ -94,7 +90,6 @@ namespace OrderCloud.SDK
 		/// <summary>Is billing of the address assignment.</summary>
 		public bool IsBilling { get => GetProp<bool>("IsBilling"); set => SetProp<bool>("IsBilling", value); }
 	}
-
 	public class ApiClient : OrderCloudModel
 	{
 		/// <summary>ID of the api client. Searchable: priority level 1. Sortable: priority level 1.</summary>
@@ -136,13 +131,12 @@ namespace OrderCloud.SDK
 		[ApiReadOnly]
 		public string OrderCheckoutIntegrationEventName { get; set; }
 	}
-
-	/// <typeparam name="Txp">Type used as a container for extended properties (xp) of the ApiClient.</typeparam>
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic ApiClient class instead.</typeparam>
 	public class ApiClient<Txp> : ApiClient
 	{
-		public new Txp xp { get; set; }
+		/// <summary>Container for extended (custom) properties of the api client.</summary>
+		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
 	}
-
 	public class ApiClientAssignment : OrderCloudModel
 	{
 		/// <summary>ID of the api client.</summary>
@@ -152,7 +146,6 @@ namespace OrderCloud.SDK
 		/// <summary>ID of the supplier. Sortable: priority level 1.</summary>
 		public string SupplierID { get => GetProp<string>("SupplierID"); set => SetProp<string>("SupplierID", value); }
 	}
-
 	public class ApprovalRule : OrderCloudModel
 	{
 		/// <summary>ID of the approval rule. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 2.</summary>
@@ -170,13 +163,12 @@ namespace OrderCloud.SDK
 		/// <summary>Container for extended (custom) properties of the approval rule.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
-
-	/// <typeparam name="Txp">Type used as a container for extended properties (xp) of the ApprovalRule.</typeparam>
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic ApprovalRule class instead.</typeparam>
 	public class ApprovalRule<Txp> : ApprovalRule
 	{
-		public new Txp xp { get; set; }
+		/// <summary>Container for extended (custom) properties of the approval rule.</summary>
+		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
 	}
-
 	public class Buyer : OrderCloudModel
 	{
 		/// <summary>ID of the buyer. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 2. Sortable: priority level 1.</summary>
@@ -191,13 +183,12 @@ namespace OrderCloud.SDK
 		/// <summary>Container for extended (custom) properties of the buyer.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
-
-	/// <typeparam name="Txp">Type used as a container for extended properties (xp) of the Buyer.</typeparam>
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic Buyer class instead.</typeparam>
 	public class Buyer<Txp> : Buyer
 	{
-		public new Txp xp { get; set; }
+		/// <summary>Container for extended (custom) properties of the buyer.</summary>
+		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
 	}
-
 	public class BuyerAddress : OrderCloudModel
 	{
 		/// <summary>ID of the address. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 2.</summary>
@@ -243,13 +234,12 @@ namespace OrderCloud.SDK
 		/// <summary>Container for extended (custom) properties of the address.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
-
-	/// <typeparam name="Txp">Type used as a container for extended properties (xp) of the BuyerAddress.</typeparam>
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic BuyerAddress class instead.</typeparam>
 	public class BuyerAddress<Txp> : BuyerAddress
 	{
-		public new Txp xp { get; set; }
+		/// <summary>Container for extended (custom) properties of the address.</summary>
+		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
 	}
-
 	public class BuyerCreditCard : OrderCloudModel
 	{
 		/// <summary>ID of the credit card. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 1.</summary>
@@ -274,13 +264,12 @@ namespace OrderCloud.SDK
 		/// <summary>Container for extended (custom) properties of the credit card.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
-
-	/// <typeparam name="Txp">Type used as a container for extended properties (xp) of the BuyerCreditCard.</typeparam>
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic BuyerCreditCard class instead.</typeparam>
 	public class BuyerCreditCard<Txp> : BuyerCreditCard
 	{
-		public new Txp xp { get; set; }
+		/// <summary>Container for extended (custom) properties of the credit card.</summary>
+		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
 	}
-
 	public class BuyerProduct : OrderCloudModel
 	{
 		/// <summary>Price schedule of the product.</summary>
@@ -321,15 +310,17 @@ namespace OrderCloud.SDK
 		/// <summary>Container for extended (custom) properties of the product.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
-
-	/// <typeparam name="Txp">Type used as a container for extended properties (xp) of the BuyerProduct.</typeparam>
-	/// <typeparam name="TPriceScheduleXP">Type used as a container for xp of the nested PriceSchedule. If weakly typed or unneeded, specify dynamic.</typeparam>
-	public class BuyerProduct<Txp, TPriceScheduleXP> : BuyerProduct
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, specify dynamic.</typeparam>
+	/// <typeparam name="TPriceSchedule">Specific type of the PriceSchedule property. If not using a custom type, specify PriceSchedule.</typeparam>
+	public class BuyerProduct<Txp, TPriceSchedule> : BuyerProduct
+		where TPriceSchedule : PriceSchedule
 	{
-		public new Txp xp { get; set; }
-		public new PriceSchedule<TPriceScheduleXP> PriceSchedule { get; set; }
+		/// <summary>Container for extended (custom) properties of the product.</summary>
+		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
+		/// <summary>Price schedule of the product.</summary>
+		[ApiReadOnly]
+		public new TPriceSchedule PriceSchedule { get; set; }
 	}
-
 	public class Catalog : OrderCloudModel
 	{
 		/// <summary>ID of the catalog. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 3.</summary>
@@ -350,13 +341,12 @@ namespace OrderCloud.SDK
 		/// <summary>Container for extended (custom) properties of the catalog.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
-
-	/// <typeparam name="Txp">Type used as a container for extended properties (xp) of the Catalog.</typeparam>
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic Catalog class instead.</typeparam>
 	public class Catalog<Txp> : Catalog
 	{
-		public new Txp xp { get; set; }
+		/// <summary>Container for extended (custom) properties of the catalog.</summary>
+		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
 	}
-
 	public class CatalogAssignment : OrderCloudModel
 	{
 		/// <summary>ID of the catalog. Required. Sortable: priority level 1.</summary>
@@ -370,7 +360,6 @@ namespace OrderCloud.SDK
 		/// <summary>View all products of the catalog assignment.</summary>
 		public bool ViewAllProducts { get => GetProp<bool>("ViewAllProducts"); set => SetProp<bool>("ViewAllProducts", value); }
 	}
-
 	public class Category : OrderCloudModel
 	{
 		/// <summary>ID of the category. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable.</summary>
@@ -392,13 +381,12 @@ namespace OrderCloud.SDK
 		/// <summary>Container for extended (custom) properties of the category.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
-
-	/// <typeparam name="Txp">Type used as a container for extended properties (xp) of the Category.</typeparam>
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic Category class instead.</typeparam>
 	public class Category<Txp> : Category
 	{
-		public new Txp xp { get; set; }
+		/// <summary>Container for extended (custom) properties of the category.</summary>
+		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
 	}
-
 	public class CategoryAssignment : OrderCloudModel
 	{
 		/// <summary>ID of the category. Required. Sortable: priority level 1.</summary>
@@ -414,7 +402,6 @@ namespace OrderCloud.SDK
 		/// <summary>Optional. Set to null to inherit from parent category or catalog level.</summary>
 		public bool? ViewAllProducts { get => GetProp<bool?>("ViewAllProducts"); set => SetProp<bool?>("ViewAllProducts", value); }
 	}
-
 	public class CategoryProductAssignment : OrderCloudModel
 	{
 		/// <summary>ID of the category. Required.</summary>
@@ -426,7 +413,6 @@ namespace OrderCloud.SDK
 		/// <summary>List order of the category product assignment.</summary>
 		public int? ListOrder { get => GetProp<int?>("ListOrder"); set => SetProp<int?>("ListOrder", value); }
 	}
-
 	public class CostCenter : OrderCloudModel
 	{
 		/// <summary>ID of the cost center. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 2.</summary>
@@ -439,13 +425,12 @@ namespace OrderCloud.SDK
 		/// <summary>Container for extended (custom) properties of the cost center.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
-
-	/// <typeparam name="Txp">Type used as a container for extended properties (xp) of the CostCenter.</typeparam>
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic CostCenter class instead.</typeparam>
 	public class CostCenter<Txp> : CostCenter
 	{
-		public new Txp xp { get; set; }
+		/// <summary>Container for extended (custom) properties of the cost center.</summary>
+		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
 	}
-
 	public class CostCenterAssignment : OrderCloudModel
 	{
 		/// <summary>ID of the cost center. Required. Sortable: priority level 1.</summary>
@@ -454,7 +439,6 @@ namespace OrderCloud.SDK
 		/// <summary>ID of the user group. Sortable: priority level 3.</summary>
 		public string UserGroupID { get => GetProp<string>("UserGroupID"); set => SetProp<string>("UserGroupID", value); }
 	}
-
 	public class CreditCard : OrderCloudModel
 	{
 		/// <summary>ID of the credit card. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 1.</summary>
@@ -475,13 +459,12 @@ namespace OrderCloud.SDK
 		/// <summary>Container for extended (custom) properties of the credit card.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
-
-	/// <typeparam name="Txp">Type used as a container for extended properties (xp) of the CreditCard.</typeparam>
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic CreditCard class instead.</typeparam>
 	public class CreditCard<Txp> : CreditCard
 	{
-		public new Txp xp { get; set; }
+		/// <summary>Container for extended (custom) properties of the credit card.</summary>
+		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
 	}
-
 	public class CreditCardAssignment : OrderCloudModel
 	{
 		/// <summary>ID of the credit card. Required. Sortable: priority level 1.</summary>
@@ -492,7 +475,6 @@ namespace OrderCloud.SDK
 		/// <summary>ID of the user group. Sortable: priority level 3.</summary>
 		public string UserGroupID { get => GetProp<string>("UserGroupID"); set => SetProp<string>("UserGroupID", value); }
 	}
-
 	public class ImpersonateTokenRequest : OrderCloudModel
 	{
 		/// <summary>ID of the client. Required.</summary>
@@ -504,7 +486,6 @@ namespace OrderCloud.SDK
 		/// <summary>Custom roles of the impersonate token request.</summary>
 		public IList<string> CustomRoles { get => GetProp<IList<string>>("CustomRoles", new List<string>()); set => SetProp<IList<string>>("CustomRoles", value); }
 	}
-
 	public class ImpersonationConfig : OrderCloudModel
 	{
 		/// <summary>ID of the impersonation config. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 8. Sortable: priority level 8.</summary>
@@ -529,7 +510,6 @@ namespace OrderCloud.SDK
 		[Required]
 		public string ClientID { get => GetProp<string>("ClientID"); set => SetProp<string>("ClientID", value); }
 	}
-
 	public class Incrementor : OrderCloudModel
 	{
 		/// <summary>ID of the incrementor. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 1.</summary>
@@ -543,7 +523,6 @@ namespace OrderCloud.SDK
 		[Required]
 		public int LeftPaddingCount { get => GetProp<int>("LeftPaddingCount"); set => SetProp<int>("LeftPaddingCount", value); }
 	}
-
 	public class IntegrationEvent : OrderCloudModel
 	{
 		/// <summary>Elevated roles of the integration event. Required.</summary>
@@ -564,7 +543,6 @@ namespace OrderCloud.SDK
 		[Required]
 		public string HashKey { get => GetProp<string>("HashKey"); set => SetProp<string>("HashKey", value); }
 	}
-
 	public class Inventory : OrderCloudModel
 	{
 		/// <summary>Enabled of the inventory.</summary>
@@ -581,7 +559,6 @@ namespace OrderCloud.SDK
 		[ApiReadOnly]
 		public DateTimeOffset? LastUpdated { get; set; }
 	}
-
 	public class LineItem : OrderCloudModel
 	{
 		/// <summary>ID of the line item. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable.</summary>
@@ -633,21 +610,32 @@ namespace OrderCloud.SDK
 		/// <summary>Container for extended (custom) properties of the line item.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
-
-	/// <typeparam name="Txp">Type used as a container for extended properties (xp) of the LineItem.</typeparam>
-	/// <typeparam name="TProductXP">Type used as a container for xp of the nested Product. If weakly typed or unneeded, specify dynamic.</typeparam>
-	/// <typeparam name="TVariantXP">Type used as a container for xp of the nested Variant. If weakly typed or unneeded, specify dynamic.</typeparam>
-	/// <typeparam name="TShippingAddressXP">Type used as a container for xp of the nested ShippingAddress. If weakly typed or unneeded, specify dynamic.</typeparam>
-	/// <typeparam name="TShipFromAddressXP">Type used as a container for xp of the nested ShipFromAddress. If weakly typed or unneeded, specify dynamic.</typeparam>
-	public class LineItem<Txp, TProductXP, TVariantXP, TShippingAddressXP, TShipFromAddressXP> : LineItem
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, specify dynamic.</typeparam>
+	/// <typeparam name="TProduct">Specific type of the Product property. If not using a custom type, specify LineItemProduct.</typeparam>
+	/// <typeparam name="TVariant">Specific type of the Variant property. If not using a custom type, specify LineItemVariant.</typeparam>
+	/// <typeparam name="TShippingAddress">Specific type of the ShippingAddress property. If not using a custom type, specify Address.</typeparam>
+	/// <typeparam name="TShipFromAddress">Specific type of the ShipFromAddress property. If not using a custom type, specify Address.</typeparam>
+	public class LineItem<Txp, TProduct, TVariant, TShippingAddress, TShipFromAddress> : LineItem
+		where TProduct : LineItemProduct
+		where TVariant : LineItemVariant
+		where TShippingAddress : Address
+		where TShipFromAddress : Address
 	{
-		public new Txp xp { get; set; }
-		public new LineItemProduct<TProductXP> Product { get; set; }
-		public new LineItemVariant<TVariantXP> Variant { get; set; }
-		public new Address<TShippingAddressXP> ShippingAddress { get; set; }
-		public new Address<TShipFromAddressXP> ShipFromAddress { get; set; }
+		/// <summary>Container for extended (custom) properties of the line item.</summary>
+		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
+		/// <summary>Product of the line item.</summary>
+		[ApiReadOnly]
+		public new TProduct Product { get; set; }
+		/// <summary>Variant of the line item.</summary>
+		[ApiReadOnly]
+		public new TVariant Variant { get; set; }
+		/// <summary>Shipping address of the line item.</summary>
+		[ApiReadOnly]
+		public new TShippingAddress ShippingAddress { get; set; }
+		/// <summary>Ship from address of the line item.</summary>
+		[ApiReadOnly]
+		public new TShipFromAddress ShipFromAddress { get; set; }
 	}
-
 	public class LineItemOverride : OrderCloudModel
 	{
 		/// <summary>ID of the line item.</summary>
@@ -655,7 +643,6 @@ namespace OrderCloud.SDK
 		/// <summary>Unit price of the line item override.</summary>
 		public decimal UnitPrice { get => GetProp<decimal>("UnitPrice"); set => SetProp<decimal>("UnitPrice", value); }
 	}
-
 	public class LineItemProduct : OrderCloudModel
 	{
 		/// <summary>ID of the line item product. Can only contain characters Aa-Zz, 0-9, -, and _.</summary>
@@ -677,13 +664,12 @@ namespace OrderCloud.SDK
 		/// <summary>Container for extended (custom) properties of the line item product.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
-
-	/// <typeparam name="Txp">Type used as a container for extended properties (xp) of the LineItemProduct.</typeparam>
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic LineItemProduct class instead.</typeparam>
 	public class LineItemProduct<Txp> : LineItemProduct
 	{
-		public new Txp xp { get; set; }
+		/// <summary>Container for extended (custom) properties of the line item product.</summary>
+		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
 	}
-
 	public class LineItemSpec : OrderCloudModel
 	{
 		/// <summary>ID of the spec. Required.</summary>
@@ -701,7 +687,6 @@ namespace OrderCloud.SDK
 		/// <summary>Price markup of the line item spec. Searchable: priority level 6.</summary>
 		public decimal? PriceMarkup { get => GetProp<decimal?>("PriceMarkup"); set => SetProp<decimal?>("PriceMarkup", value); }
 	}
-
 	public class LineItemVariant : OrderCloudModel
 	{
 		/// <summary>ID of the line item variant. Can only contain characters Aa-Zz, 0-9, -, and _.</summary>
@@ -721,13 +706,12 @@ namespace OrderCloud.SDK
 		/// <summary>Container for extended (custom) properties of the line item variant.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
-
-	/// <typeparam name="Txp">Type used as a container for extended properties (xp) of the LineItemVariant.</typeparam>
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic LineItemVariant class instead.</typeparam>
 	public class LineItemVariant<Txp> : LineItemVariant
 	{
-		public new Txp xp { get; set; }
+		/// <summary>Container for extended (custom) properties of the line item variant.</summary>
+		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
 	}
-
 	public class MeBuyer : OrderCloudModel
 	{
 		/// <summary>ID of the buyer. Can only contain characters Aa-Zz, 0-9, -, and _.</summary>
@@ -737,7 +721,6 @@ namespace OrderCloud.SDK
 		[ApiReadOnly]
 		public string DefaultCatalogID { get; set; }
 	}
-
 	public class MessageCCListenerAssignment : OrderCloudModel
 	{
 		/// <summary>Message sender assignment of the message cc listener assignment.</summary>
@@ -759,7 +742,6 @@ namespace OrderCloud.SDK
 		/// <summary>ID of the user. Searchable: priority level 2. Sortable: priority level 2.</summary>
 		public string UserID { get => GetProp<string>("UserID"); set => SetProp<string>("UserID", value); }
 	}
-
 	public class MessageSender : OrderCloudModel
 	{
 		/// <summary>ID of the message sender. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 0. Sortable: priority level 0.</summary>
@@ -783,13 +765,12 @@ namespace OrderCloud.SDK
 		/// <summary>Container for extended (custom) properties of the message sender.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
-
-	/// <typeparam name="Txp">Type used as a container for extended properties (xp) of the MessageSender.</typeparam>
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic MessageSender class instead.</typeparam>
 	public class MessageSender<Txp> : MessageSender
 	{
-		public new Txp xp { get; set; }
+		/// <summary>Container for extended (custom) properties of the message sender.</summary>
+		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
 	}
-
 	public class MessageSenderAssignment : OrderCloudModel
 	{
 		/// <summary>ID of the message sender. Required. Sortable: priority level 1.</summary>
@@ -808,14 +789,12 @@ namespace OrderCloud.SDK
 		[ApiReadOnly]
 		public string MessageConfigDescription { get; set; }
 	}
-
 	public class MeSupplier : OrderCloudModel
 	{
 		/// <summary>ID of the supplier. Can only contain characters Aa-Zz, 0-9, -, and _.</summary>
 		[ApiReadOnly]
 		public string ID { get; set; }
 	}
-
 	public class MeUser : OrderCloudModel
 	{
 		/// <summary>Buyer of the user.</summary>
@@ -860,13 +839,12 @@ namespace OrderCloud.SDK
 		[ApiReadOnly]
 		public DateTimeOffset? PasswordLastSetDate { get; set; }
 	}
-
-	/// <typeparam name="Txp">Type used as a container for extended properties (xp) of the MeUser.</typeparam>
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic MeUser class instead.</typeparam>
 	public class MeUser<Txp> : MeUser
 	{
-		public new Txp xp { get; set; }
+		/// <summary>Container for extended (custom) properties of the user.</summary>
+		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
 	}
-
 	public class OpenIdConnect : OrderCloudModel
 	{
 		/// <summary>ID of this OpenID Connect configuration object. Each object allows authentication to one Ordercloud ApiClient through one Identity Providing Party.</summary>
@@ -899,7 +877,6 @@ namespace OrderCloud.SDK
 		/// <summary>Additional idp scopes of the open id connect.</summary>
 		public IList<string> AdditionalIdpScopes { get => GetProp<IList<string>>("AdditionalIdpScopes", new List<string>()); set => SetProp<IList<string>>("AdditionalIdpScopes", value); }
 	}
-
 	public class Order : OrderCloudModel
 	{
 		/// <summary>ID of the order. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable.</summary>
@@ -965,17 +942,22 @@ namespace OrderCloud.SDK
 		/// <summary>Container for extended (custom) properties of the order.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
-
-	/// <typeparam name="Txp">Type used as a container for extended properties (xp) of the Order.</typeparam>
-	/// <typeparam name="TFromUserXP">Type used as a container for xp of the nested FromUser. If weakly typed or unneeded, specify dynamic.</typeparam>
-	/// <typeparam name="TBillingAddressXP">Type used as a container for xp of the nested BillingAddress. If weakly typed or unneeded, specify dynamic.</typeparam>
-	public class Order<Txp, TFromUserXP, TBillingAddressXP> : Order
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, specify dynamic.</typeparam>
+	/// <typeparam name="TFromUser">Specific type of the FromUser property. If not using a custom type, specify User.</typeparam>
+	/// <typeparam name="TBillingAddress">Specific type of the BillingAddress property. If not using a custom type, specify Address.</typeparam>
+	public class Order<Txp, TFromUser, TBillingAddress> : Order
+		where TFromUser : User
+		where TBillingAddress : Address
 	{
-		public new Txp xp { get; set; }
-		public new User<TFromUserXP> FromUser { get; set; }
-		public new Address<TBillingAddressXP> BillingAddress { get; set; }
+		/// <summary>Container for extended (custom) properties of the order.</summary>
+		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
+		/// <summary>From user of the order. Sortable.</summary>
+		[ApiReadOnly]
+		public new TFromUser FromUser { get; set; }
+		/// <summary>Billing address of the order.</summary>
+		[ApiReadOnly]
+		public new TBillingAddress BillingAddress { get; set; }
 	}
-
 	public class OrderApproval : OrderCloudModel
 	{
 		/// <summary>ID of the approval rule. Searchable: priority level 1. Sortable.</summary>
@@ -1003,7 +985,14 @@ namespace OrderCloud.SDK
 		[ApiReadOnly]
 		public string Comments { get; set; }
 	}
-
+	/// <typeparam name="TApprover">Specific type of the Approver property. If not using a custom type, use the non-generic OrderApproval class instead.</typeparam>
+	public class OrderApproval<TApprover> : OrderApproval
+		where TApprover : User
+	{
+		/// <summary>Approver of the order approval. Searchable: priority level 3. Sortable.</summary>
+		[ApiReadOnly]
+		public new TApprover Approver { get; set; }
+	}
 	public class OrderApprovalInfo : OrderCloudModel
 	{
 		/// <summary>Comments of the order approval info. Max length 2000 characters.</summary>
@@ -1011,7 +1000,6 @@ namespace OrderCloud.SDK
 		/// <summary>Allow resubmit of the order approval info.</summary>
 		public bool AllowResubmit { get => GetProp<bool>("AllowResubmit"); set => SetProp<bool>("AllowResubmit", value); }
 	}
-
 	public class OrderCalculateResponse : OrderCloudModel
 	{
 		/// <summary>Line item overrides of the order calculate response.</summary>
@@ -1027,13 +1015,12 @@ namespace OrderCloud.SDK
 		/// <summary>Container for extended (custom) properties of the order calculate response.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
-
-	/// <typeparam name="Txp">Type used as a container for extended properties (xp) of the OrderCalculateResponse.</typeparam>
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic OrderCalculateResponse class instead.</typeparam>
 	public class OrderCalculateResponse<Txp> : OrderCalculateResponse
 	{
-		public new Txp xp { get; set; }
+		/// <summary>Container for extended (custom) properties of the order calculate response.</summary>
+		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
 	}
-
 	public class OrderPromotion : OrderCloudModel
 	{
 		/// <summary>Amount of the order promotion.</summary>
@@ -1074,19 +1061,17 @@ namespace OrderCloud.SDK
 		/// <summary>Container for extended (custom) properties of the order promotion.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
-
-	/// <typeparam name="Txp">Type used as a container for extended properties (xp) of the OrderPromotion.</typeparam>
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic OrderPromotion class instead.</typeparam>
 	public class OrderPromotion<Txp> : OrderPromotion
 	{
-		public new Txp xp { get; set; }
+		/// <summary>Container for extended (custom) properties of the order promotion.</summary>
+		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
 	}
-
 	public class OrderShipMethodSelection : OrderCloudModel
 	{
 		/// <summary>Ship method selections of the order ship method selection.</summary>
 		public IList<ShipMethodSelection> ShipMethodSelections { get => GetProp<IList<ShipMethodSelection>>("ShipMethodSelections", new List<ShipMethodSelection>()); set => SetProp<IList<ShipMethodSelection>>("ShipMethodSelections", value); }
 	}
-
 	public class OrderSplitResult : OrderCloudModel
 	{
 		/// <summary>The outgoing Orders created, one for each unique Product.DefaultSupplierID on the original Order.</summary>
@@ -1094,7 +1079,13 @@ namespace OrderCloud.SDK
 		/// <summary>IDs of Line Items not added to an outgoing Order, most likely because Product.DefaultSupplierID is not set.</summary>
 		public IList<string> RemainingLineItemIDs { get => GetProp<IList<string>>("RemainingLineItemIDs", new List<string>()); set => SetProp<IList<string>>("RemainingLineItemIDs", value); }
 	}
-
+	/// <typeparam name="TOutgoingOrders">Specific type of the OutgoingOrders property. If not using a custom type, use the non-generic OrderSplitResult class instead.</typeparam>
+	public class OrderSplitResult<TOutgoingOrders> : OrderSplitResult
+		where TOutgoingOrders : Order
+	{
+		/// <summary>The outgoing Orders created, one for each unique Product.DefaultSupplierID on the original Order.</summary>
+		public new IList<TOutgoingOrders> OutgoingOrders { get => GetProp<IList<TOutgoingOrders>>("OutgoingOrders", new List<TOutgoingOrders>()); set => SetProp<IList<TOutgoingOrders>>("OutgoingOrders", value); }
+	}
 	public class OrderSubmitResponse : OrderCloudModel
 	{
 		/// <summary>Http status code of the order submit response.</summary>
@@ -1104,13 +1095,12 @@ namespace OrderCloud.SDK
 		/// <summary>Container for extended (custom) properties of the order submit response.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
-
-	/// <typeparam name="Txp">Type used as a container for extended properties (xp) of the OrderSubmitResponse.</typeparam>
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic OrderSubmitResponse class instead.</typeparam>
 	public class OrderSubmitResponse<Txp> : OrderSubmitResponse
 	{
-		public new Txp xp { get; set; }
+		/// <summary>Container for extended (custom) properties of the order submit response.</summary>
+		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
 	}
-
 	public class OrderWorksheet : OrderCloudModel
 	{
 		/// <summary>Order of the order worksheet.</summary>
@@ -1124,13 +1114,34 @@ namespace OrderCloud.SDK
 		/// <summary>Order submit response of the order worksheet.</summary>
 		public OrderSubmitResponse OrderSubmitResponse { get => GetProp<OrderSubmitResponse>("OrderSubmitResponse"); set => SetProp<OrderSubmitResponse>("OrderSubmitResponse", value); }
 	}
-
+	/// <typeparam name="TOrder">Specific type of the Order property. If not using a custom type, specify Order.</typeparam>
+	/// <typeparam name="TLineItems">Specific type of the LineItems property. If not using a custom type, specify LineItem.</typeparam>
+	/// <typeparam name="TShipEstimateResponse">Specific type of the ShipEstimateResponse property. If not using a custom type, specify ShipEstimateResponse.</typeparam>
+	/// <typeparam name="TOrderCalculateResponse">Specific type of the OrderCalculateResponse property. If not using a custom type, specify OrderCalculateResponse.</typeparam>
+	/// <typeparam name="TOrderSubmitResponse">Specific type of the OrderSubmitResponse property. If not using a custom type, specify OrderSubmitResponse.</typeparam>
+	public class OrderWorksheet<TOrder, TLineItems, TShipEstimateResponse, TOrderCalculateResponse, TOrderSubmitResponse> : OrderWorksheet
+		where TOrder : Order
+		where TLineItems : LineItem
+		where TShipEstimateResponse : ShipEstimateResponse
+		where TOrderCalculateResponse : OrderCalculateResponse
+		where TOrderSubmitResponse : OrderSubmitResponse
+	{
+		/// <summary>Order of the order worksheet.</summary>
+		public new TOrder Order { get => GetProp<TOrder>("Order"); set => SetProp<TOrder>("Order", value); }
+		/// <summary>Line items of the order worksheet.</summary>
+		public new IList<TLineItems> LineItems { get => GetProp<IList<TLineItems>>("LineItems", new List<TLineItems>()); set => SetProp<IList<TLineItems>>("LineItems", value); }
+		/// <summary>Ship estimate response of the order worksheet.</summary>
+		public new TShipEstimateResponse ShipEstimateResponse { get => GetProp<TShipEstimateResponse>("ShipEstimateResponse"); set => SetProp<TShipEstimateResponse>("ShipEstimateResponse", value); }
+		/// <summary>Order calculate response of the order worksheet.</summary>
+		public new TOrderCalculateResponse OrderCalculateResponse { get => GetProp<TOrderCalculateResponse>("OrderCalculateResponse"); set => SetProp<TOrderCalculateResponse>("OrderCalculateResponse", value); }
+		/// <summary>Order submit response of the order worksheet.</summary>
+		public new TOrderSubmitResponse OrderSubmitResponse { get => GetProp<TOrderSubmitResponse>("OrderSubmitResponse"); set => SetProp<TOrderSubmitResponse>("OrderSubmitResponse", value); }
+	}
 	public class PasswordConfig : OrderCloudModel
 	{
 		/// <summary>Expire in days of the password config. Must be at least 1.</summary>
 		public int? ExpireInDays { get => GetProp<int?>("ExpireInDays"); set => SetProp<int?>("ExpireInDays", value); }
 	}
-
 	public class PasswordReset : OrderCloudModel
 	{
 		/// <summary>ID of the client. Required.</summary>
@@ -1141,7 +1152,6 @@ namespace OrderCloud.SDK
 		/// <summary>Password of the password reset.</summary>
 		public string Password { get => GetProp<string>("Password"); set => SetProp<string>("Password", value); }
 	}
-
 	public class PasswordResetRequest : OrderCloudModel
 	{
 		/// <summary>ID of the client. Required.</summary>
@@ -1154,7 +1164,6 @@ namespace OrderCloud.SDK
 		/// <summary>URL of the password reset request.</summary>
 		public string URL { get => GetProp<string>("URL"); set => SetProp<string>("URL", value); }
 	}
-
 	public class Payment : OrderCloudModel
 	{
 		/// <summary>ID of the payment. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable.</summary>
@@ -1180,13 +1189,17 @@ namespace OrderCloud.SDK
 		[ApiReadOnly]
 		public IReadOnlyList<PaymentTransaction> Transactions { get; set; }
 	}
-
-	/// <typeparam name="Txp">Type used as a container for extended properties (xp) of the Payment.</typeparam>
-	public class Payment<Txp> : Payment
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, specify dynamic.</typeparam>
+	/// <typeparam name="TTransactions">Specific type of the Transactions property. If not using a custom type, specify PaymentTransaction.</typeparam>
+	public class Payment<Txp, TTransactions> : Payment
+		where TTransactions : PaymentTransaction
 	{
-		public new Txp xp { get; set; }
+		/// <summary>Container for extended (custom) properties of the payment.</summary>
+		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
+		/// <summary>Transactions of the payment.</summary>
+		[ApiReadOnly]
+		public new IReadOnlyList<TTransactions> Transactions { get; set; }
 	}
-
 	public class PaymentTransaction : OrderCloudModel
 	{
 		/// <summary>ID of the payment transaction. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable.</summary>
@@ -1208,13 +1221,12 @@ namespace OrderCloud.SDK
 		/// <summary>Container for extended (custom) properties of the payment transaction.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
-
-	/// <typeparam name="Txp">Type used as a container for extended properties (xp) of the PaymentTransaction.</typeparam>
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic PaymentTransaction class instead.</typeparam>
 	public class PaymentTransaction<Txp> : PaymentTransaction
 	{
-		public new Txp xp { get; set; }
+		/// <summary>Container for extended (custom) properties of the payment transaction.</summary>
+		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
 	}
-
 	public class PriceBreak : OrderCloudModel
 	{
 		/// <summary>Quantity of the price break. Required. Must be at least 0.</summary>
@@ -1224,7 +1236,6 @@ namespace OrderCloud.SDK
 		[Required]
 		public decimal Price { get => GetProp<decimal>("Price"); set => SetProp<decimal>("Price", value); }
 	}
-
 	public class PriceSchedule : OrderCloudModel
 	{
 		/// <summary>ID of the price schedule. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 2.</summary>
@@ -1249,13 +1260,12 @@ namespace OrderCloud.SDK
 		/// <summary>Container for extended (custom) properties of the price schedule.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
-
-	/// <typeparam name="Txp">Type used as a container for extended properties (xp) of the PriceSchedule.</typeparam>
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic PriceSchedule class instead.</typeparam>
 	public class PriceSchedule<Txp> : PriceSchedule
 	{
-		public new Txp xp { get; set; }
+		/// <summary>Container for extended (custom) properties of the price schedule.</summary>
+		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
 	}
-
 	public class Product : OrderCloudModel
 	{
 		/// <summary>ID of the Seller or Supplier org that created the Product.</summary>
@@ -1300,13 +1310,12 @@ namespace OrderCloud.SDK
 		/// <summary>Container for extended (custom) properties of the product.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
-
-	/// <typeparam name="Txp">Type used as a container for extended properties (xp) of the Product.</typeparam>
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic Product class instead.</typeparam>
 	public class Product<Txp> : Product
 	{
-		public new Txp xp { get; set; }
+		/// <summary>Container for extended (custom) properties of the product.</summary>
+		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
 	}
-
 	public class ProductAssignment : OrderCloudModel
 	{
 		/// <summary>ID of the product. Required.</summary>
@@ -1320,7 +1329,6 @@ namespace OrderCloud.SDK
 		/// <summary>ID of the price schedule.</summary>
 		public string PriceScheduleID { get => GetProp<string>("PriceScheduleID"); set => SetProp<string>("PriceScheduleID", value); }
 	}
-
 	public class ProductCatalogAssignment : OrderCloudModel
 	{
 		/// <summary>ID of the catalog. Required.</summary>
@@ -1330,7 +1338,6 @@ namespace OrderCloud.SDK
 		[Required]
 		public string ProductID { get => GetProp<string>("ProductID"); set => SetProp<string>("ProductID", value); }
 	}
-
 	public class ProductFacet : OrderCloudModel
 	{
 		/// <summary>ID of the product facet. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 2.</summary>
@@ -1348,13 +1355,12 @@ namespace OrderCloud.SDK
 		/// <summary>Container for extended (custom) properties of the product facet.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
-
-	/// <typeparam name="Txp">Type used as a container for extended properties (xp) of the ProductFacet.</typeparam>
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic ProductFacet class instead.</typeparam>
 	public class ProductFacet<Txp> : ProductFacet
 	{
-		public new Txp xp { get; set; }
+		/// <summary>Container for extended (custom) properties of the product facet.</summary>
+		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
 	}
-
 	public class Promotion : OrderCloudModel
 	{
 		/// <summary>ID of the promotion. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 2.</summary>
@@ -1392,13 +1398,12 @@ namespace OrderCloud.SDK
 		/// <summary>Container for extended (custom) properties of the promotion.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
-
-	/// <typeparam name="Txp">Type used as a container for extended properties (xp) of the Promotion.</typeparam>
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic Promotion class instead.</typeparam>
 	public class Promotion<Txp> : Promotion
 	{
-		public new Txp xp { get; set; }
+		/// <summary>Container for extended (custom) properties of the promotion.</summary>
+		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
 	}
-
 	public class PromotionAssignment : OrderCloudModel
 	{
 		/// <summary>ID of the promotion. Required. Sortable: priority level 1.</summary>
@@ -1410,7 +1415,6 @@ namespace OrderCloud.SDK
 		/// <summary>ID of the user group. Sortable: priority level 4.</summary>
 		public string UserGroupID { get => GetProp<string>("UserGroupID"); set => SetProp<string>("UserGroupID", value); }
 	}
-
 	public class SecurityProfile : OrderCloudModel
 	{
 		/// <summary>ID of the security profile. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 1.</summary>
@@ -1425,7 +1429,6 @@ namespace OrderCloud.SDK
 		/// <summary>Password config of the security profile.</summary>
 		public PasswordConfig PasswordConfig { get => GetProp<PasswordConfig>("PasswordConfig"); set => SetProp<PasswordConfig>("PasswordConfig", value); }
 	}
-
 	public class SecurityProfileAssignment : OrderCloudModel
 	{
 		/// <summary>ID of the security profile. Required. Sortable: priority level 1.</summary>
@@ -1440,7 +1443,6 @@ namespace OrderCloud.SDK
 		/// <summary>ID of the user group.</summary>
 		public string UserGroupID { get => GetProp<string>("UserGroupID"); set => SetProp<string>("UserGroupID", value); }
 	}
-
 	public class ShipEstimate : OrderCloudModel
 	{
 		/// <summary>ID of the ship estimate.</summary>
@@ -1454,13 +1456,16 @@ namespace OrderCloud.SDK
 		/// <summary>Ship methods of the ship estimate.</summary>
 		public IList<ShipMethod> ShipMethods { get => GetProp<IList<ShipMethod>>("ShipMethods", new List<ShipMethod>()); set => SetProp<IList<ShipMethod>>("ShipMethods", value); }
 	}
-
-	/// <typeparam name="Txp">Type used as a container for extended properties (xp) of the ShipEstimate.</typeparam>
-	public class ShipEstimate<Txp> : ShipEstimate
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, specify dynamic.</typeparam>
+	/// <typeparam name="TShipMethods">Specific type of the ShipMethods property. If not using a custom type, specify ShipMethod.</typeparam>
+	public class ShipEstimate<Txp, TShipMethods> : ShipEstimate
+		where TShipMethods : ShipMethod
 	{
-		public new Txp xp { get; set; }
+		/// <summary>Container for extended (custom) properties of the ship estimate.</summary>
+		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
+		/// <summary>Ship methods of the ship estimate.</summary>
+		public new IList<TShipMethods> ShipMethods { get => GetProp<IList<TShipMethods>>("ShipMethods", new List<TShipMethods>()); set => SetProp<IList<TShipMethods>>("ShipMethods", value); }
 	}
-
 	public class ShipEstimateItem : OrderCloudModel
 	{
 		/// <summary>ID of the line item.</summary>
@@ -1468,7 +1473,6 @@ namespace OrderCloud.SDK
 		/// <summary>Quantity of the ship estimate item.</summary>
 		public int Quantity { get => GetProp<int>("Quantity"); set => SetProp<int>("Quantity", value); }
 	}
-
 	public class ShipEstimateResponse : OrderCloudModel
 	{
 		/// <summary>Ship estimates of the ship estimate response.</summary>
@@ -1480,13 +1484,16 @@ namespace OrderCloud.SDK
 		/// <summary>Container for extended (custom) properties of the ship estimate response.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
-
-	/// <typeparam name="Txp">Type used as a container for extended properties (xp) of the ShipEstimateResponse.</typeparam>
-	public class ShipEstimateResponse<Txp> : ShipEstimateResponse
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, specify dynamic.</typeparam>
+	/// <typeparam name="TShipEstimates">Specific type of the ShipEstimates property. If not using a custom type, specify ShipEstimate.</typeparam>
+	public class ShipEstimateResponse<Txp, TShipEstimates> : ShipEstimateResponse
+		where TShipEstimates : ShipEstimate
 	{
-		public new Txp xp { get; set; }
+		/// <summary>Container for extended (custom) properties of the ship estimate response.</summary>
+		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
+		/// <summary>Ship estimates of the ship estimate response.</summary>
+		public new IList<TShipEstimates> ShipEstimates { get => GetProp<IList<TShipEstimates>>("ShipEstimates", new List<TShipEstimates>()); set => SetProp<IList<TShipEstimates>>("ShipEstimates", value); }
 	}
-
 	public class Shipment : OrderCloudModel
 	{
 		/// <summary>ID of the shipment. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable.</summary>
@@ -1518,17 +1525,22 @@ namespace OrderCloud.SDK
 		[ApiReadOnly]
 		public Address ToAddress { get; set; }
 	}
-
-	/// <typeparam name="Txp">Type used as a container for extended properties (xp) of the Shipment.</typeparam>
-	/// <typeparam name="TFromAddressXP">Type used as a container for xp of the nested FromAddress. If weakly typed or unneeded, specify dynamic.</typeparam>
-	/// <typeparam name="TToAddressXP">Type used as a container for xp of the nested ToAddress. If weakly typed or unneeded, specify dynamic.</typeparam>
-	public class Shipment<Txp, TFromAddressXP, TToAddressXP> : Shipment
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, specify dynamic.</typeparam>
+	/// <typeparam name="TFromAddress">Specific type of the FromAddress property. If not using a custom type, specify Address.</typeparam>
+	/// <typeparam name="TToAddress">Specific type of the ToAddress property. If not using a custom type, specify Address.</typeparam>
+	public class Shipment<Txp, TFromAddress, TToAddress> : Shipment
+		where TFromAddress : Address
+		where TToAddress : Address
 	{
-		public new Txp xp { get; set; }
-		public new Address<TFromAddressXP> FromAddress { get; set; }
-		public new Address<TToAddressXP> ToAddress { get; set; }
+		/// <summary>Container for extended (custom) properties of the shipment.</summary>
+		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
+		/// <summary>From address of the shipment.</summary>
+		[ApiReadOnly]
+		public new TFromAddress FromAddress { get; set; }
+		/// <summary>To address of the shipment.</summary>
+		[ApiReadOnly]
+		public new TToAddress ToAddress { get; set; }
 	}
-
 	public class ShipmentItem : OrderCloudModel
 	{
 		/// <summary>ID of the order. Required.</summary>
@@ -1562,17 +1574,23 @@ namespace OrderCloud.SDK
 		[ApiReadOnly]
 		public dynamic xp { get; set; } = new ExpandoObject();
 	}
-
-	/// <typeparam name="Txp">Type used as a container for extended properties (xp) of the ShipmentItem.</typeparam>
-	/// <typeparam name="TProductXP">Type used as a container for xp of the nested Product. If weakly typed or unneeded, specify dynamic.</typeparam>
-	/// <typeparam name="TVariantXP">Type used as a container for xp of the nested Variant. If weakly typed or unneeded, specify dynamic.</typeparam>
-	public class ShipmentItem<Txp, TProductXP, TVariantXP> : ShipmentItem
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, specify dynamic.</typeparam>
+	/// <typeparam name="TProduct">Specific type of the Product property. If not using a custom type, specify LineItemProduct.</typeparam>
+	/// <typeparam name="TVariant">Specific type of the Variant property. If not using a custom type, specify LineItemVariant.</typeparam>
+	public class ShipmentItem<Txp, TProduct, TVariant> : ShipmentItem
+		where TProduct : LineItemProduct
+		where TVariant : LineItemVariant
 	{
+		/// <summary>Container for extended (custom) properties of the shipment item.</summary>
+		[ApiReadOnly]
 		public new Txp xp { get; set; }
-		public new LineItemProduct<TProductXP> Product { get; set; }
-		public new LineItemVariant<TVariantXP> Variant { get; set; }
+		/// <summary>Product of the shipment item.</summary>
+		[ApiReadOnly]
+		public new TProduct Product { get; set; }
+		/// <summary>Variant of the shipment item.</summary>
+		[ApiReadOnly]
+		public new TVariant Variant { get; set; }
 	}
-
 	public class ShipMethod : OrderCloudModel
 	{
 		/// <summary>ID of the ship method.</summary>
@@ -1586,13 +1604,12 @@ namespace OrderCloud.SDK
 		/// <summary>Container for extended (custom) properties of the ship method.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
-
-	/// <typeparam name="Txp">Type used as a container for extended properties (xp) of the ShipMethod.</typeparam>
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic ShipMethod class instead.</typeparam>
 	public class ShipMethod<Txp> : ShipMethod
 	{
-		public new Txp xp { get; set; }
+		/// <summary>Container for extended (custom) properties of the ship method.</summary>
+		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
 	}
-
 	public class ShipMethodSelection : OrderCloudModel
 	{
 		/// <summary>ID of the ship estimate.</summary>
@@ -1600,7 +1617,6 @@ namespace OrderCloud.SDK
 		/// <summary>ID of the ship method.</summary>
 		public string ShipMethodID { get => GetProp<string>("ShipMethodID"); set => SetProp<string>("ShipMethodID", value); }
 	}
-
 	public class Spec : OrderCloudModel
 	{
 		/// <summary>ID of the spec. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 3. Sortable: priority level 3.</summary>
@@ -1629,13 +1645,17 @@ namespace OrderCloud.SDK
 		[ApiReadOnly]
 		public IReadOnlyList<SpecOption> Options { get; set; }
 	}
-
-	/// <typeparam name="Txp">Type used as a container for extended properties (xp) of the Spec.</typeparam>
-	public class Spec<Txp> : Spec
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, specify dynamic.</typeparam>
+	/// <typeparam name="TOptions">Specific type of the Options property. If not using a custom type, specify SpecOption.</typeparam>
+	public class Spec<Txp, TOptions> : Spec
+		where TOptions : SpecOption
 	{
-		public new Txp xp { get; set; }
+		/// <summary>Container for extended (custom) properties of the spec.</summary>
+		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
+		/// <summary>Options of the spec.</summary>
+		[ApiReadOnly]
+		public new IReadOnlyList<TOptions> Options { get; set; }
 	}
-
 	public class SpecOption : OrderCloudModel
 	{
 		/// <summary>ID of the spec option. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 2. Sortable: priority level 2.</summary>
@@ -1654,13 +1674,12 @@ namespace OrderCloud.SDK
 		/// <summary>Container for extended (custom) properties of the spec option.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
-
-	/// <typeparam name="Txp">Type used as a container for extended properties (xp) of the SpecOption.</typeparam>
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic SpecOption class instead.</typeparam>
 	public class SpecOption<Txp> : SpecOption
 	{
-		public new Txp xp { get; set; }
+		/// <summary>Container for extended (custom) properties of the spec option.</summary>
+		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
 	}
-
 	public class SpecProductAssignment : OrderCloudModel
 	{
 		/// <summary>ID of the spec. Searchable: priority level 1. Sortable: priority level 1.</summary>
@@ -1672,7 +1691,6 @@ namespace OrderCloud.SDK
 		/// <summary>Optional. When defined, overrides the DefaultOptionID set on the Spec for just this Product.</summary>
 		public string DefaultOptionID { get => GetProp<string>("DefaultOptionID"); set => SetProp<string>("DefaultOptionID", value); }
 	}
-
 	public class SpendingAccount : OrderCloudModel
 	{
 		/// <summary>ID of the spending account. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 2.</summary>
@@ -1694,13 +1712,12 @@ namespace OrderCloud.SDK
 		/// <summary>Container for extended (custom) properties of the spending account.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
-
-	/// <typeparam name="Txp">Type used as a container for extended properties (xp) of the SpendingAccount.</typeparam>
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic SpendingAccount class instead.</typeparam>
 	public class SpendingAccount<Txp> : SpendingAccount
 	{
-		public new Txp xp { get; set; }
+		/// <summary>Container for extended (custom) properties of the spending account.</summary>
+		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
 	}
-
 	public class SpendingAccountAssignment : OrderCloudModel
 	{
 		/// <summary>ID of the spending account. Required. Sortable: priority level 1.</summary>
@@ -1713,7 +1730,6 @@ namespace OrderCloud.SDK
 		/// <summary>Allow exceed of the spending account assignment.</summary>
 		public bool AllowExceed { get => GetProp<bool>("AllowExceed"); set => SetProp<bool>("AllowExceed", value); }
 	}
-
 	public class Supplier : OrderCloudModel
 	{
 		/// <summary>ID of the supplier. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 2. Sortable: priority level 1.</summary>
@@ -1726,20 +1742,18 @@ namespace OrderCloud.SDK
 		/// <summary>Container for extended (custom) properties of the supplier.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
-
-	/// <typeparam name="Txp">Type used as a container for extended properties (xp) of the Supplier.</typeparam>
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic Supplier class instead.</typeparam>
 	public class Supplier<Txp> : Supplier
 	{
-		public new Txp xp { get; set; }
+		/// <summary>Container for extended (custom) properties of the supplier.</summary>
+		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
 	}
-
 	public class TokenPasswordReset : OrderCloudModel
 	{
 		/// <summary>New password of the token password reset. Required.</summary>
 		[Required]
 		public string NewPassword { get => GetProp<string>("NewPassword"); set => SetProp<string>("NewPassword", value); }
 	}
-
 	public class User : OrderCloudModel
 	{
 		/// <summary>ID of the user. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable.</summary>
@@ -1778,13 +1792,12 @@ namespace OrderCloud.SDK
 		[ApiReadOnly]
 		public DateTimeOffset? PasswordLastSetDate { get; set; }
 	}
-
-	/// <typeparam name="Txp">Type used as a container for extended properties (xp) of the User.</typeparam>
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic User class instead.</typeparam>
 	public class User<Txp> : User
 	{
-		public new Txp xp { get; set; }
+		/// <summary>Container for extended (custom) properties of the user.</summary>
+		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
 	}
-
 	public class UserGroup : OrderCloudModel
 	{
 		/// <summary>ID of the user group. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 2.</summary>
@@ -1797,13 +1810,12 @@ namespace OrderCloud.SDK
 		/// <summary>Container for extended (custom) properties of the user group.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
-
-	/// <typeparam name="Txp">Type used as a container for extended properties (xp) of the UserGroup.</typeparam>
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic UserGroup class instead.</typeparam>
 	public class UserGroup<Txp> : UserGroup
 	{
-		public new Txp xp { get; set; }
+		/// <summary>Container for extended (custom) properties of the user group.</summary>
+		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
 	}
-
 	public class UserGroupAssignment : OrderCloudModel
 	{
 		/// <summary>ID of the user group.</summary>
@@ -1811,7 +1823,6 @@ namespace OrderCloud.SDK
 		/// <summary>ID of the user.</summary>
 		public string UserID { get => GetProp<string>("UserID"); set => SetProp<string>("UserID", value); }
 	}
-
 	public class Variant : OrderCloudModel
 	{
 		/// <summary>ID of the variant. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 1.</summary>
@@ -1838,13 +1849,12 @@ namespace OrderCloud.SDK
 		/// <summary>Container for extended (custom) properties of the variant.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
-
-	/// <typeparam name="Txp">Type used as a container for extended properties (xp) of the Variant.</typeparam>
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic Variant class instead.</typeparam>
 	public class Variant<Txp> : Variant
 	{
-		public new Txp xp { get; set; }
+		/// <summary>Container for extended (custom) properties of the variant.</summary>
+		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
 	}
-
 	public class VariantInventory : OrderCloudModel
 	{
 		/// <summary>Quantity available of the variant inventory.</summary>
@@ -1853,7 +1863,6 @@ namespace OrderCloud.SDK
 		[ApiReadOnly]
 		public DateTimeOffset LastUpdated { get; set; }
 	}
-
 	public class VariantSpec : OrderCloudModel
 	{
 		/// <summary>ID of the spec. Required.</summary>
@@ -1871,7 +1880,6 @@ namespace OrderCloud.SDK
 		/// <summary>Price markup of the variant spec. Searchable: priority level 6.</summary>
 		public decimal? PriceMarkup { get => GetProp<decimal?>("PriceMarkup"); set => SetProp<decimal?>("PriceMarkup", value); }
 	}
-
 	public class Webhook : OrderCloudModel
 	{
 		/// <summary>ID of the webhook. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable.</summary>
@@ -1898,7 +1906,6 @@ namespace OrderCloud.SDK
 		/// <summary>Webhook routes of the webhook.</summary>
 		public IList<WebhookRoute> WebhookRoutes { get => GetProp<IList<WebhookRoute>>("WebhookRoutes", new List<WebhookRoute>()); set => SetProp<IList<WebhookRoute>>("WebhookRoutes", value); }
 	}
-
 	public class WebhookRoute : OrderCloudModel
 	{
 		/// <summary>Route of the webhook route. Searchable: priority level 1. Sortable: priority level 1.</summary>
@@ -1906,7 +1913,6 @@ namespace OrderCloud.SDK
 		/// <summary>Verb of the webhook route. Searchable: priority level 2. Sortable: priority level 2.</summary>
 		public string Verb { get => GetProp<string>("Verb"); set => SetProp<string>("Verb", value); }
 	}
-
 	public class XpIndex : OrderCloudModel
 	{
 		/// <summary>Thing type of the xp index. Searchable: priority level 0. Sortable: priority level 0. Possible values: Product, Variant, Order, LineItem, Address, CostCenter, CreditCard, Payment, Spec, SpecOption, UserGroup, Company, Category, PriceSchedule, Shipment, SpendingAccount, User, Promotion, ApprovalRule, Catalog, ProductFacet, MessageSender.</summary>
@@ -1915,76 +1921,156 @@ namespace OrderCloud.SDK
 		public string Key { get => GetProp<string>("Key"); set => SetProp<string>("Key", value); }
 	}
 	public class PartialAddress : Address, IPartial { }
-	public class PartialAddress<Txp> : PartialAddress { }
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic PartialAddress class instead.</typeparam>
+	public class PartialAddress<Txp> : PartialAddress
+	{ }
 	public class PartialApiClient : ApiClient, IPartial { }
-	public class PartialApiClient<Txp> : PartialApiClient { }
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic PartialApiClient class instead.</typeparam>
+	public class PartialApiClient<Txp> : PartialApiClient
+	{ }
 	public class PartialApprovalRule : ApprovalRule, IPartial { }
-	public class PartialApprovalRule<Txp> : PartialApprovalRule { }
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic PartialApprovalRule class instead.</typeparam>
+	public class PartialApprovalRule<Txp> : PartialApprovalRule
+	{ }
 	public class PartialBuyer : Buyer, IPartial { }
-	public class PartialBuyer<Txp> : PartialBuyer { }
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic PartialBuyer class instead.</typeparam>
+	public class PartialBuyer<Txp> : PartialBuyer
+	{ }
 	public class PartialBuyerAddress : BuyerAddress, IPartial { }
-	public class PartialBuyerAddress<Txp> : PartialBuyerAddress { }
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic PartialBuyerAddress class instead.</typeparam>
+	public class PartialBuyerAddress<Txp> : PartialBuyerAddress
+	{ }
 	public class PartialBuyerCreditCard : BuyerCreditCard, IPartial { }
-	public class PartialBuyerCreditCard<Txp> : PartialBuyerCreditCard { }
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic PartialBuyerCreditCard class instead.</typeparam>
+	public class PartialBuyerCreditCard<Txp> : PartialBuyerCreditCard
+	{ }
 	public class PartialCatalog : Catalog, IPartial { }
-	public class PartialCatalog<Txp> : PartialCatalog { }
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic PartialCatalog class instead.</typeparam>
+	public class PartialCatalog<Txp> : PartialCatalog
+	{ }
 	public class PartialCategory : Category, IPartial { }
-	public class PartialCategory<Txp> : PartialCategory { }
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic PartialCategory class instead.</typeparam>
+	public class PartialCategory<Txp> : PartialCategory
+	{ }
 	public class PartialCostCenter : CostCenter, IPartial { }
-	public class PartialCostCenter<Txp> : PartialCostCenter { }
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic PartialCostCenter class instead.</typeparam>
+	public class PartialCostCenter<Txp> : PartialCostCenter
+	{ }
 	public class PartialCreditCard : CreditCard, IPartial { }
-	public class PartialCreditCard<Txp> : PartialCreditCard { }
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic PartialCreditCard class instead.</typeparam>
+	public class PartialCreditCard<Txp> : PartialCreditCard
+	{ }
 	public class PartialImpersonationConfig : ImpersonationConfig, IPartial { }
 	public class PartialIncrementor : Incrementor, IPartial { }
 	public class PartialIntegrationEvent : IntegrationEvent, IPartial { }
 	public class PartialInventory : Inventory, IPartial { }
 	public class PartialLineItem : LineItem, IPartial { }
-	public class PartialLineItem<Txp, TProductXP, TVariantXP, TShippingAddressXP, TShipFromAddressXP> : PartialLineItem { }
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, specify dynamic.</typeparam>
+	/// <typeparam name="TProduct">Specific type of the Product property. If not using a custom type, specify LineItemProduct.</typeparam>
+	/// <typeparam name="TVariant">Specific type of the Variant property. If not using a custom type, specify LineItemVariant.</typeparam>
+	/// <typeparam name="TShippingAddress">Specific type of the ShippingAddress property. If not using a custom type, specify Address.</typeparam>
+	/// <typeparam name="TShipFromAddress">Specific type of the ShipFromAddress property. If not using a custom type, specify Address.</typeparam>
+	public class PartialLineItem<Txp, TProduct, TVariant, TShippingAddress, TShipFromAddress> : PartialLineItem
+		where TProduct : LineItemProduct
+		where TVariant : LineItemVariant
+		where TShippingAddress : Address
+		where TShipFromAddress : Address
+	{ }
 	public class PartialLineItemProduct : LineItemProduct, IPartial { }
-	public class PartialLineItemProduct<Txp> : PartialLineItemProduct { }
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic PartialLineItemProduct class instead.</typeparam>
+	public class PartialLineItemProduct<Txp> : PartialLineItemProduct
+	{ }
 	public class PartialLineItemSpec : LineItemSpec, IPartial { }
 	public class PartialLineItemVariant : LineItemVariant, IPartial { }
-	public class PartialLineItemVariant<Txp> : PartialLineItemVariant { }
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic PartialLineItemVariant class instead.</typeparam>
+	public class PartialLineItemVariant<Txp> : PartialLineItemVariant
+	{ }
 	public class PartialMeBuyer : MeBuyer, IPartial { }
 	public class PartialMessageSender : MessageSender, IPartial { }
-	public class PartialMessageSender<Txp> : PartialMessageSender { }
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic PartialMessageSender class instead.</typeparam>
+	public class PartialMessageSender<Txp> : PartialMessageSender
+	{ }
 	public class PartialMeSupplier : MeSupplier, IPartial { }
 	public class PartialMeUser : MeUser, IPartial { }
-	public class PartialMeUser<Txp> : PartialMeUser { }
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic PartialMeUser class instead.</typeparam>
+	public class PartialMeUser<Txp> : PartialMeUser
+	{ }
 	public class PartialOpenIdConnect : OpenIdConnect, IPartial { }
 	public class PartialOrder : Order, IPartial { }
-	public class PartialOrder<Txp, TFromUserXP, TBillingAddressXP> : PartialOrder { }
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, specify dynamic.</typeparam>
+	/// <typeparam name="TFromUser">Specific type of the FromUser property. If not using a custom type, specify User.</typeparam>
+	/// <typeparam name="TBillingAddress">Specific type of the BillingAddress property. If not using a custom type, specify Address.</typeparam>
+	public class PartialOrder<Txp, TFromUser, TBillingAddress> : PartialOrder
+		where TFromUser : User
+		where TBillingAddress : Address
+	{ }
 	public class PartialPasswordConfig : PasswordConfig, IPartial { }
 	public class PartialPayment : Payment, IPartial { }
-	public class PartialPayment<Txp> : PartialPayment { }
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, specify dynamic.</typeparam>
+	/// <typeparam name="TTransactions">Specific type of the Transactions property. If not using a custom type, specify PaymentTransaction.</typeparam>
+	public class PartialPayment<Txp, TTransactions> : PartialPayment
+		where TTransactions : PaymentTransaction
+	{ }
 	public class PartialPaymentTransaction : PaymentTransaction, IPartial { }
-	public class PartialPaymentTransaction<Txp> : PartialPaymentTransaction { }
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic PartialPaymentTransaction class instead.</typeparam>
+	public class PartialPaymentTransaction<Txp> : PartialPaymentTransaction
+	{ }
 	public class PartialPriceBreak : PriceBreak, IPartial { }
 	public class PartialPriceSchedule : PriceSchedule, IPartial { }
-	public class PartialPriceSchedule<Txp> : PartialPriceSchedule { }
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic PartialPriceSchedule class instead.</typeparam>
+	public class PartialPriceSchedule<Txp> : PartialPriceSchedule
+	{ }
 	public class PartialProduct : Product, IPartial { }
-	public class PartialProduct<Txp> : PartialProduct { }
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic PartialProduct class instead.</typeparam>
+	public class PartialProduct<Txp> : PartialProduct
+	{ }
 	public class PartialProductFacet : ProductFacet, IPartial { }
-	public class PartialProductFacet<Txp> : PartialProductFacet { }
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic PartialProductFacet class instead.</typeparam>
+	public class PartialProductFacet<Txp> : PartialProductFacet
+	{ }
 	public class PartialPromotion : Promotion, IPartial { }
-	public class PartialPromotion<Txp> : PartialPromotion { }
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic PartialPromotion class instead.</typeparam>
+	public class PartialPromotion<Txp> : PartialPromotion
+	{ }
 	public class PartialSecurityProfile : SecurityProfile, IPartial { }
 	public class PartialShipment : Shipment, IPartial { }
-	public class PartialShipment<Txp, TFromAddressXP, TToAddressXP> : PartialShipment { }
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, specify dynamic.</typeparam>
+	/// <typeparam name="TFromAddress">Specific type of the FromAddress property. If not using a custom type, specify Address.</typeparam>
+	/// <typeparam name="TToAddress">Specific type of the ToAddress property. If not using a custom type, specify Address.</typeparam>
+	public class PartialShipment<Txp, TFromAddress, TToAddress> : PartialShipment
+		where TFromAddress : Address
+		where TToAddress : Address
+	{ }
 	public class PartialSpec : Spec, IPartial { }
-	public class PartialSpec<Txp> : PartialSpec { }
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, specify dynamic.</typeparam>
+	/// <typeparam name="TOptions">Specific type of the Options property. If not using a custom type, specify SpecOption.</typeparam>
+	public class PartialSpec<Txp, TOptions> : PartialSpec
+		where TOptions : SpecOption
+	{ }
 	public class PartialSpecOption : SpecOption, IPartial { }
-	public class PartialSpecOption<Txp> : PartialSpecOption { }
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic PartialSpecOption class instead.</typeparam>
+	public class PartialSpecOption<Txp> : PartialSpecOption
+	{ }
 	public class PartialSpendingAccount : SpendingAccount, IPartial { }
-	public class PartialSpendingAccount<Txp> : PartialSpendingAccount { }
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic PartialSpendingAccount class instead.</typeparam>
+	public class PartialSpendingAccount<Txp> : PartialSpendingAccount
+	{ }
 	public class PartialSupplier : Supplier, IPartial { }
-	public class PartialSupplier<Txp> : PartialSupplier { }
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic PartialSupplier class instead.</typeparam>
+	public class PartialSupplier<Txp> : PartialSupplier
+	{ }
 	public class PartialUser : User, IPartial { }
-	public class PartialUser<Txp> : PartialUser { }
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic PartialUser class instead.</typeparam>
+	public class PartialUser<Txp> : PartialUser
+	{ }
 	public class PartialUserGroup : UserGroup, IPartial { }
-	public class PartialUserGroup<Txp> : PartialUserGroup { }
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic PartialUserGroup class instead.</typeparam>
+	public class PartialUserGroup<Txp> : PartialUserGroup
+	{ }
 	public class PartialVariant : Variant, IPartial { }
-	public class PartialVariant<Txp> : PartialVariant { }
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic PartialVariant class instead.</typeparam>
+	public class PartialVariant<Txp> : PartialVariant
+	{ }
 	public class PartialVariantInventory : VariantInventory, IPartial { }
 	public class PartialVariantSpec : VariantSpec, IPartial { }
 	public class PartialWebhook : Webhook, IPartial { }
