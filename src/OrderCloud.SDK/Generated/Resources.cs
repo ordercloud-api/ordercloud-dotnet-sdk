@@ -1185,22 +1185,43 @@ namespace OrderCloud.SDK
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<OrderWorksheet> EstimateShippingAsync(OrderDirection direction, string orderID, string accessToken = null);
+		/// <summary>Estimate a shipping.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing.</param>
+		/// <param name="orderID">ID of the order.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TOrderWorksheet> EstimateShippingAsync<TOrderWorksheet>(OrderDirection direction, string orderID, string accessToken = null) where TOrderWorksheet : OrderWorksheet;
 		/// <summary>Select a shipmethods.</summary>
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="orderShipMethodSelection">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<OrderWorksheet> SelectShipmethodsAsync(OrderDirection direction, string orderID, OrderShipMethodSelection orderShipMethodSelection, string accessToken = null);
+		/// <summary>Select a shipmethods.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing.</param>
+		/// <param name="orderID">ID of the order.</param>
+		/// <param name="orderShipMethodSelection">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TOrderWorksheet> SelectShipmethodsAsync<TOrderWorksheet>(OrderDirection direction, string orderID, OrderShipMethodSelection orderShipMethodSelection, string accessToken = null) where TOrderWorksheet : OrderWorksheet;
 		/// <summary>Get a single integration event worksheet.</summary>
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<OrderWorksheet> GetWorksheetAsync(OrderDirection direction, string orderID, string accessToken = null);
+		/// <summary>Get a single integration event worksheet.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing.</param>
+		/// <param name="orderID">ID of the order.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TOrderWorksheet> GetWorksheetAsync<TOrderWorksheet>(OrderDirection direction, string orderID, string accessToken = null) where TOrderWorksheet : OrderWorksheet;
 		/// <summary>Calculate an integration event calculate.</summary>
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<OrderWorksheet> CalculateAsync(OrderDirection direction, string orderID, string accessToken = null);
+		/// <summary>Calculate an integration event calculate.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing.</param>
+		/// <param name="orderID">ID of the order.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TOrderWorksheet> CalculateAsync<TOrderWorksheet>(OrderDirection direction, string orderID, string accessToken = null) where TOrderWorksheet : OrderWorksheet;
 	}
 
 	public interface ILineItemsResource
@@ -2172,9 +2193,26 @@ namespace OrderCloud.SDK
 		/// <summary>Get a list of order approvals. Returns all Approvals associated with the Order.</summary>
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing.</param>
 		/// <param name="orderID">ID of the order.</param>
+		/// <param name="search">Word or phrase to search for.</param>
+		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
+		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
+		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<TOrderApproval>> ListApprovalsAsync<TOrderApproval>(OrderDirection direction, string orderID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TOrderApproval : OrderApproval;
+		/// <summary>Get a list of order approvals. Returns all Approvals associated with the Order.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing.</param>
+		/// <param name="orderID">ID of the order.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<OrderApproval>> ListApprovalsAsync(OrderDirection direction, string orderID, Action<ListOptionsBuilder<OrderApproval>> buildListOpts, string accessToken = null);
+		/// <summary>Get a list of order approvals. Returns all Approvals associated with the Order.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing.</param>
+		/// <param name="orderID">ID of the order.</param>
+		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<TOrderApproval>> ListApprovalsAsync<TOrderApproval>(OrderDirection direction, string orderID, Action<ListOptionsBuilder<TOrderApproval>> buildListOpts, string accessToken = null) where TOrderApproval : OrderApproval;
 		/// <summary>Get a list of order eligible approvers. Returns all Users who can approve or decline this order (but have not done so).</summary>
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing.</param>
 		/// <param name="orderID">ID of the order.</param>
@@ -2270,11 +2308,21 @@ namespace OrderCloud.SDK
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<OrderSplitResult> SplitAsync(OrderDirection direction, string orderID, string accessToken = null);
+		/// <summary>Split an order split. Creates, but does not submit, 0 or more outgoing Orders to Suppliers, one for each unique Product.DefaultSupplierID on this Order.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing.</param>
+		/// <param name="orderID">ID of the order.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TOrderSplitResult> SplitAsync<TOrderSplitResult>(OrderDirection direction, string orderID, string accessToken = null) where TOrderSplitResult : OrderSplitResult;
 		/// <summary>Forward an order forward. Creates and submits 0 or more outgoing Orders to Suppliers, one for each unique Product.DefaultSupplierID on this Order.</summary>
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<OrderSplitResult> ForwardAsync(OrderDirection direction, string orderID, string accessToken = null);
+		/// <summary>Forward an order forward. Creates and submits 0 or more outgoing Orders to Suppliers, one for each unique Product.DefaultSupplierID on this Order.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing.</param>
+		/// <param name="orderID">ID of the order.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TOrderSplitResult> ForwardAsync<TOrderSplitResult>(OrderDirection direction, string orderID, string accessToken = null) where TOrderSplitResult : OrderSplitResult;
 		/// <summary>Complete an order Use only when an order doesn't need a shipment. You will not be able to ship or reopen an order after completing it.</summary>
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing.</param>
 		/// <param name="orderID">ID of the order.</param>
@@ -4502,10 +4550,14 @@ namespace OrderCloud.SDK
 		public Task<IntegrationEvent> SaveAsync(string integrationEventID, IntegrationEvent integrationEvent, string accessToken = null) => Request("v1", "integrationEvents", integrationEventID).WithOAuthBearerToken(accessToken).PutJsonAsync(ValidateModel(integrationEvent)).ReceiveJson<IntegrationEvent>();
 		public Task DeleteAsync(string integrationEventID, string accessToken = null) => Request("v1", "integrationEvents", integrationEventID).WithOAuthBearerToken(accessToken).DeleteAsync();
 		public Task<IntegrationEvent> PatchAsync(string integrationEventID, PartialIntegrationEvent partialIntegrationEvent, string accessToken = null) => Request("v1", "integrationEvents", integrationEventID).WithOAuthBearerToken(accessToken).PatchJsonAsync(ValidateModel(partialIntegrationEvent)).ReceiveJson<IntegrationEvent>();
-		public Task<OrderWorksheet> EstimateShippingAsync(OrderDirection direction, string orderID, string accessToken = null) => Request("v1", "orders", direction, orderID, "estimateshipping").WithOAuthBearerToken(accessToken).PostAsync(null).ReceiveJson<OrderWorksheet>();
-		public Task<OrderWorksheet> SelectShipmethodsAsync(OrderDirection direction, string orderID, OrderShipMethodSelection orderShipMethodSelection, string accessToken = null) => Request("v1", "orders", direction, orderID, "shipmethods").WithOAuthBearerToken(accessToken).PostJsonAsync(ValidateModel(orderShipMethodSelection)).ReceiveJson<OrderWorksheet>();
-		public Task<OrderWorksheet> GetWorksheetAsync(OrderDirection direction, string orderID, string accessToken = null) => Request("v1", "orders", direction, orderID, "worksheet").WithOAuthBearerToken(accessToken).GetJsonAsync<OrderWorksheet>();
-		public Task<OrderWorksheet> CalculateAsync(OrderDirection direction, string orderID, string accessToken = null) => Request("v1", "orders", direction, orderID, "calculate").WithOAuthBearerToken(accessToken).PostAsync(null).ReceiveJson<OrderWorksheet>();
+		public Task<OrderWorksheet> EstimateShippingAsync(OrderDirection direction, string orderID, string accessToken = null) => EstimateShippingAsync<OrderWorksheet>(direction, orderID, accessToken);
+		public Task<TOrderWorksheet> EstimateShippingAsync<TOrderWorksheet>(OrderDirection direction, string orderID, string accessToken = null) where TOrderWorksheet : OrderWorksheet => Request("v1", "orders", direction, orderID, "estimateshipping").WithOAuthBearerToken(accessToken).PostAsync(null).ReceiveJson<TOrderWorksheet>();
+		public Task<OrderWorksheet> SelectShipmethodsAsync(OrderDirection direction, string orderID, OrderShipMethodSelection orderShipMethodSelection, string accessToken = null) => SelectShipmethodsAsync<OrderWorksheet>(direction, orderID, orderShipMethodSelection, accessToken);
+		public Task<TOrderWorksheet> SelectShipmethodsAsync<TOrderWorksheet>(OrderDirection direction, string orderID, OrderShipMethodSelection orderShipMethodSelection, string accessToken = null) where TOrderWorksheet : OrderWorksheet => Request("v1", "orders", direction, orderID, "shipmethods").WithOAuthBearerToken(accessToken).PostJsonAsync(ValidateModel(orderShipMethodSelection)).ReceiveJson<TOrderWorksheet>();
+		public Task<OrderWorksheet> GetWorksheetAsync(OrderDirection direction, string orderID, string accessToken = null) => GetWorksheetAsync<OrderWorksheet>(direction, orderID, accessToken);
+		public Task<TOrderWorksheet> GetWorksheetAsync<TOrderWorksheet>(OrderDirection direction, string orderID, string accessToken = null) where TOrderWorksheet : OrderWorksheet => Request("v1", "orders", direction, orderID, "worksheet").WithOAuthBearerToken(accessToken).GetJsonAsync<TOrderWorksheet>();
+		public Task<OrderWorksheet> CalculateAsync(OrderDirection direction, string orderID, string accessToken = null) => CalculateAsync<OrderWorksheet>(direction, orderID, accessToken);
+		public Task<TOrderWorksheet> CalculateAsync<TOrderWorksheet>(OrderDirection direction, string orderID, string accessToken = null) where TOrderWorksheet : OrderWorksheet => Request("v1", "orders", direction, orderID, "calculate").WithOAuthBearerToken(accessToken).PostAsync(null).ReceiveJson<TOrderWorksheet>();
 	}
 
 	public class LineItemsResource : OrderCloudResource, ILineItemsResource
@@ -4680,8 +4732,10 @@ namespace OrderCloud.SDK
 		public Task<Order> SaveAsync(OrderDirection direction, string orderID, Order order, string accessToken = null) => SaveAsync<Order>(direction, orderID, order, accessToken);
 		public Task<TOrder> SaveAsync<TOrder>(OrderDirection direction, string orderID, Order order, string accessToken = null) where TOrder : Order => Request("v1", "orders", direction, orderID).WithOAuthBearerToken(accessToken).PutJsonAsync(ValidateModel(order)).ReceiveJson<TOrder>();
 		public Task DeleteAsync(OrderDirection direction, string orderID, string accessToken = null) => Request("v1", "orders", direction, orderID).WithOAuthBearerToken(accessToken).DeleteAsync();
-		public Task<ListPage<OrderApproval>> ListApprovalsAsync(OrderDirection direction, string orderID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) => Request("v1", "orders", direction, orderID, "approvals").WithOAuthBearerToken(accessToken).SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<OrderApproval>>();
-		public Task<ListPage<OrderApproval>> ListApprovalsAsync(OrderDirection direction, string orderID, Action<ListOptionsBuilder<OrderApproval>> buildListOpts, string accessToken = null) => Request("v1", "orders", direction, orderID, "approvals").WithOAuthBearerToken(accessToken).SetListOptions(buildListOpts).GetJsonAsync<ListPage<OrderApproval>>();
+		public Task<ListPage<OrderApproval>> ListApprovalsAsync(OrderDirection direction, string orderID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) => ListApprovalsAsync<OrderApproval>(direction, orderID, search, searchOn, sortBy, page, pageSize, filters, accessToken);
+		public Task<ListPage<TOrderApproval>> ListApprovalsAsync<TOrderApproval>(OrderDirection direction, string orderID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TOrderApproval : OrderApproval => Request("v1", "orders", direction, orderID, "approvals").WithOAuthBearerToken(accessToken).SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<TOrderApproval>>();
+		public Task<ListPage<OrderApproval>> ListApprovalsAsync(OrderDirection direction, string orderID, Action<ListOptionsBuilder<OrderApproval>> buildListOpts, string accessToken = null) => ListApprovalsAsync<OrderApproval>(direction, orderID, buildListOpts, accessToken);
+		public Task<ListPage<TOrderApproval>> ListApprovalsAsync<TOrderApproval>(OrderDirection direction, string orderID, Action<ListOptionsBuilder<TOrderApproval>> buildListOpts, string accessToken = null) where TOrderApproval : OrderApproval => Request("v1", "orders", direction, orderID, "approvals").WithOAuthBearerToken(accessToken).SetListOptions(buildListOpts).GetJsonAsync<ListPage<TOrderApproval>>();
 		public Task<ListPage<User>> ListEligibleApproversAsync(OrderDirection direction, string orderID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) => ListEligibleApproversAsync<User>(direction, orderID, search, searchOn, sortBy, page, pageSize, filters, accessToken);
 		public Task<ListPage<TUser>> ListEligibleApproversAsync<TUser>(OrderDirection direction, string orderID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TUser : User => Request("v1", "orders", direction, orderID, "eligibleapprovers").WithOAuthBearerToken(accessToken).SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<TUser>>();
 		public Task<ListPage<User>> ListEligibleApproversAsync(OrderDirection direction, string orderID, Action<ListOptionsBuilder<User>> buildListOpts, string accessToken = null) => ListEligibleApproversAsync<User>(direction, orderID, buildListOpts, accessToken);
@@ -4696,8 +4750,10 @@ namespace OrderCloud.SDK
 		public Task<TOrder> DeclineAsync<TOrder>(OrderDirection direction, string orderID, OrderApprovalInfo orderApprovalInfo, string accessToken = null) where TOrder : Order => Request("v1", "orders", direction, orderID, "decline").WithOAuthBearerToken(accessToken).PostJsonAsync(ValidateModel(orderApprovalInfo)).ReceiveJson<TOrder>();
 		public Task<Order> CancelAsync(OrderDirection direction, string orderID, string accessToken = null) => CancelAsync<Order>(direction, orderID, accessToken);
 		public Task<TOrder> CancelAsync<TOrder>(OrderDirection direction, string orderID, string accessToken = null) where TOrder : Order => Request("v1", "orders", direction, orderID, "cancel").WithOAuthBearerToken(accessToken).PostAsync(null).ReceiveJson<TOrder>();
-		public Task<OrderSplitResult> SplitAsync(OrderDirection direction, string orderID, string accessToken = null) => Request("v1", "orders", direction, orderID, "split").WithOAuthBearerToken(accessToken).PostAsync(null).ReceiveJson<OrderSplitResult>();
-		public Task<OrderSplitResult> ForwardAsync(OrderDirection direction, string orderID, string accessToken = null) => Request("v1", "orders", direction, orderID, "forward").WithOAuthBearerToken(accessToken).PostAsync(null).ReceiveJson<OrderSplitResult>();
+		public Task<OrderSplitResult> SplitAsync(OrderDirection direction, string orderID, string accessToken = null) => SplitAsync<OrderSplitResult>(direction, orderID, accessToken);
+		public Task<TOrderSplitResult> SplitAsync<TOrderSplitResult>(OrderDirection direction, string orderID, string accessToken = null) where TOrderSplitResult : OrderSplitResult => Request("v1", "orders", direction, orderID, "split").WithOAuthBearerToken(accessToken).PostAsync(null).ReceiveJson<TOrderSplitResult>();
+		public Task<OrderSplitResult> ForwardAsync(OrderDirection direction, string orderID, string accessToken = null) => ForwardAsync<OrderSplitResult>(direction, orderID, accessToken);
+		public Task<TOrderSplitResult> ForwardAsync<TOrderSplitResult>(OrderDirection direction, string orderID, string accessToken = null) where TOrderSplitResult : OrderSplitResult => Request("v1", "orders", direction, orderID, "forward").WithOAuthBearerToken(accessToken).PostAsync(null).ReceiveJson<TOrderSplitResult>();
 		public Task<Order> CompleteAsync(OrderDirection direction, string orderID, string accessToken = null) => CompleteAsync<Order>(direction, orderID, accessToken);
 		public Task<TOrder> CompleteAsync<TOrder>(OrderDirection direction, string orderID, string accessToken = null) where TOrder : Order => Request("v1", "orders", direction, orderID, "complete").WithOAuthBearerToken(accessToken).PostAsync(null).ReceiveJson<TOrder>();
 		public Task<Order> ShipAsync(OrderDirection direction, string orderID, Shipment shipment, string accessToken = null) => ShipAsync<Order>(direction, orderID, shipment, accessToken);
