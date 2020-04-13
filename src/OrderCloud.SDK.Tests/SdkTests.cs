@@ -52,6 +52,22 @@ namespace OrderCloud.SDK.Tests
 			}
 		}
 
+		[Test]
+		public void strongly_typed_props_backed_by_base_props() {
+			void AssertLineItem(LineItem li) {
+				Assert.IsNotNull(li.ShippingAddress);
+				Assert.IsNotNull(li.ShippingAddress.xp);
+				Assert.AreEqual("hello", li.ShippingAddress.xp.Foo);
+			}
+
+			var custom = new CustomLineItem {
+				ShippingAddress = new CustomAddress {
+					xp = new CustomXP { Foo = "hello" }
+				}
+			};
+			AssertLineItem(custom);
+		}
+
 		class CustomAddress : Address<CustomXP> { }
 		class CustomLineItem : LineItem<CustomXP, LineItemProduct, LineItemVariant, CustomAddress, CustomAddress> { }
 
