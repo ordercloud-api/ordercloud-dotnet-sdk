@@ -16,7 +16,7 @@ namespace OrderCloud.SDK
 	public enum PriceMarkupType { NoMarkup, AmountPerQuantity, AmountTotal, Percentage }
 	public enum SearchType { AnyTerm, AllTermsAnyField, AllTermsSameField, ExactPhrase, ExactPhrasePrefix }
 	public enum UserOrderMoveOption { None, Unsubmitted, All }
-	public enum XpThingType { Product, Variant, Order, LineItem, Address, CostCenter, CreditCard, Payment, Spec, SpecOption, UserGroup, Company, Category, PriceSchedule, Shipment, SpendingAccount, User, Promotion, ApprovalRule, Catalog, ProductFacet, MessageSender }
+	public enum XpThingType { Address, Variant, Order, LineItem, CostCenter, CreditCard, Payment, Spec, SpecOption, UserGroup, Company, Category, PriceSchedule, Shipment, SpendingAccount, User, Promotion, ApprovalRule, Catalog, ProductFacet, MessageSender }
 	public class AccessToken : OrderCloudModel
 	{
 		/// <summary>Access token of the access token.</summary>
@@ -180,6 +180,9 @@ namespace OrderCloud.SDK
 		public string DefaultCatalogID { get => GetProp<string>("DefaultCatalogID"); set => SetProp<string>("DefaultCatalogID", value); }
 		/// <summary>Active of the buyer.</summary>
 		public bool Active { get => GetProp<bool>("Active"); set => SetProp<bool>("Active", value); }
+		/// <summary>Date created of the buyer. Sortable: priority level 3.</summary>
+		[ApiReadOnly]
+		public DateTimeOffset DateCreated { get => GetProp<DateTimeOffset>("DateCreated"); set => SetProp<DateTimeOffset>("DateCreated", value); }
 		/// <summary>Container for extended (custom) properties of the buyer.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
@@ -577,9 +580,15 @@ namespace OrderCloud.SDK
 		public int QuantityShipped { get => GetProp<int>("QuantityShipped"); set => SetProp<int>("QuantityShipped", value); }
 		/// <summary>Unit price of the line item. Must be between -9999999999999 and 9999999999999.</summary>
 		public decimal? UnitPrice { get => GetProp<decimal?>("UnitPrice"); set => SetProp<decimal?>("UnitPrice", value); }
+		/// <summary>Promotion discount of the line item.</summary>
+		[ApiReadOnly]
+		public decimal PromotionDiscount { get => GetProp<decimal>("PromotionDiscount"); set => SetProp<decimal>("PromotionDiscount", value); }
 		/// <summary>Line total of the line item.</summary>
 		[ApiReadOnly]
 		public decimal LineTotal { get => GetProp<decimal>("LineTotal"); set => SetProp<decimal>("LineTotal", value); }
+		/// <summary>Line subtotal of the line item.</summary>
+		[ApiReadOnly]
+		public decimal LineSubtotal { get => GetProp<decimal>("LineSubtotal"); set => SetProp<decimal>("LineSubtotal", value); }
 		/// <summary>Cost center of the line item.</summary>
 		public string CostCenter { get => GetProp<string>("CostCenter"); set => SetProp<string>("CostCenter", value); }
 		/// <summary>Date needed of the line item.</summary>
@@ -1026,8 +1035,13 @@ namespace OrderCloud.SDK
 		/// <summary>Amount of the order promotion.</summary>
 		[ApiReadOnly]
 		public decimal Amount { get => GetProp<decimal>("Amount"); set => SetProp<decimal>("Amount", value); }
+		/// <summary>ID of the line item.</summary>
+		[ApiReadOnly]
+		public string LineItemID { get => GetProp<string>("LineItemID"); set => SetProp<string>("LineItemID", value); }
 		/// <summary>ID of the order promotion. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 2.</summary>
 		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
+		/// <summary>Line item level of the order promotion.</summary>
+		public bool LineItemLevel { get => GetProp<bool>("LineItemLevel"); set => SetProp<bool>("LineItemLevel", value); }
 		/// <summary>Must be unique. Entered by buyer when adding promo to order.</summary>
 		[Required]
 		public string Code { get => GetProp<string>("Code"); set => SetProp<string>("Code", value); }
@@ -1365,6 +1379,8 @@ namespace OrderCloud.SDK
 	{
 		/// <summary>ID of the promotion. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 2.</summary>
 		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
+		/// <summary>Line item level of the promotion.</summary>
+		public bool LineItemLevel { get => GetProp<bool>("LineItemLevel"); set => SetProp<bool>("LineItemLevel", value); }
 		/// <summary>Must be unique. Entered by buyer when adding promo to order.</summary>
 		[Required]
 		public string Code { get => GetProp<string>("Code"); set => SetProp<string>("Code", value); }
@@ -1739,6 +1755,9 @@ namespace OrderCloud.SDK
 		public string Name { get => GetProp<string>("Name"); set => SetProp<string>("Name", value); }
 		/// <summary>Active of the supplier.</summary>
 		public bool Active { get => GetProp<bool>("Active"); set => SetProp<bool>("Active", value); }
+		/// <summary>Date created of the supplier. Sortable: priority level 3.</summary>
+		[ApiReadOnly]
+		public DateTimeOffset DateCreated { get => GetProp<DateTimeOffset>("DateCreated"); set => SetProp<DateTimeOffset>("DateCreated", value); }
 		/// <summary>Container for extended (custom) properties of the supplier.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
@@ -1915,7 +1934,7 @@ namespace OrderCloud.SDK
 	}
 	public class XpIndex : OrderCloudModel
 	{
-		/// <summary>Thing type of the xp index. Searchable: priority level 0. Sortable: priority level 0. Possible values: Product, Variant, Order, LineItem, Address, CostCenter, CreditCard, Payment, Spec, SpecOption, UserGroup, Company, Category, PriceSchedule, Shipment, SpendingAccount, User, Promotion, ApprovalRule, Catalog, ProductFacet, MessageSender.</summary>
+		/// <summary>Thing type of the xp index. Searchable: priority level 0. Sortable: priority level 0. Possible values: Address, Variant, Order, LineItem, CostCenter, CreditCard, Payment, Spec, SpecOption, UserGroup, Company, Category, PriceSchedule, Shipment, SpendingAccount, User, Promotion, ApprovalRule, Catalog, ProductFacet, MessageSender.</summary>
 		public XpThingType ThingType { get => GetProp<XpThingType>("ThingType"); set => SetProp<XpThingType>("ThingType", value); }
 		/// <summary>Key of the xp index. Searchable: priority level 1. Sortable: priority level 1.</summary>
 		public string Key { get => GetProp<string>("Key"); set => SetProp<string>("Key", value); }

@@ -3045,24 +3045,6 @@ namespace OrderCloud.SDK
 				public string SupplierID { get; set; }
 				public string UserID { get; set; }
 			}
-			/// <summary>Webhook payload sent by OrderCloud on POST v1/suppliers/{supplierID}/users/{userID}/accesstoken.</summary>
-			[SentOn("POST", "v1/suppliers/{supplierID}/users/{userID}/accesstoken")]
-			public class GetAccessToken : WebhookPayload<ImpersonateTokenRequest, AccessToken, GetAccessTokenRouteParams, dynamic> { }
-			/// <summary>Webhook payload sent by OrderCloud on POST v1/suppliers/{supplierID}/users/{userID}/accesstoken.</summary>
-			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
-			/// <typeparam name="TImpersonateTokenRequest">Specific type of the ImpersonateTokenRequest. If not using a custom type, specify ImpersonateTokenRequest.</typeparam>
-			/// <typeparam name="TAccessToken">Specific type of the AccessToken. If not using a custom type, specify AccessToken.</typeparam>
-			[SentOn("POST", "v1/suppliers/{supplierID}/users/{userID}/accesstoken")]
-			public class GetAccessToken<TConfigData, TImpersonateTokenRequest, TAccessToken> : WebhookPayload<TImpersonateTokenRequest, TAccessToken, GetAccessTokenRouteParams, TConfigData>
-				where TImpersonateTokenRequest : ImpersonateTokenRequest
-				where TAccessToken : AccessToken
-			{ }
-			/// <summary>Type used to represent route parameter name/value pairs for v1/suppliers/{supplierID}/users/{userID}/accesstoken.</summary>
-			public class GetAccessTokenRouteParams
-			{
-				public string SupplierID { get; set; }
-				public string UserID { get; set; }
-			}
 		}
 		public static class UserGroups
 		{

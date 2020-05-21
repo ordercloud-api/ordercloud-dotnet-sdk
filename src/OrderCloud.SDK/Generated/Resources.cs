@@ -3927,12 +3927,6 @@ namespace OrderCloud.SDK
 		/// <param name="partialUser">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TUser> PatchAsync<TUser>(string supplierID, string userID, PartialUser partialUser, string accessToken = null) where TUser : User;
-		/// <summary>Get a single supplier user access token.</summary>
-		/// <param name="supplierID">ID of the supplier.</param>
-		/// <param name="userID">ID of the user.</param>
-		/// <param name="impersonateTokenRequest">The object that will be serialized to JSON and sent in the request body.</param>
-		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
-		Task<AccessToken> GetAccessTokenAsync(string supplierID, string userID, ImpersonateTokenRequest impersonateTokenRequest, string accessToken = null);
 	}
 
 	public interface IUserGroupsResource
@@ -4199,7 +4193,7 @@ namespace OrderCloud.SDK
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<XpIndex>> ListAsync(Action<ListOptionsBuilder<XpIndex>> buildListOpts, string accessToken = null);
 		/// <summary>Delete a xp index.</summary>
-		/// <param name="thingType">Thing type of the xp index. Possible values: Product, Variant, Order, LineItem, Address, CostCenter, CreditCard, Payment, Spec, SpecOption, UserGroup, Company, Category, PriceSchedule, Shipment, SpendingAccount, User, Promotion, ApprovalRule, Catalog, ProductFacet, MessageSender.</param>
+		/// <param name="thingType">Thing type of the xp index. Possible values: Address, Variant, Order, LineItem, CostCenter, CreditCard, Payment, Spec, SpecOption, UserGroup, Company, Category, PriceSchedule, Shipment, SpendingAccount, User, Promotion, ApprovalRule, Catalog, ProductFacet, MessageSender.</param>
 		/// <param name="key">Key of the xp index.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task DeleteAsync(XpThingType thingType, string key, string accessToken = null);
@@ -5083,7 +5077,6 @@ namespace OrderCloud.SDK
 		public Task DeleteAsync(string supplierID, string userID, string accessToken = null) => Request("v1", "suppliers", supplierID, "users", userID).WithOAuthBearerToken(accessToken).DeleteAsync();
 		public Task<User> PatchAsync(string supplierID, string userID, PartialUser partialUser, string accessToken = null) => PatchAsync<User>(supplierID, userID, partialUser, accessToken);
 		public Task<TUser> PatchAsync<TUser>(string supplierID, string userID, PartialUser partialUser, string accessToken = null) where TUser : User => Request("v1", "suppliers", supplierID, "users", userID).WithOAuthBearerToken(accessToken).PatchJsonAsync(ValidateModel(partialUser)).ReceiveJson<TUser>();
-		public Task<AccessToken> GetAccessTokenAsync(string supplierID, string userID, ImpersonateTokenRequest impersonateTokenRequest, string accessToken = null) => Request("v1", "suppliers", supplierID, "users", userID, "accesstoken").WithOAuthBearerToken(accessToken).PostJsonAsync(ValidateModel(impersonateTokenRequest)).ReceiveJson<AccessToken>();
 	}
 
 	public class UserGroupsResource : OrderCloudResource, IUserGroupsResource
