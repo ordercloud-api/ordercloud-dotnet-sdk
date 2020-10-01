@@ -136,7 +136,7 @@ namespace OrderCloud.SDK
 		private async Task ThrowApiExceptionAsync(HttpCall call) {
 			if (!(call.Exception is FlurlHttpException fex)) return;
 			var resp = await fex.GetResponseJsonAsync<ApiErrorResponse>();
-			throw new OrderCloudException(call, resp.Errors);
+			throw new OrderCloudException(call, resp?.Errors);
 		}
 
 		private async Task ThrowAuthExceptionAsync(HttpCall call) {
