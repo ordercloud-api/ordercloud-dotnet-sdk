@@ -3251,6 +3251,26 @@ namespace OrderCloud.SDK
 		/// <param name="partialShipment">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TShipment> PatchAsync<TShipment>(string shipmentID, PartialShipment partialShipment, string accessToken = null) where TShipment : Shipment;
+		/// <summary>Set a ship to address. Use only when the address is not to be saved/reused. To use a saved address (i.e. from the Addresses resource), PATCH the shipment's ToAddressID property instead.</summary>
+		/// <param name="shipmentID">ID of the shipment.</param>
+		/// <param name="address">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<Shipment> SetShipToAddressAsync(string shipmentID, Address address, string accessToken = null);
+		/// <summary>Set a ship to address. Use only when the address is not to be saved/reused. To use a saved address (i.e. from the Addresses resource), PATCH the shipment's ToAddressID property instead.</summary>
+		/// <param name="shipmentID">ID of the shipment.</param>
+		/// <param name="address">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TShipment> SetShipToAddressAsync<TShipment>(string shipmentID, Address address, string accessToken = null) where TShipment : Shipment;
+		/// <summary>Set a ship from address. Use only when the address is not to be saved/reused. To use a saved address (i.e. from the Addresses resource), PATCH the shipment's FromAddressID property instead.</summary>
+		/// <param name="shipmentID">ID of the shipment.</param>
+		/// <param name="address">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<Shipment> SetShipFromAddressAsync(string shipmentID, Address address, string accessToken = null);
+		/// <summary>Set a ship from address. Use only when the address is not to be saved/reused. To use a saved address (i.e. from the Addresses resource), PATCH the shipment's FromAddressID property instead.</summary>
+		/// <param name="shipmentID">ID of the shipment.</param>
+		/// <param name="address">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TShipment> SetShipFromAddressAsync<TShipment>(string shipmentID, Address address, string accessToken = null) where TShipment : Shipment;
 		/// <summary>Get a list of shipment items.</summary>
 		/// <param name="shipmentID">ID of the shipment.</param>
 		/// <param name="search">Word or phrase to search for.</param>
@@ -4937,6 +4957,10 @@ namespace OrderCloud.SDK
 		public Task DeleteAsync(string shipmentID, string accessToken = null) => Request("v1", "shipments", shipmentID).WithOAuthBearerToken(accessToken).DeleteAsync();
 		public Task<Shipment> PatchAsync(string shipmentID, PartialShipment partialShipment, string accessToken = null) => PatchAsync<Shipment>(shipmentID, partialShipment, accessToken);
 		public Task<TShipment> PatchAsync<TShipment>(string shipmentID, PartialShipment partialShipment, string accessToken = null) where TShipment : Shipment => Request("v1", "shipments", shipmentID).WithOAuthBearerToken(accessToken).PatchJsonAsync(ValidateModel(partialShipment)).ReceiveJson<TShipment>();
+		public Task<Shipment> SetShipToAddressAsync(string shipmentID, Address address, string accessToken = null) => SetShipToAddressAsync<Shipment>(shipmentID, address, accessToken);
+		public Task<TShipment> SetShipToAddressAsync<TShipment>(string shipmentID, Address address, string accessToken = null) where TShipment : Shipment => Request("v1", "shipments", shipmentID, "shipto").WithOAuthBearerToken(accessToken).PutJsonAsync(ValidateModel(address)).ReceiveJson<TShipment>();
+		public Task<Shipment> SetShipFromAddressAsync(string shipmentID, Address address, string accessToken = null) => SetShipFromAddressAsync<Shipment>(shipmentID, address, accessToken);
+		public Task<TShipment> SetShipFromAddressAsync<TShipment>(string shipmentID, Address address, string accessToken = null) where TShipment : Shipment => Request("v1", "shipments", shipmentID, "shipfrom").WithOAuthBearerToken(accessToken).PutJsonAsync(ValidateModel(address)).ReceiveJson<TShipment>();
 		public Task<ListPage<ShipmentItem>> ListItemsAsync(string shipmentID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) => ListItemsAsync<ShipmentItem>(shipmentID, search, searchOn, sortBy, page, pageSize, filters, accessToken);
 		public Task<ListPage<TShipmentItem>> ListItemsAsync<TShipmentItem>(string shipmentID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TShipmentItem : ShipmentItem => Request("v1", "shipments", shipmentID, "items").WithOAuthBearerToken(accessToken).SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<TShipmentItem>>();
 		public Task<ListPage<ShipmentItem>> ListItemsAsync(string shipmentID, Action<ListOptionsBuilder<ShipmentItem>> buildListOpts, string accessToken = null) => ListItemsAsync<ShipmentItem>(shipmentID, buildListOpts, accessToken);

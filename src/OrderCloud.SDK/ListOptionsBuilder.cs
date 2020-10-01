@@ -180,7 +180,7 @@ namespace OrderCloud.SDK
 		/// <summary>
 		/// Specify a word or phrase to search for, and a search type to use.
 		/// </summary>
-		public new ListOptionsBuilder2<T> SearchFor(string phrase, SearchType searchType) {
+		public ListOptionsBuilder2<T> SearchFor(string phrase, SearchType searchType) {
 			_opts.Search = phrase;
 			_opts.SearchType = searchType;
 			return this;

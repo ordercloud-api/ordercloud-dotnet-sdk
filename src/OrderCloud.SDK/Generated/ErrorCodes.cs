@@ -288,6 +288,12 @@ namespace OrderCloud.SDK
 			public const string QtyNotFound = "PriceSchedule.QtyNotFound";
 			/// <summary>Quantity not allowed as per price schedule restrictions.</summary>
 			public const string QuantityNotAllowed = "PriceSchedule.QuantityNotAllowed";
+			/// <summary>Cumulative quantity given cannot be lower than the minimum as per price schedule restrictions.</summary>
+			public const string CumulativeCannotBeLessThanMin = "PriceSchedule.CumulativeCannotBeLessThanMin";
+			/// <summary>Cumulative quantity given cannot exceed the maximum as per price schedule restrictions.</summary>
+			public const string CumulativeCannotExceedMax = "PriceSchedule.CumulativeCannotExceedMax";
+			/// <summary>Cumulative quantity not allowed as per price schedule restrictions.</summary>
+			public const string CumulativeQuantityNotAllowed = "PriceSchedule.CumulativeQuantityNotAllowed";
 		}
 		public static class Product
 		{
@@ -327,6 +333,11 @@ namespace OrderCloud.SDK
 		{
 			/// <summary>Email address or verification code not found.</summary>
 			public const string InvalidVerificationCode = "Registration.InvalidVerificationCode";
+		}
+		public static class Search
+		{
+			/// <summary>Query is invalid.</summary>
+			public const string InvalidQuery = "Search.InvalidQuery";
 		}
 		public static class SecurityProfile
 		{

@@ -651,6 +651,8 @@ namespace OrderCloud.SDK
 		public string LineItemID { get => GetProp<string>("LineItemID"); set => SetProp<string>("LineItemID", value); }
 		/// <summary>Unit price of the line item override.</summary>
 		public decimal UnitPrice { get => GetProp<decimal>("UnitPrice"); set => SetProp<decimal>("UnitPrice", value); }
+		/// <summary>Promotion overrides of the line item override.</summary>
+		public IList<PromotionOverride> PromotionOverrides { get => GetProp<IList<PromotionOverride>>("PromotionOverrides", new List<PromotionOverride>()); set => SetProp<IList<PromotionOverride>>("PromotionOverrides", value); }
 	}
 	public class LineItemProduct : OrderCloudModel
 	{
@@ -729,6 +731,12 @@ namespace OrderCloud.SDK
 		/// <summary>ID of the default catalog.</summary>
 		[ApiReadOnly]
 		public string DefaultCatalogID { get => GetProp<string>("DefaultCatalogID"); set => SetProp<string>("DefaultCatalogID", value); }
+	}
+	public class MeSeller : OrderCloudModel
+	{
+		/// <summary>ID of the seller. Can only contain characters Aa-Zz, 0-9, -, and _.</summary>
+		[ApiReadOnly]
+		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
 	}
 	public class MessageCCListenerAssignment : OrderCloudModel
 	{
@@ -812,6 +820,9 @@ namespace OrderCloud.SDK
 		/// <summary>Supplier of the user.</summary>
 		[ApiReadOnly]
 		public MeSupplier Supplier { get => GetProp<MeSupplier>("Supplier"); set => SetProp<MeSupplier>("Supplier", value); }
+		/// <summary>Seller of the user.</summary>
+		[ApiReadOnly]
+		public MeSeller Seller { get => GetProp<MeSeller>("Seller"); set => SetProp<MeSeller>("Seller", value); }
 		/// <summary>ID of the user. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable.</summary>
 		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
 		/// <summary>Username of the user. Required. Max length 100 characters. Searchable: priority level 2. Sortable: priority level 3.</summary>
@@ -880,6 +891,8 @@ namespace OrderCloud.SDK
 		public bool UrlEncoded { get => GetProp<bool>("UrlEncoded"); set => SetProp<bool>("UrlEncoded", value); }
 		/// <summary>ID of the integration event.</summary>
 		public string IntegrationEventID { get => GetProp<string>("IntegrationEventID"); set => SetProp<string>("IntegrationEventID", value); }
+		/// <summary>Call sync user integration event of the open id connect.</summary>
+		public bool CallSyncUserIntegrationEvent { get => GetProp<bool>("CallSyncUserIntegrationEvent"); set => SetProp<bool>("CallSyncUserIntegrationEvent", value); }
 		/// <summary>Integration event name of the open id connect.</summary>
 		[ApiReadOnly]
 		public string IntegrationEventName { get => GetProp<string>("IntegrationEventName"); set => SetProp<string>("IntegrationEventName", value); }
@@ -890,7 +903,7 @@ namespace OrderCloud.SDK
 	{
 		/// <summary>ID of the order. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable.</summary>
 		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
-		/// <summary>From user of the order. Sortable.</summary>
+		/// <summary>From user of the order.</summary>
 		[ApiReadOnly]
 		public User FromUser { get => GetProp<User>("FromUser"); set => SetProp<User>("FromUser", value); }
 		/// <summary>ID of the Buyer or Seller placing the order. Mainly useful to the Seller or Supplier receiving it.</summary>
@@ -960,7 +973,7 @@ namespace OrderCloud.SDK
 	{
 		/// <summary>Container for extended (custom) properties of the order.</summary>
 		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
-		/// <summary>From user of the order. Sortable.</summary>
+		/// <summary>From user of the order.</summary>
 		[ApiReadOnly]
 		public new TFromUser FromUser { get => GetProp<TFromUser>("FromUser"); set => SetProp<TFromUser>("FromUser", value); }
 		/// <summary>Billing address of the order.</summary>
@@ -1009,6 +1022,21 @@ namespace OrderCloud.SDK
 		/// <summary>Allow resubmit of the order approval info.</summary>
 		public bool AllowResubmit { get => GetProp<bool>("AllowResubmit"); set => SetProp<bool>("AllowResubmit", value); }
 	}
+	public class OrderApprovedResponse : OrderCloudModel
+	{
+		/// <summary>Http status code of the order approved response.</summary>
+		public int? HttpStatusCode { get => GetProp<int?>("HttpStatusCode"); set => SetProp<int?>("HttpStatusCode", value); }
+		/// <summary>Unhandled error body of the order approved response.</summary>
+		public string UnhandledErrorBody { get => GetProp<string>("UnhandledErrorBody"); set => SetProp<string>("UnhandledErrorBody", value); }
+		/// <summary>Container for extended (custom) properties of the order approved response.</summary>
+		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
+	}
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic OrderApprovedResponse class instead.</typeparam>
+	public class OrderApprovedResponse<Txp> : OrderApprovedResponse
+	{
+		/// <summary>Container for extended (custom) properties of the order approved response.</summary>
+		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
+	}
 	public class OrderCalculateResponse : OrderCloudModel
 	{
 		/// <summary>Line item overrides of the order calculate response.</summary>
@@ -1047,9 +1075,9 @@ namespace OrderCloud.SDK
 		public string Code { get => GetProp<string>("Code"); set => SetProp<string>("Code", value); }
 		/// <summary>Name of the order promotion. Max length 100 characters. Searchable: priority level 2. Sortable: priority level 1.</summary>
 		public string Name { get => GetProp<string>("Name"); set => SetProp<string>("Name", value); }
-		/// <summary>Redemption limit of the order promotion.</summary>
+		/// <summary>Limit the total number of orders this promotion can be applied to across all users.</summary>
 		public int? RedemptionLimit { get => GetProp<int?>("RedemptionLimit"); set => SetProp<int?>("RedemptionLimit", value); }
-		/// <summary>Redemption limit per user of the order promotion.</summary>
+		/// <summary>Limit the total number of orders this promotion can be applied to per user.</summary>
 		public int? RedemptionLimitPerUser { get => GetProp<int?>("RedemptionLimitPerUser"); set => SetProp<int?>("RedemptionLimitPerUser", value); }
 		/// <summary>Redemption count of the order promotion.</summary>
 		[ApiReadOnly]
@@ -1100,6 +1128,21 @@ namespace OrderCloud.SDK
 		/// <summary>The outgoing Orders created, one for each unique Product.DefaultSupplierID on the original Order.</summary>
 		public new IList<TOutgoingOrders> OutgoingOrders { get => GetProp<IList<TOutgoingOrders>>("OutgoingOrders", new List<TOutgoingOrders>()); set => SetProp<IList<TOutgoingOrders>>("OutgoingOrders", value); }
 	}
+	public class OrderSubmitForApprovalResponse : OrderCloudModel
+	{
+		/// <summary>Http status code of the order submit for approval response.</summary>
+		public int? HttpStatusCode { get => GetProp<int?>("HttpStatusCode"); set => SetProp<int?>("HttpStatusCode", value); }
+		/// <summary>Unhandled error body of the order submit for approval response.</summary>
+		public string UnhandledErrorBody { get => GetProp<string>("UnhandledErrorBody"); set => SetProp<string>("UnhandledErrorBody", value); }
+		/// <summary>Container for extended (custom) properties of the order submit for approval response.</summary>
+		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
+	}
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic OrderSubmitForApprovalResponse class instead.</typeparam>
+	public class OrderSubmitForApprovalResponse<Txp> : OrderSubmitForApprovalResponse
+	{
+		/// <summary>Container for extended (custom) properties of the order submit for approval response.</summary>
+		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
+	}
 	public class OrderSubmitResponse : OrderCloudModel
 	{
 		/// <summary>Http status code of the order submit response.</summary>
@@ -1127,18 +1170,26 @@ namespace OrderCloud.SDK
 		public OrderCalculateResponse OrderCalculateResponse { get => GetProp<OrderCalculateResponse>("OrderCalculateResponse"); set => SetProp<OrderCalculateResponse>("OrderCalculateResponse", value); }
 		/// <summary>Order submit response of the order worksheet.</summary>
 		public OrderSubmitResponse OrderSubmitResponse { get => GetProp<OrderSubmitResponse>("OrderSubmitResponse"); set => SetProp<OrderSubmitResponse>("OrderSubmitResponse", value); }
+		/// <summary>Order submit for approval response of the order worksheet.</summary>
+		public OrderSubmitForApprovalResponse OrderSubmitForApprovalResponse { get => GetProp<OrderSubmitForApprovalResponse>("OrderSubmitForApprovalResponse"); set => SetProp<OrderSubmitForApprovalResponse>("OrderSubmitForApprovalResponse", value); }
+		/// <summary>Order approved response of the order worksheet.</summary>
+		public OrderApprovedResponse OrderApprovedResponse { get => GetProp<OrderApprovedResponse>("OrderApprovedResponse"); set => SetProp<OrderApprovedResponse>("OrderApprovedResponse", value); }
 	}
 	/// <typeparam name="TOrder">Specific type of the Order property. If not using a custom type, specify Order.</typeparam>
 	/// <typeparam name="TLineItems">Specific type of the LineItems property. If not using a custom type, specify LineItem.</typeparam>
 	/// <typeparam name="TShipEstimateResponse">Specific type of the ShipEstimateResponse property. If not using a custom type, specify ShipEstimateResponse.</typeparam>
 	/// <typeparam name="TOrderCalculateResponse">Specific type of the OrderCalculateResponse property. If not using a custom type, specify OrderCalculateResponse.</typeparam>
 	/// <typeparam name="TOrderSubmitResponse">Specific type of the OrderSubmitResponse property. If not using a custom type, specify OrderSubmitResponse.</typeparam>
-	public class OrderWorksheet<TOrder, TLineItems, TShipEstimateResponse, TOrderCalculateResponse, TOrderSubmitResponse> : OrderWorksheet
+	/// <typeparam name="TOrderSubmitForApprovalResponse">Specific type of the OrderSubmitForApprovalResponse property. If not using a custom type, specify OrderSubmitForApprovalResponse.</typeparam>
+	/// <typeparam name="TOrderApprovedResponse">Specific type of the OrderApprovedResponse property. If not using a custom type, specify OrderApprovedResponse.</typeparam>
+	public class OrderWorksheet<TOrder, TLineItems, TShipEstimateResponse, TOrderCalculateResponse, TOrderSubmitResponse, TOrderSubmitForApprovalResponse, TOrderApprovedResponse> : OrderWorksheet
 		where TOrder : Order
 		where TLineItems : LineItem
 		where TShipEstimateResponse : ShipEstimateResponse
 		where TOrderCalculateResponse : OrderCalculateResponse
 		where TOrderSubmitResponse : OrderSubmitResponse
+		where TOrderSubmitForApprovalResponse : OrderSubmitForApprovalResponse
+		where TOrderApprovedResponse : OrderApprovedResponse
 	{
 		/// <summary>Order of the order worksheet.</summary>
 		public new TOrder Order { get => GetProp<TOrder>("Order"); set => SetProp<TOrder>("Order", value); }
@@ -1150,6 +1201,10 @@ namespace OrderCloud.SDK
 		public new TOrderCalculateResponse OrderCalculateResponse { get => GetProp<TOrderCalculateResponse>("OrderCalculateResponse"); set => SetProp<TOrderCalculateResponse>("OrderCalculateResponse", value); }
 		/// <summary>Order submit response of the order worksheet.</summary>
 		public new TOrderSubmitResponse OrderSubmitResponse { get => GetProp<TOrderSubmitResponse>("OrderSubmitResponse"); set => SetProp<TOrderSubmitResponse>("OrderSubmitResponse", value); }
+		/// <summary>Order submit for approval response of the order worksheet.</summary>
+		public new TOrderSubmitForApprovalResponse OrderSubmitForApprovalResponse { get => GetProp<TOrderSubmitForApprovalResponse>("OrderSubmitForApprovalResponse"); set => SetProp<TOrderSubmitForApprovalResponse>("OrderSubmitForApprovalResponse", value); }
+		/// <summary>Order approved response of the order worksheet.</summary>
+		public new TOrderApprovedResponse OrderApprovedResponse { get => GetProp<TOrderApprovedResponse>("OrderApprovedResponse"); set => SetProp<TOrderApprovedResponse>("OrderApprovedResponse", value); }
 	}
 	public class PasswordConfig : OrderCloudModel
 	{
@@ -1265,7 +1320,7 @@ namespace OrderCloud.SDK
 		public int? MinQuantity { get => GetProp<int?>("MinQuantity", 1); set => SetProp<int?>("MinQuantity", value); }
 		/// <summary>Max quantity of the price schedule.</summary>
 		public int? MaxQuantity { get => GetProp<int?>("MaxQuantity"); set => SetProp<int?>("MaxQuantity", value); }
-		/// <summary>If true, LineItem quantities will be aggregated by productID when determining which price break applies. Else, each LineItem is treated separately.</summary>
+		/// <summary>If true, LineItem quantities will be aggregated by productID when determining which price break applies, and when Min/Max quantities are met. Else, each LineItem is treated separately.</summary>
 		public bool UseCumulativeQuantity { get => GetProp<bool>("UseCumulativeQuantity"); set => SetProp<bool>("UseCumulativeQuantity", value); }
 		/// <summary>If true, this product can only be ordered in quantities that exactly match one of the price breaks on this schedule.</summary>
 		public bool RestrictedQuantity { get => GetProp<bool>("RestrictedQuantity"); set => SetProp<bool>("RestrictedQuantity", value); }
@@ -1386,9 +1441,9 @@ namespace OrderCloud.SDK
 		public string Code { get => GetProp<string>("Code"); set => SetProp<string>("Code", value); }
 		/// <summary>Name of the promotion. Max length 100 characters. Searchable: priority level 2. Sortable: priority level 1.</summary>
 		public string Name { get => GetProp<string>("Name"); set => SetProp<string>("Name", value); }
-		/// <summary>Redemption limit of the promotion.</summary>
+		/// <summary>Limit the total number of orders this promotion can be applied to across all users.</summary>
 		public int? RedemptionLimit { get => GetProp<int?>("RedemptionLimit"); set => SetProp<int?>("RedemptionLimit", value); }
-		/// <summary>Redemption limit per user of the promotion.</summary>
+		/// <summary>Limit the total number of orders this promotion can be applied to per user.</summary>
 		public int? RedemptionLimitPerUser { get => GetProp<int?>("RedemptionLimitPerUser"); set => SetProp<int?>("RedemptionLimitPerUser", value); }
 		/// <summary>Redemption count of the promotion.</summary>
 		[ApiReadOnly]
@@ -1430,6 +1485,13 @@ namespace OrderCloud.SDK
 		public string BuyerID { get => GetProp<string>("BuyerID"); set => SetProp<string>("BuyerID", value); }
 		/// <summary>ID of the user group. Sortable: priority level 4.</summary>
 		public string UserGroupID { get => GetProp<string>("UserGroupID"); set => SetProp<string>("UserGroupID", value); }
+	}
+	public class PromotionOverride : OrderCloudModel
+	{
+		/// <summary>ID of the promotion.</summary>
+		public string PromotionID { get => GetProp<string>("PromotionID"); set => SetProp<string>("PromotionID", value); }
+		/// <summary>Overrides the promotion's calculated discount to this amount, and prevents it from being recalculated unless order calculate is called again without an override.</summary>
+		public decimal Amount { get => GetProp<decimal>("Amount"); set => SetProp<decimal>("Amount", value); }
 	}
 	public class SecurityProfile : OrderCloudModel
 	{
@@ -2005,6 +2067,7 @@ namespace OrderCloud.SDK
 	public class PartialLineItemVariant<Txp> : PartialLineItemVariant
 	{ }
 	public class PartialMeBuyer : MeBuyer, IPartial { }
+	public class PartialMeSeller : MeSeller, IPartial { }
 	public class PartialMessageSender : MessageSender, IPartial { }
 	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic PartialMessageSender class instead.</typeparam>
 	public class PartialMessageSender<Txp> : PartialMessageSender

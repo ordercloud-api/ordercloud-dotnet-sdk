@@ -2503,6 +2503,40 @@ namespace OrderCloud.SDK
 			{
 				public string ShipmentID { get; set; }
 			}
+			/// <summary>Webhook payload sent by OrderCloud on PUT v1/shipments/{shipmentID}/shipto.</summary>
+			[SentOn("PUT", "v1/shipments/{shipmentID}/shipto")]
+			public class SetShipToAddress : WebhookPayload<Address, Shipment, SetShipToAddressRouteParams, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on PUT v1/shipments/{shipmentID}/shipto.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TAddress">Specific type of the Address. If not using a custom type, specify Address.</typeparam>
+			/// <typeparam name="TShipment">Specific type of the Shipment. If not using a custom type, specify Shipment.</typeparam>
+			[SentOn("PUT", "v1/shipments/{shipmentID}/shipto")]
+			public class SetShipToAddress<TConfigData, TAddress, TShipment> : WebhookPayload<TAddress, TShipment, SetShipToAddressRouteParams, TConfigData>
+				where TAddress : Address
+				where TShipment : Shipment
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/shipments/{shipmentID}/shipto.</summary>
+			public class SetShipToAddressRouteParams
+			{
+				public string ShipmentID { get; set; }
+			}
+			/// <summary>Webhook payload sent by OrderCloud on PUT v1/shipments/{shipmentID}/shipfrom.</summary>
+			[SentOn("PUT", "v1/shipments/{shipmentID}/shipfrom")]
+			public class SetShipFromAddress : WebhookPayload<Address, Shipment, SetShipFromAddressRouteParams, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on PUT v1/shipments/{shipmentID}/shipfrom.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TAddress">Specific type of the Address. If not using a custom type, specify Address.</typeparam>
+			/// <typeparam name="TShipment">Specific type of the Shipment. If not using a custom type, specify Shipment.</typeparam>
+			[SentOn("PUT", "v1/shipments/{shipmentID}/shipfrom")]
+			public class SetShipFromAddress<TConfigData, TAddress, TShipment> : WebhookPayload<TAddress, TShipment, SetShipFromAddressRouteParams, TConfigData>
+				where TAddress : Address
+				where TShipment : Shipment
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/shipments/{shipmentID}/shipfrom.</summary>
+			public class SetShipFromAddressRouteParams
+			{
+				public string ShipmentID { get; set; }
+			}
 			/// <summary>Webhook payload sent by OrderCloud on POST v1/shipments/{shipmentID}/items.</summary>
 			[SentOn("POST", "v1/shipments/{shipmentID}/items")]
 			public class SaveItem : WebhookPayload<ShipmentItem, ShipmentItem, SaveItemRouteParams, dynamic> { }
