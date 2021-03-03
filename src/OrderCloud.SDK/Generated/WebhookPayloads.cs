@@ -729,6 +729,9 @@ namespace OrderCloud.SDK
 				public string ProductID { get; set; }
 			}
 		}
+		public static class Certs
+		{
+		}
 		public static class CostCenters
 		{
 			/// <summary>Webhook payload sent by OrderCloud on POST v1/buyers/{buyerID}/costcenters.</summary>

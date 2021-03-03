@@ -133,28 +133,28 @@ namespace OrderCloud.SDK
 				settings.JsonSerializer = Serializer;
 			});
 
-		private async Task ThrowApiExceptionAsync(HttpCall call) {
+		private async Task ThrowApiExceptionAsync(FlurlCall call) {
 			if (!(call.Exception is FlurlHttpException fex)) return;
 			var resp = await fex.GetResponseJsonAsync<ApiErrorResponse>();
 			throw new OrderCloudException(call, resp?.Errors);
 		}
 
-		private async Task ThrowAuthExceptionAsync(HttpCall call) {
+		private async Task ThrowAuthExceptionAsync(FlurlCall call) {
 			if (!(call.Exception is FlurlHttpException fex)) return;
 			var resp = await fex.GetResponseJsonAsync<AuthErrorResponse>();
 			var error = new ApiError { ErrorCode = resp.error, Message = resp.error_description };
 			throw new OrderCloudException(call, new[] { error });
 		}
 
-		private async Task EnsureTokenAsync(HttpCall call) {
+		private async Task EnsureTokenAsync(FlurlCall call) {
 			var hasToken =
-				call.FlurlRequest.Headers.TryGetValue("Authorization", out var value) &&
+				call.Request.Headers.TryGetFirst("Authorization", out var value) &&
 				(value as string) != "Bearer ";
 
 			if (!hasToken) {
 				if (!IsAuthenticated)
 					await AuthenticateAsync().ConfigureAwait(false);
-				call.FlurlRequest.WithOAuthBearerToken(TokenResponse.AccessToken);
+				call.Request.WithOAuthBearerToken(TokenResponse.AccessToken);
 			}
 		}
 
