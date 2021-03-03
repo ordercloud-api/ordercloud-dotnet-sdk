@@ -15,6 +15,7 @@ namespace OrderCloud.SDK
 		IBuyersResource Buyers { get; }
 		ICatalogsResource Catalogs { get; }
 		ICategoriesResource Categories { get; }
+		ICertsResource Certs { get; }
 		ICostCentersResource CostCenters { get; }
 		ICreditCardsResource CreditCards { get; }
 		IImpersonationConfigsResource ImpersonationConfigs { get; }
@@ -855,6 +856,14 @@ namespace OrderCloud.SDK
 		Task DeleteProductAssignmentAsync(string catalogID, string categoryID, string productID, string accessToken = null);
 	}
 
+	public interface ICertsResource
+	{
+		/// <summary>Get a single cert public key.</summary>
+		/// <param name="ID">ID of the public key.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<PublicKey> GetPublicKeyAsync(string ID, string accessToken = null);
+	}
+
 	public interface ICostCentersResource
 	{
 		/// <summary>Get a single cost center.</summary>
@@ -1688,6 +1697,46 @@ namespace OrderCloud.SDK
 		/// <param name="catalogID">ID of the catalog.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TSpec> GetSpecAsync<TSpec>(string productID, string specID, string catalogID = null, string accessToken = null) where TSpec : Spec;
+		/// <summary>Get a list of variants visible to this user. Only available to Buyer Users.</summary>
+		/// <param name="productID">ID of the product.</param>
+		/// <param name="search">Word or phrase to search for.</param>
+		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
+		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
+		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<Variant>> ListVariantsAsync(string productID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
+		/// <summary>Get a list of variants visible to this user. Only available to Buyer Users.</summary>
+		/// <param name="productID">ID of the product.</param>
+		/// <param name="search">Word or phrase to search for.</param>
+		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
+		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
+		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<TVariant>> ListVariantsAsync<TVariant>(string productID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TVariant : Variant;
+		/// <summary>Get a list of variants visible to this user. Only available to Buyer Users.</summary>
+		/// <param name="productID">ID of the product.</param>
+		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<Variant>> ListVariantsAsync(string productID, Action<ListOptionsBuilder<Variant>> buildListOpts, string accessToken = null);
+		/// <summary>Get a list of variants visible to this user. Only available to Buyer Users.</summary>
+		/// <param name="productID">ID of the product.</param>
+		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<TVariant>> ListVariantsAsync<TVariant>(string productID, Action<ListOptionsBuilder<TVariant>> buildListOpts, string accessToken = null) where TVariant : Variant;
+		/// <summary>Get a single variant. Only available to Buyer Users.</summary>
+		/// <param name="productID">ID of the product.</param>
+		/// <param name="variantID">ID of the variant.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<Variant> GetVariantAsync(string productID, string variantID, string accessToken = null);
+		/// <summary>Get a single variant. Only available to Buyer Users.</summary>
+		/// <param name="productID">ID of the product.</param>
+		/// <param name="variantID">ID of the variant.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TVariant> GetVariantAsync<TVariant>(string productID, string variantID, string accessToken = null) where TVariant : Variant;
 		/// <summary>Get a list of orders visible to this user. List orders created by this user.</summary>
 		/// <param name="from">Lower bound of date range that the order was created (if outgoing) or submitted (if incoming).</param>
 		/// <param name="to">Upper bound of date range that the order was created (if outgoing) or submitted (if incoming).</param>
@@ -4235,6 +4284,7 @@ namespace OrderCloud.SDK
 			Buyers = new BuyersResource(this);
 			Catalogs = new CatalogsResource(this);
 			Categories = new CategoriesResource(this);
+			Certs = new CertsResource(this);
 			CostCenters = new CostCentersResource(this);
 			CreditCards = new CreditCardsResource(this);
 			ImpersonationConfigs = new ImpersonationConfigsResource(this);
@@ -4274,6 +4324,7 @@ namespace OrderCloud.SDK
 		public IBuyersResource Buyers { get; private set; }
 		public ICatalogsResource Catalogs { get; private set; }
 		public ICategoriesResource Categories { get; private set; }
+		public ICertsResource Certs { get; private set; }
 		public ICostCentersResource CostCenters { get; private set; }
 		public ICreditCardsResource CreditCards { get; private set; }
 		public IImpersonationConfigsResource ImpersonationConfigs { get; private set; }
@@ -4488,6 +4539,12 @@ namespace OrderCloud.SDK
 		public Task DeleteProductAssignmentAsync(string catalogID, string categoryID, string productID, string accessToken = null) => Request("v1", "catalogs", catalogID, "categories", categoryID, "productassignments", productID).WithOAuthBearerToken(accessToken).DeleteAsync();
 	}
 
+	public class CertsResource : OrderCloudResource, ICertsResource
+	{
+		internal CertsResource(OrderCloudClient client) : base(client) { }
+		public Task<PublicKey> GetPublicKeyAsync(string ID, string accessToken = null) => Request("oauth", "certs", ID).WithOAuthBearerToken(accessToken).GetJsonAsync<PublicKey>();
+	}
+
 	public class CostCentersResource : OrderCloudResource, ICostCentersResource
 	{
 		internal CostCentersResource(OrderCloudClient client) : base(client) { }
@@ -4655,6 +4712,12 @@ namespace OrderCloud.SDK
 		public Task<ListPage<TSpec>> ListSpecsAsync<TSpec>(string productID, Action<ListOptionsBuilder<TSpec>> buildListOpts, string catalogID = null, string accessToken = null) where TSpec : Spec => Request("v1", "me", "products", productID, "specs").WithOAuthBearerToken(accessToken).SetQueryParams(new { catalogID }).SetListOptions(buildListOpts).GetJsonAsync<ListPage<TSpec>>();
 		public Task<Spec> GetSpecAsync(string productID, string specID, string catalogID = null, string accessToken = null) => GetSpecAsync<Spec>(productID, specID, catalogID, accessToken);
 		public Task<TSpec> GetSpecAsync<TSpec>(string productID, string specID, string catalogID = null, string accessToken = null) where TSpec : Spec => Request("v1", "me", "products", productID, "specs", specID).WithOAuthBearerToken(accessToken).SetQueryParams(new { catalogID }).GetJsonAsync<TSpec>();
+		public Task<ListPage<Variant>> ListVariantsAsync(string productID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) => ListVariantsAsync<Variant>(productID, search, searchOn, sortBy, page, pageSize, filters, accessToken);
+		public Task<ListPage<TVariant>> ListVariantsAsync<TVariant>(string productID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TVariant : Variant => Request("v1", "me", "products", productID, "variants").WithOAuthBearerToken(accessToken).SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<TVariant>>();
+		public Task<ListPage<Variant>> ListVariantsAsync(string productID, Action<ListOptionsBuilder<Variant>> buildListOpts, string accessToken = null) => ListVariantsAsync<Variant>(productID, buildListOpts, accessToken);
+		public Task<ListPage<TVariant>> ListVariantsAsync<TVariant>(string productID, Action<ListOptionsBuilder<TVariant>> buildListOpts, string accessToken = null) where TVariant : Variant => Request("v1", "me", "products", productID, "variants").WithOAuthBearerToken(accessToken).SetListOptions(buildListOpts).GetJsonAsync<ListPage<TVariant>>();
+		public Task<Variant> GetVariantAsync(string productID, string variantID, string accessToken = null) => GetVariantAsync<Variant>(productID, variantID, accessToken);
+		public Task<TVariant> GetVariantAsync<TVariant>(string productID, string variantID, string accessToken = null) where TVariant : Variant => Request("v1", "me", "products", productID, "variants", variantID).WithOAuthBearerToken(accessToken).GetJsonAsync<TVariant>();
 		public Task<ListPage<Order>> ListOrdersAsync(DateTimeOffset? from = null, DateTimeOffset? to = null, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) => ListOrdersAsync<Order>(from, to, search, searchOn, sortBy, page, pageSize, filters, accessToken);
 		public Task<ListPage<TOrder>> ListOrdersAsync<TOrder>(DateTimeOffset? from = null, DateTimeOffset? to = null, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TOrder : Order => Request("v1", "me", "orders").WithOAuthBearerToken(accessToken).SetQueryParams(new { from, to, search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<TOrder>>();
 		public Task<ListPage<Order>> ListOrdersAsync(Action<ListOptionsBuilder<Order>> buildListOpts, DateTimeOffset? from = null, DateTimeOffset? to = null, string accessToken = null) => ListOrdersAsync<Order>(buildListOpts, from, to, accessToken);

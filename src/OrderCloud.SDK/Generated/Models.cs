@@ -92,32 +92,32 @@ namespace OrderCloud.SDK
 	}
 	public class ApiClient : OrderCloudModel
 	{
-		/// <summary>ID of the api client. Searchable: priority level 1. Sortable: priority level 1.</summary>
+		/// <summary>Used for OAuth 2.0 workflows and OrderCloud impersonation to represent this Client Application.</summary>
 		[ApiReadOnly]
 		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
-		/// <summary>Client secret of the api client.</summary>
+		/// <summary>Enables the OAuth 2.0 Client Credentials grant type. Required on all OAuth workflows when present.</summary>
 		public string ClientSecret { get => GetProp<string>("ClientSecret"); set => SetProp<string>("ClientSecret", value); }
 		/// <summary>Access token duration of the api client. Required. Must be between 10 and 600.</summary>
 		[Required]
 		public int AccessTokenDuration { get => GetProp<int>("AccessTokenDuration"); set => SetProp<int>("AccessTokenDuration", value); }
-		/// <summary>Active of the api client.</summary>
+		/// <summary>All user authentication is prohibited if false.</summary>
 		public bool Active { get => GetProp<bool>("Active"); set => SetProp<bool>("Active", value); }
 		/// <summary>App name of the api client. Required. Searchable: priority level 2. Sortable.</summary>
 		[Required]
 		public string AppName { get => GetProp<string>("AppName"); set => SetProp<string>("AppName", value); }
 		/// <summary>Refresh token duration of the api client. Must be between 0 and 43200.</summary>
 		public int RefreshTokenDuration { get => GetProp<int>("RefreshTokenDuration"); set => SetProp<int>("RefreshTokenDuration", value); }
-		/// <summary>Default context user name of the api client. Searchable: priority level 3. Sortable.</summary>
+		/// <summary>Optionally set a user that will be used when authenticating with a Client Credentials grant type flow. This grant type is often used for anonymous browsing on buyer applications and authentication on server integration layers.</summary>
 		public string DefaultContextUserName { get => GetProp<string>("DefaultContextUserName"); set => SetProp<string>("DefaultContextUserName", value); }
 		/// <summary>Container for extended (custom) properties of the api client.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
-		/// <summary>Allow any buyer of the api client.</summary>
+		/// <summary>Allow all buyer users in your organization access to authenticate using this ApiClient.</summary>
 		public bool AllowAnyBuyer { get => GetProp<bool>("AllowAnyBuyer"); set => SetProp<bool>("AllowAnyBuyer", value); }
-		/// <summary>Allow any supplier of the api client.</summary>
+		/// <summary>Allow all supplier users in your organization access to authenticate using this ApiClient.</summary>
 		public bool AllowAnySupplier { get => GetProp<bool>("AllowAnySupplier"); set => SetProp<bool>("AllowAnySupplier", value); }
-		/// <summary>Allow seller of the api client.</summary>
+		/// <summary>Allow all seller users in your organization access to authenticate using this ApiClient.</summary>
 		public bool AllowSeller { get => GetProp<bool>("AllowSeller"); set => SetProp<bool>("AllowSeller", value); }
-		/// <summary>Is anon buyer of the api client.</summary>
+		/// <summary>Enables anonymous shopping. It only works when a Buyer User is the Default Context User.</summary>
 		public bool IsAnonBuyer { get => GetProp<bool>("IsAnonBuyer"); set => SetProp<bool>("IsAnonBuyer", value); }
 		/// <summary>Assigned buyer count of the api client.</summary>
 		[ApiReadOnly]
@@ -125,11 +125,19 @@ namespace OrderCloud.SDK
 		/// <summary>Assigned supplier count of the api client.</summary>
 		[ApiReadOnly]
 		public int AssignedSupplierCount { get => GetProp<int>("AssignedSupplierCount"); set => SetProp<int>("AssignedSupplierCount", value); }
-		/// <summary>ID of the order checkout integration event.</summary>
+		/// <summary>If populated, an error will be thrown when attempting to submit an order that has not been processed through the OrderCheckout Integration.</summary>
 		public string OrderCheckoutIntegrationEventID { get => GetProp<string>("OrderCheckoutIntegrationEventID"); set => SetProp<string>("OrderCheckoutIntegrationEventID", value); }
 		/// <summary>Order checkout integration event name of the api client.</summary>
 		[ApiReadOnly]
 		public string OrderCheckoutIntegrationEventName { get => GetProp<string>("OrderCheckoutIntegrationEventName"); set => SetProp<string>("OrderCheckoutIntegrationEventName", value); }
+		/// <summary>Minimum required roles of the api client.</summary>
+		public IList<ApiRole> MinimumRequiredRoles { get => GetProp<IList<ApiRole>>("MinimumRequiredRoles", new List<ApiRole>()); set => SetProp<IList<ApiRole>>("MinimumRequiredRoles", value); }
+		/// <summary>Minimum required custom roles of the api client.</summary>
+		public IList<string> MinimumRequiredCustomRoles { get => GetProp<IList<string>>("MinimumRequiredCustomRoles", new List<string>()); set => SetProp<IList<string>>("MinimumRequiredCustomRoles", value); }
+		/// <summary>Maximum granted roles of the api client.</summary>
+		public IList<ApiRole> MaximumGrantedRoles { get => GetProp<IList<ApiRole>>("MaximumGrantedRoles", new List<ApiRole>()); set => SetProp<IList<ApiRole>>("MaximumGrantedRoles", value); }
+		/// <summary>Maximum granted custom roles of the api client.</summary>
+		public IList<string> MaximumGrantedCustomRoles { get => GetProp<IList<string>>("MaximumGrantedCustomRoles", new List<string>()); set => SetProp<IList<string>>("MaximumGrantedCustomRoles", value); }
 	}
 	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic ApiClient class instead.</typeparam>
 	public class ApiClient<Txp> : ApiClient
@@ -157,7 +165,7 @@ namespace OrderCloud.SDK
 		/// <summary>ID of the approving group. Required. Sortable.</summary>
 		[Required]
 		public string ApprovingGroupID { get => GetProp<string>("ApprovingGroupID"); set => SetProp<string>("ApprovingGroupID", value); }
-		/// <summary>Rule expression of the approval rule. Required. Max length 400 characters. Searchable: priority level 4. Sortable.</summary>
+		/// <summary>The expression evaluated to determine an order requires approval. See Rules Engine documentation for formatting details.</summary>
 		[Required]
 		public string RuleExpression { get => GetProp<string>("RuleExpression"); set => SetProp<string>("RuleExpression", value); }
 		/// <summary>Container for extended (custom) properties of the approval rule.</summary>
@@ -176,9 +184,9 @@ namespace OrderCloud.SDK
 		/// <summary>Name of the buyer. Required. Max length 100 characters. Searchable: priority level 1. Sortable: priority level 2.</summary>
 		[Required]
 		public string Name { get => GetProp<string>("Name"); set => SetProp<string>("Name", value); }
-		/// <summary>ID of the default catalog.</summary>
+		/// <summary>If null on POST a new default catalog will be created for the buyer. Used in buyer product queries to allow filtering on categories without explicitly providing a CatalogID.</summary>
 		public string DefaultCatalogID { get => GetProp<string>("DefaultCatalogID"); set => SetProp<string>("DefaultCatalogID", value); }
-		/// <summary>Active of the buyer.</summary>
+		/// <summary>If false, all authentication is prohibited.</summary>
 		public bool Active { get => GetProp<bool>("Active"); set => SetProp<bool>("Active", value); }
 		/// <summary>Date created of the buyer. Sortable: priority level 3.</summary>
 		[ApiReadOnly]
@@ -251,7 +259,7 @@ namespace OrderCloud.SDK
 		/// <summary>Editable of the credit card. Searchable: priority level 5.</summary>
 		[ApiReadOnly]
 		public bool Editable { get => GetProp<bool>("Editable"); set => SetProp<bool>("Editable", value); }
-		/// <summary>Token of the credit card.</summary>
+		/// <summary>Token provided by the credit card processor used to reference the card with that processor.</summary>
 		public string Token { get => GetProp<string>("Token"); set => SetProp<string>("Token", value); }
 		/// <summary>Date created of the credit card. Sortable.</summary>
 		[ApiReadOnly]
@@ -285,7 +293,7 @@ namespace OrderCloud.SDK
 		public string Name { get => GetProp<string>("Name"); set => SetProp<string>("Name", value); }
 		/// <summary>Description of the product. Max length 2000 characters. Searchable: priority level 3.</summary>
 		public string Description { get => GetProp<string>("Description"); set => SetProp<string>("Description", value); }
-		/// <summary>Quantity multiplier of the product. Required. Must be at least 1.</summary>
+		/// <summary>For reference only, does not influence any OrderCloud behavior. Used to indicate an amount per Quantity.</summary>
 		[Required]
 		public int QuantityMultiplier { get => GetProp<int>("QuantityMultiplier", 1); set => SetProp<int>("QuantityMultiplier", value); }
 		/// <summary>Ship weight of the product.</summary>
@@ -296,19 +304,19 @@ namespace OrderCloud.SDK
 		public decimal? ShipWidth { get => GetProp<decimal?>("ShipWidth"); set => SetProp<decimal?>("ShipWidth", value); }
 		/// <summary>Ship length of the product.</summary>
 		public decimal? ShipLength { get => GetProp<decimal?>("ShipLength"); set => SetProp<decimal?>("ShipLength", value); }
-		/// <summary>Active of the product.</summary>
+		/// <summary>If false, product is not visible or purchasable from the Shopper perspective.</summary>
 		public bool Active { get => GetProp<bool>("Active"); set => SetProp<bool>("Active", value); }
-		/// <summary>Spec count of the product.</summary>
+		/// <summary>Count of Specs assigned to the product.</summary>
 		[ApiReadOnly]
 		public int SpecCount { get => GetProp<int>("SpecCount"); set => SetProp<int>("SpecCount", value); }
-		/// <summary>Variant count of the product.</summary>
+		/// <summary>Count of Variants generated from the product/spec combinations.</summary>
 		[ApiReadOnly]
 		public int VariantCount { get => GetProp<int>("VariantCount"); set => SetProp<int>("VariantCount", value); }
-		/// <summary>ID of the ship from address.</summary>
+		/// <summary>Seller or Supplier AddressID where the product will be shipped from. Can be used to calculate shipping costs.</summary>
 		public string ShipFromAddressID { get => GetProp<string>("ShipFromAddressID"); set => SetProp<string>("ShipFromAddressID", value); }
 		/// <summary>Inventory of the product.</summary>
 		public Inventory Inventory { get => GetProp<Inventory>("Inventory"); set => SetProp<Inventory>("Inventory", value); }
-		/// <summary>ID of the default supplier.</summary>
+		/// <summary>If this property has a value and a SupplierID isn't explicitly passed when creating a LineItem, this SupplierID will be used.</summary>
 		public string DefaultSupplierID { get => GetProp<string>("DefaultSupplierID"); set => SetProp<string>("DefaultSupplierID", value); }
 		/// <summary>Container for extended (custom) properties of the product.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
@@ -328,7 +336,7 @@ namespace OrderCloud.SDK
 	{
 		/// <summary>ID of the catalog. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 3.</summary>
 		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
-		/// <summary>ID of the Seller or Supplier org that created the Catalog.</summary>
+		/// <summary>ID of the Seller or Supplier org that created, and therefore owns, the Catalog.</summary>
 		[ApiReadOnly]
 		public string OwnerID { get => GetProp<string>("OwnerID"); set => SetProp<string>("OwnerID", value); }
 		/// <summary>Name of the catalog. Required. Max length 100 characters. Searchable: priority level 2. Sortable: priority level 2.</summary>
@@ -336,7 +344,7 @@ namespace OrderCloud.SDK
 		public string Name { get => GetProp<string>("Name"); set => SetProp<string>("Name", value); }
 		/// <summary>Description of the catalog. Max length 2000 characters. Searchable: priority level 3.</summary>
 		public string Description { get => GetProp<string>("Description"); set => SetProp<string>("Description", value); }
-		/// <summary>Active of the catalog.</summary>
+		/// <summary>Categories and Products within to this catalog will not be visible to buyer users if false.</summary>
 		public bool Active { get => GetProp<bool>("Active"); set => SetProp<bool>("Active", value); }
 		/// <summary>Category count of the catalog.</summary>
 		[ApiReadOnly]
@@ -446,7 +454,7 @@ namespace OrderCloud.SDK
 	{
 		/// <summary>ID of the credit card. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 1.</summary>
 		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
-		/// <summary>Token of the credit card.</summary>
+		/// <summary>Token provided by the credit card processor used to reference the card with that processor.</summary>
 		public string Token { get => GetProp<string>("Token"); set => SetProp<string>("Token", value); }
 		/// <summary>Date created of the credit card. Sortable.</summary>
 		[ApiReadOnly]
@@ -515,14 +523,14 @@ namespace OrderCloud.SDK
 	}
 	public class Incrementor : OrderCloudModel
 	{
-		/// <summary>ID of the incrementor. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 1.</summary>
+		/// <summary>The string "{replace-with-incrementor-ID}" can be passed into any ID field to populate the next ID in the sequence. It can also be prefixed with other ID safe characters.</summary>
 		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
 		/// <summary>Name of the incrementor. Max length 100 characters. Searchable: priority level 2. Sortable: priority level 2.</summary>
 		public string Name { get => GetProp<string>("Name"); set => SetProp<string>("Name", value); }
-		/// <summary>Last number of the incrementor. Required. Must be between 0 and 2147483647.</summary>
+		/// <summary>Increments as IDs are generated.</summary>
 		[Required]
 		public int LastNumber { get => GetProp<int>("LastNumber"); set => SetProp<int>("LastNumber", value); }
-		/// <summary>Left padding count of the incrementor. Required. Must be between 0 and 25.</summary>
+		/// <summary>Use to enforce a minimum incrementor ID length. For example if your LastNumber is 0 and LeftPaddingCount is 4, your first generated ID will be 0001.</summary>
 		[Required]
 		public int LeftPaddingCount { get => GetProp<int>("LeftPaddingCount"); set => SetProp<int>("LeftPaddingCount", value); }
 	}
@@ -537,24 +545,24 @@ namespace OrderCloud.SDK
 		public object ConfigData { get => GetProp<object>("ConfigData"); set => SetProp<object>("ConfigData", value); }
 		/// <summary>Event type of the integration event. Searchable: priority level 2. Sortable: priority level 2. Possible values: OrderCheckout, OpenIDConnect.</summary>
 		public IntegrationEventType EventType { get => GetProp<IntegrationEventType>("EventType"); set => SetProp<IntegrationEventType>("EventType", value); }
-		/// <summary>Custom implementation url of the integration event.</summary>
+		/// <summary>URL the IntegrationEvent will POST data to, likely a route within your middleware.</summary>
 		public string CustomImplementationUrl { get => GetProp<string>("CustomImplementationUrl"); set => SetProp<string>("CustomImplementationUrl", value); }
 		/// <summary>Name of the integration event. Required. Searchable: priority level 3. Sortable: priority level 3.</summary>
 		[Required]
 		public string Name { get => GetProp<string>("Name"); set => SetProp<string>("Name", value); }
-		/// <summary>Hash key of the integration event. Required. Max length 50 characters.</summary>
+		/// <summary>Security feature that allows your middleware to verify the digital signature in the request header to ensure you only accept trusted data.</summary>
 		[Required]
 		public string HashKey { get => GetProp<string>("HashKey"); set => SetProp<string>("HashKey", value); }
 	}
 	public class Inventory : OrderCloudModel
 	{
-		/// <summary>Enabled of the inventory.</summary>
+		/// <summary>If true, inventory will be tracked and enforced.</summary>
 		public bool Enabled { get => GetProp<bool>("Enabled"); set => SetProp<bool>("Enabled", value); }
-		/// <summary>Notification point of the inventory.</summary>
+		/// <summary>For reference only, does not influence any OrderCloud behavior at this time.</summary>
 		public int? NotificationPoint { get => GetProp<int?>("NotificationPoint"); set => SetProp<int?>("NotificationPoint", value); }
-		/// <summary>Variant level tracking of the inventory.</summary>
+		/// <summary>If true, QuantityAvailable will be determined at the Variant level.</summary>
 		public bool VariantLevelTracking { get => GetProp<bool>("VariantLevelTracking"); set => SetProp<bool>("VariantLevelTracking", value); }
-		/// <summary>Order can exceed of the inventory.</summary>
+		/// <summary>If true, a user can create line items and place orders for the product even if there is insufficient QuantityAvailable.</summary>
 		public bool OrderCanExceed { get => GetProp<bool>("OrderCanExceed"); set => SetProp<bool>("OrderCanExceed", value); }
 		/// <summary>Automatically decrements on order submit.</summary>
 		public int? QuantityAvailable { get => GetProp<int?>("QuantityAvailable"); set => SetProp<int?>("QuantityAvailable", value); }
@@ -575,29 +583,29 @@ namespace OrderCloud.SDK
 		/// <summary>Date added of the line item. Sortable: priority level 1.</summary>
 		[ApiReadOnly]
 		public DateTimeOffset DateAdded { get => GetProp<DateTimeOffset>("DateAdded"); set => SetProp<DateTimeOffset>("DateAdded", value); }
-		/// <summary>Quantity shipped of the line item.</summary>
+		/// <summary>Sum of QuantityShipped from all shipment items.</summary>
 		[ApiReadOnly]
 		public int QuantityShipped { get => GetProp<int>("QuantityShipped"); set => SetProp<int>("QuantityShipped", value); }
-		/// <summary>Unit price of the line item. Must be between -9999999999999 and 9999999999999.</summary>
+		/// <summary>Auto calculated Price per Quantity. Modification requires OverrideUnitPrice Role.</summary>
 		public decimal? UnitPrice { get => GetProp<decimal?>("UnitPrice"); set => SetProp<decimal?>("UnitPrice", value); }
-		/// <summary>Promotion discount of the line item.</summary>
+		/// <summary>Sum of all line item level promotion discount amounts applied.</summary>
 		[ApiReadOnly]
 		public decimal PromotionDiscount { get => GetProp<decimal>("PromotionDiscount"); set => SetProp<decimal>("PromotionDiscount", value); }
-		/// <summary>Line total of the line item.</summary>
+		/// <summary>LineSubtotal - PromotionDiscount</summary>
 		[ApiReadOnly]
 		public decimal LineTotal { get => GetProp<decimal>("LineTotal"); set => SetProp<decimal>("LineTotal", value); }
-		/// <summary>Line subtotal of the line item.</summary>
+		/// <summary>UnitPrice x Quantity</summary>
 		[ApiReadOnly]
 		public decimal LineSubtotal { get => GetProp<decimal>("LineSubtotal"); set => SetProp<decimal>("LineSubtotal", value); }
-		/// <summary>Cost center of the line item.</summary>
+		/// <summary>For reference only, does not influence any OrderCloud behavior.</summary>
 		public string CostCenter { get => GetProp<string>("CostCenter"); set => SetProp<string>("CostCenter", value); }
 		/// <summary>Date needed of the line item.</summary>
 		public DateTimeOffset? DateNeeded { get => GetProp<DateTimeOffset?>("DateNeeded"); set => SetProp<DateTimeOffset?>("DateNeeded", value); }
-		/// <summary>Shipping account of the line item.</summary>
+		/// <summary>For reference only, does not influence any OrderCloud behavior.</summary>
 		public string ShippingAccount { get => GetProp<string>("ShippingAccount"); set => SetProp<string>("ShippingAccount", value); }
 		/// <summary>ID of the shipping address.</summary>
 		public string ShippingAddressID { get => GetProp<string>("ShippingAddressID"); set => SetProp<string>("ShippingAddressID", value); }
-		/// <summary>ID of the ship from address.</summary>
+		/// <summary>Seller or Supplier AddressID where the product will be shipped from. Can be used to calculate shipping costs.</summary>
 		public string ShipFromAddressID { get => GetProp<string>("ShipFromAddressID"); set => SetProp<string>("ShipFromAddressID", value); }
 		/// <summary>Product of the line item.</summary>
 		[ApiReadOnly]
@@ -771,12 +779,12 @@ namespace OrderCloud.SDK
 		public IList<MessageType> MessageTypes { get => GetProp<IList<MessageType>>("MessageTypes", new List<MessageType>()); set => SetProp<IList<MessageType>>("MessageTypes", value); }
 		/// <summary>Description of the message sender.</summary>
 		public string Description { get => GetProp<string>("Description"); set => SetProp<string>("Description", value); }
-		/// <summary>URL of the message sender. Required. Searchable: priority level 2. Sortable: priority level 2.</summary>
+		/// <summary>URL the MessageSender will POST data to, likely a route within your middleware.</summary>
 		[Required]
 		public string URL { get => GetProp<string>("URL"); set => SetProp<string>("URL", value); }
-		/// <summary>Elevated roles of the message sender.</summary>
+		/// <summary>If additional data not provided by the message sender is needed, provide any elevated roles needed to make additional calls.</summary>
 		public IList<ApiRole> ElevatedRoles { get => GetProp<IList<ApiRole>>("ElevatedRoles", new List<ApiRole>()); set => SetProp<IList<ApiRole>>("ElevatedRoles", value); }
-		/// <summary>Shared key of the message sender. Required.</summary>
+		/// <summary>Security feature that allows your middleware to verify the digital signature in the request header to ensure you only accept trusted data.</summary>
 		[Required]
 		public string SharedKey { get => GetProp<string>("SharedKey"); set => SetProp<string>("SharedKey", value); }
 		/// <summary>Container for extended (custom) properties of the message sender.</summary>
@@ -825,7 +833,7 @@ namespace OrderCloud.SDK
 		public MeSeller Seller { get => GetProp<MeSeller>("Seller"); set => SetProp<MeSeller>("Seller", value); }
 		/// <summary>ID of the user. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable.</summary>
 		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
-		/// <summary>Username of the user. Required. Max length 100 characters. Searchable: priority level 2. Sortable: priority level 3.</summary>
+		/// <summary>Must be unique across the Marketplace.</summary>
 		[Required]
 		public string Username { get => GetProp<string>("Username"); set => SetProp<string>("Username", value); }
 		/// <summary>Password of the user.</summary>
@@ -844,18 +852,18 @@ namespace OrderCloud.SDK
 		public string Phone { get => GetProp<string>("Phone"); set => SetProp<string>("Phone", value); }
 		/// <summary>Terms accepted of the user.</summary>
 		public DateTimeOffset? TermsAccepted { get => GetProp<DateTimeOffset?>("TermsAccepted"); set => SetProp<DateTimeOffset?>("TermsAccepted", value); }
-		/// <summary>Active of the user. Required.</summary>
+		/// <summary>If false, authentication is prohibited.</summary>
 		[Required]
 		public bool Active { get => GetProp<bool>("Active"); set => SetProp<bool>("Active", value); }
 		/// <summary>Container for extended (custom) properties of the user.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
-		/// <summary>Available roles of the user.</summary>
+		/// <summary>List of Roles currently available to the user via all SecurityProfile Assignments.</summary>
 		[ApiReadOnly]
 		public IReadOnlyList<string> AvailableRoles { get => GetProp<IReadOnlyList<string>>("AvailableRoles"); set => SetProp<IReadOnlyList<string>>("AvailableRoles", value); }
 		/// <summary>Date created of the user. Sortable.</summary>
 		[ApiReadOnly]
 		public DateTimeOffset? DateCreated { get => GetProp<DateTimeOffset?>("DateCreated"); set => SetProp<DateTimeOffset?>("DateCreated", value); }
-		/// <summary>Password last set date of the user. Sortable.</summary>
+		/// <summary>Can be used in conjunction with SecurityProfile.PasswordConfig to enforce password reset schedules.</summary>
 		[ApiReadOnly]
 		public DateTimeOffset? PasswordLastSetDate { get => GetProp<DateTimeOffset?>("PasswordLastSetDate"); set => SetProp<DateTimeOffset?>("PasswordLastSetDate", value); }
 	}
@@ -867,9 +875,9 @@ namespace OrderCloud.SDK
 	}
 	public class OpenIdConnect : OrderCloudModel
 	{
-		/// <summary>ID of this OpenID Connect configuration object. Each object allows authentication to one Ordercloud ApiClient through one Identity Providing Party.</summary>
+		/// <summary>ID of this OpenID Connect configuration object. Each object allows authentication to one OrderCloud ApiClient through one Identity Providing Party.</summary>
 		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
-		/// <summary>An ID that references an Ordercloud ApiClient.</summary>
+		/// <summary>An ID that references an OrderCloud ApiClient.</summary>
 		[Required]
 		public string OrderCloudApiClientID { get => GetProp<string>("OrderCloudApiClientID"); set => SetProp<string>("OrderCloudApiClientID", value); }
 		/// <summary>An app ID from the Identity Provider that is required to get JWT tokens.</summary>
@@ -878,7 +886,7 @@ namespace OrderCloud.SDK
 		/// <summary>A secret string from the Identity Provider that grants access to get JWT tokens.</summary>
 		[Required]
 		public string ConnectClientSecret { get => GetProp<string>("ConnectClientSecret"); set => SetProp<string>("ConnectClientSecret", value); }
-		/// <summary>A URL on your front-end ordering site where users will be redirected after they authenticate through the Identity Provider. The string "{token}" will be replaced with a valid Ordercloud JWT.</summary>
+		/// <summary>A URL on your front-end ordering site where users will be redirected after they authenticate through the Identity Provider. The string "{token}" will be replaced with a valid OrderCloud JWT.</summary>
 		[Required]
 		public string AppStartUrl { get => GetProp<string>("AppStartUrl"); set => SetProp<string>("AppStartUrl", value); }
 		/// <summary>A publicly known URL from the Identity Provider that redirects to a resource where users enter personal credentials.</summary>
@@ -889,28 +897,28 @@ namespace OrderCloud.SDK
 		public string TokenEndpoint { get => GetProp<string>("TokenEndpoint"); set => SetProp<string>("TokenEndpoint", value); }
 		/// <summary>If true, uses a url encoded form post with all auth values. Otherwise, an Authorization header with basic auth is passed with a JSON object in the body.</summary>
 		public bool UrlEncoded { get => GetProp<bool>("UrlEncoded"); set => SetProp<bool>("UrlEncoded", value); }
-		/// <summary>ID of the integration event.</summary>
+		/// <summary>ID of the IntegrationEvent to call upon authorization request. Used when you haven't pre-populated users into OrderCloud, or need to sync user data.</summary>
 		public string IntegrationEventID { get => GetProp<string>("IntegrationEventID"); set => SetProp<string>("IntegrationEventID", value); }
-		/// <summary>Call sync user integration event of the open id connect.</summary>
+		/// <summary>If true, the integration event is always triggered regardless of if the user already exists in OrderCloud.</summary>
 		public bool CallSyncUserIntegrationEvent { get => GetProp<bool>("CallSyncUserIntegrationEvent"); set => SetProp<bool>("CallSyncUserIntegrationEvent", value); }
 		/// <summary>Integration event name of the open id connect.</summary>
 		[ApiReadOnly]
 		public string IntegrationEventName { get => GetProp<string>("IntegrationEventName"); set => SetProp<string>("IntegrationEventName", value); }
-		/// <summary>Additional idp scopes of the open id connect.</summary>
+		/// <summary>Any additional scopes needed by the IDP.</summary>
 		public IList<string> AdditionalIdpScopes { get => GetProp<IList<string>>("AdditionalIdpScopes", new List<string>()); set => SetProp<IList<string>>("AdditionalIdpScopes", value); }
 	}
 	public class Order : OrderCloudModel
 	{
 		/// <summary>ID of the order. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable.</summary>
 		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
-		/// <summary>From user of the order.</summary>
+		/// <summary>User placing the order.</summary>
 		[ApiReadOnly]
 		public User FromUser { get => GetProp<User>("FromUser"); set => SetProp<User>("FromUser", value); }
 		/// <summary>ID of the Buyer or Seller placing the order. Mainly useful to the Seller or Supplier receiving it.</summary>
 		public string FromCompanyID { get => GetProp<string>("FromCompanyID"); set => SetProp<string>("FromCompanyID", value); }
 		/// <summary>ID of the Seller or Supplier receiving the order. Mainly useful to the Buyer or Seller placing it.</summary>
 		public string ToCompanyID { get => GetProp<string>("ToCompanyID"); set => SetProp<string>("ToCompanyID", value); }
-		/// <summary>ID of the from user. Sortable.</summary>
+		/// <summary>This property is only writable when creating an order from the seller perspective on behalf of a buyer user.</summary>
 		public string FromUserID { get => GetProp<string>("FromUserID"); set => SetProp<string>("FromUserID", value); }
 		/// <summary>ID of the billing address.</summary>
 		public string BillingAddressID { get => GetProp<string>("BillingAddressID"); set => SetProp<string>("BillingAddressID", value); }
@@ -930,7 +938,7 @@ namespace OrderCloud.SDK
 		/// <summary>Date created of the order. Sortable: priority level 2.</summary>
 		[ApiReadOnly]
 		public DateTimeOffset? DateCreated { get => GetProp<DateTimeOffset?>("DateCreated"); set => SetProp<DateTimeOffset?>("DateCreated", value); }
-		/// <summary>Date submitted of the order. Sortable: priority level 1.</summary>
+		/// <summary>NULL until the order passes from the buyer to the seller, including when Status is PendingApproval.</summary>
 		[ApiReadOnly]
 		public DateTimeOffset? DateSubmitted { get => GetProp<DateTimeOffset?>("DateSubmitted"); set => SetProp<DateTimeOffset?>("DateSubmitted", value); }
 		/// <summary>Date approved of the order. Sortable.</summary>
@@ -942,20 +950,23 @@ namespace OrderCloud.SDK
 		/// <summary>Date canceled of the order. Sortable.</summary>
 		[ApiReadOnly]
 		public DateTimeOffset? DateCanceled { get => GetProp<DateTimeOffset?>("DateCanceled"); set => SetProp<DateTimeOffset?>("DateCanceled", value); }
-		/// <summary>Date completed of the order. Sortable.</summary>
+		/// <summary>Populated when all items on an order have shipped, or the order is explicitly completed.</summary>
 		[ApiReadOnly]
 		public DateTimeOffset? DateCompleted { get => GetProp<DateTimeOffset?>("DateCompleted"); set => SetProp<DateTimeOffset?>("DateCompleted", value); }
-		/// <summary>Subtotal of the order. Sortable.</summary>
+		/// <summary>Last updated of the order. Sortable.</summary>
+		[ApiReadOnly]
+		public DateTimeOffset LastUpdated { get => GetProp<DateTimeOffset>("LastUpdated"); set => SetProp<DateTimeOffset>("LastUpdated", value); }
+		/// <summary>Sum of all LineItem.LineSubtotals.</summary>
 		[ApiReadOnly]
 		public decimal Subtotal { get => GetProp<decimal>("Subtotal"); set => SetProp<decimal>("Subtotal", value); }
-		/// <summary>Shipping cost of the order. Sortable.</summary>
+		/// <summary>Modifying requires OverrideShipping Role.</summary>
 		public decimal ShippingCost { get => GetProp<decimal>("ShippingCost"); set => SetProp<decimal>("ShippingCost", value); }
-		/// <summary>Tax cost of the order. Sortable.</summary>
+		/// <summary>Modifying requires TaxOverride Role.</summary>
 		public decimal TaxCost { get => GetProp<decimal>("TaxCost"); set => SetProp<decimal>("TaxCost", value); }
-		/// <summary>Promotion discount of the order. Sortable.</summary>
+		/// <summary>Sum of all Promotion.Amounts applied to the order.</summary>
 		[ApiReadOnly]
 		public decimal PromotionDiscount { get => GetProp<decimal>("PromotionDiscount"); set => SetProp<decimal>("PromotionDiscount", value); }
-		/// <summary>Total of the order. Sortable.</summary>
+		/// <summary>Subtotal + TaxCost + ShippingCost - PromotionDiscount</summary>
 		[ApiReadOnly]
 		public decimal Total { get => GetProp<decimal>("Total"); set => SetProp<decimal>("Total", value); }
 		/// <summary>True if this Order has been passed from the Buyer to the Seller.</summary>
@@ -973,7 +984,7 @@ namespace OrderCloud.SDK
 	{
 		/// <summary>Container for extended (custom) properties of the order.</summary>
 		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
-		/// <summary>From user of the order.</summary>
+		/// <summary>User placing the order.</summary>
 		[ApiReadOnly]
 		public new TFromUser FromUser { get => GetProp<TFromUser>("FromUser"); set => SetProp<TFromUser>("FromUser", value); }
 		/// <summary>Billing address of the order.</summary>
@@ -991,7 +1002,7 @@ namespace OrderCloud.SDK
 		/// <summary>Status of the order approval. Sortable. Possible values: Pending, Approved, Declined.</summary>
 		[ApiReadOnly]
 		public ApprovalStatus Status { get => GetProp<ApprovalStatus>("Status"); set => SetProp<ApprovalStatus>("Status", value); }
-		/// <summary>Allow resubmit of the order approval. Sortable.</summary>
+		/// <summary>If true, the submitting user will be able to modify the order and resubmit for approval.</summary>
 		[ApiReadOnly]
 		public bool AllowResubmit { get => GetProp<bool>("AllowResubmit"); set => SetProp<bool>("AllowResubmit", value); }
 		/// <summary>Date created of the order approval. Sortable: priority level 1.</summary>
@@ -1068,7 +1079,7 @@ namespace OrderCloud.SDK
 		public string LineItemID { get => GetProp<string>("LineItemID"); set => SetProp<string>("LineItemID", value); }
 		/// <summary>ID of the order promotion. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 2.</summary>
 		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
-		/// <summary>Line item level of the order promotion.</summary>
+		/// <summary>If true, certain eligible expression requirements must be met, and the PromotionDiscount will be applied at the line item level.</summary>
 		public bool LineItemLevel { get => GetProp<bool>("LineItemLevel"); set => SetProp<bool>("LineItemLevel", value); }
 		/// <summary>Must be unique. Entered by buyer when adding promo to order.</summary>
 		[Required]
@@ -1079,7 +1090,7 @@ namespace OrderCloud.SDK
 		public int? RedemptionLimit { get => GetProp<int?>("RedemptionLimit"); set => SetProp<int?>("RedemptionLimit", value); }
 		/// <summary>Limit the total number of orders this promotion can be applied to per user.</summary>
 		public int? RedemptionLimitPerUser { get => GetProp<int?>("RedemptionLimitPerUser"); set => SetProp<int?>("RedemptionLimitPerUser", value); }
-		/// <summary>Redemption count of the order promotion.</summary>
+		/// <summary>The number of times this promotion has been applied to an order.</summary>
 		[ApiReadOnly]
 		public int RedemptionCount { get => GetProp<int>("RedemptionCount"); set => SetProp<int>("RedemptionCount", value); }
 		/// <summary>Description of the order promotion. Max length 2000 characters. Searchable: priority level 4.</summary>
@@ -1090,15 +1101,15 @@ namespace OrderCloud.SDK
 		public DateTimeOffset? StartDate { get => GetProp<DateTimeOffset?>("StartDate"); set => SetProp<DateTimeOffset?>("StartDate", value); }
 		/// <summary>Expiration date of the order promotion. Sortable.</summary>
 		public DateTimeOffset? ExpirationDate { get => GetProp<DateTimeOffset?>("ExpirationDate"); set => SetProp<DateTimeOffset?>("ExpirationDate", value); }
-		/// <summary>Eligible expression of the order promotion. Required. Max length 400 characters. Searchable: priority level 6. Sortable.</summary>
+		/// <summary>The expression evaluated to determine if an item or order is eligible for a promotion. See Rules Engine documentation for formatting details.</summary>
 		[Required]
 		public string EligibleExpression { get => GetProp<string>("EligibleExpression"); set => SetProp<string>("EligibleExpression", value); }
-		/// <summary>Value expression of the order promotion. Required. Max length 400 characters. Searchable: priority level 7. Sortable.</summary>
+		/// <summary>The expression evaluated to determine the discount amount of an eligible promotion. See Rules Engine documentation for formatting details.</summary>
 		[Required]
 		public string ValueExpression { get => GetProp<string>("ValueExpression"); set => SetProp<string>("ValueExpression", value); }
-		/// <summary>Can combine of the order promotion. Sortable.</summary>
+		/// <summary>If true, the promotion can be applied to an order that already other promotions applied, as long as they can also be combined.</summary>
 		public bool CanCombine { get => GetProp<bool>("CanCombine"); set => SetProp<bool>("CanCombine", value); }
-		/// <summary>Allow promo to be used by all buyers without creating assignments.</summary>
+		/// <summary>Allow promo to be used by all buyers in your Marketplace without creating explicit assignments.</summary>
 		public bool AllowAllBuyers { get => GetProp<bool>("AllowAllBuyers"); set => SetProp<bool>("AllowAllBuyers", value); }
 		/// <summary>Container for extended (custom) properties of the order promotion.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
@@ -1208,8 +1219,28 @@ namespace OrderCloud.SDK
 	}
 	public class PasswordConfig : OrderCloudModel
 	{
-		/// <summary>Expire in days of the password config. Must be at least 1.</summary>
-		public int? ExpireInDays { get => GetProp<int?>("ExpireInDays"); set => SetProp<int?>("ExpireInDays", value); }
+		/// <summary>The number of passwords, including the current password, that are blocked from reuse. For example, if set to 1, any password except the current one can be reused.</summary>
+		public int? LimitPasswordReuse { get => GetProp<int?>("LimitPasswordReuse"); set => SetProp<int?>("LimitPasswordReuse", value); }
+		/// <summary>The maximum number of consecutive repeating characters in a password.</summary>
+		public int? MaxConsecutiveDupeChars { get => GetProp<int?>("MaxConsecutiveDupeChars"); set => SetProp<int?>("MaxConsecutiveDupeChars", value); }
+		/// <summary>The password expires after MaximumPasswordAge in days.</summary>
+		public int? MaximumPasswordAge { get => GetProp<int?>("MaximumPasswordAge"); set => SetProp<int?>("MaximumPasswordAge", value); }
+		/// <summary>The password may not be changed again until this number of minutes has passed.</summary>
+		public int? MinimumPasswordAge { get => GetProp<int?>("MinimumPasswordAge"); set => SetProp<int?>("MinimumPasswordAge", value); }
+		/// <summary>The number of failed attempts before the account is Locked for the LockoutDuration.</summary>
+		public int? AllowedFailedAttempts { get => GetProp<int?>("AllowedFailedAttempts"); set => SetProp<int?>("AllowedFailedAttempts", value); }
+		/// <summary>The number of minutes an account is locked when the AllowedFailedAttempts is reached.</summary>
+		public int? LockoutDuration { get => GetProp<int?>("LockoutDuration"); set => SetProp<int?>("LockoutDuration", value); }
+		/// <summary>At least one upper case character is required.</summary>
+		public bool UpperCaseRequired { get => GetProp<bool>("UpperCaseRequired"); set => SetProp<bool>("UpperCaseRequired", value); }
+		/// <summary>At least one lower case character is required.</summary>
+		public bool LowerCaseRequired { get => GetProp<bool>("LowerCaseRequired"); set => SetProp<bool>("LowerCaseRequired", value); }
+		/// <summary>At least one special character is required.</summary>
+		public bool SpecialCharacterRequired { get => GetProp<bool>("SpecialCharacterRequired"); set => SetProp<bool>("SpecialCharacterRequired", value); }
+		/// <summary>At least one number is required.</summary>
+		public bool NumericRequired { get => GetProp<bool>("NumericRequired"); set => SetProp<bool>("NumericRequired", value); }
+		/// <summary>The minimum length of a password.</summary>
+		public int? MinimumCharacterCount { get => GetProp<int?>("MinimumCharacterCount"); set => SetProp<int?>("MinimumCharacterCount", value); }
 	}
 	public class PasswordReset : OrderCloudModel
 	{
@@ -1242,15 +1273,15 @@ namespace OrderCloud.SDK
 		/// <summary>Date created of the payment. Sortable: priority level 1.</summary>
 		[ApiReadOnly]
 		public DateTimeOffset DateCreated { get => GetProp<DateTimeOffset>("DateCreated"); set => SetProp<DateTimeOffset>("DateCreated", value); }
-		/// <summary>ID of the credit card. Sortable.</summary>
+		/// <summary>Only writeable on POST.</summary>
 		public string CreditCardID { get => GetProp<string>("CreditCardID"); set => SetProp<string>("CreditCardID", value); }
-		/// <summary>ID of the spending account. Sortable.</summary>
+		/// <summary>Only writeable on POST.</summary>
 		public string SpendingAccountID { get => GetProp<string>("SpendingAccountID"); set => SetProp<string>("SpendingAccountID", value); }
 		/// <summary>Description of the payment. Max length 2000 characters. Searchable: priority level 2.</summary>
 		public string Description { get => GetProp<string>("Description"); set => SetProp<string>("Description", value); }
 		/// <summary>If null, Payment applies to order total (or total of specific Line Items, if set), minus any other Payments where Amount is set.</summary>
 		public decimal? Amount { get => GetProp<decimal?>("Amount"); set => SetProp<decimal?>("Amount", value); }
-		/// <summary>Accepted of the payment.</summary>
+		/// <summary>All payments must be Accepted to submit an order.</summary>
 		public bool? Accepted { get => GetProp<bool?>("Accepted"); set => SetProp<bool?>("Accepted", value); }
 		/// <summary>Container for extended (custom) properties of the payment.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
@@ -1298,10 +1329,10 @@ namespace OrderCloud.SDK
 	}
 	public class PriceBreak : OrderCloudModel
 	{
-		/// <summary>Quantity of the price break. Required. Must be at least 0.</summary>
+		/// <summary>Most commonly 1, except when offering tiered/bulk pricing.</summary>
 		[Required]
 		public int Quantity { get => GetProp<int>("Quantity"); set => SetProp<int>("Quantity", value); }
-		/// <summary>Price of the price break. Required.</summary>
+		/// <summary>Price per unit.</summary>
 		[Required]
 		public decimal Price { get => GetProp<decimal>("Price"); set => SetProp<decimal>("Price", value); }
 	}
@@ -1312,13 +1343,13 @@ namespace OrderCloud.SDK
 		/// <summary>Name of the price schedule. Required. Max length 100 characters. Searchable: priority level 2. Sortable: priority level 1.</summary>
 		[Required]
 		public string Name { get => GetProp<string>("Name"); set => SetProp<string>("Name", value); }
-		/// <summary>Apply tax of the price schedule. Searchable: priority level 3.</summary>
+		/// <summary>For reference only for calculating tax, does not influence any OrderCloud behavior.</summary>
 		public bool ApplyTax { get => GetProp<bool>("ApplyTax"); set => SetProp<bool>("ApplyTax", value); }
-		/// <summary>Apply shipping of the price schedule.</summary>
+		/// <summary>For reference only for calculating shipping cost, does not influence any OrderCloud behavior.</summary>
 		public bool ApplyShipping { get => GetProp<bool>("ApplyShipping"); set => SetProp<bool>("ApplyShipping", value); }
-		/// <summary>Min quantity of the price schedule. Must be at least 1.</summary>
+		/// <summary>The minimum quantity allowed per order.</summary>
 		public int? MinQuantity { get => GetProp<int?>("MinQuantity", 1); set => SetProp<int?>("MinQuantity", value); }
-		/// <summary>Max quantity of the price schedule.</summary>
+		/// <summary>The maximum quantity allowed per order.</summary>
 		public int? MaxQuantity { get => GetProp<int?>("MaxQuantity"); set => SetProp<int?>("MaxQuantity", value); }
 		/// <summary>If true, LineItem quantities will be aggregated by productID when determining which price break applies, and when Min/Max quantities are met. Else, each LineItem is treated separately.</summary>
 		public bool UseCumulativeQuantity { get => GetProp<bool>("UseCumulativeQuantity"); set => SetProp<bool>("UseCumulativeQuantity", value); }
@@ -1337,10 +1368,10 @@ namespace OrderCloud.SDK
 	}
 	public class Product : OrderCloudModel
 	{
-		/// <summary>ID of the Seller or Supplier org that created the Product.</summary>
+		/// <summary>ID of the Seller or Supplier org that created, and therefore owns, the Product.</summary>
 		[ApiReadOnly]
 		public string OwnerID { get => GetProp<string>("OwnerID"); set => SetProp<string>("OwnerID", value); }
-		/// <summary>ID of the default price schedule.</summary>
+		/// <summary>When provided, no explicit PriceSchedule assignment is required. When a PriceSchedule assignment exists, it will override any default provided.</summary>
 		public string DefaultPriceScheduleID { get => GetProp<string>("DefaultPriceScheduleID"); set => SetProp<string>("DefaultPriceScheduleID", value); }
 		/// <summary>If true, when this product is ordered by a Buyer, it will automatically be added to a new Order from the Seller to the Default Supplier and submitted. Requires a valid DefaultSupplierID.</summary>
 		public bool AutoForward { get => GetProp<bool>("AutoForward"); set => SetProp<bool>("AutoForward", value); }
@@ -1351,7 +1382,7 @@ namespace OrderCloud.SDK
 		public string Name { get => GetProp<string>("Name"); set => SetProp<string>("Name", value); }
 		/// <summary>Description of the product. Max length 2000 characters. Searchable: priority level 3.</summary>
 		public string Description { get => GetProp<string>("Description"); set => SetProp<string>("Description", value); }
-		/// <summary>Quantity multiplier of the product. Required. Must be at least 1.</summary>
+		/// <summary>For reference only, does not influence any OrderCloud behavior. Used to indicate an amount per Quantity.</summary>
 		[Required]
 		public int QuantityMultiplier { get => GetProp<int>("QuantityMultiplier", 1); set => SetProp<int>("QuantityMultiplier", value); }
 		/// <summary>Ship weight of the product.</summary>
@@ -1362,19 +1393,19 @@ namespace OrderCloud.SDK
 		public decimal? ShipWidth { get => GetProp<decimal?>("ShipWidth"); set => SetProp<decimal?>("ShipWidth", value); }
 		/// <summary>Ship length of the product.</summary>
 		public decimal? ShipLength { get => GetProp<decimal?>("ShipLength"); set => SetProp<decimal?>("ShipLength", value); }
-		/// <summary>Active of the product.</summary>
+		/// <summary>If false, product is not visible or purchasable from the Shopper perspective.</summary>
 		public bool Active { get => GetProp<bool>("Active"); set => SetProp<bool>("Active", value); }
-		/// <summary>Spec count of the product.</summary>
+		/// <summary>Count of Specs assigned to the product.</summary>
 		[ApiReadOnly]
 		public int SpecCount { get => GetProp<int>("SpecCount"); set => SetProp<int>("SpecCount", value); }
-		/// <summary>Variant count of the product.</summary>
+		/// <summary>Count of Variants generated from the product/spec combinations.</summary>
 		[ApiReadOnly]
 		public int VariantCount { get => GetProp<int>("VariantCount"); set => SetProp<int>("VariantCount", value); }
-		/// <summary>ID of the ship from address.</summary>
+		/// <summary>Seller or Supplier AddressID where the product will be shipped from. Can be used to calculate shipping costs.</summary>
 		public string ShipFromAddressID { get => GetProp<string>("ShipFromAddressID"); set => SetProp<string>("ShipFromAddressID", value); }
 		/// <summary>Inventory of the product.</summary>
 		public Inventory Inventory { get => GetProp<Inventory>("Inventory"); set => SetProp<Inventory>("Inventory", value); }
-		/// <summary>ID of the default supplier.</summary>
+		/// <summary>If this property has a value and a SupplierID isn't explicitly passed when creating a LineItem, this SupplierID will be used.</summary>
 		public string DefaultSupplierID { get => GetProp<string>("DefaultSupplierID"); set => SetProp<string>("DefaultSupplierID", value); }
 		/// <summary>Container for extended (custom) properties of the product.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
@@ -1434,7 +1465,7 @@ namespace OrderCloud.SDK
 	{
 		/// <summary>ID of the promotion. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 2.</summary>
 		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
-		/// <summary>Line item level of the promotion.</summary>
+		/// <summary>If true, certain eligible expression requirements must be met, and the PromotionDiscount will be applied at the line item level.</summary>
 		public bool LineItemLevel { get => GetProp<bool>("LineItemLevel"); set => SetProp<bool>("LineItemLevel", value); }
 		/// <summary>Must be unique. Entered by buyer when adding promo to order.</summary>
 		[Required]
@@ -1445,7 +1476,7 @@ namespace OrderCloud.SDK
 		public int? RedemptionLimit { get => GetProp<int?>("RedemptionLimit"); set => SetProp<int?>("RedemptionLimit", value); }
 		/// <summary>Limit the total number of orders this promotion can be applied to per user.</summary>
 		public int? RedemptionLimitPerUser { get => GetProp<int?>("RedemptionLimitPerUser"); set => SetProp<int?>("RedemptionLimitPerUser", value); }
-		/// <summary>Redemption count of the promotion.</summary>
+		/// <summary>The number of times this promotion has been applied to an order.</summary>
 		[ApiReadOnly]
 		public int RedemptionCount { get => GetProp<int>("RedemptionCount"); set => SetProp<int>("RedemptionCount", value); }
 		/// <summary>Description of the promotion. Max length 2000 characters. Searchable: priority level 4.</summary>
@@ -1456,15 +1487,15 @@ namespace OrderCloud.SDK
 		public DateTimeOffset? StartDate { get => GetProp<DateTimeOffset?>("StartDate"); set => SetProp<DateTimeOffset?>("StartDate", value); }
 		/// <summary>Expiration date of the promotion. Sortable.</summary>
 		public DateTimeOffset? ExpirationDate { get => GetProp<DateTimeOffset?>("ExpirationDate"); set => SetProp<DateTimeOffset?>("ExpirationDate", value); }
-		/// <summary>Eligible expression of the promotion. Required. Max length 400 characters. Searchable: priority level 6. Sortable.</summary>
+		/// <summary>The expression evaluated to determine if an item or order is eligible for a promotion. See Rules Engine documentation for formatting details.</summary>
 		[Required]
 		public string EligibleExpression { get => GetProp<string>("EligibleExpression"); set => SetProp<string>("EligibleExpression", value); }
-		/// <summary>Value expression of the promotion. Required. Max length 400 characters. Searchable: priority level 7. Sortable.</summary>
+		/// <summary>The expression evaluated to determine the discount amount of an eligible promotion. See Rules Engine documentation for formatting details.</summary>
 		[Required]
 		public string ValueExpression { get => GetProp<string>("ValueExpression"); set => SetProp<string>("ValueExpression", value); }
-		/// <summary>Can combine of the promotion. Sortable.</summary>
+		/// <summary>If true, the promotion can be applied to an order that already other promotions applied, as long as they can also be combined.</summary>
 		public bool CanCombine { get => GetProp<bool>("CanCombine"); set => SetProp<bool>("CanCombine", value); }
-		/// <summary>Allow promo to be used by all buyers without creating assignments.</summary>
+		/// <summary>Allow promo to be used by all buyers in your Marketplace without creating explicit assignments.</summary>
 		public bool AllowAllBuyers { get => GetProp<bool>("AllowAllBuyers"); set => SetProp<bool>("AllowAllBuyers", value); }
 		/// <summary>Container for extended (custom) properties of the promotion.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
@@ -1493,6 +1524,21 @@ namespace OrderCloud.SDK
 		/// <summary>Overrides the promotion's calculated discount to this amount, and prevents it from being recalculated unless order calculate is called again without an override.</summary>
 		public decimal Amount { get => GetProp<decimal>("Amount"); set => SetProp<decimal>("Amount", value); }
 	}
+	public class PublicKey : OrderCloudModel
+	{
+		/// <summary>Kty of the public key.</summary>
+		public string kty { get => GetProp<string>("kty"); set => SetProp<string>("kty", value); }
+		/// <summary>N of the public key.</summary>
+		public string n { get => GetProp<string>("n"); set => SetProp<string>("n", value); }
+		/// <summary>E of the public key.</summary>
+		public string e { get => GetProp<string>("e"); set => SetProp<string>("e", value); }
+		/// <summary>Alg of the public key.</summary>
+		public string alg { get => GetProp<string>("alg"); set => SetProp<string>("alg", value); }
+		/// <summary>Use of the public key.</summary>
+		public string use { get => GetProp<string>("use"); set => SetProp<string>("use", value); }
+		/// <summary>Kid of the public key.</summary>
+		public string kid { get => GetProp<string>("kid"); set => SetProp<string>("kid", value); }
+	}
 	public class SecurityProfile : OrderCloudModel
 	{
 		/// <summary>ID of the security profile. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 1.</summary>
@@ -1504,7 +1550,7 @@ namespace OrderCloud.SDK
 		public IList<ApiRole> Roles { get => GetProp<IList<ApiRole>>("Roles", new List<ApiRole>()); set => SetProp<IList<ApiRole>>("Roles", value); }
 		/// <summary>Custom roles of the security profile.</summary>
 		public IList<string> CustomRoles { get => GetProp<IList<string>>("CustomRoles", new List<string>()); set => SetProp<IList<string>>("CustomRoles", value); }
-		/// <summary>Password config of the security profile.</summary>
+		/// <summary>When PasswordConfig.ExpireInDays has a value, the user will be required to go through the PW reset flow once that number of days has passed.</summary>
 		public PasswordConfig PasswordConfig { get => GetProp<PasswordConfig>("PasswordConfig"); set => SetProp<PasswordConfig>("PasswordConfig", value); }
 	}
 	public class SecurityProfileAssignment : OrderCloudModel
@@ -1578,21 +1624,21 @@ namespace OrderCloud.SDK
 		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
 		/// <summary>ID of the buyer. Searchable: priority level 1. Sortable.</summary>
 		public string BuyerID { get => GetProp<string>("BuyerID"); set => SetProp<string>("BuyerID", value); }
-		/// <summary>Shipper of the shipment. Searchable: priority level 2. Sortable.</summary>
+		/// <summary>For reference only, does not influence any OrderCloud behavior.</summary>
 		public string Shipper { get => GetProp<string>("Shipper"); set => SetProp<string>("Shipper", value); }
-		/// <summary>Date shipped of the shipment. Searchable: priority level 3. Sortable: priority level 1.</summary>
+		/// <summary>In order to properly trigger OrderShipped emails, this date must be NULL on initial POST. Update with the date only when all of the Shipment items have been created. Once all of an order's items exist on a shipment that has a DateShipped the OrderShipped email will trigger and Order.Status will be updated to Complete.</summary>
 		public DateTimeOffset? DateShipped { get => GetProp<DateTimeOffset?>("DateShipped"); set => SetProp<DateTimeOffset?>("DateShipped", value); }
 		/// <summary>Date delivered of the shipment. Searchable: priority level 4. Sortable.</summary>
 		public DateTimeOffset? DateDelivered { get => GetProp<DateTimeOffset?>("DateDelivered"); set => SetProp<DateTimeOffset?>("DateDelivered", value); }
 		/// <summary>Tracking number of the shipment. Max length 3000 characters. Searchable: priority level 4.</summary>
 		public string TrackingNumber { get => GetProp<string>("TrackingNumber"); set => SetProp<string>("TrackingNumber", value); }
-		/// <summary>Cost of the shipment. Sortable.</summary>
+		/// <summary>For reference only, does not influence any OrderCloud behavior.</summary>
 		public decimal? Cost { get => GetProp<decimal?>("Cost"); set => SetProp<decimal?>("Cost", value); }
 		/// <summary>Container for extended (custom) properties of the shipment.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 		/// <summary>Account of the shipment.</summary>
 		public string Account { get => GetProp<string>("Account"); set => SetProp<string>("Account", value); }
-		/// <summary>ID of the from address.</summary>
+		/// <summary>Seller or Supplier AddressID where the product will be shipped from.</summary>
 		public string FromAddressID { get => GetProp<string>("FromAddressID"); set => SetProp<string>("FromAddressID", value); }
 		/// <summary>ID of the to address.</summary>
 		public string ToAddressID { get => GetProp<string>("ToAddressID"); set => SetProp<string>("ToAddressID", value); }
@@ -1690,9 +1736,11 @@ namespace OrderCloud.SDK
 	}
 	public class ShipMethodSelection : OrderCloudModel
 	{
-		/// <summary>ID of the ship estimate.</summary>
+		/// <summary>ID of the ship estimate. Required.</summary>
+		[Required]
 		public string ShipEstimateID { get => GetProp<string>("ShipEstimateID"); set => SetProp<string>("ShipEstimateID", value); }
-		/// <summary>ID of the ship method.</summary>
+		/// <summary>ID of the ship method. Required.</summary>
+		[Required]
 		public string ShipMethodID { get => GetProp<string>("ShipMethodID"); set => SetProp<string>("ShipMethodID", value); }
 	}
 	public class Spec : OrderCloudModel
@@ -1704,15 +1752,15 @@ namespace OrderCloud.SDK
 		/// <summary>Name of the spec. Required. Searchable: priority level 1. Sortable: priority level 2.</summary>
 		[Required]
 		public string Name { get => GetProp<string>("Name"); set => SetProp<string>("Name", value); }
-		/// <summary>Default value of the spec. Max length 2000 characters.</summary>
+		/// <summary>If no Spec.Value is passed in the LineItemSpec, this value will be used.</summary>
 		public string DefaultValue { get => GetProp<string>("DefaultValue"); set => SetProp<string>("DefaultValue", value); }
 		/// <summary>Required of the spec. Searchable: priority level 4.</summary>
 		public bool Required { get => GetProp<bool>("Required"); set => SetProp<bool>("Required", value); }
-		/// <summary>Allow open text of the spec. Searchable: priority level 5.</summary>
+		/// <summary>For Spec options that are not pre-defined, such as FirstName for a business card.</summary>
 		public bool AllowOpenText { get => GetProp<bool>("AllowOpenText"); set => SetProp<bool>("AllowOpenText", value); }
-		/// <summary>ID of the default option.</summary>
+		/// <summary>If no Spec.OptionID is passed in the LineItemSpec, this option will be used.</summary>
 		public string DefaultOptionID { get => GetProp<string>("DefaultOptionID"); set => SetProp<string>("DefaultOptionID", value); }
-		/// <summary>True if each unique combinations of this Spec's Options map to unique Product Variants/SKUs.</summary>
+		/// <summary>If true, each unique combinations of this Spec's Options should map to a unique Product Variant.</summary>
 		public bool DefinesVariant { get => GetProp<bool>("DefinesVariant"); set => SetProp<bool>("DefinesVariant", value); }
 		/// <summary>Container for extended (custom) properties of the spec.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
@@ -1745,7 +1793,7 @@ namespace OrderCloud.SDK
 		public int ListOrder { get => GetProp<int>("ListOrder"); set => SetProp<int>("ListOrder", value); }
 		/// <summary>Is open text of the spec option. Searchable: priority level 3.</summary>
 		public bool IsOpenText { get => GetProp<bool>("IsOpenText"); set => SetProp<bool>("IsOpenText", value); }
-		/// <summary>Price markup type of the spec option. Searchable: priority level 5. Possible values: NoMarkup, AmountPerQuantity, AmountTotal, Percentage.</summary>
+		/// <summary>Used to change the price of a product when a specific Spec Option is selected.</summary>
 		public PriceMarkupType? PriceMarkupType { get => GetProp<PriceMarkupType?>("PriceMarkupType"); set => SetProp<PriceMarkupType?>("PriceMarkupType", value); }
 		/// <summary>Price markup of the spec option. Searchable: priority level 6.</summary>
 		public decimal? PriceMarkup { get => GetProp<decimal?>("PriceMarkup"); set => SetProp<decimal?>("PriceMarkup", value); }
@@ -1779,9 +1827,9 @@ namespace OrderCloud.SDK
 		/// <summary>Balance of the spending account. Required.</summary>
 		[Required]
 		public decimal Balance { get => GetProp<decimal>("Balance"); set => SetProp<decimal>("Balance", value); }
-		/// <summary>Allow as payment method of the spending account.</summary>
+		/// <summary>If true, a Payment can be created referencing the SpendingAccountID.</summary>
 		public bool AllowAsPaymentMethod { get => GetProp<bool>("AllowAsPaymentMethod"); set => SetProp<bool>("AllowAsPaymentMethod", value); }
-		/// <summary>If specified, matching code must be provided on redemption in order for the transaction to be successful. Most commonly used to implement Gift Cards.</summary>
+		/// <summary>For reference only, does not influence any OrderCloud behavior at this time.</summary>
 		public string RedemptionCode { get => GetProp<string>("RedemptionCode"); set => SetProp<string>("RedemptionCode", value); }
 		/// <summary>Start date of the spending account.</summary>
 		public DateTimeOffset? StartDate { get => GetProp<DateTimeOffset?>("StartDate"); set => SetProp<DateTimeOffset?>("StartDate", value); }
@@ -1805,7 +1853,7 @@ namespace OrderCloud.SDK
 		public string UserID { get => GetProp<string>("UserID"); set => SetProp<string>("UserID", value); }
 		/// <summary>ID of the user group. Sortable: priority level 3.</summary>
 		public string UserGroupID { get => GetProp<string>("UserGroupID"); set => SetProp<string>("UserGroupID", value); }
-		/// <summary>Allow exceed of the spending account assignment.</summary>
+		/// <summary>If true, a user can place an order for an amount greater than the available balance, causing the balance to go negative.</summary>
 		public bool AllowExceed { get => GetProp<bool>("AllowExceed"); set => SetProp<bool>("AllowExceed", value); }
 	}
 	public class Supplier : OrderCloudModel
@@ -1815,7 +1863,7 @@ namespace OrderCloud.SDK
 		/// <summary>Name of the supplier. Required. Max length 100 characters. Searchable: priority level 1. Sortable: priority level 2.</summary>
 		[Required]
 		public string Name { get => GetProp<string>("Name"); set => SetProp<string>("Name", value); }
-		/// <summary>Active of the supplier.</summary>
+		/// <summary>If false, all authentication is prohibited.</summary>
 		public bool Active { get => GetProp<bool>("Active"); set => SetProp<bool>("Active", value); }
 		/// <summary>Date created of the supplier. Sortable: priority level 3.</summary>
 		[ApiReadOnly]
@@ -1839,7 +1887,7 @@ namespace OrderCloud.SDK
 	{
 		/// <summary>ID of the user. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable.</summary>
 		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
-		/// <summary>Username of the user. Required. Max length 100 characters. Searchable: priority level 2. Sortable: priority level 3.</summary>
+		/// <summary>Must be unique across the Marketplace.</summary>
 		[Required]
 		public string Username { get => GetProp<string>("Username"); set => SetProp<string>("Username", value); }
 		/// <summary>Password of the user.</summary>
@@ -1858,18 +1906,18 @@ namespace OrderCloud.SDK
 		public string Phone { get => GetProp<string>("Phone"); set => SetProp<string>("Phone", value); }
 		/// <summary>Terms accepted of the user.</summary>
 		public DateTimeOffset? TermsAccepted { get => GetProp<DateTimeOffset?>("TermsAccepted"); set => SetProp<DateTimeOffset?>("TermsAccepted", value); }
-		/// <summary>Active of the user. Required.</summary>
+		/// <summary>If false, authentication is prohibited.</summary>
 		[Required]
 		public bool Active { get => GetProp<bool>("Active"); set => SetProp<bool>("Active", value); }
 		/// <summary>Container for extended (custom) properties of the user.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
-		/// <summary>Available roles of the user.</summary>
+		/// <summary>List of Roles currently available to the user via all SecurityProfile Assignments.</summary>
 		[ApiReadOnly]
 		public IReadOnlyList<string> AvailableRoles { get => GetProp<IReadOnlyList<string>>("AvailableRoles"); set => SetProp<IReadOnlyList<string>>("AvailableRoles", value); }
 		/// <summary>Date created of the user. Sortable.</summary>
 		[ApiReadOnly]
 		public DateTimeOffset? DateCreated { get => GetProp<DateTimeOffset?>("DateCreated"); set => SetProp<DateTimeOffset?>("DateCreated", value); }
-		/// <summary>Password last set date of the user. Sortable.</summary>
+		/// <summary>Can be used in conjunction with SecurityProfile.PasswordConfig to enforce password reset schedules.</summary>
 		[ApiReadOnly]
 		public DateTimeOffset? PasswordLastSetDate { get => GetProp<DateTimeOffset?>("PasswordLastSetDate"); set => SetProp<DateTimeOffset?>("PasswordLastSetDate", value); }
 	}
@@ -1912,7 +1960,7 @@ namespace OrderCloud.SDK
 		public string Name { get => GetProp<string>("Name"); set => SetProp<string>("Name", value); }
 		/// <summary>Description of the variant. Max length 2000 characters. Searchable: priority level 3.</summary>
 		public string Description { get => GetProp<string>("Description"); set => SetProp<string>("Description", value); }
-		/// <summary>Active of the variant.</summary>
+		/// <summary>If false, variant is not visible or purchasable from the Shopper perspective.</summary>
 		public bool Active { get => GetProp<bool>("Active"); set => SetProp<bool>("Active", value); }
 		/// <summary>Ship weight of the variant.</summary>
 		public decimal? ShipWeight { get => GetProp<decimal?>("ShipWeight"); set => SetProp<decimal?>("ShipWeight", value); }
@@ -1970,21 +2018,21 @@ namespace OrderCloud.SDK
 		public string Name { get => GetProp<string>("Name"); set => SetProp<string>("Name", value); }
 		/// <summary>Description of the webhook. Max length 2000 characters. Searchable: priority level 3.</summary>
 		public string Description { get => GetProp<string>("Description"); set => SetProp<string>("Description", value); }
-		/// <summary>Url of the webhook. Required. Searchable: priority level 4.</summary>
+		/// <summary>URL the WebHook will POST data to, likely a route within your middleware.</summary>
 		[Required]
 		public string Url { get => GetProp<string>("Url"); set => SetProp<string>("Url", value); }
-		/// <summary>Hash key of the webhook. Required.</summary>
+		/// <summary>Security feature that allows your middleware to verify the digital signature in the request header to ensure you only accept trusted data.</summary>
 		[Required]
 		public string HashKey { get => GetProp<string>("HashKey"); set => SetProp<string>("HashKey", value); }
-		/// <summary>Elevated roles of the webhook.</summary>
+		/// <summary>If you need additional data not provided by the WebHook payload, you can request any elevated roles needed to make additional calls.</summary>
 		public IList<ApiRole> ElevatedRoles { get => GetProp<IList<ApiRole>>("ElevatedRoles", new List<ApiRole>()); set => SetProp<IList<ApiRole>>("ElevatedRoles", value); }
 		/// <summary>Config data of the webhook.</summary>
 		public object ConfigData { get => GetProp<object>("ConfigData"); set => SetProp<object>("ConfigData", value); }
-		/// <summary>Before process request of the webhook.</summary>
+		/// <summary>If true, the Webhook is processed prior to the call being made and OrderCloud waits for a response before proceeding.</summary>
 		public bool BeforeProcessRequest { get => GetProp<bool>("BeforeProcessRequest"); set => SetProp<bool>("BeforeProcessRequest", value); }
-		/// <summary>Api client I ds of the webhook.</summary>
+		/// <summary>List of API ClientIDs the WebHook will be triggered for.</summary>
 		public IList<string> ApiClientIDs { get => GetProp<IList<string>>("ApiClientIDs", new List<string>()); set => SetProp<IList<string>>("ApiClientIDs", value); }
-		/// <summary>Webhook routes of the webhook.</summary>
+		/// <summary>List of routes the WebHook will be triggered for.</summary>
 		public IList<WebhookRoute> WebhookRoutes { get => GetProp<IList<WebhookRoute>>("WebhookRoutes", new List<WebhookRoute>()); set => SetProp<IList<WebhookRoute>>("WebhookRoutes", value); }
 	}
 	public class WebhookRoute : OrderCloudModel

@@ -37,8 +37,10 @@ namespace OrderCloud.SDK
 		{
 			/// <summary>Company not active.</summary>
 			public const string CompanyNotActive = "Auth.CompanyNotActive";
-			/// <summary>Incorrect password.</summary>
-			public const string IncorrectPassword = "Auth.IncorrectPassword";
+			/// <summary>Invalid username or password.</summary>
+			public const string InvalidUsernameOrPassword = "Auth.InvalidUsernameOrPassword";
+			/// <summary>Both username and password are required.</summary>
+			public const string UsernameAndPasswordRequired = "Auth.UsernameAndPasswordRequired";
 			/// <summary>User does not have role(s) required to perform this action.</summary>
 			public const string InsufficientRoles = "Auth.InsufficientRoles";
 			/// <summary>invalid</summary>
@@ -49,10 +51,14 @@ namespace OrderCloud.SDK
 			public const string SellerNotActive = "Auth.SellerNotActive";
 			/// <summary>User not active.</summary>
 			public const string UserNotActive = "Auth.UserNotActive";
-			/// <summary>Administering certain resources is forbidden for all Buyer and Supplier users regardless of role(s).</summary>
+			/// <summary>Reading and/or Administering certain resources is forbidden for all Buyer and Supplier users regardless of role(s).</summary>
 			public const string UserNotAuthorizedToAdmin = "Auth.UserNotAuthorizedToAdmin";
 			/// <summary>User not found.</summary>
 			public const string UserNotFound = "Auth.UserNotFound";
+			/// <summary>Due to excessive login failures, this account has been locked out for a period of 30 minutes.</summary>
+			public const string LockedOut = "Auth.LockedOut";
+			/// <summary>Password does not meet security requirements.</summary>
+			public const string InsecurePassword = "Auth.InsecurePassword";
 		}
 		public static class BillingAddress
 		{
@@ -204,6 +210,8 @@ namespace OrderCloud.SDK
 			public const string OverrideShippingPermission = "Order.OverrideShippingPermission";
 			/// <summary>User must have OverrideTax permission to change tax cost. Either PATCH the user's assigned SecurityProfile or assign them to a new one to give them the required permissions.</summary>
 			public const string OverrideTaxPermission = "Order.OverrideTaxPermission";
+			/// <summary>Cannot delete an order that has been forwarded without first deleting the associated outgoing orders.</summary>
+			public const string CannotDeleteForwardedOrder = "Order.CannotDeleteForwardedOrder";
 		}
 		public static class PartyAssignment
 		{
@@ -226,18 +234,20 @@ namespace OrderCloud.SDK
 		}
 		public static class PasswordReset
 		{
-			/// <summary>The supplied password is one of the four previous passwords used by this account and may not be reused.</summary>
-			public const string CannotRecyclePassword = "PasswordReset.CannotRecyclePassword";
-			/// <summary>Password does not meet security requirements. A password should be between 8 and 100 characters long, and should contain at least one digit.</summary>
+			/// <summary>The supplied password is one of the previous passwords used by this account and may not be reused.</summary>
+			public const string CannotReusePassword = "PasswordReset.CannotReusePassword";
+			/// <summary>Password does not meet security requirements.</summary>
 			public const string InsecurePassword = "PasswordReset.InsecurePassword";
 			/// <summary>Incorrect verification code or username.</summary>
 			public const string InvalidVerification = "PasswordReset.InvalidVerification";
-			/// <summary>Due to excessive login failures, this account has been locked out for a period of 30 minutes.</summary>
+			/// <summary>Due to excessive login failures, this account has been locked.</summary>
 			public const string LockedOut = "PasswordReset.LockedOut";
 			/// <summary>ClientID is missing or invalid.</summary>
 			public const string MissingOrInvalidClientID = "PasswordReset.MissingOrInvalidClientID";
 			/// <summary>Username is required.</summary>
 			public const string MissingUsername = "PasswordReset.MissingUsername";
+			/// <summary>The password cannot be changed until MinimumPasswordAge has expired since the password was last changed.</summary>
+			public const string TooSoonToChange = "PasswordReset.TooSoonToChange";
 		}
 		public static class Payment
 		{
@@ -263,6 +273,8 @@ namespace OrderCloud.SDK
 			public const string NotAuthorizedToPatch = "Payment.NotAuthorizedToPatch";
 			/// <summary>You must include a corresponding ID when creating a payment of type SpendingAccount.</summary>
 			public const string SpendingAccountIdMissing = "Payment.SpendingAccountIdMissing";
+			/// <summary>When creating a payment Amount must be null or greater than zero.</summary>
+			public const string AmountGreaterThanZero = "Payment.AmountGreaterThanZero";
 		}
 		public static class PriceSchedule
 		{
@@ -294,6 +306,8 @@ namespace OrderCloud.SDK
 			public const string CumulativeCannotExceedMax = "PriceSchedule.CumulativeCannotExceedMax";
 			/// <summary>Cumulative quantity not allowed as per price schedule restrictions.</summary>
 			public const string CumulativeQuantityNotAllowed = "PriceSchedule.CumulativeQuantityNotAllowed";
+			/// <summary>Not authorized to modify this PriceSchedule.</summary>
+			public const string CannotModify = "PriceSchedule.CannotModify";
 		}
 		public static class Product
 		{
