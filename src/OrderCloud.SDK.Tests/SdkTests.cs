@@ -185,7 +185,7 @@ namespace OrderCloud.SDK.Tests
 
 				httpTest.ShouldHaveCalled("*/products")
 					.WithVerb(HttpMethod.Get)
-					.WithQueryParamValue("search", "something")
+					.WithQueryParam("search", "something")
 					.WithoutQueryParam("searchOn")
 					.WithoutQueryParam("sortBy");
 			}

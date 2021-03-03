@@ -11,12 +11,12 @@ namespace OrderCloud.SDK
 		public HttpStatusCode? HttpStatus { get; }
 		public ApiError[] Errors { get; }
 
-		internal OrderCloudException(HttpCall call, ApiError[] errors) : base(BuildMessage(call, errors), call.Exception) {
-			HttpStatus = call.HttpStatus;
+		internal OrderCloudException(FlurlCall call, ApiError[] errors) : base(BuildMessage(call, errors), call.Exception) {
+			HttpStatus = call.HttpResponseMessage.StatusCode;
 			Errors = errors;
 		}
 
-		private static string BuildMessage(HttpCall call, ApiError[] errors) {
+		private static string BuildMessage(FlurlCall call, ApiError[] errors) {
 			var code = errors?.FirstOrDefault()?.ErrorCode;
 			var msg = errors?.FirstOrDefault()?.Message;
 			if (!string.IsNullOrEmpty(code) && !string.IsNullOrEmpty(msg))
