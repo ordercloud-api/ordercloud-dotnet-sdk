@@ -2,7 +2,7 @@
 
 [![OrderCloud.SDK](https://img.shields.io/nuget/v/OrderCloud.SDK.svg?maxAge=3600)](https://www.nuget.org/packages/OrderCloud.SDK/)
 
-The OrderClould.io SDK for .NET is a client library for building solutions targeting the [OrderCloud.io](https://developer.ordercloud.io/documentation/) eCommerce platform using C# or other .NET language. Compared to accessing OrderCloud.io's REST API via direct HTTP calls, the SDK aims to greatly improve developer productivity and reduce errors by providing discoverable, strongly typed wrappers for all public endpoints and request/response models.
+The OrderCloud.io SDK for .NET is a client library for building solutions targeting the [OrderCloud.io](https://developer.ordercloud.io/documentation/) eCommerce platform using C# or other .NET language. Compared to accessing OrderCloud.io's REST API via direct HTTP calls, the SDK aims to greatly improve developer productivity and reduce errors by providing discoverable, strongly typed wrappers for all public endpoints and request/response models.
 
 - [Example](#example)
 - [Authenticating](#authenticating)
@@ -17,7 +17,7 @@ The OrderClould.io SDK for .NET is a client library for building solutions targe
 
 ## Example
 ```c#
-using OrderClould.SDK;
+using OrderCloud.SDK;
 
 var client = new OrderCloudClient(new OrderCloudClientConfig {
     ClientId = "my-client-id",
@@ -46,7 +46,7 @@ foreach (var order in orders.Items) {
 
 OrderCloud.io uses OAuth2 for authentication and authorization. In a nutshell, you provide a set of credentials, acquire a temporary access token, and provide that token in the HTTP headers on subsequent API calls. Using the SDK, you have a few options to simplify this process, depending on the scenario:
 
-1. Configure `OrderClouldClient` with a set of credentials, as in the [example](#example) above. This is ideal for scheduled batch jobs, and you should prefer the client credentials grant (shared secret) flow since this processing isn't usually triggered by or on behalf of a particular user. With this method, you don't need to explicitly authenticate or keep track of access tokens - the SDK will acquire, cache, and refresh tokens implicitly as needed. Just configure the client and start making calls. (And please, please, _PLEASE_ keep shared secrets and user credentials securly locked down, such as with [Azure Key Vault](https://azure.microsoft.com/en-us/services/key-vault/).)
+1. Configure `OrderCloudClient` with a set of credentials, as in the [example](#example) above. This is ideal for scheduled batch jobs, and you should prefer the client credentials grant (shared secret) flow since this processing isn't usually triggered by or on behalf of a particular user. With this method, you don't need to explicitly authenticate or keep track of access tokens - the SDK will acquire, cache, and refresh tokens implicitly as needed. Just configure the client and start making calls. (And please, please, _PLEASE_ keep shared secrets and user credentials securly locked down, such as with [Azure Key Vault](https://azure.microsoft.com/en-us/services/key-vault/).)
 
 2. Use an existing access token. A typical use case is when a user has already authenticated with OrderCloud in a front-end app and you want some custom endpoint to perform actions on behalf of that user. _Do not pass the user's credentials to your custom endpoint_. Instead, pass their token (always over SSL). Every method in the SDK that calls an OrderCloud endpoint takes an optional `accessToken` argument, allowing you to ignore any configured credentials and use the ad-hoc token:
 
@@ -156,7 +156,7 @@ More details [here](https://github.com/ordercloud-api/ordercloud-dotnet-sdk/issu
 #### Do I have to use `async`/`await` when calling endpoints?
 Yes. (Isn't it refreshing when the answer isn't always "it depends"?) The SDK uses [Flurl.Http](https://github.com/tmenier/Flurl), which uses `HttpClient`, which does not support synchronous calls (and for good reason). Do _not_ use `.Result` or `.Wait()` on calls made with this SDK, ever. These will block threads and potentially cause deadlocks. In short, [don't block on async code](https://blog.stephencleary.com/2012/07/dont-block-on-async-code.html). Use `await`.
 
-#### HttpClient under the hood, eh? So I should use OrderClouldClient as a singleton?
+#### HttpClient under the hood, eh? So I should use OrderCloudClient as a singleton?
 It depends. ;)
 
 The ideal scope is _one instance per set of authorization credentials_. Since the access token is cached and reused by `OrderCloudClient`, creating new instances with the same credentials will result in excessive authorization calls. If you're only using a single set of credentials for the lifetime of your application, using `OrderCloudClient` as a singleton is fully thread-safe. In any case, you do _not_ need to worry about [this infamous problem](https://aspnetmonsters.com/2016/08/2016-08-27-httpclientwrong/), because the SDK uses a static, lazily-instantiated singleton instance of `HttpClient`, regardless of how many `OrderCloudClient`s are created.
