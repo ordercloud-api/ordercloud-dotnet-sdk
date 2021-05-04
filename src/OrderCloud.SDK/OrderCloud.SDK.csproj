@@ -1,19 +1,19 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<!-- https://docs.microsoft.com/en-us/dotnet/core/tools/csproj -->
 		<TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<Version>0.10.1</Version>
+		<Version>0.10.2</Version>
 		<PackageId>OrderCloud.SDK</PackageId>
 		<Title>OrderCloud SDK</Title>
 		<Authors>Todd Menier</Authors>
 		<Description>The official .NET client SDK for OrderClould.io, a cloud-hosted headless B2B eCommerce platform.</Description>
-		<Copyright>Copyright 2020 Four51, Inc.</Copyright>
+		<Copyright>Copyright 2021 Sitecore, Inc.</Copyright>
 		<PackageProjectUrl>https://ordercloud.io/</PackageProjectUrl>
 		<PackageIcon>icon.png</PackageIcon>
 		<PackageIconUrl>https://ordercloud.io/wp-content/uploads/2018/01/oc-circle-logo-2018.png</PackageIconUrl>
-		<PackageTags>ecommerce b2b four51 ordercloud cloud api headless</PackageTags>
+		<PackageTags>ecommerce b2b sitecore four51 ordercloud cloud api headless</PackageTags>
 		<PackageReleaseNotes>https://ordercloud-api.github.io/release-notes/</PackageReleaseNotes>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<RepositoryUrl>https://github.com/ordercloud-api/ordercloud-dotnet-sdk</RepositoryUrl>
