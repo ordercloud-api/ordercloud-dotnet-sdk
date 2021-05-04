@@ -352,6 +352,8 @@ namespace OrderCloud.SDK
 		{
 			/// <summary>Query is invalid.</summary>
 			public const string InvalidQuery = "Search.InvalidQuery";
+			/// <summary>The maximum result set is 100,000 items. Narrow your query using filters or use the LastID method as outlined in the Advanced Querying documentation.</summary>
+			public const string ResultSetTooLarge = "Search.ResultSetTooLarge";
 		}
 		public static class SecurityProfile
 		{

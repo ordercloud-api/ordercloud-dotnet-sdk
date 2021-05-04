@@ -294,8 +294,7 @@ namespace OrderCloud.SDK
 		/// <summary>Description of the product. Max length 2000 characters. Searchable: priority level 3.</summary>
 		public string Description { get => GetProp<string>("Description"); set => SetProp<string>("Description", value); }
 		/// <summary>For reference only, does not influence any OrderCloud behavior. Used to indicate an amount per Quantity.</summary>
-		[Required]
-		public int QuantityMultiplier { get => GetProp<int>("QuantityMultiplier", 1); set => SetProp<int>("QuantityMultiplier", value); }
+		public int? QuantityMultiplier { get => GetProp<int?>("QuantityMultiplier", 1); set => SetProp<int?>("QuantityMultiplier", value); }
 		/// <summary>Ship weight of the product.</summary>
 		public decimal? ShipWeight { get => GetProp<decimal?>("ShipWeight"); set => SetProp<decimal?>("ShipWeight", value); }
 		/// <summary>Ship height of the product.</summary>
@@ -541,7 +540,7 @@ namespace OrderCloud.SDK
 		public IList<ApiRole> ElevatedRoles { get => GetProp<IList<ApiRole>>("ElevatedRoles", new List<ApiRole>()); set => SetProp<IList<ApiRole>>("ElevatedRoles", value); }
 		/// <summary>ID of the integration event. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 1.</summary>
 		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
-		/// <summary>Config data of the integration event.</summary>
+		/// <summary>Any additional data needed for your Integration Event should be included here.</summary>
 		public object ConfigData { get => GetProp<object>("ConfigData"); set => SetProp<object>("ConfigData", value); }
 		/// <summary>Event type of the integration event. Searchable: priority level 2. Sortable: priority level 2. Possible values: OrderCheckout, OpenIDConnect.</summary>
 		public IntegrationEventType EventType { get => GetProp<IntegrationEventType>("EventType"); set => SetProp<IntegrationEventType>("EventType", value); }
@@ -1383,8 +1382,7 @@ namespace OrderCloud.SDK
 		/// <summary>Description of the product. Max length 2000 characters. Searchable: priority level 3.</summary>
 		public string Description { get => GetProp<string>("Description"); set => SetProp<string>("Description", value); }
 		/// <summary>For reference only, does not influence any OrderCloud behavior. Used to indicate an amount per Quantity.</summary>
-		[Required]
-		public int QuantityMultiplier { get => GetProp<int>("QuantityMultiplier", 1); set => SetProp<int>("QuantityMultiplier", value); }
+		public int? QuantityMultiplier { get => GetProp<int?>("QuantityMultiplier", 1); set => SetProp<int?>("QuantityMultiplier", value); }
 		/// <summary>Ship weight of the product.</summary>
 		public decimal? ShipWeight { get => GetProp<decimal?>("ShipWeight"); set => SetProp<decimal?>("ShipWeight", value); }
 		/// <summary>Ship height of the product.</summary>
@@ -1694,7 +1692,7 @@ namespace OrderCloud.SDK
 		/// <summary>Specs of the shipment item.</summary>
 		[ApiReadOnly]
 		public IReadOnlyList<LineItemSpec> Specs { get => GetProp<IReadOnlyList<LineItemSpec>>("Specs"); set => SetProp<IReadOnlyList<LineItemSpec>>("Specs", value); }
-		/// <summary>Container for extended (custom) properties of the shipment item.</summary>
+		/// <summary>For reference only, represents LineItem XP from the given LineItem ID</summary>
 		[ApiReadOnly]
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
@@ -1705,7 +1703,7 @@ namespace OrderCloud.SDK
 		where TProduct : LineItemProduct
 		where TVariant : LineItemVariant
 	{
-		/// <summary>Container for extended (custom) properties of the shipment item.</summary>
+		/// <summary>For reference only, represents LineItem XP from the given LineItem ID</summary>
 		[ApiReadOnly]
 		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
 		/// <summary>Product of the shipment item.</summary>
