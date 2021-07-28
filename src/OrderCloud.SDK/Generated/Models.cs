@@ -9,7 +9,7 @@ namespace OrderCloud.SDK
 	public enum CommerceRole { Buyer, Seller, Supplier }
 	public enum IntegrationEventType { OrderCheckout, OpenIDConnect }
 	public enum MessageType { OrderDeclined, OrderSubmitted, ShipmentCreated, ForgottenPassword, OrderSubmittedForYourApproval, OrderSubmittedForApproval, OrderApproved, OrderSubmittedForYourApprovalHasBeenApproved, OrderSubmittedForYourApprovalHasBeenDeclined, NewUserInvitation }
-	public enum OrderDirection { Incoming, Outgoing }
+	public enum OrderDirection { Incoming, Outgoing, All }
 	public enum OrderStatus { Unsubmitted, AwaitingApproval, Declined, Open, Completed, Canceled }
 	public enum PartyType { User, Group, Company }
 	public enum PaymentType { PurchaseOrder, CreditCard, SpendingAccount }
@@ -181,14 +181,14 @@ namespace OrderCloud.SDK
 	{
 		/// <summary>ID of the buyer. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 2. Sortable: priority level 1.</summary>
 		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
-		/// <summary>Name of the buyer. Required. Max length 100 characters. Searchable: priority level 1. Sortable: priority level 2.</summary>
+		/// <summary>Name of the buyer. Required. Max length 100 characters. Searchable: priority level 1. Sortable.</summary>
 		[Required]
 		public string Name { get => GetProp<string>("Name"); set => SetProp<string>("Name", value); }
 		/// <summary>If null on POST a new default catalog will be created for the buyer. Used in buyer product queries to allow filtering on categories without explicitly providing a CatalogID.</summary>
 		public string DefaultCatalogID { get => GetProp<string>("DefaultCatalogID"); set => SetProp<string>("DefaultCatalogID", value); }
 		/// <summary>If false, all authentication is prohibited.</summary>
 		public bool Active { get => GetProp<bool>("Active"); set => SetProp<bool>("Active", value); }
-		/// <summary>Date created of the buyer. Sortable: priority level 3.</summary>
+		/// <summary>Date created of the buyer. Sortable.</summary>
 		[ApiReadOnly]
 		public DateTimeOffset DateCreated { get => GetProp<DateTimeOffset>("DateCreated"); set => SetProp<DateTimeOffset>("DateCreated", value); }
 		/// <summary>Container for extended (custom) properties of the buyer.</summary>
@@ -317,6 +317,8 @@ namespace OrderCloud.SDK
 		public Inventory Inventory { get => GetProp<Inventory>("Inventory"); set => SetProp<Inventory>("Inventory", value); }
 		/// <summary>If this property has a value and a SupplierID isn't explicitly passed when creating a LineItem, this SupplierID will be used.</summary>
 		public string DefaultSupplierID { get => GetProp<string>("DefaultSupplierID"); set => SetProp<string>("DefaultSupplierID", value); }
+		/// <summary>If true, all suppliers are eligible to opt into selling this product.</summary>
+		public bool AllSuppliersCanSell { get => GetProp<bool>("AllSuppliersCanSell"); set => SetProp<bool>("AllSuppliersCanSell", value); }
 		/// <summary>Container for extended (custom) properties of the product.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
@@ -331,12 +333,18 @@ namespace OrderCloud.SDK
 		[ApiReadOnly]
 		public new TPriceSchedule PriceSchedule { get => GetProp<TPriceSchedule>("PriceSchedule"); set => SetProp<TPriceSchedule>("PriceSchedule", value); }
 	}
+	public class BuyerSupplier : OrderCloudModel
+	{
+		/// <summary>ID of the supplier. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 2.</summary>
+		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
+		/// <summary>Name of the supplier. Max length 100 characters. Searchable: priority level 2. Sortable: priority level 1.</summary>
+		public string Name { get => GetProp<string>("Name"); set => SetProp<string>("Name", value); }
+	}
 	public class Catalog : OrderCloudModel
 	{
 		/// <summary>ID of the catalog. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 3.</summary>
 		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
-		/// <summary>ID of the Seller or Supplier org that created, and therefore owns, the Catalog.</summary>
-		[ApiReadOnly]
+		/// <summary>ID of the organization that owns the Catalog. Only the Marketplace Owner can override the OwnerID on create.</summary>
 		public string OwnerID { get => GetProp<string>("OwnerID"); set => SetProp<string>("OwnerID", value); }
 		/// <summary>Name of the catalog. Required. Max length 100 characters. Searchable: priority level 2. Sortable: priority level 2.</summary>
 		[Required]
@@ -915,7 +923,7 @@ namespace OrderCloud.SDK
 		public User FromUser { get => GetProp<User>("FromUser"); set => SetProp<User>("FromUser", value); }
 		/// <summary>ID of the Buyer or Seller placing the order. Mainly useful to the Seller or Supplier receiving it.</summary>
 		public string FromCompanyID { get => GetProp<string>("FromCompanyID"); set => SetProp<string>("FromCompanyID", value); }
-		/// <summary>ID of the Seller or Supplier receiving the order. Mainly useful to the Buyer or Seller placing it.</summary>
+		/// <summary>ID of the Seller or Supplier receiving the order, only writeable on create. Mainly useful to the Buyer or Seller placing it.</summary>
 		public string ToCompanyID { get => GetProp<string>("ToCompanyID"); set => SetProp<string>("ToCompanyID", value); }
 		/// <summary>This property is only writable when creating an order from the seller perspective on behalf of a buyer user.</summary>
 		public string FromUserID { get => GetProp<string>("FromUserID"); set => SetProp<string>("FromUserID", value); }
@@ -1110,6 +1118,8 @@ namespace OrderCloud.SDK
 		public bool CanCombine { get => GetProp<bool>("CanCombine"); set => SetProp<bool>("CanCombine", value); }
 		/// <summary>Allow promo to be used by all buyers in your Marketplace without creating explicit assignments.</summary>
 		public bool AllowAllBuyers { get => GetProp<bool>("AllowAllBuyers"); set => SetProp<bool>("AllowAllBuyers", value); }
+		/// <summary>ID of the organization that owns the Promotion. Only the Marketplace Owner can override the OwnerID on create.</summary>
+		public string OwnerID { get => GetProp<string>("OwnerID"); set => SetProp<string>("OwnerID", value); }
 		/// <summary>Container for extended (custom) properties of the order promotion.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
@@ -1337,6 +1347,8 @@ namespace OrderCloud.SDK
 	}
 	public class PriceSchedule : OrderCloudModel
 	{
+		/// <summary>ID of the organization that owns the PriceSchedule. Only the Marketplace Owner can override the OwnerID on create.</summary>
+		public string OwnerID { get => GetProp<string>("OwnerID"); set => SetProp<string>("OwnerID", value); }
 		/// <summary>ID of the price schedule. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 2.</summary>
 		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
 		/// <summary>Name of the price schedule. Required. Max length 100 characters. Searchable: priority level 2. Sortable: priority level 1.</summary>
@@ -1367,8 +1379,7 @@ namespace OrderCloud.SDK
 	}
 	public class Product : OrderCloudModel
 	{
-		/// <summary>ID of the Seller or Supplier org that created, and therefore owns, the Product.</summary>
-		[ApiReadOnly]
+		/// <summary>ID of the organization that owns the Product. Only the Marketplace Owner can override the OwnerID on create.</summary>
 		public string OwnerID { get => GetProp<string>("OwnerID"); set => SetProp<string>("OwnerID", value); }
 		/// <summary>When provided, no explicit PriceSchedule assignment is required. When a PriceSchedule assignment exists, it will override any default provided.</summary>
 		public string DefaultPriceScheduleID { get => GetProp<string>("DefaultPriceScheduleID"); set => SetProp<string>("DefaultPriceScheduleID", value); }
@@ -1405,6 +1416,8 @@ namespace OrderCloud.SDK
 		public Inventory Inventory { get => GetProp<Inventory>("Inventory"); set => SetProp<Inventory>("Inventory", value); }
 		/// <summary>If this property has a value and a SupplierID isn't explicitly passed when creating a LineItem, this SupplierID will be used.</summary>
 		public string DefaultSupplierID { get => GetProp<string>("DefaultSupplierID"); set => SetProp<string>("DefaultSupplierID", value); }
+		/// <summary>If true, all suppliers are eligible to opt into selling this product.</summary>
+		public bool AllSuppliersCanSell { get => GetProp<bool>("AllSuppliersCanSell"); set => SetProp<bool>("AllSuppliersCanSell", value); }
 		/// <summary>Container for extended (custom) properties of the product.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
@@ -1416,6 +1429,8 @@ namespace OrderCloud.SDK
 	}
 	public class ProductAssignment : OrderCloudModel
 	{
+		/// <summary>ID of the seller.</summary>
+		public string SellerID { get => GetProp<string>("SellerID"); set => SetProp<string>("SellerID", value); }
 		/// <summary>ID of the product. Required.</summary>
 		[Required]
 		public string ProductID { get => GetProp<string>("ProductID"); set => SetProp<string>("ProductID", value); }
@@ -1459,6 +1474,31 @@ namespace OrderCloud.SDK
 		/// <summary>Container for extended (custom) properties of the product facet.</summary>
 		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
 	}
+	public class ProductSupplier : OrderCloudModel
+	{
+		/// <summary>ID of the default price schedule.</summary>
+		public string DefaultPriceScheduleID { get => GetProp<string>("DefaultPriceScheduleID"); set => SetProp<string>("DefaultPriceScheduleID", value); }
+		/// <summary>ID of the product supplier. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 2. Sortable: priority level 1.</summary>
+		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
+		/// <summary>Name of the product supplier. Required. Max length 100 characters. Searchable: priority level 1. Sortable.</summary>
+		[Required]
+		public string Name { get => GetProp<string>("Name"); set => SetProp<string>("Name", value); }
+		/// <summary>If false, all authentication is prohibited.</summary>
+		public bool Active { get => GetProp<bool>("Active"); set => SetProp<bool>("Active", value); }
+		/// <summary>Date created of the product supplier. Sortable.</summary>
+		[ApiReadOnly]
+		public DateTimeOffset DateCreated { get => GetProp<DateTimeOffset>("DateCreated"); set => SetProp<DateTimeOffset>("DateCreated", value); }
+		/// <summary>If false, buyers will only be able to set ToCompanyID on an order to the Marketplace Owner, or suppliers they have an explicit relationship to.</summary>
+		public bool AllBuyersCanOrder { get => GetProp<bool>("AllBuyersCanOrder"); set => SetProp<bool>("AllBuyersCanOrder", value); }
+		/// <summary>Container for extended (custom) properties of the product supplier.</summary>
+		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
+	}
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic ProductSupplier class instead.</typeparam>
+	public class ProductSupplier<Txp> : ProductSupplier
+	{
+		/// <summary>Container for extended (custom) properties of the product supplier.</summary>
+		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
+	}
 	public class Promotion : OrderCloudModel
 	{
 		/// <summary>ID of the promotion. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 2.</summary>
@@ -1495,6 +1535,8 @@ namespace OrderCloud.SDK
 		public bool CanCombine { get => GetProp<bool>("CanCombine"); set => SetProp<bool>("CanCombine", value); }
 		/// <summary>Allow promo to be used by all buyers in your Marketplace without creating explicit assignments.</summary>
 		public bool AllowAllBuyers { get => GetProp<bool>("AllowAllBuyers"); set => SetProp<bool>("AllowAllBuyers", value); }
+		/// <summary>ID of the organization that owns the Promotion. Only the Marketplace Owner can override the OwnerID on create.</summary>
+		public string OwnerID { get => GetProp<string>("OwnerID"); set => SetProp<string>("OwnerID", value); }
 		/// <summary>Container for extended (custom) properties of the promotion.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
@@ -1632,6 +1674,8 @@ namespace OrderCloud.SDK
 		public string TrackingNumber { get => GetProp<string>("TrackingNumber"); set => SetProp<string>("TrackingNumber", value); }
 		/// <summary>For reference only, does not influence any OrderCloud behavior.</summary>
 		public decimal? Cost { get => GetProp<decimal?>("Cost"); set => SetProp<decimal?>("Cost", value); }
+		/// <summary>ID of the organization that owns the Shipment. Only the Marketplace Owner can override the OwnerID on create.</summary>
+		public string OwnerID { get => GetProp<string>("OwnerID"); set => SetProp<string>("OwnerID", value); }
 		/// <summary>Container for extended (custom) properties of the shipment.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 		/// <summary>Account of the shipment.</summary>
@@ -1743,6 +1787,8 @@ namespace OrderCloud.SDK
 	}
 	public class Spec : OrderCloudModel
 	{
+		/// <summary>ID of the organization that owns the Spec. Only the Marketplace Owner can override the OwnerID on create.</summary>
+		public string OwnerID { get => GetProp<string>("OwnerID"); set => SetProp<string>("OwnerID", value); }
 		/// <summary>ID of the spec. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 3. Sortable: priority level 3.</summary>
 		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
 		/// <summary>List order of the spec. Searchable: priority level 2. Sortable: priority level 1.</summary>
@@ -1858,14 +1904,16 @@ namespace OrderCloud.SDK
 	{
 		/// <summary>ID of the supplier. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 2. Sortable: priority level 1.</summary>
 		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
-		/// <summary>Name of the supplier. Required. Max length 100 characters. Searchable: priority level 1. Sortable: priority level 2.</summary>
+		/// <summary>Name of the supplier. Required. Max length 100 characters. Searchable: priority level 1. Sortable.</summary>
 		[Required]
 		public string Name { get => GetProp<string>("Name"); set => SetProp<string>("Name", value); }
 		/// <summary>If false, all authentication is prohibited.</summary>
 		public bool Active { get => GetProp<bool>("Active"); set => SetProp<bool>("Active", value); }
-		/// <summary>Date created of the supplier. Sortable: priority level 3.</summary>
+		/// <summary>Date created of the supplier. Sortable.</summary>
 		[ApiReadOnly]
 		public DateTimeOffset DateCreated { get => GetProp<DateTimeOffset>("DateCreated"); set => SetProp<DateTimeOffset>("DateCreated", value); }
+		/// <summary>If false, buyers will only be able to set ToCompanyID on an order to the Marketplace Owner, or suppliers they have an explicit relationship to.</summary>
+		public bool AllBuyersCanOrder { get => GetProp<bool>("AllBuyersCanOrder"); set => SetProp<bool>("AllBuyersCanOrder", value); }
 		/// <summary>Container for extended (custom) properties of the supplier.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
@@ -1874,6 +1922,13 @@ namespace OrderCloud.SDK
 	{
 		/// <summary>Container for extended (custom) properties of the supplier.</summary>
 		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
+	}
+	public class SupplierBuyer : OrderCloudModel
+	{
+		/// <summary>ID of the buyer. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 2.</summary>
+		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
+		/// <summary>Name of the buyer. Max length 100 characters. Searchable: priority level 2. Sortable: priority level 1.</summary>
+		public string Name { get => GetProp<string>("Name"); set => SetProp<string>("Name", value); }
 	}
 	public class TokenPasswordReset : OrderCloudModel
 	{

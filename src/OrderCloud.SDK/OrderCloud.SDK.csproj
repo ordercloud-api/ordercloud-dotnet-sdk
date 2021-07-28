@@ -4,11 +4,11 @@
 		<!-- https://docs.microsoft.com/en-us/dotnet/core/tools/csproj -->
 		<TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<Version>0.10.2</Version>
+		<Version>0.10.3</Version>
 		<PackageId>OrderCloud.SDK</PackageId>
 		<Title>OrderCloud SDK</Title>
 		<Authors>Todd Menier</Authors>
-		<Description>The official .NET client SDK for OrderClould.io, a cloud-hosted headless B2B eCommerce platform.</Description>
+		<Description>The official .NET client SDK for OrderClould.io, a headless, cloud-based eCommerce platform.</Description>
 		<Copyright>Copyright 2021 Sitecore, Inc.</Copyright>
 		<PackageProjectUrl>https://ordercloud.io/</PackageProjectUrl>
 		<PackageIcon>icon.png</PackageIcon>

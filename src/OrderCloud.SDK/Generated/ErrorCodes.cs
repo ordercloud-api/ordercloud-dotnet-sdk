@@ -89,6 +89,8 @@ namespace OrderCloud.SDK
 			public const string CannotEdit = "Catalog.CannotEdit";
 			/// <summary>The Catalog is not active.</summary>
 			public const string NotActive = "Catalog.NotActive";
+			/// <summary>Cannot assign product to this catalog. Product must be owned by the Marketplace Owner or the Catalog owner.</summary>
+			public const string CannotAssignProduct = "Catalog.CannotAssignProduct";
 		}
 		public static class Category
 		{
@@ -160,6 +162,8 @@ namespace OrderCloud.SDK
 			public const string QuantityMustBePositive = "LineItem.QuantityMustBePositive";
 			/// <summary>Variant not found based on Specs provided.</summary>
 			public const string VariantNotFound = "LineItem.VariantNotFound";
+			/// <summary>This Seller (Order.ToCompanyID) does not supply this product.</summary>
+			public const string ProductNotAvailableFromSeller = "LineItem.ProductNotAvailableFromSeller";
 		}
 		public static class List
 		{
@@ -308,6 +312,10 @@ namespace OrderCloud.SDK
 			public const string CumulativeQuantityNotAllowed = "PriceSchedule.CumulativeQuantityNotAllowed";
 			/// <summary>Not authorized to modify this PriceSchedule.</summary>
 			public const string CannotModify = "PriceSchedule.CannotModify";
+			/// <summary>The DefaultPriceScheduleID for a given product supplier must be owned by the Marketplace Owner or the Supplier.</summary>
+			public const string InvalidDefaultPriceScheduleID = "PriceSchedule.InvalidDefaultPriceScheduleID";
+			/// <summary>The PriceSchedule.OwnerID must match the SellerID.</summary>
+			public const string SellerIDMustMatchOwnerID = "PriceSchedule.SellerIDMustMatchOwnerID";
 		}
 		public static class Product
 		{
@@ -323,6 +331,8 @@ namespace OrderCloud.SDK
 			public const string InventoryDisabled = "Product.InventoryDisabled";
 			/// <summary>Product assignment must include a Price Schedule or a Buyer/User/Group.</summary>
 			public const string RequiresPriceScheduleOrBuyer = "Product.RequiresPriceScheduleOrBuyer";
+			/// <summary>Only the Marketplace Owner can modify AllSuppliersCanSell on their owned products.</summary>
+			public const string CannotModifyAllSuppliersCanSell = "Product.CannotModifyAllSuppliersCanSell";
 		}
 		public static class Promotion
 		{
@@ -342,6 +352,8 @@ namespace OrderCloud.SDK
 			public const string NotEligible = "Promotion.NotEligible";
 			/// <summary>Promotion is not yet valid.</summary>
 			public const string NotYetValid = "Promotion.NotYetValid";
+			/// <summary>ToCompanyID represents a Supplier. Only promotions with a matching OwnerID may be applied to this order.</summary>
+			public const string OwnerIDMustMatchOrderToCompanyID = "Promotion.OwnerIDMustMatchOrderToCompanyID";
 		}
 		public static class Registration
 		{
@@ -397,6 +409,8 @@ namespace OrderCloud.SDK
 			public const string RequiresSelection = "Spec.RequiresSelection";
 			/// <summary>This spec requires a value.</summary>
 			public const string RequiresValue = "Spec.RequiresValue";
+			/// <summary>Cannot assign spec to this product. Product must be owned by the Spec owner.</summary>
+			public const string CannotAssignProduct = "Spec.CannotAssignProduct";
 		}
 		public static class SpendingAccount
 		{
