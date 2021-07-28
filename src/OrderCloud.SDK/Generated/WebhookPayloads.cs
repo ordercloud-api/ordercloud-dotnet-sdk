@@ -2924,6 +2924,34 @@ namespace OrderCloud.SDK
 			{
 				public string SupplierID { get; set; }
 			}
+			/// <summary>Webhook payload sent by OrderCloud on PUT v1/suppliers/{supplierID}/buyers/{buyerID}.</summary>
+			[SentOn("PUT", "v1/suppliers/{supplierID}/buyers/{buyerID}")]
+			public class SaveBuyer : WebhookPayload<object, object, SaveBuyerRouteParams, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on PUT v1/suppliers/{supplierID}/buyers/{buyerID}.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, use the non-generic payload type instead.</typeparam>
+			[SentOn("PUT", "v1/suppliers/{supplierID}/buyers/{buyerID}")]
+			public class SaveBuyer<TConfigData> : WebhookPayload<object, object, SaveBuyerRouteParams, TConfigData>
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/suppliers/{supplierID}/buyers/{buyerID}.</summary>
+			public class SaveBuyerRouteParams
+			{
+				public string SupplierID { get; set; }
+				public string BuyerID { get; set; }
+			}
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/suppliers/{supplierID}/buyers/{buyerID}.</summary>
+			[SentOn("DELETE", "v1/suppliers/{supplierID}/buyers/{buyerID}")]
+			public class DeleteBuyer : WebhookPayload<object, object, DeleteBuyerRouteParams, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/suppliers/{supplierID}/buyers/{buyerID}.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, use the non-generic payload type instead.</typeparam>
+			[SentOn("DELETE", "v1/suppliers/{supplierID}/buyers/{buyerID}")]
+			public class DeleteBuyer<TConfigData> : WebhookPayload<object, object, DeleteBuyerRouteParams, TConfigData>
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/suppliers/{supplierID}/buyers/{buyerID}.</summary>
+			public class DeleteBuyerRouteParams
+			{
+				public string SupplierID { get; set; }
+				public string BuyerID { get; set; }
+			}
 		}
 		public static class SupplierUserGroups
 		{
