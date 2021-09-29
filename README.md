@@ -81,7 +81,7 @@ public class MyUserXp
     public string Gender { get; set; }
 }
 
-var user = new User<MyUserXp>();
+var user = new User();
 user.xp = new MyUserXp() {
     Gender = "male"
 }; // strongly typed!
