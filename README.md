@@ -74,13 +74,19 @@ Here are a few niceties that the SDK provides. Features of the OrderCloud.io _pl
 Extended Properties, or `xp`, is a platform feature that allows you to extend the OrderCloud.io data model. This is modeled in the SDK using (by default) a C# [dynamic](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/dynamic):
 
 ```c#
-var user = new User();
+var user = new CustomUser();
 user.xp.Gender = "male";
 ```
 
 Even though `Gender` does not exist the native model, the code above will compile and work just fine with the API. But with dynamics you don't get compile-time type checking. Alternatively, the SDK provides generic versions of all models that allow you to provide a custom `xp` type:
 
 ```c#
+public class CustomUser : User<MyUserXp> (
+    public CustomUser() {
+        xp = new MyUserXp();
+    }
+)
+
 public class MyUserXp
 {
     public string Gender { get; set; }
