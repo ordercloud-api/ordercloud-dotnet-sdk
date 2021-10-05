@@ -83,8 +83,8 @@ user.xp = new {
 Even though `Gender` does not exist the native model, the code above will compile and work just fine with the API. But with dynamics you don't get compile-time type checking. Alternatively, the SDK provides generic versions of all models that allow you to provide a custom `xp` type:
 
 ```c#
-public class CustomUser : User<MyUserXp> (
-    public CustomUser() {
+public class MyUser : User<MyUserXp> (
+    public MyUser() {
         xp = new MyUserXp();
     }
 )
@@ -94,7 +94,7 @@ public class MyUserXp
     public string Gender { get; set; }
 }
 
-var user = new User<MyUserXp>();
+var user = new MyUser<MyUserXp>();
 user.xp.Gender = "male"; // strongly typed!
 ```
 
