@@ -83,6 +83,22 @@ user.xp = new {
 Even though `Gender` does not exist the native model, the code above will compile and work just fine with the API. But with dynamics you don't get compile-time type checking. Alternatively, the SDK provides generic versions of all models that allow you to provide a custom `xp` type:
 
 ```c#
+public class MyUserXp
+{
+    public string Gender { get; set; }
+}
+```
+
+This time `Gender` is strongly typed, so you'll get the compile-time checking, Intellisense, autocomplete, etc. that you get with first-class properties. This is also available on calls that GET an object (or list):
+
+```c#
+var user = await client.Users.GetAsync<User<MyUserXp>>(buyerId, userId);
+Console.WriteLine(user.xp.Gender); // strongly typed!
+```
+
+A common alternative to the above example is to first define a custom class that _inherits_ from `User<MyUserXp>`:
+
+```c#
 public class MyUser : User<MyUserXp> (
     public MyUser() {
         xp = new MyUserXp();
@@ -96,19 +112,6 @@ public class MyUserXp
 
 var user = new MyUser();
 user.xp.Gender = "male"; // strongly typed!
-```
-
-This time `Gender` is strongly typed, so you'll get the compile-time checking, Intellisense, autocomplete, etc. that you get with first-class properties. This is also available on calls that GET an object (or list):
-
-```c#
-var user = await client.Users.GetAsync<User<MyUserXp>>(buyerId, userId);
-Console.WriteLine(user.xp.Gender); // strongly typed!
-```
-
-A common alternative to the above example is to first define a custom class that _inherits_ from `User<MyUserXp>`:
-
-```c#
-public class MyUser : User<MyUserXp> { }
 ```
 
 Now calls to `GetAsync<User<MyUserXp>>(...)` can be simplified to `GetAsync<MyUser>(...)`. This is especially preferable when working with models that have nested models, each with their own custom xp type, which must all be declared on the top-level model. For example: `Order<Txp, TFromUserXP, TBillingAddressXP>`. Declaring those 3 xp types once on a custom `MyOrder` class is far cleaner than declaring them on every call to `GetAsync` or `ListAsync`.
