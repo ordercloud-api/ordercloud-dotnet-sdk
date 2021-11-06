@@ -27,6 +27,8 @@ namespace OrderCloud.SDK
 		{
 			/// <summary>The last full access client cannot be deleted.</summary>
 			public const string CannotDeleteLastFullAccess = "ApiClient.CannotDeleteLastFullAccess";
+			/// <summary>Invalid Client ID.</summary>
+			public const string InvalidClientID = "ApiClient.InvalidClientID";
 		}
 		public static class ApprovalRule
 		{
@@ -178,6 +180,11 @@ namespace OrderCloud.SDK
 			/// <summary>Value passed is not valid for property type.</summary>
 			public const string InvalidType = "List.InvalidType";
 		}
+		public static class Locale
+		{
+			/// <summary>You are allowed only a single language/currency combination per marketplace.</summary>
+			public const string DuplicateLanguageAndCurrency = "Locale.DuplicateLanguageAndCurrency";
+		}
 		public static class Order
 		{
 			/// <summary>Cannot cancel an order with the status of Open or Completed.</summary>
@@ -216,6 +223,8 @@ namespace OrderCloud.SDK
 			public const string OverrideTaxPermission = "Order.OverrideTaxPermission";
 			/// <summary>Cannot delete an order that has been forwarded without first deleting the associated outgoing orders.</summary>
 			public const string CannotDeleteForwardedOrder = "Order.CannotDeleteForwardedOrder";
+			/// <summary>The user's assigned Locale Currency must match the Order's Currency.</summary>
+			public const string CurrencyMismatch = "Order.CurrencyMismatch";
 		}
 		public static class PartyAssignment
 		{
@@ -250,6 +259,8 @@ namespace OrderCloud.SDK
 			public const string MissingOrInvalidClientID = "PasswordReset.MissingOrInvalidClientID";
 			/// <summary>Username is required.</summary>
 			public const string MissingUsername = "PasswordReset.MissingUsername";
+			/// <summary>Username or Email is required.</summary>
+			public const string MissingUsernameOrEmail = "PasswordReset.MissingUsernameOrEmail";
 			/// <summary>The password cannot be changed until MinimumPasswordAge has expired since the password was last changed.</summary>
 			public const string TooSoonToChange = "PasswordReset.TooSoonToChange";
 		}
@@ -290,6 +301,8 @@ namespace OrderCloud.SDK
 			public const string CannotDeleteLastPriceBreak = "PriceSchedule.CannotDeleteLastPriceBreak";
 			/// <summary>Quantity given cannot exceed the maximum as per price schedule restrictions.</summary>
 			public const string CannotExceedMax = "PriceSchedule.CannotExceedMax";
+			/// <summary>Cannot modify Currency of a Price Schedule that has assignments.</summary>
+			public const string CannotModifyCurrency = "PriceSchedule.CannotModifyCurrency";
 			/// <summary>Price breaks array cannot contain duplicate quantity values.</summary>
 			public const string DuplicatePriceBreaks = "PriceSchedule.DuplicatePriceBreaks";
 			/// <summary>Max Quantity must be greater than or equal to min quantity.</summary>
@@ -316,6 +329,8 @@ namespace OrderCloud.SDK
 			public const string InvalidDefaultPriceScheduleID = "PriceSchedule.InvalidDefaultPriceScheduleID";
 			/// <summary>The PriceSchedule.OwnerID must match the SellerID.</summary>
 			public const string SellerIDMustMatchOwnerID = "PriceSchedule.SellerIDMustMatchOwnerID";
+			/// <summary>The party's assigned Locale must match the Price Schedule's Currency.</summary>
+			public const string CurrencyMismatch = "PriceSchedule.CurrencyMismatch";
 		}
 		public static class Product
 		{
@@ -359,6 +374,11 @@ namespace OrderCloud.SDK
 		{
 			/// <summary>Email address or verification code not found.</summary>
 			public const string InvalidVerificationCode = "Registration.InvalidVerificationCode";
+		}
+		public static class Request
+		{
+			/// <summary>Invalid content type. Please use x-www-form-urlencoded.</summary>
+			public const string InvalidContentType = "Request.InvalidContentType";
 		}
 		public static class Search
 		{
@@ -435,7 +455,7 @@ namespace OrderCloud.SDK
 			public const string IsNotTemp = "User.IsNotTemp";
 			/// <summary>User not found.</summary>
 			public const string NotFound = "User.NotFound";
-			/// <summary>Username already exists in this Buying Network.</summary>
+			/// <summary>Username already exists in this Marketplace.</summary>
 			public const string UsernameMustBeUnique = "User.UsernameMustBeUnique";
 			/// <summary>You do not have permission to access your extended properties.</summary>
 			public const string XPNotAllowed = "User.XPNotAllowed";

@@ -1242,6 +1242,85 @@ namespace OrderCloud.SDK
 				public string LineItemID { get; set; }
 			}
 		}
+		public static class Locales
+		{
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/locales.</summary>
+			[SentOn("POST", "v1/locales")]
+			public class Create : WebhookPayload<Locale, Locale, object, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/locales.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TLocale">Specific type of the Locale. If not using a custom type, specify Locale.</typeparam>
+			[SentOn("POST", "v1/locales")]
+			public class Create<TConfigData, TLocale> : WebhookPayload<TLocale, TLocale, object, TConfigData>
+				where TLocale : Locale
+			{ }
+			/// <summary>Webhook payload sent by OrderCloud on PUT v1/locales/{localeID}.</summary>
+			[SentOn("PUT", "v1/locales/{localeID}")]
+			public class Save : WebhookPayload<Locale, Locale, SaveRouteParams, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on PUT v1/locales/{localeID}.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TLocale">Specific type of the Locale. If not using a custom type, specify Locale.</typeparam>
+			[SentOn("PUT", "v1/locales/{localeID}")]
+			public class Save<TConfigData, TLocale> : WebhookPayload<TLocale, TLocale, SaveRouteParams, TConfigData>
+				where TLocale : Locale
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/locales/{localeID}.</summary>
+			public class SaveRouteParams
+			{
+				public string LocaleID { get; set; }
+			}
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/locales/{localeID}.</summary>
+			[SentOn("DELETE", "v1/locales/{localeID}")]
+			public class Delete : WebhookPayload<object, object, DeleteRouteParams, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/locales/{localeID}.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, use the non-generic payload type instead.</typeparam>
+			[SentOn("DELETE", "v1/locales/{localeID}")]
+			public class Delete<TConfigData> : WebhookPayload<object, object, DeleteRouteParams, TConfigData>
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/locales/{localeID}.</summary>
+			public class DeleteRouteParams
+			{
+				public string LocaleID { get; set; }
+			}
+			/// <summary>Webhook payload sent by OrderCloud on PATCH v1/locales/{localeID}.</summary>
+			[SentOn("PATCH", "v1/locales/{localeID}")]
+			public class Patch : WebhookPayload<Locale, Locale, PatchRouteParams, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on PATCH v1/locales/{localeID}.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TLocale">Specific type of the Locale. If not using a custom type, specify Locale.</typeparam>
+			[SentOn("PATCH", "v1/locales/{localeID}")]
+			public class Patch<TConfigData, TLocale> : WebhookPayload<TLocale, TLocale, PatchRouteParams, TConfigData>
+				where TLocale : Locale
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/locales/{localeID}.</summary>
+			public class PatchRouteParams
+			{
+				public string LocaleID { get; set; }
+			}
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/locales/assignments.</summary>
+			[SentOn("POST", "v1/locales/assignments")]
+			public class SaveAssignment : WebhookPayload<LocaleAssignment, object, object, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/locales/assignments.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TLocaleAssignment">Specific type of the LocaleAssignment. If not using a custom type, specify LocaleAssignment.</typeparam>
+			[SentOn("POST", "v1/locales/assignments")]
+			public class SaveAssignment<TConfigData, TLocaleAssignment> : WebhookPayload<TLocaleAssignment, object, object, TConfigData>
+				where TLocaleAssignment : LocaleAssignment
+			{ }
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/locales/{localeID}/assignments.</summary>
+			[SentOn("DELETE", "v1/locales/{localeID}/assignments")]
+			public class DeleteAssignment : WebhookPayload<object, object, DeleteAssignmentRouteParams, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/locales/{localeID}/assignments.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, use the non-generic payload type instead.</typeparam>
+			[SentOn("DELETE", "v1/locales/{localeID}/assignments")]
+			public class DeleteAssignment<TConfigData> : WebhookPayload<object, object, DeleteAssignmentRouteParams, TConfigData>
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/locales/{localeID}/assignments.</summary>
+			public class DeleteAssignmentRouteParams
+			{
+				public string LocaleID { get; set; }
+			}
+		}
 		public static class Me
 		{
 			/// <summary>Webhook payload sent by OrderCloud on PUT v1/me.</summary>
