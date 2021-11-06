@@ -22,6 +22,7 @@ namespace OrderCloud.SDK
 		IIncrementorsResource Incrementors { get; }
 		IIntegrationEventsResource IntegrationEvents { get; }
 		ILineItemsResource LineItems { get; }
+		ILocalesResource Locales { get; }
 		IMeResource Me { get; }
 		IMessageSendersResource MessageSenders { get; }
 		IOpenIdConnectsResource OpenIdConnects { get; }
@@ -63,7 +64,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -73,7 +74,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -135,7 +136,7 @@ namespace OrderCloud.SDK
 		/// <param name="level">Level of the address assignment. Possible values: User, Group, Company.</param>
 		/// <param name="isShipping">Is shipping of the address assignment.</param>
 		/// <param name="isBilling">Is billing of the address assignment.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<AddressAssignment>> ListAssignmentsAsync(string buyerID, string addressID = null, string userID = null, string userGroupID = null, PartyType? level = null, bool? isShipping = null, bool? isBilling = null, int? page = null, int? pageSize = null, string accessToken = null);
@@ -167,7 +168,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -176,7 +177,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -237,7 +238,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -246,7 +247,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -294,7 +295,7 @@ namespace OrderCloud.SDK
 		/// <summary>Get a list of admin user group user assignments.</summary>
 		/// <param name="userGroupID">ID of the user group.</param>
 		/// <param name="userID">ID of the user.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<UserGroupAssignment>> ListUserAssignmentsAsync(string userGroupID = null, string userID = null, int page = 1, int pageSize = 20, string accessToken = null);
@@ -323,7 +324,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -332,7 +333,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -393,7 +394,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -402,7 +403,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -437,6 +438,14 @@ namespace OrderCloud.SDK
 		/// <param name="apiClientID">ID of the api client.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task DeleteAsync(string apiClientID, string accessToken = null);
+		/// <summary>Get a list of API client assignments.</summary>
+		/// <param name="apiClientID">ID of the api client.</param>
+		/// <param name="buyerID">ID of the buyer.</param>
+		/// <param name="supplierID">ID of the supplier.</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<ApiClientAssignment>> ListAssignmentsAsync(string apiClientID = null, string buyerID = null, string supplierID = null, int page = 1, int pageSize = 20, string accessToken = null);
 		/// <summary>Partially update a API client.</summary>
 		/// <param name="apiClientID">ID of the api client.</param>
 		/// <param name="partialApiClient">The object that will be partially serialized to JSON and sent in the request body.</param>
@@ -447,14 +456,6 @@ namespace OrderCloud.SDK
 		/// <param name="partialApiClient">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TApiClient> PatchAsync<TApiClient>(string apiClientID, PartialApiClient partialApiClient, string accessToken = null) where TApiClient : ApiClient;
-		/// <summary>Get a list of API client assignments.</summary>
-		/// <param name="apiClientID">ID of the api client.</param>
-		/// <param name="buyerID">ID of the buyer.</param>
-		/// <param name="supplierID">ID of the supplier.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
-		Task<ListPage<ApiClientAssignment>> ListAssignmentsAsync(string apiClientID = null, string buyerID = null, string supplierID = null, int page = 1, int pageSize = 20, string accessToken = null);
 		/// <summary>Create or update a API client assignment.</summary>
 		/// <param name="apiClientAssignment">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -488,7 +489,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -498,7 +499,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -568,7 +569,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -577,7 +578,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -638,7 +639,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -647,7 +648,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -695,7 +696,7 @@ namespace OrderCloud.SDK
 		/// <summary>Get a list of catalog assignments.</summary>
 		/// <param name="catalogID">ID of the catalog.</param>
 		/// <param name="buyerID">ID of the buyer.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<CatalogAssignment>> ListAssignmentsAsync(string catalogID = null, string buyerID = null, int page = 1, int pageSize = 20, string accessToken = null);
@@ -711,7 +712,7 @@ namespace OrderCloud.SDK
 		/// <summary>Get a list of catalog product assignments.</summary>
 		/// <param name="catalogID">ID of the catalog.</param>
 		/// <param name="productID">ID of the product.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<ProductCatalogAssignment>> ListProductAssignmentsAsync(string catalogID = null, string productID = null, int page = 1, int pageSize = 20, string accessToken = null);
@@ -744,7 +745,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -755,7 +756,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -818,7 +819,7 @@ namespace OrderCloud.SDK
 		/// <param name="userID">ID of the user.</param>
 		/// <param name="userGroupID">ID of the user group.</param>
 		/// <param name="level">Level of the category assignment. Possible values: User, Group, Company.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<CategoryAssignment>> ListAssignmentsAsync(string catalogID, string categoryID = null, string buyerID = null, string userID = null, string userGroupID = null, PartyType? level = null, int? page = null, int? pageSize = null, string accessToken = null);
@@ -839,7 +840,7 @@ namespace OrderCloud.SDK
 		/// <param name="catalogID">ID of the catalog.</param>
 		/// <param name="categoryID">ID of the category.</param>
 		/// <param name="productID">ID of the product.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<CategoryProductAssignment>> ListProductAssignmentsAsync(string catalogID, string categoryID = null, string productID = null, int page = 1, int pageSize = 20, string accessToken = null);
@@ -858,7 +859,7 @@ namespace OrderCloud.SDK
 
 	public interface ICertsResource
 	{
-		/// <summary>Get a single cert public key.</summary>
+		/// <summary>Get a single cert public key. Returns a JSON Web Key (JWK). Can be used for validating the token was signed by OrderCloud.</summary>
 		/// <param name="ID">ID of the public key.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<PublicKey> GetPublicKeyAsync(string ID, string accessToken = null);
@@ -881,7 +882,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -891,7 +892,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -951,7 +952,7 @@ namespace OrderCloud.SDK
 		/// <param name="userID">ID of the user.</param>
 		/// <param name="userGroupID">ID of the user group.</param>
 		/// <param name="level">Level of the cost center assignment. Possible values: User, Group, Company.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<CostCenterAssignment>> ListAssignmentsAsync(string buyerID, string costCenterID = null, string userID = null, string userGroupID = null, PartyType? level = null, int? page = null, int? pageSize = null, string accessToken = null);
@@ -986,7 +987,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -996,7 +997,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -1056,7 +1057,7 @@ namespace OrderCloud.SDK
 		/// <param name="userID">ID of the user.</param>
 		/// <param name="userGroupID">ID of the user group.</param>
 		/// <param name="level">Level of the credit card assignment. Possible values: User, Group, Company.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<CreditCardAssignment>> ListAssignmentsAsync(string buyerID, string creditCardID = null, string userID = null, string userGroupID = null, PartyType? level = null, int? page = null, int? pageSize = null, string accessToken = null);
@@ -1084,7 +1085,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -1123,7 +1124,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -1162,7 +1163,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -1253,7 +1254,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -1264,7 +1265,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -1357,6 +1358,66 @@ namespace OrderCloud.SDK
 		Task<TLineItem> PatchShippingAddressAsync<TLineItem>(OrderDirection direction, string orderID, string lineItemID, PartialAddress partialAddress, string accessToken = null) where TLineItem : LineItem;
 	}
 
+	public interface ILocalesResource
+	{
+		/// <summary>Get a single locale.</summary>
+		/// <param name="localeID">ID of the locale.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<Locale> GetAsync(string localeID, string accessToken = null);
+		/// <summary>Get a list of locales.</summary>
+		/// <param name="search">Word or phrase to search for.</param>
+		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
+		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<Locale>> ListAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
+		/// <summary>Get a list of locales.</summary>
+		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<Locale>> ListAsync(Action<ListOptionsBuilder<Locale>> buildListOpts, string accessToken = null);
+		/// <summary>Create a new locale. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <param name="locale">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<Locale> CreateAsync(Locale locale, string accessToken = null);
+		/// <summary>Create or update a locale. If an object with the same ID already exists, it will be overwritten.</summary>
+		/// <param name="localeID">ID of the locale.</param>
+		/// <param name="locale">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<Locale> SaveAsync(string localeID, Locale locale, string accessToken = null);
+		/// <summary>Delete a locale.</summary>
+		/// <param name="localeID">ID of the locale.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task DeleteAsync(string localeID, string accessToken = null);
+		/// <summary>Partially update a locale.</summary>
+		/// <param name="localeID">ID of the locale.</param>
+		/// <param name="partialLocale">The object that will be partially serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<Locale> PatchAsync(string localeID, PartialLocale partialLocale, string accessToken = null);
+		/// <summary>Get a list of locale assignments.</summary>
+		/// <param name="buyerID">ID of the buyer.</param>
+		/// <param name="localeID">ID of the locale.</param>
+		/// <param name="userID">ID of the user.</param>
+		/// <param name="userGroupID">ID of the user group.</param>
+		/// <param name="level">Level of the locale assignment. Possible values: User, Group, Company.</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<LocaleAssignment>> ListAssignmentsAsync(string buyerID = null, string localeID = null, string userID = null, string userGroupID = null, PartyType? level = null, int? page = null, int? pageSize = null, string accessToken = null);
+		/// <summary>Create or update a locale assignment. Do not assign a user multiple groups with different assigned locales. That is considered a misconfiguration, and will yield unexpected results.</summary>
+		/// <param name="localeAssignment">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task SaveAssignmentAsync(LocaleAssignment localeAssignment, string accessToken = null);
+		/// <summary>Delete a locale assignment.</summary>
+		/// <param name="localeID">ID of the locale.</param>
+		/// <param name="buyerID">ID of the buyer.</param>
+		/// <param name="userID">ID of the user.</param>
+		/// <param name="userGroupID">ID of the user group.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task DeleteAssignmentAsync(string localeID, string buyerID, string userID = null, string userGroupID = null, string accessToken = null);
+	}
+
 	public interface IMeResource
 	{
 		/// <summary>Get the Current Authenticated User</summary>
@@ -1385,7 +1446,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -1394,7 +1455,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -1411,7 +1472,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -1420,7 +1481,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -1437,7 +1498,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -1446,7 +1507,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -1506,7 +1567,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -1515,7 +1576,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -1557,24 +1618,24 @@ namespace OrderCloud.SDK
 		Task DeleteCreditCardAsync(string creditcardID, string accessToken = null);
 		/// <summary>Get a list of categories visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="depth">Indicates how deep down the hierarchy to return results. Valid values are a number of 1 or greater, or 'all'. Relative to ParentID if specified. Default is 1.</param>
-		/// <param name="catalogID">ID of the catalog.</param>
+		/// <param name="catalogID">The user’s default CatalogID will be used to return categories if you do not pass another CatalogID explicitly. Listing categories across multiple catalogs is not supported.</param>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Category>> ListCategoriesAsync(string depth = "1", string catalogID = null, string productID = null, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
 		/// <summary>Get a list of categories visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="depth">Indicates how deep down the hierarchy to return results. Valid values are a number of 1 or greater, or 'all'. Relative to ParentID if specified. Default is 1.</param>
-		/// <param name="catalogID">ID of the catalog.</param>
+		/// <param name="catalogID">The user’s default CatalogID will be used to return categories if you do not pass another CatalogID explicitly. Listing categories across multiple catalogs is not supported.</param>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -1582,14 +1643,14 @@ namespace OrderCloud.SDK
 		/// <summary>Get a list of categories visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="depth">Indicates how deep down the hierarchy to return results. Valid values are a number of 1 or greater, or 'all'. Relative to ParentID if specified. Default is 1.</param>
-		/// <param name="catalogID">ID of the catalog.</param>
+		/// <param name="catalogID">The user’s default CatalogID will be used to return categories if you do not pass another CatalogID explicitly. Listing categories across multiple catalogs is not supported.</param>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Category>> ListCategoriesAsync(Action<ListOptionsBuilder<Category>> buildListOpts, string depth = "1", string catalogID = null, string productID = null, string accessToken = null);
 		/// <summary>Get a list of categories visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="depth">Indicates how deep down the hierarchy to return results. Valid values are a number of 1 or greater, or 'all'. Relative to ParentID if specified. Default is 1.</param>
-		/// <param name="catalogID">ID of the catalog.</param>
+		/// <param name="catalogID">The user’s default CatalogID will be used to return categories if you do not pass another CatalogID explicitly. Listing categories across multiple catalogs is not supported.</param>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TCategory>> ListCategoriesAsync<TCategory>(Action<ListOptionsBuilder<TCategory>> buildListOpts, string depth = "1", string catalogID = null, string productID = null, string accessToken = null) where TCategory : Category;
@@ -1611,7 +1672,7 @@ namespace OrderCloud.SDK
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="searchType">Type of search to perform. Possible values: AnyTerm (default), AllTermsAnyField, AllTermsSameField, ExactPhrase, ExactPhrasePrefix.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="sellerID">ID of the seller.</param>
@@ -1625,7 +1686,7 @@ namespace OrderCloud.SDK
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="searchType">Type of search to perform. Possible values: AnyTerm (default), AllTermsAnyField, AllTermsSameField, ExactPhrase, ExactPhrasePrefix.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="sellerID">ID of the seller.</param>
@@ -1663,7 +1724,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -1674,7 +1735,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -1708,7 +1769,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -1718,7 +1779,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -1749,7 +1810,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -1760,7 +1821,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -1783,7 +1844,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -1794,7 +1855,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -1815,7 +1876,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -1824,7 +1885,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -1849,7 +1910,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -1858,7 +1919,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -1884,7 +1945,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -1894,7 +1955,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -1923,7 +1984,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -1934,7 +1995,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -1968,7 +2029,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="sellerID">ID of the seller.</param>
@@ -1978,7 +2039,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="sellerID">ID of the seller.</param>
@@ -2006,7 +2067,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -2031,7 +2092,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -2040,7 +2101,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -2091,7 +2152,7 @@ namespace OrderCloud.SDK
 		/// <param name="userID">ID of the user.</param>
 		/// <param name="userGroupID">ID of the user group.</param>
 		/// <param name="level">Level of the message sender assignment. Possible values: User, Group, Company.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="supplierID">ID of the supplier.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -2112,7 +2173,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -2137,7 +2198,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -2187,7 +2248,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -2201,7 +2262,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -2257,7 +2318,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -2268,7 +2329,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -2291,7 +2352,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -2302,7 +2363,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -2423,7 +2484,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -2434,7 +2495,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -2451,13 +2512,13 @@ namespace OrderCloud.SDK
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TShipment>> ListShipmentsAsync<TShipment>(OrderDirection direction, string orderID, Action<ListOptionsBuilder<TShipment>> buildListOpts, string accessToken = null) where TShipment : Shipment;
-		/// <summary>Set a shipping address. Use only when the address is not to be saved/reused. To use a saved address (i.e. from the Addresses resource), PATCH the order's ShippingAddressID property instead.</summary>
+		/// <summary>Set a shipping address.</summary>
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="address">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Order> SetShippingAddressAsync(OrderDirection direction, string orderID, Address address, string accessToken = null);
-		/// <summary>Set a shipping address. Use only when the address is not to be saved/reused. To use a saved address (i.e. from the Addresses resource), PATCH the order's ShippingAddressID property instead.</summary>
+		/// <summary>Set a shipping address.</summary>
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="address">The object that will be serialized to JSON and sent in the request body.</param>
@@ -2529,7 +2590,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -2540,7 +2601,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -2609,7 +2670,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -2620,7 +2681,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -2706,7 +2767,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -2715,7 +2776,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -2791,7 +2852,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -2800,7 +2861,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -2865,7 +2926,7 @@ namespace OrderCloud.SDK
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="searchType">Type of search to perform. Possible values: AnyTerm (default), AllTermsAnyField, AllTermsSameField, ExactPhrase, ExactPhrasePrefix.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -2878,7 +2939,7 @@ namespace OrderCloud.SDK
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="searchType">Type of search to perform. Possible values: AnyTerm (default), AllTermsAnyField, AllTermsSameField, ExactPhrase, ExactPhrasePrefix.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -2944,7 +3005,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -2954,7 +3015,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -3008,7 +3069,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -3018,7 +3079,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -3038,7 +3099,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -3048,7 +3109,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -3085,7 +3146,7 @@ namespace OrderCloud.SDK
 		/// <param name="userID">ID of the user.</param>
 		/// <param name="userGroupID">ID of the user group.</param>
 		/// <param name="level">Level of the product assignment. Possible values: User, Group, Company.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<ProductAssignment>> ListAssignmentsAsync(string productID = null, string priceScheduleID = null, string buyerID = null, string userID = null, string userGroupID = null, PartyType? level = null, int? page = null, int? pageSize = null, string accessToken = null);
@@ -3113,7 +3174,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -3122,7 +3183,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -3173,7 +3234,7 @@ namespace OrderCloud.SDK
 		/// <param name="userID">ID of the user.</param>
 		/// <param name="userGroupID">ID of the user group.</param>
 		/// <param name="level">Level of the promotion assignment. Possible values: User, Group, Company.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<PromotionAssignment>> ListAssignmentsAsync(string buyerID = null, string promotionID = null, string userID = null, string userGroupID = null, PartyType? level = null, int? page = null, int? pageSize = null, string accessToken = null);
@@ -3200,7 +3261,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -3235,7 +3296,7 @@ namespace OrderCloud.SDK
 		/// <param name="userGroupID">ID of the user group.</param>
 		/// <param name="commerceRole">Commerce role of the security profile assignment. Possible values: Buyer, Seller, Supplier.</param>
 		/// <param name="level">Level of the security profile assignment. Possible values: User, Group, Company.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<SecurityProfileAssignment>> ListAssignmentsAsync(string buyerID = null, string supplierID = null, string securityProfileID = null, string userID = null, string userGroupID = null, CommerceRole? commerceRole = null, PartyType? level = null, int? page = null, int? pageSize = null, string accessToken = null);
@@ -3268,7 +3329,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -3278,7 +3339,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -3350,7 +3411,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -3360,7 +3421,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -3419,7 +3480,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -3428,7 +3489,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -3477,7 +3538,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -3510,7 +3571,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -3520,7 +3581,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -3593,7 +3654,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -3603,7 +3664,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -3663,7 +3724,7 @@ namespace OrderCloud.SDK
 		/// <param name="userID">ID of the user.</param>
 		/// <param name="userGroupID">ID of the user group.</param>
 		/// <param name="level">Level of the spending account assignment. Possible values: User, Group, Company.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<SpendingAccountAssignment>> ListAssignmentsAsync(string buyerID, string spendingAccountID = null, string userID = null, string userGroupID = null, PartyType? level = null, int? page = null, int? pageSize = null, string accessToken = null);
@@ -3698,7 +3759,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -3708,7 +3769,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -3778,7 +3839,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -3787,7 +3848,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -3837,7 +3898,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -3876,7 +3937,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -3886,7 +3947,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -3944,7 +4005,7 @@ namespace OrderCloud.SDK
 		/// <param name="supplierID">ID of the supplier.</param>
 		/// <param name="userGroupID">ID of the user group.</param>
 		/// <param name="userID">ID of the user.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<UserGroupAssignment>> ListUserAssignmentsAsync(string supplierID, string userGroupID = null, string userID = null, int page = 1, int pageSize = 20, string accessToken = null);
@@ -3979,7 +4040,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -3990,7 +4051,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -4065,7 +4126,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -4075,7 +4136,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -4133,7 +4194,7 @@ namespace OrderCloud.SDK
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="userGroupID">ID of the user group.</param>
 		/// <param name="userID">ID of the user.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<UserGroupAssignment>> ListUserAssignmentsAsync(string buyerID, string userGroupID = null, string userID = null, int page = 1, int pageSize = 20, string accessToken = null);
@@ -4168,7 +4229,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -4179,7 +4240,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -4267,7 +4328,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -4302,7 +4363,7 @@ namespace OrderCloud.SDK
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -4341,6 +4402,7 @@ namespace OrderCloud.SDK
 			Incrementors = new IncrementorsResource(this);
 			IntegrationEvents = new IntegrationEventsResource(this);
 			LineItems = new LineItemsResource(this);
+			Locales = new LocalesResource(this);
 			Me = new MeResource(this);
 			MessageSenders = new MessageSendersResource(this);
 			OpenIdConnects = new OpenIdConnectsResource(this);
@@ -4381,6 +4443,7 @@ namespace OrderCloud.SDK
 		public IIncrementorsResource Incrementors { get; private set; }
 		public IIntegrationEventsResource IntegrationEvents { get; private set; }
 		public ILineItemsResource LineItems { get; private set; }
+		public ILocalesResource Locales { get; private set; }
 		public IMeResource Me { get; private set; }
 		public IMessageSendersResource MessageSenders { get; private set; }
 		public IOpenIdConnectsResource OpenIdConnects { get; private set; }
@@ -4497,9 +4560,9 @@ namespace OrderCloud.SDK
 		public Task<ApiClient> SaveAsync(string apiClientID, ApiClient apiClient, string accessToken = null) => SaveAsync<ApiClient>(apiClientID, apiClient, accessToken);
 		public Task<TApiClient> SaveAsync<TApiClient>(string apiClientID, ApiClient apiClient, string accessToken = null) where TApiClient : ApiClient => Request("v1", "apiclients", apiClientID).WithOAuthBearerToken(accessToken).PutJsonAsync(ValidateModel(apiClient)).ReceiveJson<TApiClient>();
 		public Task DeleteAsync(string apiClientID, string accessToken = null) => Request("v1", "apiclients", apiClientID).WithOAuthBearerToken(accessToken).DeleteAsync();
+		public Task<ListPage<ApiClientAssignment>> ListAssignmentsAsync(string apiClientID = null, string buyerID = null, string supplierID = null, int page = 1, int pageSize = 20, string accessToken = null) => Request("v1", "apiclients", "assignments").WithOAuthBearerToken(accessToken).SetQueryParams(new { apiClientID, buyerID, supplierID, page, pageSize }).GetJsonAsync<ListPage<ApiClientAssignment>>();
 		public Task<ApiClient> PatchAsync(string apiClientID, PartialApiClient partialApiClient, string accessToken = null) => PatchAsync<ApiClient>(apiClientID, partialApiClient, accessToken);
 		public Task<TApiClient> PatchAsync<TApiClient>(string apiClientID, PartialApiClient partialApiClient, string accessToken = null) where TApiClient : ApiClient => Request("v1", "apiclients", apiClientID).WithOAuthBearerToken(accessToken).PatchJsonAsync(ValidateModel(partialApiClient)).ReceiveJson<TApiClient>();
-		public Task<ListPage<ApiClientAssignment>> ListAssignmentsAsync(string apiClientID = null, string buyerID = null, string supplierID = null, int page = 1, int pageSize = 20, string accessToken = null) => Request("v1", "apiclients", "assignments").WithOAuthBearerToken(accessToken).SetQueryParams(new { apiClientID, buyerID, supplierID, page, pageSize }).GetJsonAsync<ListPage<ApiClientAssignment>>();
 		public Task SaveAssignmentAsync(ApiClientAssignment apiClientAssignment, string accessToken = null) => Request("v1", "apiclients", "assignments").WithOAuthBearerToken(accessToken).PostJsonAsync(ValidateModel(apiClientAssignment));
 		public Task DeleteBuyerAssignmentAsync(string apiClientID, string buyerID, string accessToken = null) => Request("v1", "buyers", buyerID, "ApiClients", "Assignments", apiClientID).WithOAuthBearerToken(accessToken).DeleteAsync();
 		public Task DeleteSupplierAssignmentAsync(string apiClientID, string supplierID, string accessToken = null) => Request("v1", "suppliers", supplierID, "ApiClients", "Assignments", apiClientID).WithOAuthBearerToken(accessToken).DeleteAsync();
@@ -4701,6 +4764,21 @@ namespace OrderCloud.SDK
 		public Task<TLineItem> SetShippingAddressAsync<TLineItem>(OrderDirection direction, string orderID, string lineItemID, Address address, string accessToken = null) where TLineItem : LineItem => Request("v1", "orders", direction, orderID, "lineitems", lineItemID, "shipto").WithOAuthBearerToken(accessToken).PutJsonAsync(ValidateModel(address)).ReceiveJson<TLineItem>();
 		public Task<LineItem> PatchShippingAddressAsync(OrderDirection direction, string orderID, string lineItemID, PartialAddress partialAddress, string accessToken = null) => PatchShippingAddressAsync<LineItem>(direction, orderID, lineItemID, partialAddress, accessToken);
 		public Task<TLineItem> PatchShippingAddressAsync<TLineItem>(OrderDirection direction, string orderID, string lineItemID, PartialAddress partialAddress, string accessToken = null) where TLineItem : LineItem => Request("v1", "orders", direction, orderID, "lineitems", lineItemID, "shipto").WithOAuthBearerToken(accessToken).PatchJsonAsync(ValidateModel(partialAddress)).ReceiveJson<TLineItem>();
+	}
+
+	public class LocalesResource : OrderCloudResource, ILocalesResource
+	{
+		internal LocalesResource(OrderCloudClient client) : base(client) { }
+		public Task<Locale> GetAsync(string localeID, string accessToken = null) => Request("v1", "locales", localeID).WithOAuthBearerToken(accessToken).GetJsonAsync<Locale>();
+		public Task<ListPage<Locale>> ListAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) => Request("v1", "locales").WithOAuthBearerToken(accessToken).SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<Locale>>();
+		public Task<ListPage<Locale>> ListAsync(Action<ListOptionsBuilder<Locale>> buildListOpts, string accessToken = null) => Request("v1", "locales").WithOAuthBearerToken(accessToken).SetListOptions(buildListOpts).GetJsonAsync<ListPage<Locale>>();
+		public Task<Locale> CreateAsync(Locale locale, string accessToken = null) => Request("v1", "locales").WithOAuthBearerToken(accessToken).PostJsonAsync(ValidateModel(locale)).ReceiveJson<Locale>();
+		public Task<Locale> SaveAsync(string localeID, Locale locale, string accessToken = null) => Request("v1", "locales", localeID).WithOAuthBearerToken(accessToken).PutJsonAsync(ValidateModel(locale)).ReceiveJson<Locale>();
+		public Task DeleteAsync(string localeID, string accessToken = null) => Request("v1", "locales", localeID).WithOAuthBearerToken(accessToken).DeleteAsync();
+		public Task<Locale> PatchAsync(string localeID, PartialLocale partialLocale, string accessToken = null) => Request("v1", "locales", localeID).WithOAuthBearerToken(accessToken).PatchJsonAsync(ValidateModel(partialLocale)).ReceiveJson<Locale>();
+		public Task<ListPage<LocaleAssignment>> ListAssignmentsAsync(string buyerID = null, string localeID = null, string userID = null, string userGroupID = null, PartyType? level = null, int? page = null, int? pageSize = null, string accessToken = null) => Request("v1", "locales", "assignments").WithOAuthBearerToken(accessToken).SetQueryParams(new { buyerID, localeID, userID, userGroupID, level, page, pageSize }).GetJsonAsync<ListPage<LocaleAssignment>>();
+		public Task SaveAssignmentAsync(LocaleAssignment localeAssignment, string accessToken = null) => Request("v1", "locales", "assignments").WithOAuthBearerToken(accessToken).PostJsonAsync(ValidateModel(localeAssignment));
+		public Task DeleteAssignmentAsync(string localeID, string buyerID, string userID = null, string userGroupID = null, string accessToken = null) => Request("v1", "locales", localeID, "assignments").WithOAuthBearerToken(accessToken).SetQueryParams(new { buyerID, userID, userGroupID }).DeleteAsync();
 	}
 
 	public class MeResource : OrderCloudResource, IMeResource
