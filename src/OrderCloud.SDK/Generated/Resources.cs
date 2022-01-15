@@ -21,6 +21,7 @@ namespace OrderCloud.SDK
 		IImpersonationConfigsResource ImpersonationConfigs { get; }
 		IIncrementorsResource Incrementors { get; }
 		IIntegrationEventsResource IntegrationEvents { get; }
+		IInventoryRecordsResource InventoryRecords { get; }
 		ILineItemsResource LineItems { get; }
 		ILocalesResource Locales { get; }
 		IMeResource Me { get; }
@@ -623,6 +624,21 @@ namespace OrderCloud.SDK
 		/// <param name="partialBuyer">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TBuyer> PatchAsync<TBuyer>(string buyerID, PartialBuyer partialBuyer, string accessToken = null) where TBuyer : Buyer;
+		/// <summary>Get a list of buyer buyer sellers.</summary>
+		/// <param name="buyerID">ID of the buyer.</param>
+		/// <param name="search">Word or phrase to search for.</param>
+		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
+		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<BuyerSupplier>> ListBuyerSellersAsync(string buyerID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
+		/// <summary>Get a list of buyer buyer sellers.</summary>
+		/// <param name="buyerID">ID of the buyer.</param>
+		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<BuyerSupplier>> ListBuyerSellersAsync(string buyerID, Action<ListOptionsBuilder<BuyerSupplier>> buildListOpts, string accessToken = null);
 	}
 
 	public interface ICatalogsResource
@@ -1234,6 +1250,181 @@ namespace OrderCloud.SDK
 		Task<TOrderWorksheet> CalculateAsync<TOrderWorksheet>(OrderDirection direction, string orderID, string accessToken = null) where TOrderWorksheet : OrderWorksheet;
 	}
 
+	public interface IInventoryRecordsResource
+	{
+		/// <summary>Get a single inventory record.</summary>
+		/// <param name="productID">ID of the product.</param>
+		/// <param name="inventoryRecordID">ID of the inventory record.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<InventoryRecord> GetAsync(string productID, string inventoryRecordID, string accessToken = null);
+		/// <summary>Get a single inventory record.</summary>
+		/// <param name="productID">ID of the product.</param>
+		/// <param name="inventoryRecordID">ID of the inventory record.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TInventoryRecord> GetAsync<TInventoryRecord>(string productID, string inventoryRecordID, string accessToken = null) where TInventoryRecord : InventoryRecord;
+		/// <summary>Get a list of inventory records.</summary>
+		/// <param name="productID">ID of the product.</param>
+		/// <param name="search">Word or phrase to search for.</param>
+		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
+		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<InventoryRecord>> ListAsync(string productID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
+		/// <summary>Get a list of inventory records.</summary>
+		/// <param name="productID">ID of the product.</param>
+		/// <param name="search">Word or phrase to search for.</param>
+		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
+		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<TInventoryRecord>> ListAsync<TInventoryRecord>(string productID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TInventoryRecord : InventoryRecord;
+		/// <summary>Get a list of inventory records.</summary>
+		/// <param name="productID">ID of the product.</param>
+		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<InventoryRecord>> ListAsync(string productID, Action<ListOptionsBuilder<InventoryRecord>> buildListOpts, string accessToken = null);
+		/// <summary>Get a list of inventory records.</summary>
+		/// <param name="productID">ID of the product.</param>
+		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<TInventoryRecord>> ListAsync<TInventoryRecord>(string productID, Action<ListOptionsBuilder<TInventoryRecord>> buildListOpts, string accessToken = null) where TInventoryRecord : InventoryRecord;
+		/// <summary>Create a new inventory record. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <param name="productID">ID of the product.</param>
+		/// <param name="inventoryRecord">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<InventoryRecord> CreateAsync(string productID, InventoryRecord inventoryRecord, string accessToken = null);
+		/// <summary>Create a new inventory record. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <param name="productID">ID of the product.</param>
+		/// <param name="inventoryRecord">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TInventoryRecord> CreateAsync<TInventoryRecord>(string productID, InventoryRecord inventoryRecord, string accessToken = null) where TInventoryRecord : InventoryRecord;
+		/// <summary>Delete an inventory record.</summary>
+		/// <param name="productID">ID of the product.</param>
+		/// <param name="inventoryRecordID">ID of the inventory record.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task DeleteAsync(string productID, string inventoryRecordID, string accessToken = null);
+		/// <summary>Create or update an inventory record. If an object with the same ID already exists, it will be overwritten.</summary>
+		/// <param name="productID">ID of the product.</param>
+		/// <param name="inventoryRecordID">ID of the inventory record.</param>
+		/// <param name="inventoryRecord">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<InventoryRecord> SaveAsync(string productID, string inventoryRecordID, InventoryRecord inventoryRecord, string accessToken = null);
+		/// <summary>Create or update an inventory record. If an object with the same ID already exists, it will be overwritten.</summary>
+		/// <param name="productID">ID of the product.</param>
+		/// <param name="inventoryRecordID">ID of the inventory record.</param>
+		/// <param name="inventoryRecord">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TInventoryRecord> SaveAsync<TInventoryRecord>(string productID, string inventoryRecordID, InventoryRecord inventoryRecord, string accessToken = null) where TInventoryRecord : InventoryRecord;
+		/// <summary>Partially update an inventory record.</summary>
+		/// <param name="productID">ID of the product.</param>
+		/// <param name="inventoryRecordID">ID of the inventory record.</param>
+		/// <param name="partialInventoryRecord">The object that will be partially serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<InventoryRecord> PatchAsync(string productID, string inventoryRecordID, PartialInventoryRecord partialInventoryRecord, string accessToken = null);
+		/// <summary>Partially update an inventory record.</summary>
+		/// <param name="productID">ID of the product.</param>
+		/// <param name="inventoryRecordID">ID of the inventory record.</param>
+		/// <param name="partialInventoryRecord">The object that will be partially serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TInventoryRecord> PatchAsync<TInventoryRecord>(string productID, string inventoryRecordID, PartialInventoryRecord partialInventoryRecord, string accessToken = null) where TInventoryRecord : InventoryRecord;
+		/// <summary>Get a list of inventory record variants.</summary>
+		/// <param name="productID">ID of the product.</param>
+		/// <param name="variantID">ID of the variant.</param>
+		/// <param name="search">Word or phrase to search for.</param>
+		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
+		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<InventoryRecord>> ListVariantAsync(string productID, string variantID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
+		/// <summary>Get a list of inventory record variants.</summary>
+		/// <param name="productID">ID of the product.</param>
+		/// <param name="variantID">ID of the variant.</param>
+		/// <param name="search">Word or phrase to search for.</param>
+		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
+		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<TInventoryRecord>> ListVariantAsync<TInventoryRecord>(string productID, string variantID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TInventoryRecord : InventoryRecord;
+		/// <summary>Get a list of inventory record variants.</summary>
+		/// <param name="productID">ID of the product.</param>
+		/// <param name="variantID">ID of the variant.</param>
+		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<InventoryRecord>> ListVariantAsync(string productID, string variantID, Action<ListOptionsBuilder<InventoryRecord>> buildListOpts, string accessToken = null);
+		/// <summary>Get a list of inventory record variants.</summary>
+		/// <param name="productID">ID of the product.</param>
+		/// <param name="variantID">ID of the variant.</param>
+		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<TInventoryRecord>> ListVariantAsync<TInventoryRecord>(string productID, string variantID, Action<ListOptionsBuilder<TInventoryRecord>> buildListOpts, string accessToken = null) where TInventoryRecord : InventoryRecord;
+		/// <summary>Get a single inventory record variant.</summary>
+		/// <param name="productID">ID of the product.</param>
+		/// <param name="variantID">ID of the variant.</param>
+		/// <param name="inventoryRecordID">ID of the inventory record.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<InventoryRecord> GetVariantAsync(string productID, string variantID, string inventoryRecordID, string accessToken = null);
+		/// <summary>Get a single inventory record variant.</summary>
+		/// <param name="productID">ID of the product.</param>
+		/// <param name="variantID">ID of the variant.</param>
+		/// <param name="inventoryRecordID">ID of the inventory record.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TInventoryRecord> GetVariantAsync<TInventoryRecord>(string productID, string variantID, string inventoryRecordID, string accessToken = null) where TInventoryRecord : InventoryRecord;
+		/// <summary>Create a new inventory record variant.</summary>
+		/// <param name="productID">ID of the product.</param>
+		/// <param name="variantID">ID of the variant.</param>
+		/// <param name="inventoryRecord">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<InventoryRecord> CreateVariantAsync(string productID, string variantID, InventoryRecord inventoryRecord, string accessToken = null);
+		/// <summary>Create a new inventory record variant.</summary>
+		/// <param name="productID">ID of the product.</param>
+		/// <param name="variantID">ID of the variant.</param>
+		/// <param name="inventoryRecord">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TInventoryRecord> CreateVariantAsync<TInventoryRecord>(string productID, string variantID, InventoryRecord inventoryRecord, string accessToken = null) where TInventoryRecord : InventoryRecord;
+		/// <summary>Create or update an inventory record variant.</summary>
+		/// <param name="productID">ID of the product.</param>
+		/// <param name="variantID">ID of the variant.</param>
+		/// <param name="inventoryRecordID">ID of the inventory record.</param>
+		/// <param name="inventoryRecord">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<InventoryRecord> SaveVariantAsync(string productID, string variantID, string inventoryRecordID, InventoryRecord inventoryRecord, string accessToken = null);
+		/// <summary>Create or update an inventory record variant.</summary>
+		/// <param name="productID">ID of the product.</param>
+		/// <param name="variantID">ID of the variant.</param>
+		/// <param name="inventoryRecordID">ID of the inventory record.</param>
+		/// <param name="inventoryRecord">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TInventoryRecord> SaveVariantAsync<TInventoryRecord>(string productID, string variantID, string inventoryRecordID, InventoryRecord inventoryRecord, string accessToken = null) where TInventoryRecord : InventoryRecord;
+		/// <summary>Partially update an inventory record variant.</summary>
+		/// <param name="productID">ID of the product.</param>
+		/// <param name="variantID">ID of the variant.</param>
+		/// <param name="inventoryRecordID">ID of the inventory record.</param>
+		/// <param name="partialInventoryRecord">The object that will be partially serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<InventoryRecord> PatchVariantAsync(string productID, string variantID, string inventoryRecordID, PartialInventoryRecord partialInventoryRecord, string accessToken = null);
+		/// <summary>Partially update an inventory record variant.</summary>
+		/// <param name="productID">ID of the product.</param>
+		/// <param name="variantID">ID of the variant.</param>
+		/// <param name="inventoryRecordID">ID of the inventory record.</param>
+		/// <param name="partialInventoryRecord">The object that will be partially serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TInventoryRecord> PatchVariantAsync<TInventoryRecord>(string productID, string variantID, string inventoryRecordID, PartialInventoryRecord partialInventoryRecord, string accessToken = null) where TInventoryRecord : InventoryRecord;
+		/// <summary>Delete an inventory record variant.</summary>
+		/// <param name="productID">ID of the product.</param>
+		/// <param name="variantID">ID of the variant.</param>
+		/// <param name="inventoryRecordID">ID of the inventory record.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task DeleteVariantAsync(string productID, string variantID, string inventoryRecordID, string accessToken = null);
+	}
+
 	public interface ILineItemsResource
 	{
 		/// <summary>Get a single line item.</summary>
@@ -1809,35 +2000,37 @@ namespace OrderCloud.SDK
 		/// <param name="to">Upper bound of date range that the order was created (if outgoing) or submitted (if incoming).</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
+		/// <param name="searchType">Type of search to perform. Possible values: AnyTerm (default), AllTermsAnyField, AllTermsSameField, ExactPhrase, ExactPhrasePrefix.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
-		Task<ListPage<Order>> ListOrdersAsync(DateTimeOffset? from = null, DateTimeOffset? to = null, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
+		Task<ListPage<Order>> ListOrdersAsync(DateTimeOffset? from = null, DateTimeOffset? to = null, string search = null, string searchOn = null, SearchType searchType = SearchType.AnyTerm, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
 		/// <summary>Get a list of orders visible to this user. List orders created by this user.</summary>
 		/// <param name="from">Lower bound of date range that the order was created (if outgoing) or submitted (if incoming).</param>
 		/// <param name="to">Upper bound of date range that the order was created (if outgoing) or submitted (if incoming).</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
+		/// <param name="searchType">Type of search to perform. Possible values: AnyTerm (default), AllTermsAnyField, AllTermsSameField, ExactPhrase, ExactPhrasePrefix.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
-		Task<ListPage<TOrder>> ListOrdersAsync<TOrder>(DateTimeOffset? from = null, DateTimeOffset? to = null, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TOrder : Order;
+		Task<ListPage<TOrder>> ListOrdersAsync<TOrder>(DateTimeOffset? from = null, DateTimeOffset? to = null, string search = null, string searchOn = null, SearchType searchType = SearchType.AnyTerm, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TOrder : Order;
 		/// <summary>Get a list of orders visible to this user. List orders created by this user.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="from">Lower bound of date range that the order was created (if outgoing) or submitted (if incoming).</param>
 		/// <param name="to">Upper bound of date range that the order was created (if outgoing) or submitted (if incoming).</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
-		Task<ListPage<Order>> ListOrdersAsync(Action<ListOptionsBuilder<Order>> buildListOpts, DateTimeOffset? from = null, DateTimeOffset? to = null, string accessToken = null);
+		Task<ListPage<Order>> ListOrdersAsync(Action<ListOptionsBuilder2<Order>> buildListOpts, DateTimeOffset? from = null, DateTimeOffset? to = null, string accessToken = null);
 		/// <summary>Get a list of orders visible to this user. List orders created by this user.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="from">Lower bound of date range that the order was created (if outgoing) or submitted (if incoming).</param>
 		/// <param name="to">Upper bound of date range that the order was created (if outgoing) or submitted (if incoming).</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
-		Task<ListPage<TOrder>> ListOrdersAsync<TOrder>(Action<ListOptionsBuilder<TOrder>> buildListOpts, DateTimeOffset? from = null, DateTimeOffset? to = null, string accessToken = null) where TOrder : Order;
+		Task<ListPage<TOrder>> ListOrdersAsync<TOrder>(Action<ListOptionsBuilder2<TOrder>> buildListOpts, DateTimeOffset? from = null, DateTimeOffset? to = null, string accessToken = null) where TOrder : Order;
 		/// <summary>Get a list of orders that this user can approve.</summary>
 		/// <param name="from">Lower bound of date range that the order was created (if outgoing) or submitted (if incoming).</param>
 		/// <param name="to">Upper bound of date range that the order was created (if outgoing) or submitted (if incoming).</param>
@@ -2247,12 +2440,13 @@ namespace OrderCloud.SDK
 		/// <param name="to">Upper bound of date range that the order was created.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
+		/// <param name="searchType">Type of search to perform. Possible values: AnyTerm (default), AllTermsAnyField, AllTermsSameField, ExactPhrase, ExactPhrasePrefix.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
-		Task<ListPage<Order>> ListAsync(OrderDirection direction, string buyerID = null, string supplierID = null, DateTimeOffset? from = null, DateTimeOffset? to = null, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
+		Task<ListPage<Order>> ListAsync(OrderDirection direction, string buyerID = null, string supplierID = null, DateTimeOffset? from = null, DateTimeOffset? to = null, string search = null, string searchOn = null, SearchType searchType = SearchType.AnyTerm, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
 		/// <summary>Get a list of orders.</summary>
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
 		/// <param name="buyerID">ID of the buyer.</param>
@@ -2261,12 +2455,13 @@ namespace OrderCloud.SDK
 		/// <param name="to">Upper bound of date range that the order was created.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
+		/// <param name="searchType">Type of search to perform. Possible values: AnyTerm (default), AllTermsAnyField, AllTermsSameField, ExactPhrase, ExactPhrasePrefix.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
-		Task<ListPage<TOrder>> ListAsync<TOrder>(OrderDirection direction, string buyerID = null, string supplierID = null, DateTimeOffset? from = null, DateTimeOffset? to = null, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TOrder : Order;
+		Task<ListPage<TOrder>> ListAsync<TOrder>(OrderDirection direction, string buyerID = null, string supplierID = null, DateTimeOffset? from = null, DateTimeOffset? to = null, string search = null, string searchOn = null, SearchType searchType = SearchType.AnyTerm, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TOrder : Order;
 		/// <summary>Get a list of orders.</summary>
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
@@ -2275,7 +2470,7 @@ namespace OrderCloud.SDK
 		/// <param name="from">Lower bound of date range that the order was created.</param>
 		/// <param name="to">Upper bound of date range that the order was created.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
-		Task<ListPage<Order>> ListAsync(OrderDirection direction, Action<ListOptionsBuilder<Order>> buildListOpts, string buyerID = null, string supplierID = null, DateTimeOffset? from = null, DateTimeOffset? to = null, string accessToken = null);
+		Task<ListPage<Order>> ListAsync(OrderDirection direction, Action<ListOptionsBuilder2<Order>> buildListOpts, string buyerID = null, string supplierID = null, DateTimeOffset? from = null, DateTimeOffset? to = null, string accessToken = null);
 		/// <summary>Get a list of orders.</summary>
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
@@ -2284,7 +2479,7 @@ namespace OrderCloud.SDK
 		/// <param name="from">Lower bound of date range that the order was created.</param>
 		/// <param name="to">Upper bound of date range that the order was created.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
-		Task<ListPage<TOrder>> ListAsync<TOrder>(OrderDirection direction, Action<ListOptionsBuilder<TOrder>> buildListOpts, string buyerID = null, string supplierID = null, DateTimeOffset? from = null, DateTimeOffset? to = null, string accessToken = null) where TOrder : Order;
+		Task<ListPage<TOrder>> ListAsync<TOrder>(OrderDirection direction, Action<ListOptionsBuilder2<TOrder>> buildListOpts, string buyerID = null, string supplierID = null, DateTimeOffset? from = null, DateTimeOffset? to = null, string accessToken = null) where TOrder : Order;
 		/// <summary>Create a new order. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
 		/// <param name="order">The object that will be serialized to JSON and sent in the request body.</param>
@@ -4373,7 +4568,7 @@ namespace OrderCloud.SDK
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<XpIndex>> ListAsync(Action<ListOptionsBuilder<XpIndex>> buildListOpts, string accessToken = null);
 		/// <summary>Delete a XP index.</summary>
-		/// <param name="thingType">Thing type of the xp index. Possible values: Address, Variant, Order, LineItem, CostCenter, CreditCard, Payment, Spec, SpecOption, UserGroup, Company, Category, PriceSchedule, Shipment, SpendingAccount, User, Promotion, ApprovalRule, Catalog, ProductFacet, MessageSender.</param>
+		/// <param name="thingType">Thing type of the xp index. Possible values: Address, Variant, Order, LineItem, CostCenter, CreditCard, Payment, Spec, SpecOption, UserGroup, Company, Category, PriceSchedule, Shipment, SpendingAccount, User, Promotion, ApprovalRule, Catalog, ProductFacet, MessageSender, InventoryRecord.</param>
 		/// <param name="key">Key of the xp index.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task DeleteAsync(XpThingType thingType, string key, string accessToken = null);
@@ -4401,6 +4596,7 @@ namespace OrderCloud.SDK
 			ImpersonationConfigs = new ImpersonationConfigsResource(this);
 			Incrementors = new IncrementorsResource(this);
 			IntegrationEvents = new IntegrationEventsResource(this);
+			InventoryRecords = new InventoryRecordsResource(this);
 			LineItems = new LineItemsResource(this);
 			Locales = new LocalesResource(this);
 			Me = new MeResource(this);
@@ -4442,6 +4638,7 @@ namespace OrderCloud.SDK
 		public IImpersonationConfigsResource ImpersonationConfigs { get; private set; }
 		public IIncrementorsResource Incrementors { get; private set; }
 		public IIntegrationEventsResource IntegrationEvents { get; private set; }
+		public IInventoryRecordsResource InventoryRecords { get; private set; }
 		public ILineItemsResource LineItems { get; private set; }
 		public ILocalesResource Locales { get; private set; }
 		public IMeResource Me { get; private set; }
@@ -4602,6 +4799,8 @@ namespace OrderCloud.SDK
 		public Task<TBuyer> SaveAsync<TBuyer>(string buyerID, Buyer buyer, string accessToken = null) where TBuyer : Buyer => Request("v1", "buyers", buyerID).WithOAuthBearerToken(accessToken).PutJsonAsync(ValidateModel(buyer)).ReceiveJson<TBuyer>();
 		public Task<Buyer> PatchAsync(string buyerID, PartialBuyer partialBuyer, string accessToken = null) => PatchAsync<Buyer>(buyerID, partialBuyer, accessToken);
 		public Task<TBuyer> PatchAsync<TBuyer>(string buyerID, PartialBuyer partialBuyer, string accessToken = null) where TBuyer : Buyer => Request("v1", "buyers", buyerID).WithOAuthBearerToken(accessToken).PatchJsonAsync(ValidateModel(partialBuyer)).ReceiveJson<TBuyer>();
+		public Task<ListPage<BuyerSupplier>> ListBuyerSellersAsync(string buyerID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) => Request("v1", "buyers", buyerID, "sellers").WithOAuthBearerToken(accessToken).SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<BuyerSupplier>>();
+		public Task<ListPage<BuyerSupplier>> ListBuyerSellersAsync(string buyerID, Action<ListOptionsBuilder<BuyerSupplier>> buildListOpts, string accessToken = null) => Request("v1", "buyers", buyerID, "sellers").WithOAuthBearerToken(accessToken).SetListOptions(buildListOpts).GetJsonAsync<ListPage<BuyerSupplier>>();
 	}
 
 	public class CatalogsResource : OrderCloudResource, ICatalogsResource
@@ -4744,6 +4943,37 @@ namespace OrderCloud.SDK
 		public Task<TOrderWorksheet> CalculateAsync<TOrderWorksheet>(OrderDirection direction, string orderID, string accessToken = null) where TOrderWorksheet : OrderWorksheet => Request("v1", "orders", direction, orderID, "calculate").WithOAuthBearerToken(accessToken).PostAsync(null).ReceiveJson<TOrderWorksheet>();
 	}
 
+	public class InventoryRecordsResource : OrderCloudResource, IInventoryRecordsResource
+	{
+		internal InventoryRecordsResource(OrderCloudClient client) : base(client) { }
+		public Task<InventoryRecord> GetAsync(string productID, string inventoryRecordID, string accessToken = null) => GetAsync<InventoryRecord>(productID, inventoryRecordID, accessToken);
+		public Task<TInventoryRecord> GetAsync<TInventoryRecord>(string productID, string inventoryRecordID, string accessToken = null) where TInventoryRecord : InventoryRecord => Request("v1", "products", productID, "inventoryrecords", inventoryRecordID).WithOAuthBearerToken(accessToken).GetJsonAsync<TInventoryRecord>();
+		public Task<ListPage<InventoryRecord>> ListAsync(string productID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) => ListAsync<InventoryRecord>(productID, search, searchOn, sortBy, page, pageSize, filters, accessToken);
+		public Task<ListPage<TInventoryRecord>> ListAsync<TInventoryRecord>(string productID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TInventoryRecord : InventoryRecord => Request("v1", "products", productID, "inventoryrecords").WithOAuthBearerToken(accessToken).SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<TInventoryRecord>>();
+		public Task<ListPage<InventoryRecord>> ListAsync(string productID, Action<ListOptionsBuilder<InventoryRecord>> buildListOpts, string accessToken = null) => ListAsync<InventoryRecord>(productID, buildListOpts, accessToken);
+		public Task<ListPage<TInventoryRecord>> ListAsync<TInventoryRecord>(string productID, Action<ListOptionsBuilder<TInventoryRecord>> buildListOpts, string accessToken = null) where TInventoryRecord : InventoryRecord => Request("v1", "products", productID, "inventoryrecords").WithOAuthBearerToken(accessToken).SetListOptions(buildListOpts).GetJsonAsync<ListPage<TInventoryRecord>>();
+		public Task<InventoryRecord> CreateAsync(string productID, InventoryRecord inventoryRecord, string accessToken = null) => CreateAsync<InventoryRecord>(productID, inventoryRecord, accessToken);
+		public Task<TInventoryRecord> CreateAsync<TInventoryRecord>(string productID, InventoryRecord inventoryRecord, string accessToken = null) where TInventoryRecord : InventoryRecord => Request("v1", "products", productID, "inventoryrecords").WithOAuthBearerToken(accessToken).PostJsonAsync(ValidateModel(inventoryRecord)).ReceiveJson<TInventoryRecord>();
+		public Task DeleteAsync(string productID, string inventoryRecordID, string accessToken = null) => Request("v1", "products", productID, "inventoryrecords", inventoryRecordID).WithOAuthBearerToken(accessToken).DeleteAsync();
+		public Task<InventoryRecord> SaveAsync(string productID, string inventoryRecordID, InventoryRecord inventoryRecord, string accessToken = null) => SaveAsync<InventoryRecord>(productID, inventoryRecordID, inventoryRecord, accessToken);
+		public Task<TInventoryRecord> SaveAsync<TInventoryRecord>(string productID, string inventoryRecordID, InventoryRecord inventoryRecord, string accessToken = null) where TInventoryRecord : InventoryRecord => Request("v1", "products", productID, "inventoryrecords", inventoryRecordID).WithOAuthBearerToken(accessToken).PutJsonAsync(ValidateModel(inventoryRecord)).ReceiveJson<TInventoryRecord>();
+		public Task<InventoryRecord> PatchAsync(string productID, string inventoryRecordID, PartialInventoryRecord partialInventoryRecord, string accessToken = null) => PatchAsync<InventoryRecord>(productID, inventoryRecordID, partialInventoryRecord, accessToken);
+		public Task<TInventoryRecord> PatchAsync<TInventoryRecord>(string productID, string inventoryRecordID, PartialInventoryRecord partialInventoryRecord, string accessToken = null) where TInventoryRecord : InventoryRecord => Request("v1", "products", productID, "inventoryrecords", inventoryRecordID).WithOAuthBearerToken(accessToken).PatchJsonAsync(ValidateModel(partialInventoryRecord)).ReceiveJson<TInventoryRecord>();
+		public Task<ListPage<InventoryRecord>> ListVariantAsync(string productID, string variantID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) => ListVariantAsync<InventoryRecord>(productID, variantID, search, searchOn, sortBy, page, pageSize, filters, accessToken);
+		public Task<ListPage<TInventoryRecord>> ListVariantAsync<TInventoryRecord>(string productID, string variantID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TInventoryRecord : InventoryRecord => Request("v1", "products", productID, "variants", variantID, "inventoryrecords").WithOAuthBearerToken(accessToken).SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<TInventoryRecord>>();
+		public Task<ListPage<InventoryRecord>> ListVariantAsync(string productID, string variantID, Action<ListOptionsBuilder<InventoryRecord>> buildListOpts, string accessToken = null) => ListVariantAsync<InventoryRecord>(productID, variantID, buildListOpts, accessToken);
+		public Task<ListPage<TInventoryRecord>> ListVariantAsync<TInventoryRecord>(string productID, string variantID, Action<ListOptionsBuilder<TInventoryRecord>> buildListOpts, string accessToken = null) where TInventoryRecord : InventoryRecord => Request("v1", "products", productID, "variants", variantID, "inventoryrecords").WithOAuthBearerToken(accessToken).SetListOptions(buildListOpts).GetJsonAsync<ListPage<TInventoryRecord>>();
+		public Task<InventoryRecord> GetVariantAsync(string productID, string variantID, string inventoryRecordID, string accessToken = null) => GetVariantAsync<InventoryRecord>(productID, variantID, inventoryRecordID, accessToken);
+		public Task<TInventoryRecord> GetVariantAsync<TInventoryRecord>(string productID, string variantID, string inventoryRecordID, string accessToken = null) where TInventoryRecord : InventoryRecord => Request("v1", "products", productID, "variants", variantID, "inventoryrecords", inventoryRecordID).WithOAuthBearerToken(accessToken).GetJsonAsync<TInventoryRecord>();
+		public Task<InventoryRecord> CreateVariantAsync(string productID, string variantID, InventoryRecord inventoryRecord, string accessToken = null) => CreateVariantAsync<InventoryRecord>(productID, variantID, inventoryRecord, accessToken);
+		public Task<TInventoryRecord> CreateVariantAsync<TInventoryRecord>(string productID, string variantID, InventoryRecord inventoryRecord, string accessToken = null) where TInventoryRecord : InventoryRecord => Request("v1", "products", productID, "variants", variantID, "inventoryrecords").WithOAuthBearerToken(accessToken).PostJsonAsync(ValidateModel(inventoryRecord)).ReceiveJson<TInventoryRecord>();
+		public Task<InventoryRecord> SaveVariantAsync(string productID, string variantID, string inventoryRecordID, InventoryRecord inventoryRecord, string accessToken = null) => SaveVariantAsync<InventoryRecord>(productID, variantID, inventoryRecordID, inventoryRecord, accessToken);
+		public Task<TInventoryRecord> SaveVariantAsync<TInventoryRecord>(string productID, string variantID, string inventoryRecordID, InventoryRecord inventoryRecord, string accessToken = null) where TInventoryRecord : InventoryRecord => Request("v1", "products", productID, "variants", variantID, "inventoryrecords", inventoryRecordID).WithOAuthBearerToken(accessToken).PutJsonAsync(ValidateModel(inventoryRecord)).ReceiveJson<TInventoryRecord>();
+		public Task<InventoryRecord> PatchVariantAsync(string productID, string variantID, string inventoryRecordID, PartialInventoryRecord partialInventoryRecord, string accessToken = null) => PatchVariantAsync<InventoryRecord>(productID, variantID, inventoryRecordID, partialInventoryRecord, accessToken);
+		public Task<TInventoryRecord> PatchVariantAsync<TInventoryRecord>(string productID, string variantID, string inventoryRecordID, PartialInventoryRecord partialInventoryRecord, string accessToken = null) where TInventoryRecord : InventoryRecord => Request("v1", "products", productID, "variants", variantID, "inventoryrecords", inventoryRecordID).WithOAuthBearerToken(accessToken).PatchJsonAsync(ValidateModel(partialInventoryRecord)).ReceiveJson<TInventoryRecord>();
+		public Task DeleteVariantAsync(string productID, string variantID, string inventoryRecordID, string accessToken = null) => Request("v1", "products", productID, "variants", variantID, "inventoryrecords", inventoryRecordID).WithOAuthBearerToken(accessToken).DeleteAsync();
+	}
+
 	public class LineItemsResource : OrderCloudResource, ILineItemsResource
 	{
 		internal LineItemsResource(OrderCloudClient client) : base(client) { }
@@ -4846,10 +5076,10 @@ namespace OrderCloud.SDK
 		public Task<ListPage<TVariant>> ListVariantsAsync<TVariant>(string productID, Action<ListOptionsBuilder<TVariant>> buildListOpts, string accessToken = null) where TVariant : Variant => Request("v1", "me", "products", productID, "variants").WithOAuthBearerToken(accessToken).SetListOptions(buildListOpts).GetJsonAsync<ListPage<TVariant>>();
 		public Task<Variant> GetVariantAsync(string productID, string variantID, string accessToken = null) => GetVariantAsync<Variant>(productID, variantID, accessToken);
 		public Task<TVariant> GetVariantAsync<TVariant>(string productID, string variantID, string accessToken = null) where TVariant : Variant => Request("v1", "me", "products", productID, "variants", variantID).WithOAuthBearerToken(accessToken).GetJsonAsync<TVariant>();
-		public Task<ListPage<Order>> ListOrdersAsync(DateTimeOffset? from = null, DateTimeOffset? to = null, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) => ListOrdersAsync<Order>(from, to, search, searchOn, sortBy, page, pageSize, filters, accessToken);
-		public Task<ListPage<TOrder>> ListOrdersAsync<TOrder>(DateTimeOffset? from = null, DateTimeOffset? to = null, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TOrder : Order => Request("v1", "me", "orders").WithOAuthBearerToken(accessToken).SetQueryParams(new { from, to, search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<TOrder>>();
-		public Task<ListPage<Order>> ListOrdersAsync(Action<ListOptionsBuilder<Order>> buildListOpts, DateTimeOffset? from = null, DateTimeOffset? to = null, string accessToken = null) => ListOrdersAsync<Order>(buildListOpts, from, to, accessToken);
-		public Task<ListPage<TOrder>> ListOrdersAsync<TOrder>(Action<ListOptionsBuilder<TOrder>> buildListOpts, DateTimeOffset? from = null, DateTimeOffset? to = null, string accessToken = null) where TOrder : Order => Request("v1", "me", "orders").WithOAuthBearerToken(accessToken).SetQueryParams(new { from, to }).SetListOptions(buildListOpts).GetJsonAsync<ListPage<TOrder>>();
+		public Task<ListPage<Order>> ListOrdersAsync(DateTimeOffset? from = null, DateTimeOffset? to = null, string search = null, string searchOn = null, SearchType searchType = SearchType.AnyTerm, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) => ListOrdersAsync<Order>(from, to, search, searchOn, searchType, sortBy, page, pageSize, filters, accessToken);
+		public Task<ListPage<TOrder>> ListOrdersAsync<TOrder>(DateTimeOffset? from = null, DateTimeOffset? to = null, string search = null, string searchOn = null, SearchType searchType = SearchType.AnyTerm, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TOrder : Order => Request("v1", "me", "orders").WithOAuthBearerToken(accessToken).SetQueryParams(new { from, to, search, searchOn, searchType, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<TOrder>>();
+		public Task<ListPage<Order>> ListOrdersAsync(Action<ListOptionsBuilder2<Order>> buildListOpts, DateTimeOffset? from = null, DateTimeOffset? to = null, string accessToken = null) => ListOrdersAsync<Order>(buildListOpts, from, to, accessToken);
+		public Task<ListPage<TOrder>> ListOrdersAsync<TOrder>(Action<ListOptionsBuilder2<TOrder>> buildListOpts, DateTimeOffset? from = null, DateTimeOffset? to = null, string accessToken = null) where TOrder : Order => Request("v1", "me", "orders").WithOAuthBearerToken(accessToken).SetQueryParams(new { from, to }).SetListOptions(buildListOpts).GetJsonAsync<ListPage<TOrder>>();
 		public Task<ListPage<Order>> ListApprovableOrdersAsync(DateTimeOffset? from = null, DateTimeOffset? to = null, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) => ListApprovableOrdersAsync<Order>(from, to, search, searchOn, sortBy, page, pageSize, filters, accessToken);
 		public Task<ListPage<TOrder>> ListApprovableOrdersAsync<TOrder>(DateTimeOffset? from = null, DateTimeOffset? to = null, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TOrder : Order => Request("v1", "me", "orders", "approvable").WithOAuthBearerToken(accessToken).SetQueryParams(new { from, to, search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<TOrder>>();
 		public Task<ListPage<Order>> ListApprovableOrdersAsync(Action<ListOptionsBuilder<Order>> buildListOpts, DateTimeOffset? from = null, DateTimeOffset? to = null, string accessToken = null) => ListApprovableOrdersAsync<Order>(buildListOpts, from, to, accessToken);
@@ -4930,10 +5160,10 @@ namespace OrderCloud.SDK
 		internal OrdersResource(OrderCloudClient client) : base(client) { }
 		public Task<Order> GetAsync(OrderDirection direction, string orderID, string accessToken = null) => GetAsync<Order>(direction, orderID, accessToken);
 		public Task<TOrder> GetAsync<TOrder>(OrderDirection direction, string orderID, string accessToken = null) where TOrder : Order => Request("v1", "orders", direction, orderID).WithOAuthBearerToken(accessToken).GetJsonAsync<TOrder>();
-		public Task<ListPage<Order>> ListAsync(OrderDirection direction, string buyerID = null, string supplierID = null, DateTimeOffset? from = null, DateTimeOffset? to = null, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) => ListAsync<Order>(direction, buyerID, supplierID, from, to, search, searchOn, sortBy, page, pageSize, filters, accessToken);
-		public Task<ListPage<TOrder>> ListAsync<TOrder>(OrderDirection direction, string buyerID = null, string supplierID = null, DateTimeOffset? from = null, DateTimeOffset? to = null, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TOrder : Order => Request("v1", "orders", direction).WithOAuthBearerToken(accessToken).SetQueryParams(new { buyerID, supplierID, from, to, search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<TOrder>>();
-		public Task<ListPage<Order>> ListAsync(OrderDirection direction, Action<ListOptionsBuilder<Order>> buildListOpts, string buyerID = null, string supplierID = null, DateTimeOffset? from = null, DateTimeOffset? to = null, string accessToken = null) => ListAsync<Order>(direction, buildListOpts, buyerID, supplierID, from, to, accessToken);
-		public Task<ListPage<TOrder>> ListAsync<TOrder>(OrderDirection direction, Action<ListOptionsBuilder<TOrder>> buildListOpts, string buyerID = null, string supplierID = null, DateTimeOffset? from = null, DateTimeOffset? to = null, string accessToken = null) where TOrder : Order => Request("v1", "orders", direction).WithOAuthBearerToken(accessToken).SetQueryParams(new { buyerID, supplierID, from, to }).SetListOptions(buildListOpts).GetJsonAsync<ListPage<TOrder>>();
+		public Task<ListPage<Order>> ListAsync(OrderDirection direction, string buyerID = null, string supplierID = null, DateTimeOffset? from = null, DateTimeOffset? to = null, string search = null, string searchOn = null, SearchType searchType = SearchType.AnyTerm, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) => ListAsync<Order>(direction, buyerID, supplierID, from, to, search, searchOn, searchType, sortBy, page, pageSize, filters, accessToken);
+		public Task<ListPage<TOrder>> ListAsync<TOrder>(OrderDirection direction, string buyerID = null, string supplierID = null, DateTimeOffset? from = null, DateTimeOffset? to = null, string search = null, string searchOn = null, SearchType searchType = SearchType.AnyTerm, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TOrder : Order => Request("v1", "orders", direction).WithOAuthBearerToken(accessToken).SetQueryParams(new { buyerID, supplierID, from, to, search, searchOn, searchType, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<TOrder>>();
+		public Task<ListPage<Order>> ListAsync(OrderDirection direction, Action<ListOptionsBuilder2<Order>> buildListOpts, string buyerID = null, string supplierID = null, DateTimeOffset? from = null, DateTimeOffset? to = null, string accessToken = null) => ListAsync<Order>(direction, buildListOpts, buyerID, supplierID, from, to, accessToken);
+		public Task<ListPage<TOrder>> ListAsync<TOrder>(OrderDirection direction, Action<ListOptionsBuilder2<TOrder>> buildListOpts, string buyerID = null, string supplierID = null, DateTimeOffset? from = null, DateTimeOffset? to = null, string accessToken = null) where TOrder : Order => Request("v1", "orders", direction).WithOAuthBearerToken(accessToken).SetQueryParams(new { buyerID, supplierID, from, to }).SetListOptions(buildListOpts).GetJsonAsync<ListPage<TOrder>>();
 		public Task<Order> CreateAsync(OrderDirection direction, Order order, string accessToken = null) => CreateAsync<Order>(direction, order, accessToken);
 		public Task<TOrder> CreateAsync<TOrder>(OrderDirection direction, Order order, string accessToken = null) where TOrder : Order => Request("v1", "orders", direction).WithOAuthBearerToken(accessToken).PostJsonAsync(ValidateModel(order)).ReceiveJson<TOrder>();
 		public Task<Order> SaveAsync(OrderDirection direction, string orderID, Order order, string accessToken = null) => SaveAsync<Order>(direction, orderID, order, accessToken);

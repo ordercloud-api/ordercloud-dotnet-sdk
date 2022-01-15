@@ -193,7 +193,7 @@ namespace OrderCloud.SDK
 		/// <summary>
 		/// Add one or more properties to apply the search phrase.
 		/// </summary>
-		public ListOptionsBuilder2<T> SearchOn(params Expression<Func<T, object>>[] properties) => (ListOptionsBuilder2<T>)base.SearchOn(properties);
+		public new ListOptionsBuilder2<T> SearchOn(params Expression<Func<T, object>>[] properties) => (ListOptionsBuilder2<T>)base.SearchOn(properties);
 		/// <summary>
 		/// Add one or more properties to sort by.
 		/// </summary>
