@@ -12,11 +12,22 @@ namespace OrderCloud.SDK
 			public const string CannotUpdateNotFound = "Address.CannotUpdateNotFound";
 			/// <summary>This Address is not assigned as a Shipping Address.</summary>
 			public const string IsNotShippingAddress = "Address.IsNotShippingAddress";
+			/// <summary>This Address is referenced on 1 or more InventoryRecords, you must delete or modify the InventoryRecords prior to deleting the address.</summary>
+			public const string CannotDeleteInventoryRecordAddress = "Address.CannotDeleteInventoryRecordAddress";
 		}
 		public static class AddressAssignment
 		{
 			/// <summary>Cannot assign address without defining it as either a billing or a shipping address.</summary>
 			public const string MustBeBillingOrShipping = "AddressAssignment.MustBeBillingOrShipping";
+		}
+		public static class AnalyticsEvent
+		{
+			/// <summary>Only one AnalyticsEvent of a given type is permitted for the same ApiClient.</summary>
+			public const string CannotCreateMultipleEventsOfSameType = "AnalyticsEvent.CannotCreateMultipleEventsOfSameType";
+			/// <summary>The properties ClientID and EventType cannot be updated.</summary>
+			public const string CannotUpdateProperty = "AnalyticsEvent.CannotUpdateProperty";
+			/// <summary>The ApiClient specified by ClientID in the request does not exist.</summary>
+			public const string InvalidClientID = "AnalyticsEvent.InvalidClientID";
 		}
 		public static class Api
 		{
@@ -152,6 +163,22 @@ namespace OrderCloud.SDK
 			/// <summary>Inventory must be enabled for this product.</summary>
 			public const string MustEnable = "Inventory.MustEnable";
 		}
+		public static class InventoryConfiguration
+		{
+			/// <summary>Cannot change VariantLevelTracking when InventoryRecords exist for the product.</summary>
+			public const string CannotChangeVariantLevelTracking = "InventoryConfiguration.CannotChangeVariantLevelTracking";
+			/// <summary>Conflicting InventoryRecords exist for the product. You can only have product InventoryRecords, or variant InventoryRecords.</summary>
+			public const string CannotCreateInventoryRecord = "InventoryConfiguration.CannotCreateInventoryRecord";
+			/// <summary>This product does not have inventory configured. Please add inventory to the product and try again.</summary>
+			public const string ProductInventoryMustExist = "InventoryConfiguration.ProductInventoryMustExist";
+			/// <summary>Product.Inventory.VariantLevelTracking must be false in order to create InventoryRecords at the product level, and true in order to create InventoryRecords at the variant level.</summary>
+			public const string InvalidVariantLevelTracking = "InventoryConfiguration.InvalidVariantLevelTracking";
+		}
+		public static class InventoryRecord
+		{
+			/// <summary>Cannot delete an InventoryRecord referenced on a line item from an open order, or an order pending approval.</summary>
+			public const string OpenOrdersExist = "InventoryRecord.OpenOrdersExist";
+		}
 		public static class LineItem
 		{
 			/// <summary>Cannot change the Product ID of an existing Line Item.</summary>
@@ -187,6 +214,8 @@ namespace OrderCloud.SDK
 		}
 		public static class Order
 		{
+			/// <summary>Order search index is being built. Please try again later.</summary>
+			public const string CacheBuilding = "Order.CacheBuilding";
 			/// <summary>Cannot cancel an order with the status of Open or Completed.</summary>
 			public const string CannotCancelInCurrentStatus = "Order.CannotCancelInCurrentStatus";
 			/// <summary>Cannot complete an order with this status. Order status must be Open.</summary>
@@ -334,7 +363,7 @@ namespace OrderCloud.SDK
 		}
 		public static class Product
 		{
-			/// <summary>Product cache is being built. Please try again later.</summary>
+			/// <summary>Product search index is being built. Please try again later.</summary>
 			public const string CacheBuilding = "Product.CacheBuilding";
 			/// <summary>Product cannot be assigned directly to Buyer (or User or Group) because it is not in a Catalog that the Buyer can access.</summary>
 			public const string CannotAssignNotInBuyerCatalog = "Product.CannotAssignNotInBuyerCatalog";
@@ -348,6 +377,11 @@ namespace OrderCloud.SDK
 			public const string RequiresPriceScheduleOrBuyer = "Product.RequiresPriceScheduleOrBuyer";
 			/// <summary>Only the Marketplace Owner can modify AllSuppliersCanSell on their owned products.</summary>
 			public const string CannotModifyAllSuppliersCanSell = "Product.CannotModifyAllSuppliersCanSell";
+		}
+		public static class ProductAssigment
+		{
+			/// <summary>The marketplace owner can create product assignments and designate a SellerID, but only when a PriceScheduleID is also provided. Use the designated endpoints to create a relationship between a Seller and a Product or a Seller and a Buyer.</summary>
+			public const string MustSpecifyPriceScheduleID = "ProductAssigment.MustSpecifyPriceScheduleID";
 		}
 		public static class Promotion
 		{

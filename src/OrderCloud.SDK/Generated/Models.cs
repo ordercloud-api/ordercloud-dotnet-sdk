@@ -16,7 +16,7 @@ namespace OrderCloud.SDK
 	public enum PriceMarkupType { NoMarkup, AmountPerQuantity, AmountTotal, Percentage }
 	public enum SearchType { AnyTerm, AllTermsAnyField, AllTermsSameField, ExactPhrase, ExactPhrasePrefix }
 	public enum UserOrderMoveOption { None, Unsubmitted, All }
-	public enum XpThingType { Address, Variant, Order, LineItem, CostCenter, CreditCard, Payment, Spec, SpecOption, UserGroup, Company, Category, PriceSchedule, Shipment, SpendingAccount, User, Promotion, ApprovalRule, Catalog, ProductFacet, MessageSender }
+	public enum XpThingType { Address, Variant, Order, LineItem, CostCenter, CreditCard, Payment, Spec, SpecOption, UserGroup, Company, Category, PriceSchedule, Shipment, SpendingAccount, User, Promotion, ApprovalRule, Catalog, ProductFacet, MessageSender, InventoryRecord }
 	public class AccessToken : OrderCloudModel
 	{
 		/// <summary>Access token of the access token.</summary>
@@ -553,6 +553,7 @@ namespace OrderCloud.SDK
 		/// <summary>Event type of the integration event. Searchable: priority level 2. Sortable: priority level 2. Possible values: OrderCheckout, OpenIDConnect.</summary>
 		public IntegrationEventType EventType { get => GetProp<IntegrationEventType>("EventType"); set => SetProp<IntegrationEventType>("EventType", value); }
 		/// <summary>URL the IntegrationEvent will POST data to, likely a route within your middleware.</summary>
+		[Required]
 		public string CustomImplementationUrl { get => GetProp<string>("CustomImplementationUrl"); set => SetProp<string>("CustomImplementationUrl", value); }
 		/// <summary>Name of the integration event. Required. Searchable: priority level 3. Sortable: priority level 3.</summary>
 		[Required]
@@ -571,11 +572,44 @@ namespace OrderCloud.SDK
 		public bool VariantLevelTracking { get => GetProp<bool>("VariantLevelTracking"); set => SetProp<bool>("VariantLevelTracking", value); }
 		/// <summary>If true, a user can create line items and place orders for the product even if there is insufficient QuantityAvailable.</summary>
 		public bool OrderCanExceed { get => GetProp<bool>("OrderCanExceed"); set => SetProp<bool>("OrderCanExceed", value); }
-		/// <summary>Automatically decrements on order submit.</summary>
+		/// <summary>Automatically decrements on order submit. If you utilize InventoryRecords either at the product or variant level, this property becomes readonly, and is derived from the sum of all QuantityAvailable of each InventoryRecord. If VariantLevelTracking is enabled, this is the sum of all variant quantities, so the value may not be very useful beyond using it to filter out products with no variant level inventory available.</summary>
 		public int? QuantityAvailable { get => GetProp<int?>("QuantityAvailable"); set => SetProp<int?>("QuantityAvailable", value); }
 		/// <summary>Last updated of the inventory.</summary>
 		[ApiReadOnly]
 		public DateTimeOffset? LastUpdated { get => GetProp<DateTimeOffset?>("LastUpdated"); set => SetProp<DateTimeOffset?>("LastUpdated", value); }
+	}
+	public class InventoryRecord : OrderCloudModel
+	{
+		/// <summary>ID of the inventory record. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 1.</summary>
+		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
+		/// <summary>ID of the owner.</summary>
+		public string OwnerID { get => GetProp<string>("OwnerID"); set => SetProp<string>("OwnerID", value); }
+		/// <summary>Address of the inventory record.</summary>
+		[ApiReadOnly]
+		public Address Address { get => GetProp<Address>("Address"); set => SetProp<Address>("Address", value); }
+		/// <summary>Since an InventoryRecord represents a physical location where inventory for a given product exists, AddressID is required.</summary>
+		[Required]
+		public string AddressID { get => GetProp<string>("AddressID"); set => SetProp<string>("AddressID", value); }
+		/// <summary>Order can exceed of the inventory record.</summary>
+		public bool OrderCanExceed { get => GetProp<bool>("OrderCanExceed"); set => SetProp<bool>("OrderCanExceed", value); }
+		/// <summary>Quantity available of the inventory record.</summary>
+		public int QuantityAvailable { get => GetProp<int>("QuantityAvailable"); set => SetProp<int>("QuantityAvailable", value); }
+		/// <summary>Last updated of the inventory record.</summary>
+		[ApiReadOnly]
+		public DateTimeOffset LastUpdated { get => GetProp<DateTimeOffset>("LastUpdated"); set => SetProp<DateTimeOffset>("LastUpdated", value); }
+		/// <summary>Container for extended (custom) properties of the inventory record.</summary>
+		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
+	}
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, specify dynamic.</typeparam>
+	/// <typeparam name="TAddress">Specific type of the Address property. If not using a custom type, specify Address.</typeparam>
+	public class InventoryRecord<Txp, TAddress> : InventoryRecord
+		where TAddress : Address
+	{
+		/// <summary>Container for extended (custom) properties of the inventory record.</summary>
+		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
+		/// <summary>Address of the inventory record.</summary>
+		[ApiReadOnly]
+		public new TAddress Address { get => GetProp<TAddress>("Address"); set => SetProp<TAddress>("Address", value); }
 	}
 	public class LineItem : OrderCloudModel
 	{
@@ -629,6 +663,8 @@ namespace OrderCloud.SDK
 		/// <summary>ID of the supplier.</summary>
 		[ApiReadOnly]
 		public string SupplierID { get => GetProp<string>("SupplierID"); set => SetProp<string>("SupplierID", value); }
+		/// <summary>Inventory Record ID of which product inventory location to use. The Inventory Record ID cannot be modified once an order is submitted</summary>
+		public string InventoryRecordID { get => GetProp<string>("InventoryRecordID"); set => SetProp<string>("InventoryRecordID", value); }
 		/// <summary>Specs of the line item.</summary>
 		public IList<LineItemSpec> Specs { get => GetProp<IList<LineItemSpec>>("Specs", new List<LineItemSpec>()); set => SetProp<IList<LineItemSpec>>("Specs", value); }
 		/// <summary>Container for extended (custom) properties of the line item.</summary>
@@ -1465,7 +1501,7 @@ namespace OrderCloud.SDK
 	}
 	public class ProductAssignment : OrderCloudModel
 	{
-		/// <summary>ID of the seller.</summary>
+		/// <summary>Marketplace owner can write to this property when creating product assignments for other sellers. A PriceScheduleID owned by the SellerID is required in order to write to this property.</summary>
 		public string SellerID { get => GetProp<string>("SellerID"); set => SetProp<string>("SellerID", value); }
 		/// <summary>ID of the product. Required.</summary>
 		[Required]
@@ -1838,7 +1874,7 @@ namespace OrderCloud.SDK
 		public bool Required { get => GetProp<bool>("Required"); set => SetProp<bool>("Required", value); }
 		/// <summary>For Spec options that are not pre-defined, such as FirstName for a business card.</summary>
 		public bool AllowOpenText { get => GetProp<bool>("AllowOpenText"); set => SetProp<bool>("AllowOpenText", value); }
-		/// <summary>If no Spec.OptionID is passed in the LineItemSpec, this option will be used.</summary>
+		/// <summary>This property can only be written to after both the Spec and Option have been created. If no Spec.OptionID is passed in the LineItemSpec, this option will be used.</summary>
 		public string DefaultOptionID { get => GetProp<string>("DefaultOptionID"); set => SetProp<string>("DefaultOptionID", value); }
 		/// <summary>If true, each unique combinations of this Spec's Options should map to a unique Product Variant.</summary>
 		public bool DefinesVariant { get => GetProp<bool>("DefinesVariant"); set => SetProp<bool>("DefinesVariant", value); }
@@ -2136,7 +2172,7 @@ namespace OrderCloud.SDK
 	}
 	public class XpIndex : OrderCloudModel
 	{
-		/// <summary>Thing type of the xp index. Searchable: priority level 0. Sortable: priority level 0. Possible values: Address, Variant, Order, LineItem, CostCenter, CreditCard, Payment, Spec, SpecOption, UserGroup, Company, Category, PriceSchedule, Shipment, SpendingAccount, User, Promotion, ApprovalRule, Catalog, ProductFacet, MessageSender.</summary>
+		/// <summary>Thing type of the xp index. Searchable: priority level 0. Sortable: priority level 0. Possible values: Address, Variant, Order, LineItem, CostCenter, CreditCard, Payment, Spec, SpecOption, UserGroup, Company, Category, PriceSchedule, Shipment, SpendingAccount, User, Promotion, ApprovalRule, Catalog, ProductFacet, MessageSender, InventoryRecord.</summary>
 		public XpThingType ThingType { get => GetProp<XpThingType>("ThingType"); set => SetProp<XpThingType>("ThingType", value); }
 		/// <summary>Key of the xp index. Searchable: priority level 1. Sortable: priority level 1.</summary>
 		public string Key { get => GetProp<string>("Key"); set => SetProp<string>("Key", value); }
@@ -2185,6 +2221,12 @@ namespace OrderCloud.SDK
 	public class PartialIncrementor : Incrementor, IPartial { }
 	public class PartialIntegrationEvent : IntegrationEvent, IPartial { }
 	public class PartialInventory : Inventory, IPartial { }
+	public class PartialInventoryRecord : InventoryRecord, IPartial { }
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, specify dynamic.</typeparam>
+	/// <typeparam name="TAddress">Specific type of the Address property. If not using a custom type, specify Address.</typeparam>
+	public class PartialInventoryRecord<Txp, TAddress> : PartialInventoryRecord
+		where TAddress : Address
+	{ }
 	public class PartialLineItem : LineItem, IPartial { }
 	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, specify dynamic.</typeparam>
 	/// <typeparam name="TProduct">Specific type of the Product property. If not using a custom type, specify LineItemProduct.</typeparam>
