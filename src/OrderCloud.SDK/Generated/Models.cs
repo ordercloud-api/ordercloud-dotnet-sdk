@@ -723,6 +723,8 @@ namespace OrderCloud.SDK
 		public decimal? ShipWidth { get => GetProp<decimal?>("ShipWidth"); set => SetProp<decimal?>("ShipWidth", value); }
 		/// <summary>Ship length of the line item product.</summary>
 		public decimal? ShipLength { get => GetProp<decimal?>("ShipLength"); set => SetProp<decimal?>("ShipLength", value); }
+		/// <summary>ID of the default supplier.</summary>
+		public string DefaultSupplierID { get => GetProp<string>("DefaultSupplierID"); set => SetProp<string>("DefaultSupplierID", value); }
 		/// <summary>Container for extended (custom) properties of the line item product.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
@@ -1414,6 +1416,8 @@ namespace OrderCloud.SDK
 		/// <summary>Price per unit.</summary>
 		[Required]
 		public decimal Price { get => GetProp<decimal>("Price"); set => SetProp<decimal>("Price", value); }
+		/// <summary>Optional. Sale Price per unit. If the current date/time is within the PriceSchedule SaleStart and SaleEnd, this SalePrice will be used.</summary>
+		public decimal? SalePrice { get => GetProp<decimal?>("SalePrice"); set => SetProp<decimal?>("SalePrice", value); }
 	}
 	public class PriceSchedule : OrderCloudModel
 	{
@@ -1440,6 +1444,13 @@ namespace OrderCloud.SDK
 		public IList<PriceBreak> PriceBreaks { get => GetProp<IList<PriceBreak>>("PriceBreaks", new List<PriceBreak>()); set => SetProp<IList<PriceBreak>>("PriceBreaks", value); }
 		/// <summary>We recommend using ISO-4217 Currency Codes for compatibility with tax and payment processors.</summary>
 		public string Currency { get => GetProp<string>("Currency"); set => SetProp<string>("Currency", value); }
+		/// <summary>Optional. Starting date/time for PriceBreak.SalePrice to be used as the price for the LineItem. Requires that the PriceBreak.SalePrice value is set.</summary>
+		public DateTimeOffset? SaleStart { get => GetProp<DateTimeOffset?>("SaleStart", null); set => SetProp<DateTimeOffset?>("SaleStart", value); }
+		/// <summary>Optional. Ending date/time for PriceBreak.SalePrice to be used as the price for the LineItem. Requires that the PriceBreak.SalePrice value is set.</summary>
+		public DateTimeOffset? SaleEnd { get => GetProp<DateTimeOffset?>("SaleEnd", null); set => SetProp<DateTimeOffset?>("SaleEnd", value); }
+		/// <summary>Is the price currently a sale price. Determined by the SaleStart and SaleEnd date/times and the presence of PriceBreak.SalePrice value being set.</summary>
+		[ApiReadOnly]
+		public bool IsOnSale { get => GetProp<bool>("IsOnSale"); set => SetProp<bool>("IsOnSale", value); }
 		/// <summary>Container for extended (custom) properties of the price schedule.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
