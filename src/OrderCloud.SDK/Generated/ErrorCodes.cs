@@ -413,6 +413,8 @@ namespace OrderCloud.SDK
 		{
 			/// <summary>Invalid content type. Please use x-www-form-urlencoded.</summary>
 			public const string InvalidContentType = "Request.InvalidContentType";
+			/// <summary>Request body is invalid or null.</summary>
+			public const string InvalidRequestBody = "Request.InvalidRequestBody";
 		}
 		public static class Search
 		{
