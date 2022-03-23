@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Linq.Expressions;
@@ -184,9 +184,8 @@ namespace OrderCloud.SDK
 				RequireConfigProp(c => c.Username);
 				RequireConfigProp(c => c.Password);
 			}
-			else if (Config.GrantType == GrantType.Password) {
+			else if (Config.GrantType == GrantType.ClientCredentials) {
 				RequireConfigProp(c => c.ClientId);
-				RequireConfigProp(c => c.ClientSecret);
 			}
 		}
 
