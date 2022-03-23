@@ -40,6 +40,11 @@ namespace OrderCloud.SDK
 		/// 2-integer array of first, last item number in this page. 1-based. Example: if this is page 1 and it contains 5 items, ItemRange is [1, 5].
 		/// </summary>
 		public int[] ItemRange { get; set; }
+		/// <summary>
+		/// When a non-null value is returned, pass in the pageKey parameter to get the next page of data, in lieu of passing page and pageSize.
+		/// Results in better performance for endpoints that support it.
+		/// </summary>
+		public string NextPageKey { get; set; }
 	}
 
 	/// <summary>

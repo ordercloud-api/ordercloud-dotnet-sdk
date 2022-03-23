@@ -67,7 +67,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Address>> ListAsync(string buyerID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
 		/// <summary>Get a list of addresses.</summary>
@@ -77,7 +77,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TAddress>> ListAsync<TAddress>(string buyerID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TAddress : Address;
 		/// <summary>Get a list of addresses.</summary>
@@ -171,7 +171,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Address>> ListAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
 		/// <summary>Get a list of admin addresses.</summary>
@@ -180,7 +180,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TAddress>> ListAsync<TAddress>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TAddress : Address;
 		/// <summary>Get a list of admin addresses.</summary>
@@ -241,7 +241,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<UserGroup>> ListAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
 		/// <summary>Get a list of admin user groups.</summary>
@@ -250,7 +250,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TUserGroup>> ListAsync<TUserGroup>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TUserGroup : UserGroup;
 		/// <summary>Get a list of admin user groups.</summary>
@@ -327,7 +327,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<User>> ListAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
 		/// <summary>Get a list of admin users.</summary>
@@ -336,7 +336,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TUser>> ListAsync<TUser>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TUser : User;
 		/// <summary>Get a list of admin users.</summary>
@@ -397,7 +397,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<ApiClient>> ListAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
 		/// <summary>Get a list of API clients.</summary>
@@ -406,7 +406,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TApiClient>> ListAsync<TApiClient>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TApiClient : ApiClient;
 		/// <summary>Get a list of API clients.</summary>
@@ -492,7 +492,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<ApprovalRule>> ListAsync(string buyerID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
 		/// <summary>Get a list of approval rules.</summary>
@@ -502,7 +502,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TApprovalRule>> ListAsync<TApprovalRule>(string buyerID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TApprovalRule : ApprovalRule;
 		/// <summary>Get a list of approval rules.</summary>
@@ -572,7 +572,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Buyer>> ListAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
 		/// <summary>Get a list of buyers.</summary>
@@ -581,7 +581,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TBuyer>> ListAsync<TBuyer>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TBuyer : Buyer;
 		/// <summary>Get a list of buyers.</summary>
@@ -631,7 +631,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<BuyerSupplier>> ListBuyerSellersAsync(string buyerID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
 		/// <summary>Get a list of buyer buyer sellers.</summary>
@@ -657,7 +657,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Catalog>> ListAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
 		/// <summary>Get a list of catalogs.</summary>
@@ -666,7 +666,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TCatalog>> ListAsync<TCatalog>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TCatalog : Catalog;
 		/// <summary>Get a list of catalogs.</summary>
@@ -763,7 +763,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Category>> ListAsync(string catalogID, string depth = "1", string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
 		/// <summary>Get a list of categories.</summary>
@@ -774,7 +774,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TCategory>> ListAsync<TCategory>(string catalogID, string depth = "1", string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TCategory : Category;
 		/// <summary>Get a list of categories.</summary>
@@ -900,7 +900,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<CostCenter>> ListAsync(string buyerID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
 		/// <summary>Get a list of cost centers.</summary>
@@ -910,7 +910,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TCostCenter>> ListAsync<TCostCenter>(string buyerID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TCostCenter : CostCenter;
 		/// <summary>Get a list of cost centers.</summary>
@@ -1005,7 +1005,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<CreditCard>> ListAsync(string buyerID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
 		/// <summary>Get a list of credit cards.</summary>
@@ -1015,7 +1015,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TCreditCard>> ListAsync<TCreditCard>(string buyerID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TCreditCard : CreditCard;
 		/// <summary>Get a list of credit cards.</summary>
@@ -1103,7 +1103,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<ImpersonationConfig>> ListAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
 		/// <summary>Get a list of impersonation configs.</summary>
@@ -1142,7 +1142,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Incrementor>> ListAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
 		/// <summary>Get a list of incrementors.</summary>
@@ -1181,7 +1181,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<IntegrationEvent>> ListAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
 		/// <summary>Get a list of integration events.</summary>
@@ -1269,7 +1269,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<InventoryRecord>> ListAsync(string productID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
 		/// <summary>Get a list of inventory records.</summary>
@@ -1279,7 +1279,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TInventoryRecord>> ListAsync<TInventoryRecord>(string productID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TInventoryRecord : InventoryRecord;
 		/// <summary>Get a list of inventory records.</summary>
@@ -1339,7 +1339,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<InventoryRecord>> ListVariantAsync(string productID, string variantID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
 		/// <summary>Get a list of inventory record variants.</summary>
@@ -1350,7 +1350,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TInventoryRecord>> ListVariantAsync<TInventoryRecord>(string productID, string variantID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TInventoryRecord : InventoryRecord;
 		/// <summary>Get a list of inventory record variants.</summary>
@@ -1447,7 +1447,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<LineItem>> ListAsync(OrderDirection direction, string orderID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
 		/// <summary>Get a list of line items.</summary>
@@ -1458,7 +1458,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TLineItem>> ListAsync<TLineItem>(OrderDirection direction, string orderID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TLineItem : LineItem;
 		/// <summary>Get a list of line items.</summary>
@@ -1547,6 +1547,54 @@ namespace OrderCloud.SDK
 		/// <param name="partialAddress">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TLineItem> PatchShippingAddressAsync<TLineItem>(OrderDirection direction, string orderID, string lineItemID, PartialAddress partialAddress, string accessToken = null) where TLineItem : LineItem;
+		/// <summary>Get a list of line item across orders.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <param name="buyerID">ID of the buyer.</param>
+		/// <param name="supplierID">ID of the supplier.</param>
+		/// <param name="from">Lower bound of date range that the order was created.</param>
+		/// <param name="to">Upper bound of date range that the order was created.</param>
+		/// <param name="search">Word or phrase to search for.</param>
+		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
+		/// <param name="searchType">Type of search to perform. Possible values: AnyTerm (default), AllTermsAnyField, AllTermsSameField, ExactPhrase, ExactPhrasePrefix.</param>
+		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<ExtendedLineItem>> ListAcrossOrdersAsync(OrderDirection direction, string buyerID = null, string supplierID = null, DateTimeOffset? from = null, DateTimeOffset? to = null, string search = null, string searchOn = null, SearchType searchType = SearchType.AnyTerm, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
+		/// <summary>Get a list of line item across orders.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <param name="buyerID">ID of the buyer.</param>
+		/// <param name="supplierID">ID of the supplier.</param>
+		/// <param name="from">Lower bound of date range that the order was created.</param>
+		/// <param name="to">Upper bound of date range that the order was created.</param>
+		/// <param name="search">Word or phrase to search for.</param>
+		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
+		/// <param name="searchType">Type of search to perform. Possible values: AnyTerm (default), AllTermsAnyField, AllTermsSameField, ExactPhrase, ExactPhrasePrefix.</param>
+		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<TExtendedLineItem>> ListAcrossOrdersAsync<TExtendedLineItem>(OrderDirection direction, string buyerID = null, string supplierID = null, DateTimeOffset? from = null, DateTimeOffset? to = null, string search = null, string searchOn = null, SearchType searchType = SearchType.AnyTerm, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TExtendedLineItem : ExtendedLineItem;
+		/// <summary>Get a list of line item across orders.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
+		/// <param name="buyerID">ID of the buyer.</param>
+		/// <param name="supplierID">ID of the supplier.</param>
+		/// <param name="from">Lower bound of date range that the order was created.</param>
+		/// <param name="to">Upper bound of date range that the order was created.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<ExtendedLineItem>> ListAcrossOrdersAsync(OrderDirection direction, Action<ListOptionsBuilder2<ExtendedLineItem>> buildListOpts, string buyerID = null, string supplierID = null, DateTimeOffset? from = null, DateTimeOffset? to = null, string accessToken = null);
+		/// <summary>Get a list of line item across orders.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
+		/// <param name="buyerID">ID of the buyer.</param>
+		/// <param name="supplierID">ID of the supplier.</param>
+		/// <param name="from">Lower bound of date range that the order was created.</param>
+		/// <param name="to">Upper bound of date range that the order was created.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<TExtendedLineItem>> ListAcrossOrdersAsync<TExtendedLineItem>(OrderDirection direction, Action<ListOptionsBuilder2<TExtendedLineItem>> buildListOpts, string buyerID = null, string supplierID = null, DateTimeOffset? from = null, DateTimeOffset? to = null, string accessToken = null) where TExtendedLineItem : ExtendedLineItem;
 	}
 
 	public interface ILocalesResource
@@ -1561,7 +1609,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Locale>> ListAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
 		/// <summary>Get a list of locales.</summary>
@@ -1639,7 +1687,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<CostCenter>> ListCostCentersAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
 		/// <summary>Get a list of cost centers visible to this user. Only available to Buyer Users.</summary>
@@ -1648,7 +1696,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TCostCenter>> ListCostCentersAsync<TCostCenter>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TCostCenter : CostCenter;
 		/// <summary>Get a list of cost centers visible to this user. Only available to Buyer Users.</summary>
@@ -1665,7 +1713,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<UserGroup>> ListUserGroupsAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
 		/// <summary>Get a list of user groups visible to this user. Only available to Buyer Users.</summary>
@@ -1674,7 +1722,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TUserGroup>> ListUserGroupsAsync<TUserGroup>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TUserGroup : UserGroup;
 		/// <summary>Get a list of user groups visible to this user. Only available to Buyer Users.</summary>
@@ -1691,7 +1739,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<BuyerAddress>> ListAddressesAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
 		/// <summary>Get a list of addresses visible to this user. Only available to Buyer Users.</summary>
@@ -1700,7 +1748,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TBuyerAddress>> ListAddressesAsync<TBuyerAddress>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TBuyerAddress : BuyerAddress;
 		/// <summary>Get a list of addresses visible to this user. Only available to Buyer Users.</summary>
@@ -1760,7 +1808,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<BuyerCreditCard>> ListCreditCardsAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
 		/// <summary>Get a list of credit cards visible to this user. Only available to Buyer Users.</summary>
@@ -1769,7 +1817,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TBuyerCreditCard>> ListCreditCardsAsync<TBuyerCreditCard>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TBuyerCreditCard : BuyerCreditCard;
 		/// <summary>Get a list of credit cards visible to this user. Only available to Buyer Users.</summary>
@@ -1816,7 +1864,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Category>> ListCategoriesAsync(string depth = "1", string catalogID = null, string productID = null, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
 		/// <summary>Get a list of categories visible to this user. Only available to Buyer Users.</summary>
@@ -1828,7 +1876,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TCategory>> ListCategoriesAsync<TCategory>(string depth = "1", string catalogID = null, string productID = null, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TCategory : Category;
 		/// <summary>Get a list of categories visible to this user. Only available to Buyer Users.</summary>
@@ -1865,7 +1913,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="sellerID">ID of the seller.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPageWithFacets<BuyerProduct>> ListProductsAsync(string catalogID = null, string categoryID = null, string depth = null, string search = null, string searchOn = null, SearchType searchType = SearchType.AnyTerm, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string sellerID = null, string accessToken = null);
@@ -1879,7 +1927,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="sellerID">ID of the seller.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPageWithFacets<TBuyerProduct>> ListProductsAsync<TBuyerProduct>(string catalogID = null, string categoryID = null, string depth = null, string search = null, string searchOn = null, SearchType searchType = SearchType.AnyTerm, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string sellerID = null, string accessToken = null) where TBuyerProduct : BuyerProduct;
@@ -1917,7 +1965,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Spec>> ListSpecsAsync(string productID, string catalogID = null, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
 		/// <summary>Get a list of specs visible to this user. Only available to Buyer Users.</summary>
@@ -1928,7 +1976,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TSpec>> ListSpecsAsync<TSpec>(string productID, string catalogID = null, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TSpec : Spec;
 		/// <summary>Get a list of specs visible to this user. Only available to Buyer Users.</summary>
@@ -1962,7 +2010,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Variant>> ListVariantsAsync(string productID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
 		/// <summary>Get a list of variants visible to this user. Only available to Buyer Users.</summary>
@@ -1972,7 +2020,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TVariant>> ListVariantsAsync<TVariant>(string productID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TVariant : Variant;
 		/// <summary>Get a list of variants visible to this user. Only available to Buyer Users.</summary>
@@ -2004,7 +2052,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Order>> ListOrdersAsync(DateTimeOffset? from = null, DateTimeOffset? to = null, string search = null, string searchOn = null, SearchType searchType = SearchType.AnyTerm, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
 		/// <summary>Get a list of orders visible to this user. List orders created by this user.</summary>
@@ -2016,7 +2064,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TOrder>> ListOrdersAsync<TOrder>(DateTimeOffset? from = null, DateTimeOffset? to = null, string search = null, string searchOn = null, SearchType searchType = SearchType.AnyTerm, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TOrder : Order;
 		/// <summary>Get a list of orders visible to this user. List orders created by this user.</summary>
@@ -2039,7 +2087,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Order>> ListApprovableOrdersAsync(DateTimeOffset? from = null, DateTimeOffset? to = null, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
 		/// <summary>Get a list of orders that this user can approve.</summary>
@@ -2050,7 +2098,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TOrder>> ListApprovableOrdersAsync<TOrder>(DateTimeOffset? from = null, DateTimeOffset? to = null, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TOrder : Order;
 		/// <summary>Get a list of orders that this user can approve.</summary>
@@ -2071,7 +2119,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Promotion>> ListPromotionsAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
 		/// <summary>Get a list of promotions visible to this user. Only available to Buyer Users.</summary>
@@ -2080,7 +2128,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TPromotion>> ListPromotionsAsync<TPromotion>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TPromotion : Promotion;
 		/// <summary>Get a list of promotions visible to this user. Only available to Buyer Users.</summary>
@@ -2105,7 +2153,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<SpendingAccount>> ListSpendingAccountsAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
 		/// <summary>Get a list of spending accounts visible to this user. Only available to Buyer Users.</summary>
@@ -2114,7 +2162,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TSpendingAccount>> ListSpendingAccountsAsync<TSpendingAccount>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TSpendingAccount : SpendingAccount;
 		/// <summary>Get a list of spending accounts visible to this user. Only available to Buyer Users.</summary>
@@ -2140,7 +2188,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Shipment>> ListShipmentsAsync(string orderID = null, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
 		/// <summary>Get a list of shipments visible to this user. Only available to Buyer Users.</summary>
@@ -2150,7 +2198,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TShipment>> ListShipmentsAsync<TShipment>(string orderID = null, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TShipment : Shipment;
 		/// <summary>Get a list of shipments visible to this user. Only available to Buyer Users.</summary>
@@ -2179,7 +2227,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<ShipmentItem>> ListShipmentItemsAsync(string shipmentID, string orderID = null, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
 		/// <summary>Get a list of shipment items visible to this user. Only available to Buyer Users.</summary>
@@ -2190,7 +2238,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TShipmentItem>> ListShipmentItemsAsync<TShipmentItem>(string shipmentID, string orderID = null, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TShipmentItem : ShipmentItem;
 		/// <summary>Get a list of shipment items visible to this user. Only available to Buyer Users.</summary>
@@ -2224,7 +2272,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="sellerID">ID of the seller.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Catalog>> ListCatalogsAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string sellerID = null, string accessToken = null);
@@ -2234,7 +2282,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="sellerID">ID of the seller.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TCatalog>> ListCatalogsAsync<TCatalog>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string sellerID = null, string accessToken = null) where TCatalog : Catalog;
@@ -2262,7 +2310,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<BuyerSupplier>> ListBuyerSellersAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
 		/// <summary>Get a list of buyer sellers visible to this user. Organizations you can place orders directly to.</summary>
@@ -2287,7 +2335,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<MessageSender>> ListAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
 		/// <summary>Get a list of message senders.</summary>
@@ -2296,7 +2344,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TMessageSender>> ListAsync<TMessageSender>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TMessageSender : MessageSender;
 		/// <summary>Get a list of message senders.</summary>
@@ -2368,7 +2416,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<MessageCCListenerAssignment>> ListCCListenerAssignmentsAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
 		/// <summary>Get a list of message sender cc listener assignments.</summary>
@@ -2393,7 +2441,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<OpenIdConnect>> ListAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
 		/// <summary>Get a list of OpenID Connects.</summary>
@@ -2444,7 +2492,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Order>> ListAsync(OrderDirection direction, string buyerID = null, string supplierID = null, DateTimeOffset? from = null, DateTimeOffset? to = null, string search = null, string searchOn = null, SearchType searchType = SearchType.AnyTerm, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
 		/// <summary>Get a list of orders.</summary>
@@ -2459,7 +2507,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TOrder>> ListAsync<TOrder>(OrderDirection direction, string buyerID = null, string supplierID = null, DateTimeOffset? from = null, DateTimeOffset? to = null, string search = null, string searchOn = null, SearchType searchType = SearchType.AnyTerm, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TOrder : Order;
 		/// <summary>Get a list of orders.</summary>
@@ -2515,7 +2563,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<OrderApproval>> ListApprovalsAsync(OrderDirection direction, string orderID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
 		/// <summary>Get a list of order approvals. Returns all Approvals associated with the Order.</summary>
@@ -2526,7 +2574,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TOrderApproval>> ListApprovalsAsync<TOrderApproval>(OrderDirection direction, string orderID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TOrderApproval : OrderApproval;
 		/// <summary>Get a list of order approvals. Returns all Approvals associated with the Order.</summary>
@@ -2549,7 +2597,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<User>> ListEligibleApproversAsync(OrderDirection direction, string orderID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
 		/// <summary>Get a list of order eligible approvers. Returns all Users who can approve or decline this order (but have not done so).</summary>
@@ -2560,7 +2608,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TUser>> ListEligibleApproversAsync<TUser>(OrderDirection direction, string orderID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TUser : User;
 		/// <summary>Get a list of order eligible approvers. Returns all Users who can approve or decline this order (but have not done so).</summary>
@@ -2681,7 +2729,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Shipment>> ListShipmentsAsync(OrderDirection direction, string orderID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
 		/// <summary>List shipments for an order.</summary>
@@ -2692,7 +2740,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TShipment>> ListShipmentsAsync<TShipment>(OrderDirection direction, string orderID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TShipment : Shipment;
 		/// <summary>List shipments for an order.</summary>
@@ -2787,7 +2835,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<OrderPromotion>> ListPromotionsAsync(OrderDirection direction, string orderID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
 		/// <summary>Get a list of order promotions.</summary>
@@ -2798,7 +2846,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TOrderPromotion>> ListPromotionsAsync<TOrderPromotion>(OrderDirection direction, string orderID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TOrderPromotion : OrderPromotion;
 		/// <summary>Get a list of order promotions.</summary>
@@ -2867,7 +2915,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Payment>> ListAsync(OrderDirection direction, string orderID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
 		/// <summary>Get a list of payments.</summary>
@@ -2878,7 +2926,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TPayment>> ListAsync<TPayment>(OrderDirection direction, string orderID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TPayment : Payment;
 		/// <summary>Get a list of payments.</summary>
@@ -2964,7 +3012,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<PriceSchedule>> ListAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
 		/// <summary>Get a list of price schedules.</summary>
@@ -2973,7 +3021,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TPriceSchedule>> ListAsync<TPriceSchedule>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TPriceSchedule : PriceSchedule;
 		/// <summary>Get a list of price schedules.</summary>
@@ -3049,7 +3097,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<ProductFacet>> ListAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
 		/// <summary>Get a list of product facets.</summary>
@@ -3058,7 +3106,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TProductFacet>> ListAsync<TProductFacet>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TProductFacet : ProductFacet;
 		/// <summary>Get a list of product facets.</summary>
@@ -3123,7 +3171,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPageWithFacets<Product>> ListAsync(string catalogID = null, string categoryID = null, string supplierID = null, string search = null, string searchOn = null, SearchType searchType = SearchType.AnyTerm, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
 		/// <summary>Get a list of products.</summary>
@@ -3136,7 +3184,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPageWithFacets<TProduct>> ListAsync<TProduct>(string catalogID = null, string categoryID = null, string supplierID = null, string search = null, string searchOn = null, SearchType searchType = SearchType.AnyTerm, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TProduct : Product;
 		/// <summary>Get a list of products.</summary>
@@ -3202,7 +3250,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Variant>> ListVariantsAsync(string productID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
 		/// <summary>Get a list of product variants.</summary>
@@ -3212,7 +3260,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TVariant>> ListVariantsAsync<TVariant>(string productID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TVariant : Variant;
 		/// <summary>Get a list of product variants.</summary>
@@ -3266,7 +3314,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Spec>> ListSpecsAsync(string productID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
 		/// <summary>Get a list of product specs.</summary>
@@ -3276,7 +3324,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TSpec>> ListSpecsAsync<TSpec>(string productID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TSpec : Spec;
 		/// <summary>Get a list of product specs.</summary>
@@ -3296,7 +3344,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<ProductSupplier>> ListSuppliersAsync(string productID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
 		/// <summary>Get a list of product suppliers.</summary>
@@ -3306,7 +3354,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TProductSupplier>> ListSuppliersAsync<TProductSupplier>(string productID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TProductSupplier : ProductSupplier;
 		/// <summary>Get a list of product suppliers.</summary>
@@ -3371,7 +3419,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Promotion>> ListAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
 		/// <summary>Get a list of promotions.</summary>
@@ -3380,7 +3428,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TPromotion>> ListAsync<TPromotion>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TPromotion : Promotion;
 		/// <summary>Get a list of promotions.</summary>
@@ -3458,7 +3506,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<SecurityProfile>> ListAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
 		/// <summary>Get a list of security profiles.</summary>
@@ -3526,7 +3574,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Shipment>> ListAsync(string orderID = null, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
 		/// <summary>Get a list of shipments.</summary>
@@ -3536,7 +3584,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TShipment>> ListAsync<TShipment>(string orderID = null, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TShipment : Shipment;
 		/// <summary>Get a list of shipments.</summary>
@@ -3608,7 +3656,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<ShipmentItem>> ListItemsAsync(string shipmentID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
 		/// <summary>Get a list of shipment items.</summary>
@@ -3618,7 +3666,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TShipmentItem>> ListItemsAsync<TShipmentItem>(string shipmentID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TShipmentItem : ShipmentItem;
 		/// <summary>Get a list of shipment items.</summary>
@@ -3677,7 +3725,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Spec>> ListAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
 		/// <summary>Get a list of specs.</summary>
@@ -3686,7 +3734,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TSpec>> ListAsync<TSpec>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TSpec : Spec;
 		/// <summary>Get a list of specs.</summary>
@@ -3735,7 +3783,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<SpecProductAssignment>> ListProductAssignmentsAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
 		/// <summary>Get a list of spec product assignments.</summary>
@@ -3768,7 +3816,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<SpecOption>> ListOptionsAsync(string specID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
 		/// <summary>Get a list of spec options.</summary>
@@ -3778,7 +3826,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TSpecOption>> ListOptionsAsync<TSpecOption>(string specID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TSpecOption : SpecOption;
 		/// <summary>Get a list of spec options.</summary>
@@ -3851,7 +3899,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<SpendingAccount>> ListAsync(string buyerID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
 		/// <summary>Get a list of spending accounts.</summary>
@@ -3861,7 +3909,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TSpendingAccount>> ListAsync<TSpendingAccount>(string buyerID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TSpendingAccount : SpendingAccount;
 		/// <summary>Get a list of spending accounts.</summary>
@@ -3956,7 +4004,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Address>> ListAsync(string supplierID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
 		/// <summary>Get a list of supplier addresses.</summary>
@@ -3966,7 +4014,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TAddress>> ListAsync<TAddress>(string supplierID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TAddress : Address;
 		/// <summary>Get a list of supplier addresses.</summary>
@@ -4036,7 +4084,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Supplier>> ListAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
 		/// <summary>Get a list of suppliers.</summary>
@@ -4045,7 +4093,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TSupplier>> ListAsync<TSupplier>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TSupplier : Supplier;
 		/// <summary>Get a list of suppliers.</summary>
@@ -4095,7 +4143,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<SupplierBuyer>> ListBuyersAsync(string supplierID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
 		/// <summary>Get a list of supplier buyers.</summary>
@@ -4134,7 +4182,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<UserGroup>> ListAsync(string supplierID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
 		/// <summary>Get a list of supplier user groups.</summary>
@@ -4144,7 +4192,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TUserGroup>> ListAsync<TUserGroup>(string supplierID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TUserGroup : UserGroup;
 		/// <summary>Get a list of supplier user groups.</summary>
@@ -4237,7 +4285,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<User>> ListAsync(string supplierID, string userGroupID = null, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
 		/// <summary>Get a list of supplier users.</summary>
@@ -4248,7 +4296,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TUser>> ListAsync<TUser>(string supplierID, string userGroupID = null, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TUser : User;
 		/// <summary>Get a list of supplier users.</summary>
@@ -4323,7 +4371,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<UserGroup>> ListAsync(string buyerID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
 		/// <summary>Get a list of user groups.</summary>
@@ -4333,7 +4381,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TUserGroup>> ListAsync<TUserGroup>(string buyerID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TUserGroup : UserGroup;
 		/// <summary>Get a list of user groups.</summary>
@@ -4426,7 +4474,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<User>> ListAsync(string buyerID, string userGroupID = null, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
 		/// <summary>Get a list of users.</summary>
@@ -4437,7 +4485,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TUser>> ListAsync<TUser>(string buyerID, string userGroupID = null, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TUser : User;
 		/// <summary>Get a list of users.</summary>
@@ -4525,7 +4573,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Webhook>> ListAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
 		/// <summary>Get a list of webhooks.</summary>
@@ -4560,7 +4608,7 @@ namespace OrderCloud.SDK
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
-		/// <param name="filters">Any additional key/value pairs passed in the query string are interpretted as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<XpIndex>> ListAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
 		/// <summary>Get a list of XP indices.</summary>
@@ -4994,6 +5042,10 @@ namespace OrderCloud.SDK
 		public Task<TLineItem> SetShippingAddressAsync<TLineItem>(OrderDirection direction, string orderID, string lineItemID, Address address, string accessToken = null) where TLineItem : LineItem => Request("v1", "orders", direction, orderID, "lineitems", lineItemID, "shipto").WithOAuthBearerToken(accessToken).PutJsonAsync(ValidateModel(address)).ReceiveJson<TLineItem>();
 		public Task<LineItem> PatchShippingAddressAsync(OrderDirection direction, string orderID, string lineItemID, PartialAddress partialAddress, string accessToken = null) => PatchShippingAddressAsync<LineItem>(direction, orderID, lineItemID, partialAddress, accessToken);
 		public Task<TLineItem> PatchShippingAddressAsync<TLineItem>(OrderDirection direction, string orderID, string lineItemID, PartialAddress partialAddress, string accessToken = null) where TLineItem : LineItem => Request("v1", "orders", direction, orderID, "lineitems", lineItemID, "shipto").WithOAuthBearerToken(accessToken).PatchJsonAsync(ValidateModel(partialAddress)).ReceiveJson<TLineItem>();
+		public Task<ListPage<ExtendedLineItem>> ListAcrossOrdersAsync(OrderDirection direction, string buyerID = null, string supplierID = null, DateTimeOffset? from = null, DateTimeOffset? to = null, string search = null, string searchOn = null, SearchType searchType = SearchType.AnyTerm, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) => ListAcrossOrdersAsync<ExtendedLineItem>(direction, buyerID, supplierID, from, to, search, searchOn, searchType, sortBy, page, pageSize, filters, accessToken);
+		public Task<ListPage<TExtendedLineItem>> ListAcrossOrdersAsync<TExtendedLineItem>(OrderDirection direction, string buyerID = null, string supplierID = null, DateTimeOffset? from = null, DateTimeOffset? to = null, string search = null, string searchOn = null, SearchType searchType = SearchType.AnyTerm, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TExtendedLineItem : ExtendedLineItem => Request("v1", "lineitems", direction).WithOAuthBearerToken(accessToken).SetQueryParams(new { buyerID, supplierID, from, to, search, searchOn, searchType, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<TExtendedLineItem>>();
+		public Task<ListPage<ExtendedLineItem>> ListAcrossOrdersAsync(OrderDirection direction, Action<ListOptionsBuilder2<ExtendedLineItem>> buildListOpts, string buyerID = null, string supplierID = null, DateTimeOffset? from = null, DateTimeOffset? to = null, string accessToken = null) => ListAcrossOrdersAsync<ExtendedLineItem>(direction, buildListOpts, buyerID, supplierID, from, to, accessToken);
+		public Task<ListPage<TExtendedLineItem>> ListAcrossOrdersAsync<TExtendedLineItem>(OrderDirection direction, Action<ListOptionsBuilder2<TExtendedLineItem>> buildListOpts, string buyerID = null, string supplierID = null, DateTimeOffset? from = null, DateTimeOffset? to = null, string accessToken = null) where TExtendedLineItem : ExtendedLineItem => Request("v1", "lineitems", direction).WithOAuthBearerToken(accessToken).SetQueryParams(new { buyerID, supplierID, from, to }).SetListOptions(buildListOpts).GetJsonAsync<ListPage<TExtendedLineItem>>();
 	}
 
 	public class LocalesResource : OrderCloudResource, ILocalesResource
