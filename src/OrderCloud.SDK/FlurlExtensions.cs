@@ -31,17 +31,19 @@ namespace OrderCloud.SDK
 	    }
 
 		private static IFlurlRequest SetListOptions(this IFlurlRequest req, ListOptions opts) {
-			var filters = opts.Filters
-				.GroupBy(f => f.Key, f => f.Value)
-				.Select(g => new { key = g.Key, value = g });
-
-			return req.SetListOptions(opts.Search, opts.SearchOn, opts.SearchType, opts.SortBy, opts.Page, opts.PageSize, filters);
-		}
-
-		public static IFlurlRequest SetListOptions(this IFlurlRequest req, string search, string searchOn, SearchType? searchType, string sortBy, int? page, int? pageSize, object filters) {
 		    return req
-			    .SetQueryParams(new { search, searchOn, searchType, sortBy, page, pageSize })
-			    .SetQueryParams(filters);
+			    .SetQueryParams(new {
+				    search = opts.Search,
+				    searchOn = opts.SearchOn,
+				    searchType = opts.SearchType,
+				    sortBy = opts.SortBy,
+				    page = opts.Page,
+				    pageSize = opts.PageSize,
+				    pageKey = opts.PageKey
+			    })
+			    .SetQueryParams(opts.Filters
+				    .GroupBy(f => f.Key, f => f.Value)
+				    .Select(g => new { key = g.Key, value = g }));
 	    }
     }
 }

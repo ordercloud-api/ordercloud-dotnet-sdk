@@ -193,6 +193,12 @@ namespace OrderCloud.SDK
 			public const string VariantNotFound = "LineItem.VariantNotFound";
 			/// <summary>This Seller (Order.ToCompanyID) does not supply this product.</summary>
 			public const string ProductNotAvailableFromSeller = "LineItem.ProductNotAvailableFromSeller";
+			/// <summary>Sorting by line item across orders is not currently supported. First sort field must be at the order level, such as Order.ID or Order.DateSubmitted.</summary>
+			public const string MustSortByOrderFirst = "LineItem.MustSortByOrderFirst";
+			/// <summary>Filtering by an order field OR line item field is not currently supported. You may only AND them together.</summary>
+			public const string CannotFilterByOrderOrLineItem = "LineItem.CannotFilterByOrderOrLineItem";
+			/// <summary>Searching by both order field(s) and a line item field(s) is not currently supported.</summary>
+			public const string CannotSearchByOrderOrLineItem = "LineItem.CannotSearchByOrderOrLineItem";
 		}
 		public static class List
 		{
@@ -254,6 +260,10 @@ namespace OrderCloud.SDK
 			public const string CannotDeleteForwardedOrder = "Order.CannotDeleteForwardedOrder";
 			/// <summary>The user's assigned Locale Currency must match the Order's Currency.</summary>
 			public const string CurrencyMismatch = "Order.CurrencyMismatch";
+			/// <summary>This beta feature is available for enabled marketplaces only. Please contact your Sitecore OrderCloud sales or support rep.</summary>
+			public const string SearchNotEnabled = "Order.SearchNotEnabled";
+			/// <summary>This feature is not available for unsubmitted orders.</summary>
+			public const string AllowedOnSubmittedOnly = "Order.AllowedOnSubmittedOnly";
 		}
 		public static class PartyAssignment
 		{
@@ -434,8 +444,6 @@ namespace OrderCloud.SDK
 		{
 			/// <summary>AutoForwardingUserID must be set on Seller, or AutoForward cannot be set on any Products.</summary>
 			public const string AutoForwardingUserRequired = "Seller.AutoForwardingUserRequired";
-			/// <summary>Feature requires subscription to Premium Search. Please contact your sales rep.</summary>
-			public const string RequiresPremiumSearch = "Seller.RequiresPremiumSearch";
 		}
 		public static class ShipmentItem
 		{

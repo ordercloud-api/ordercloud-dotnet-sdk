@@ -205,11 +205,11 @@ namespace OrderCloud.SDK
 		/// <summary>ID of the address. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 2.</summary>
 		[ApiReadOnly]
 		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
-		/// <summary>Shipping of the address. Searchable: priority level 6.</summary>
+		/// <summary>Indicates whether this Address can be used as a Shipping Address on an Order or Line Item.</summary>
 		public bool Shipping { get => GetProp<bool>("Shipping"); set => SetProp<bool>("Shipping", value); }
-		/// <summary>Billing of the address. Searchable: priority level 7.</summary>
+		/// <summary>Indicates whether this Address can be used as a Billing Address on an Order.</summary>
 		public bool Billing { get => GetProp<bool>("Billing"); set => SetProp<bool>("Billing", value); }
-		/// <summary>Editable of the address. Searchable: priority level 8.</summary>
+		/// <summary>Indicates whether this Address can be edited by the current User.</summary>
 		[ApiReadOnly]
 		public bool Editable { get => GetProp<bool>("Editable"); set => SetProp<bool>("Editable", value); }
 		/// <summary>Date created of the address. Sortable.</summary>
@@ -492,6 +492,192 @@ namespace OrderCloud.SDK
 		public string UserID { get => GetProp<string>("UserID"); set => SetProp<string>("UserID", value); }
 		/// <summary>ID of the user group. Sortable: priority level 3.</summary>
 		public string UserGroupID { get => GetProp<string>("UserGroupID"); set => SetProp<string>("UserGroupID", value); }
+	}
+	public class ExtendedLineItem : OrderCloudModel
+	{
+		/// <summary>ID of the order.</summary>
+		public string OrderID { get => GetProp<string>("OrderID"); set => SetProp<string>("OrderID", value); }
+		/// <summary>Returned only when include=Order (or include=Order.???) is provided in the query string.</summary>
+		public Order Order { get => GetProp<Order>("Order"); set => SetProp<Order>("Order", value); }
+		/// <summary>ID of the extended line item. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable.</summary>
+		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
+		/// <summary>ID of the product. Required. Searchable: priority level 2. Sortable.</summary>
+		[Required]
+		public string ProductID { get => GetProp<string>("ProductID"); set => SetProp<string>("ProductID", value); }
+		/// <summary>Quantity of the extended line item. Required. Must be at least 1.</summary>
+		[Required]
+		public int Quantity { get => GetProp<int>("Quantity", 1); set => SetProp<int>("Quantity", value); }
+		/// <summary>Date added of the extended line item. Sortable: priority level 1.</summary>
+		[ApiReadOnly]
+		public DateTimeOffset DateAdded { get => GetProp<DateTimeOffset>("DateAdded"); set => SetProp<DateTimeOffset>("DateAdded", value); }
+		/// <summary>Sum of QuantityShipped from all shipment items.</summary>
+		[ApiReadOnly]
+		public int QuantityShipped { get => GetProp<int>("QuantityShipped"); set => SetProp<int>("QuantityShipped", value); }
+		/// <summary>Auto calculated Price per Quantity. Modification requires OverrideUnitPrice Role.</summary>
+		public decimal? UnitPrice { get => GetProp<decimal?>("UnitPrice"); set => SetProp<decimal?>("UnitPrice", value); }
+		/// <summary>Sum of all line item level promotion discount amounts applied.</summary>
+		[ApiReadOnly]
+		public decimal PromotionDiscount { get => GetProp<decimal>("PromotionDiscount"); set => SetProp<decimal>("PromotionDiscount", value); }
+		/// <summary>LineSubtotal - PromotionDiscount</summary>
+		[ApiReadOnly]
+		public decimal LineTotal { get => GetProp<decimal>("LineTotal"); set => SetProp<decimal>("LineTotal", value); }
+		/// <summary>UnitPrice x Quantity</summary>
+		[ApiReadOnly]
+		public decimal LineSubtotal { get => GetProp<decimal>("LineSubtotal"); set => SetProp<decimal>("LineSubtotal", value); }
+		/// <summary>For reference only, does not influence any OrderCloud behavior.</summary>
+		public string CostCenter { get => GetProp<string>("CostCenter"); set => SetProp<string>("CostCenter", value); }
+		/// <summary>Date needed of the extended line item.</summary>
+		public DateTimeOffset? DateNeeded { get => GetProp<DateTimeOffset?>("DateNeeded"); set => SetProp<DateTimeOffset?>("DateNeeded", value); }
+		/// <summary>For reference only, does not influence any OrderCloud behavior.</summary>
+		public string ShippingAccount { get => GetProp<string>("ShippingAccount"); set => SetProp<string>("ShippingAccount", value); }
+		/// <summary>ID of the shipping address.</summary>
+		public string ShippingAddressID { get => GetProp<string>("ShippingAddressID"); set => SetProp<string>("ShippingAddressID", value); }
+		/// <summary>Marketplace Owner or Supplier AddressID where the product will be shipped from. Can be used to calculate shipping costs.</summary>
+		public string ShipFromAddressID { get => GetProp<string>("ShipFromAddressID"); set => SetProp<string>("ShipFromAddressID", value); }
+		/// <summary>Product of the extended line item.</summary>
+		[ApiReadOnly]
+		public LineItemProduct Product { get => GetProp<LineItemProduct>("Product"); set => SetProp<LineItemProduct>("Product", value); }
+		/// <summary>Variant of the extended line item.</summary>
+		[ApiReadOnly]
+		public LineItemVariant Variant { get => GetProp<LineItemVariant>("Variant"); set => SetProp<LineItemVariant>("Variant", value); }
+		/// <summary>Shipping address of the extended line item.</summary>
+		[ApiReadOnly]
+		public Address ShippingAddress { get => GetProp<Address>("ShippingAddress"); set => SetProp<Address>("ShippingAddress", value); }
+		/// <summary>Ship from address of the extended line item.</summary>
+		[ApiReadOnly]
+		public Address ShipFromAddress { get => GetProp<Address>("ShipFromAddress"); set => SetProp<Address>("ShipFromAddress", value); }
+		/// <summary>ID of the supplier.</summary>
+		[ApiReadOnly]
+		public string SupplierID { get => GetProp<string>("SupplierID"); set => SetProp<string>("SupplierID", value); }
+		/// <summary>Inventory Record ID of which product inventory location to use. The Inventory Record ID cannot be modified once an order is submitted</summary>
+		public string InventoryRecordID { get => GetProp<string>("InventoryRecordID"); set => SetProp<string>("InventoryRecordID", value); }
+		/// <summary>Specs of the extended line item.</summary>
+		public IList<LineItemSpec> Specs { get => GetProp<IList<LineItemSpec>>("Specs", new List<LineItemSpec>()); set => SetProp<IList<LineItemSpec>>("Specs", value); }
+		/// <summary>Container for extended (custom) properties of the extended line item.</summary>
+		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
+	}
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, specify dynamic.</typeparam>
+	/// <typeparam name="TOrder">Specific type of the Order property. If not using a custom type, specify Order.</typeparam>
+	/// <typeparam name="TProduct">Specific type of the Product property. If not using a custom type, specify LineItemProduct.</typeparam>
+	/// <typeparam name="TVariant">Specific type of the Variant property. If not using a custom type, specify LineItemVariant.</typeparam>
+	/// <typeparam name="TShippingAddress">Specific type of the ShippingAddress property. If not using a custom type, specify Address.</typeparam>
+	/// <typeparam name="TShipFromAddress">Specific type of the ShipFromAddress property. If not using a custom type, specify Address.</typeparam>
+	public class ExtendedLineItem<Txp, TOrder, TProduct, TVariant, TShippingAddress, TShipFromAddress> : ExtendedLineItem
+		where TOrder : Order
+		where TProduct : LineItemProduct
+		where TVariant : LineItemVariant
+		where TShippingAddress : Address
+		where TShipFromAddress : Address
+	{
+		/// <summary>Container for extended (custom) properties of the extended line item.</summary>
+		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
+		/// <summary>Returned only when include=Order (or include=Order.???) is provided in the query string.</summary>
+		public new TOrder Order { get => GetProp<TOrder>("Order"); set => SetProp<TOrder>("Order", value); }
+		/// <summary>Product of the extended line item.</summary>
+		[ApiReadOnly]
+		public new TProduct Product { get => GetProp<TProduct>("Product"); set => SetProp<TProduct>("Product", value); }
+		/// <summary>Variant of the extended line item.</summary>
+		[ApiReadOnly]
+		public new TVariant Variant { get => GetProp<TVariant>("Variant"); set => SetProp<TVariant>("Variant", value); }
+		/// <summary>Shipping address of the extended line item.</summary>
+		[ApiReadOnly]
+		public new TShippingAddress ShippingAddress { get => GetProp<TShippingAddress>("ShippingAddress"); set => SetProp<TShippingAddress>("ShippingAddress", value); }
+		/// <summary>Ship from address of the extended line item.</summary>
+		[ApiReadOnly]
+		public new TShipFromAddress ShipFromAddress { get => GetProp<TShipFromAddress>("ShipFromAddress"); set => SetProp<TShipFromAddress>("ShipFromAddress", value); }
+	}
+	public class ExtendedOrder : OrderCloudModel
+	{
+		/// <summary>Line items of the extended order.</summary>
+		public IList<LineItem> LineItems { get => GetProp<IList<LineItem>>("LineItems", new List<LineItem>()); set => SetProp<IList<LineItem>>("LineItems", value); }
+		/// <summary>ID of the extended order. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable.</summary>
+		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
+		/// <summary>User placing the order.</summary>
+		[ApiReadOnly]
+		public User FromUser { get => GetProp<User>("FromUser"); set => SetProp<User>("FromUser", value); }
+		/// <summary>ID of the Buyer or Marketplace Owner placing the order. Mainly useful to the Marketplace Owner or Supplier receiving it.</summary>
+		public string FromCompanyID { get => GetProp<string>("FromCompanyID"); set => SetProp<string>("FromCompanyID", value); }
+		/// <summary>ID of the Marketplace Owner or Supplier receiving the order, only writable on create. Mainly useful to the Buyer or Marketplace Owner placing it.</summary>
+		public string ToCompanyID { get => GetProp<string>("ToCompanyID"); set => SetProp<string>("ToCompanyID", value); }
+		/// <summary>This property is only writable when creating an order from the marketplace owner perspective on behalf of a buyer user.</summary>
+		public string FromUserID { get => GetProp<string>("FromUserID"); set => SetProp<string>("FromUserID", value); }
+		/// <summary>ID of the billing address.</summary>
+		public string BillingAddressID { get => GetProp<string>("BillingAddressID"); set => SetProp<string>("BillingAddressID", value); }
+		/// <summary>Billing address of the extended order.</summary>
+		[ApiReadOnly]
+		public Address BillingAddress { get => GetProp<Address>("BillingAddress"); set => SetProp<Address>("BillingAddress", value); }
+		/// <summary>ID of the Shipping Address for all LineItems on the Order. Null when there are multiple Shipping Addresses involved.</summary>
+		public string ShippingAddressID { get => GetProp<string>("ShippingAddressID"); set => SetProp<string>("ShippingAddressID", value); }
+		/// <summary>Comments of the extended order. Max length 2000 characters. Searchable: priority level 4.</summary>
+		public string Comments { get => GetProp<string>("Comments"); set => SetProp<string>("Comments", value); }
+		/// <summary>Line item count of the extended order.</summary>
+		[ApiReadOnly]
+		public int LineItemCount { get => GetProp<int>("LineItemCount"); set => SetProp<int>("LineItemCount", value); }
+		/// <summary>Status of the extended order. Sortable. Possible values: Unsubmitted, AwaitingApproval, Declined, Open, Completed, Canceled.</summary>
+		[ApiReadOnly]
+		public OrderStatus Status { get => GetProp<OrderStatus>("Status"); set => SetProp<OrderStatus>("Status", value); }
+		/// <summary>Date created of the extended order. Sortable: priority level 2.</summary>
+		[ApiReadOnly]
+		public DateTimeOffset? DateCreated { get => GetProp<DateTimeOffset?>("DateCreated"); set => SetProp<DateTimeOffset?>("DateCreated", value); }
+		/// <summary>NULL until the order passes from the buyer to the Marketplace Owner, including when Status is PendingApproval.</summary>
+		[ApiReadOnly]
+		public DateTimeOffset? DateSubmitted { get => GetProp<DateTimeOffset?>("DateSubmitted"); set => SetProp<DateTimeOffset?>("DateSubmitted", value); }
+		/// <summary>Date approved of the extended order. Sortable.</summary>
+		[ApiReadOnly]
+		public DateTimeOffset? DateApproved { get => GetProp<DateTimeOffset?>("DateApproved"); set => SetProp<DateTimeOffset?>("DateApproved", value); }
+		/// <summary>Date declined of the extended order. Sortable.</summary>
+		[ApiReadOnly]
+		public DateTimeOffset? DateDeclined { get => GetProp<DateTimeOffset?>("DateDeclined"); set => SetProp<DateTimeOffset?>("DateDeclined", value); }
+		/// <summary>Date canceled of the extended order. Sortable.</summary>
+		[ApiReadOnly]
+		public DateTimeOffset? DateCanceled { get => GetProp<DateTimeOffset?>("DateCanceled"); set => SetProp<DateTimeOffset?>("DateCanceled", value); }
+		/// <summary>Populated when all items on an order have shipped, or the order is explicitly completed.</summary>
+		[ApiReadOnly]
+		public DateTimeOffset? DateCompleted { get => GetProp<DateTimeOffset?>("DateCompleted"); set => SetProp<DateTimeOffset?>("DateCompleted", value); }
+		/// <summary>Last updated of the extended order. Sortable.</summary>
+		[ApiReadOnly]
+		public DateTimeOffset LastUpdated { get => GetProp<DateTimeOffset>("LastUpdated"); set => SetProp<DateTimeOffset>("LastUpdated", value); }
+		/// <summary>Sum of all LineItem.LineSubtotals.</summary>
+		[ApiReadOnly]
+		public decimal Subtotal { get => GetProp<decimal>("Subtotal"); set => SetProp<decimal>("Subtotal", value); }
+		/// <summary>Modifying requires OverrideShipping Role.</summary>
+		public decimal ShippingCost { get => GetProp<decimal>("ShippingCost"); set => SetProp<decimal>("ShippingCost", value); }
+		/// <summary>Modifying requires TaxOverride Role.</summary>
+		public decimal TaxCost { get => GetProp<decimal>("TaxCost"); set => SetProp<decimal>("TaxCost", value); }
+		/// <summary>Sum of all Promotion.Amounts applied to the order.</summary>
+		[ApiReadOnly]
+		public decimal PromotionDiscount { get => GetProp<decimal>("PromotionDiscount"); set => SetProp<decimal>("PromotionDiscount", value); }
+		/// <summary>Inherited from the user placing the order.</summary>
+		[ApiReadOnly]
+		public string Currency { get => GetProp<string>("Currency"); set => SetProp<string>("Currency", value); }
+		/// <summary>Subtotal + TaxCost + ShippingCost - PromotionDiscount</summary>
+		[ApiReadOnly]
+		public decimal Total { get => GetProp<decimal>("Total"); set => SetProp<decimal>("Total", value); }
+		/// <summary>True if this Order has been passed from the Buyer to the Marketplace Owner.</summary>
+		[ApiReadOnly]
+		public bool IsSubmitted { get => GetProp<bool>("IsSubmitted"); set => SetProp<bool>("IsSubmitted", value); }
+		/// <summary>Container for extended (custom) properties of the extended order.</summary>
+		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
+	}
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, specify dynamic.</typeparam>
+	/// <typeparam name="TLineItems">Specific type of the LineItems property. If not using a custom type, specify LineItem.</typeparam>
+	/// <typeparam name="TFromUser">Specific type of the FromUser property. If not using a custom type, specify User.</typeparam>
+	/// <typeparam name="TBillingAddress">Specific type of the BillingAddress property. If not using a custom type, specify Address.</typeparam>
+	public class ExtendedOrder<Txp, TLineItems, TFromUser, TBillingAddress> : ExtendedOrder
+		where TLineItems : LineItem
+		where TFromUser : User
+		where TBillingAddress : Address
+	{
+		/// <summary>Container for extended (custom) properties of the extended order.</summary>
+		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
+		/// <summary>Line items of the extended order.</summary>
+		public new IList<TLineItems> LineItems { get => GetProp<IList<TLineItems>>("LineItems", new List<TLineItems>()); set => SetProp<IList<TLineItems>>("LineItems", value); }
+		/// <summary>User placing the order.</summary>
+		[ApiReadOnly]
+		public new TFromUser FromUser { get => GetProp<TFromUser>("FromUser"); set => SetProp<TFromUser>("FromUser", value); }
+		/// <summary>Billing address of the extended order.</summary>
+		[ApiReadOnly]
+		public new TBillingAddress BillingAddress { get => GetProp<TBillingAddress>("BillingAddress"); set => SetProp<TBillingAddress>("BillingAddress", value); }
 	}
 	public class ImpersonateTokenRequest : OrderCloudModel
 	{

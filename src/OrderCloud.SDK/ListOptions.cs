@@ -20,6 +20,10 @@ namespace OrderCloud.SDK
 		public string SortBy { get; set; }
 		public int? Page { get; set; }
 		public int? PageSize { get; set; }
+		/// <summary>
+		/// Preferred alternative to Page and PageSize when Page > 1 AND value is provided in previous page's Meta.NextPageKey. Provides additional metadata to OC for improved performance.
+		/// </summary>
+		public string PageKey { get; set; }
 		public IList<KeyValuePair<string, string>> Filters { get; set; } = new List<KeyValuePair<string, string>>();
 	}
 }
