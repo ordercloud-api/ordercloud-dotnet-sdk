@@ -50,6 +50,23 @@ namespace OrderCloud.SDK
 		}
 
 		/// <summary>
+		/// Add one or more properties to apply the search phrase.
+		/// </summary>
+		public ListOptionsBuilder<T> SearchOn(params string[] properties) {
+			_searchOn.AddRange(properties);
+			return this;
+		}
+
+		/// <summary>
+		/// Add one or more properties to sort by. Use the "!" prefix to specify descending order.
+		/// </summary>
+		public ListOptionsBuilder<T> SortBy(params string[] properties) {
+			_sortBy.AddRange(properties);
+			return this;
+		}
+
+
+		/// <summary>
 		/// Specify which page of results to return. 1-based.
 		/// </summary>
 		public ListOptionsBuilder<T> Page(int page) {
@@ -62,6 +79,22 @@ namespace OrderCloud.SDK
 		/// </summary>
 		public ListOptionsBuilder<T> PageSize(int size) {
 			_opts.PageSize = size;
+			return this;
+		}
+
+		/// <summary>
+		/// Preferred alternative to page and pageSize when page > 1 AND value is provided in previous page's Meta.NextPageKey. Provides additional metadata to OC for improved performance.
+		/// </summary>
+		public ListOptionsBuilder<T> PageKey(string key) {
+			_opts.PageKey = key;
+			return this;
+		}
+
+		/// <summary>
+		/// Add a filter name/value pair.
+		/// </summary>
+		public ListOptionsBuilder<T> AddFilter(string name, string value) {
+			_opts.Filters.Add(new KeyValuePair<string, string>(name, value));
 			return this;
 		}
 
@@ -199,6 +232,14 @@ namespace OrderCloud.SDK
 		/// </summary>
 		public new ListOptionsBuilder2<T> SortBy(params Expression<Func<T, object>>[] properties) => (ListOptionsBuilder2<T>)base.SortBy(properties);
 		/// <summary>
+		/// Add one or more properties to apply the search phrase.
+		/// </summary>
+		public new ListOptionsBuilder2<T> SearchOn(params string[] properties) => (ListOptionsBuilder2<T>)base.SearchOn(properties);
+		/// <summary>
+		/// Add one or more properties to sort by. Use the "!" prefix to specify descending order.
+		/// </summary>
+		public new ListOptionsBuilder2<T> SortBy(params string[] properties) => (ListOptionsBuilder2<T>)base.SortBy(properties);
+		/// <summary>
 		/// Add one or more properties to sort by in descending order.
 		/// </summary>
 		public new ListOptionsBuilder2<T> SortByReverse(params Expression<Func<T, object>>[] properties) => (ListOptionsBuilder2<T>)base.SortByReverse(properties);
@@ -211,9 +252,17 @@ namespace OrderCloud.SDK
 		/// </summary>
 		public new ListOptionsBuilder2<T> PageSize(int size) => (ListOptionsBuilder2<T>)base.PageSize(size);
 		/// <summary>
+		/// Preferred alternative to page and pageSize when page > 1 AND value is provided in previous page's Meta.NextPageKey. Provides additional metadata to OC for improved performance.
+		/// </summary>
+		public new ListOptionsBuilder2<T> PageKey(string key) => (ListOptionsBuilder2<T>)base.PageKey(key);
+		/// <summary>
 		/// Add a filter expression. Can contain operators such as ==, &lt;, &gt;, etc. Left side of expression must specify a property, right side
 		/// must evaluate a value. i.e. order => order.Subtotal > 100
 		/// </summary>
 		public new ListOptionsBuilder2<T> AddFilter(Expression<Func<T, bool>> predicate) => (ListOptionsBuilder2<T>)base.AddFilter(predicate);
+		/// <summary>
+		/// Add a filter name/value pair.
+		/// </summary>
+		public new ListOptionsBuilder2<T> AddFilter(string name, string value) => (ListOptionsBuilder2<T>)base.AddFilter(name, value);
 	}
 }
