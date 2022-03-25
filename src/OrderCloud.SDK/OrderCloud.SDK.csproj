@@ -12,9 +12,8 @@
 		<Copyright>Copyright 2022 Sitecore, Inc.</Copyright>
 		<PackageProjectUrl>https://ordercloud.io/</PackageProjectUrl>
 		<PackageIcon>icon.png</PackageIcon>
-		<PackageIconUrl>https://ordercloud.io/wp-content/uploads/2018/01/oc-circle-logo-2018.png</PackageIconUrl>
 		<PackageTags>ecommerce b2b sitecore four51 ordercloud cloud api headless</PackageTags>
-		<PackageReleaseNotes>https://ordercloud-api.github.io/release-notes/</PackageReleaseNotes>
+		<PackageReleaseNotes>https://ordercloud.io/release-notes/</PackageReleaseNotes>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<RepositoryUrl>https://github.com/ordercloud-api/ordercloud-dotnet-sdk</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
