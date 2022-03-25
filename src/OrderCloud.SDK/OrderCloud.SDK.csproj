@@ -14,6 +14,7 @@
 		<PackageIcon>icon.png</PackageIcon>
 		<PackageTags>ecommerce b2b sitecore four51 ordercloud cloud api headless</PackageTags>
 		<PackageReleaseNotes>https://ordercloud.io/release-notes/</PackageReleaseNotes>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<RepositoryUrl>https://github.com/ordercloud-api/ordercloud-dotnet-sdk</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
