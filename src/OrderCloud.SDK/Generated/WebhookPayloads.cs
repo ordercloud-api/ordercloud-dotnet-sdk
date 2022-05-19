@@ -1754,6 +1754,157 @@ namespace OrderCloud.SDK
 				public string OpenidconnectID { get; set; }
 			}
 		}
+		public static class OrderReturns
+		{
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/orderreturns.</summary>
+			[SentOn("POST", "v1/orderreturns")]
+			public class Create : WebhookPayload<OrderReturn, OrderReturn, object, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/orderreturns.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TOrderReturn">Specific type of the OrderReturn. If not using a custom type, specify OrderReturn.</typeparam>
+			[SentOn("POST", "v1/orderreturns")]
+			public class Create<TConfigData, TOrderReturn> : WebhookPayload<TOrderReturn, TOrderReturn, object, TConfigData>
+				where TOrderReturn : OrderReturn
+			{ }
+			/// <summary>Webhook payload sent by OrderCloud on PUT v1/orderreturns/{returnID}.</summary>
+			[SentOn("PUT", "v1/orderreturns/{returnID}")]
+			public class Save : WebhookPayload<OrderReturn, OrderReturn, SaveRouteParams, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on PUT v1/orderreturns/{returnID}.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TOrderReturn">Specific type of the OrderReturn. If not using a custom type, specify OrderReturn.</typeparam>
+			[SentOn("PUT", "v1/orderreturns/{returnID}")]
+			public class Save<TConfigData, TOrderReturn> : WebhookPayload<TOrderReturn, TOrderReturn, SaveRouteParams, TConfigData>
+				where TOrderReturn : OrderReturn
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/orderreturns/{returnID}.</summary>
+			public class SaveRouteParams
+			{
+				public string ReturnID { get; set; }
+			}
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/orderreturns/{returnID}.</summary>
+			[SentOn("DELETE", "v1/orderreturns/{returnID}")]
+			public class Delete : WebhookPayload<object, object, DeleteRouteParams, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/orderreturns/{returnID}.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, use the non-generic payload type instead.</typeparam>
+			[SentOn("DELETE", "v1/orderreturns/{returnID}")]
+			public class Delete<TConfigData> : WebhookPayload<object, object, DeleteRouteParams, TConfigData>
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/orderreturns/{returnID}.</summary>
+			public class DeleteRouteParams
+			{
+				public string ReturnID { get; set; }
+			}
+			/// <summary>Webhook payload sent by OrderCloud on PATCH v1/orderreturns/{returnID}.</summary>
+			[SentOn("PATCH", "v1/orderreturns/{returnID}")]
+			public class Patch : WebhookPayload<OrderReturn, OrderReturn, PatchRouteParams, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on PATCH v1/orderreturns/{returnID}.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TOrderReturn">Specific type of the OrderReturn. If not using a custom type, specify OrderReturn.</typeparam>
+			[SentOn("PATCH", "v1/orderreturns/{returnID}")]
+			public class Patch<TConfigData, TOrderReturn> : WebhookPayload<TOrderReturn, TOrderReturn, PatchRouteParams, TConfigData>
+				where TOrderReturn : OrderReturn
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/orderreturns/{returnID}.</summary>
+			public class PatchRouteParams
+			{
+				public string ReturnID { get; set; }
+			}
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/orderreturns/{returnID}/items/{lineItemID}.</summary>
+			[SentOn("DELETE", "v1/orderreturns/{returnID}/items/{lineItemID}")]
+			public class DeleteItem : WebhookPayload<object, OrderReturn, DeleteItemRouteParams, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/orderreturns/{returnID}/items/{lineItemID}.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TOrderReturn">Specific type of the OrderReturn. If not using a custom type, specify OrderReturn.</typeparam>
+			[SentOn("DELETE", "v1/orderreturns/{returnID}/items/{lineItemID}")]
+			public class DeleteItem<TConfigData, TOrderReturn> : WebhookPayload<object, TOrderReturn, DeleteItemRouteParams, TConfigData>
+				where TOrderReturn : OrderReturn
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/orderreturns/{returnID}/items/{lineItemID}.</summary>
+			public class DeleteItemRouteParams
+			{
+				public string ReturnID { get; set; }
+				public string LineItemID { get; set; }
+			}
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/orderreturns/{returnID}/cancel.</summary>
+			[SentOn("POST", "v1/orderreturns/{returnID}/cancel")]
+			public class Cancel : WebhookPayload<object, OrderReturn, CancelRouteParams, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/orderreturns/{returnID}/cancel.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TOrderReturn">Specific type of the OrderReturn. If not using a custom type, specify OrderReturn.</typeparam>
+			[SentOn("POST", "v1/orderreturns/{returnID}/cancel")]
+			public class Cancel<TConfigData, TOrderReturn> : WebhookPayload<object, TOrderReturn, CancelRouteParams, TConfigData>
+				where TOrderReturn : OrderReturn
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/orderreturns/{returnID}/cancel.</summary>
+			public class CancelRouteParams
+			{
+				public string ReturnID { get; set; }
+			}
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/orderreturns/{returnID}/complete.</summary>
+			[SentOn("POST", "v1/orderreturns/{returnID}/complete")]
+			public class Complete : WebhookPayload<object, OrderReturn, CompleteRouteParams, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/orderreturns/{returnID}/complete.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TOrderReturn">Specific type of the OrderReturn. If not using a custom type, specify OrderReturn.</typeparam>
+			[SentOn("POST", "v1/orderreturns/{returnID}/complete")]
+			public class Complete<TConfigData, TOrderReturn> : WebhookPayload<object, TOrderReturn, CompleteRouteParams, TConfigData>
+				where TOrderReturn : OrderReturn
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/orderreturns/{returnID}/complete.</summary>
+			public class CompleteRouteParams
+			{
+				public string ReturnID { get; set; }
+			}
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/orderreturns/{returnID}/submit.</summary>
+			[SentOn("POST", "v1/orderreturns/{returnID}/submit")]
+			public class Submit : WebhookPayload<object, OrderReturn, SubmitRouteParams, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/orderreturns/{returnID}/submit.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TOrderReturn">Specific type of the OrderReturn. If not using a custom type, specify OrderReturn.</typeparam>
+			[SentOn("POST", "v1/orderreturns/{returnID}/submit")]
+			public class Submit<TConfigData, TOrderReturn> : WebhookPayload<object, TOrderReturn, SubmitRouteParams, TConfigData>
+				where TOrderReturn : OrderReturn
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/orderreturns/{returnID}/submit.</summary>
+			public class SubmitRouteParams
+			{
+				public string ReturnID { get; set; }
+			}
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/orderreturns/{returnID}/approve.</summary>
+			[SentOn("POST", "v1/orderreturns/{returnID}/approve")]
+			public class Approve : WebhookPayload<ApprovalInfo, OrderReturn, ApproveRouteParams, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/orderreturns/{returnID}/approve.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TApprovalInfo">Specific type of the ApprovalInfo. If not using a custom type, specify ApprovalInfo.</typeparam>
+			/// <typeparam name="TOrderReturn">Specific type of the OrderReturn. If not using a custom type, specify OrderReturn.</typeparam>
+			[SentOn("POST", "v1/orderreturns/{returnID}/approve")]
+			public class Approve<TConfigData, TApprovalInfo, TOrderReturn> : WebhookPayload<TApprovalInfo, TOrderReturn, ApproveRouteParams, TConfigData>
+				where TApprovalInfo : ApprovalInfo
+				where TOrderReturn : OrderReturn
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/orderreturns/{returnID}/approve.</summary>
+			public class ApproveRouteParams
+			{
+				public string ReturnID { get; set; }
+			}
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/orderreturns/{returnID}/decline.</summary>
+			[SentOn("POST", "v1/orderreturns/{returnID}/decline")]
+			public class Decline : WebhookPayload<ApprovalInfo, OrderReturn, DeclineRouteParams, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/orderreturns/{returnID}/decline.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TApprovalInfo">Specific type of the ApprovalInfo. If not using a custom type, specify ApprovalInfo.</typeparam>
+			/// <typeparam name="TOrderReturn">Specific type of the OrderReturn. If not using a custom type, specify OrderReturn.</typeparam>
+			[SentOn("POST", "v1/orderreturns/{returnID}/decline")]
+			public class Decline<TConfigData, TApprovalInfo, TOrderReturn> : WebhookPayload<TApprovalInfo, TOrderReturn, DeclineRouteParams, TConfigData>
+				where TApprovalInfo : ApprovalInfo
+				where TOrderReturn : OrderReturn
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/orderreturns/{returnID}/decline.</summary>
+			public class DeclineRouteParams
+			{
+				public string ReturnID { get; set; }
+			}
+		}
 		public static class Orders
 		{
 			/// <summary>Webhook payload sent by OrderCloud on POST v1/orders/{direction}.</summary>
@@ -2658,6 +2809,62 @@ namespace OrderCloud.SDK
 			public class SaveAssignment<TConfigData, TSecurityProfileAssignment> : WebhookPayload<TSecurityProfileAssignment, object, object, TConfigData>
 				where TSecurityProfileAssignment : SecurityProfileAssignment
 			{ }
+		}
+		public static class SellerApprovalRules
+		{
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/approvalrules.</summary>
+			[SentOn("POST", "v1/approvalrules")]
+			public class Create : WebhookPayload<SellerApprovalRule, SellerApprovalRule, object, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/approvalrules.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TSellerApprovalRule">Specific type of the SellerApprovalRule. If not using a custom type, specify SellerApprovalRule.</typeparam>
+			[SentOn("POST", "v1/approvalrules")]
+			public class Create<TConfigData, TSellerApprovalRule> : WebhookPayload<TSellerApprovalRule, TSellerApprovalRule, object, TConfigData>
+				where TSellerApprovalRule : SellerApprovalRule
+			{ }
+			/// <summary>Webhook payload sent by OrderCloud on PUT v1/approvalrules/{approvalRuleID}.</summary>
+			[SentOn("PUT", "v1/approvalrules/{approvalRuleID}")]
+			public class Save : WebhookPayload<SellerApprovalRule, SellerApprovalRule, SaveRouteParams, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on PUT v1/approvalrules/{approvalRuleID}.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TSellerApprovalRule">Specific type of the SellerApprovalRule. If not using a custom type, specify SellerApprovalRule.</typeparam>
+			[SentOn("PUT", "v1/approvalrules/{approvalRuleID}")]
+			public class Save<TConfigData, TSellerApprovalRule> : WebhookPayload<TSellerApprovalRule, TSellerApprovalRule, SaveRouteParams, TConfigData>
+				where TSellerApprovalRule : SellerApprovalRule
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/approvalrules/{approvalRuleID}.</summary>
+			public class SaveRouteParams
+			{
+				public string ApprovalRuleID { get; set; }
+			}
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/approvalrules/{approvalRuleID}.</summary>
+			[SentOn("DELETE", "v1/approvalrules/{approvalRuleID}")]
+			public class Delete : WebhookPayload<object, object, DeleteRouteParams, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/approvalrules/{approvalRuleID}.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, use the non-generic payload type instead.</typeparam>
+			[SentOn("DELETE", "v1/approvalrules/{approvalRuleID}")]
+			public class Delete<TConfigData> : WebhookPayload<object, object, DeleteRouteParams, TConfigData>
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/approvalrules/{approvalRuleID}.</summary>
+			public class DeleteRouteParams
+			{
+				public string ApprovalRuleID { get; set; }
+			}
+			/// <summary>Webhook payload sent by OrderCloud on PATCH v1/approvalrules/{approvalRuleID}.</summary>
+			[SentOn("PATCH", "v1/approvalrules/{approvalRuleID}")]
+			public class Patch : WebhookPayload<SellerApprovalRule, SellerApprovalRule, PatchRouteParams, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on PATCH v1/approvalrules/{approvalRuleID}.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TSellerApprovalRule">Specific type of the SellerApprovalRule. If not using a custom type, specify SellerApprovalRule.</typeparam>
+			[SentOn("PATCH", "v1/approvalrules/{approvalRuleID}")]
+			public class Patch<TConfigData, TSellerApprovalRule> : WebhookPayload<TSellerApprovalRule, TSellerApprovalRule, PatchRouteParams, TConfigData>
+				where TSellerApprovalRule : SellerApprovalRule
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/approvalrules/{approvalRuleID}.</summary>
+			public class PatchRouteParams
+			{
+				public string ApprovalRuleID { get; set; }
+			}
 		}
 		public static class Shipments
 		{
