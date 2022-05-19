@@ -2,7 +2,7 @@
 
 [![OrderCloud.SDK](https://img.shields.io/nuget/v/OrderCloud.SDK.svg?maxAge=3600)](https://www.nuget.org/packages/OrderCloud.SDK/)
 
-The OrderCloud.io SDK for .NET is a client library for building solutions targeting the [OrderCloud.io](https://ordercloud.io/) eCommerce platform using C# or other .NET language. Compared to accessing OrderCloud.io's REST API via direct HTTP calls, the SDK aims to greatly improve developer productivity and reduce errors by providing discoverable, strongly typed wrappers for all public endpoints and request/response models.
+The OrderCloud.io SDK for .NET is a client library for building solutions targeting the [OrderCloud.io](https://developer.ordercloud.io/documentation/) eCommerce platform using C# or other .NET language. Compared to accessing OrderCloud.io's REST API via direct HTTP calls, the SDK aims to greatly improve developer productivity and reduce errors by providing discoverable, strongly typed wrappers for all public endpoints and request/response models.
 
 - [Example](#example)
 - [Authenticating](#authenticating)
@@ -68,7 +68,7 @@ OrderCloud.io uses OAuth2 for authentication and authorization. In a nutshell, y
     ```
 
 ## Notable Features
-Here are a few niceties that the SDK provides. Features of the OrderCloud.io _platform_ are documented [here](https://ordercloud.io/api-reference/).
+Here are a few niceties that the SDK provides. Features of the OrderCloud.io _platform_ are documented [here](https://developer.ordercloud.io/documentation).
 
 ### Strongly Typed xp
 Extended Properties, or `xp`, is a platform feature that allows you to extend the OrderCloud.io data model. This is modeled in the SDK using (by default) a C# [dynamic](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/dynamic):
@@ -179,7 +179,7 @@ Yes and yes. All service-y classes implement interfaces (`IOrderCloudClient`, `I
 The SDK targets .NET Framework 4.5 and [.NET Standard](https://docs.microsoft.com/en-us/dotnet/standard/net-standard)  1.3 and 2.0, meaning it'll run just about everywhere .NET runs, including .NET Core 1.0 and 2.0, Mono, Xamarin (iOS and Android), and UWP 10.
 
 ## Getting Help
-If you're new to OrderCloud.io, exploring the [documentation](https://ordercloud.io/) is recommended, especially the [Intro to OrderCloud.io](https://ordercloud.io/learn/getting-started/welcome-to-ordercloud/). When you're ready to dive deeper, check out the [API reference](https://ordercloud.io/api-reference/).
+If you're new to OrderCloud.io, exploring the [documentation](https://developer.ordercloud.io/documentation) is recommended, especially the [Intro to OrderCloud.io](https://developer.ordercloud.io/documentation/platform-guides/getting-started/introduction-to-ordercloud) and [Quick Start Guide](https://developer.ordercloud.io/documentation/platform-guides/getting-started/quick-start-guide). When you're ready to dive deeper, check out the [platform guides](https://developer.ordercloud.io/documentation/platform-guides) and [API reference](https://developer.ordercloud.io/documentation/api-reference).
 
 For programming questions, please [ask](https://stackoverflow.com/questions/ask?tags=ordercloud) on Stack Overflow.
 

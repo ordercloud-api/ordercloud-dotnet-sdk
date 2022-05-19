@@ -12,9 +12,9 @@
 		<Copyright>Copyright 2022 Sitecore, Inc.</Copyright>
 		<PackageProjectUrl>https://ordercloud.io/</PackageProjectUrl>
 		<PackageIcon>icon.png</PackageIcon>
+		<PackageIconUrl>https://ordercloud.io/wp-content/uploads/2018/01/oc-circle-logo-2018.png</PackageIconUrl>
 		<PackageTags>ecommerce b2b sitecore four51 ordercloud cloud api headless</PackageTags>
-		<PackageReleaseNotes>https://ordercloud.io/release-notes/</PackageReleaseNotes>
-		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageReleaseNotes>https://ordercloud-api.github.io/release-notes/</PackageReleaseNotes>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<RepositoryUrl>https://github.com/ordercloud-api/ordercloud-dotnet-sdk</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
@@ -36,7 +36,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="Flurl.Http" Version="3.2.0" />
+	  <PackageReference Include="Flurl.Http" Version="3.2.2" />
 	  <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
 		<None Include="..\..\icon.png" Pack="true" PackagePath="\" />
 	</ItemGroup>
