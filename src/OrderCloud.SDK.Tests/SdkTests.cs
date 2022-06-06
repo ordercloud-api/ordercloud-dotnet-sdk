@@ -23,8 +23,23 @@ namespace OrderCloud.SDK.Tests
 		}
 
 		[Test]
-		public async Task can_get_strongly_typed_xp() {
-			var ba = new {
+		public void can_create_strongly_typed_partial_xp() {
+			var product1 = new Product<CustomPartialXP>
+			{
+				xp = new CustomPartialXP { Foo = "xyz" }
+			};
+			JsonAssert.AreEquivalent(new { Foo = "xyz" }, product1.xp);
+
+			var product2 = new CustomProduct();
+			product2.xp.Foo = "xyz";
+			JsonAssert.AreEquivalent(new { Foo = "xyz" }, product2.xp);
+		}
+
+		[Test]
+		public async Task can_get_strongly_typed_xp()
+		{
+			var ba = new
+			{
 				Items = new[] {
 					new {
 						xp = new { Foo = "abc", Bar = 123 },
@@ -49,6 +64,49 @@ namespace OrderCloud.SDK.Tests
 				Assert.AreEqual(123, lineItems.Items[0].xp.Bar);
 				Assert.AreEqual("xyz", lineItems.Items[0].ShipFromAddress.xp.Foo);
 				Assert.AreEqual(456, lineItems.Items[0].ShipFromAddress.xp.Bar);
+			}
+		}
+
+		[Test]
+		public async Task can_get_strongly_typed_partial_xp()
+		{
+			var ba = new
+			{
+				Items = new[] {
+					new {
+						xp = new { Foo = "abc" },
+						ShipFromAddress = new {
+							xp = new { Foo = "abc", Bar = 456 }
+						},
+						ShippingAddress = new
+						{
+							ID = "addressID"
+						}
+					}
+				}
+			};
+
+			using (var httpTest = new HttpTest())
+			{
+				httpTest
+					.RespondWith("{}") // auth
+					.RespondWithJson(ba);
+
+				var lineItems = await GetClient().LineItems.ListAsync<CustomLineItemWithPartialXP>(OrderDirection.Incoming, "orderID");
+
+				Assert.IsInstanceOf<ListPage<CustomLineItemWithPartialXP>>(lineItems);
+				Assert.IsInstanceOf<CustomLineItemWithPartialXP>(lineItems.Items[0]);
+				Assert.IsInstanceOf<Address<CustomPartialXP>>(lineItems.Items[0].ShipFromAddress);
+				Assert.IsInstanceOf<Address<CustomPartialXP>>(lineItems.Items[0].ShippingAddress);
+				Assert.AreEqual("abc", lineItems.Items[0].xp.Foo);
+				Assert.AreEqual(1, lineItems.Items[0].xp.Props.Count);
+				Assert.AreEqual(default(int), lineItems.Items[0].xp.Bar);
+				Assert.AreEqual(2, lineItems.Items[0].ShipFromAddress.xp.Props.Count);
+				Assert.AreEqual("abc", lineItems.Items[0].ShipFromAddress.xp.Foo);
+				Assert.AreEqual(456, lineItems.Items[0].ShipFromAddress.xp.Bar);
+				Assert.AreEqual(0, lineItems.Items[0].ShippingAddress.xp.Props.Count);
+				Assert.AreEqual(default(string), lineItems.Items[0].ShippingAddress.xp.Foo);
+				Assert.AreEqual(default(int), lineItems.Items[0].ShippingAddress.xp.Bar);
 			}
 		}
 
@@ -127,7 +185,7 @@ namespace OrderCloud.SDK.Tests
 			};
 
 			var serializedProduct = OrderCloudClient.Serializer.Serialize(product);
-			var deserializedProduct = OrderCloudClient.Serializer.Deserialize<CustomPartialProduct<CustomPartialXP>>(serializedProduct);
+			var deserializedProduct = OrderCloudClient.Serializer.Deserialize<CustomPartialProduct>(serializedProduct);
 
 			// As the complete model is deserialized, we expect to see all properties be assigned to the Props dictionary.
 			Assert.IsNotNull(deserializedProduct.Props.ContainsKey(nameof(product.OwnerID)));
@@ -407,11 +465,30 @@ namespace OrderCloud.SDK.Tests
 
 		class CustomUser : User<CustomXP> { }
 		class CustomAddress : Address<CustomXP> { }
+		class CustomAddressWithPartialXP : Address<CustomPartialXP>
+		{
+			public CustomAddressWithPartialXP()
+			{
+				xp = new CustomPartialXP();
+			}
+		}
 		class CustomLineItem : LineItem<CustomXP, LineItemProduct, LineItemVariant, CustomAddress, CustomAddress> { }
+		class CustomLineItemWithPartialXP : LineItem<CustomPartialXP, LineItemProduct, LineItemVariant, CustomAddressWithPartialXP, CustomAddressWithPartialXP> { }
 		class CustomOrder : Order<CustomXP, CustomUser, CustomAddress> { }
-		class CustomPartialProduct : PartialProduct<CustomPartialXP> { }
-		class CustomPartialProduct<Txp> : CustomPartialProduct {
-			public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
+		class CustomProduct : Product<CustomPartialXP>
+		{
+			public CustomProduct()
+			{
+				xp = new CustomPartialXP();
+			}
+		}
+		class CustomPartialProduct : PartialProduct<CustomPartialXP> {
+			public CustomPartialProduct()
+			{
+				xp = new CustomPartialXP();
+			}
+
+			public new CustomPartialXP xp { get => GetProp<CustomPartialXP>(nameof(xp)); set => SetProp<CustomPartialXP>(nameof(xp), value); }
 		}
 
 		private static class JsonAssert
