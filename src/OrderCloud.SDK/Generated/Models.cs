@@ -4,11 +4,12 @@ using System.Dynamic;
 
 namespace OrderCloud.SDK
 {
-	public enum ApiRole { ApiClientAdmin, ApiClientReader, AddressAdmin, AddressReader, AdminAddressAdmin, AdminAddressReader, AdminUserAdmin, AdminUserGroupAdmin, AdminUserGroupReader, AdminUserReader, ApprovalRuleAdmin, ApprovalRuleReader, BuyerAdmin, BuyerImpersonation, BuyerReader, BuyerUserAdmin, BuyerUserReader, CatalogAdmin, CatalogReader, CategoryAdmin, CategoryReader, CostCenterAdmin, CostCenterReader, CreditCardAdmin, CreditCardReader, FullAccess, IncrementorAdmin, IncrementorReader, InventoryAdmin, LocaleReader, LocaleAdmin, MeAddressAdmin, MeAdmin, MeCreditCardAdmin, MessageConfigAssignmentAdmin, MeXpAdmin, OrderAdmin, OrderReader, OverrideShipping, OverrideTax, OverrideUnitPrice, PasswordReset, PriceScheduleAdmin, PriceScheduleReader, ProductAdmin, ProductAssignmentAdmin, ProductFacetAdmin, ProductFacetReader, ProductReader, PromotionAdmin, PromotionReader, SecurityProfileAdmin, SecurityProfileReader, SetSecurityProfile, ShipmentAdmin, ShipmentReader, Shopper, SpendingAccountAdmin, SpendingAccountReader, SupplierAddressAdmin, SupplierAddressReader, SupplierAdmin, SupplierReader, SupplierUserAdmin, SupplierUserGroupAdmin, SupplierUserGroupReader, SupplierUserReader, UnsubmittedOrderReader, UserGroupAdmin, UserGroupReader, OpenIDConnectReader, OpenIDConnectAdmin, MessageSenderReader, MessageSenderAdmin, XpIndexAdmin, WebhookReader, WebhookAdmin, IntegrationEventReader, IntegrationEventAdmin }
+	public enum ApiRole { ApiClientAdmin, ApiClientReader, AddressAdmin, AddressReader, AdminAddressAdmin, AdminAddressReader, AdminUserAdmin, AdminUserGroupAdmin, AdminUserGroupReader, AdminUserReader, ApprovalRuleAdmin, ApprovalRuleReader, BuyerAdmin, BuyerImpersonation, BuyerReader, BuyerUserAdmin, BuyerUserReader, CatalogAdmin, CatalogReader, CategoryAdmin, CategoryReader, CostCenterAdmin, CostCenterReader, CreditCardAdmin, CreditCardReader, FullAccess, IncrementorAdmin, IncrementorReader, LocaleReader, LocaleAdmin, MeAddressAdmin, MeAdmin, MeCreditCardAdmin, MessageConfigAssignmentAdmin, MeXpAdmin, OrderAdmin, OrderReader, OverrideShipping, OverrideTax, OverrideUnitPrice, PasswordReset, PriceScheduleAdmin, PriceScheduleReader, ProductAdmin, ProductAssignmentAdmin, ProductFacetAdmin, ProductFacetReader, ProductReader, PromotionAdmin, PromotionReader, SecurityProfileAdmin, SecurityProfileReader, SetSecurityProfile, ShipmentAdmin, ShipmentReader, Shopper, SpendingAccountAdmin, SpendingAccountReader, SupplierAddressAdmin, SupplierAddressReader, SupplierAdmin, SupplierReader, SupplierUserAdmin, SupplierUserGroupAdmin, SupplierUserGroupReader, SupplierUserReader, UnsubmittedOrderReader, UserGroupAdmin, UserGroupReader, OpenIDConnectReader, OpenIDConnectAdmin, MessageSenderReader, MessageSenderAdmin, XpIndexAdmin, WebhookReader, WebhookAdmin, IntegrationEventReader, IntegrationEventAdmin }
 	public enum ApprovalStatus { Pending, Approved, Declined }
+	public enum ApprovalType { Order, OrderReturn }
 	public enum CommerceRole { Buyer, Seller, Supplier }
-	public enum IntegrationEventType { OrderCheckout, OpenIDConnect }
-	public enum MessageType { OrderDeclined, OrderSubmitted, ShipmentCreated, ForgottenPassword, OrderSubmittedForYourApproval, OrderSubmittedForApproval, OrderApproved, OrderSubmittedForYourApprovalHasBeenApproved, OrderSubmittedForYourApprovalHasBeenDeclined, NewUserInvitation }
+	public enum IntegrationEventType { OrderCheckout, OpenIDConnect, OrderReturn }
+	public enum MessageType { OrderDeclined, OrderSubmitted, ShipmentCreated, ForgottenPassword, OrderSubmittedForYourApproval, OrderSubmittedForApproval, OrderApproved, OrderSubmittedForYourApprovalHasBeenApproved, OrderSubmittedForYourApprovalHasBeenDeclined, NewUserInvitation, OrderReturnDeclined, OrderReturnSubmitted, OrderReturnSubmittedForYourApproval, OrderReturnSubmittedForApproval, OrderReturnApproved, OrderReturnSubmittedForYourApprovalHasBeenApproved, OrderReturnSubmittedForYourApprovalHasBeenDeclined, OrderReturnCompleted }
 	public enum OrderDirection { Incoming, Outgoing, All }
 	public enum OrderStatus { Unsubmitted, AwaitingApproval, Declined, Open, Completed, Canceled }
 	public enum PartyType { User, Group, Company }
@@ -16,7 +17,7 @@ namespace OrderCloud.SDK
 	public enum PriceMarkupType { NoMarkup, AmountPerQuantity, AmountTotal, Percentage }
 	public enum SearchType { AnyTerm, AllTermsAnyField, AllTermsSameField, ExactPhrase, ExactPhrasePrefix }
 	public enum UserOrderMoveOption { None, Unsubmitted, All }
-	public enum XpThingType { Address, Variant, Order, LineItem, CostCenter, CreditCard, Payment, Spec, SpecOption, UserGroup, Company, Category, PriceSchedule, Shipment, SpendingAccount, User, Promotion, ApprovalRule, Catalog, ProductFacet, MessageSender, InventoryRecord }
+	public enum XpThingType { Address, Variant, Order, OrderReturn, LineItem, CostCenter, CreditCard, Payment, Spec, SpecOption, UserGroup, Company, Category, PriceSchedule, Shipment, SpendingAccount, User, Promotion, ApprovalRule, SellerApprovalRule, Catalog, ProductFacet, MessageSender, InventoryRecord, ProductCollection }
 	public class AccessToken : OrderCloudModel
 	{
 		/// <summary>Access token of the access token.</summary>
@@ -130,6 +131,11 @@ namespace OrderCloud.SDK
 		/// <summary>Order checkout integration event name of the api client.</summary>
 		[ApiReadOnly]
 		public string OrderCheckoutIntegrationEventName { get => GetProp<string>("OrderCheckoutIntegrationEventName"); set => SetProp<string>("OrderCheckoutIntegrationEventName", value); }
+		/// <summary>If populated, and not overriden by an OrderAdmin, the integration event will be used to calculate ReturnAmount on the Order Return or each individual return item.</summary>
+		public string OrderReturnIntegrationEventID { get => GetProp<string>("OrderReturnIntegrationEventID"); set => SetProp<string>("OrderReturnIntegrationEventID", value); }
+		/// <summary>Order return integration event name of the api client.</summary>
+		[ApiReadOnly]
+		public string OrderReturnIntegrationEventName { get => GetProp<string>("OrderReturnIntegrationEventName"); set => SetProp<string>("OrderReturnIntegrationEventName", value); }
 		/// <summary>Minimum required roles of the api client.</summary>
 		public IList<ApiRole> MinimumRequiredRoles { get => GetProp<IList<ApiRole>>("MinimumRequiredRoles", new List<ApiRole>()); set => SetProp<IList<ApiRole>>("MinimumRequiredRoles", value); }
 		/// <summary>Minimum required custom roles of the api client.</summary>
@@ -153,6 +159,11 @@ namespace OrderCloud.SDK
 		public string BuyerID { get => GetProp<string>("BuyerID"); set => SetProp<string>("BuyerID", value); }
 		/// <summary>ID of the supplier. Sortable: priority level 1.</summary>
 		public string SupplierID { get => GetProp<string>("SupplierID"); set => SetProp<string>("SupplierID", value); }
+	}
+	public class ApprovalInfo : OrderCloudModel
+	{
+		/// <summary>Comments to be saved with the order approval or denial.</summary>
+		public string Comments { get => GetProp<string>("Comments"); set => SetProp<string>("Comments", value); }
 	}
 	public class ApprovalRule : OrderCloudModel
 	{
@@ -319,6 +330,8 @@ namespace OrderCloud.SDK
 		public string DefaultSupplierID { get => GetProp<string>("DefaultSupplierID"); set => SetProp<string>("DefaultSupplierID", value); }
 		/// <summary>If true, all suppliers are eligible to opt into selling this product.</summary>
 		public bool AllSuppliersCanSell { get => GetProp<bool>("AllSuppliersCanSell"); set => SetProp<bool>("AllSuppliersCanSell", value); }
+		/// <summary>Returnable of the product.</summary>
+		public bool Returnable { get => GetProp<bool>("Returnable"); set => SetProp<bool>("Returnable", value); }
 		/// <summary>Container for extended (custom) properties of the product.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
@@ -549,8 +562,14 @@ namespace OrderCloud.SDK
 		/// <summary>ID of the supplier.</summary>
 		[ApiReadOnly]
 		public string SupplierID { get => GetProp<string>("SupplierID"); set => SetProp<string>("SupplierID", value); }
-		/// <summary>Inventory Record ID of which product inventory location to use. The Inventory Record ID cannot be modified once an order is submitted</summary>
+		/// <summary>Inventory Record ID of which product inventory location to use. The Inventory Record ID cannot be modified once an order is submitted.</summary>
 		public string InventoryRecordID { get => GetProp<string>("InventoryRecordID"); set => SetProp<string>("InventoryRecordID", value); }
+		/// <summary>ID of the Price Schedule used to determine Unit price.</summary>
+		[ApiReadOnly]
+		public string PriceScheduleID { get => GetProp<string>("PriceScheduleID"); set => SetProp<string>("PriceScheduleID", value); }
+		/// <summary>If true, UnitPrice was overwritten.</summary>
+		[ApiReadOnly]
+		public bool PriceOverridden { get => GetProp<bool>("PriceOverridden"); set => SetProp<bool>("PriceOverridden", value); }
 		/// <summary>Specs of the extended line item.</summary>
 		public IList<LineItemSpec> Specs { get => GetProp<IList<LineItemSpec>>("Specs", new List<LineItemSpec>()); set => SetProp<IList<LineItemSpec>>("Specs", value); }
 		/// <summary>Container for extended (custom) properties of the extended line item.</summary>
@@ -729,14 +748,13 @@ namespace OrderCloud.SDK
 	}
 	public class IntegrationEvent : OrderCloudModel
 	{
-		/// <summary>Elevated roles of the integration event. Required.</summary>
-		[Required]
+		/// <summary>Elevated roles of the integration event.</summary>
 		public IList<ApiRole> ElevatedRoles { get => GetProp<IList<ApiRole>>("ElevatedRoles", new List<ApiRole>()); set => SetProp<IList<ApiRole>>("ElevatedRoles", value); }
 		/// <summary>ID of the integration event. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 1.</summary>
 		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
 		/// <summary>Any additional data needed for your Integration Event should be included here.</summary>
 		public object ConfigData { get => GetProp<object>("ConfigData"); set => SetProp<object>("ConfigData", value); }
-		/// <summary>Event type of the integration event. Searchable: priority level 2. Sortable: priority level 2. Possible values: OrderCheckout, OpenIDConnect.</summary>
+		/// <summary>Event type of the integration event. Searchable: priority level 2. Sortable: priority level 2. Possible values: OrderCheckout, OpenIDConnect, OrderReturn.</summary>
 		public IntegrationEventType EventType { get => GetProp<IntegrationEventType>("EventType"); set => SetProp<IntegrationEventType>("EventType", value); }
 		/// <summary>URL the IntegrationEvent will POST data to, likely a route within your middleware.</summary>
 		[Required]
@@ -849,8 +867,14 @@ namespace OrderCloud.SDK
 		/// <summary>ID of the supplier.</summary>
 		[ApiReadOnly]
 		public string SupplierID { get => GetProp<string>("SupplierID"); set => SetProp<string>("SupplierID", value); }
-		/// <summary>Inventory Record ID of which product inventory location to use. The Inventory Record ID cannot be modified once an order is submitted</summary>
+		/// <summary>Inventory Record ID of which product inventory location to use. The Inventory Record ID cannot be modified once an order is submitted.</summary>
 		public string InventoryRecordID { get => GetProp<string>("InventoryRecordID"); set => SetProp<string>("InventoryRecordID", value); }
+		/// <summary>ID of the Price Schedule used to determine Unit price.</summary>
+		[ApiReadOnly]
+		public string PriceScheduleID { get => GetProp<string>("PriceScheduleID"); set => SetProp<string>("PriceScheduleID", value); }
+		/// <summary>If true, UnitPrice was overwritten.</summary>
+		[ApiReadOnly]
+		public bool PriceOverridden { get => GetProp<bool>("PriceOverridden"); set => SetProp<bool>("PriceOverridden", value); }
 		/// <summary>Specs of the line item.</summary>
 		public IList<LineItemSpec> Specs { get => GetProp<IList<LineItemSpec>>("Specs", new List<LineItemSpec>()); set => SetProp<IList<LineItemSpec>>("Specs", value); }
 		/// <summary>Container for extended (custom) properties of the line item.</summary>
@@ -899,6 +923,8 @@ namespace OrderCloud.SDK
 		public string Name { get => GetProp<string>("Name"); set => SetProp<string>("Name", value); }
 		/// <summary>Description of the line item product.</summary>
 		public string Description { get => GetProp<string>("Description"); set => SetProp<string>("Description", value); }
+		/// <summary>Returnable of the line item product.</summary>
+		public bool Returnable { get => GetProp<bool>("Returnable"); set => SetProp<bool>("Returnable", value); }
 		/// <summary>Quantity multiplier of the line item product.</summary>
 		public int QuantityMultiplier { get => GetProp<int>("QuantityMultiplier"); set => SetProp<int>("QuantityMultiplier", value); }
 		/// <summary>Ship weight of the line item product.</summary>
@@ -1010,7 +1036,7 @@ namespace OrderCloud.SDK
 		/// <summary>Message config description of the message cc listener assignment.</summary>
 		[ApiReadOnly]
 		public string MessageConfigDescription { get => GetProp<string>("MessageConfigDescription"); set => SetProp<string>("MessageConfigDescription", value); }
-		/// <summary>Message type of the message cc listener assignment. Possible values: OrderDeclined, OrderSubmitted, ShipmentCreated, ForgottenPassword, OrderSubmittedForYourApproval, OrderSubmittedForApproval, OrderApproved, OrderSubmittedForYourApprovalHasBeenApproved, OrderSubmittedForYourApprovalHasBeenDeclined, NewUserInvitation.</summary>
+		/// <summary>Message type of the message cc listener assignment. Possible values: OrderDeclined, OrderSubmitted, ShipmentCreated, ForgottenPassword, OrderSubmittedForYourApproval, OrderSubmittedForApproval, OrderApproved, OrderSubmittedForYourApprovalHasBeenApproved, OrderSubmittedForYourApprovalHasBeenDeclined, NewUserInvitation, OrderReturnDeclined, OrderReturnSubmitted, OrderReturnSubmittedForYourApproval, OrderReturnSubmittedForApproval, OrderReturnApproved, OrderReturnSubmittedForYourApprovalHasBeenApproved, OrderReturnSubmittedForYourApprovalHasBeenDeclined, OrderReturnCompleted.</summary>
 		public MessageType MessageType { get => GetProp<MessageType>("MessageType"); set => SetProp<MessageType>("MessageType", value); }
 		/// <summary>ID of the buyer. Searchable: priority level 0. Sortable: priority level 0.</summary>
 		public string BuyerID { get => GetProp<string>("BuyerID"); set => SetProp<string>("BuyerID", value); }
@@ -1253,6 +1279,9 @@ namespace OrderCloud.SDK
 	}
 	public class OrderApproval : OrderCloudModel
 	{
+		/// <summary>If true, the submitting user will be able to modify the order and resubmit for approval.</summary>
+		[ApiReadOnly]
+		public bool AllowResubmit { get => GetProp<bool>("AllowResubmit"); set => SetProp<bool>("AllowResubmit", value); }
 		/// <summary>ID of the approval rule. Searchable: priority level 1. Sortable.</summary>
 		[ApiReadOnly]
 		public string ApprovalRuleID { get => GetProp<string>("ApprovalRuleID"); set => SetProp<string>("ApprovalRuleID", value); }
@@ -1262,9 +1291,6 @@ namespace OrderCloud.SDK
 		/// <summary>Status of the order approval. Sortable. Possible values: Pending, Approved, Declined.</summary>
 		[ApiReadOnly]
 		public ApprovalStatus Status { get => GetProp<ApprovalStatus>("Status"); set => SetProp<ApprovalStatus>("Status", value); }
-		/// <summary>If true, the submitting user will be able to modify the order and resubmit for approval.</summary>
-		[ApiReadOnly]
-		public bool AllowResubmit { get => GetProp<bool>("AllowResubmit"); set => SetProp<bool>("AllowResubmit", value); }
 		/// <summary>Date created of the order approval. Sortable: priority level 1.</summary>
 		[ApiReadOnly]
 		public DateTimeOffset DateCreated { get => GetProp<DateTimeOffset>("DateCreated"); set => SetProp<DateTimeOffset>("DateCreated", value); }
@@ -1288,10 +1314,10 @@ namespace OrderCloud.SDK
 	}
 	public class OrderApprovalInfo : OrderCloudModel
 	{
-		/// <summary>Comments of the order approval info. Max length 2000 characters.</summary>
-		public string Comments { get => GetProp<string>("Comments"); set => SetProp<string>("Comments", value); }
-		/// <summary>Allow resubmit of the order approval info.</summary>
+		/// <summary>Only relevant when declining an order. Changes the Order Status back to Open and allows the user to make changes and resubmit.</summary>
 		public bool AllowResubmit { get => GetProp<bool>("AllowResubmit"); set => SetProp<bool>("AllowResubmit", value); }
+		/// <summary>Comments to be saved with the order approval or denial.</summary>
+		public string Comments { get => GetProp<string>("Comments"); set => SetProp<string>("Comments", value); }
 	}
 	public class OrderApprovedResponse : OrderCloudModel
 	{
@@ -1382,6 +1408,101 @@ namespace OrderCloud.SDK
 		/// <summary>Container for extended (custom) properties of the order promotion.</summary>
 		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
 	}
+	public class OrderReturn : OrderCloudModel
+	{
+		/// <summary>ID of the order return. Can only contain characters Aa-Zz, 0-9, -, and _.</summary>
+		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
+		/// <summary>ID of the order. Required.</summary>
+		[Required]
+		public string OrderID { get => GetProp<string>("OrderID"); set => SetProp<string>("OrderID", value); }
+		/// <summary>IDs of Payments associated with this OrderReturn.</summary>
+		[ApiReadOnly]
+		public IReadOnlyList<string> PaymentIDs { get => GetProp<IReadOnlyList<string>>("PaymentIDs"); set => SetProp<IReadOnlyList<string>>("PaymentIDs", value); }
+		/// <summary>Status of the order return. Possible values: Unsubmitted, AwaitingApproval, Declined, Open, Completed, Canceled.</summary>
+		[ApiReadOnly]
+		public OrderStatus Status { get => GetProp<OrderStatus>("Status"); set => SetProp<OrderStatus>("Status", value); }
+		/// <summary>Date created of the order return. Sortable: priority level 2.</summary>
+		[ApiReadOnly]
+		public DateTimeOffset? DateCreated { get => GetProp<DateTimeOffset?>("DateCreated"); set => SetProp<DateTimeOffset?>("DateCreated", value); }
+		/// <summary>NULL until the order return passes from the buyer to the Marketplace Owner, including when Status is PendingApproval.</summary>
+		[ApiReadOnly]
+		public DateTimeOffset? DateSubmitted { get => GetProp<DateTimeOffset?>("DateSubmitted"); set => SetProp<DateTimeOffset?>("DateSubmitted", value); }
+		/// <summary>Date approved of the order return. Sortable.</summary>
+		[ApiReadOnly]
+		public DateTimeOffset? DateApproved { get => GetProp<DateTimeOffset?>("DateApproved"); set => SetProp<DateTimeOffset?>("DateApproved", value); }
+		/// <summary>Date declined of the order return. Sortable.</summary>
+		[ApiReadOnly]
+		public DateTimeOffset? DateDeclined { get => GetProp<DateTimeOffset?>("DateDeclined"); set => SetProp<DateTimeOffset?>("DateDeclined", value); }
+		/// <summary>Date canceled of the order return. Sortable.</summary>
+		[ApiReadOnly]
+		public DateTimeOffset? DateCanceled { get => GetProp<DateTimeOffset?>("DateCanceled"); set => SetProp<DateTimeOffset?>("DateCanceled", value); }
+		/// <summary>Populated when payment to customer has been completed.</summary>
+		[ApiReadOnly]
+		public DateTimeOffset? DateCompleted { get => GetProp<DateTimeOffset?>("DateCompleted"); set => SetProp<DateTimeOffset?>("DateCompleted", value); }
+		/// <summary>Last updated of the order return. Sortable.</summary>
+		[ApiReadOnly]
+		public DateTimeOffset LastUpdated { get => GetProp<DateTimeOffset>("LastUpdated"); set => SetProp<DateTimeOffset>("LastUpdated", value); }
+		/// <summary>Refund amount of the order return.</summary>
+		public decimal? RefundAmount { get => GetProp<decimal?>("RefundAmount"); set => SetProp<decimal?>("RefundAmount", value); }
+		/// <summary>Comments of the order return. Max length 2000 characters.</summary>
+		public string Comments { get => GetProp<string>("Comments"); set => SetProp<string>("Comments", value); }
+		/// <summary>Items to return of the order return.</summary>
+		public IList<OrderReturnItem> ItemsToReturn { get => GetProp<IList<OrderReturnItem>>("ItemsToReturn", new List<OrderReturnItem>()); set => SetProp<IList<OrderReturnItem>>("ItemsToReturn", value); }
+		/// <summary>Container for extended (custom) properties of the order return.</summary>
+		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
+	}
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic OrderReturn class instead.</typeparam>
+	public class OrderReturn<Txp> : OrderReturn
+	{
+		/// <summary>Container for extended (custom) properties of the order return.</summary>
+		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
+	}
+	public class OrderReturnApproval : OrderCloudModel
+	{
+		/// <summary>ID of the order return.</summary>
+		public string OrderReturnID { get => GetProp<string>("OrderReturnID"); set => SetProp<string>("OrderReturnID", value); }
+		/// <summary>ID of the approval rule. Searchable: priority level 1. Sortable.</summary>
+		[ApiReadOnly]
+		public string ApprovalRuleID { get => GetProp<string>("ApprovalRuleID"); set => SetProp<string>("ApprovalRuleID", value); }
+		/// <summary>ID of the approving group. Searchable: priority level 2. Sortable.</summary>
+		[ApiReadOnly]
+		public string ApprovingGroupID { get => GetProp<string>("ApprovingGroupID"); set => SetProp<string>("ApprovingGroupID", value); }
+		/// <summary>Status of the order return approval. Sortable. Possible values: Pending, Approved, Declined.</summary>
+		[ApiReadOnly]
+		public ApprovalStatus Status { get => GetProp<ApprovalStatus>("Status"); set => SetProp<ApprovalStatus>("Status", value); }
+		/// <summary>Date created of the order return approval. Sortable: priority level 1.</summary>
+		[ApiReadOnly]
+		public DateTimeOffset DateCreated { get => GetProp<DateTimeOffset>("DateCreated"); set => SetProp<DateTimeOffset>("DateCreated", value); }
+		/// <summary>Date completed of the order return approval. Sortable.</summary>
+		[ApiReadOnly]
+		public DateTimeOffset? DateCompleted { get => GetProp<DateTimeOffset?>("DateCompleted"); set => SetProp<DateTimeOffset?>("DateCompleted", value); }
+		/// <summary>Approver of the order return approval. Searchable: priority level 3. Sortable.</summary>
+		[ApiReadOnly]
+		public User Approver { get => GetProp<User>("Approver"); set => SetProp<User>("Approver", value); }
+		/// <summary>Comments of the order return approval. Searchable: priority level 4.</summary>
+		[ApiReadOnly]
+		public string Comments { get => GetProp<string>("Comments"); set => SetProp<string>("Comments", value); }
+	}
+	/// <typeparam name="TApprover">Specific type of the Approver property. If not using a custom type, use the non-generic OrderReturnApproval class instead.</typeparam>
+	public class OrderReturnApproval<TApprover> : OrderReturnApproval
+		where TApprover : User
+	{
+		/// <summary>Approver of the order return approval. Searchable: priority level 3. Sortable.</summary>
+		[ApiReadOnly]
+		public new TApprover Approver { get => GetProp<TApprover>("Approver"); set => SetProp<TApprover>("Approver", value); }
+	}
+	public class OrderReturnItem : OrderCloudModel
+	{
+		/// <summary>ID of the line item. Required.</summary>
+		[Required]
+		public string LineItemID { get => GetProp<string>("LineItemID"); set => SetProp<string>("LineItemID", value); }
+		/// <summary>Quantity of the order return item. Must be at least 0.</summary>
+		public int Quantity { get => GetProp<int>("Quantity", 0); set => SetProp<int>("Quantity", value); }
+		/// <summary>Refund amount of the order return item.</summary>
+		public decimal? RefundAmount { get => GetProp<decimal?>("RefundAmount"); set => SetProp<decimal?>("RefundAmount", value); }
+		/// <summary>Comments of the order return item. Max length 500 characters.</summary>
+		public string Comments { get => GetProp<string>("Comments"); set => SetProp<string>("Comments", value); }
+	}
 	public class OrderShipMethodSelection : OrderCloudModel
 	{
 		/// <summary>Ship method selections of the order ship method selection.</summary>
@@ -1437,6 +1558,8 @@ namespace OrderCloud.SDK
 		public Order Order { get => GetProp<Order>("Order"); set => SetProp<Order>("Order", value); }
 		/// <summary>Line items of the order worksheet.</summary>
 		public IList<LineItem> LineItems { get => GetProp<IList<LineItem>>("LineItems", new List<LineItem>()); set => SetProp<IList<LineItem>>("LineItems", value); }
+		/// <summary>Order promotions of the order worksheet.</summary>
+		public IList<OrderPromotion> OrderPromotions { get => GetProp<IList<OrderPromotion>>("OrderPromotions", new List<OrderPromotion>()); set => SetProp<IList<OrderPromotion>>("OrderPromotions", value); }
 		/// <summary>Ship estimate response of the order worksheet.</summary>
 		public ShipEstimateResponse ShipEstimateResponse { get => GetProp<ShipEstimateResponse>("ShipEstimateResponse"); set => SetProp<ShipEstimateResponse>("ShipEstimateResponse", value); }
 		/// <summary>Order calculate response of the order worksheet.</summary>
@@ -1450,14 +1573,16 @@ namespace OrderCloud.SDK
 	}
 	/// <typeparam name="TOrder">Specific type of the Order property. If not using a custom type, specify Order.</typeparam>
 	/// <typeparam name="TLineItems">Specific type of the LineItems property. If not using a custom type, specify LineItem.</typeparam>
+	/// <typeparam name="TOrderPromotions">Specific type of the OrderPromotions property. If not using a custom type, specify OrderPromotion.</typeparam>
 	/// <typeparam name="TShipEstimateResponse">Specific type of the ShipEstimateResponse property. If not using a custom type, specify ShipEstimateResponse.</typeparam>
 	/// <typeparam name="TOrderCalculateResponse">Specific type of the OrderCalculateResponse property. If not using a custom type, specify OrderCalculateResponse.</typeparam>
 	/// <typeparam name="TOrderSubmitResponse">Specific type of the OrderSubmitResponse property. If not using a custom type, specify OrderSubmitResponse.</typeparam>
 	/// <typeparam name="TOrderSubmitForApprovalResponse">Specific type of the OrderSubmitForApprovalResponse property. If not using a custom type, specify OrderSubmitForApprovalResponse.</typeparam>
 	/// <typeparam name="TOrderApprovedResponse">Specific type of the OrderApprovedResponse property. If not using a custom type, specify OrderApprovedResponse.</typeparam>
-	public class OrderWorksheet<TOrder, TLineItems, TShipEstimateResponse, TOrderCalculateResponse, TOrderSubmitResponse, TOrderSubmitForApprovalResponse, TOrderApprovedResponse> : OrderWorksheet
+	public class OrderWorksheet<TOrder, TLineItems, TOrderPromotions, TShipEstimateResponse, TOrderCalculateResponse, TOrderSubmitResponse, TOrderSubmitForApprovalResponse, TOrderApprovedResponse> : OrderWorksheet
 		where TOrder : Order
 		where TLineItems : LineItem
+		where TOrderPromotions : OrderPromotion
 		where TShipEstimateResponse : ShipEstimateResponse
 		where TOrderCalculateResponse : OrderCalculateResponse
 		where TOrderSubmitResponse : OrderSubmitResponse
@@ -1468,6 +1593,8 @@ namespace OrderCloud.SDK
 		public new TOrder Order { get => GetProp<TOrder>("Order"); set => SetProp<TOrder>("Order", value); }
 		/// <summary>Line items of the order worksheet.</summary>
 		public new IList<TLineItems> LineItems { get => GetProp<IList<TLineItems>>("LineItems", new List<TLineItems>()); set => SetProp<IList<TLineItems>>("LineItems", value); }
+		/// <summary>Order promotions of the order worksheet.</summary>
+		public new IList<TOrderPromotions> OrderPromotions { get => GetProp<IList<TOrderPromotions>>("OrderPromotions", new List<TOrderPromotions>()); set => SetProp<IList<TOrderPromotions>>("OrderPromotions", value); }
 		/// <summary>Ship estimate response of the order worksheet.</summary>
 		public new TShipEstimateResponse ShipEstimateResponse { get => GetProp<TShipEstimateResponse>("ShipEstimateResponse"); set => SetProp<TShipEstimateResponse>("ShipEstimateResponse", value); }
 		/// <summary>Order calculate response of the order worksheet.</summary>
@@ -1531,7 +1658,7 @@ namespace OrderCloud.SDK
 		/// <summary>ID of the payment. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable.</summary>
 		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
 		/// <summary>Type of the payment. Sortable. Possible values: PurchaseOrder, CreditCard, SpendingAccount.</summary>
-		public PaymentType Type { get => GetProp<PaymentType>("Type"); set => SetProp<PaymentType>("Type", value); }
+		public PaymentType? Type { get => GetProp<PaymentType?>("Type"); set => SetProp<PaymentType?>("Type", value); }
 		/// <summary>Date created of the payment. Sortable: priority level 1.</summary>
 		[ApiReadOnly]
 		public DateTimeOffset DateCreated { get => GetProp<DateTimeOffset>("DateCreated"); set => SetProp<DateTimeOffset>("DateCreated", value); }
@@ -1544,10 +1671,12 @@ namespace OrderCloud.SDK
 		/// <summary>Inherited from Order.</summary>
 		[ApiReadOnly]
 		public string Currency { get => GetProp<string>("Currency"); set => SetProp<string>("Currency", value); }
-		/// <summary>If null, Payment applies to order total (or total of specific Line Items, if set), minus any other Payments where Amount is set.</summary>
+		/// <summary>If null, Payment applies to order total (or total of specific Line Items, if set), minus any other Payments where Amount is set. Value can only be negative if processing a payment for an OrderReturn.</summary>
 		public decimal? Amount { get => GetProp<decimal?>("Amount"); set => SetProp<decimal?>("Amount", value); }
 		/// <summary>All payments must be Accepted to submit an order.</summary>
 		public bool? Accepted { get => GetProp<bool?>("Accepted"); set => SetProp<bool?>("Accepted", value); }
+		/// <summary>Used to indicate this payment is associated with an Order Return.</summary>
+		public string OrderReturnID { get => GetProp<string>("OrderReturnID"); set => SetProp<string>("OrderReturnID", value); }
 		/// <summary>Container for extended (custom) properties of the payment.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 		/// <summary>Transactions of the payment.</summary>
@@ -1687,6 +1816,8 @@ namespace OrderCloud.SDK
 		public string DefaultSupplierID { get => GetProp<string>("DefaultSupplierID"); set => SetProp<string>("DefaultSupplierID", value); }
 		/// <summary>If true, all suppliers are eligible to opt into selling this product.</summary>
 		public bool AllSuppliersCanSell { get => GetProp<bool>("AllSuppliersCanSell"); set => SetProp<bool>("AllSuppliersCanSell", value); }
+		/// <summary>Returnable of the product.</summary>
+		public bool Returnable { get => GetProp<bool>("Returnable"); set => SetProp<bool>("Returnable", value); }
 		/// <summary>Container for extended (custom) properties of the product.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
@@ -1719,6 +1850,22 @@ namespace OrderCloud.SDK
 		/// <summary>ID of the product. Required.</summary>
 		[Required]
 		public string ProductID { get => GetProp<string>("ProductID"); set => SetProp<string>("ProductID", value); }
+	}
+	public class ProductCollection : OrderCloudModel
+	{
+		/// <summary>ID of the product collection. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 2.</summary>
+		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
+		/// <summary>Name of the product collection. Required. Max length 100 characters. Searchable: priority level 2. Sortable: priority level 1.</summary>
+		[Required]
+		public string Name { get => GetProp<string>("Name"); set => SetProp<string>("Name", value); }
+		/// <summary>Container for extended (custom) properties of the product collection.</summary>
+		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
+	}
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic ProductCollection class instead.</typeparam>
+	public class ProductCollection<Txp> : ProductCollection
+	{
+		/// <summary>Container for extended (custom) properties of the product collection.</summary>
+		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
 	}
 	public class ProductFacet : OrderCloudModel
 	{
@@ -1875,6 +2022,34 @@ namespace OrderCloud.SDK
 		public string UserID { get => GetProp<string>("UserID"); set => SetProp<string>("UserID", value); }
 		/// <summary>ID of the user group.</summary>
 		public string UserGroupID { get => GetProp<string>("UserGroupID"); set => SetProp<string>("UserGroupID", value); }
+	}
+	public class SellerApprovalRule : OrderCloudModel
+	{
+		/// <summary>ID of the organization who owns the rule. Only the MPO can write a value other than their own organization ID. The value is used to look up the ApprovingGroupID.</summary>
+		public string OwnerID { get => GetProp<string>("OwnerID"); set => SetProp<string>("OwnerID", value); }
+		/// <summary>OrderReturn is the only Type supported currently. We plan to expand to Orders in the future.</summary>
+		[Required]
+		public ApprovalType ApprovalType { get => GetProp<ApprovalType>("ApprovalType"); set => SetProp<ApprovalType>("ApprovalType", value); }
+		/// <summary>ID of the seller approval rule. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 2.</summary>
+		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
+		/// <summary>Name of the seller approval rule. Max length 100 characters. Searchable: priority level 2. Sortable: priority level 1.</summary>
+		public string Name { get => GetProp<string>("Name"); set => SetProp<string>("Name", value); }
+		/// <summary>Description of the seller approval rule. Max length 2000 characters. Searchable: priority level 3.</summary>
+		public string Description { get => GetProp<string>("Description"); set => SetProp<string>("Description", value); }
+		/// <summary>ID of the approving group. Required. Sortable.</summary>
+		[Required]
+		public string ApprovingGroupID { get => GetProp<string>("ApprovingGroupID"); set => SetProp<string>("ApprovingGroupID", value); }
+		/// <summary>The expression evaluated to determine an order requires approval. See Rules Engine documentation for formatting details.</summary>
+		[Required]
+		public string RuleExpression { get => GetProp<string>("RuleExpression"); set => SetProp<string>("RuleExpression", value); }
+		/// <summary>Container for extended (custom) properties of the seller approval rule.</summary>
+		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
+	}
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic SellerApprovalRule class instead.</typeparam>
+	public class SellerApprovalRule<Txp> : SellerApprovalRule
+	{
+		/// <summary>Container for extended (custom) properties of the seller approval rule.</summary>
+		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
 	}
 	public class ShipEstimate : OrderCloudModel
 	{
@@ -2369,7 +2544,7 @@ namespace OrderCloud.SDK
 	}
 	public class XpIndex : OrderCloudModel
 	{
-		/// <summary>Thing type of the xp index. Searchable: priority level 0. Sortable: priority level 0. Possible values: Address, Variant, Order, LineItem, CostCenter, CreditCard, Payment, Spec, SpecOption, UserGroup, Company, Category, PriceSchedule, Shipment, SpendingAccount, User, Promotion, ApprovalRule, Catalog, ProductFacet, MessageSender, InventoryRecord.</summary>
+		/// <summary>Thing type of the xp index. Searchable: priority level 0. Sortable: priority level 0. Possible values: Address, Variant, Order, OrderReturn, LineItem, CostCenter, CreditCard, Payment, Spec, SpecOption, UserGroup, Company, Category, PriceSchedule, Shipment, SpendingAccount, User, Promotion, ApprovalRule, SellerApprovalRule, Catalog, ProductFacet, MessageSender, InventoryRecord, ProductCollection.</summary>
 		public XpThingType ThingType { get => GetProp<XpThingType>("ThingType"); set => SetProp<XpThingType>("ThingType", value); }
 		/// <summary>Key of the xp index. Searchable: priority level 1. Sortable: priority level 1.</summary>
 		public string Key { get => GetProp<string>("Key"); set => SetProp<string>("Key", value); }
@@ -2466,6 +2641,11 @@ namespace OrderCloud.SDK
 		where TFromUser : User
 		where TBillingAddress : Address
 	{ }
+	public class PartialOrderReturn : OrderReturn, IPartial { }
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic PartialOrderReturn class instead.</typeparam>
+	public class PartialOrderReturn<Txp> : PartialOrderReturn
+	{ }
+	public class PartialOrderReturnItem : OrderReturnItem, IPartial { }
 	public class PartialPasswordConfig : PasswordConfig, IPartial { }
 	public class PartialPayment : Payment, IPartial { }
 	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, specify dynamic.</typeparam>
@@ -2486,6 +2666,10 @@ namespace OrderCloud.SDK
 	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic PartialProduct class instead.</typeparam>
 	public class PartialProduct<Txp> : PartialProduct
 	{ }
+	public class PartialProductCollection : ProductCollection, IPartial { }
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic PartialProductCollection class instead.</typeparam>
+	public class PartialProductCollection<Txp> : PartialProductCollection
+	{ }
 	public class PartialProductFacet : ProductFacet, IPartial { }
 	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic PartialProductFacet class instead.</typeparam>
 	public class PartialProductFacet<Txp> : PartialProductFacet
@@ -2495,6 +2679,10 @@ namespace OrderCloud.SDK
 	public class PartialPromotion<Txp> : PartialPromotion
 	{ }
 	public class PartialSecurityProfile : SecurityProfile, IPartial { }
+	public class PartialSellerApprovalRule : SellerApprovalRule, IPartial { }
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic PartialSellerApprovalRule class instead.</typeparam>
+	public class PartialSellerApprovalRule<Txp> : PartialSellerApprovalRule
+	{ }
 	public class PartialShipment : Shipment, IPartial { }
 	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, specify dynamic.</typeparam>
 	/// <typeparam name="TFromAddress">Specific type of the FromAddress property. If not using a custom type, specify Address.</typeparam>

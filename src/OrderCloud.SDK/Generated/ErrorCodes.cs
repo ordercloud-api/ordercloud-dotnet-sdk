@@ -43,8 +43,10 @@ namespace OrderCloud.SDK
 		}
 		public static class ApprovalRule
 		{
-			/// <summary>Cannot delete Approval Rule because it has pending Order Approvals.</summary>
+			/// <summary>Cannot delete Approval Rule because it has pending Approvals.</summary>
 			public const string CannotDeleteIfPending = "ApprovalRule.CannotDeleteIfPending";
+			/// <summary>Not authorized to modify this Approval Rule.</summary>
+			public const string CannotModify = "ApprovalRule.CannotModify";
 		}
 		public static class Auth
 		{
@@ -72,6 +74,8 @@ namespace OrderCloud.SDK
 			public const string LockedOut = "Auth.LockedOut";
 			/// <summary>Password does not meet security requirements.</summary>
 			public const string InsecurePassword = "Auth.InsecurePassword";
+			/// <summary>Anonymous users are prohibited from performing these actions.</summary>
+			public const string AnonUserProhibited = "Auth.AnonUserProhibited";
 		}
 		public static class BillingAddress
 		{
@@ -155,6 +159,8 @@ namespace OrderCloud.SDK
 			public const string CannotEditType = "IntegrationEvent.CannotEditType";
 			/// <summary>The referenced IntegrationEvent must reference an IntegrationEvent with the correct EventType</summary>
 			public const string IncompatibleEventType = "IntegrationEvent.IncompatibleEventType";
+			/// <summary>Something went wrong when we called your integration event, check your custom code and try again.</summary>
+			public const string BadRequest = "IntegrationEvent.BadRequest";
 		}
 		public static class Inventory
 		{
@@ -264,6 +270,37 @@ namespace OrderCloud.SDK
 			public const string SearchNotEnabled = "Order.SearchNotEnabled";
 			/// <summary>This feature is not available for unsubmitted orders.</summary>
 			public const string AllowedOnSubmittedOnly = "Order.AllowedOnSubmittedOnly";
+			/// <summary>You cannot request both submitted and unsubmitted orders in the same list.</summary>
+			public const string CannotMixSubmittedAndUnsubmitted = "Order.CannotMixSubmittedAndUnsubmitted";
+		}
+		public static class OrderReturn
+		{
+			/// <summary>The quantity requested exceeds the quantity eligible to return.</summary>
+			public const string ItemQuantityExceeded = "OrderReturn.ItemQuantityExceeded";
+			/// <summary>Cannot create an OrderReturn for an order with this status. Order status must be Open or Complete.</summary>
+			public const string CannotCreateBadOrderStatus = "OrderReturn.CannotCreateBadOrderStatus";
+			/// <summary>Only OrderAdmins are authorized to delete or cancel completed OrderReturns.</summary>
+			public const string NotAuthorizedToDelete = "OrderReturn.NotAuthorizedToDelete";
+			/// <summary>Cannot cancel an unsubmitted OrderReturn, please delete instead.</summary>
+			public const string CannotCancelUnsubmitted = "OrderReturn.CannotCancelUnsubmitted";
+			/// <summary>Cannot complete an order return with this status. OrderReturn status must be Open.</summary>
+			public const string CannotCompleteBadStatus = "OrderReturn.CannotCompleteBadStatus";
+			/// <summary>Cannot submit an order return with no refund amount.</summary>
+			public const string CannotCompleteNoRefund = "OrderReturn.CannotCompleteNoRefund";
+			/// <summary>Product is not eligible to return.</summary>
+			public const string ProductNotEligibleToReturn = "OrderReturn.ProductNotEligibleToReturn";
+			/// <summary>OrderReturn payment value must be negative.</summary>
+			public const string PaymentValueMustBeNegative = "OrderReturn.PaymentValueMustBeNegative";
+			/// <summary>The total of the refunds for this OrderReturn cannot exceed the RefundAmount.</summary>
+			public const string TotalRefundsExceedRefundAmount = "OrderReturn.TotalRefundsExceedRefundAmount";
+			/// <summary>Cannot create a payment for an OrderReturn with this status. OrderReturn Status must be Open.</summary>
+			public const string CannotCreatePaymentBadStatus = "OrderReturn.CannotCreatePaymentBadStatus";
+			/// <summary>You are not eligible to approve or decline this order return.</summary>
+			public const string NotEligibleToApproveOrDecline = "OrderReturn.NotEligibleToApproveOrDecline";
+			/// <summary>LineItemID must be unique across ItemsToReturn.</summary>
+			public const string CannotCreateDuplicateItemToReturn = "OrderReturn.CannotCreateDuplicateItemToReturn";
+			/// <summary>RefundAmount is only writable on the OrderReturn when there are no RefundAmounts on any ItemsToReturn.</summary>
+			public const string ConflictingRefundAmounts = "OrderReturn.ConflictingRefundAmounts";
 		}
 		public static class PartyAssignment
 		{
@@ -370,6 +407,8 @@ namespace OrderCloud.SDK
 			public const string SellerIDMustMatchOwnerID = "PriceSchedule.SellerIDMustMatchOwnerID";
 			/// <summary>The party's assigned Locale must match the Price Schedule's Currency.</summary>
 			public const string CurrencyMismatch = "PriceSchedule.CurrencyMismatch";
+			/// <summary>The SaleStart DateTime must be before the SaleEnd DateTime.</summary>
+			public const string InvalidSaleStartOrSaleEnd = "PriceSchedule.InvalidSaleStartOrSaleEnd";
 		}
 		public static class Product
 		{
@@ -392,6 +431,11 @@ namespace OrderCloud.SDK
 		{
 			/// <summary>The marketplace owner can create product assignments and designate a SellerID, but only when a PriceScheduleID is also provided. Use the designated endpoints to create a relationship between a Seller and a Product or a Seller and a Buyer.</summary>
 			public const string MustSpecifyPriceScheduleID = "ProductAssigment.MustSpecifyPriceScheduleID";
+		}
+		public static class ProductCollection
+		{
+			/// <summary>Cannot exceed 500 product entries per Product Collection.</summary>
+			public const string ProductEntryLimit = "ProductCollection.ProductEntryLimit";
 		}
 		public static class Promotion
 		{

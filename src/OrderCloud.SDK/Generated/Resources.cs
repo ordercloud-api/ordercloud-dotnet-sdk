@@ -27,6 +27,7 @@ namespace OrderCloud.SDK
 		IMeResource Me { get; }
 		IMessageSendersResource MessageSenders { get; }
 		IOpenIdConnectsResource OpenIdConnects { get; }
+		IOrderReturnsResource OrderReturns { get; }
 		IOrdersResource Orders { get; }
 		IPasswordResetsResource PasswordResets { get; }
 		IPaymentsResource Payments { get; }
@@ -35,6 +36,7 @@ namespace OrderCloud.SDK
 		IProductsResource Products { get; }
 		IPromotionsResource Promotions { get; }
 		ISecurityProfilesResource SecurityProfiles { get; }
+		ISellerApprovalRulesResource SellerApprovalRules { get; }
 		IShipmentsResource Shipments { get; }
 		ISpecsResource Specs { get; }
 		ISpendingAccountsResource SpendingAccounts { get; }
@@ -2317,6 +2319,114 @@ namespace OrderCloud.SDK
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<BuyerSupplier>> ListBuyerSellersAsync(Action<ListOptionsBuilder<BuyerSupplier>> buildListOpts, string accessToken = null);
+		/// <summary>Create a new product collection. Only available to Buyer Users.</summary>
+		/// <param name="productCollection">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ProductCollection> CreateProductCollectionAsync(ProductCollection productCollection, string accessToken = null);
+		/// <summary>Create a new product collection. Only available to Buyer Users.</summary>
+		/// <param name="productCollection">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TProductCollection> CreateProductCollectionAsync<TProductCollection>(ProductCollection productCollection, string accessToken = null) where TProductCollection : ProductCollection;
+		/// <summary>Get a single product collection. Only available to Buyer Users.</summary>
+		/// <param name="productCollectionID">ID of the product collection.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ProductCollection> GetProductCollectionAsync(string productCollectionID, string accessToken = null);
+		/// <summary>Get a single product collection. Only available to Buyer Users.</summary>
+		/// <param name="productCollectionID">ID of the product collection.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TProductCollection> GetProductCollectionAsync<TProductCollection>(string productCollectionID, string accessToken = null) where TProductCollection : ProductCollection;
+		/// <summary>Get a list of product collections visible to this user. Only available to Buyer Users.</summary>
+		/// <param name="search">Word or phrase to search for.</param>
+		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
+		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<ProductCollection>> ListProductCollectionsAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
+		/// <summary>Get a list of product collections visible to this user. Only available to Buyer Users.</summary>
+		/// <param name="search">Word or phrase to search for.</param>
+		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
+		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<TProductCollection>> ListProductCollectionsAsync<TProductCollection>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TProductCollection : ProductCollection;
+		/// <summary>Get a list of product collections visible to this user. Only available to Buyer Users.</summary>
+		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<ProductCollection>> ListProductCollectionsAsync(Action<ListOptionsBuilder<ProductCollection>> buildListOpts, string accessToken = null);
+		/// <summary>Get a list of product collections visible to this user. Only available to Buyer Users.</summary>
+		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<TProductCollection>> ListProductCollectionsAsync<TProductCollection>(Action<ListOptionsBuilder<TProductCollection>> buildListOpts, string accessToken = null) where TProductCollection : ProductCollection;
+		/// <summary>Partially update a product collection. Only available to Buyer Users.</summary>
+		/// <param name="productCollectionID">ID of the product collection.</param>
+		/// <param name="partialProductCollection">The object that will be partially serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ProductCollection> PatchProductCollectionAsync(string productCollectionID, PartialProductCollection partialProductCollection, string accessToken = null);
+		/// <summary>Partially update a product collection. Only available to Buyer Users.</summary>
+		/// <param name="productCollectionID">ID of the product collection.</param>
+		/// <param name="partialProductCollection">The object that will be partially serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TProductCollection> PatchProductCollectionAsync<TProductCollection>(string productCollectionID, PartialProductCollection partialProductCollection, string accessToken = null) where TProductCollection : ProductCollection;
+		/// <summary>Create or update a product collection. Only available to Buyer Users.</summary>
+		/// <param name="productCollectionID">ID of the product collection.</param>
+		/// <param name="productCollection">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ProductCollection> SaveProductCollectionAsync(string productCollectionID, ProductCollection productCollection, string accessToken = null);
+		/// <summary>Create or update a product collection. Only available to Buyer Users.</summary>
+		/// <param name="productCollectionID">ID of the product collection.</param>
+		/// <param name="productCollection">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TProductCollection> SaveProductCollectionAsync<TProductCollection>(string productCollectionID, ProductCollection productCollection, string accessToken = null) where TProductCollection : ProductCollection;
+		/// <summary>Delete a product collection. Only available to Buyer Users.</summary>
+		/// <param name="productCollectionID">ID of the product collection.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task DeleteProductCollectionAsync(string productCollectionID, string accessToken = null);
+		/// <summary>Get a list of product collection entries visible to this user. Only available to Buyer Users.</summary>
+		/// <param name="productCollectionID">ID of the product collection.</param>
+		/// <param name="search">Word or phrase to search for.</param>
+		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
+		/// <param name="searchType">Type of search to perform. Possible values: AnyTerm (default), AllTermsAnyField, AllTermsSameField, ExactPhrase, ExactPhrasePrefix.</param>
+		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPageWithFacets<BuyerProduct>> ListProductCollectionEntriesAsync(string productCollectionID, string search = null, string searchOn = null, SearchType searchType = SearchType.AnyTerm, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
+		/// <summary>Get a list of product collection entries visible to this user. Only available to Buyer Users.</summary>
+		/// <param name="productCollectionID">ID of the product collection.</param>
+		/// <param name="search">Word or phrase to search for.</param>
+		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
+		/// <param name="searchType">Type of search to perform. Possible values: AnyTerm (default), AllTermsAnyField, AllTermsSameField, ExactPhrase, ExactPhrasePrefix.</param>
+		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPageWithFacets<TBuyerProduct>> ListProductCollectionEntriesAsync<TBuyerProduct>(string productCollectionID, string search = null, string searchOn = null, SearchType searchType = SearchType.AnyTerm, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TBuyerProduct : BuyerProduct;
+		/// <summary>Get a list of product collection entries visible to this user. Only available to Buyer Users.</summary>
+		/// <param name="productCollectionID">ID of the product collection.</param>
+		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPageWithFacets<BuyerProduct>> ListProductCollectionEntriesAsync(string productCollectionID, Action<ListOptionsBuilder2<BuyerProduct>> buildListOpts, string accessToken = null);
+		/// <summary>Get a list of product collection entries visible to this user. Only available to Buyer Users.</summary>
+		/// <param name="productCollectionID">ID of the product collection.</param>
+		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPageWithFacets<TBuyerProduct>> ListProductCollectionEntriesAsync<TBuyerProduct>(string productCollectionID, Action<ListOptionsBuilder2<TBuyerProduct>> buildListOpts, string accessToken = null) where TBuyerProduct : BuyerProduct;
+		/// <summary>Create a new product collection entry. Only available to Buyer Users.</summary>
+		/// <param name="productCollectionID">ID of the product collection.</param>
+		/// <param name="productID">ID of the product.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task CreateProductCollectionEntryAsync(string productCollectionID, string productID, string accessToken = null);
+		/// <summary>Delete a product collection entry. Only available to Buyer Users.</summary>
+		/// <param name="productCollectionID">ID of the product collection.</param>
+		/// <param name="productID">ID of the product.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task DeleteProductCollectionEntryAsync(string productCollectionID, string productID, string accessToken = null);
 	}
 
 	public interface IMessageSendersResource
@@ -2466,6 +2576,194 @@ namespace OrderCloud.SDK
 		/// <param name="partialOpenIdConnect">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<OpenIdConnect> PatchAsync(string openidconnectID, PartialOpenIdConnect partialOpenIdConnect, string accessToken = null);
+	}
+
+	public interface IOrderReturnsResource
+	{
+		/// <summary>Get a single order return.</summary>
+		/// <param name="returnID">ID of the return.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<OrderReturn> GetAsync(string returnID, string accessToken = null);
+		/// <summary>Get a single order return.</summary>
+		/// <param name="returnID">ID of the return.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TOrderReturn> GetAsync<TOrderReturn>(string returnID, string accessToken = null) where TOrderReturn : OrderReturn;
+		/// <summary>Get a list of order returns.</summary>
+		/// <param name="approvable">Only returns orders awaiting the user's approval if true.</param>
+		/// <param name="search">Word or phrase to search for.</param>
+		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
+		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<OrderReturn>> ListAsync(bool approvable = false, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
+		/// <summary>Get a list of order returns.</summary>
+		/// <param name="approvable">Only returns orders awaiting the user's approval if true.</param>
+		/// <param name="search">Word or phrase to search for.</param>
+		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
+		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<TOrderReturn>> ListAsync<TOrderReturn>(bool approvable = false, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TOrderReturn : OrderReturn;
+		/// <summary>Get a list of order returns.</summary>
+		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
+		/// <param name="approvable">Only returns orders awaiting the user's approval if true.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<OrderReturn>> ListAsync(Action<ListOptionsBuilder<OrderReturn>> buildListOpts, bool approvable = false, string accessToken = null);
+		/// <summary>Get a list of order returns.</summary>
+		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
+		/// <param name="approvable">Only returns orders awaiting the user's approval if true.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<TOrderReturn>> ListAsync<TOrderReturn>(Action<ListOptionsBuilder<TOrderReturn>> buildListOpts, bool approvable = false, string accessToken = null) where TOrderReturn : OrderReturn;
+		/// <summary>Create a new order return. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <param name="orderReturn">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<OrderReturn> CreateAsync(OrderReturn orderReturn, string accessToken = null);
+		/// <summary>Create a new order return. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <param name="orderReturn">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TOrderReturn> CreateAsync<TOrderReturn>(OrderReturn orderReturn, string accessToken = null) where TOrderReturn : OrderReturn;
+		/// <summary>Create or update an order return. If an object with the same ID already exists, it will be overwritten.</summary>
+		/// <param name="returnID">ID of the return.</param>
+		/// <param name="orderReturn">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<OrderReturn> SaveAsync(string returnID, OrderReturn orderReturn, string accessToken = null);
+		/// <summary>Create or update an order return. If an object with the same ID already exists, it will be overwritten.</summary>
+		/// <param name="returnID">ID of the return.</param>
+		/// <param name="orderReturn">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TOrderReturn> SaveAsync<TOrderReturn>(string returnID, OrderReturn orderReturn, string accessToken = null) where TOrderReturn : OrderReturn;
+		/// <summary>Delete an order return.</summary>
+		/// <param name="returnID">ID of the return.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task DeleteAsync(string returnID, string accessToken = null);
+		/// <summary>Partially update an order return.</summary>
+		/// <param name="returnID">ID of the return.</param>
+		/// <param name="partialOrderReturn">The object that will be partially serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<OrderReturn> PatchAsync(string returnID, PartialOrderReturn partialOrderReturn, string accessToken = null);
+		/// <summary>Partially update an order return.</summary>
+		/// <param name="returnID">ID of the return.</param>
+		/// <param name="partialOrderReturn">The object that will be partially serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TOrderReturn> PatchAsync<TOrderReturn>(string returnID, PartialOrderReturn partialOrderReturn, string accessToken = null) where TOrderReturn : OrderReturn;
+		/// <summary>Delete an order return item.</summary>
+		/// <param name="returnID">ID of the return.</param>
+		/// <param name="lineItemID">ID of the line item.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<OrderReturn> DeleteItemAsync(string returnID, string lineItemID, string accessToken = null);
+		/// <summary>Delete an order return item.</summary>
+		/// <param name="returnID">ID of the return.</param>
+		/// <param name="lineItemID">ID of the line item.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TOrderReturn> DeleteItemAsync<TOrderReturn>(string returnID, string lineItemID, string accessToken = null) where TOrderReturn : OrderReturn;
+		/// <summary>Cancel an OrderReturn.</summary>
+		/// <param name="returnID">ID of the return.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<OrderReturn> CancelAsync(string returnID, string accessToken = null);
+		/// <summary>Cancel an OrderReturn.</summary>
+		/// <param name="returnID">ID of the return.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TOrderReturn> CancelAsync<TOrderReturn>(string returnID, string accessToken = null) where TOrderReturn : OrderReturn;
+		/// <summary>Complete an OrderReturn. Use only when an order return won't have an associated payment. You will not to reopen an order return after completing it.</summary>
+		/// <param name="returnID">ID of the return.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<OrderReturn> CompleteAsync(string returnID, string accessToken = null);
+		/// <summary>Complete an OrderReturn. Use only when an order return won't have an associated payment. You will not to reopen an order return after completing it.</summary>
+		/// <param name="returnID">ID of the return.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TOrderReturn> CompleteAsync<TOrderReturn>(string returnID, string accessToken = null) where TOrderReturn : OrderReturn;
+		/// <summary>Submit an order return submit.</summary>
+		/// <param name="returnID">ID of the return.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<OrderReturn> SubmitAsync(string returnID, string accessToken = null);
+		/// <summary>Submit an order return submit.</summary>
+		/// <param name="returnID">ID of the return.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TOrderReturn> SubmitAsync<TOrderReturn>(string returnID, string accessToken = null) where TOrderReturn : OrderReturn;
+		/// <summary>Get a list of order return approvals. Returns all Approvals associated with the Order Return.</summary>
+		/// <param name="returnID">ID of the return.</param>
+		/// <param name="search">Word or phrase to search for.</param>
+		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
+		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<OrderReturnApproval>> ListApprovalsAsync(string returnID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
+		/// <summary>Get a list of order return approvals. Returns all Approvals associated with the Order Return.</summary>
+		/// <param name="returnID">ID of the return.</param>
+		/// <param name="search">Word or phrase to search for.</param>
+		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
+		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<TOrderReturnApproval>> ListApprovalsAsync<TOrderReturnApproval>(string returnID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TOrderReturnApproval : OrderReturnApproval;
+		/// <summary>Get a list of order return approvals. Returns all Approvals associated with the Order Return.</summary>
+		/// <param name="returnID">ID of the return.</param>
+		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<OrderReturnApproval>> ListApprovalsAsync(string returnID, Action<ListOptionsBuilder<OrderReturnApproval>> buildListOpts, string accessToken = null);
+		/// <summary>Get a list of order return approvals. Returns all Approvals associated with the Order Return.</summary>
+		/// <param name="returnID">ID of the return.</param>
+		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<TOrderReturnApproval>> ListApprovalsAsync<TOrderReturnApproval>(string returnID, Action<ListOptionsBuilder<TOrderReturnApproval>> buildListOpts, string accessToken = null) where TOrderReturnApproval : OrderReturnApproval;
+		/// <summary>Get a list of order return eligible approvers. Returns all Users who can approve or decline this order return (but have not done so).</summary>
+		/// <param name="returnID">ID of the return.</param>
+		/// <param name="search">Word or phrase to search for.</param>
+		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
+		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<User>> ListEligibleApproversAsync(string returnID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
+		/// <summary>Get a list of order return eligible approvers. Returns all Users who can approve or decline this order return (but have not done so).</summary>
+		/// <param name="returnID">ID of the return.</param>
+		/// <param name="search">Word or phrase to search for.</param>
+		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
+		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<TUser>> ListEligibleApproversAsync<TUser>(string returnID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TUser : User;
+		/// <summary>Get a list of order return eligible approvers. Returns all Users who can approve or decline this order return (but have not done so).</summary>
+		/// <param name="returnID">ID of the return.</param>
+		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<User>> ListEligibleApproversAsync(string returnID, Action<ListOptionsBuilder<User>> buildListOpts, string accessToken = null);
+		/// <summary>Get a list of order return eligible approvers. Returns all Users who can approve or decline this order return (but have not done so).</summary>
+		/// <param name="returnID">ID of the return.</param>
+		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<TUser>> ListEligibleApproversAsync<TUser>(string returnID, Action<ListOptionsBuilder<TUser>> buildListOpts, string accessToken = null) where TUser : User;
+		/// <summary>Approve an order return.</summary>
+		/// <param name="returnID">ID of the return.</param>
+		/// <param name="approvalInfo">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<OrderReturn> ApproveAsync(string returnID, ApprovalInfo approvalInfo, string accessToken = null);
+		/// <summary>Approve an order return.</summary>
+		/// <param name="returnID">ID of the return.</param>
+		/// <param name="approvalInfo">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TOrderReturn> ApproveAsync<TOrderReturn>(string returnID, ApprovalInfo approvalInfo, string accessToken = null) where TOrderReturn : OrderReturn;
+		/// <summary>Decline an order return.</summary>
+		/// <param name="returnID">ID of the return.</param>
+		/// <param name="approvalInfo">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<OrderReturn> DeclineAsync(string returnID, ApprovalInfo approvalInfo, string accessToken = null);
+		/// <summary>Decline an order return.</summary>
+		/// <param name="returnID">ID of the return.</param>
+		/// <param name="approvalInfo">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TOrderReturn> DeclineAsync<TOrderReturn>(string returnID, ApprovalInfo approvalInfo, string accessToken = null) where TOrderReturn : OrderReturn;
 	}
 
 	public interface IOrdersResource
@@ -3273,13 +3571,13 @@ namespace OrderCloud.SDK
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TVariant>> ListVariantsAsync<TVariant>(string productID, Action<ListOptionsBuilder<TVariant>> buildListOpts, string accessToken = null) where TVariant : Variant;
-		/// <summary>Create or update a product variant. Update a product variant.</summary>
+		/// <summary>Update a product variant. Update a product variant.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="variantID">ID of the variant.</param>
 		/// <param name="variant">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Variant> SaveVariantAsync(string productID, string variantID, Variant variant, string accessToken = null);
-		/// <summary>Create or update a product variant. Update a product variant.</summary>
+		/// <summary>Update a product variant. Update a product variant.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="variantID">ID of the variant.</param>
 		/// <param name="variant">The object that will be serialized to JSON and sent in the request body.</param>
@@ -3555,6 +3853,76 @@ namespace OrderCloud.SDK
 		/// <param name="securityProfileAssignment">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task SaveAssignmentAsync(SecurityProfileAssignment securityProfileAssignment, string accessToken = null);
+	}
+
+	public interface ISellerApprovalRulesResource
+	{
+		/// <summary>Get a single seller approval rule.</summary>
+		/// <param name="approvalRuleID">ID of the approval rule.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<SellerApprovalRule> GetAsync(string approvalRuleID, string accessToken = null);
+		/// <summary>Get a single seller approval rule.</summary>
+		/// <param name="approvalRuleID">ID of the approval rule.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TSellerApprovalRule> GetAsync<TSellerApprovalRule>(string approvalRuleID, string accessToken = null) where TSellerApprovalRule : SellerApprovalRule;
+		/// <summary>Get a list of seller approval rules.</summary>
+		/// <param name="search">Word or phrase to search for.</param>
+		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
+		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<SellerApprovalRule>> ListAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
+		/// <summary>Get a list of seller approval rules.</summary>
+		/// <param name="search">Word or phrase to search for.</param>
+		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
+		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<TSellerApprovalRule>> ListAsync<TSellerApprovalRule>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TSellerApprovalRule : SellerApprovalRule;
+		/// <summary>Get a list of seller approval rules.</summary>
+		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<SellerApprovalRule>> ListAsync(Action<ListOptionsBuilder<SellerApprovalRule>> buildListOpts, string accessToken = null);
+		/// <summary>Get a list of seller approval rules.</summary>
+		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<TSellerApprovalRule>> ListAsync<TSellerApprovalRule>(Action<ListOptionsBuilder<TSellerApprovalRule>> buildListOpts, string accessToken = null) where TSellerApprovalRule : SellerApprovalRule;
+		/// <summary>Create a new seller approval rule. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <param name="sellerApprovalRule">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<SellerApprovalRule> CreateAsync(SellerApprovalRule sellerApprovalRule, string accessToken = null);
+		/// <summary>Create a new seller approval rule. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <param name="sellerApprovalRule">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TSellerApprovalRule> CreateAsync<TSellerApprovalRule>(SellerApprovalRule sellerApprovalRule, string accessToken = null) where TSellerApprovalRule : SellerApprovalRule;
+		/// <summary>Create or update a seller approval rule. If an object with the same ID already exists, it will be overwritten.</summary>
+		/// <param name="approvalRuleID">ID of the approval rule.</param>
+		/// <param name="sellerApprovalRule">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<SellerApprovalRule> SaveAsync(string approvalRuleID, SellerApprovalRule sellerApprovalRule, string accessToken = null);
+		/// <summary>Create or update a seller approval rule. If an object with the same ID already exists, it will be overwritten.</summary>
+		/// <param name="approvalRuleID">ID of the approval rule.</param>
+		/// <param name="sellerApprovalRule">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TSellerApprovalRule> SaveAsync<TSellerApprovalRule>(string approvalRuleID, SellerApprovalRule sellerApprovalRule, string accessToken = null) where TSellerApprovalRule : SellerApprovalRule;
+		/// <summary>Delete a seller approval rule.</summary>
+		/// <param name="approvalRuleID">ID of the approval rule.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task DeleteAsync(string approvalRuleID, string accessToken = null);
+		/// <summary>Partially update a seller approval rule.</summary>
+		/// <param name="approvalRuleID">ID of the approval rule.</param>
+		/// <param name="partialSellerApprovalRule">The object that will be partially serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<SellerApprovalRule> PatchAsync(string approvalRuleID, PartialSellerApprovalRule partialSellerApprovalRule, string accessToken = null);
+		/// <summary>Partially update a seller approval rule.</summary>
+		/// <param name="approvalRuleID">ID of the approval rule.</param>
+		/// <param name="partialSellerApprovalRule">The object that will be partially serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TSellerApprovalRule> PatchAsync<TSellerApprovalRule>(string approvalRuleID, PartialSellerApprovalRule partialSellerApprovalRule, string accessToken = null) where TSellerApprovalRule : SellerApprovalRule;
 	}
 
 	public interface IShipmentsResource
@@ -4616,7 +4984,7 @@ namespace OrderCloud.SDK
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<XpIndex>> ListAsync(Action<ListOptionsBuilder<XpIndex>> buildListOpts, string accessToken = null);
 		/// <summary>Delete a XP index.</summary>
-		/// <param name="thingType">Thing type of the xp index. Possible values: Address, Variant, Order, LineItem, CostCenter, CreditCard, Payment, Spec, SpecOption, UserGroup, Company, Category, PriceSchedule, Shipment, SpendingAccount, User, Promotion, ApprovalRule, Catalog, ProductFacet, MessageSender, InventoryRecord.</param>
+		/// <param name="thingType">Thing type of the xp index. Possible values: Address, Variant, Order, OrderReturn, LineItem, CostCenter, CreditCard, Payment, Spec, SpecOption, UserGroup, Company, Category, PriceSchedule, Shipment, SpendingAccount, User, Promotion, ApprovalRule, SellerApprovalRule, Catalog, ProductFacet, MessageSender, InventoryRecord, ProductCollection.</param>
 		/// <param name="key">Key of the xp index.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task DeleteAsync(XpThingType thingType, string key, string accessToken = null);
@@ -4650,6 +5018,7 @@ namespace OrderCloud.SDK
 			Me = new MeResource(this);
 			MessageSenders = new MessageSendersResource(this);
 			OpenIdConnects = new OpenIdConnectsResource(this);
+			OrderReturns = new OrderReturnsResource(this);
 			Orders = new OrdersResource(this);
 			PasswordResets = new PasswordResetsResource(this);
 			Payments = new PaymentsResource(this);
@@ -4658,6 +5027,7 @@ namespace OrderCloud.SDK
 			Products = new ProductsResource(this);
 			Promotions = new PromotionsResource(this);
 			SecurityProfiles = new SecurityProfilesResource(this);
+			SellerApprovalRules = new SellerApprovalRulesResource(this);
 			Shipments = new ShipmentsResource(this);
 			Specs = new SpecsResource(this);
 			SpendingAccounts = new SpendingAccountsResource(this);
@@ -4692,6 +5062,7 @@ namespace OrderCloud.SDK
 		public IMeResource Me { get; private set; }
 		public IMessageSendersResource MessageSenders { get; private set; }
 		public IOpenIdConnectsResource OpenIdConnects { get; private set; }
+		public IOrderReturnsResource OrderReturns { get; private set; }
 		public IOrdersResource Orders { get; private set; }
 		public IPasswordResetsResource PasswordResets { get; private set; }
 		public IPaymentsResource Payments { get; private set; }
@@ -4700,6 +5071,7 @@ namespace OrderCloud.SDK
 		public IProductsResource Products { get; private set; }
 		public IPromotionsResource Promotions { get; private set; }
 		public ISecurityProfilesResource SecurityProfiles { get; private set; }
+		public ISellerApprovalRulesResource SellerApprovalRules { get; private set; }
 		public IShipmentsResource Shipments { get; private set; }
 		public ISpecsResource Specs { get; private set; }
 		public ISpendingAccountsResource SpendingAccounts { get; private set; }
@@ -5169,6 +5541,25 @@ namespace OrderCloud.SDK
 		public Task<TCatalog> GetCatalogAsync<TCatalog>(string catalogID, string accessToken = null) where TCatalog : Catalog => Request("v1", "me", "catalogs", catalogID).WithOAuthBearerToken(accessToken).GetJsonAsync<TCatalog>();
 		public Task<ListPage<BuyerSupplier>> ListBuyerSellersAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) => Request("v1", "me", "sellers").WithOAuthBearerToken(accessToken).SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<BuyerSupplier>>();
 		public Task<ListPage<BuyerSupplier>> ListBuyerSellersAsync(Action<ListOptionsBuilder<BuyerSupplier>> buildListOpts, string accessToken = null) => Request("v1", "me", "sellers").WithOAuthBearerToken(accessToken).SetListOptions(buildListOpts).GetJsonAsync<ListPage<BuyerSupplier>>();
+		public Task<ProductCollection> CreateProductCollectionAsync(ProductCollection productCollection, string accessToken = null) => CreateProductCollectionAsync<ProductCollection>(productCollection, accessToken);
+		public Task<TProductCollection> CreateProductCollectionAsync<TProductCollection>(ProductCollection productCollection, string accessToken = null) where TProductCollection : ProductCollection => Request("v1", "me", "productcollections").WithOAuthBearerToken(accessToken).PostJsonAsync(ValidateModel(productCollection)).ReceiveJson<TProductCollection>();
+		public Task<ProductCollection> GetProductCollectionAsync(string productCollectionID, string accessToken = null) => GetProductCollectionAsync<ProductCollection>(productCollectionID, accessToken);
+		public Task<TProductCollection> GetProductCollectionAsync<TProductCollection>(string productCollectionID, string accessToken = null) where TProductCollection : ProductCollection => Request("v1", "me", "productcollections", productCollectionID).WithOAuthBearerToken(accessToken).GetJsonAsync<TProductCollection>();
+		public Task<ListPage<ProductCollection>> ListProductCollectionsAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) => ListProductCollectionsAsync<ProductCollection>(search, searchOn, sortBy, page, pageSize, filters, accessToken);
+		public Task<ListPage<TProductCollection>> ListProductCollectionsAsync<TProductCollection>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TProductCollection : ProductCollection => Request("v1", "me", "productcollections").WithOAuthBearerToken(accessToken).SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<TProductCollection>>();
+		public Task<ListPage<ProductCollection>> ListProductCollectionsAsync(Action<ListOptionsBuilder<ProductCollection>> buildListOpts, string accessToken = null) => ListProductCollectionsAsync<ProductCollection>(buildListOpts, accessToken);
+		public Task<ListPage<TProductCollection>> ListProductCollectionsAsync<TProductCollection>(Action<ListOptionsBuilder<TProductCollection>> buildListOpts, string accessToken = null) where TProductCollection : ProductCollection => Request("v1", "me", "productcollections").WithOAuthBearerToken(accessToken).SetListOptions(buildListOpts).GetJsonAsync<ListPage<TProductCollection>>();
+		public Task<ProductCollection> PatchProductCollectionAsync(string productCollectionID, PartialProductCollection partialProductCollection, string accessToken = null) => PatchProductCollectionAsync<ProductCollection>(productCollectionID, partialProductCollection, accessToken);
+		public Task<TProductCollection> PatchProductCollectionAsync<TProductCollection>(string productCollectionID, PartialProductCollection partialProductCollection, string accessToken = null) where TProductCollection : ProductCollection => Request("v1", "me", "productcollections", productCollectionID).WithOAuthBearerToken(accessToken).PatchJsonAsync(ValidateModel(partialProductCollection)).ReceiveJson<TProductCollection>();
+		public Task<ProductCollection> SaveProductCollectionAsync(string productCollectionID, ProductCollection productCollection, string accessToken = null) => SaveProductCollectionAsync<ProductCollection>(productCollectionID, productCollection, accessToken);
+		public Task<TProductCollection> SaveProductCollectionAsync<TProductCollection>(string productCollectionID, ProductCollection productCollection, string accessToken = null) where TProductCollection : ProductCollection => Request("v1", "me", "productcollections", productCollectionID).WithOAuthBearerToken(accessToken).PutJsonAsync(ValidateModel(productCollection)).ReceiveJson<TProductCollection>();
+		public Task DeleteProductCollectionAsync(string productCollectionID, string accessToken = null) => Request("v1", "me", "productcollections", productCollectionID).WithOAuthBearerToken(accessToken).DeleteAsync();
+		public Task<ListPageWithFacets<BuyerProduct>> ListProductCollectionEntriesAsync(string productCollectionID, string search = null, string searchOn = null, SearchType searchType = SearchType.AnyTerm, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) => ListProductCollectionEntriesAsync<BuyerProduct>(productCollectionID, search, searchOn, searchType, sortBy, page, pageSize, filters, accessToken);
+		public Task<ListPageWithFacets<TBuyerProduct>> ListProductCollectionEntriesAsync<TBuyerProduct>(string productCollectionID, string search = null, string searchOn = null, SearchType searchType = SearchType.AnyTerm, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TBuyerProduct : BuyerProduct => Request("v1", "me", "productcollections", productCollectionID, "products").WithOAuthBearerToken(accessToken).SetQueryParams(new { search, searchOn, searchType, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPageWithFacets<TBuyerProduct>>();
+		public Task<ListPageWithFacets<BuyerProduct>> ListProductCollectionEntriesAsync(string productCollectionID, Action<ListOptionsBuilder2<BuyerProduct>> buildListOpts, string accessToken = null) => ListProductCollectionEntriesAsync<BuyerProduct>(productCollectionID, buildListOpts, accessToken);
+		public Task<ListPageWithFacets<TBuyerProduct>> ListProductCollectionEntriesAsync<TBuyerProduct>(string productCollectionID, Action<ListOptionsBuilder2<TBuyerProduct>> buildListOpts, string accessToken = null) where TBuyerProduct : BuyerProduct => Request("v1", "me", "productcollections", productCollectionID, "products").WithOAuthBearerToken(accessToken).SetListOptions(buildListOpts).GetJsonAsync<ListPageWithFacets<TBuyerProduct>>();
+		public Task CreateProductCollectionEntryAsync(string productCollectionID, string productID, string accessToken = null) => Request("v1", "me", "productcollections", productCollectionID, productID).WithOAuthBearerToken(accessToken).PutAsync(null);
+		public Task DeleteProductCollectionEntryAsync(string productCollectionID, string productID, string accessToken = null) => Request("v1", "me", "productcollections", productCollectionID, productID).WithOAuthBearerToken(accessToken).DeleteAsync();
 	}
 
 	public class MessageSendersResource : OrderCloudResource, IMessageSendersResource
@@ -5205,6 +5596,44 @@ namespace OrderCloud.SDK
 		public Task<OpenIdConnect> SaveAsync(string openidconnectID, OpenIdConnect openIdConnect, string accessToken = null) => Request("v1", "openidconnects", openidconnectID).WithOAuthBearerToken(accessToken).PutJsonAsync(ValidateModel(openIdConnect)).ReceiveJson<OpenIdConnect>();
 		public Task DeleteAsync(string openidconnectID, string accessToken = null) => Request("v1", "openidconnects", openidconnectID).WithOAuthBearerToken(accessToken).DeleteAsync();
 		public Task<OpenIdConnect> PatchAsync(string openidconnectID, PartialOpenIdConnect partialOpenIdConnect, string accessToken = null) => Request("v1", "openidconnects", openidconnectID).WithOAuthBearerToken(accessToken).PatchJsonAsync(ValidateModel(partialOpenIdConnect)).ReceiveJson<OpenIdConnect>();
+	}
+
+	public class OrderReturnsResource : OrderCloudResource, IOrderReturnsResource
+	{
+		internal OrderReturnsResource(OrderCloudClient client) : base(client) { }
+		public Task<OrderReturn> GetAsync(string returnID, string accessToken = null) => GetAsync<OrderReturn>(returnID, accessToken);
+		public Task<TOrderReturn> GetAsync<TOrderReturn>(string returnID, string accessToken = null) where TOrderReturn : OrderReturn => Request("v1", "orderreturns", returnID).WithOAuthBearerToken(accessToken).GetJsonAsync<TOrderReturn>();
+		public Task<ListPage<OrderReturn>> ListAsync(bool approvable = false, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) => ListAsync<OrderReturn>(approvable, search, searchOn, sortBy, page, pageSize, filters, accessToken);
+		public Task<ListPage<TOrderReturn>> ListAsync<TOrderReturn>(bool approvable = false, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TOrderReturn : OrderReturn => Request("v1", "orderreturns").WithOAuthBearerToken(accessToken).SetQueryParams(new { approvable, search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<TOrderReturn>>();
+		public Task<ListPage<OrderReturn>> ListAsync(Action<ListOptionsBuilder<OrderReturn>> buildListOpts, bool approvable = false, string accessToken = null) => ListAsync<OrderReturn>(buildListOpts, approvable, accessToken);
+		public Task<ListPage<TOrderReturn>> ListAsync<TOrderReturn>(Action<ListOptionsBuilder<TOrderReturn>> buildListOpts, bool approvable = false, string accessToken = null) where TOrderReturn : OrderReturn => Request("v1", "orderreturns").WithOAuthBearerToken(accessToken).SetQueryParams(new { approvable }).SetListOptions(buildListOpts).GetJsonAsync<ListPage<TOrderReturn>>();
+		public Task<OrderReturn> CreateAsync(OrderReturn orderReturn, string accessToken = null) => CreateAsync<OrderReturn>(orderReturn, accessToken);
+		public Task<TOrderReturn> CreateAsync<TOrderReturn>(OrderReturn orderReturn, string accessToken = null) where TOrderReturn : OrderReturn => Request("v1", "orderreturns").WithOAuthBearerToken(accessToken).PostJsonAsync(ValidateModel(orderReturn)).ReceiveJson<TOrderReturn>();
+		public Task<OrderReturn> SaveAsync(string returnID, OrderReturn orderReturn, string accessToken = null) => SaveAsync<OrderReturn>(returnID, orderReturn, accessToken);
+		public Task<TOrderReturn> SaveAsync<TOrderReturn>(string returnID, OrderReturn orderReturn, string accessToken = null) where TOrderReturn : OrderReturn => Request("v1", "orderreturns", returnID).WithOAuthBearerToken(accessToken).PutJsonAsync(ValidateModel(orderReturn)).ReceiveJson<TOrderReturn>();
+		public Task DeleteAsync(string returnID, string accessToken = null) => Request("v1", "orderreturns", returnID).WithOAuthBearerToken(accessToken).DeleteAsync();
+		public Task<OrderReturn> PatchAsync(string returnID, PartialOrderReturn partialOrderReturn, string accessToken = null) => PatchAsync<OrderReturn>(returnID, partialOrderReturn, accessToken);
+		public Task<TOrderReturn> PatchAsync<TOrderReturn>(string returnID, PartialOrderReturn partialOrderReturn, string accessToken = null) where TOrderReturn : OrderReturn => Request("v1", "orderreturns", returnID).WithOAuthBearerToken(accessToken).PatchJsonAsync(ValidateModel(partialOrderReturn)).ReceiveJson<TOrderReturn>();
+		public Task<OrderReturn> DeleteItemAsync(string returnID, string lineItemID, string accessToken = null) => DeleteItemAsync<OrderReturn>(returnID, lineItemID, accessToken);
+		public Task<TOrderReturn> DeleteItemAsync<TOrderReturn>(string returnID, string lineItemID, string accessToken = null) where TOrderReturn : OrderReturn => Request("v1", "orderreturns", returnID, "items", lineItemID).WithOAuthBearerToken(accessToken).DeleteAsync().ReceiveJson<TOrderReturn>();
+		public Task<OrderReturn> CancelAsync(string returnID, string accessToken = null) => CancelAsync<OrderReturn>(returnID, accessToken);
+		public Task<TOrderReturn> CancelAsync<TOrderReturn>(string returnID, string accessToken = null) where TOrderReturn : OrderReturn => Request("v1", "orderreturns", returnID, "cancel").WithOAuthBearerToken(accessToken).PostAsync(null).ReceiveJson<TOrderReturn>();
+		public Task<OrderReturn> CompleteAsync(string returnID, string accessToken = null) => CompleteAsync<OrderReturn>(returnID, accessToken);
+		public Task<TOrderReturn> CompleteAsync<TOrderReturn>(string returnID, string accessToken = null) where TOrderReturn : OrderReturn => Request("v1", "orderreturns", returnID, "complete").WithOAuthBearerToken(accessToken).PostAsync(null).ReceiveJson<TOrderReturn>();
+		public Task<OrderReturn> SubmitAsync(string returnID, string accessToken = null) => SubmitAsync<OrderReturn>(returnID, accessToken);
+		public Task<TOrderReturn> SubmitAsync<TOrderReturn>(string returnID, string accessToken = null) where TOrderReturn : OrderReturn => Request("v1", "orderreturns", returnID, "submit").WithOAuthBearerToken(accessToken).PostAsync(null).ReceiveJson<TOrderReturn>();
+		public Task<ListPage<OrderReturnApproval>> ListApprovalsAsync(string returnID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) => ListApprovalsAsync<OrderReturnApproval>(returnID, search, searchOn, sortBy, page, pageSize, filters, accessToken);
+		public Task<ListPage<TOrderReturnApproval>> ListApprovalsAsync<TOrderReturnApproval>(string returnID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TOrderReturnApproval : OrderReturnApproval => Request("v1", "orderreturns", returnID, "approvals").WithOAuthBearerToken(accessToken).SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<TOrderReturnApproval>>();
+		public Task<ListPage<OrderReturnApproval>> ListApprovalsAsync(string returnID, Action<ListOptionsBuilder<OrderReturnApproval>> buildListOpts, string accessToken = null) => ListApprovalsAsync<OrderReturnApproval>(returnID, buildListOpts, accessToken);
+		public Task<ListPage<TOrderReturnApproval>> ListApprovalsAsync<TOrderReturnApproval>(string returnID, Action<ListOptionsBuilder<TOrderReturnApproval>> buildListOpts, string accessToken = null) where TOrderReturnApproval : OrderReturnApproval => Request("v1", "orderreturns", returnID, "approvals").WithOAuthBearerToken(accessToken).SetListOptions(buildListOpts).GetJsonAsync<ListPage<TOrderReturnApproval>>();
+		public Task<ListPage<User>> ListEligibleApproversAsync(string returnID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) => ListEligibleApproversAsync<User>(returnID, search, searchOn, sortBy, page, pageSize, filters, accessToken);
+		public Task<ListPage<TUser>> ListEligibleApproversAsync<TUser>(string returnID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TUser : User => Request("v1", "orderreturns", returnID, "eligibleapprovers").WithOAuthBearerToken(accessToken).SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<TUser>>();
+		public Task<ListPage<User>> ListEligibleApproversAsync(string returnID, Action<ListOptionsBuilder<User>> buildListOpts, string accessToken = null) => ListEligibleApproversAsync<User>(returnID, buildListOpts, accessToken);
+		public Task<ListPage<TUser>> ListEligibleApproversAsync<TUser>(string returnID, Action<ListOptionsBuilder<TUser>> buildListOpts, string accessToken = null) where TUser : User => Request("v1", "orderreturns", returnID, "eligibleapprovers").WithOAuthBearerToken(accessToken).SetListOptions(buildListOpts).GetJsonAsync<ListPage<TUser>>();
+		public Task<OrderReturn> ApproveAsync(string returnID, ApprovalInfo approvalInfo, string accessToken = null) => ApproveAsync<OrderReturn>(returnID, approvalInfo, accessToken);
+		public Task<TOrderReturn> ApproveAsync<TOrderReturn>(string returnID, ApprovalInfo approvalInfo, string accessToken = null) where TOrderReturn : OrderReturn => Request("v1", "orderreturns", returnID, "approve").WithOAuthBearerToken(accessToken).PostJsonAsync(ValidateModel(approvalInfo)).ReceiveJson<TOrderReturn>();
+		public Task<OrderReturn> DeclineAsync(string returnID, ApprovalInfo approvalInfo, string accessToken = null) => DeclineAsync<OrderReturn>(returnID, approvalInfo, accessToken);
+		public Task<TOrderReturn> DeclineAsync<TOrderReturn>(string returnID, ApprovalInfo approvalInfo, string accessToken = null) where TOrderReturn : OrderReturn => Request("v1", "orderreturns", returnID, "decline").WithOAuthBearerToken(accessToken).PostJsonAsync(ValidateModel(approvalInfo)).ReceiveJson<TOrderReturn>();
 	}
 
 	public class OrdersResource : OrderCloudResource, IOrdersResource
@@ -5414,6 +5843,24 @@ namespace OrderCloud.SDK
 		public Task<ListPage<SecurityProfileAssignment>> ListAssignmentsAsync(string buyerID = null, string supplierID = null, string securityProfileID = null, string userID = null, string userGroupID = null, CommerceRole? commerceRole = null, PartyType? level = null, int? page = null, int? pageSize = null, string accessToken = null) => Request("v1", "securityprofiles", "assignments").WithOAuthBearerToken(accessToken).SetQueryParams(new { buyerID, supplierID, securityProfileID, userID, userGroupID, commerceRole, level, page, pageSize }).GetJsonAsync<ListPage<SecurityProfileAssignment>>();
 		public Task DeleteAssignmentAsync(string securityProfileID, string buyerID = null, string userID = null, string userGroupID = null, string supplierID = null, string accessToken = null) => Request("v1", "securityprofiles", securityProfileID, "assignments").WithOAuthBearerToken(accessToken).SetQueryParams(new { buyerID, userID, userGroupID, supplierID }).DeleteAsync();
 		public Task SaveAssignmentAsync(SecurityProfileAssignment securityProfileAssignment, string accessToken = null) => Request("v1", "securityprofiles", "assignments").WithOAuthBearerToken(accessToken).PostJsonAsync(ValidateModel(securityProfileAssignment));
+	}
+
+	public class SellerApprovalRulesResource : OrderCloudResource, ISellerApprovalRulesResource
+	{
+		internal SellerApprovalRulesResource(OrderCloudClient client) : base(client) { }
+		public Task<SellerApprovalRule> GetAsync(string approvalRuleID, string accessToken = null) => GetAsync<SellerApprovalRule>(approvalRuleID, accessToken);
+		public Task<TSellerApprovalRule> GetAsync<TSellerApprovalRule>(string approvalRuleID, string accessToken = null) where TSellerApprovalRule : SellerApprovalRule => Request("v1", "approvalrules", approvalRuleID).WithOAuthBearerToken(accessToken).GetJsonAsync<TSellerApprovalRule>();
+		public Task<ListPage<SellerApprovalRule>> ListAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) => ListAsync<SellerApprovalRule>(search, searchOn, sortBy, page, pageSize, filters, accessToken);
+		public Task<ListPage<TSellerApprovalRule>> ListAsync<TSellerApprovalRule>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TSellerApprovalRule : SellerApprovalRule => Request("v1", "approvalrules").WithOAuthBearerToken(accessToken).SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<TSellerApprovalRule>>();
+		public Task<ListPage<SellerApprovalRule>> ListAsync(Action<ListOptionsBuilder<SellerApprovalRule>> buildListOpts, string accessToken = null) => ListAsync<SellerApprovalRule>(buildListOpts, accessToken);
+		public Task<ListPage<TSellerApprovalRule>> ListAsync<TSellerApprovalRule>(Action<ListOptionsBuilder<TSellerApprovalRule>> buildListOpts, string accessToken = null) where TSellerApprovalRule : SellerApprovalRule => Request("v1", "approvalrules").WithOAuthBearerToken(accessToken).SetListOptions(buildListOpts).GetJsonAsync<ListPage<TSellerApprovalRule>>();
+		public Task<SellerApprovalRule> CreateAsync(SellerApprovalRule sellerApprovalRule, string accessToken = null) => CreateAsync<SellerApprovalRule>(sellerApprovalRule, accessToken);
+		public Task<TSellerApprovalRule> CreateAsync<TSellerApprovalRule>(SellerApprovalRule sellerApprovalRule, string accessToken = null) where TSellerApprovalRule : SellerApprovalRule => Request("v1", "approvalrules").WithOAuthBearerToken(accessToken).PostJsonAsync(ValidateModel(sellerApprovalRule)).ReceiveJson<TSellerApprovalRule>();
+		public Task<SellerApprovalRule> SaveAsync(string approvalRuleID, SellerApprovalRule sellerApprovalRule, string accessToken = null) => SaveAsync<SellerApprovalRule>(approvalRuleID, sellerApprovalRule, accessToken);
+		public Task<TSellerApprovalRule> SaveAsync<TSellerApprovalRule>(string approvalRuleID, SellerApprovalRule sellerApprovalRule, string accessToken = null) where TSellerApprovalRule : SellerApprovalRule => Request("v1", "approvalrules", approvalRuleID).WithOAuthBearerToken(accessToken).PutJsonAsync(ValidateModel(sellerApprovalRule)).ReceiveJson<TSellerApprovalRule>();
+		public Task DeleteAsync(string approvalRuleID, string accessToken = null) => Request("v1", "approvalrules", approvalRuleID).WithOAuthBearerToken(accessToken).DeleteAsync();
+		public Task<SellerApprovalRule> PatchAsync(string approvalRuleID, PartialSellerApprovalRule partialSellerApprovalRule, string accessToken = null) => PatchAsync<SellerApprovalRule>(approvalRuleID, partialSellerApprovalRule, accessToken);
+		public Task<TSellerApprovalRule> PatchAsync<TSellerApprovalRule>(string approvalRuleID, PartialSellerApprovalRule partialSellerApprovalRule, string accessToken = null) where TSellerApprovalRule : SellerApprovalRule => Request("v1", "approvalrules", approvalRuleID).WithOAuthBearerToken(accessToken).PatchJsonAsync(ValidateModel(partialSellerApprovalRule)).ReceiveJson<TSellerApprovalRule>();
 	}
 
 	public class ShipmentsResource : OrderCloudResource, IShipmentsResource
