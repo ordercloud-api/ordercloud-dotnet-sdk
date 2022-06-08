@@ -4984,11 +4984,7 @@ namespace OrderCloud.SDK
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<XpIndex>> ListAsync(Action<ListOptionsBuilder<XpIndex>> buildListOpts, string accessToken = null);
 		/// <summary>Delete a XP index.</summary>
-<<<<<<< HEAD
 		/// <param name="thingType">Thing type of the xp index. Possible values: Address, Variant, Order, OrderReturn, LineItem, CostCenter, CreditCard, Payment, Spec, SpecOption, UserGroup, Company, Category, PriceSchedule, Shipment, SpendingAccount, User, Promotion, ApprovalRule, SellerApprovalRule, Catalog, ProductFacet, MessageSender, InventoryRecord, ProductCollection.</param>
-=======
-		/// <param name="thingType">Thing type of the xp index. Possible values: Address, Variant, Order, OrderReturn, LineItem, CostCenter, CreditCard, Payment, Spec, SpecOption, UserGroup, Company, Category, PriceSchedule, Shipment, SpendingAccount, User, Promotion, ApprovalRule, SellerApprovalRule, Catalog, ProductFacet, MessageSender, InventoryRecord.</param>
->>>>>>> master
 		/// <param name="key">Key of the xp index.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task DeleteAsync(XpThingType thingType, string key, string accessToken = null);

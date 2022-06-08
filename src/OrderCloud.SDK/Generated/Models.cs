@@ -17,11 +17,7 @@ namespace OrderCloud.SDK
 	public enum PriceMarkupType { NoMarkup, AmountPerQuantity, AmountTotal, Percentage }
 	public enum SearchType { AnyTerm, AllTermsAnyField, AllTermsSameField, ExactPhrase, ExactPhrasePrefix }
 	public enum UserOrderMoveOption { None, Unsubmitted, All }
-<<<<<<< HEAD
 	public enum XpThingType { Address, Variant, Order, OrderReturn, LineItem, CostCenter, CreditCard, Payment, Spec, SpecOption, UserGroup, Company, Category, PriceSchedule, Shipment, SpendingAccount, User, Promotion, ApprovalRule, SellerApprovalRule, Catalog, ProductFacet, MessageSender, InventoryRecord, ProductCollection }
-=======
-	public enum XpThingType { Address, Variant, Order, OrderReturn, LineItem, CostCenter, CreditCard, Payment, Spec, SpecOption, UserGroup, Company, Category, PriceSchedule, Shipment, SpendingAccount, User, Promotion, ApprovalRule, SellerApprovalRule, Catalog, ProductFacet, MessageSender, InventoryRecord }
->>>>>>> master
 	public class AccessToken : OrderCloudModel
 	{
 		/// <summary>Access token of the access token.</summary>
@@ -2548,11 +2544,7 @@ namespace OrderCloud.SDK
 	}
 	public class XpIndex : OrderCloudModel
 	{
-<<<<<<< HEAD
 		/// <summary>Thing type of the xp index. Searchable: priority level 0. Sortable: priority level 0. Possible values: Address, Variant, Order, OrderReturn, LineItem, CostCenter, CreditCard, Payment, Spec, SpecOption, UserGroup, Company, Category, PriceSchedule, Shipment, SpendingAccount, User, Promotion, ApprovalRule, SellerApprovalRule, Catalog, ProductFacet, MessageSender, InventoryRecord, ProductCollection.</summary>
-=======
-		/// <summary>Thing type of the xp index. Searchable: priority level 0. Sortable: priority level 0. Possible values: Address, Variant, Order, OrderReturn, LineItem, CostCenter, CreditCard, Payment, Spec, SpecOption, UserGroup, Company, Category, PriceSchedule, Shipment, SpendingAccount, User, Promotion, ApprovalRule, SellerApprovalRule, Catalog, ProductFacet, MessageSender, InventoryRecord.</summary>
->>>>>>> master
 		public XpThingType ThingType { get => GetProp<XpThingType>("ThingType"); set => SetProp<XpThingType>("ThingType", value); }
 		/// <summary>Key of the xp index. Searchable: priority level 1. Sortable: priority level 1.</summary>
 		public string Key { get => GetProp<string>("Key"); set => SetProp<string>("Key", value); }
