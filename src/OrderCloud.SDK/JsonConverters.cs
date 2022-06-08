@@ -14,6 +14,8 @@ namespace OrderCloud.SDK
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) =>
 			JObject.FromObject(((OrderCloudModel)value).Props, serializer).WriteTo(writer);
 
+		public override bool CanRead => false;
+
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer) =>
 			throw new NotImplementedException();
 
