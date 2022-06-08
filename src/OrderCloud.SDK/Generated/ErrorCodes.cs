@@ -432,6 +432,11 @@ namespace OrderCloud.SDK
 			/// <summary>The marketplace owner can create product assignments and designate a SellerID, but only when a PriceScheduleID is also provided. Use the designated endpoints to create a relationship between a Seller and a Product or a Seller and a Buyer.</summary>
 			public const string MustSpecifyPriceScheduleID = "ProductAssigment.MustSpecifyPriceScheduleID";
 		}
+		public static class ProductCollection
+		{
+			/// <summary>Cannot exceed 500 product entries per Product Collection.</summary>
+			public const string ProductEntryLimit = "ProductCollection.ProductEntryLimit";
+		}
 		public static class Promotion
 		{
 			/// <summary>Promotion has already been added to this order.</summary>
