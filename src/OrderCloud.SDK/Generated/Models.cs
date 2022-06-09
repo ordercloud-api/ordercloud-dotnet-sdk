@@ -17,7 +17,7 @@ namespace OrderCloud.SDK
 	public enum PriceMarkupType { NoMarkup, AmountPerQuantity, AmountTotal, Percentage }
 	public enum SearchType { AnyTerm, AllTermsAnyField, AllTermsSameField, ExactPhrase, ExactPhrasePrefix }
 	public enum UserOrderMoveOption { None, Unsubmitted, All }
-	public enum XpThingType { Address, Variant, Order, OrderReturn, LineItem, CostCenter, CreditCard, Payment, Spec, SpecOption, UserGroup, Company, Category, PriceSchedule, Shipment, SpendingAccount, User, Promotion, ApprovalRule, SellerApprovalRule, Catalog, ProductFacet, MessageSender, InventoryRecord }
+	public enum XpThingType { Address, Variant, Order, OrderReturn, LineItem, CostCenter, CreditCard, Payment, Spec, SpecOption, UserGroup, Company, Category, PriceSchedule, Shipment, SpendingAccount, User, Promotion, ApprovalRule, SellerApprovalRule, Catalog, ProductFacet, MessageSender, InventoryRecord, ProductCollection }
 	public class AccessToken : OrderCloudModel
 	{
 		/// <summary>Access token of the access token.</summary>
@@ -1851,6 +1851,22 @@ namespace OrderCloud.SDK
 		[Required]
 		public string ProductID { get => GetProp<string>("ProductID"); set => SetProp<string>("ProductID", value); }
 	}
+	public class ProductCollection : OrderCloudModel
+	{
+		/// <summary>ID of the product collection. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 2.</summary>
+		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
+		/// <summary>Name of the product collection. Required. Max length 100 characters. Searchable: priority level 2. Sortable: priority level 1.</summary>
+		[Required]
+		public string Name { get => GetProp<string>("Name"); set => SetProp<string>("Name", value); }
+		/// <summary>Container for extended (custom) properties of the product collection.</summary>
+		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
+	}
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic ProductCollection class instead.</typeparam>
+	public class ProductCollection<Txp> : ProductCollection
+	{
+		/// <summary>Container for extended (custom) properties of the product collection.</summary>
+		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
+	}
 	public class ProductFacet : OrderCloudModel
 	{
 		/// <summary>ID of the product facet. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 2.</summary>
@@ -2528,7 +2544,7 @@ namespace OrderCloud.SDK
 	}
 	public class XpIndex : OrderCloudModel
 	{
-		/// <summary>Thing type of the xp index. Searchable: priority level 0. Sortable: priority level 0. Possible values: Address, Variant, Order, OrderReturn, LineItem, CostCenter, CreditCard, Payment, Spec, SpecOption, UserGroup, Company, Category, PriceSchedule, Shipment, SpendingAccount, User, Promotion, ApprovalRule, SellerApprovalRule, Catalog, ProductFacet, MessageSender, InventoryRecord.</summary>
+		/// <summary>Thing type of the xp index. Searchable: priority level 0. Sortable: priority level 0. Possible values: Address, Variant, Order, OrderReturn, LineItem, CostCenter, CreditCard, Payment, Spec, SpecOption, UserGroup, Company, Category, PriceSchedule, Shipment, SpendingAccount, User, Promotion, ApprovalRule, SellerApprovalRule, Catalog, ProductFacet, MessageSender, InventoryRecord, ProductCollection.</summary>
 		public XpThingType ThingType { get => GetProp<XpThingType>("ThingType"); set => SetProp<XpThingType>("ThingType", value); }
 		/// <summary>Key of the xp index. Searchable: priority level 1. Sortable: priority level 1.</summary>
 		public string Key { get => GetProp<string>("Key"); set => SetProp<string>("Key", value); }
@@ -2649,6 +2665,10 @@ namespace OrderCloud.SDK
 	public class PartialProduct : Product, IPartial { }
 	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic PartialProduct class instead.</typeparam>
 	public class PartialProduct<Txp> : PartialProduct
+	{ }
+	public class PartialProductCollection : ProductCollection, IPartial { }
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic PartialProductCollection class instead.</typeparam>
+	public class PartialProductCollection<Txp> : PartialProductCollection
 	{ }
 	public class PartialProductFacet : ProductFacet, IPartial { }
 	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic PartialProductFacet class instead.</typeparam>
