@@ -4,6 +4,10 @@ namespace OrderCloud.SDK
 {
 	public static class ErrorCodes
 	{
+		/// <summary>Object not found.</summary>
+		public const string NotFound = "NotFound";
+		/// <summary>Model or property was invalid.</summary>
+		public const string ValidationFailure = "ValidationFailure";
 		public static class Address
 		{
 			/// <summary>This Address is registered as public and cannot be edited by this endpoint.</summary>
@@ -157,7 +161,7 @@ namespace OrderCloud.SDK
 			public const string CannotDeleteInUse = "IntegrationEvent.CannotDeleteInUse";
 			/// <summary>The EventType can't be changed once the event is created.</summary>
 			public const string CannotEditType = "IntegrationEvent.CannotEditType";
-			/// <summary>The referenced IntegrationEvent must reference an IntegrationEvent with the correct EventType</summary>
+			/// <summary>The referenced IntegrationEvent must reference an IntegrationEvent with the correct EventType.</summary>
 			public const string IncompatibleEventType = "IntegrationEvent.IncompatibleEventType";
 			/// <summary>Something went wrong when we called your integration event, check your custom code and try again.</summary>
 			public const string BadRequest = "IntegrationEvent.BadRequest";

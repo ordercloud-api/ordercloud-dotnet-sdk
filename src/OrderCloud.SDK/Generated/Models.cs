@@ -8,7 +8,7 @@ namespace OrderCloud.SDK
 	public enum ApprovalStatus { Pending, Approved, Declined }
 	public enum ApprovalType { Order, OrderReturn }
 	public enum CommerceRole { Buyer, Seller, Supplier }
-	public enum IntegrationEventType { OrderCheckout, OpenIDConnect, OrderReturn }
+	public enum IntegrationEventType { OrderCheckout, OpenIDConnect, OrderReturn, AddToCart }
 	public enum MessageType { OrderDeclined, OrderSubmitted, ShipmentCreated, ForgottenPassword, OrderSubmittedForYourApproval, OrderSubmittedForApproval, OrderApproved, OrderSubmittedForYourApprovalHasBeenApproved, OrderSubmittedForYourApprovalHasBeenDeclined, NewUserInvitation, OrderReturnDeclined, OrderReturnSubmitted, OrderReturnSubmittedForYourApproval, OrderReturnSubmittedForApproval, OrderReturnApproved, OrderReturnSubmittedForYourApprovalHasBeenApproved, OrderReturnSubmittedForYourApprovalHasBeenDeclined, OrderReturnCompleted }
 	public enum OrderDirection { Incoming, Outgoing, All }
 	public enum OrderStatus { Unsubmitted, AwaitingApproval, Declined, Open, Completed, Canceled }
@@ -91,6 +91,38 @@ namespace OrderCloud.SDK
 		/// <summary>Is billing of the address assignment.</summary>
 		public bool IsBilling { get => GetProp<bool>("IsBilling"); set => SetProp<bool>("IsBilling", value); }
 	}
+	public class AdHocProduct : OrderCloudModel
+	{
+		/// <summary>ID of the ad hoc product. Can only contain characters Aa-Zz, 0-9, -, and _.</summary>
+		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
+		/// <summary>Name of the ad hoc product. Required. Max length 100 characters.</summary>
+		[Required]
+		public string Name { get => GetProp<string>("Name"); set => SetProp<string>("Name", value); }
+		/// <summary>Description of the ad hoc product. Max length 2000 characters.</summary>
+		public string Description { get => GetProp<string>("Description"); set => SetProp<string>("Description", value); }
+		/// <summary>Informational only, does not influence any OrderCloud behavior. Used to indicate an amount per Quantity.</summary>
+		public int? QuantityMultiplier { get => GetProp<int?>("QuantityMultiplier", 1); set => SetProp<int?>("QuantityMultiplier", value); }
+		/// <summary>Ship weight of the ad hoc product.</summary>
+		public decimal? ShipWeight { get => GetProp<decimal?>("ShipWeight"); set => SetProp<decimal?>("ShipWeight", value); }
+		/// <summary>Ship height of the ad hoc product.</summary>
+		public decimal? ShipHeight { get => GetProp<decimal?>("ShipHeight"); set => SetProp<decimal?>("ShipHeight", value); }
+		/// <summary>Ship width of the ad hoc product.</summary>
+		public decimal? ShipWidth { get => GetProp<decimal?>("ShipWidth"); set => SetProp<decimal?>("ShipWidth", value); }
+		/// <summary>Ship length of the ad hoc product.</summary>
+		public decimal? ShipLength { get => GetProp<decimal?>("ShipLength"); set => SetProp<decimal?>("ShipLength", value); }
+		/// <summary>If this property has a value and a SupplierID isn't explicitly passed when creating a LineItem, this SupplierID will be used.</summary>
+		public string DefaultSupplierID { get => GetProp<string>("DefaultSupplierID"); set => SetProp<string>("DefaultSupplierID", value); }
+		/// <summary>If true, all suppliers are eligible to opt into selling this product.</summary>
+		public bool Returnable { get => GetProp<bool>("Returnable"); set => SetProp<bool>("Returnable", value); }
+		/// <summary>Container for extended (custom) properties of the ad hoc product.</summary>
+		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
+	}
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic AdHocProduct class instead.</typeparam>
+	public class AdHocProduct<Txp> : AdHocProduct
+	{
+		/// <summary>Container for extended (custom) properties of the ad hoc product.</summary>
+		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
+	}
 	public class ApiClient : OrderCloudModel
 	{
 		/// <summary>Used for OAuth 2.0 workflows and OrderCloud impersonation to represent this Client Application.</summary>
@@ -136,6 +168,11 @@ namespace OrderCloud.SDK
 		/// <summary>Order return integration event name of the api client.</summary>
 		[ApiReadOnly]
 		public string OrderReturnIntegrationEventName { get => GetProp<string>("OrderReturnIntegrationEventName"); set => SetProp<string>("OrderReturnIntegrationEventName", value); }
+		/// <summary>If populated, the integration event will be used to fetch product information from an external system, instead of an OrderCloud catalog, when a line item is added to an unsubmitted order.</summary>
+		public string AddToCartIntegrationEventID { get => GetProp<string>("AddToCartIntegrationEventID"); set => SetProp<string>("AddToCartIntegrationEventID", value); }
+		/// <summary>Add to cart integration event name of the api client.</summary>
+		[ApiReadOnly]
+		public string AddToCartIntegrationEventName { get => GetProp<string>("AddToCartIntegrationEventName"); set => SetProp<string>("AddToCartIntegrationEventName", value); }
 		/// <summary>Minimum required roles of the api client.</summary>
 		public IList<ApiRole> MinimumRequiredRoles { get => GetProp<IList<ApiRole>>("MinimumRequiredRoles", new List<ApiRole>()); set => SetProp<IList<ApiRole>>("MinimumRequiredRoles", value); }
 		/// <summary>Minimum required custom roles of the api client.</summary>
@@ -754,7 +791,7 @@ namespace OrderCloud.SDK
 		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
 		/// <summary>Any additional data needed for your Integration Event should be included here.</summary>
 		public object ConfigData { get => GetProp<object>("ConfigData"); set => SetProp<object>("ConfigData", value); }
-		/// <summary>Event type of the integration event. Searchable: priority level 2. Sortable: priority level 2. Possible values: OrderCheckout, OpenIDConnect, OrderReturn.</summary>
+		/// <summary>Event type of the integration event. Searchable: priority level 2. Sortable: priority level 2. Possible values: OrderCheckout, OpenIDConnect, OrderReturn, AddToCart.</summary>
 		public IntegrationEventType EventType { get => GetProp<IntegrationEventType>("EventType"); set => SetProp<IntegrationEventType>("EventType", value); }
 		/// <summary>URL the IntegrationEvent will POST data to, likely a route within your middleware.</summary>
 		[Required]
@@ -911,9 +948,20 @@ namespace OrderCloud.SDK
 		/// <summary>ID of the line item.</summary>
 		public string LineItemID { get => GetProp<string>("LineItemID"); set => SetProp<string>("LineItemID", value); }
 		/// <summary>Unit price of the line item override.</summary>
-		public decimal UnitPrice { get => GetProp<decimal>("UnitPrice"); set => SetProp<decimal>("UnitPrice", value); }
+		public decimal? UnitPrice { get => GetProp<decimal?>("UnitPrice"); set => SetProp<decimal?>("UnitPrice", value); }
+		/// <summary>Product of the line item override.</summary>
+		public PartialAdHocProduct Product { get => GetProp<PartialAdHocProduct>("Product"); set => SetProp<PartialAdHocProduct>("Product", value); }
 		/// <summary>Promotion overrides of the line item override.</summary>
 		public IList<PromotionOverride> PromotionOverrides { get => GetProp<IList<PromotionOverride>>("PromotionOverrides", new List<PromotionOverride>()); set => SetProp<IList<PromotionOverride>>("PromotionOverrides", value); }
+		/// <summary>Remove of the line item override.</summary>
+		public bool? Remove { get => GetProp<bool?>("Remove"); set => SetProp<bool?>("Remove", value); }
+	}
+	/// <typeparam name="TProduct">Specific type of the Product property. If not using a custom type, use the non-generic LineItemOverride class instead.</typeparam>
+	public class LineItemOverride<TProduct> : LineItemOverride
+		where TProduct : AdHocProduct
+	{
+		/// <summary>Product of the line item override.</summary>
+		public new PartialAdHocProduct Product { get => GetProp<PartialAdHocProduct>("Product"); set => SetProp<PartialAdHocProduct>("Product", value); }
 	}
 	public class LineItemProduct : OrderCloudModel
 	{
@@ -1327,6 +1375,8 @@ namespace OrderCloud.SDK
 		public string UnhandledErrorBody { get => GetProp<string>("UnhandledErrorBody"); set => SetProp<string>("UnhandledErrorBody", value); }
 		/// <summary>Container for extended (custom) properties of the order approved response.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
+		/// <summary>Succeeded of the order approved response.</summary>
+		public bool Succeeded { get => GetProp<bool>("Succeeded"); set => SetProp<bool>("Succeeded", value); }
 	}
 	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic OrderApprovedResponse class instead.</typeparam>
 	public class OrderApprovedResponse<Txp> : OrderApprovedResponse
@@ -1348,12 +1398,18 @@ namespace OrderCloud.SDK
 		public string UnhandledErrorBody { get => GetProp<string>("UnhandledErrorBody"); set => SetProp<string>("UnhandledErrorBody", value); }
 		/// <summary>Container for extended (custom) properties of the order calculate response.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
+		/// <summary>Succeeded of the order calculate response.</summary>
+		public bool Succeeded { get => GetProp<bool>("Succeeded"); set => SetProp<bool>("Succeeded", value); }
 	}
-	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic OrderCalculateResponse class instead.</typeparam>
-	public class OrderCalculateResponse<Txp> : OrderCalculateResponse
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, specify dynamic.</typeparam>
+	/// <typeparam name="TLineItemOverrides">Specific type of the LineItemOverrides property. If not using a custom type, specify LineItemOverride.</typeparam>
+	public class OrderCalculateResponse<Txp, TLineItemOverrides> : OrderCalculateResponse
+		where TLineItemOverrides : LineItemOverride
 	{
 		/// <summary>Container for extended (custom) properties of the order calculate response.</summary>
 		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
+		/// <summary>Line item overrides of the order calculate response.</summary>
+		public new IList<TLineItemOverrides> LineItemOverrides { get => GetProp<IList<TLineItemOverrides>>("LineItemOverrides", new List<TLineItemOverrides>()); set => SetProp<IList<TLineItemOverrides>>("LineItemOverrides", value); }
 	}
 	public class OrderPromotion : OrderCloudModel
 	{
@@ -1530,6 +1586,8 @@ namespace OrderCloud.SDK
 		public string UnhandledErrorBody { get => GetProp<string>("UnhandledErrorBody"); set => SetProp<string>("UnhandledErrorBody", value); }
 		/// <summary>Container for extended (custom) properties of the order submit for approval response.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
+		/// <summary>Succeeded of the order submit for approval response.</summary>
+		public bool Succeeded { get => GetProp<bool>("Succeeded"); set => SetProp<bool>("Succeeded", value); }
 	}
 	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic OrderSubmitForApprovalResponse class instead.</typeparam>
 	public class OrderSubmitForApprovalResponse<Txp> : OrderSubmitForApprovalResponse
@@ -1545,6 +1603,8 @@ namespace OrderCloud.SDK
 		public string UnhandledErrorBody { get => GetProp<string>("UnhandledErrorBody"); set => SetProp<string>("UnhandledErrorBody", value); }
 		/// <summary>Container for extended (custom) properties of the order submit response.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
+		/// <summary>Succeeded of the order submit response.</summary>
+		public bool Succeeded { get => GetProp<bool>("Succeeded"); set => SetProp<bool>("Succeeded", value); }
 	}
 	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic OrderSubmitResponse class instead.</typeparam>
 	public class OrderSubmitResponse<Txp> : OrderSubmitResponse
@@ -1977,7 +2037,7 @@ namespace OrderCloud.SDK
 	{
 		/// <summary>ID of the promotion.</summary>
 		public string PromotionID { get => GetProp<string>("PromotionID"); set => SetProp<string>("PromotionID", value); }
-		/// <summary>Overrides the promotion's calculated discount to this amount, and prevents it from being recalculated unless order calculate is called again without an override.</summary>
+		/// <summary>Overrides the promotion's calculated discount to this amount.</summary>
 		public decimal Amount { get => GetProp<decimal>("Amount"); set => SetProp<decimal>("Amount", value); }
 	}
 	public class PublicKey : OrderCloudModel
@@ -2091,6 +2151,8 @@ namespace OrderCloud.SDK
 		public string UnhandledErrorBody { get => GetProp<string>("UnhandledErrorBody"); set => SetProp<string>("UnhandledErrorBody", value); }
 		/// <summary>Container for extended (custom) properties of the ship estimate response.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
+		/// <summary>Succeeded of the ship estimate response.</summary>
+		public bool Succeeded { get => GetProp<bool>("Succeeded"); set => SetProp<bool>("Succeeded", value); }
 	}
 	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, specify dynamic.</typeparam>
 	/// <typeparam name="TShipEstimates">Specific type of the ShipEstimates property. If not using a custom type, specify ShipEstimate.</typeparam>
@@ -2552,6 +2614,10 @@ namespace OrderCloud.SDK
 	public class PartialAddress : Address, IPartial { }
 	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic PartialAddress class instead.</typeparam>
 	public class PartialAddress<Txp> : PartialAddress
+	{ }
+	public class PartialAdHocProduct : AdHocProduct, IPartial { }
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic PartialAdHocProduct class instead.</typeparam>
+	public class PartialAdHocProduct<Txp> : PartialAdHocProduct
 	{ }
 	public class PartialApiClient : ApiClient, IPartial { }
 	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic PartialApiClient class instead.</typeparam>
