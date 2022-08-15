@@ -23,6 +23,7 @@ jobs:
       id: release_version
       uses: pozetroninc/github-action-get-latest-release@v0.5.0
       with:
+        repo: ${{ github.repository }}
         excludes: prerelease, draft
         
     - name: Echo release
