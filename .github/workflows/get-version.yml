@@ -18,3 +18,14 @@ jobs:
     - name: Echo version
       run: |
         echo "Current version: ${{ steps.package_version.outputs.version }}"
+        
+    - name: Get latest release
+      id: release_version
+      uses: pozetroninc/github-action-get-latest-release@v0.5.0
+      with:
+        excludes: prerelease, draft
+        
+    - name: Echo release
+      run: |
+        echo "Current release ID: ${{ steps.release_version.outputs.id }}"
+        echo "Current release tag: ${{ steps.release_version.outputs.release }}"
