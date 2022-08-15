@@ -50,4 +50,5 @@ jobs:
       with:
         tag: ${{ env.PACKAGE_VER }}
         body: "Updates for latest OrderCloud API version"
+        artifacts: "ordercloud.sdk.*.nupkg"
         draft: true
