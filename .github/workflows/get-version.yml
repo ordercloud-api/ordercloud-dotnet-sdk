@@ -17,4 +17,4 @@ jobs:
 
     - name: Echo version
       run: |
-        echo "Current version: ${{ steps.package_version.version }}"
+        echo "Current version: ${{ steps.package_version.outputs.version }}"
