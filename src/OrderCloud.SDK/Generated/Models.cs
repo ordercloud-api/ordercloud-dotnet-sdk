@@ -1161,6 +1161,9 @@ namespace OrderCloud.SDK
 		public MeSeller Seller { get => GetProp<MeSeller>("Seller"); set => SetProp<MeSeller>("Seller", value); }
 		/// <summary>ID of the user. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable.</summary>
 		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
+		/// <summary>ID of the company.</summary>
+		[ApiReadOnly]
+		public string CompanyID { get => GetProp<string>("CompanyID"); set => SetProp<string>("CompanyID", value); }
 		/// <summary>Must be unique across the Marketplace.</summary>
 		[Required]
 		public string Username { get => GetProp<string>("Username"); set => SetProp<string>("Username", value); }
@@ -2446,6 +2449,9 @@ namespace OrderCloud.SDK
 	{
 		/// <summary>ID of the user. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable.</summary>
 		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
+		/// <summary>ID of the company.</summary>
+		[ApiReadOnly]
+		public string CompanyID { get => GetProp<string>("CompanyID"); set => SetProp<string>("CompanyID", value); }
 		/// <summary>Must be unique across the Marketplace.</summary>
 		[Required]
 		public string Username { get => GetProp<string>("Username"); set => SetProp<string>("Username", value); }
