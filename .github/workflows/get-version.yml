@@ -16,4 +16,5 @@ jobs:
         file: src/OrderCloud.SDK/OrderCloud.SDK.csproj
 
     - name: Echo version
-      run: echo "Current version: ${{ steps.package_version.version }}"
+      run: |
+        echo "Current version: ${{ steps.package_version.version }}"
