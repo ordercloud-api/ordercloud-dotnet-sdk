@@ -22,11 +22,11 @@ jobs:
         repository: ${{ github.repository }}
         excludes: prerelease
         
-    - name: Get latest release 1
+    - name: Get latest release 2
       id: release_2
       uses: InsonusK/get-latest-release@v1.0.1
       with:
-        excludes: prerelease
+        exclude_types: prerelease
         
     - name: Echo
       run: |
