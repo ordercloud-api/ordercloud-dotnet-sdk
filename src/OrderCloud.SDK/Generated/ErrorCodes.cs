@@ -54,8 +54,10 @@ namespace OrderCloud.SDK
 		}
 		public static class Auth
 		{
-			/// <summary>Company not active.</summary>
+			/// <summary>User's organization is not active.</summary>
 			public const string CompanyNotActive = "Auth.CompanyNotActive";
+			/// <summary>Client ID is not active.</summary>
+			public const string ClientNotActive = "Auth.ClientNotActive";
 			/// <summary>Invalid username or password.</summary>
 			public const string InvalidUsernameOrPassword = "Auth.InvalidUsernameOrPassword";
 			/// <summary>Both username and password are required.</summary>
@@ -66,9 +68,9 @@ namespace OrderCloud.SDK
 			public const string OauthError = "Auth.OauthError";
 			/// <summary>Expired Password.</summary>
 			public const string PasswordExpired = "Auth.PasswordExpired";
-			/// <summary>Seller not active.</summary>
+			/// <summary>Marketplace is not active.</summary>
 			public const string SellerNotActive = "Auth.SellerNotActive";
-			/// <summary>User not active.</summary>
+			/// <summary>User is not active.</summary>
 			public const string UserNotActive = "Auth.UserNotActive";
 			/// <summary>Reading and/or Administering certain resources is forbidden for all Buyer and Supplier users regardless of role(s).</summary>
 			public const string UserNotAuthorizedToAdmin = "Auth.UserNotAuthorizedToAdmin";
@@ -165,6 +167,8 @@ namespace OrderCloud.SDK
 			public const string IncompatibleEventType = "IntegrationEvent.IncompatibleEventType";
 			/// <summary>Something went wrong when we called your integration event, check your custom code and try again.</summary>
 			public const string BadRequest = "IntegrationEvent.BadRequest";
+			/// <summary>IntegrationEvents require at least one ApiClient to be configured with AllowSeller = true in order to generate an elevated role token.</summary>
+			public const string AllowSellerApiClientRequired = "IntegrationEvent.AllowSellerApiClientRequired";
 		}
 		public static class Inventory
 		{
@@ -303,8 +307,6 @@ namespace OrderCloud.SDK
 			public const string NotEligibleToApproveOrDecline = "OrderReturn.NotEligibleToApproveOrDecline";
 			/// <summary>LineItemID must be unique across ItemsToReturn.</summary>
 			public const string CannotCreateDuplicateItemToReturn = "OrderReturn.CannotCreateDuplicateItemToReturn";
-			/// <summary>RefundAmount is only writable on the OrderReturn when there are no RefundAmounts on any ItemsToReturn.</summary>
-			public const string ConflictingRefundAmounts = "OrderReturn.ConflictingRefundAmounts";
 		}
 		public static class PartyAssignment
 		{

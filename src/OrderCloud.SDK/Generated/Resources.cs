@@ -4895,6 +4895,32 @@ namespace OrderCloud.SDK
 		/// <param name="userID">ID of the user.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task DeleteAsync(string buyerID, string userID, string accessToken = null);
+		/// <summary>Get a list of user across buyers.</summary>
+		/// <param name="search">Word or phrase to search for.</param>
+		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
+		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<User>> ListAcrossBuyersAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
+		/// <summary>Get a list of user across buyers.</summary>
+		/// <param name="search">Word or phrase to search for.</param>
+		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
+		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<TUser>> ListAcrossBuyersAsync<TUser>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TUser : User;
+		/// <summary>Get a list of user across buyers.</summary>
+		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<User>> ListAcrossBuyersAsync(Action<ListOptionsBuilder<User>> buildListOpts, string accessToken = null);
+		/// <summary>Get a list of user across buyers.</summary>
+		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<TUser>> ListAcrossBuyersAsync<TUser>(Action<ListOptionsBuilder<TUser>> buildListOpts, string accessToken = null) where TUser : User;
 		/// <summary>Partially update a user.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="userID">ID of the user.</param>
@@ -6064,6 +6090,10 @@ namespace OrderCloud.SDK
 		public Task<User> SaveAsync(string buyerID, string userID, User user, string accessToken = null) => SaveAsync<User>(buyerID, userID, user, accessToken);
 		public Task<TUser> SaveAsync<TUser>(string buyerID, string userID, User user, string accessToken = null) where TUser : User => Request("v1", "buyers", buyerID, "users", userID).WithOAuthBearerToken(accessToken).PutJsonAsync(ValidateModel(user)).ReceiveJson<TUser>();
 		public Task DeleteAsync(string buyerID, string userID, string accessToken = null) => Request("v1", "buyers", buyerID, "users", userID).WithOAuthBearerToken(accessToken).DeleteAsync();
+		public Task<ListPage<User>> ListAcrossBuyersAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) => ListAcrossBuyersAsync<User>(search, searchOn, sortBy, page, pageSize, filters, accessToken);
+		public Task<ListPage<TUser>> ListAcrossBuyersAsync<TUser>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TUser : User => Request("v1", "buyerusers").WithOAuthBearerToken(accessToken).SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<TUser>>();
+		public Task<ListPage<User>> ListAcrossBuyersAsync(Action<ListOptionsBuilder<User>> buildListOpts, string accessToken = null) => ListAcrossBuyersAsync<User>(buildListOpts, accessToken);
+		public Task<ListPage<TUser>> ListAcrossBuyersAsync<TUser>(Action<ListOptionsBuilder<TUser>> buildListOpts, string accessToken = null) where TUser : User => Request("v1", "buyerusers").WithOAuthBearerToken(accessToken).SetListOptions(buildListOpts).GetJsonAsync<ListPage<TUser>>();
 		public Task<User> PatchAsync(string buyerID, string userID, PartialUser partialUser, string accessToken = null) => PatchAsync<User>(buyerID, userID, partialUser, accessToken);
 		public Task<TUser> PatchAsync<TUser>(string buyerID, string userID, PartialUser partialUser, string accessToken = null) where TUser : User => Request("v1", "buyers", buyerID, "users", userID).WithOAuthBearerToken(accessToken).PatchJsonAsync(ValidateModel(partialUser)).ReceiveJson<TUser>();
 		public Task<User> MoveAsync(string buyerID, string userID, string newBuyerID, UserOrderMoveOption orders, string accessToken = null) => MoveAsync<User>(buyerID, userID, newBuyerID, orders, accessToken);
