@@ -19,14 +19,8 @@ jobs:
       with:
         dotnet-version: 6.0.x
 
-    - name: Restore dependencies
-      run: dotnet restore
-
-    - name: Build
-      run: dotnet build -c Release --no-restore
-
-    - name: Test
-      run: dotnet test -c Release --no-build --verbosity normal
+    - name: Build & test
+      run: dotnet test -c Release --verbosity normal
       
     - name: Get package version
       id: package_version
@@ -40,8 +34,13 @@ jobs:
       with:
         repository: ${{ github.repository }}
         excludes: prerelease, draft
+        
+    - name: Output versions
+      run: |
+        echo "package version: ${{ steps.package_version.outputs.version }}"
+        echo "latest release: ${{ steps.release_version.outputs.release }}"
       
-    - name: Draft Release
+    - name: Draft release
       env:
         PACKAGE_VER: ${{ steps.package_version.outputs.version }}
         RELEASE_VER: ${{ steps.release_version.outputs.release }}
