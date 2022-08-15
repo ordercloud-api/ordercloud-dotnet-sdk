@@ -49,6 +49,6 @@ jobs:
       uses: ncipollo/release-action@v1.10.0
       with:
         tag: ${{ env.PACKAGE_VER }}
-        body: "Updates for latest OrderCloud API version"
-        artifacts: "src/OrderCloud.SDK/bin/release/*.nupkg"
+        body: "- Updates for latest OrderCloud API version"
+        artifacts: "**/*.nupkg"
         draft: true
