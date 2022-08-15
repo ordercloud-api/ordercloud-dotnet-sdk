@@ -22,18 +22,17 @@ jobs:
         repository: ${{ github.repository }}
         excludes: prerelease, draft
         
-    - name: Release
+    - name: Set env variables
       env:
         PACKAGE_VER: ${{ steps.package_version.outputs.version }}
         RELEASE_VER: ${{ steps.release_version.outputs.release }}
+
+    - name: Release
       if: $PACKAGE_VER != $RELEASE_VER
       run: |
         echo "Package version ($PACKAGE_VER) is different than release version ($RELEASE_VER), we should release!"
         
     - name: Don't release
-      env:
-        PACKAGE_VER: ${{ steps.package_version.outputs.version }}
-        RELEASE_VER: ${{ steps.release_version.outputs.release }}
       if: $PACKAGE_VER == $RELEASE_VER
       run: |
         echo "Package version ($PACKAGE_VER) and release version ($RELEASE_VER) are the same, no relase needed."
