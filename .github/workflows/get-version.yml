@@ -26,6 +26,7 @@ jobs:
       id: release_2
       uses: InsonusK/get-latest-release@v1.0.1
       with:
+        myToken: ${{ github.token }} #required to see drafts
         exclude_types: prerelease
         
     - name: Echo
