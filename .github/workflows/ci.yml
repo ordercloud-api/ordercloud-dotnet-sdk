@@ -30,20 +30,21 @@ jobs:
         
     - name: Get latest release tag
       id: release_version
-      uses: pozetroninc/github-action-get-latest-release@v0.5.0
+      uses: InsonusK/get-latest-release@v1.0.1
       with:
-        repository: ${{ github.repository }}
-        excludes: prerelease
+        myToken: ${{ github.token }} #required to see drafts
+        exclude_types: prerelease
+        view_top: 1
         
     - name: Output versions
       run: |
         echo "package version: ${{ steps.package_version.outputs.version }}"
-        echo "latest release: ${{ steps.release_version.outputs.release }}"
+        echo "latest release: ${{ steps.release_version.outputs.tag_name }}"
       
     - name: Draft release
       env:
         PACKAGE_VER: ${{ steps.package_version.outputs.version }}
-        RELEASE_VER: ${{ steps.release_version.outputs.release }}
+        RELEASE_VER: ${{ steps.release_version.outputs.tag_name }}
       if: env.PACKAGE_VER != env.RELEASE_VER
       uses: ncipollo/release-action@v1.10.0
       with:
