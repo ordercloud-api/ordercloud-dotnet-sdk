@@ -179,7 +179,7 @@ Yes and yes. All service-y classes implement interfaces (`IOrderCloudClient`, `I
 The SDK targets .NET Framework 4.5 and [.NET Standard](https://docs.microsoft.com/en-us/dotnet/standard/net-standard)  1.3 and 2.0, meaning it'll run just about everywhere .NET runs, including .NET Core 1.0 and 2.0, Mono, Xamarin (iOS and Android), and UWP 10.
 
 ## Getting Help
-If you're new to OrderCloud.io, exploring the [documentation](https://developer.ordercloud.io/documentation) is recommended, especially the [Intro to OrderCloud.io](https://developer.ordercloud.io/documentation/platform-guides/getting-started/introduction-to-ordercloud) and [Quick Start Guide](https://developer.ordercloud.io/documentation/platform-guides/getting-started/quick-start-guide). When you're ready to dive deeper, check out the [platform guides](https://developer.ordercloud.io/documentation/platform-guides) and [API reference](https://developer.ordercloud.io/documentation/api-reference).
+If you're new to OrderCloud.io, exploring the [documentation](https://ordercloud.io) is recommended, especially the [Platform Overview](https://ordercloud.io/discover/platform-overview) and the [Getting Started guide](https://ordercloud.io/learn/getting-started/welcome-to-ordercloud). When you're ready to dive deeper, check out the [Knowledge Base](https://ordercloud.io/knowledge-base) and [API reference](https://ordercloud.io/api-reference).
 
 For programming questions, please [ask](https://stackoverflow.com/questions/ask?tags=ordercloud) on Stack Overflow.
 
