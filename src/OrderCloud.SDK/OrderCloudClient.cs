@@ -48,6 +48,16 @@ namespace OrderCloud.SDK
 		/// Sends a token request to the OrderCloud authorization server using the OAuth2 client credentials grant flow.
 		/// </summary>
 		Task<TokenResponse> AuthenticateAsync(string clientID, string clientSecret, params ApiRole[] roles);
+		
+		/// <summary>
+		/// Sends a token request to the OrderCloud authorization server using the OAuth2 refresh_token grant flow.
+		/// </summary>
+		Task<TokenResponse> RefreshTokenAsync(string refreshToken);
+
+		/// <summary>
+		/// Sends a token request to the OrderCloud authorization server using the OAuth2 refresh_token grant flow.
+		/// </summary>
+		Task<TokenResponse> RefreshTokenAsync(string clientID, string refreshToken);
 	}
 
 	public partial class OrderCloudClient : IDisposable
@@ -115,6 +125,21 @@ namespace OrderCloud.SDK
 			};
 			return AuthenticateAsync(req);
 		}
+		
+		public Task<TokenResponse> RefreshTokenAsync(string refreshToken) {
+			return RefreshTokenAsync(Config.ClientId, refreshToken);
+		}
+        
+		public Task<TokenResponse> RefreshTokenAsync(string clientID, string refreshToken) {
+			Require(clientID, nameof(clientID));
+			Require(refreshToken, nameof(refreshToken));
+            
+			var req = new OAuthTokenRequestWithRefreshTokenGrant {
+				client_id = clientID,
+				refresh_token = refreshToken
+			};
+			return AuthenticateAsync(req);
+		}		
 
 		public void Dispose() => TokenResponse = null;
 

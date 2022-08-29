@@ -37,4 +37,13 @@ namespace OrderCloud.SDK
 
 		public string client_secret { get; set; }
 	}
+	
+	internal class OAuthTokenRequestWithRefreshTokenGrant : OAuthTokenRequest 
+	{
+		public OAuthTokenRequestWithRefreshTokenGrant() {
+			grant_type = "refresh_token";
+		}
+        
+		public string refresh_token { get; set; }
+	}
 }

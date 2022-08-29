@@ -176,7 +176,13 @@ namespace OrderCloud.SDK
 			var prop = GetPropertyInfo(exp.Left);
 			if (prop == null)
 				throw new FilterExpressionException(exp.Left, FilterExpressionErrorMessages.LEFT_MUST_BE_PROPERTY);
-			var key = string.Join(".", ((MemberExpression)exp.Left).ToString().Split('.').Skip(1));
+			var left = exp.Left;
+			if (left is UnaryExpression unaryExpression) {
+				left = unaryExpression.Operand;
+			}
+			var key = left is MemberExpression memberExpression 
+				? string.Join(".", memberExpression.ToString().Split('.').Skip(1))
+				: throw new FilterExpressionException(left, FilterExpressionErrorMessages.LEFT_MUST_BE_PROPERTY);
 
 			var prefix = GetFilterValuePrefix(exp);
 

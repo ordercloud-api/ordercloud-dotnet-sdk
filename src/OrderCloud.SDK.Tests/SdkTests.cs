@@ -135,9 +135,20 @@ namespace OrderCloud.SDK.Tests
 			var catalog = OrderCloudClient.Serializer.Deserialize<Catalog>(json);
 			Assert.AreEqual(678, catalog.CategoryCount);
 		}
+		
+		[Test]
+		public void can_build_list_options_fluently_for_unary_expression() {
+			
+			var opts = new ListOptionsBuilder<Order>()
+				.AddFilter(o => o.Status == OrderStatus.Unsubmitted)
+				.Build();
+			
+			Assert.AreEqual(1, opts.Filters.Count);
+			CollectionAssert.Contains(opts.Filters, new KeyValuePair<string, string>("Status", "0"));
+		}
 
 		[Test]
-		public void can_build_list_options_flluently() {
+		public void can_build_list_options_fluently() {
 			int a = 10, b = 20;
 
 			var opts = new ListOptionsBuilder<Product<CustomXP>>()
