@@ -4,7 +4,7 @@
 		<!-- https://docs.microsoft.com/en-us/dotnet/core/tools/csproj -->
 		<TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<Version>0.11.5</Version>
+		<Version>0.12.0</Version>
 		<PackageId>OrderCloud.SDK</PackageId>
 		<Title>OrderCloud SDK</Title>
 		<Authors>Todd Menier</Authors>
@@ -18,21 +18,13 @@
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<RepositoryUrl>https://github.com/ordercloud-api/ordercloud-dotnet-sdk</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
+	  <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <LangVersion>latest</LangVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
 	  <DocumentationFile>bin\Release\OrderCloud.SDK.xml</DocumentationFile>
 		<NoWarn>CS1591</NoWarn>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.0|AnyCPU'">
-	  <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-	  <WarningsAsErrors />
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard2.0|AnyCPU'">
-	  <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-	  <WarningsAsErrors />
 	</PropertyGroup>
 
 	<ItemGroup>

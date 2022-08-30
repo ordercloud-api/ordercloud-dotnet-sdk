@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
+using System.Threading;
 using Flurl.Http;
 using Flurl.Http.Configuration;
 using Newtonsoft.Json;
@@ -171,16 +172,37 @@ namespace OrderCloud.SDK
 			throw new OrderCloudException(call, new[] { error });
 		}
 
-		private async Task EnsureTokenAsync(FlurlCall call) {
-			var hasToken =
-				call.Request.Headers.TryGetFirst("Authorization", out var value) &&
-				(value as string) != "Bearer ";
+		private readonly SemaphoreSlim _authLock = new(1);
 
-			if (!hasToken) {
-				if (!IsAuthenticated)
-					await AuthenticateAsync().ConfigureAwait(false);
-				call.Request.WithOAuthBearerToken(TokenResponse.AccessToken);
+		private async Task EnsureTokenAsync(FlurlCall call) {
+			if (call.Request.Headers.TryGetFirst("Authorization", out var value) && value != "Bearer ")
+				return; // a token was provided explicitly
+
+			if (!IsAuthenticated) {
+				await _authLock.WaitAsync();
+				try {
+					// expired token? try a refresh
+					if (TokenResponse?.RefreshToken != null && TokenResponse.ExpiresUtc < DateTime.UtcNow) {
+						try {
+							var resp = await RefreshTokenAsync(TokenResponse.RefreshToken);
+							TokenResponse.AccessToken = resp.AccessToken;
+							TokenResponse.ExpiresUtc = resp.ExpiresUtc;
+							TokenResponse.RefreshToken = resp.RefreshToken ?? TokenResponse.RefreshToken;
+						}
+						catch {
+							// if anything goes wrong while refreshing the token, we'll fall back on re-authenticating below
+						}
+					}
+
+					if (!IsAuthenticated)
+						await AuthenticateAsync().ConfigureAwait(false);
+				}
+				finally {
+					_authLock.Release();
+				}
 			}
+
+			call.Request.WithOAuthBearerToken(TokenResponse.AccessToken);
 		}
 
 		private async Task<TokenResponse> AuthenticateAsync(OAuthTokenRequest req) {
