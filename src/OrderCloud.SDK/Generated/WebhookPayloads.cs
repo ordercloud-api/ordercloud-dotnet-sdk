@@ -503,6 +503,250 @@ namespace OrderCloud.SDK
 				public string BuyerID { get; set; }
 			}
 		}
+		public static class Cart
+		{
+			/// <summary>Webhook payload sent by OrderCloud on PUT v1/cart.</summary>
+			[SentOn("PUT", "v1/cart")]
+			public class Save : WebhookPayload<Order, Order, object, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on PUT v1/cart.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TOrder">Specific type of the Order. If not using a custom type, specify Order.</typeparam>
+			[SentOn("PUT", "v1/cart")]
+			public class Save<TConfigData, TOrder> : WebhookPayload<TOrder, TOrder, object, TConfigData>
+				where TOrder : Order
+			{ }
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/cart.</summary>
+			[SentOn("DELETE", "v1/cart")]
+			public class Delete : WebhookPayload<object, object, object, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/cart.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, use the non-generic payload type instead.</typeparam>
+			[SentOn("DELETE", "v1/cart")]
+			public class Delete<TConfigData> : WebhookPayload<object, object, object, TConfigData>
+			{ }
+			/// <summary>Webhook payload sent by OrderCloud on PUT v1/cart/{orderID}.</summary>
+			[SentOn("PUT", "v1/cart/{orderID}")]
+			public class SetActiveCart : WebhookPayload<object, object, SetActiveCartRouteParams, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on PUT v1/cart/{orderID}.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, use the non-generic payload type instead.</typeparam>
+			[SentOn("PUT", "v1/cart/{orderID}")]
+			public class SetActiveCart<TConfigData> : WebhookPayload<object, object, SetActiveCartRouteParams, TConfigData>
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/cart/{orderID}.</summary>
+			public class SetActiveCartRouteParams
+			{
+				public string OrderID { get; set; }
+			}
+			/// <summary>Webhook payload sent by OrderCloud on PATCH v1/cart.</summary>
+			[SentOn("PATCH", "v1/cart")]
+			public class Patch : WebhookPayload<Order, Order, object, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on PATCH v1/cart.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TOrder">Specific type of the Order. If not using a custom type, specify Order.</typeparam>
+			[SentOn("PATCH", "v1/cart")]
+			public class Patch<TConfigData, TOrder> : WebhookPayload<TOrder, TOrder, object, TConfigData>
+				where TOrder : Order
+			{ }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/cart/lineitems.</summary>
+			[SentOn("POST", "v1/cart/lineitems")]
+			public class CreateLineItem : WebhookPayload<LineItem, LineItem, object, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/cart/lineitems.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TLineItem">Specific type of the LineItem. If not using a custom type, specify LineItem.</typeparam>
+			[SentOn("POST", "v1/cart/lineitems")]
+			public class CreateLineItem<TConfigData, TLineItem> : WebhookPayload<TLineItem, TLineItem, object, TConfigData>
+				where TLineItem : LineItem
+			{ }
+			/// <summary>Webhook payload sent by OrderCloud on PUT v1/cart/lineitems/{lineItemID}.</summary>
+			[SentOn("PUT", "v1/cart/lineitems/{lineItemID}")]
+			public class SaveLineItem : WebhookPayload<LineItem, LineItem, SaveLineItemRouteParams, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on PUT v1/cart/lineitems/{lineItemID}.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TLineItem">Specific type of the LineItem. If not using a custom type, specify LineItem.</typeparam>
+			[SentOn("PUT", "v1/cart/lineitems/{lineItemID}")]
+			public class SaveLineItem<TConfigData, TLineItem> : WebhookPayload<TLineItem, TLineItem, SaveLineItemRouteParams, TConfigData>
+				where TLineItem : LineItem
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/cart/lineitems/{lineItemID}.</summary>
+			public class SaveLineItemRouteParams
+			{
+				public string LineItemID { get; set; }
+			}
+			/// <summary>Webhook payload sent by OrderCloud on PATCH v1/cart/lineitems/{lineItemID}.</summary>
+			[SentOn("PATCH", "v1/cart/lineitems/{lineItemID}")]
+			public class PatchLineItem : WebhookPayload<LineItem, LineItem, PatchLineItemRouteParams, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on PATCH v1/cart/lineitems/{lineItemID}.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TLineItem">Specific type of the LineItem. If not using a custom type, specify LineItem.</typeparam>
+			[SentOn("PATCH", "v1/cart/lineitems/{lineItemID}")]
+			public class PatchLineItem<TConfigData, TLineItem> : WebhookPayload<TLineItem, TLineItem, PatchLineItemRouteParams, TConfigData>
+				where TLineItem : LineItem
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/cart/lineitems/{lineItemID}.</summary>
+			public class PatchLineItemRouteParams
+			{
+				public string LineItemID { get; set; }
+			}
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/cart/lineitems/{lineItemID}.</summary>
+			[SentOn("DELETE", "v1/cart/lineitems/{lineItemID}")]
+			public class DeleteLineItem : WebhookPayload<object, object, DeleteLineItemRouteParams, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/cart/lineitems/{lineItemID}.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, use the non-generic payload type instead.</typeparam>
+			[SentOn("DELETE", "v1/cart/lineitems/{lineItemID}")]
+			public class DeleteLineItem<TConfigData> : WebhookPayload<object, object, DeleteLineItemRouteParams, TConfigData>
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/cart/lineitems/{lineItemID}.</summary>
+			public class DeleteLineItemRouteParams
+			{
+				public string LineItemID { get; set; }
+			}
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/cart/promotions/{promoCode}.</summary>
+			[SentOn("POST", "v1/cart/promotions/{promoCode}")]
+			public class AddPromotion : WebhookPayload<object, OrderPromotion, AddPromotionRouteParams, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/cart/promotions/{promoCode}.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TOrderPromotion">Specific type of the OrderPromotion. If not using a custom type, specify OrderPromotion.</typeparam>
+			[SentOn("POST", "v1/cart/promotions/{promoCode}")]
+			public class AddPromotion<TConfigData, TOrderPromotion> : WebhookPayload<object, TOrderPromotion, AddPromotionRouteParams, TConfigData>
+				where TOrderPromotion : OrderPromotion
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/cart/promotions/{promoCode}.</summary>
+			public class AddPromotionRouteParams
+			{
+				public string PromoCode { get; set; }
+			}
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/cart/promotions/{promoCode}.</summary>
+			[SentOn("DELETE", "v1/cart/promotions/{promoCode}")]
+			public class DeletePromotion : WebhookPayload<object, object, DeletePromotionRouteParams, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/cart/promotions/{promoCode}.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, use the non-generic payload type instead.</typeparam>
+			[SentOn("DELETE", "v1/cart/promotions/{promoCode}")]
+			public class DeletePromotion<TConfigData> : WebhookPayload<object, object, DeletePromotionRouteParams, TConfigData>
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/cart/promotions/{promoCode}.</summary>
+			public class DeletePromotionRouteParams
+			{
+				public string PromoCode { get; set; }
+			}
+			/// <summary>Webhook payload sent by OrderCloud on PATCH v1/cart/fromuser.</summary>
+			[SentOn("PATCH", "v1/cart/fromuser")]
+			public class PatchFromUser : WebhookPayload<User, Order, object, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on PATCH v1/cart/fromuser.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TUser">Specific type of the User. If not using a custom type, specify User.</typeparam>
+			/// <typeparam name="TOrder">Specific type of the Order. If not using a custom type, specify Order.</typeparam>
+			[SentOn("PATCH", "v1/cart/fromuser")]
+			public class PatchFromUser<TConfigData, TUser, TOrder> : WebhookPayload<TUser, TOrder, object, TConfigData>
+				where TUser : User
+				where TOrder : Order
+			{ }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/cart/payments.</summary>
+			[SentOn("POST", "v1/cart/payments")]
+			public class CreatePayment : WebhookPayload<Payment, Payment, object, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/cart/payments.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TPayment">Specific type of the Payment. If not using a custom type, specify Payment.</typeparam>
+			[SentOn("POST", "v1/cart/payments")]
+			public class CreatePayment<TConfigData, TPayment> : WebhookPayload<TPayment, TPayment, object, TConfigData>
+				where TPayment : Payment
+			{ }
+			/// <summary>Webhook payload sent by OrderCloud on PATCH v1/cart/payments/{paymentID}.</summary>
+			[SentOn("PATCH", "v1/cart/payments/{paymentID}")]
+			public class PatchPayment : WebhookPayload<Payment, Payment, PatchPaymentRouteParams, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on PATCH v1/cart/payments/{paymentID}.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TPayment">Specific type of the Payment. If not using a custom type, specify Payment.</typeparam>
+			[SentOn("PATCH", "v1/cart/payments/{paymentID}")]
+			public class PatchPayment<TConfigData, TPayment> : WebhookPayload<TPayment, TPayment, PatchPaymentRouteParams, TConfigData>
+				where TPayment : Payment
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/cart/payments/{paymentID}.</summary>
+			public class PatchPaymentRouteParams
+			{
+				public string PaymentID { get; set; }
+			}
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/cart/payments/{paymentID}.</summary>
+			[SentOn("DELETE", "v1/cart/payments/{paymentID}")]
+			public class DeletePayment : WebhookPayload<object, object, DeletePaymentRouteParams, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/cart/payments/{paymentID}.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, use the non-generic payload type instead.</typeparam>
+			[SentOn("DELETE", "v1/cart/payments/{paymentID}")]
+			public class DeletePayment<TConfigData> : WebhookPayload<object, object, DeletePaymentRouteParams, TConfigData>
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/cart/payments/{paymentID}.</summary>
+			public class DeletePaymentRouteParams
+			{
+				public string PaymentID { get; set; }
+			}
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/cart/payments/{paymentID}/transactions.</summary>
+			[SentOn("POST", "v1/cart/payments/{paymentID}/transactions")]
+			public class CreatePaymentTransaction : WebhookPayload<PaymentTransaction, PaymentTransaction, CreatePaymentTransactionRouteParams, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/cart/payments/{paymentID}/transactions.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TPaymentTransaction">Specific type of the PaymentTransaction. If not using a custom type, specify PaymentTransaction.</typeparam>
+			[SentOn("POST", "v1/cart/payments/{paymentID}/transactions")]
+			public class CreatePaymentTransaction<TConfigData, TPaymentTransaction> : WebhookPayload<TPaymentTransaction, TPaymentTransaction, CreatePaymentTransactionRouteParams, TConfigData>
+				where TPaymentTransaction : PaymentTransaction
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/cart/payments/{paymentID}/transactions.</summary>
+			public class CreatePaymentTransactionRouteParams
+			{
+				public string PaymentID { get; set; }
+			}
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/cart/payments/{paymentID}/transactions/{transactionID}.</summary>
+			[SentOn("DELETE", "v1/cart/payments/{paymentID}/transactions/{transactionID}")]
+			public class DeletePaymentTransaction : WebhookPayload<object, object, DeletePaymentTransactionRouteParams, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/cart/payments/{paymentID}/transactions/{transactionID}.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, use the non-generic payload type instead.</typeparam>
+			[SentOn("DELETE", "v1/cart/payments/{paymentID}/transactions/{transactionID}")]
+			public class DeletePaymentTransaction<TConfigData> : WebhookPayload<object, object, DeletePaymentTransactionRouteParams, TConfigData>
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/cart/payments/{paymentID}/transactions/{transactionID}.</summary>
+			public class DeletePaymentTransactionRouteParams
+			{
+				public string PaymentID { get; set; }
+				public string TransactionID { get; set; }
+			}
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/cart/submit.</summary>
+			[SentOn("POST", "v1/cart/submit")]
+			public class Submit : WebhookPayload<object, Order, object, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/cart/submit.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TOrder">Specific type of the Order. If not using a custom type, specify Order.</typeparam>
+			[SentOn("POST", "v1/cart/submit")]
+			public class Submit<TConfigData, TOrder> : WebhookPayload<object, TOrder, object, TConfigData>
+				where TOrder : Order
+			{ }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/cart/validate.</summary>
+			[SentOn("POST", "v1/cart/validate")]
+			public class Validate : WebhookPayload<object, object, object, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/cart/validate.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, use the non-generic payload type instead.</typeparam>
+			[SentOn("POST", "v1/cart/validate")]
+			public class Validate<TConfigData> : WebhookPayload<object, object, object, TConfigData>
+			{ }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/cart/estimateshipping.</summary>
+			[SentOn("POST", "v1/cart/estimateshipping")]
+			public class EstimateShipping : WebhookPayload<object, OrderWorksheet, object, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/cart/estimateshipping.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TOrderWorksheet">Specific type of the OrderWorksheet. If not using a custom type, specify OrderWorksheet.</typeparam>
+			[SentOn("POST", "v1/cart/estimateshipping")]
+			public class EstimateShipping<TConfigData, TOrderWorksheet> : WebhookPayload<object, TOrderWorksheet, object, TConfigData>
+				where TOrderWorksheet : OrderWorksheet
+			{ }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/cart/shipmethods.</summary>
+			[SentOn("POST", "v1/cart/shipmethods")]
+			public class SelectShipMethods : WebhookPayload<OrderShipMethodSelection, OrderWorksheet, object, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/cart/shipmethods.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TOrderShipMethodSelection">Specific type of the OrderShipMethodSelection. If not using a custom type, specify OrderShipMethodSelection.</typeparam>
+			/// <typeparam name="TOrderWorksheet">Specific type of the OrderWorksheet. If not using a custom type, specify OrderWorksheet.</typeparam>
+			[SentOn("POST", "v1/cart/shipmethods")]
+			public class SelectShipMethods<TConfigData, TOrderShipMethodSelection, TOrderWorksheet> : WebhookPayload<TOrderShipMethodSelection, TOrderWorksheet, object, TConfigData>
+				where TOrderShipMethodSelection : OrderShipMethodSelection
+				where TOrderWorksheet : OrderWorksheet
+			{ }
+		}
 		public static class Catalogs
 		{
 			/// <summary>Webhook payload sent by OrderCloud on POST v1/catalogs.</summary>
@@ -1578,18 +1822,6 @@ namespace OrderCloud.SDK
 			{
 				public string CreditcardID { get; set; }
 			}
-			/// <summary>Webhook payload sent by OrderCloud on PUT v1/me/register.</summary>
-			[SentOn("PUT", "v1/me/register")]
-			public class Register : WebhookPayload<MeUser, AccessTokenBasic, object, dynamic> { }
-			/// <summary>Webhook payload sent by OrderCloud on PUT v1/me/register.</summary>
-			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
-			/// <typeparam name="TMeUser">Specific type of the MeUser. If not using a custom type, specify MeUser.</typeparam>
-			/// <typeparam name="TAccessTokenBasic">Specific type of the AccessTokenBasic. If not using a custom type, specify AccessTokenBasic.</typeparam>
-			[SentOn("PUT", "v1/me/register")]
-			public class Register<TConfigData, TMeUser, TAccessTokenBasic> : WebhookPayload<TMeUser, TAccessTokenBasic, object, TConfigData>
-				where TMeUser : MeUser
-				where TAccessTokenBasic : AccessTokenBasic
-			{ }
 			/// <summary>Webhook payload sent by OrderCloud on PUT v1/me/orders.</summary>
 			[SentOn("PUT", "v1/me/orders")]
 			public class TransferAnonUserOrder : WebhookPayload<object, object, object, dynamic> { }
@@ -1607,6 +1839,18 @@ namespace OrderCloud.SDK
 			[SentOn("POST", "v1/me/password")]
 			public class ResetPasswordByToken<TConfigData, TTokenPasswordReset> : WebhookPayload<TTokenPasswordReset, object, object, TConfigData>
 				where TTokenPasswordReset : TokenPasswordReset
+			{ }
+			/// <summary>Webhook payload sent by OrderCloud on PUT v1/me/register.</summary>
+			[SentOn("PUT", "v1/me/register")]
+			public class Register : WebhookPayload<MeUser, AccessTokenBasic, object, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on PUT v1/me/register.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TMeUser">Specific type of the MeUser. If not using a custom type, specify MeUser.</typeparam>
+			/// <typeparam name="TAccessTokenBasic">Specific type of the AccessTokenBasic. If not using a custom type, specify AccessTokenBasic.</typeparam>
+			[SentOn("PUT", "v1/me/register")]
+			public class Register<TConfigData, TMeUser, TAccessTokenBasic> : WebhookPayload<TMeUser, TAccessTokenBasic, object, TConfigData>
+				where TMeUser : MeUser
+				where TAccessTokenBasic : AccessTokenBasic
 			{ }
 			/// <summary>Webhook payload sent by OrderCloud on POST v1/me/productcollections.</summary>
 			[SentOn("POST", "v1/me/productcollections")]
