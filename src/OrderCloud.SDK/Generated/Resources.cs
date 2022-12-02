@@ -3426,7 +3426,7 @@ namespace OrderCloud.SDK
 
 	public interface IPasswordResetsResource
 	{
-		/// <summary>Send a verification code. Sends a temporary verification code via email, which must subsequently be passed in a Reset Password call.</summary>
+		/// <summary>Send a verification code. Sends a temporary verification code via email, which must subsequently be passed in a Reset Password call. The verification code expires in 120 minutes.</summary>
 		/// <param name="passwordResetRequest">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task SendVerificationCodeAsync(PasswordResetRequest passwordResetRequest, string accessToken = null);

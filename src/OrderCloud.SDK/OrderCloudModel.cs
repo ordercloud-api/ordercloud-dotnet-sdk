@@ -49,6 +49,18 @@ namespace OrderCloud.SDK
 	public class RequiredAttribute : Attribute { }
 
 	/// <summary>
+	/// Indicates an Address model property is required only when Country is one of the provided values.
+	/// </summary>
+	public class RequiredForCountriesAttribute : RequiredAttribute
+	{
+		public IList<string> Countries { get; }
+
+		public RequiredForCountriesAttribute(params string[] countries) {
+			Countries = countries;
+		}
+	}
+
+	/// <summary>
 	/// Indicates model property is read-only. OrderCloud.io will ignore if sent via POST/PUT/PATCH.
 	/// </summary>
 	public class ApiReadOnlyAttribute : Attribute { }
