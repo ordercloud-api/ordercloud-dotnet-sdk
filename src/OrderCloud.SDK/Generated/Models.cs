@@ -56,10 +56,10 @@ namespace OrderCloud.SDK
 		[Required]
 		public string City { get => GetProp<string>("City"); set => SetProp<string>("City", value); }
 		/// <summary>State of the address. Required. Max length 100 characters. Searchable: priority level 9. Sortable.</summary>
-		[Required]
+		[RequiredForCountries("US","CA")]
 		public string State { get => GetProp<string>("State"); set => SetProp<string>("State", value); }
 		/// <summary>Zip of the address. Required. Max length 100 characters. Searchable: priority level 10. Sortable.</summary>
-		[Required]
+		[RequiredForCountries("US","CA")]
 		public string Zip { get => GetProp<string>("Zip"); set => SetProp<string>("Zip", value); }
 		/// <summary>Country of the address. Required. Max length 2 characters. Sortable.</summary>
 		[Required]
@@ -190,7 +190,8 @@ namespace OrderCloud.SDK
 	}
 	public class ApiClientAssignment : OrderCloudModel
 	{
-		/// <summary>ID of the api client.</summary>
+		/// <summary>ID of the api client. Required.</summary>
+		[Required]
 		public string ApiClientID { get => GetProp<string>("ApiClientID"); set => SetProp<string>("ApiClientID", value); }
 		/// <summary>ID of the buyer. Sortable: priority level 0.</summary>
 		public string BuyerID { get => GetProp<string>("BuyerID"); set => SetProp<string>("BuyerID", value); }
@@ -278,10 +279,10 @@ namespace OrderCloud.SDK
 		[Required]
 		public string City { get => GetProp<string>("City"); set => SetProp<string>("City", value); }
 		/// <summary>State of the address. Required. Max length 100 characters. Searchable: priority level 9. Sortable.</summary>
-		[Required]
+		[RequiredForCountries("US","CA")]
 		public string State { get => GetProp<string>("State"); set => SetProp<string>("State", value); }
 		/// <summary>Zip of the address. Required. Max length 100 characters. Searchable: priority level 10. Sortable.</summary>
-		[Required]
+		[RequiredForCountries("US","CA")]
 		public string Zip { get => GetProp<string>("Zip"); set => SetProp<string>("Zip", value); }
 		/// <summary>Country of the address. Required. Max length 2 characters. Sortable.</summary>
 		[Required]
@@ -554,8 +555,7 @@ namespace OrderCloud.SDK
 		/// <summary>ID of the product. Required. Searchable: priority level 2. Sortable.</summary>
 		[Required]
 		public string ProductID { get => GetProp<string>("ProductID"); set => SetProp<string>("ProductID", value); }
-		/// <summary>Quantity of the extended line item. Required. Must be at least 1.</summary>
-		[Required]
+		/// <summary>Quantity of the extended line item. Must be at least 1.</summary>
 		public int Quantity { get => GetProp<int>("Quantity", 1); set => SetProp<int>("Quantity", value); }
 		/// <summary>Date added of the extended line item. Sortable: priority level 1.</summary>
 		[ApiReadOnly]
@@ -653,9 +653,9 @@ namespace OrderCloud.SDK
 		public User FromUser { get => GetProp<User>("FromUser"); set => SetProp<User>("FromUser", value); }
 		/// <summary>ID of the Buyer or Marketplace Owner placing the order. Mainly useful to the Marketplace Owner or Supplier receiving it.</summary>
 		public string FromCompanyID { get => GetProp<string>("FromCompanyID"); set => SetProp<string>("FromCompanyID", value); }
-		/// <summary>ID of the Marketplace Owner or Supplier receiving the order, only writable on create. Mainly useful to the Buyer or Marketplace Owner placing it.</summary>
+		/// <summary>ID of the Marketplace Owner or Supplier receiving the order, only writable on create. Mainly useful to the user placing it.</summary>
 		public string ToCompanyID { get => GetProp<string>("ToCompanyID"); set => SetProp<string>("ToCompanyID", value); }
-		/// <summary>This property is only writable when creating an order from the marketplace owner perspective on behalf of a buyer user.</summary>
+		/// <summary>This property is only writable when creating an order on behalf of a buyer user.</summary>
 		public string FromUserID { get => GetProp<string>("FromUserID"); set => SetProp<string>("FromUserID", value); }
 		/// <summary>ID of the billing address.</summary>
 		public string BillingAddressID { get => GetProp<string>("BillingAddressID"); set => SetProp<string>("BillingAddressID", value); }
@@ -859,8 +859,7 @@ namespace OrderCloud.SDK
 		/// <summary>ID of the product. Required. Searchable: priority level 2. Sortable.</summary>
 		[Required]
 		public string ProductID { get => GetProp<string>("ProductID"); set => SetProp<string>("ProductID", value); }
-		/// <summary>Quantity of the line item. Required. Must be at least 1.</summary>
-		[Required]
+		/// <summary>Quantity of the line item. Must be at least 1.</summary>
 		public int Quantity { get => GetProp<int>("Quantity", 1); set => SetProp<int>("Quantity", value); }
 		/// <summary>Date added of the line item. Sortable: priority level 1.</summary>
 		[ApiReadOnly]
@@ -1076,7 +1075,8 @@ namespace OrderCloud.SDK
 	}
 	public class MessageCCListenerAssignment : OrderCloudModel
 	{
-		/// <summary>Message sender assignment of the message cc listener assignment.</summary>
+		/// <summary>Message sender assignment of the message cc listener assignment. Required.</summary>
+		[Required]
 		public MessageSenderAssignment MessageSenderAssignment { get => GetProp<MessageSenderAssignment>("MessageSenderAssignment"); set => SetProp<MessageSenderAssignment>("MessageSenderAssignment", value); }
 		/// <summary>Message config name of the message cc listener assignment. Searchable: priority level 3. Sortable: priority level 3.</summary>
 		[ApiReadOnly]
@@ -1084,7 +1084,8 @@ namespace OrderCloud.SDK
 		/// <summary>Message config description of the message cc listener assignment.</summary>
 		[ApiReadOnly]
 		public string MessageConfigDescription { get => GetProp<string>("MessageConfigDescription"); set => SetProp<string>("MessageConfigDescription", value); }
-		/// <summary>Message type of the message cc listener assignment. Possible values: OrderDeclined, OrderSubmitted, ShipmentCreated, ForgottenPassword, OrderSubmittedForYourApproval, OrderSubmittedForApproval, OrderApproved, OrderSubmittedForYourApprovalHasBeenApproved, OrderSubmittedForYourApprovalHasBeenDeclined, NewUserInvitation, OrderReturnDeclined, OrderReturnSubmitted, OrderReturnSubmittedForYourApproval, OrderReturnSubmittedForApproval, OrderReturnApproved, OrderReturnSubmittedForYourApprovalHasBeenApproved, OrderReturnSubmittedForYourApprovalHasBeenDeclined, OrderReturnCompleted.</summary>
+		/// <summary>Message type of the message cc listener assignment. Required. Possible values: OrderDeclined, OrderSubmitted, ShipmentCreated, ForgottenPassword, OrderSubmittedForYourApproval, OrderSubmittedForApproval, OrderApproved, OrderSubmittedForYourApprovalHasBeenApproved, OrderSubmittedForYourApprovalHasBeenDeclined, NewUserInvitation, OrderReturnDeclined, OrderReturnSubmitted, OrderReturnSubmittedForYourApproval, OrderReturnSubmittedForApproval, OrderReturnApproved, OrderReturnSubmittedForYourApprovalHasBeenApproved, OrderReturnSubmittedForYourApprovalHasBeenDeclined, OrderReturnCompleted.</summary>
+		[Required]
 		public MessageType MessageType { get => GetProp<MessageType>("MessageType"); set => SetProp<MessageType>("MessageType", value); }
 		/// <summary>ID of the buyer. Searchable: priority level 0. Sortable: priority level 0.</summary>
 		public string BuyerID { get => GetProp<string>("BuyerID"); set => SetProp<string>("BuyerID", value); }
@@ -1240,6 +1241,8 @@ namespace OrderCloud.SDK
 		public string IntegrationEventName { get => GetProp<string>("IntegrationEventName"); set => SetProp<string>("IntegrationEventName", value); }
 		/// <summary>Any additional scopes needed by the IDP.</summary>
 		public IList<string> AdditionalIdpScopes { get => GetProp<IList<string>>("AdditionalIdpScopes", new List<string>()); set => SetProp<IList<string>>("AdditionalIdpScopes", value); }
+		/// <summary>A URL on your front-end ordering site where users will be redirected if an error occurs while trying to authenticate.</summary>
+		public string CustomErrorUrl { get => GetProp<string>("CustomErrorUrl"); set => SetProp<string>("CustomErrorUrl", value); }
 	}
 	public class Order : OrderCloudModel
 	{
@@ -1250,9 +1253,9 @@ namespace OrderCloud.SDK
 		public User FromUser { get => GetProp<User>("FromUser"); set => SetProp<User>("FromUser", value); }
 		/// <summary>ID of the Buyer or Marketplace Owner placing the order. Mainly useful to the Marketplace Owner or Supplier receiving it.</summary>
 		public string FromCompanyID { get => GetProp<string>("FromCompanyID"); set => SetProp<string>("FromCompanyID", value); }
-		/// <summary>ID of the Marketplace Owner or Supplier receiving the order, only writable on create. Mainly useful to the Buyer or Marketplace Owner placing it.</summary>
+		/// <summary>ID of the Marketplace Owner or Supplier receiving the order, only writable on create. Mainly useful to the user placing it.</summary>
 		public string ToCompanyID { get => GetProp<string>("ToCompanyID"); set => SetProp<string>("ToCompanyID", value); }
-		/// <summary>This property is only writable when creating an order from the marketplace owner perspective on behalf of a buyer user.</summary>
+		/// <summary>This property is only writable when creating an order on behalf of a buyer user.</summary>
 		public string FromUserID { get => GetProp<string>("FromUserID"); set => SetProp<string>("FromUserID", value); }
 		/// <summary>ID of the billing address.</summary>
 		public string BillingAddressID { get => GetProp<string>("BillingAddressID"); set => SetProp<string>("BillingAddressID", value); }
@@ -1469,9 +1472,9 @@ namespace OrderCloud.SDK
 	}
 	public class OrderReturn : OrderCloudModel
 	{
-		/// <summary>ID of the order return. Can only contain characters Aa-Zz, 0-9, -, and _.</summary>
+		/// <summary>ID of the order return. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 3.</summary>
 		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
-		/// <summary>ID of the order. Required.</summary>
+		/// <summary>ID of the order. Required. Searchable: priority level 2. Sortable: priority level 4.</summary>
 		[Required]
 		public string OrderID { get => GetProp<string>("OrderID"); set => SetProp<string>("OrderID", value); }
 		/// <summary>IDs of Payments associated with this OrderReturn.</summary>
@@ -1942,7 +1945,6 @@ namespace OrderCloud.SDK
 		/// <summary>List order of the product facet. Sortable: priority level 1.</summary>
 		public int ListOrder { get => GetProp<int>("ListOrder"); set => SetProp<int>("ListOrder", value); }
 		/// <summary>Minimum count required or a facet value to be returned in list metadata. Default is 1. If you want zero-count values returned, set this to 0.</summary>
-		[Required]
 		public int MinCount { get => GetProp<int>("MinCount", 1); set => SetProp<int>("MinCount", value); }
 		/// <summary>Container for extended (custom) properties of the product facet.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
@@ -2361,9 +2363,11 @@ namespace OrderCloud.SDK
 	}
 	public class SpecProductAssignment : OrderCloudModel
 	{
-		/// <summary>ID of the spec. Searchable: priority level 1. Sortable: priority level 1.</summary>
+		/// <summary>ID of the spec. Required. Searchable: priority level 1. Sortable: priority level 1.</summary>
+		[Required]
 		public string SpecID { get => GetProp<string>("SpecID"); set => SetProp<string>("SpecID", value); }
-		/// <summary>ID of the product. Searchable: priority level 2. Sortable: priority level 2.</summary>
+		/// <summary>ID of the product. Required. Searchable: priority level 2. Sortable: priority level 2.</summary>
+		[Required]
 		public string ProductID { get => GetProp<string>("ProductID"); set => SetProp<string>("ProductID", value); }
 		/// <summary>Optional. When defined, overrides the DefaultValue set on the Spec for just this Product.</summary>
 		public string DefaultValue { get => GetProp<string>("DefaultValue"); set => SetProp<string>("DefaultValue", value); }
@@ -2515,9 +2519,11 @@ namespace OrderCloud.SDK
 	}
 	public class UserGroupAssignment : OrderCloudModel
 	{
-		/// <summary>ID of the user group.</summary>
+		/// <summary>ID of the user group. Required.</summary>
+		[Required]
 		public string UserGroupID { get => GetProp<string>("UserGroupID"); set => SetProp<string>("UserGroupID", value); }
-		/// <summary>ID of the user.</summary>
+		/// <summary>ID of the user. Required.</summary>
+		[Required]
 		public string UserID { get => GetProp<string>("UserID"); set => SetProp<string>("UserID", value); }
 	}
 	public class Variant : OrderCloudModel

@@ -26,11 +26,18 @@ namespace OrderCloud.SDK
 				return model;
 
 			foreach (var prop in typeof(TModel).GetProperties()) {
-				if (prop.GetCustomAttribute<RequiredAttribute>() == null)
+				if (!Attribute.IsDefined(prop, typeof(RequiredAttribute)))
 					continue;
 
 				if (model is IPartial && !model.Props.ContainsKey(prop.Name))
 					continue;
+
+				if (Attribute.IsDefined(prop, typeof(RequiredForCountriesAttribute))) {
+					var attribute = prop.GetCustomAttribute<RequiredForCountriesAttribute>();
+					if (attribute != null && !attribute.Countries.Contains((model as Address)?.Country?.ToUpper())) {
+						continue;
+					}
+				}
 
 				var val = prop.GetValue(model);
 				if (val == null || val as string == "")

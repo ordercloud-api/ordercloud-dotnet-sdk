@@ -72,7 +72,7 @@ namespace OrderCloud.SDK
 			public const string SellerNotActive = "Auth.SellerNotActive";
 			/// <summary>User is not active.</summary>
 			public const string UserNotActive = "Auth.UserNotActive";
-			/// <summary>Reading and/or Administering certain resources is forbidden for all Buyer and Supplier users regardless of role(s).</summary>
+			/// <summary>Reading and/or Administering certain resources is forbidden for certain user types regardless of role(s).</summary>
 			public const string UserNotAuthorizedToAdmin = "Auth.UserNotAuthorizedToAdmin";
 			/// <summary>User not found.</summary>
 			public const string UserNotFound = "Auth.UserNotFound";
@@ -98,6 +98,8 @@ namespace OrderCloud.SDK
 			public const string RequiredIDWhenAnon = "Buyer.RequiredIDWhenAnon";
 			/// <summary>User was not found in this Buyer company.</summary>
 			public const string UserNotFound = "Buyer.UserNotFound";
+			/// <summary>A Catalog with this ID already exists. Please either delete that catalog, or specify it as the DefaultCatalogID of this new Buyer in the request body.</summary>
+			public const string DefaultCatalogAlreadyExists = "Buyer.DefaultCatalogAlreadyExists";
 		}
 		public static class BuyerAddress
 		{
@@ -154,6 +156,15 @@ namespace OrderCloud.SDK
 			public const string CannotDeleteImpersonateeParty = "Impersonation.CannotDeleteImpersonateeParty";
 			/// <summary>Client ID not found or you do not have access to it.</summary>
 			public const string ClientIDNotFound = "Impersonation.ClientIDNotFound";
+			/// <summary>Buyer is not assigned to the API client.</summary>
+			public const string BuyerNotAssigned = "Impersonation.BuyerNotAssigned";
+			/// <summary>No Impersonation Config exists for the requested Buyer ID and API client ID or there are no roles assigned to the SecurityProfile. Check your configuration and try again.</summary>
+			public const string ConfigError = "Impersonation.ConfigError";
+		}
+		public static class ImpersonationConfig
+		{
+			/// <summary>An ImpersonationConfig already exists for this combination of ApiClient, SecurityProfile, Impersonator, and Impersonatee.</summary>
+			public const string ConflictingImpersonationConfigExists = "ImpersonationConfig.ConflictingImpersonationConfigExists";
 		}
 		public static class IntegrationEvent
 		{
@@ -169,6 +180,8 @@ namespace OrderCloud.SDK
 			public const string BadRequest = "IntegrationEvent.BadRequest";
 			/// <summary>IntegrationEvents require at least one ApiClient to be configured with AllowSeller = true in order to generate an elevated role token.</summary>
 			public const string AllowSellerApiClientRequired = "IntegrationEvent.AllowSellerApiClientRequired";
+			/// <summary>You must estimate shipping costs prior to setting your shipping method.</summary>
+			public const string MustCalculateShipping = "IntegrationEvent.MustCalculateShipping";
 		}
 		public static class Inventory
 		{
