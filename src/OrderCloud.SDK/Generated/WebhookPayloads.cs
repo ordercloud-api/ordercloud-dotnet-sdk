@@ -627,6 +627,16 @@ namespace OrderCloud.SDK
 			{
 				public string PromoCode { get; set; }
 			}
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/cart/applypromotions.</summary>
+			[SentOn("POST", "v1/cart/applypromotions")]
+			public class ApplyPromotions : WebhookPayload<object, Order, object, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/cart/applypromotions.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TOrder">Specific type of the Order. If not using a custom type, specify Order.</typeparam>
+			[SentOn("POST", "v1/cart/applypromotions")]
+			public class ApplyPromotions<TConfigData, TOrder> : WebhookPayload<object, TOrder, object, TConfigData>
+				where TOrder : Order
+			{ }
 			/// <summary>Webhook payload sent by OrderCloud on PATCH v1/cart/fromuser.</summary>
 			[SentOn("PATCH", "v1/cart/fromuser")]
 			public class PatchFromUser : WebhookPayload<User, Order, object, dynamic> { }
@@ -723,6 +733,16 @@ namespace OrderCloud.SDK
 			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, use the non-generic payload type instead.</typeparam>
 			[SentOn("POST", "v1/cart/validate")]
 			public class Validate<TConfigData> : WebhookPayload<object, object, object, TConfigData>
+			{ }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/cart/calculate.</summary>
+			[SentOn("POST", "v1/cart/calculate")]
+			public class Calculate : WebhookPayload<object, OrderWorksheet, object, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/cart/calculate.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TOrderWorksheet">Specific type of the OrderWorksheet. If not using a custom type, specify OrderWorksheet.</typeparam>
+			[SentOn("POST", "v1/cart/calculate")]
+			public class Calculate<TConfigData, TOrderWorksheet> : WebhookPayload<object, TOrderWorksheet, object, TConfigData>
+				where TOrderWorksheet : OrderWorksheet
 			{ }
 			/// <summary>Webhook payload sent by OrderCloud on POST v1/cart/estimateshipping.</summary>
 			[SentOn("POST", "v1/cart/estimateshipping")]
@@ -2550,6 +2570,22 @@ namespace OrderCloud.SDK
 				public OrderDirection Direction { get; set; }
 				public string OrderID { get; set; }
 				public string PromoCode { get; set; }
+			}
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/orders/{direction}/{orderID}/applypromotions.</summary>
+			[SentOn("POST", "v1/orders/{direction}/{orderID}/applypromotions")]
+			public class ApplyPromotions : WebhookPayload<object, Order, ApplyPromotionsRouteParams, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/orders/{direction}/{orderID}/applypromotions.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TOrder">Specific type of the Order. If not using a custom type, specify Order.</typeparam>
+			[SentOn("POST", "v1/orders/{direction}/{orderID}/applypromotions")]
+			public class ApplyPromotions<TConfigData, TOrder> : WebhookPayload<object, TOrder, ApplyPromotionsRouteParams, TConfigData>
+				where TOrder : Order
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/orders/{direction}/{orderID}/applypromotions.</summary>
+			public class ApplyPromotionsRouteParams
+			{
+				public OrderDirection Direction { get; set; }
+				public string OrderID { get; set; }
 			}
 			/// <summary>Webhook payload sent by OrderCloud on POST v1/orders/{direction}/{orderID}/validate.</summary>
 			[SentOn("POST", "v1/orders/{direction}/{orderID}/validate")]

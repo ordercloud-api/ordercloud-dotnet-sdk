@@ -160,14 +160,40 @@ namespace OrderCloud.SDK
 			});
 
 		private async Task ThrowApiExceptionAsync(FlurlCall call) {
-			if (!(call.Exception is FlurlHttpException fex)) return;
-			var resp = await fex.GetResponseJsonAsync<ApiErrorResponse>();
+			ApiErrorResponse resp;
+
+			try {
+				if (call.Response.StatusCode >= 500) return;
+				if (call.Exception is not FlurlHttpException fex) return;
+
+				resp = await fex.GetResponseJsonAsync<ApiErrorResponse>();
+			}
+			catch (Exception) {
+				// doing nothing here will bubble up the original exception
+				return;
+			}
+
+			if (resp == null) return;
+
 			throw new OrderCloudException(call, resp?.Errors);
 		}
 
 		private async Task ThrowAuthExceptionAsync(FlurlCall call) {
-			if (!(call.Exception is FlurlHttpException fex)) return;
-			var resp = await fex.GetResponseJsonAsync<AuthErrorResponse>();
+			AuthErrorResponse resp;
+
+			try {
+				if (call.Response.StatusCode >= 500) return;
+				if (call.Exception is not FlurlHttpException fex) return;
+
+				resp = await fex.GetResponseJsonAsync<AuthErrorResponse>();
+			}
+			catch (Exception) {
+				// doing nothing here will bubble up the original exception
+				return;
+			}
+
+			if (resp == null) return;
+
 			var error = new ApiError { ErrorCode = resp.error, Message = resp.error_description };
 			throw new OrderCloudException(call, new[] { error });
 		}
