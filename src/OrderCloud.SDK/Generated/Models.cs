@@ -1461,6 +1461,12 @@ namespace OrderCloud.SDK
 		public bool AllowAllBuyers { get => GetProp<bool>("AllowAllBuyers"); set => SetProp<bool>("AllowAllBuyers", value); }
 		/// <summary>ID of the organization that owns the Promotion. Only the Marketplace Owner can override the OwnerID on create.</summary>
 		public string OwnerID { get => GetProp<string>("OwnerID"); set => SetProp<string>("OwnerID", value); }
+		/// <summary>Auto apply of the order promotion. Sortable.</summary>
+		public bool AutoApply { get => GetProp<bool>("AutoApply", false); set => SetProp<bool>("AutoApply", value); }
+		/// <summary>Active of the order promotion. Sortable.</summary>
+		public bool Active { get => GetProp<bool>("Active", true); set => SetProp<bool>("Active", value); }
+		/// <summary>Priority of the order promotion. Sortable.</summary>
+		public int? Priority { get => GetProp<int?>("Priority"); set => SetProp<int?>("Priority", value); }
 		/// <summary>Container for extended (custom) properties of the order promotion.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
@@ -2018,6 +2024,12 @@ namespace OrderCloud.SDK
 		public bool AllowAllBuyers { get => GetProp<bool>("AllowAllBuyers"); set => SetProp<bool>("AllowAllBuyers", value); }
 		/// <summary>ID of the organization that owns the Promotion. Only the Marketplace Owner can override the OwnerID on create.</summary>
 		public string OwnerID { get => GetProp<string>("OwnerID"); set => SetProp<string>("OwnerID", value); }
+		/// <summary>Auto apply of the promotion. Sortable.</summary>
+		public bool AutoApply { get => GetProp<bool>("AutoApply", false); set => SetProp<bool>("AutoApply", value); }
+		/// <summary>Active of the promotion. Sortable.</summary>
+		public bool Active { get => GetProp<bool>("Active", true); set => SetProp<bool>("Active", value); }
+		/// <summary>Priority of the promotion. Sortable.</summary>
+		public int? Priority { get => GetProp<int?>("Priority"); set => SetProp<int?>("Priority", value); }
 		/// <summary>Container for extended (custom) properties of the promotion.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}

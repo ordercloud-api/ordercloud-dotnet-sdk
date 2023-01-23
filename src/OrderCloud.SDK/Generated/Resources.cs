@@ -767,6 +767,32 @@ namespace OrderCloud.SDK
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TOrderPromotion>> ListPromotionsAsync<TOrderPromotion>(Action<ListOptionsBuilder<TOrderPromotion>> buildListOpts, string accessToken = null) where TOrderPromotion : OrderPromotion;
+		/// <summary>List eligible promotions. Get a list of promotions eligible for the cart.</summary>
+		/// <param name="search">Word or phrase to search for.</param>
+		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
+		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<Promotion>> ListEligiblePromotionsAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
+		/// <summary>List eligible promotions. Get a list of promotions eligible for the cart.</summary>
+		/// <param name="search">Word or phrase to search for.</param>
+		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
+		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<TPromotion>> ListEligiblePromotionsAsync<TPromotion>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TPromotion : Promotion;
+		/// <summary>List eligible promotions. Get a list of promotions eligible for the cart.</summary>
+		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<Promotion>> ListEligiblePromotionsAsync(Action<ListOptionsBuilder<Promotion>> buildListOpts, string accessToken = null);
+		/// <summary>List eligible promotions. Get a list of promotions eligible for the cart.</summary>
+		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<TPromotion>> ListEligiblePromotionsAsync<TPromotion>(Action<ListOptionsBuilder<TPromotion>> buildListOpts, string accessToken = null) where TPromotion : Promotion;
 		/// <summary>Add a promotion.</summary>
 		/// <param name="promoCode">Promo code of the order promotion.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -779,11 +805,17 @@ namespace OrderCloud.SDK
 		/// <param name="promoCode">Promo code of the cart.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task DeletePromotionAsync(string promoCode, string accessToken = null);
-		/// <summary>Partially update a cart from user.</summary>
+		/// <summary>AutoApply eligible promotions. Apply up to 100 eligible promotions to the cart.</summary>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<Order> ApplyPromotionsAsync(string accessToken = null);
+		/// <summary>AutoApply eligible promotions. Apply up to 100 eligible promotions to the cart.</summary>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TOrder> ApplyPromotionsAsync<TOrder>(string accessToken = null) where TOrder : Order;
+		/// <summary>Update cart FromUser. Only FirstName, LastName, and Email can be updated. Primarily used to facilitate guest checkout scenarios.</summary>
 		/// <param name="partialUser">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Order> PatchFromUserAsync(PartialUser partialUser, string accessToken = null);
-		/// <summary>Partially update a cart from user.</summary>
+		/// <summary>Update cart FromUser. Only FirstName, LastName, and Email can be updated. Primarily used to facilitate guest checkout scenarios.</summary>
 		/// <param name="partialUser">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TOrder> PatchFromUserAsync<TOrder>(PartialUser partialUser, string accessToken = null) where TOrder : Order;
@@ -858,32 +890,38 @@ namespace OrderCloud.SDK
 		/// <param name="transactionID">ID of the transaction.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task DeletePaymentTransactionAsync(string paymentID, string transactionID, string accessToken = null);
-		/// <summary>Submit a cart submit.</summary>
+		/// <summary>Submit the cart.</summary>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Order> SubmitAsync(string accessToken = null);
-		/// <summary>Submit a cart submit.</summary>
+		/// <summary>Submit the cart.</summary>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TOrder> SubmitAsync<TOrder>(string accessToken = null) where TOrder : Order;
 		/// <summary>Validate a cart validate.</summary>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task ValidateAsync(string accessToken = null);
+		/// <summary>Calculate the cart.</summary>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<OrderWorksheet> CalculateAsync(string accessToken = null);
+		/// <summary>Calculate the cart.</summary>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TOrderWorksheet> CalculateAsync<TOrderWorksheet>(string accessToken = null) where TOrderWorksheet : OrderWorksheet;
 		/// <summary>Get a single cart order worksheet.</summary>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<OrderWorksheet> GetOrderWorksheetAsync(string accessToken = null);
 		/// <summary>Get a single cart order worksheet.</summary>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TOrderWorksheet> GetOrderWorksheetAsync<TOrderWorksheet>(string accessToken = null) where TOrderWorksheet : OrderWorksheet;
-		/// <summary>Estimate a shipping.</summary>
+		/// <summary>Estimate shipping cost.</summary>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<OrderWorksheet> EstimateShippingAsync(string accessToken = null);
-		/// <summary>Estimate a shipping.</summary>
+		/// <summary>Estimate shipping cost.</summary>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TOrderWorksheet> EstimateShippingAsync<TOrderWorksheet>(string accessToken = null) where TOrderWorksheet : OrderWorksheet;
-		/// <summary>Select a ship methods.</summary>
+		/// <summary>Select a ship method.</summary>
 		/// <param name="orderShipMethodSelection">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<OrderWorksheet> SelectShipMethodsAsync(OrderShipMethodSelection orderShipMethodSelection, string accessToken = null);
-		/// <summary>Select a ship methods.</summary>
+		/// <summary>Select a ship method.</summary>
 		/// <param name="orderShipMethodSelection">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TOrderWorksheet> SelectShipMethodsAsync<TOrderWorksheet>(OrderShipMethodSelection orderShipMethodSelection, string accessToken = null) where TOrderWorksheet : OrderWorksheet;
@@ -1040,42 +1078,48 @@ namespace OrderCloud.SDK
 		/// <summary>Create a new category. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
 		/// <param name="catalogID">ID of the catalog.</param>
 		/// <param name="category">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="adjustListOrders">Adjust list orders of the category.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
-		Task<Category> CreateAsync(string catalogID, Category category, string accessToken = null);
+		Task<Category> CreateAsync(string catalogID, Category category, bool adjustListOrders = false, string accessToken = null);
 		/// <summary>Create a new category. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
 		/// <param name="catalogID">ID of the catalog.</param>
 		/// <param name="category">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="adjustListOrders">Adjust list orders of the category.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
-		Task<TCategory> CreateAsync<TCategory>(string catalogID, Category category, string accessToken = null) where TCategory : Category;
+		Task<TCategory> CreateAsync<TCategory>(string catalogID, Category category, bool adjustListOrders = false, string accessToken = null) where TCategory : Category;
 		/// <summary>Create or update a category. If an object with the same ID already exists, it will be overwritten.</summary>
 		/// <param name="catalogID">ID of the catalog.</param>
 		/// <param name="categoryID">ID of the category.</param>
 		/// <param name="category">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="adjustListOrders">Adjust list orders of the category.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
-		Task<Category> SaveAsync(string catalogID, string categoryID, Category category, string accessToken = null);
+		Task<Category> SaveAsync(string catalogID, string categoryID, Category category, bool adjustListOrders = false, string accessToken = null);
 		/// <summary>Create or update a category. If an object with the same ID already exists, it will be overwritten.</summary>
 		/// <param name="catalogID">ID of the catalog.</param>
 		/// <param name="categoryID">ID of the category.</param>
 		/// <param name="category">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="adjustListOrders">Adjust list orders of the category.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
-		Task<TCategory> SaveAsync<TCategory>(string catalogID, string categoryID, Category category, string accessToken = null) where TCategory : Category;
+		Task<TCategory> SaveAsync<TCategory>(string catalogID, string categoryID, Category category, bool adjustListOrders = false, string accessToken = null) where TCategory : Category;
 		/// <summary>Delete a category. Deleting a parent category will also delete all of that category's children.</summary>
 		/// <param name="catalogID">ID of the catalog.</param>
 		/// <param name="categoryID">ID of the category.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task DeleteAsync(string catalogID, string categoryID, string accessToken = null);
-		/// <summary>Partially update a category.</summary>
+		/// <summary>Partially update a category. Setting adjustListOrders to true will increase ListOrder for all categories with the same or higher ListOrder.</summary>
 		/// <param name="catalogID">ID of the catalog.</param>
 		/// <param name="categoryID">ID of the category.</param>
 		/// <param name="partialCategory">The object that will be partially serialized to JSON and sent in the request body.</param>
+		/// <param name="adjustListOrders">Adjust list orders of the partial 1.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
-		Task<Category> PatchAsync(string catalogID, string categoryID, PartialCategory partialCategory, string accessToken = null);
-		/// <summary>Partially update a category.</summary>
+		Task<Category> PatchAsync(string catalogID, string categoryID, PartialCategory partialCategory, bool adjustListOrders = false, string accessToken = null);
+		/// <summary>Partially update a category. Setting adjustListOrders to true will increase ListOrder for all categories with the same or higher ListOrder.</summary>
 		/// <param name="catalogID">ID of the catalog.</param>
 		/// <param name="categoryID">ID of the category.</param>
 		/// <param name="partialCategory">The object that will be partially serialized to JSON and sent in the request body.</param>
+		/// <param name="adjustListOrders">Adjust list orders of the partial 1.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
-		Task<TCategory> PatchAsync<TCategory>(string catalogID, string categoryID, PartialCategory partialCategory, string accessToken = null) where TCategory : Category;
+		Task<TCategory> PatchAsync<TCategory>(string catalogID, string categoryID, PartialCategory partialCategory, bool adjustListOrders = false, string accessToken = null) where TCategory : Category;
 		/// <summary>Get a list of category assignments.</summary>
 		/// <param name="catalogID">ID of the catalog.</param>
 		/// <param name="categoryID">ID of the category.</param>
@@ -3347,18 +3391,52 @@ namespace OrderCloud.SDK
 		/// <param name="partialAddress">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TOrder> PatchBillingAddressAsync<TOrder>(OrderDirection direction, string orderID, PartialAddress partialAddress, string accessToken = null) where TOrder : Order;
-		/// <summary>Override order creator details. Only FirstName, LastName, and Email can be updated. Primarily used to facilitate guest checkout scenarios.</summary>
+		/// <summary>Update order FromUser. Only FirstName, LastName, and Email can be updated. Primarily used to facilitate guest checkout scenarios.</summary>
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="partialUser">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Order> PatchFromUserAsync(OrderDirection direction, string orderID, PartialUser partialUser, string accessToken = null);
-		/// <summary>Override order creator details. Only FirstName, LastName, and Email can be updated. Primarily used to facilitate guest checkout scenarios.</summary>
+		/// <summary>Update order FromUser. Only FirstName, LastName, and Email can be updated. Primarily used to facilitate guest checkout scenarios.</summary>
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="partialUser">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TOrder> PatchFromUserAsync<TOrder>(OrderDirection direction, string orderID, PartialUser partialUser, string accessToken = null) where TOrder : Order;
+		/// <summary>List eligible promotions. Get a list of promotions eligible for an order.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <param name="orderID">ID of the order.</param>
+		/// <param name="search">Word or phrase to search for.</param>
+		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
+		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<Promotion>> ListEligiblePromotionsAsync(OrderDirection direction, string orderID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
+		/// <summary>List eligible promotions. Get a list of promotions eligible for an order.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <param name="orderID">ID of the order.</param>
+		/// <param name="search">Word or phrase to search for.</param>
+		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
+		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<TPromotion>> ListEligiblePromotionsAsync<TPromotion>(OrderDirection direction, string orderID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TPromotion : Promotion;
+		/// <summary>List eligible promotions. Get a list of promotions eligible for an order.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <param name="orderID">ID of the order.</param>
+		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<Promotion>> ListEligiblePromotionsAsync(OrderDirection direction, string orderID, Action<ListOptionsBuilder<Promotion>> buildListOpts, string accessToken = null);
+		/// <summary>List eligible promotions. Get a list of promotions eligible for an order.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <param name="orderID">ID of the order.</param>
+		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<TPromotion>> ListEligiblePromotionsAsync<TPromotion>(OrderDirection direction, string orderID, Action<ListOptionsBuilder<TPromotion>> buildListOpts, string accessToken = null) where TPromotion : Promotion;
 		/// <summary>Add a promotion to an order.</summary>
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
 		/// <param name="orderID">ID of the order.</param>
@@ -3417,6 +3495,16 @@ namespace OrderCloud.SDK
 		/// <param name="promoCode">Promo code of the order.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TOrder> RemovePromotionAsync<TOrder>(OrderDirection direction, string orderID, string promoCode, string accessToken = null) where TOrder : Order;
+		/// <summary>AutoApply eligible promotions. Apply up to 100 eligible promotions to an order.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <param name="orderID">ID of the order.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<Order> ApplyPromotionsAsync(OrderDirection direction, string orderID, string accessToken = null);
+		/// <summary>AutoApply eligible promotions. Apply up to 100 eligible promotions to an order.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <param name="orderID">ID of the order.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TOrder> ApplyPromotionsAsync<TOrder>(OrderDirection direction, string orderID, string accessToken = null) where TOrder : Order;
 		/// <summary>Validate an order in its current state.</summary>
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
 		/// <param name="orderID">ID of the order.</param>
@@ -5525,9 +5613,15 @@ namespace OrderCloud.SDK
 		public Task<ListPage<TOrderPromotion>> ListPromotionsAsync<TOrderPromotion>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TOrderPromotion : OrderPromotion => Request("v1", "cart", "promotions").WithOAuthBearerToken(accessToken).SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<TOrderPromotion>>();
 		public Task<ListPage<OrderPromotion>> ListPromotionsAsync(Action<ListOptionsBuilder<OrderPromotion>> buildListOpts, string accessToken = null) => ListPromotionsAsync<OrderPromotion>(buildListOpts, accessToken);
 		public Task<ListPage<TOrderPromotion>> ListPromotionsAsync<TOrderPromotion>(Action<ListOptionsBuilder<TOrderPromotion>> buildListOpts, string accessToken = null) where TOrderPromotion : OrderPromotion => Request("v1", "cart", "promotions").WithOAuthBearerToken(accessToken).SetListOptions(buildListOpts).GetJsonAsync<ListPage<TOrderPromotion>>();
+		public Task<ListPage<Promotion>> ListEligiblePromotionsAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) => ListEligiblePromotionsAsync<Promotion>(search, searchOn, sortBy, page, pageSize, filters, accessToken);
+		public Task<ListPage<TPromotion>> ListEligiblePromotionsAsync<TPromotion>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TPromotion : Promotion => Request("v1", "cart", "eligiblepromotions").WithOAuthBearerToken(accessToken).SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<TPromotion>>();
+		public Task<ListPage<Promotion>> ListEligiblePromotionsAsync(Action<ListOptionsBuilder<Promotion>> buildListOpts, string accessToken = null) => ListEligiblePromotionsAsync<Promotion>(buildListOpts, accessToken);
+		public Task<ListPage<TPromotion>> ListEligiblePromotionsAsync<TPromotion>(Action<ListOptionsBuilder<TPromotion>> buildListOpts, string accessToken = null) where TPromotion : Promotion => Request("v1", "cart", "eligiblepromotions").WithOAuthBearerToken(accessToken).SetListOptions(buildListOpts).GetJsonAsync<ListPage<TPromotion>>();
 		public Task<OrderPromotion> AddPromotionAsync(string promoCode, string accessToken = null) => AddPromotionAsync<OrderPromotion>(promoCode, accessToken);
 		public Task<TOrderPromotion> AddPromotionAsync<TOrderPromotion>(string promoCode, string accessToken = null) where TOrderPromotion : OrderPromotion => Request("v1", "cart", "promotions", promoCode).WithOAuthBearerToken(accessToken).PostAsync(null).ReceiveJson<TOrderPromotion>();
 		public Task DeletePromotionAsync(string promoCode, string accessToken = null) => Request("v1", "cart", "promotions", promoCode).WithOAuthBearerToken(accessToken).DeleteAsync();
+		public Task<Order> ApplyPromotionsAsync(string accessToken = null) => ApplyPromotionsAsync<Order>(accessToken);
+		public Task<TOrder> ApplyPromotionsAsync<TOrder>(string accessToken = null) where TOrder : Order => Request("v1", "cart", "applypromotions").WithOAuthBearerToken(accessToken).PostAsync(null).ReceiveJson<TOrder>();
 		public Task<Order> PatchFromUserAsync(PartialUser partialUser, string accessToken = null) => PatchFromUserAsync<Order>(partialUser, accessToken);
 		public Task<TOrder> PatchFromUserAsync<TOrder>(PartialUser partialUser, string accessToken = null) where TOrder : Order => Request("v1", "cart", "fromuser").WithOAuthBearerToken(accessToken).PatchJsonAsync(ValidateModel(partialUser)).ReceiveJson<TOrder>();
 		public Task<ListPage<Payment>> ListPaymentsAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) => ListPaymentsAsync<Payment>(search, searchOn, sortBy, page, pageSize, filters, accessToken);
@@ -5547,6 +5641,8 @@ namespace OrderCloud.SDK
 		public Task<Order> SubmitAsync(string accessToken = null) => SubmitAsync<Order>(accessToken);
 		public Task<TOrder> SubmitAsync<TOrder>(string accessToken = null) where TOrder : Order => Request("v1", "cart", "submit").WithOAuthBearerToken(accessToken).PostAsync(null).ReceiveJson<TOrder>();
 		public Task ValidateAsync(string accessToken = null) => Request("v1", "cart", "validate").WithOAuthBearerToken(accessToken).PostAsync(null);
+		public Task<OrderWorksheet> CalculateAsync(string accessToken = null) => CalculateAsync<OrderWorksheet>(accessToken);
+		public Task<TOrderWorksheet> CalculateAsync<TOrderWorksheet>(string accessToken = null) where TOrderWorksheet : OrderWorksheet => Request("v1", "cart", "calculate").WithOAuthBearerToken(accessToken).PostAsync(null).ReceiveJson<TOrderWorksheet>();
 		public Task<OrderWorksheet> GetOrderWorksheetAsync(string accessToken = null) => GetOrderWorksheetAsync<OrderWorksheet>(accessToken);
 		public Task<TOrderWorksheet> GetOrderWorksheetAsync<TOrderWorksheet>(string accessToken = null) where TOrderWorksheet : OrderWorksheet => Request("v1", "cart", "worksheet").WithOAuthBearerToken(accessToken).GetJsonAsync<TOrderWorksheet>();
 		public Task<OrderWorksheet> EstimateShippingAsync(string accessToken = null) => EstimateShippingAsync<OrderWorksheet>(accessToken);
@@ -5588,13 +5684,13 @@ namespace OrderCloud.SDK
 		public Task<ListPage<TCategory>> ListAsync<TCategory>(string catalogID, string depth = "1", string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TCategory : Category => Request("v1", "catalogs", catalogID, "categories").WithOAuthBearerToken(accessToken).SetQueryParams(new { depth, search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<TCategory>>();
 		public Task<ListPage<Category>> ListAsync(string catalogID, Action<ListOptionsBuilder<Category>> buildListOpts, string depth = "1", string accessToken = null) => ListAsync<Category>(catalogID, buildListOpts, depth, accessToken);
 		public Task<ListPage<TCategory>> ListAsync<TCategory>(string catalogID, Action<ListOptionsBuilder<TCategory>> buildListOpts, string depth = "1", string accessToken = null) where TCategory : Category => Request("v1", "catalogs", catalogID, "categories").WithOAuthBearerToken(accessToken).SetQueryParams(new { depth }).SetListOptions(buildListOpts).GetJsonAsync<ListPage<TCategory>>();
-		public Task<Category> CreateAsync(string catalogID, Category category, string accessToken = null) => CreateAsync<Category>(catalogID, category, accessToken);
-		public Task<TCategory> CreateAsync<TCategory>(string catalogID, Category category, string accessToken = null) where TCategory : Category => Request("v1", "catalogs", catalogID, "categories").WithOAuthBearerToken(accessToken).PostJsonAsync(ValidateModel(category)).ReceiveJson<TCategory>();
-		public Task<Category> SaveAsync(string catalogID, string categoryID, Category category, string accessToken = null) => SaveAsync<Category>(catalogID, categoryID, category, accessToken);
-		public Task<TCategory> SaveAsync<TCategory>(string catalogID, string categoryID, Category category, string accessToken = null) where TCategory : Category => Request("v1", "catalogs", catalogID, "categories", categoryID).WithOAuthBearerToken(accessToken).PutJsonAsync(ValidateModel(category)).ReceiveJson<TCategory>();
+		public Task<Category> CreateAsync(string catalogID, Category category, bool adjustListOrders = false, string accessToken = null) => CreateAsync<Category>(catalogID, category, adjustListOrders, accessToken);
+		public Task<TCategory> CreateAsync<TCategory>(string catalogID, Category category, bool adjustListOrders = false, string accessToken = null) where TCategory : Category => Request("v1", "catalogs", catalogID, "categories").WithOAuthBearerToken(accessToken).SetQueryParams(new { adjustListOrders }).PostJsonAsync(ValidateModel(category)).ReceiveJson<TCategory>();
+		public Task<Category> SaveAsync(string catalogID, string categoryID, Category category, bool adjustListOrders = false, string accessToken = null) => SaveAsync<Category>(catalogID, categoryID, category, adjustListOrders, accessToken);
+		public Task<TCategory> SaveAsync<TCategory>(string catalogID, string categoryID, Category category, bool adjustListOrders = false, string accessToken = null) where TCategory : Category => Request("v1", "catalogs", catalogID, "categories", categoryID).WithOAuthBearerToken(accessToken).SetQueryParams(new { adjustListOrders }).PutJsonAsync(ValidateModel(category)).ReceiveJson<TCategory>();
 		public Task DeleteAsync(string catalogID, string categoryID, string accessToken = null) => Request("v1", "catalogs", catalogID, "categories", categoryID).WithOAuthBearerToken(accessToken).DeleteAsync();
-		public Task<Category> PatchAsync(string catalogID, string categoryID, PartialCategory partialCategory, string accessToken = null) => PatchAsync<Category>(catalogID, categoryID, partialCategory, accessToken);
-		public Task<TCategory> PatchAsync<TCategory>(string catalogID, string categoryID, PartialCategory partialCategory, string accessToken = null) where TCategory : Category => Request("v1", "catalogs", catalogID, "categories", categoryID).WithOAuthBearerToken(accessToken).PatchJsonAsync(ValidateModel(partialCategory)).ReceiveJson<TCategory>();
+		public Task<Category> PatchAsync(string catalogID, string categoryID, PartialCategory partialCategory, bool adjustListOrders = false, string accessToken = null) => PatchAsync<Category>(catalogID, categoryID, partialCategory, adjustListOrders, accessToken);
+		public Task<TCategory> PatchAsync<TCategory>(string catalogID, string categoryID, PartialCategory partialCategory, bool adjustListOrders = false, string accessToken = null) where TCategory : Category => Request("v1", "catalogs", catalogID, "categories", categoryID).WithOAuthBearerToken(accessToken).SetQueryParams(new { adjustListOrders }).PatchJsonAsync(ValidateModel(partialCategory)).ReceiveJson<TCategory>();
 		public Task<ListPage<CategoryAssignment>> ListAssignmentsAsync(string catalogID, string categoryID = null, string buyerID = null, string userID = null, string userGroupID = null, PartyType? level = null, int? page = null, int? pageSize = null, string accessToken = null) => Request("v1", "catalogs", catalogID, "categories", "assignments").WithOAuthBearerToken(accessToken).SetQueryParams(new { categoryID, buyerID, userID, userGroupID, level, page, pageSize }).GetJsonAsync<ListPage<CategoryAssignment>>();
 		public Task DeleteAssignmentAsync(string catalogID, string categoryID, string buyerID, string userID = null, string userGroupID = null, string accessToken = null) => Request("v1", "catalogs", catalogID, "categories", categoryID, "assignments").WithOAuthBearerToken(accessToken).SetQueryParams(new { buyerID, userID, userGroupID }).DeleteAsync();
 		public Task SaveAssignmentAsync(string catalogID, CategoryAssignment categoryAssignment, string accessToken = null) => Request("v1", "catalogs", catalogID, "categories", "assignments").WithOAuthBearerToken(accessToken).PostJsonAsync(ValidateModel(categoryAssignment));
@@ -6022,6 +6118,10 @@ namespace OrderCloud.SDK
 		public Task<TOrder> PatchBillingAddressAsync<TOrder>(OrderDirection direction, string orderID, PartialAddress partialAddress, string accessToken = null) where TOrder : Order => Request("v1", "orders", direction, orderID, "billto").WithOAuthBearerToken(accessToken).PatchJsonAsync(ValidateModel(partialAddress)).ReceiveJson<TOrder>();
 		public Task<Order> PatchFromUserAsync(OrderDirection direction, string orderID, PartialUser partialUser, string accessToken = null) => PatchFromUserAsync<Order>(direction, orderID, partialUser, accessToken);
 		public Task<TOrder> PatchFromUserAsync<TOrder>(OrderDirection direction, string orderID, PartialUser partialUser, string accessToken = null) where TOrder : Order => Request("v1", "orders", direction, orderID, "fromuser").WithOAuthBearerToken(accessToken).PatchJsonAsync(ValidateModel(partialUser)).ReceiveJson<TOrder>();
+		public Task<ListPage<Promotion>> ListEligiblePromotionsAsync(OrderDirection direction, string orderID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) => ListEligiblePromotionsAsync<Promotion>(direction, orderID, search, searchOn, sortBy, page, pageSize, filters, accessToken);
+		public Task<ListPage<TPromotion>> ListEligiblePromotionsAsync<TPromotion>(OrderDirection direction, string orderID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TPromotion : Promotion => Request("v1", "orders", direction, orderID, "eligiblepromotions").WithOAuthBearerToken(accessToken).SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<TPromotion>>();
+		public Task<ListPage<Promotion>> ListEligiblePromotionsAsync(OrderDirection direction, string orderID, Action<ListOptionsBuilder<Promotion>> buildListOpts, string accessToken = null) => ListEligiblePromotionsAsync<Promotion>(direction, orderID, buildListOpts, accessToken);
+		public Task<ListPage<TPromotion>> ListEligiblePromotionsAsync<TPromotion>(OrderDirection direction, string orderID, Action<ListOptionsBuilder<TPromotion>> buildListOpts, string accessToken = null) where TPromotion : Promotion => Request("v1", "orders", direction, orderID, "eligiblepromotions").WithOAuthBearerToken(accessToken).SetListOptions(buildListOpts).GetJsonAsync<ListPage<TPromotion>>();
 		public Task<OrderPromotion> AddPromotionAsync(OrderDirection direction, string orderID, string promoCode, string accessToken = null) => AddPromotionAsync<OrderPromotion>(direction, orderID, promoCode, accessToken);
 		public Task<TOrderPromotion> AddPromotionAsync<TOrderPromotion>(OrderDirection direction, string orderID, string promoCode, string accessToken = null) where TOrderPromotion : OrderPromotion => Request("v1", "orders", direction, orderID, "promotions", promoCode).WithOAuthBearerToken(accessToken).PostAsync(null).ReceiveJson<TOrderPromotion>();
 		public Task<ListPage<OrderPromotion>> ListPromotionsAsync(OrderDirection direction, string orderID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) => ListPromotionsAsync<OrderPromotion>(direction, orderID, search, searchOn, sortBy, page, pageSize, filters, accessToken);
@@ -6030,6 +6130,8 @@ namespace OrderCloud.SDK
 		public Task<ListPage<TOrderPromotion>> ListPromotionsAsync<TOrderPromotion>(OrderDirection direction, string orderID, Action<ListOptionsBuilder<TOrderPromotion>> buildListOpts, string accessToken = null) where TOrderPromotion : OrderPromotion => Request("v1", "orders", direction, orderID, "promotions").WithOAuthBearerToken(accessToken).SetListOptions(buildListOpts).GetJsonAsync<ListPage<TOrderPromotion>>();
 		public Task<Order> RemovePromotionAsync(OrderDirection direction, string orderID, string promoCode, string accessToken = null) => RemovePromotionAsync<Order>(direction, orderID, promoCode, accessToken);
 		public Task<TOrder> RemovePromotionAsync<TOrder>(OrderDirection direction, string orderID, string promoCode, string accessToken = null) where TOrder : Order => Request("v1", "orders", direction, orderID, "promotions", promoCode).WithOAuthBearerToken(accessToken).DeleteAsync().ReceiveJson<TOrder>();
+		public Task<Order> ApplyPromotionsAsync(OrderDirection direction, string orderID, string accessToken = null) => ApplyPromotionsAsync<Order>(direction, orderID, accessToken);
+		public Task<TOrder> ApplyPromotionsAsync<TOrder>(OrderDirection direction, string orderID, string accessToken = null) where TOrder : Order => Request("v1", "orders", direction, orderID, "applypromotions").WithOAuthBearerToken(accessToken).PostAsync(null).ReceiveJson<TOrder>();
 		public Task ValidateAsync(OrderDirection direction, string orderID, string accessToken = null) => Request("v1", "orders", direction, orderID, "validate").WithOAuthBearerToken(accessToken).PostAsync(null);
 	}
 

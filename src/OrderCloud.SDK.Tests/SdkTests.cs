@@ -8,6 +8,7 @@ using System.Net.Http;
 using NUnit.Framework;
 using Flurl.Http.Testing;
 using Newtonsoft.Json;
+using Flurl.Http;
 
 namespace OrderCloud.SDK.Tests
 {
@@ -277,6 +278,35 @@ namespace OrderCloud.SDK.Tests
 			var payload = JsonConvert.DeserializeObject<WebhookPayloads.Addresses.Delete>(json);
 			Assert.IsNotNull(payload?.Request);
 			Assert.IsNotNull(payload?.Response);
+		}
+
+		[Test]
+		public void http_error_auth_exception_handled()
+		{
+			using (var httpTest = new HttpTest())
+			{
+				httpTest.RespondWith("<>", 502); // auth response with 500 level error code with response that could cause stackoverflow exception if it gets deserialized
+
+				AsyncTestDelegate del = async () => await GetClient().Me.GetAsync(); // Will ThrowAuthExceptionAsync
+
+				var response = Assert.ThrowsAsync<FlurlHttpException>(del);
+				Assert.NotNull(response);
+				Assert.AreEqual(response.Call.Response.StatusCode, 502);
+			}
+		}
+
+		[Test]
+		public void http_error_api_exception_handled() {
+			using (var httpTest = new HttpTest()) {
+				httpTest.RespondWith("{}"); // auth response
+				httpTest.RespondWith("<>", 504); // api response that could cause stackoverflow exception if it gets deserialized
+
+				AsyncTestDelegate del = async () => await GetClient().Me.GetAsync(); //Will ThrowApiExceptionAsync
+
+				var response = Assert.ThrowsAsync<FlurlHttpException>(del);
+				Assert.NotNull(response);
+				Assert.AreEqual(response.Call.Response.StatusCode, 504);
+			}
 		}
 
 		private OrderCloudClient GetClient() => new OrderCloudClient(new OrderCloudClientConfig {

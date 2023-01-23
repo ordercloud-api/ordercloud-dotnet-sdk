@@ -133,7 +133,7 @@ namespace OrderCloud.SDK
 		}
 		public static class Expression
 		{
-			/// <summary>Function takes exactly one argument.</summary>
+			/// <summary>Function has invalid number of arguments.</summary>
 			public const string InvalidArguments = "Expression.InvalidArguments";
 			/// <summary>Expression contains unknown function.</summary>
 			public const string InvalidFunction = "Expression.InvalidFunction";
@@ -476,6 +476,8 @@ namespace OrderCloud.SDK
 			public const string NotYetValid = "Promotion.NotYetValid";
 			/// <summary>ToCompanyID represents a Supplier. Only promotions with a matching OwnerID may be applied to this order.</summary>
 			public const string OwnerIDMustMatchOrderToCompanyID = "Promotion.OwnerIDMustMatchOrderToCompanyID";
+			/// <summary>Promotion is not active.</summary>
+			public const string NotActive = "Promotion.NotActive";
 		}
 		public static class Registration
 		{
@@ -495,6 +497,8 @@ namespace OrderCloud.SDK
 			public const string InvalidQuery = "Search.InvalidQuery";
 			/// <summary>The maximum result set is 100,000 items. Narrow your query using filters or use the LastID method as outlined in the Advanced Querying documentation.</summary>
 			public const string ResultSetTooLarge = "Search.ResultSetTooLarge";
+			/// <summary>The maximum number of rebuilds for this index type has been exceeded.</summary>
+			public const string ExceedsRebuildLimit = "Search.ExceedsRebuildLimit";
 		}
 		public static class SecurityProfile
 		{
