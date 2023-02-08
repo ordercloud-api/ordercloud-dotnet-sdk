@@ -201,7 +201,7 @@ namespace OrderCloud.SDK
 		private readonly SemaphoreSlim _authLock = new(1);
 
 		private async Task EnsureTokenAsync(FlurlCall call) {
-			if (call.Request.Headers.TryGetFirst("Authorization", out var value) && value != "Bearer ")
+			if (call.Request.Headers.TryGetFirst("Authorization", out var value) && value.TrimEnd() != "Bearer")
 				return; // a token was provided explicitly
 
 			if (!IsAuthenticated) {

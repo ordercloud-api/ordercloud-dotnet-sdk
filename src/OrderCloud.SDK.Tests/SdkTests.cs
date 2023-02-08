@@ -119,6 +119,24 @@ namespace OrderCloud.SDK.Tests
 				httpTest.ShouldHaveMadeACall().WithHeader("Authorization", "Bearer some-other-token");
 			}
 		}
+        
+		[Test]
+		public async Task missing_bearer_token_obtains_new_token() {
+			var cli = new OrderCloudClient(new OrderCloudClientConfig {
+				ApiUrl = "https://fake.com",
+				AuthUrl = "https://fake.com",
+				ClientId = "client-id",
+				ClientSecret = "client-secret",
+			});
+
+			using (var httpTest = new HttpTest())
+			{
+				_ = await cli.Me.GetAsync();
+				httpTest
+					.ShouldHaveCalled("https://fake.com/oauth/token")
+					.WithoutHeader("Authorization");
+			}
+		}
 
 		[Test]
 		public void doesnt_serialize_api_readonly_properties() {
