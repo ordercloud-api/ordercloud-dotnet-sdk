@@ -82,6 +82,8 @@ namespace OrderCloud.SDK
 			public const string InsecurePassword = "Auth.InsecurePassword";
 			/// <summary>Anonymous users are prohibited from performing these actions.</summary>
 			public const string AnonUserProhibited = "Auth.AnonUserProhibited";
+			/// <summary>The token provided is invalid. Please provide an anonymous user token and try again.</summary>
+			public const string MustPassAnonUserToken = "Auth.MustPassAnonUserToken";
 		}
 		public static class BillingAddress
 		{
