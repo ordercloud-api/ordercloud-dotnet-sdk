@@ -337,10 +337,14 @@ namespace OrderCloud.SDK
 		public PriceSchedule PriceSchedule { get => GetProp<PriceSchedule>("PriceSchedule"); set => SetProp<PriceSchedule>("PriceSchedule", value); }
 		/// <summary>ID of the product. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 3.</summary>
 		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
-		/// <summary>Name of the product. Required. Max length 100 characters. Searchable: priority level 2. Sortable: priority level 2.</summary>
+		/// <summary>ID of the parent product. If not null, IsParent should be false</summary>
+		public string ParentID { get => GetProp<string>("ParentID"); set => SetProp<string>("ParentID", value); }
+		/// <summary>If true, ParentID must be null, as a parent product cannot have a parent itself.</summary>
+		public bool IsParent { get => GetProp<bool>("IsParent"); set => SetProp<bool>("IsParent", value); }
+		/// <summary>Name of the product. Required. Max length 100 characters. Searchable: priority level 3. Sortable: priority level 2.</summary>
 		[Required]
 		public string Name { get => GetProp<string>("Name"); set => SetProp<string>("Name", value); }
-		/// <summary>Description of the product. Max length 2000 characters. Searchable: priority level 3.</summary>
+		/// <summary>Description of the product. Max length 2000 characters. Searchable: priority level 4.</summary>
 		public string Description { get => GetProp<string>("Description"); set => SetProp<string>("Description", value); }
 		/// <summary>For reference only, does not influence any OrderCloud behavior. Used to indicate an amount per Quantity.</summary>
 		public int? QuantityMultiplier { get => GetProp<int?>("QuantityMultiplier", 1); set => SetProp<int?>("QuantityMultiplier", value); }
@@ -1857,10 +1861,14 @@ namespace OrderCloud.SDK
 		public bool AutoForward { get => GetProp<bool>("AutoForward"); set => SetProp<bool>("AutoForward", value); }
 		/// <summary>ID of the product. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 3.</summary>
 		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
-		/// <summary>Name of the product. Required. Max length 100 characters. Searchable: priority level 2. Sortable: priority level 2.</summary>
+		/// <summary>ID of the parent product. If not null, IsParent should be false</summary>
+		public string ParentID { get => GetProp<string>("ParentID"); set => SetProp<string>("ParentID", value); }
+		/// <summary>If true, ParentID must be null, as a parent product cannot have a parent itself.</summary>
+		public bool IsParent { get => GetProp<bool>("IsParent"); set => SetProp<bool>("IsParent", value); }
+		/// <summary>Name of the product. Required. Max length 100 characters. Searchable: priority level 3. Sortable: priority level 2.</summary>
 		[Required]
 		public string Name { get => GetProp<string>("Name"); set => SetProp<string>("Name", value); }
-		/// <summary>Description of the product. Max length 2000 characters. Searchable: priority level 3.</summary>
+		/// <summary>Description of the product. Max length 2000 characters. Searchable: priority level 4.</summary>
 		public string Description { get => GetProp<string>("Description"); set => SetProp<string>("Description", value); }
 		/// <summary>For reference only, does not influence any OrderCloud behavior. Used to indicate an amount per Quantity.</summary>
 		public int? QuantityMultiplier { get => GetProp<int?>("QuantityMultiplier", 1); set => SetProp<int?>("QuantityMultiplier", value); }
