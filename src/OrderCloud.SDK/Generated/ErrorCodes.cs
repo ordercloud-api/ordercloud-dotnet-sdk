@@ -118,6 +118,8 @@ namespace OrderCloud.SDK
 			public const string NotActive = "Catalog.NotActive";
 			/// <summary>Cannot assign product to this catalog. Product must be owned by the Marketplace Owner or the Catalog owner.</summary>
 			public const string CannotAssignProduct = "Catalog.CannotAssignProduct";
+			/// <summary>Cannot assign a child product to a catalog.</summary>
+			public const string CannotAssignChildProduct = "Catalog.CannotAssignChildProduct";
 		}
 		public static class Category
 		{
@@ -127,6 +129,8 @@ namespace OrderCloud.SDK
 			public const string InvalidDepth = "Category.InvalidDepth";
 			/// <summary>Buyer not specified.</summary>
 			public const string NoBuyer = "Category.NoBuyer";
+			/// <summary>Cannot assign a child product to a category.</summary>
+			public const string CannotAssignChildProduct = "Category.CannotAssignChildProduct";
 		}
 		public static class CreditCard
 		{
@@ -196,6 +200,8 @@ namespace OrderCloud.SDK
 		{
 			/// <summary>Cannot change VariantLevelTracking when InventoryRecords exist for the product.</summary>
 			public const string CannotChangeVariantLevelTracking = "InventoryConfiguration.CannotChangeVariantLevelTracking";
+			/// <summary>Cannot set VariantLevelTracking for parent or child products.</summary>
+			public const string CannotSetVariantLevelTracking = "InventoryConfiguration.CannotSetVariantLevelTracking";
 			/// <summary>Conflicting InventoryRecords exist for the product. You can only have product InventoryRecords, or variant InventoryRecords.</summary>
 			public const string CannotCreateInventoryRecord = "InventoryConfiguration.CannotCreateInventoryRecord";
 			/// <summary>This product does not have inventory configured. Please add inventory to the product and try again.</summary>
@@ -228,6 +234,8 @@ namespace OrderCloud.SDK
 			public const string CannotFilterByOrderOrLineItem = "LineItem.CannotFilterByOrderOrLineItem";
 			/// <summary>Searching by both order field(s) and a line item field(s) is not currently supported.</summary>
 			public const string CannotSearchByOrderOrLineItem = "LineItem.CannotSearchByOrderOrLineItem";
+			/// <summary>Parent product is not purchasable.</summary>
+			public const string CannotPurchaseParentProduct = "LineItem.CannotPurchaseParentProduct";
 		}
 		public static class List
 		{
@@ -273,6 +281,8 @@ namespace OrderCloud.SDK
 			public const string CannotSubmitWithNoLineItems = "Order.CannotSubmitWithNoLineItems";
 			/// <summary>Cannot submit an order with payments that have not been Accepted.</summary>
 			public const string CannotSubmitWithUnaccceptedPayments = "Order.CannotSubmitWithUnaccceptedPayments";
+			/// <summary>Cannot submit an order with not purchasable parent product.</summary>
+			public const string CannotSubmitWithParentProduct = "Order.CannotSubmitWithParentProduct";
 			/// <summary>Cannot ship full order because it contains line items that are on other shipments. The returned data contains these conflicting line items.</summary>
 			public const string ConflictsWithOtherShipments = "Order.ConflictsWithOtherShipments";
 			/// <summary>To create an incoming order, you must provide both FromCompanyID and FromUserID.</summary>
@@ -447,11 +457,29 @@ namespace OrderCloud.SDK
 			public const string RequiresPriceScheduleOrBuyer = "Product.RequiresPriceScheduleOrBuyer";
 			/// <summary>Only the Marketplace Owner can modify AllSuppliersCanSell on their owned products.</summary>
 			public const string CannotModifyAllSuppliersCanSell = "Product.CannotModifyAllSuppliersCanSell";
+			/// <summary>IsParent cannot be set to false if a child product exists.</summary>
+			public const string CannotModifyIsParent = "Product.CannotModifyIsParent";
+			/// <summary>IsParent cannot be set to true for a variant product.</summary>
+			public const string CannotModifyIsParentForVariant = "Product.CannotModifyIsParentForVariant";
+			/// <summary>ParentID cannot be set for a variant product.</summary>
+			public const string CannotModifyParentIDForVariant = "Product.CannotModifyParentIDForVariant";
+			/// <summary>Parent product ParentID is not null or IsParent false.</summary>
+			public const string IsNotParent = "Product.IsNotParent";
+			/// <summary>Parent product cannot have a parent.</summary>
+			public const string ParentProductCannotHaveParent = "Product.ParentProductCannotHaveParent";
+			/// <summary>Parent product cannot be deleted if a child product exists.</summary>
+			public const string CannotDeleteParentProduct = "Product.CannotDeleteParentProduct";
+			/// <summary>Parent and child products should have the same owner.</summary>
+			public const string ParentChildProductOwnersShouldMatch = "Product.ParentChildProductOwnersShouldMatch";
+			/// <summary>Parent and child products cannot have variants.</summary>
+			public const string ParentChildProductsCannotHaveVariants = "Product.ParentChildProductsCannotHaveVariants";
 		}
 		public static class ProductAssigment
 		{
 			/// <summary>The marketplace owner can create product assignments and designate a SellerID, but only when a PriceScheduleID is also provided. Use the designated endpoints to create a relationship between a Seller and a Product or a Seller and a Buyer.</summary>
 			public const string MustSpecifyPriceScheduleID = "ProductAssigment.MustSpecifyPriceScheduleID";
+			/// <summary>Spec that defines a variant cannot be assigned to a parent/child product.</summary>
+			public const string ParentChildProductCannotBeAssignedToVariantSpec = "ProductAssigment.ParentChildProductCannotBeAssignedToVariantSpec";
 		}
 		public static class ProductCollection
 		{
