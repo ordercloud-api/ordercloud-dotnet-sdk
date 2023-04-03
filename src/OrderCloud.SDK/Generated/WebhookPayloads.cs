@@ -1528,6 +1528,35 @@ namespace OrderCloud.SDK
 				public string VariantID { get; set; }
 				public string InventoryRecordID { get; set; }
 			}
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/products/{productID}/inventoryrecords/assignments.</summary>
+			[SentOn("POST", "v1/products/{productID}/inventoryrecords/assignments")]
+			public class SaveAssignment : WebhookPayload<InventoryRecordAssignment, object, SaveAssignmentRouteParams, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/products/{productID}/inventoryrecords/assignments.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TInventoryRecordAssignment">Specific type of the InventoryRecordAssignment. If not using a custom type, specify InventoryRecordAssignment.</typeparam>
+			[SentOn("POST", "v1/products/{productID}/inventoryrecords/assignments")]
+			public class SaveAssignment<TConfigData, TInventoryRecordAssignment> : WebhookPayload<TInventoryRecordAssignment, object, SaveAssignmentRouteParams, TConfigData>
+				where TInventoryRecordAssignment : InventoryRecordAssignment
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/products/{productID}/inventoryrecords/assignments.</summary>
+			public class SaveAssignmentRouteParams
+			{
+				public string ProductID { get; set; }
+			}
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/products/{productID}/inventoryrecords/{inventoryRecordID}/assignments.</summary>
+			[SentOn("DELETE", "v1/products/{productID}/inventoryrecords/{inventoryRecordID}/assignments")]
+			public class DeleteAssignment : WebhookPayload<object, object, DeleteAssignmentRouteParams, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/products/{productID}/inventoryrecords/{inventoryRecordID}/assignments.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, use the non-generic payload type instead.</typeparam>
+			[SentOn("DELETE", "v1/products/{productID}/inventoryrecords/{inventoryRecordID}/assignments")]
+			public class DeleteAssignment<TConfigData> : WebhookPayload<object, object, DeleteAssignmentRouteParams, TConfigData>
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/products/{productID}/inventoryrecords/{inventoryRecordID}/assignments.</summary>
+			public class DeleteAssignmentRouteParams
+			{
+				public string ProductID { get; set; }
+				public string InventoryRecordID { get; set; }
+			}
 		}
 		public static class LineItems
 		{
@@ -3885,6 +3914,62 @@ namespace OrderCloud.SDK
 			{
 				public string SupplierID { get; set; }
 				public string UserID { get; set; }
+			}
+		}
+		public static class TrackingEvents
+		{
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/integrations/trackingEvents.</summary>
+			[SentOn("POST", "v1/integrations/trackingEvents")]
+			public class Create : WebhookPayload<TrackingEvent, TrackingEvent, object, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/integrations/trackingEvents.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TTrackingEvent">Specific type of the TrackingEvent. If not using a custom type, specify TrackingEvent.</typeparam>
+			[SentOn("POST", "v1/integrations/trackingEvents")]
+			public class Create<TConfigData, TTrackingEvent> : WebhookPayload<TTrackingEvent, TTrackingEvent, object, TConfigData>
+				where TTrackingEvent : TrackingEvent
+			{ }
+			/// <summary>Webhook payload sent by OrderCloud on PUT v1/integrations/trackingEvents/{eventID}.</summary>
+			[SentOn("PUT", "v1/integrations/trackingEvents/{eventID}")]
+			public class Save : WebhookPayload<TrackingEvent, TrackingEvent, SaveRouteParams, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on PUT v1/integrations/trackingEvents/{eventID}.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TTrackingEvent">Specific type of the TrackingEvent. If not using a custom type, specify TrackingEvent.</typeparam>
+			[SentOn("PUT", "v1/integrations/trackingEvents/{eventID}")]
+			public class Save<TConfigData, TTrackingEvent> : WebhookPayload<TTrackingEvent, TTrackingEvent, SaveRouteParams, TConfigData>
+				where TTrackingEvent : TrackingEvent
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/integrations/trackingEvents/{eventID}.</summary>
+			public class SaveRouteParams
+			{
+				public string EventID { get; set; }
+			}
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/integrations/trackingEvents/{eventID}.</summary>
+			[SentOn("DELETE", "v1/integrations/trackingEvents/{eventID}")]
+			public class Delete : WebhookPayload<object, object, DeleteRouteParams, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/integrations/trackingEvents/{eventID}.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, use the non-generic payload type instead.</typeparam>
+			[SentOn("DELETE", "v1/integrations/trackingEvents/{eventID}")]
+			public class Delete<TConfigData> : WebhookPayload<object, object, DeleteRouteParams, TConfigData>
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/integrations/trackingEvents/{eventID}.</summary>
+			public class DeleteRouteParams
+			{
+				public string EventID { get; set; }
+			}
+			/// <summary>Webhook payload sent by OrderCloud on PATCH v1/integrations/trackingEvents/{eventID}.</summary>
+			[SentOn("PATCH", "v1/integrations/trackingEvents/{eventID}")]
+			public class Patch : WebhookPayload<TrackingEvent, TrackingEvent, PatchRouteParams, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on PATCH v1/integrations/trackingEvents/{eventID}.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TTrackingEvent">Specific type of the TrackingEvent. If not using a custom type, specify TrackingEvent.</typeparam>
+			[SentOn("PATCH", "v1/integrations/trackingEvents/{eventID}")]
+			public class Patch<TConfigData, TTrackingEvent> : WebhookPayload<TTrackingEvent, TTrackingEvent, PatchRouteParams, TConfigData>
+				where TTrackingEvent : TrackingEvent
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/integrations/trackingEvents/{eventID}.</summary>
+			public class PatchRouteParams
+			{
+				public string EventID { get; set; }
 			}
 		}
 		public static class UserGroups

@@ -4,7 +4,7 @@ using System.Dynamic;
 
 namespace OrderCloud.SDK
 {
-	public enum ApiRole { ApiClientAdmin, ApiClientReader, AddressAdmin, AddressReader, AdminAddressAdmin, AdminAddressReader, AdminUserAdmin, AdminUserGroupAdmin, AdminUserGroupReader, AdminUserReader, ApprovalRuleAdmin, ApprovalRuleReader, BuyerAdmin, BuyerImpersonation, BuyerReader, BuyerUserAdmin, BuyerUserReader, CatalogAdmin, CatalogReader, CategoryAdmin, CategoryReader, CostCenterAdmin, CostCenterReader, CreditCardAdmin, CreditCardReader, FullAccess, IncrementorAdmin, IncrementorReader, LocaleReader, LocaleAdmin, MeAddressAdmin, MeAdmin, MeCreditCardAdmin, MessageConfigAssignmentAdmin, MeXpAdmin, OrderAdmin, OrderReader, OverrideShipping, OverrideTax, OverrideUnitPrice, PasswordReset, PriceScheduleAdmin, PriceScheduleReader, ProductAdmin, ProductAssignmentAdmin, ProductFacetAdmin, ProductFacetReader, ProductReader, PromotionAdmin, PromotionReader, SecurityProfileAdmin, SecurityProfileReader, SetSecurityProfile, ShipmentAdmin, ShipmentReader, Shopper, SpendingAccountAdmin, SpendingAccountReader, SupplierAddressAdmin, SupplierAddressReader, SupplierAdmin, SupplierReader, SupplierUserAdmin, SupplierUserGroupAdmin, SupplierUserGroupReader, SupplierUserReader, UnsubmittedOrderReader, UserGroupAdmin, UserGroupReader, OpenIDConnectReader, OpenIDConnectAdmin, MessageSenderReader, MessageSenderAdmin, XpIndexAdmin, WebhookReader, WebhookAdmin, IntegrationEventReader, IntegrationEventAdmin }
+	public enum ApiRole { ApiClientAdmin, ApiClientReader, AddressAdmin, AddressReader, AdminAddressAdmin, AdminAddressReader, AdminUserAdmin, AdminUserGroupAdmin, AdminUserGroupReader, AdminUserReader, ApprovalRuleAdmin, ApprovalRuleReader, BuyerAdmin, BuyerImpersonation, BuyerReader, BuyerUserAdmin, BuyerUserReader, CatalogAdmin, CatalogReader, CategoryAdmin, CategoryReader, CostCenterAdmin, CostCenterReader, CreditCardAdmin, CreditCardReader, FullAccess, IncrementorAdmin, IncrementorReader, LocaleReader, LocaleAdmin, MeAddressAdmin, MeAdmin, MeCreditCardAdmin, MessageConfigAssignmentAdmin, MeXpAdmin, OrderAdmin, OrderReader, OverrideShipping, OverrideTax, OverrideUnitPrice, PasswordReset, PriceScheduleAdmin, PriceScheduleReader, ProductAdmin, ProductAssignmentAdmin, ProductFacetAdmin, ProductFacetReader, ProductReader, PromotionAdmin, PromotionReader, SecurityProfileAdmin, SecurityProfileReader, SetSecurityProfile, ShipmentAdmin, ShipmentReader, Shopper, SpendingAccountAdmin, SpendingAccountReader, SupplierAddressAdmin, SupplierAddressReader, SupplierAdmin, SupplierReader, SupplierUserAdmin, SupplierUserGroupAdmin, SupplierUserGroupReader, SupplierUserReader, UnsubmittedOrderReader, UserGroupAdmin, UserGroupReader, OpenIDConnectReader, OpenIDConnectAdmin, MessageSenderReader, MessageSenderAdmin, XpIndexAdmin, WebhookReader, WebhookAdmin, IntegrationEventReader, IntegrationEventAdmin, TrackingEventReader, TrackingEventAdmin }
 	public enum ApprovalStatus { Pending, Approved, Declined }
 	public enum ApprovalType { Order, OrderReturn }
 	public enum CommerceRole { Buyer, Seller, Supplier }
@@ -16,6 +16,7 @@ namespace OrderCloud.SDK
 	public enum PaymentType { PurchaseOrder, CreditCard, SpendingAccount }
 	public enum PriceMarkupType { NoMarkup, AmountPerQuantity, AmountTotal, Percentage }
 	public enum SearchType { AnyTerm, AllTermsAnyField, AllTermsSameField, ExactPhrase, ExactPhrasePrefix }
+	public enum TrackingEventType { UserLoggedIn, LineItemAdded, LineItemUpdated, OrderSubmitted }
 	public enum UserOrderMoveOption { None, Unsubmitted, All }
 	public enum XpThingType { Address, Variant, Order, OrderReturn, LineItem, CostCenter, CreditCard, Payment, Spec, SpecOption, UserGroup, Company, Category, PriceSchedule, Shipment, SpendingAccount, User, Promotion, ApprovalRule, SellerApprovalRule, Catalog, ProductFacet, MessageSender, InventoryRecord, ProductCollection }
 	public class AccessToken : OrderCloudModel
@@ -829,6 +830,8 @@ namespace OrderCloud.SDK
 		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
 		/// <summary>ID of the owner.</summary>
 		public string OwnerID { get => GetProp<string>("OwnerID"); set => SetProp<string>("OwnerID", value); }
+		/// <summary>Allow inventory record to be used by all buyers in your Marketplace without creating explicit assignments, defaults to true.</summary>
+		public bool AllowAllBuyers { get => GetProp<bool>("AllowAllBuyers", true); set => SetProp<bool>("AllowAllBuyers", value); }
 		/// <summary>Address of the inventory record.</summary>
 		[ApiReadOnly]
 		public Address Address { get => GetProp<Address>("Address"); set => SetProp<Address>("Address", value); }
@@ -855,6 +858,17 @@ namespace OrderCloud.SDK
 		/// <summary>Address of the inventory record.</summary>
 		[ApiReadOnly]
 		public new TAddress Address { get => GetProp<TAddress>("Address"); set => SetProp<TAddress>("Address", value); }
+	}
+	public class InventoryRecordAssignment : OrderCloudModel
+	{
+		/// <summary>ID of the inventory record. Required. Sortable: priority level 1.</summary>
+		[Required]
+		public string InventoryRecordID { get => GetProp<string>("InventoryRecordID"); set => SetProp<string>("InventoryRecordID", value); }
+		/// <summary>ID of the buyer. Required. Sortable: priority level 2.</summary>
+		[Required]
+		public string BuyerID { get => GetProp<string>("BuyerID"); set => SetProp<string>("BuyerID", value); }
+		/// <summary>ID of the user group. Sortable: priority level 3.</summary>
+		public string UserGroupID { get => GetProp<string>("UserGroupID"); set => SetProp<string>("UserGroupID", value); }
 	}
 	public class LineItem : OrderCloudModel
 	{
@@ -956,6 +970,8 @@ namespace OrderCloud.SDK
 		public PartialAdHocProduct Product { get => GetProp<PartialAdHocProduct>("Product"); set => SetProp<PartialAdHocProduct>("Product", value); }
 		/// <summary>Promotion overrides of the line item override.</summary>
 		public IList<PromotionOverride> PromotionOverrides { get => GetProp<IList<PromotionOverride>>("PromotionOverrides", new List<PromotionOverride>()); set => SetProp<IList<PromotionOverride>>("PromotionOverrides", value); }
+		/// <summary>ID of the inventory record.</summary>
+		public string InventoryRecordID { get => GetProp<string>("InventoryRecordID"); set => SetProp<string>("InventoryRecordID", value); }
 		/// <summary>Remove of the line item override.</summary>
 		public bool? Remove { get => GetProp<bool?>("Remove"); set => SetProp<bool?>("Remove", value); }
 	}
@@ -1429,6 +1445,12 @@ namespace OrderCloud.SDK
 		/// <summary>ID of the line item.</summary>
 		[ApiReadOnly]
 		public string LineItemID { get => GetProp<string>("LineItemID"); set => SetProp<string>("LineItemID", value); }
+		/// <summary>True when the Amount has been set via PromotionOverrides.</summary>
+		[ApiReadOnly]
+		public bool AmountOverridden { get => GetProp<bool>("AmountOverridden"); set => SetProp<bool>("AmountOverridden", value); }
+		/// <summary>Date applied of the order promotion. Sortable.</summary>
+		[ApiReadOnly]
+		public DateTimeOffset? DateApplied { get => GetProp<DateTimeOffset?>("DateApplied"); set => SetProp<DateTimeOffset?>("DateApplied", value); }
 		/// <summary>ID of the order promotion. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 2.</summary>
 		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
 		/// <summary>If true, certain eligible expression requirements must be met, and the PromotionDiscount will be applied at the line item level.</summary>
@@ -2469,6 +2491,22 @@ namespace OrderCloud.SDK
 		[Required]
 		public string NewPassword { get => GetProp<string>("NewPassword"); set => SetProp<string>("NewPassword", value); }
 	}
+	public class TrackingEvent : OrderCloudModel
+	{
+		/// <summary>ID of the tracking event. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 1.</summary>
+		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
+		/// <summary>Event type of the tracking event. Required. Searchable: priority level 2. Sortable: priority level 2. Possible values: UserLoggedIn, LineItemAdded, LineItemUpdated, OrderSubmitted.</summary>
+		[Required]
+		public TrackingEventType EventType { get => GetProp<TrackingEventType>("EventType"); set => SetProp<TrackingEventType>("EventType", value); }
+		/// <summary>ID of the client. Required.</summary>
+		[Required]
+		public string ClientID { get => GetProp<string>("ClientID"); set => SetProp<string>("ClientID", value); }
+		/// <summary>Name of the tracking event. Required.</summary>
+		[Required]
+		public string Name { get => GetProp<string>("Name"); set => SetProp<string>("Name", value); }
+		/// <summary>Config data of the tracking event.</summary>
+		public object ConfigData { get => GetProp<object>("ConfigData"); set => SetProp<object>("ConfigData", value); }
+	}
 	public class User : OrderCloudModel
 	{
 		/// <summary>ID of the user. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable.</summary>
@@ -2807,6 +2845,7 @@ namespace OrderCloud.SDK
 	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic PartialSupplier class instead.</typeparam>
 	public class PartialSupplier<Txp> : PartialSupplier
 	{ }
+	public class PartialTrackingEvent : TrackingEvent, IPartial { }
 	public class PartialUser : User, IPartial { }
 	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic PartialUser class instead.</typeparam>
 	public class PartialUser<Txp> : PartialUser

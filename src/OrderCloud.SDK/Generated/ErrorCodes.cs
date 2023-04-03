@@ -24,15 +24,6 @@ namespace OrderCloud.SDK
 			/// <summary>Cannot assign address without defining it as either a billing or a shipping address.</summary>
 			public const string MustBeBillingOrShipping = "AddressAssignment.MustBeBillingOrShipping";
 		}
-		public static class AnalyticsEvent
-		{
-			/// <summary>Only one AnalyticsEvent of a given type is permitted for the same ApiClient.</summary>
-			public const string CannotCreateMultipleEventsOfSameType = "AnalyticsEvent.CannotCreateMultipleEventsOfSameType";
-			/// <summary>The properties ClientID and EventType cannot be updated.</summary>
-			public const string CannotUpdateProperty = "AnalyticsEvent.CannotUpdateProperty";
-			/// <summary>The ApiClient specified by ClientID in the request does not exist.</summary>
-			public const string InvalidClientID = "AnalyticsEvent.InvalidClientID";
-		}
 		public static class Api
 		{
 			/// <summary>The API is down briefly for maintenance. Please try again in a few seconds.</summary>
@@ -486,6 +477,11 @@ namespace OrderCloud.SDK
 			/// <summary>Cannot exceed 500 product entries per Product Collection.</summary>
 			public const string ProductEntryLimit = "ProductCollection.ProductEntryLimit";
 		}
+		public static class ProductSyncConfig
+		{
+			/// <summary>Only one product sync can be configured for a marketplace.</summary>
+			public const string OnlyOneConfigPerMarketplace = "ProductSyncConfig.OnlyOneConfigPerMarketplace";
+		}
 		public static class Promotion
 		{
 			/// <summary>Promotion has already been added to this order.</summary>
@@ -577,6 +573,15 @@ namespace OrderCloud.SDK
 		{
 			/// <summary>The redemption code specified is already in use.</summary>
 			public const string InvalidRedemptionCode = "SpendingAccount.InvalidRedemptionCode";
+		}
+		public static class TrackingEvent
+		{
+			/// <summary>Only one TrackingEvent of a given type is permitted for the same ApiClient.</summary>
+			public const string CannotCreateMultipleEventsOfSameType = "TrackingEvent.CannotCreateMultipleEventsOfSameType";
+			/// <summary>The properties ClientID and EventType cannot be updated.</summary>
+			public const string CannotUpdateProperty = "TrackingEvent.CannotUpdateProperty";
+			/// <summary>The ApiClient specified by ClientID in the request does not exist.</summary>
+			public const string InvalidClientID = "TrackingEvent.InvalidClientID";
 		}
 		public static class User
 		{
