@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
@@ -49,7 +48,7 @@ namespace OrderCloud.SDK
 		/// Sends a token request to the OrderCloud authorization server using the OAuth2 client credentials grant flow.
 		/// </summary>
 		Task<TokenResponse> AuthenticateAsync(string clientID, string clientSecret, params ApiRole[] roles);
-		
+
 		/// <summary>
 		/// Sends a token request to the OrderCloud authorization server using the OAuth2 refresh_token grant flow.
 		/// </summary>
@@ -126,21 +125,21 @@ namespace OrderCloud.SDK
 			};
 			return AuthenticateAsync(req);
 		}
-		
+
 		public Task<TokenResponse> RefreshTokenAsync(string refreshToken) {
 			return RefreshTokenAsync(Config.ClientId, refreshToken);
 		}
-        
+
 		public Task<TokenResponse> RefreshTokenAsync(string clientID, string refreshToken) {
 			Require(clientID, nameof(clientID));
 			Require(refreshToken, nameof(refreshToken));
-            
+
 			var req = new OAuthTokenRequestWithRefreshTokenGrant {
 				client_id = clientID,
 				refresh_token = refreshToken
 			};
 			return AuthenticateAsync(req);
-		}		
+		}
 
 		public void Dispose() => TokenResponse = null;
 
@@ -155,47 +154,24 @@ namespace OrderCloud.SDK
 			.Request(pathSegments)
 			.ConfigureRequest(settings => {
 				settings.BeforeCallAsync = EnsureTokenAsync;
-				settings.OnErrorAsync = ThrowApiExceptionAsync;
+				settings.OnErrorAsync = call => ThrowOcExceptionAsync<ApiErrorResponse>(call, r => r.Errors);
 				settings.JsonSerializer = Serializer;
 			});
 
-		private async Task ThrowApiExceptionAsync(FlurlCall call) {
-			ApiErrorResponse resp;
+		private async Task ThrowOcExceptionAsync<TError>(FlurlCall call, Func<TError, ApiError[]> buildErrors) {
+			if (!(call.Exception is FlurlHttpException fex))
+				return;
 
+			ApiError[] errors;
 			try {
-				if (call.Response.StatusCode >= 500) return;
-				if (call.Exception is not FlurlHttpException fex) return;
-
-				resp = await fex.GetResponseJsonAsync<ApiErrorResponse>();
+				var body = await fex.GetResponseStringAsync();
+				var resp = Serializer.Deserialize<TError>(body);
+				errors = buildErrors(resp);
 			}
 			catch (Exception) {
-				// doing nothing here will bubble up the original exception
-				return;
+				errors = new[] { new ApiError { Message = fex.Message } };
 			}
-
-			if (resp == null) return;
-
-			throw new OrderCloudException(call, resp?.Errors);
-		}
-
-		private async Task ThrowAuthExceptionAsync(FlurlCall call) {
-			AuthErrorResponse resp;
-
-			try {
-				if (call.Response.StatusCode >= 500) return;
-				if (call.Exception is not FlurlHttpException fex) return;
-
-				resp = await fex.GetResponseJsonAsync<AuthErrorResponse>();
-			}
-			catch (Exception) {
-				// doing nothing here will bubble up the original exception
-				return;
-			}
-
-			if (resp == null) return;
-
-			var error = new ApiError { ErrorCode = resp.error, Message = resp.error_description };
-			throw new OrderCloudException(call, new[] { error });
+			throw new OrderCloudException(call, errors);
 		}
 
 		private readonly SemaphoreSlim _authLock = new(1);
@@ -236,7 +212,12 @@ namespace OrderCloud.SDK
 			var resp = await AuthClient
 				.Request("oauth/token")
 				.ConfigureRequest(settings => {
-					settings.OnErrorAsync = ThrowAuthExceptionAsync;
+					settings.OnErrorAsync = call => ThrowOcExceptionAsync<AuthErrorResponse>(call, r => new[] {
+						new ApiError {
+							ErrorCode = r.error,
+							Message = r.error_description
+						}
+					}); ;
 					settings.JsonSerializer = Serializer;
 				})
 				.PostUrlEncodedAsync(req)

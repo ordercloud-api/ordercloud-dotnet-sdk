@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Net.Http;
@@ -299,32 +300,30 @@ namespace OrderCloud.SDK.Tests
 		}
 
 		[Test]
-		public void http_error_auth_exception_handled()
-		{
-			using (var httpTest = new HttpTest())
-			{
-				httpTest.RespondWith("<>", 502); // auth response with 500 level error code with response that could cause stackoverflow exception if it gets deserialized
+		public void http_error_auth_exception_handled() {
+			using var httpTest = new HttpTest();
 
-				AsyncTestDelegate del = async () => await GetClient().Me.GetAsync(); // Will ThrowAuthExceptionAsync
+			httpTest.RespondWith("<>", 502); // auth response with 500 level error code with response that could cause stackoverflow exception if it gets deserialized
 
-				var response = Assert.ThrowsAsync<FlurlHttpException>(del);
-				Assert.NotNull(response);
-				Assert.AreEqual(response.Call.Response.StatusCode, 502);
-			}
+			AsyncTestDelegate del = async () => await GetClient().Me.GetAsync(); // Will ThrowAuthExceptionAsync
+
+			var response = Assert.ThrowsAsync<OrderCloudException>(del);
+			Assert.NotNull(response);
+			Assert.AreEqual(response.HttpStatus, HttpStatusCode.BadGateway);
 		}
 
 		[Test]
 		public void http_error_api_exception_handled() {
-			using (var httpTest = new HttpTest()) {
-				httpTest.RespondWith("{}"); // auth response
-				httpTest.RespondWith("<>", 504); // api response that could cause stackoverflow exception if it gets deserialized
+			using var httpTest = new HttpTest();
 
-				AsyncTestDelegate del = async () => await GetClient().Me.GetAsync(); //Will ThrowApiExceptionAsync
+			httpTest.RespondWith("{}"); // auth response
+			httpTest.RespondWith("<>", 504); // api response that could cause stackoverflow exception if it gets deserialized
 
-				var response = Assert.ThrowsAsync<FlurlHttpException>(del);
-				Assert.NotNull(response);
-				Assert.AreEqual(response.Call.Response.StatusCode, 504);
-			}
+			AsyncTestDelegate del = async () => await GetClient().Me.GetAsync(); //Will ThrowApiExceptionAsync
+
+			var response = Assert.ThrowsAsync<OrderCloudException>(del);
+			Assert.NotNull(response);
+			Assert.AreEqual(response.HttpStatus, HttpStatusCode.GatewayTimeout);
 		}
 
 		private OrderCloudClient GetClient() => new OrderCloudClient(new OrderCloudClientConfig {
