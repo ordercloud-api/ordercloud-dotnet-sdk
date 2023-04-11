@@ -1982,6 +1982,120 @@ namespace OrderCloud.SDK
 				public string ProductCollectionID { get; set; }
 				public string ProductID { get; set; }
 			}
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/me/subscriptions.</summary>
+			[SentOn("POST", "v1/me/subscriptions")]
+			public class CreateSubscription : WebhookPayload<Subscription, Subscription, object, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/me/subscriptions.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TSubscription">Specific type of the Subscription. If not using a custom type, specify Subscription.</typeparam>
+			[SentOn("POST", "v1/me/subscriptions")]
+			public class CreateSubscription<TConfigData, TSubscription> : WebhookPayload<TSubscription, TSubscription, object, TConfigData>
+				where TSubscription : Subscription
+			{ }
+			/// <summary>Webhook payload sent by OrderCloud on PUT v1/me/subscriptions/{subscriptionID}.</summary>
+			[SentOn("PUT", "v1/me/subscriptions/{subscriptionID}")]
+			public class SaveSubscription : WebhookPayload<Subscription, Subscription, SaveSubscriptionRouteParams, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on PUT v1/me/subscriptions/{subscriptionID}.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TSubscription">Specific type of the Subscription. If not using a custom type, specify Subscription.</typeparam>
+			[SentOn("PUT", "v1/me/subscriptions/{subscriptionID}")]
+			public class SaveSubscription<TConfigData, TSubscription> : WebhookPayload<TSubscription, TSubscription, SaveSubscriptionRouteParams, TConfigData>
+				where TSubscription : Subscription
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/me/subscriptions/{subscriptionID}.</summary>
+			public class SaveSubscriptionRouteParams
+			{
+				public string SubscriptionID { get; set; }
+			}
+			/// <summary>Webhook payload sent by OrderCloud on PATCH v1/me/subscriptions/{subscriptionID}.</summary>
+			[SentOn("PATCH", "v1/me/subscriptions/{subscriptionID}")]
+			public class PatchSubscription : WebhookPayload<Subscription, Subscription, PatchSubscriptionRouteParams, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on PATCH v1/me/subscriptions/{subscriptionID}.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TSubscription">Specific type of the Subscription. If not using a custom type, specify Subscription.</typeparam>
+			[SentOn("PATCH", "v1/me/subscriptions/{subscriptionID}")]
+			public class PatchSubscription<TConfigData, TSubscription> : WebhookPayload<TSubscription, TSubscription, PatchSubscriptionRouteParams, TConfigData>
+				where TSubscription : Subscription
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/me/subscriptions/{subscriptionID}.</summary>
+			public class PatchSubscriptionRouteParams
+			{
+				public string SubscriptionID { get; set; }
+			}
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/me/subscriptions/{subscriptionID}.</summary>
+			[SentOn("DELETE", "v1/me/subscriptions/{subscriptionID}")]
+			public class DeleteSubscription : WebhookPayload<object, object, DeleteSubscriptionRouteParams, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/me/subscriptions/{subscriptionID}.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, use the non-generic payload type instead.</typeparam>
+			[SentOn("DELETE", "v1/me/subscriptions/{subscriptionID}")]
+			public class DeleteSubscription<TConfigData> : WebhookPayload<object, object, DeleteSubscriptionRouteParams, TConfigData>
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/me/subscriptions/{subscriptionID}.</summary>
+			public class DeleteSubscriptionRouteParams
+			{
+				public string SubscriptionID { get; set; }
+			}
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/me/subscriptions/{subscriptionID}/items.</summary>
+			[SentOn("POST", "v1/me/subscriptions/{subscriptionID}/items")]
+			public class CreateSubscriptionItem : WebhookPayload<LineItem, LineItem, CreateSubscriptionItemRouteParams, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/me/subscriptions/{subscriptionID}/items.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TLineItem">Specific type of the LineItem. If not using a custom type, specify LineItem.</typeparam>
+			[SentOn("POST", "v1/me/subscriptions/{subscriptionID}/items")]
+			public class CreateSubscriptionItem<TConfigData, TLineItem> : WebhookPayload<TLineItem, TLineItem, CreateSubscriptionItemRouteParams, TConfigData>
+				where TLineItem : LineItem
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/me/subscriptions/{subscriptionID}/items.</summary>
+			public class CreateSubscriptionItemRouteParams
+			{
+				public string SubscriptionID { get; set; }
+			}
+			/// <summary>Webhook payload sent by OrderCloud on PUT v1/me/subscriptions/{subscriptionID}/items/{subscriptionItemID}.</summary>
+			[SentOn("PUT", "v1/me/subscriptions/{subscriptionID}/items/{subscriptionItemID}")]
+			public class SaveSubscriptionItem : WebhookPayload<LineItem, LineItem, SaveSubscriptionItemRouteParams, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on PUT v1/me/subscriptions/{subscriptionID}/items/{subscriptionItemID}.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TLineItem">Specific type of the LineItem. If not using a custom type, specify LineItem.</typeparam>
+			[SentOn("PUT", "v1/me/subscriptions/{subscriptionID}/items/{subscriptionItemID}")]
+			public class SaveSubscriptionItem<TConfigData, TLineItem> : WebhookPayload<TLineItem, TLineItem, SaveSubscriptionItemRouteParams, TConfigData>
+				where TLineItem : LineItem
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/me/subscriptions/{subscriptionID}/items/{subscriptionItemID}.</summary>
+			public class SaveSubscriptionItemRouteParams
+			{
+				public string SubscriptionID { get; set; }
+				public string SubscriptionItemID { get; set; }
+			}
+			/// <summary>Webhook payload sent by OrderCloud on PATCH v1/me/subscriptions/{subscriptionID}/items/{subscriptionItemID}.</summary>
+			[SentOn("PATCH", "v1/me/subscriptions/{subscriptionID}/items/{subscriptionItemID}")]
+			public class PatchSubscriptionItem : WebhookPayload<LineItem, LineItem, PatchSubscriptionItemRouteParams, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on PATCH v1/me/subscriptions/{subscriptionID}/items/{subscriptionItemID}.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TLineItem">Specific type of the LineItem. If not using a custom type, specify LineItem.</typeparam>
+			[SentOn("PATCH", "v1/me/subscriptions/{subscriptionID}/items/{subscriptionItemID}")]
+			public class PatchSubscriptionItem<TConfigData, TLineItem> : WebhookPayload<TLineItem, TLineItem, PatchSubscriptionItemRouteParams, TConfigData>
+				where TLineItem : LineItem
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/me/subscriptions/{subscriptionID}/items/{subscriptionItemID}.</summary>
+			public class PatchSubscriptionItemRouteParams
+			{
+				public string SubscriptionID { get; set; }
+				public string SubscriptionItemID { get; set; }
+			}
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/me/subscriptions/{subscriptionID}/items/{subscriptionItemID}.</summary>
+			[SentOn("DELETE", "v1/me/subscriptions/{subscriptionID}/items/{subscriptionItemID}")]
+			public class DeleteSubscriptionItem : WebhookPayload<object, object, DeleteSubscriptionItemRouteParams, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/me/subscriptions/{subscriptionID}/items/{subscriptionItemID}.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, use the non-generic payload type instead.</typeparam>
+			[SentOn("DELETE", "v1/me/subscriptions/{subscriptionID}/items/{subscriptionItemID}")]
+			public class DeleteSubscriptionItem<TConfigData> : WebhookPayload<object, object, DeleteSubscriptionItemRouteParams, TConfigData>
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/me/subscriptions/{subscriptionID}/items/{subscriptionItemID}.</summary>
+			public class DeleteSubscriptionItemRouteParams
+			{
+				public string SubscriptionID { get; set; }
+				public string SubscriptionItemID { get; set; }
+			}
 		}
 		public static class MessageSenders
 		{
@@ -3608,6 +3722,157 @@ namespace OrderCloud.SDK
 			{
 				public string BuyerID { get; set; }
 				public string SpendingAccountID { get; set; }
+			}
+		}
+		public static class SubscriptionIntegrations
+		{
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/integrations/subscription.</summary>
+			[SentOn("DELETE", "v1/integrations/subscription")]
+			public class Delete : WebhookPayload<object, object, object, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/integrations/subscription.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, use the non-generic payload type instead.</typeparam>
+			[SentOn("DELETE", "v1/integrations/subscription")]
+			public class Delete<TConfigData> : WebhookPayload<object, object, object, TConfigData>
+			{ }
+			/// <summary>Webhook payload sent by OrderCloud on PUT v1/integrations/subscription.</summary>
+			[SentOn("PUT", "v1/integrations/subscription")]
+			public class Save : WebhookPayload<SubscriptionIntegration, SubscriptionIntegration, object, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on PUT v1/integrations/subscription.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TSubscriptionIntegration">Specific type of the SubscriptionIntegration. If not using a custom type, specify SubscriptionIntegration.</typeparam>
+			[SentOn("PUT", "v1/integrations/subscription")]
+			public class Save<TConfigData, TSubscriptionIntegration> : WebhookPayload<TSubscriptionIntegration, TSubscriptionIntegration, object, TConfigData>
+				where TSubscriptionIntegration : SubscriptionIntegration
+			{ }
+			/// <summary>Webhook payload sent by OrderCloud on PATCH v1/integrations/subscription.</summary>
+			[SentOn("PATCH", "v1/integrations/subscription")]
+			public class Patch : WebhookPayload<SubscriptionIntegration, SubscriptionIntegration, object, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on PATCH v1/integrations/subscription.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TSubscriptionIntegration">Specific type of the SubscriptionIntegration. If not using a custom type, specify SubscriptionIntegration.</typeparam>
+			[SentOn("PATCH", "v1/integrations/subscription")]
+			public class Patch<TConfigData, TSubscriptionIntegration> : WebhookPayload<TSubscriptionIntegration, TSubscriptionIntegration, object, TConfigData>
+				where TSubscriptionIntegration : SubscriptionIntegration
+			{ }
+		}
+		public static class SubscriptionItems
+		{
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/subscriptions/{subscriptionID}/items.</summary>
+			[SentOn("POST", "v1/subscriptions/{subscriptionID}/items")]
+			public class Create : WebhookPayload<LineItem, LineItem, CreateRouteParams, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/subscriptions/{subscriptionID}/items.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TLineItem">Specific type of the LineItem. If not using a custom type, specify LineItem.</typeparam>
+			[SentOn("POST", "v1/subscriptions/{subscriptionID}/items")]
+			public class Create<TConfigData, TLineItem> : WebhookPayload<TLineItem, TLineItem, CreateRouteParams, TConfigData>
+				where TLineItem : LineItem
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/subscriptions/{subscriptionID}/items.</summary>
+			public class CreateRouteParams
+			{
+				public string SubscriptionID { get; set; }
+			}
+			/// <summary>Webhook payload sent by OrderCloud on PUT v1/subscriptions/{subscriptionID}/items/{subscriptionItemID}.</summary>
+			[SentOn("PUT", "v1/subscriptions/{subscriptionID}/items/{subscriptionItemID}")]
+			public class Save : WebhookPayload<LineItem, LineItem, SaveRouteParams, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on PUT v1/subscriptions/{subscriptionID}/items/{subscriptionItemID}.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TLineItem">Specific type of the LineItem. If not using a custom type, specify LineItem.</typeparam>
+			[SentOn("PUT", "v1/subscriptions/{subscriptionID}/items/{subscriptionItemID}")]
+			public class Save<TConfigData, TLineItem> : WebhookPayload<TLineItem, TLineItem, SaveRouteParams, TConfigData>
+				where TLineItem : LineItem
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/subscriptions/{subscriptionID}/items/{subscriptionItemID}.</summary>
+			public class SaveRouteParams
+			{
+				public string SubscriptionID { get; set; }
+				public string SubscriptionItemID { get; set; }
+			}
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/subscriptions/{subscriptionID}/items/{subscriptionItemID}.</summary>
+			[SentOn("DELETE", "v1/subscriptions/{subscriptionID}/items/{subscriptionItemID}")]
+			public class Delete : WebhookPayload<object, object, DeleteRouteParams, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/subscriptions/{subscriptionID}/items/{subscriptionItemID}.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, use the non-generic payload type instead.</typeparam>
+			[SentOn("DELETE", "v1/subscriptions/{subscriptionID}/items/{subscriptionItemID}")]
+			public class Delete<TConfigData> : WebhookPayload<object, object, DeleteRouteParams, TConfigData>
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/subscriptions/{subscriptionID}/items/{subscriptionItemID}.</summary>
+			public class DeleteRouteParams
+			{
+				public string SubscriptionID { get; set; }
+				public string SubscriptionItemID { get; set; }
+			}
+			/// <summary>Webhook payload sent by OrderCloud on PATCH v1/subscriptions/{subscriptionID}/items/{subscriptionItemID}.</summary>
+			[SentOn("PATCH", "v1/subscriptions/{subscriptionID}/items/{subscriptionItemID}")]
+			public class Patch : WebhookPayload<LineItem, LineItem, PatchRouteParams, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on PATCH v1/subscriptions/{subscriptionID}/items/{subscriptionItemID}.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TLineItem">Specific type of the LineItem. If not using a custom type, specify LineItem.</typeparam>
+			[SentOn("PATCH", "v1/subscriptions/{subscriptionID}/items/{subscriptionItemID}")]
+			public class Patch<TConfigData, TLineItem> : WebhookPayload<TLineItem, TLineItem, PatchRouteParams, TConfigData>
+				where TLineItem : LineItem
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/subscriptions/{subscriptionID}/items/{subscriptionItemID}.</summary>
+			public class PatchRouteParams
+			{
+				public string SubscriptionID { get; set; }
+				public string SubscriptionItemID { get; set; }
+			}
+		}
+		public static class Subscriptions
+		{
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/subscriptions.</summary>
+			[SentOn("POST", "v1/subscriptions")]
+			public class Create : WebhookPayload<Subscription, Subscription, object, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/subscriptions.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TSubscription">Specific type of the Subscription. If not using a custom type, specify Subscription.</typeparam>
+			[SentOn("POST", "v1/subscriptions")]
+			public class Create<TConfigData, TSubscription> : WebhookPayload<TSubscription, TSubscription, object, TConfigData>
+				where TSubscription : Subscription
+			{ }
+			/// <summary>Webhook payload sent by OrderCloud on PUT v1/subscriptions/{subscriptionID}.</summary>
+			[SentOn("PUT", "v1/subscriptions/{subscriptionID}")]
+			public class Save : WebhookPayload<Subscription, Subscription, SaveRouteParams, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on PUT v1/subscriptions/{subscriptionID}.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TSubscription">Specific type of the Subscription. If not using a custom type, specify Subscription.</typeparam>
+			[SentOn("PUT", "v1/subscriptions/{subscriptionID}")]
+			public class Save<TConfigData, TSubscription> : WebhookPayload<TSubscription, TSubscription, SaveRouteParams, TConfigData>
+				where TSubscription : Subscription
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/subscriptions/{subscriptionID}.</summary>
+			public class SaveRouteParams
+			{
+				public string SubscriptionID { get; set; }
+			}
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/subscriptions/{subscriptionID}.</summary>
+			[SentOn("DELETE", "v1/subscriptions/{subscriptionID}")]
+			public class Delete : WebhookPayload<object, object, DeleteRouteParams, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/subscriptions/{subscriptionID}.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, use the non-generic payload type instead.</typeparam>
+			[SentOn("DELETE", "v1/subscriptions/{subscriptionID}")]
+			public class Delete<TConfigData> : WebhookPayload<object, object, DeleteRouteParams, TConfigData>
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/subscriptions/{subscriptionID}.</summary>
+			public class DeleteRouteParams
+			{
+				public string SubscriptionID { get; set; }
+			}
+			/// <summary>Webhook payload sent by OrderCloud on PATCH v1/subscriptions/{subscriptionID}.</summary>
+			[SentOn("PATCH", "v1/subscriptions/{subscriptionID}")]
+			public class Patch : WebhookPayload<Subscription, Subscription, PatchRouteParams, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on PATCH v1/subscriptions/{subscriptionID}.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TSubscription">Specific type of the Subscription. If not using a custom type, specify Subscription.</typeparam>
+			[SentOn("PATCH", "v1/subscriptions/{subscriptionID}")]
+			public class Patch<TConfigData, TSubscription> : WebhookPayload<TSubscription, TSubscription, PatchRouteParams, TConfigData>
+				where TSubscription : Subscription
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/subscriptions/{subscriptionID}.</summary>
+			public class PatchRouteParams
+			{
+				public string SubscriptionID { get; set; }
 			}
 		}
 		public static class SupplierAddresses

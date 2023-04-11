@@ -41,6 +41,9 @@ namespace OrderCloud.SDK
 		IShipmentsResource Shipments { get; }
 		ISpecsResource Specs { get; }
 		ISpendingAccountsResource SpendingAccounts { get; }
+		ISubscriptionIntegrationsResource SubscriptionIntegrations { get; }
+		ISubscriptionItemsResource SubscriptionItems { get; }
+		ISubscriptionsResource Subscriptions { get; }
 		ISupplierAddressesResource SupplierAddresses { get; }
 		ISuppliersResource Suppliers { get; }
 		ISupplierUserGroupsResource SupplierUserGroups { get; }
@@ -2806,6 +2809,151 @@ namespace OrderCloud.SDK
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task DeleteProductCollectionEntryAsync(string productCollectionID, string productID, string accessToken = null);
+		/// <summary>Get a list of subscriptions visible to this user.</summary>
+		/// <param name="search">Word or phrase to search for.</param>
+		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
+		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<Subscription>> ListSubscriptionsAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
+		/// <summary>Get a list of subscriptions visible to this user.</summary>
+		/// <param name="search">Word or phrase to search for.</param>
+		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
+		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<TSubscription>> ListSubscriptionsAsync<TSubscription>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TSubscription : Subscription;
+		/// <summary>Get a list of subscriptions visible to this user.</summary>
+		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<Subscription>> ListSubscriptionsAsync(Action<ListOptionsBuilder<Subscription>> buildListOpts, string accessToken = null);
+		/// <summary>Get a list of subscriptions visible to this user.</summary>
+		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<TSubscription>> ListSubscriptionsAsync<TSubscription>(Action<ListOptionsBuilder<TSubscription>> buildListOpts, string accessToken = null) where TSubscription : Subscription;
+		/// <summary>Get a single subscription.</summary>
+		/// <param name="subscriptionID">ID of the subscription.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<Subscription> GetSubscriptionAsync(string subscriptionID, string accessToken = null);
+		/// <summary>Get a single subscription.</summary>
+		/// <param name="subscriptionID">ID of the subscription.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TSubscription> GetSubscriptionAsync<TSubscription>(string subscriptionID, string accessToken = null) where TSubscription : Subscription;
+		/// <summary>Create a new subscription.</summary>
+		/// <param name="subscription">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<Subscription> CreateSubscriptionAsync(Subscription subscription, string accessToken = null);
+		/// <summary>Create a new subscription.</summary>
+		/// <param name="subscription">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TSubscription> CreateSubscriptionAsync<TSubscription>(Subscription subscription, string accessToken = null) where TSubscription : Subscription;
+		/// <summary>Create or update a subscription.</summary>
+		/// <param name="subscriptionID">ID of the subscription.</param>
+		/// <param name="subscription">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<Subscription> SaveSubscriptionAsync(string subscriptionID, Subscription subscription, string accessToken = null);
+		/// <summary>Create or update a subscription.</summary>
+		/// <param name="subscriptionID">ID of the subscription.</param>
+		/// <param name="subscription">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TSubscription> SaveSubscriptionAsync<TSubscription>(string subscriptionID, Subscription subscription, string accessToken = null) where TSubscription : Subscription;
+		/// <summary>Partially update a subscription.</summary>
+		/// <param name="subscriptionID">ID of the subscription.</param>
+		/// <param name="partialSubscription">The object that will be partially serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<Subscription> PatchSubscriptionAsync(string subscriptionID, PartialSubscription partialSubscription, string accessToken = null);
+		/// <summary>Partially update a subscription.</summary>
+		/// <param name="subscriptionID">ID of the subscription.</param>
+		/// <param name="partialSubscription">The object that will be partially serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TSubscription> PatchSubscriptionAsync<TSubscription>(string subscriptionID, PartialSubscription partialSubscription, string accessToken = null) where TSubscription : Subscription;
+		/// <summary>Delete a subscription.</summary>
+		/// <param name="subscriptionID">ID of the subscription.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task DeleteSubscriptionAsync(string subscriptionID, string accessToken = null);
+		/// <summary>Get a list of subscription items visible to this user.</summary>
+		/// <param name="subscriptionID">ID of the subscription.</param>
+		/// <param name="search">Word or phrase to search for.</param>
+		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
+		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<LineItem>> ListSubscriptionItemsAsync(string subscriptionID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
+		/// <summary>Get a list of subscription items visible to this user.</summary>
+		/// <param name="subscriptionID">ID of the subscription.</param>
+		/// <param name="search">Word or phrase to search for.</param>
+		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
+		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<TLineItem>> ListSubscriptionItemsAsync<TLineItem>(string subscriptionID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TLineItem : LineItem;
+		/// <summary>Get a list of subscription items visible to this user.</summary>
+		/// <param name="subscriptionID">ID of the subscription.</param>
+		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<LineItem>> ListSubscriptionItemsAsync(string subscriptionID, Action<ListOptionsBuilder<LineItem>> buildListOpts, string accessToken = null);
+		/// <summary>Get a list of subscription items visible to this user.</summary>
+		/// <param name="subscriptionID">ID of the subscription.</param>
+		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<TLineItem>> ListSubscriptionItemsAsync<TLineItem>(string subscriptionID, Action<ListOptionsBuilder<TLineItem>> buildListOpts, string accessToken = null) where TLineItem : LineItem;
+		/// <summary>Get a single subscription item.</summary>
+		/// <param name="subscriptionID">ID of the subscription.</param>
+		/// <param name="subscriptionItemID">ID of the subscription item.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<LineItem> GetSubscriptionItemAsync(string subscriptionID, string subscriptionItemID, string accessToken = null);
+		/// <summary>Get a single subscription item.</summary>
+		/// <param name="subscriptionID">ID of the subscription.</param>
+		/// <param name="subscriptionItemID">ID of the subscription item.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TLineItem> GetSubscriptionItemAsync<TLineItem>(string subscriptionID, string subscriptionItemID, string accessToken = null) where TLineItem : LineItem;
+		/// <summary>Create a new subscription item.</summary>
+		/// <param name="subscriptionID">ID of the subscription.</param>
+		/// <param name="lineItem">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<LineItem> CreateSubscriptionItemAsync(string subscriptionID, LineItem lineItem, string accessToken = null);
+		/// <summary>Create a new subscription item.</summary>
+		/// <param name="subscriptionID">ID of the subscription.</param>
+		/// <param name="lineItem">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TLineItem> CreateSubscriptionItemAsync<TLineItem>(string subscriptionID, LineItem lineItem, string accessToken = null) where TLineItem : LineItem;
+		/// <summary>Create or update a subscription item.</summary>
+		/// <param name="subscriptionID">ID of the subscription.</param>
+		/// <param name="subscriptionItemID">ID of the subscription item.</param>
+		/// <param name="lineItem">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<LineItem> SaveSubscriptionItemAsync(string subscriptionID, string subscriptionItemID, LineItem lineItem, string accessToken = null);
+		/// <summary>Create or update a subscription item.</summary>
+		/// <param name="subscriptionID">ID of the subscription.</param>
+		/// <param name="subscriptionItemID">ID of the subscription item.</param>
+		/// <param name="lineItem">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TLineItem> SaveSubscriptionItemAsync<TLineItem>(string subscriptionID, string subscriptionItemID, LineItem lineItem, string accessToken = null) where TLineItem : LineItem;
+		/// <summary>Partially update a subscription item.</summary>
+		/// <param name="subscriptionID">ID of the subscription.</param>
+		/// <param name="subscriptionItemID">ID of the subscription item.</param>
+		/// <param name="partialLineItem">The object that will be partially serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<LineItem> PatchSubscriptionItemAsync(string subscriptionID, string subscriptionItemID, PartialLineItem partialLineItem, string accessToken = null);
+		/// <summary>Partially update a subscription item.</summary>
+		/// <param name="subscriptionID">ID of the subscription.</param>
+		/// <param name="subscriptionItemID">ID of the subscription item.</param>
+		/// <param name="partialLineItem">The object that will be partially serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TLineItem> PatchSubscriptionItemAsync<TLineItem>(string subscriptionID, string subscriptionItemID, PartialLineItem partialLineItem, string accessToken = null) where TLineItem : LineItem;
+		/// <summary>Delete a subscription item.</summary>
+		/// <param name="subscriptionID">ID of the subscription.</param>
+		/// <param name="subscriptionItemID">ID of the subscription item.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task DeleteSubscriptionItemAsync(string subscriptionID, string subscriptionItemID, string accessToken = null);
 	}
 
 	public interface IMessageSendersResource
@@ -4776,6 +4924,188 @@ namespace OrderCloud.SDK
 		Task DeleteAssignmentAsync(string buyerID, string spendingAccountID, string userID = null, string userGroupID = null, string accessToken = null);
 	}
 
+	public interface ISubscriptionIntegrationsResource
+	{
+		/// <summary>Get a single subscription integration.</summary>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<SubscriptionIntegration> GetAsync(string accessToken = null);
+		/// <summary>Get a single subscription integration.</summary>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TSubscriptionIntegration> GetAsync<TSubscriptionIntegration>(string accessToken = null) where TSubscriptionIntegration : SubscriptionIntegration;
+		/// <summary>Delete a subscription integration.</summary>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task DeleteAsync(string accessToken = null);
+		/// <summary>Create or update a subscription integration. If an object with the same ID already exists, it will be overwritten.</summary>
+		/// <param name="subscriptionIntegration">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<SubscriptionIntegration> SaveAsync(SubscriptionIntegration subscriptionIntegration, string accessToken = null);
+		/// <summary>Create or update a subscription integration. If an object with the same ID already exists, it will be overwritten.</summary>
+		/// <param name="subscriptionIntegration">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TSubscriptionIntegration> SaveAsync<TSubscriptionIntegration>(SubscriptionIntegration subscriptionIntegration, string accessToken = null) where TSubscriptionIntegration : SubscriptionIntegration;
+		/// <summary>Partially update a subscription integration.</summary>
+		/// <param name="partialSubscriptionIntegration">The object that will be partially serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<SubscriptionIntegration> PatchAsync(PartialSubscriptionIntegration partialSubscriptionIntegration, string accessToken = null);
+		/// <summary>Partially update a subscription integration.</summary>
+		/// <param name="partialSubscriptionIntegration">The object that will be partially serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TSubscriptionIntegration> PatchAsync<TSubscriptionIntegration>(PartialSubscriptionIntegration partialSubscriptionIntegration, string accessToken = null) where TSubscriptionIntegration : SubscriptionIntegration;
+	}
+
+	public interface ISubscriptionItemsResource
+	{
+		/// <summary>Get a single subscription item.</summary>
+		/// <param name="subscriptionID">ID of the subscription.</param>
+		/// <param name="subscriptionItemID">ID of the subscription item.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<LineItem> GetAsync(string subscriptionID, string subscriptionItemID, string accessToken = null);
+		/// <summary>Get a single subscription item.</summary>
+		/// <param name="subscriptionID">ID of the subscription.</param>
+		/// <param name="subscriptionItemID">ID of the subscription item.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TLineItem> GetAsync<TLineItem>(string subscriptionID, string subscriptionItemID, string accessToken = null) where TLineItem : LineItem;
+		/// <summary>Get a list of subscription items.</summary>
+		/// <param name="subscriptionID">ID of the subscription.</param>
+		/// <param name="search">Word or phrase to search for.</param>
+		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
+		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<LineItem>> ListAsync(string subscriptionID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
+		/// <summary>Get a list of subscription items.</summary>
+		/// <param name="subscriptionID">ID of the subscription.</param>
+		/// <param name="search">Word or phrase to search for.</param>
+		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
+		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<TLineItem>> ListAsync<TLineItem>(string subscriptionID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TLineItem : LineItem;
+		/// <summary>Get a list of subscription items.</summary>
+		/// <param name="subscriptionID">ID of the subscription.</param>
+		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<LineItem>> ListAsync(string subscriptionID, Action<ListOptionsBuilder<LineItem>> buildListOpts, string accessToken = null);
+		/// <summary>Get a list of subscription items.</summary>
+		/// <param name="subscriptionID">ID of the subscription.</param>
+		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<TLineItem>> ListAsync<TLineItem>(string subscriptionID, Action<ListOptionsBuilder<TLineItem>> buildListOpts, string accessToken = null) where TLineItem : LineItem;
+		/// <summary>Create a new subscription item. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <param name="subscriptionID">ID of the subscription.</param>
+		/// <param name="lineItem">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<LineItem> CreateAsync(string subscriptionID, LineItem lineItem, string accessToken = null);
+		/// <summary>Create a new subscription item. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <param name="subscriptionID">ID of the subscription.</param>
+		/// <param name="lineItem">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TLineItem> CreateAsync<TLineItem>(string subscriptionID, LineItem lineItem, string accessToken = null) where TLineItem : LineItem;
+		/// <summary>Create or update a subscription item. If an object with the same ID already exists, it will be overwritten.</summary>
+		/// <param name="subscriptionID">ID of the subscription.</param>
+		/// <param name="subscriptionItemID">ID of the subscription item.</param>
+		/// <param name="lineItem">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<LineItem> SaveAsync(string subscriptionID, string subscriptionItemID, LineItem lineItem, string accessToken = null);
+		/// <summary>Create or update a subscription item. If an object with the same ID already exists, it will be overwritten.</summary>
+		/// <param name="subscriptionID">ID of the subscription.</param>
+		/// <param name="subscriptionItemID">ID of the subscription item.</param>
+		/// <param name="lineItem">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TLineItem> SaveAsync<TLineItem>(string subscriptionID, string subscriptionItemID, LineItem lineItem, string accessToken = null) where TLineItem : LineItem;
+		/// <summary>Delete a subscription item.</summary>
+		/// <param name="subscriptionID">ID of the subscription.</param>
+		/// <param name="subscriptionItemID">ID of the subscription item.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task DeleteAsync(string subscriptionID, string subscriptionItemID, string accessToken = null);
+		/// <summary>Partially update a subscription item.</summary>
+		/// <param name="subscriptionID">ID of the subscription.</param>
+		/// <param name="subscriptionItemID">ID of the subscription item.</param>
+		/// <param name="partialLineItem">The object that will be partially serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<LineItem> PatchAsync(string subscriptionID, string subscriptionItemID, PartialLineItem partialLineItem, string accessToken = null);
+		/// <summary>Partially update a subscription item.</summary>
+		/// <param name="subscriptionID">ID of the subscription.</param>
+		/// <param name="subscriptionItemID">ID of the subscription item.</param>
+		/// <param name="partialLineItem">The object that will be partially serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TLineItem> PatchAsync<TLineItem>(string subscriptionID, string subscriptionItemID, PartialLineItem partialLineItem, string accessToken = null) where TLineItem : LineItem;
+	}
+
+	public interface ISubscriptionsResource
+	{
+		/// <summary>Get a single subscription.</summary>
+		/// <param name="subscriptionID">ID of the subscription.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<Subscription> GetAsync(string subscriptionID, string accessToken = null);
+		/// <summary>Get a single subscription.</summary>
+		/// <param name="subscriptionID">ID of the subscription.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TSubscription> GetAsync<TSubscription>(string subscriptionID, string accessToken = null) where TSubscription : Subscription;
+		/// <summary>Get a list of subscriptions.</summary>
+		/// <param name="search">Word or phrase to search for.</param>
+		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
+		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<Subscription>> ListAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
+		/// <summary>Get a list of subscriptions.</summary>
+		/// <param name="search">Word or phrase to search for.</param>
+		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
+		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<TSubscription>> ListAsync<TSubscription>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TSubscription : Subscription;
+		/// <summary>Get a list of subscriptions.</summary>
+		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<Subscription>> ListAsync(Action<ListOptionsBuilder<Subscription>> buildListOpts, string accessToken = null);
+		/// <summary>Get a list of subscriptions.</summary>
+		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<TSubscription>> ListAsync<TSubscription>(Action<ListOptionsBuilder<TSubscription>> buildListOpts, string accessToken = null) where TSubscription : Subscription;
+		/// <summary>Create a new subscription. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <param name="subscription">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<Subscription> CreateAsync(Subscription subscription, string accessToken = null);
+		/// <summary>Create a new subscription. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <param name="subscription">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TSubscription> CreateAsync<TSubscription>(Subscription subscription, string accessToken = null) where TSubscription : Subscription;
+		/// <summary>Create or update a subscription. If an object with the same ID already exists, it will be overwritten.</summary>
+		/// <param name="subscriptionID">ID of the subscription.</param>
+		/// <param name="subscription">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<Subscription> SaveAsync(string subscriptionID, Subscription subscription, string accessToken = null);
+		/// <summary>Create or update a subscription. If an object with the same ID already exists, it will be overwritten.</summary>
+		/// <param name="subscriptionID">ID of the subscription.</param>
+		/// <param name="subscription">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TSubscription> SaveAsync<TSubscription>(string subscriptionID, Subscription subscription, string accessToken = null) where TSubscription : Subscription;
+		/// <summary>Delete a subscription.</summary>
+		/// <param name="subscriptionID">ID of the subscription.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task DeleteAsync(string subscriptionID, string accessToken = null);
+		/// <summary>Partially update a subscription.</summary>
+		/// <param name="subscriptionID">ID of the subscription.</param>
+		/// <param name="partialSubscription">The object that will be partially serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<Subscription> PatchAsync(string subscriptionID, PartialSubscription partialSubscription, string accessToken = null);
+		/// <summary>Partially update a subscription.</summary>
+		/// <param name="subscriptionID">ID of the subscription.</param>
+		/// <param name="partialSubscription">The object that will be partially serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TSubscription> PatchAsync<TSubscription>(string subscriptionID, PartialSubscription partialSubscription, string accessToken = null) where TSubscription : Subscription;
+	}
+
 	public interface ISupplierAddressesResource
 	{
 		/// <summary>Get a single supplier address.</summary>
@@ -5472,7 +5802,7 @@ namespace OrderCloud.SDK
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<XpIndex>> ListAsync(Action<ListOptionsBuilder<XpIndex>> buildListOpts, string accessToken = null);
 		/// <summary>Delete a XP index.</summary>
-		/// <param name="thingType">Thing type of the xp index. Possible values: Address, Variant, Order, OrderReturn, LineItem, CostCenter, CreditCard, Payment, Spec, SpecOption, UserGroup, Company, Category, PriceSchedule, Shipment, SpendingAccount, User, Promotion, ApprovalRule, SellerApprovalRule, Catalog, ProductFacet, MessageSender, InventoryRecord, ProductCollection.</param>
+		/// <param name="thingType">Thing type of the xp index. Possible values: Address, Variant, Order, OrderReturn, LineItem, CostCenter, CreditCard, Payment, Spec, SpecOption, UserGroup, Company, Category, PriceSchedule, Shipment, SpendingAccount, User, Promotion, ApprovalRule, SellerApprovalRule, Catalog, ProductFacet, MessageSender, InventoryRecord, ProductCollection, Subscription.</param>
 		/// <param name="key">Key of the xp index.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task DeleteAsync(XpThingType thingType, string key, string accessToken = null);
@@ -5520,6 +5850,9 @@ namespace OrderCloud.SDK
 			Shipments = new ShipmentsResource(this);
 			Specs = new SpecsResource(this);
 			SpendingAccounts = new SpendingAccountsResource(this);
+			SubscriptionIntegrations = new SubscriptionIntegrationsResource(this);
+			SubscriptionItems = new SubscriptionItemsResource(this);
+			Subscriptions = new SubscriptionsResource(this);
 			SupplierAddresses = new SupplierAddressesResource(this);
 			Suppliers = new SuppliersResource(this);
 			SupplierUserGroups = new SupplierUserGroupsResource(this);
@@ -5566,6 +5899,9 @@ namespace OrderCloud.SDK
 		public IShipmentsResource Shipments { get; private set; }
 		public ISpecsResource Specs { get; private set; }
 		public ISpendingAccountsResource SpendingAccounts { get; private set; }
+		public ISubscriptionIntegrationsResource SubscriptionIntegrations { get; private set; }
+		public ISubscriptionItemsResource SubscriptionItems { get; private set; }
+		public ISubscriptionsResource Subscriptions { get; private set; }
 		public ISupplierAddressesResource SupplierAddresses { get; private set; }
 		public ISuppliersResource Suppliers { get; private set; }
 		public ISupplierUserGroupsResource SupplierUserGroups { get; private set; }
@@ -6129,6 +6465,32 @@ namespace OrderCloud.SDK
 		public Task<ListPageWithFacets<TBuyerProduct>> ListProductCollectionEntriesAsync<TBuyerProduct>(string productCollectionID, Action<ListOptionsBuilder2<TBuyerProduct>> buildListOpts, string accessToken = null) where TBuyerProduct : BuyerProduct => Request("v1", "me", "productcollections", productCollectionID, "products").WithOAuthBearerToken(accessToken).SetListOptions(buildListOpts).GetJsonAsync<ListPageWithFacets<TBuyerProduct>>();
 		public Task CreateProductCollectionEntryAsync(string productCollectionID, string productID, string accessToken = null) => Request("v1", "me", "productcollections", productCollectionID, productID).WithOAuthBearerToken(accessToken).PutAsync(null);
 		public Task DeleteProductCollectionEntryAsync(string productCollectionID, string productID, string accessToken = null) => Request("v1", "me", "productcollections", productCollectionID, productID).WithOAuthBearerToken(accessToken).DeleteAsync();
+		public Task<ListPage<Subscription>> ListSubscriptionsAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) => ListSubscriptionsAsync<Subscription>(search, searchOn, sortBy, page, pageSize, filters, accessToken);
+		public Task<ListPage<TSubscription>> ListSubscriptionsAsync<TSubscription>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TSubscription : Subscription => Request("v1", "me", "subscriptions").WithOAuthBearerToken(accessToken).SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<TSubscription>>();
+		public Task<ListPage<Subscription>> ListSubscriptionsAsync(Action<ListOptionsBuilder<Subscription>> buildListOpts, string accessToken = null) => ListSubscriptionsAsync<Subscription>(buildListOpts, accessToken);
+		public Task<ListPage<TSubscription>> ListSubscriptionsAsync<TSubscription>(Action<ListOptionsBuilder<TSubscription>> buildListOpts, string accessToken = null) where TSubscription : Subscription => Request("v1", "me", "subscriptions").WithOAuthBearerToken(accessToken).SetListOptions(buildListOpts).GetJsonAsync<ListPage<TSubscription>>();
+		public Task<Subscription> GetSubscriptionAsync(string subscriptionID, string accessToken = null) => GetSubscriptionAsync<Subscription>(subscriptionID, accessToken);
+		public Task<TSubscription> GetSubscriptionAsync<TSubscription>(string subscriptionID, string accessToken = null) where TSubscription : Subscription => Request("v1", "me", "subscriptions", subscriptionID).WithOAuthBearerToken(accessToken).GetJsonAsync<TSubscription>();
+		public Task<Subscription> CreateSubscriptionAsync(Subscription subscription, string accessToken = null) => CreateSubscriptionAsync<Subscription>(subscription, accessToken);
+		public Task<TSubscription> CreateSubscriptionAsync<TSubscription>(Subscription subscription, string accessToken = null) where TSubscription : Subscription => Request("v1", "me", "subscriptions").WithOAuthBearerToken(accessToken).PostJsonAsync(ValidateModel(subscription)).ReceiveJson<TSubscription>();
+		public Task<Subscription> SaveSubscriptionAsync(string subscriptionID, Subscription subscription, string accessToken = null) => SaveSubscriptionAsync<Subscription>(subscriptionID, subscription, accessToken);
+		public Task<TSubscription> SaveSubscriptionAsync<TSubscription>(string subscriptionID, Subscription subscription, string accessToken = null) where TSubscription : Subscription => Request("v1", "me", "subscriptions", subscriptionID).WithOAuthBearerToken(accessToken).PutJsonAsync(ValidateModel(subscription)).ReceiveJson<TSubscription>();
+		public Task<Subscription> PatchSubscriptionAsync(string subscriptionID, PartialSubscription partialSubscription, string accessToken = null) => PatchSubscriptionAsync<Subscription>(subscriptionID, partialSubscription, accessToken);
+		public Task<TSubscription> PatchSubscriptionAsync<TSubscription>(string subscriptionID, PartialSubscription partialSubscription, string accessToken = null) where TSubscription : Subscription => Request("v1", "me", "subscriptions", subscriptionID).WithOAuthBearerToken(accessToken).PatchJsonAsync(ValidateModel(partialSubscription)).ReceiveJson<TSubscription>();
+		public Task DeleteSubscriptionAsync(string subscriptionID, string accessToken = null) => Request("v1", "me", "subscriptions", subscriptionID).WithOAuthBearerToken(accessToken).DeleteAsync();
+		public Task<ListPage<LineItem>> ListSubscriptionItemsAsync(string subscriptionID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) => ListSubscriptionItemsAsync<LineItem>(subscriptionID, search, searchOn, sortBy, page, pageSize, filters, accessToken);
+		public Task<ListPage<TLineItem>> ListSubscriptionItemsAsync<TLineItem>(string subscriptionID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TLineItem : LineItem => Request("v1", "me", "subscriptions", subscriptionID, "items").WithOAuthBearerToken(accessToken).SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<TLineItem>>();
+		public Task<ListPage<LineItem>> ListSubscriptionItemsAsync(string subscriptionID, Action<ListOptionsBuilder<LineItem>> buildListOpts, string accessToken = null) => ListSubscriptionItemsAsync<LineItem>(subscriptionID, buildListOpts, accessToken);
+		public Task<ListPage<TLineItem>> ListSubscriptionItemsAsync<TLineItem>(string subscriptionID, Action<ListOptionsBuilder<TLineItem>> buildListOpts, string accessToken = null) where TLineItem : LineItem => Request("v1", "me", "subscriptions", subscriptionID, "items").WithOAuthBearerToken(accessToken).SetListOptions(buildListOpts).GetJsonAsync<ListPage<TLineItem>>();
+		public Task<LineItem> GetSubscriptionItemAsync(string subscriptionID, string subscriptionItemID, string accessToken = null) => GetSubscriptionItemAsync<LineItem>(subscriptionID, subscriptionItemID, accessToken);
+		public Task<TLineItem> GetSubscriptionItemAsync<TLineItem>(string subscriptionID, string subscriptionItemID, string accessToken = null) where TLineItem : LineItem => Request("v1", "me", "subscriptions", subscriptionID, "items", subscriptionItemID).WithOAuthBearerToken(accessToken).GetJsonAsync<TLineItem>();
+		public Task<LineItem> CreateSubscriptionItemAsync(string subscriptionID, LineItem lineItem, string accessToken = null) => CreateSubscriptionItemAsync<LineItem>(subscriptionID, lineItem, accessToken);
+		public Task<TLineItem> CreateSubscriptionItemAsync<TLineItem>(string subscriptionID, LineItem lineItem, string accessToken = null) where TLineItem : LineItem => Request("v1", "me", "subscriptions", subscriptionID, "items").WithOAuthBearerToken(accessToken).PostJsonAsync(ValidateModel(lineItem)).ReceiveJson<TLineItem>();
+		public Task<LineItem> SaveSubscriptionItemAsync(string subscriptionID, string subscriptionItemID, LineItem lineItem, string accessToken = null) => SaveSubscriptionItemAsync<LineItem>(subscriptionID, subscriptionItemID, lineItem, accessToken);
+		public Task<TLineItem> SaveSubscriptionItemAsync<TLineItem>(string subscriptionID, string subscriptionItemID, LineItem lineItem, string accessToken = null) where TLineItem : LineItem => Request("v1", "me", "subscriptions", subscriptionID, "items", subscriptionItemID).WithOAuthBearerToken(accessToken).PutJsonAsync(ValidateModel(lineItem)).ReceiveJson<TLineItem>();
+		public Task<LineItem> PatchSubscriptionItemAsync(string subscriptionID, string subscriptionItemID, PartialLineItem partialLineItem, string accessToken = null) => PatchSubscriptionItemAsync<LineItem>(subscriptionID, subscriptionItemID, partialLineItem, accessToken);
+		public Task<TLineItem> PatchSubscriptionItemAsync<TLineItem>(string subscriptionID, string subscriptionItemID, PartialLineItem partialLineItem, string accessToken = null) where TLineItem : LineItem => Request("v1", "me", "subscriptions", subscriptionID, "items", subscriptionItemID).WithOAuthBearerToken(accessToken).PatchJsonAsync(ValidateModel(partialLineItem)).ReceiveJson<TLineItem>();
+		public Task DeleteSubscriptionItemAsync(string subscriptionID, string subscriptionItemID, string accessToken = null) => Request("v1", "me", "subscriptions", subscriptionID, "items", subscriptionItemID).WithOAuthBearerToken(accessToken).DeleteAsync();
 	}
 
 	public class MessageSendersResource : OrderCloudResource, IMessageSendersResource
@@ -6523,6 +6885,54 @@ namespace OrderCloud.SDK
 		public Task<ListPage<SpendingAccountAssignment>> ListAssignmentsAsync(string buyerID, string spendingAccountID = null, string userID = null, string userGroupID = null, PartyType? level = null, int? page = null, int? pageSize = null, string accessToken = null) => Request("v1", "buyers", buyerID, "spendingaccounts", "assignments").WithOAuthBearerToken(accessToken).SetQueryParams(new { spendingAccountID, userID, userGroupID, level, page, pageSize }).GetJsonAsync<ListPage<SpendingAccountAssignment>>();
 		public Task SaveAssignmentAsync(string buyerID, SpendingAccountAssignment spendingAccountAssignment, string accessToken = null) => Request("v1", "buyers", buyerID, "spendingaccounts", "assignments").WithOAuthBearerToken(accessToken).PostJsonAsync(ValidateModel(spendingAccountAssignment));
 		public Task DeleteAssignmentAsync(string buyerID, string spendingAccountID, string userID = null, string userGroupID = null, string accessToken = null) => Request("v1", "buyers", buyerID, "spendingaccounts", spendingAccountID, "assignments").WithOAuthBearerToken(accessToken).SetQueryParams(new { userID, userGroupID }).DeleteAsync();
+	}
+
+	public class SubscriptionIntegrationsResource : OrderCloudResource, ISubscriptionIntegrationsResource
+	{
+		internal SubscriptionIntegrationsResource(OrderCloudClient client) : base(client) { }
+		public Task<SubscriptionIntegration> GetAsync(string accessToken = null) => GetAsync<SubscriptionIntegration>(accessToken);
+		public Task<TSubscriptionIntegration> GetAsync<TSubscriptionIntegration>(string accessToken = null) where TSubscriptionIntegration : SubscriptionIntegration => Request("v1", "integrations", "subscription").WithOAuthBearerToken(accessToken).GetJsonAsync<TSubscriptionIntegration>();
+		public Task DeleteAsync(string accessToken = null) => Request("v1", "integrations", "subscription").WithOAuthBearerToken(accessToken).DeleteAsync();
+		public Task<SubscriptionIntegration> SaveAsync(SubscriptionIntegration subscriptionIntegration, string accessToken = null) => SaveAsync<SubscriptionIntegration>(subscriptionIntegration, accessToken);
+		public Task<TSubscriptionIntegration> SaveAsync<TSubscriptionIntegration>(SubscriptionIntegration subscriptionIntegration, string accessToken = null) where TSubscriptionIntegration : SubscriptionIntegration => Request("v1", "integrations", "subscription").WithOAuthBearerToken(accessToken).PutJsonAsync(ValidateModel(subscriptionIntegration)).ReceiveJson<TSubscriptionIntegration>();
+		public Task<SubscriptionIntegration> PatchAsync(PartialSubscriptionIntegration partialSubscriptionIntegration, string accessToken = null) => PatchAsync<SubscriptionIntegration>(partialSubscriptionIntegration, accessToken);
+		public Task<TSubscriptionIntegration> PatchAsync<TSubscriptionIntegration>(PartialSubscriptionIntegration partialSubscriptionIntegration, string accessToken = null) where TSubscriptionIntegration : SubscriptionIntegration => Request("v1", "integrations", "subscription").WithOAuthBearerToken(accessToken).PatchJsonAsync(ValidateModel(partialSubscriptionIntegration)).ReceiveJson<TSubscriptionIntegration>();
+	}
+
+	public class SubscriptionItemsResource : OrderCloudResource, ISubscriptionItemsResource
+	{
+		internal SubscriptionItemsResource(OrderCloudClient client) : base(client) { }
+		public Task<LineItem> GetAsync(string subscriptionID, string subscriptionItemID, string accessToken = null) => GetAsync<LineItem>(subscriptionID, subscriptionItemID, accessToken);
+		public Task<TLineItem> GetAsync<TLineItem>(string subscriptionID, string subscriptionItemID, string accessToken = null) where TLineItem : LineItem => Request("v1", "subscriptions", subscriptionID, "items", subscriptionItemID).WithOAuthBearerToken(accessToken).GetJsonAsync<TLineItem>();
+		public Task<ListPage<LineItem>> ListAsync(string subscriptionID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) => ListAsync<LineItem>(subscriptionID, search, searchOn, sortBy, page, pageSize, filters, accessToken);
+		public Task<ListPage<TLineItem>> ListAsync<TLineItem>(string subscriptionID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TLineItem : LineItem => Request("v1", "subscriptions", subscriptionID, "items").WithOAuthBearerToken(accessToken).SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<TLineItem>>();
+		public Task<ListPage<LineItem>> ListAsync(string subscriptionID, Action<ListOptionsBuilder<LineItem>> buildListOpts, string accessToken = null) => ListAsync<LineItem>(subscriptionID, buildListOpts, accessToken);
+		public Task<ListPage<TLineItem>> ListAsync<TLineItem>(string subscriptionID, Action<ListOptionsBuilder<TLineItem>> buildListOpts, string accessToken = null) where TLineItem : LineItem => Request("v1", "subscriptions", subscriptionID, "items").WithOAuthBearerToken(accessToken).SetListOptions(buildListOpts).GetJsonAsync<ListPage<TLineItem>>();
+		public Task<LineItem> CreateAsync(string subscriptionID, LineItem lineItem, string accessToken = null) => CreateAsync<LineItem>(subscriptionID, lineItem, accessToken);
+		public Task<TLineItem> CreateAsync<TLineItem>(string subscriptionID, LineItem lineItem, string accessToken = null) where TLineItem : LineItem => Request("v1", "subscriptions", subscriptionID, "items").WithOAuthBearerToken(accessToken).PostJsonAsync(ValidateModel(lineItem)).ReceiveJson<TLineItem>();
+		public Task<LineItem> SaveAsync(string subscriptionID, string subscriptionItemID, LineItem lineItem, string accessToken = null) => SaveAsync<LineItem>(subscriptionID, subscriptionItemID, lineItem, accessToken);
+		public Task<TLineItem> SaveAsync<TLineItem>(string subscriptionID, string subscriptionItemID, LineItem lineItem, string accessToken = null) where TLineItem : LineItem => Request("v1", "subscriptions", subscriptionID, "items", subscriptionItemID).WithOAuthBearerToken(accessToken).PutJsonAsync(ValidateModel(lineItem)).ReceiveJson<TLineItem>();
+		public Task DeleteAsync(string subscriptionID, string subscriptionItemID, string accessToken = null) => Request("v1", "subscriptions", subscriptionID, "items", subscriptionItemID).WithOAuthBearerToken(accessToken).DeleteAsync();
+		public Task<LineItem> PatchAsync(string subscriptionID, string subscriptionItemID, PartialLineItem partialLineItem, string accessToken = null) => PatchAsync<LineItem>(subscriptionID, subscriptionItemID, partialLineItem, accessToken);
+		public Task<TLineItem> PatchAsync<TLineItem>(string subscriptionID, string subscriptionItemID, PartialLineItem partialLineItem, string accessToken = null) where TLineItem : LineItem => Request("v1", "subscriptions", subscriptionID, "items", subscriptionItemID).WithOAuthBearerToken(accessToken).PatchJsonAsync(ValidateModel(partialLineItem)).ReceiveJson<TLineItem>();
+	}
+
+	public class SubscriptionsResource : OrderCloudResource, ISubscriptionsResource
+	{
+		internal SubscriptionsResource(OrderCloudClient client) : base(client) { }
+		public Task<Subscription> GetAsync(string subscriptionID, string accessToken = null) => GetAsync<Subscription>(subscriptionID, accessToken);
+		public Task<TSubscription> GetAsync<TSubscription>(string subscriptionID, string accessToken = null) where TSubscription : Subscription => Request("v1", "subscriptions", subscriptionID).WithOAuthBearerToken(accessToken).GetJsonAsync<TSubscription>();
+		public Task<ListPage<Subscription>> ListAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) => ListAsync<Subscription>(search, searchOn, sortBy, page, pageSize, filters, accessToken);
+		public Task<ListPage<TSubscription>> ListAsync<TSubscription>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TSubscription : Subscription => Request("v1", "subscriptions").WithOAuthBearerToken(accessToken).SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<TSubscription>>();
+		public Task<ListPage<Subscription>> ListAsync(Action<ListOptionsBuilder<Subscription>> buildListOpts, string accessToken = null) => ListAsync<Subscription>(buildListOpts, accessToken);
+		public Task<ListPage<TSubscription>> ListAsync<TSubscription>(Action<ListOptionsBuilder<TSubscription>> buildListOpts, string accessToken = null) where TSubscription : Subscription => Request("v1", "subscriptions").WithOAuthBearerToken(accessToken).SetListOptions(buildListOpts).GetJsonAsync<ListPage<TSubscription>>();
+		public Task<Subscription> CreateAsync(Subscription subscription, string accessToken = null) => CreateAsync<Subscription>(subscription, accessToken);
+		public Task<TSubscription> CreateAsync<TSubscription>(Subscription subscription, string accessToken = null) where TSubscription : Subscription => Request("v1", "subscriptions").WithOAuthBearerToken(accessToken).PostJsonAsync(ValidateModel(subscription)).ReceiveJson<TSubscription>();
+		public Task<Subscription> SaveAsync(string subscriptionID, Subscription subscription, string accessToken = null) => SaveAsync<Subscription>(subscriptionID, subscription, accessToken);
+		public Task<TSubscription> SaveAsync<TSubscription>(string subscriptionID, Subscription subscription, string accessToken = null) where TSubscription : Subscription => Request("v1", "subscriptions", subscriptionID).WithOAuthBearerToken(accessToken).PutJsonAsync(ValidateModel(subscription)).ReceiveJson<TSubscription>();
+		public Task DeleteAsync(string subscriptionID, string accessToken = null) => Request("v1", "subscriptions", subscriptionID).WithOAuthBearerToken(accessToken).DeleteAsync();
+		public Task<Subscription> PatchAsync(string subscriptionID, PartialSubscription partialSubscription, string accessToken = null) => PatchAsync<Subscription>(subscriptionID, partialSubscription, accessToken);
+		public Task<TSubscription> PatchAsync<TSubscription>(string subscriptionID, PartialSubscription partialSubscription, string accessToken = null) where TSubscription : Subscription => Request("v1", "subscriptions", subscriptionID).WithOAuthBearerToken(accessToken).PatchJsonAsync(ValidateModel(partialSubscription)).ReceiveJson<TSubscription>();
 	}
 
 	public class SupplierAddressesResource : OrderCloudResource, ISupplierAddressesResource

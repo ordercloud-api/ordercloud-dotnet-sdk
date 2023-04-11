@@ -35,6 +35,8 @@ namespace OrderCloud.SDK
 			public const string CannotDeleteLastFullAccess = "ApiClient.CannotDeleteLastFullAccess";
 			/// <summary>Invalid Client ID.</summary>
 			public const string InvalidClientID = "ApiClient.InvalidClientID";
+			/// <summary>Cannot delete API Client used by a Subscription Integration.</summary>
+			public const string UsedByIntegration = "ApiClient.UsedByIntegration";
 		}
 		public static class ApprovalRule
 		{
@@ -573,6 +575,18 @@ namespace OrderCloud.SDK
 		{
 			/// <summary>The redemption code specified is already in use.</summary>
 			public const string InvalidRedemptionCode = "SpendingAccount.InvalidRedemptionCode";
+		}
+		public static class Subscription
+		{
+			/// <summary>To create a subscription, you must provide both FromCompanyID and FromUserID.</summary>
+			public const string CreateRequiresFromUser = "Subscription.CreateRequiresFromUser";
+		}
+		public static class SubscriptionIntegration
+		{
+			/// <summary>Cannot use API Client that has OrderCheckoutIntegrationEventID populated.</summary>
+			public const string CannotUseApiClient = "SubscriptionIntegration.CannotUseApiClient";
+			/// <summary>DefaultContextUser must be defined to use this API Client ID.</summary>
+			public const string DefaultContextUser = "SubscriptionIntegration.DefaultContextUser";
 		}
 		public static class TrackingEvent
 		{
