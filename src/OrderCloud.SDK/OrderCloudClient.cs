@@ -208,7 +208,7 @@ namespace OrderCloud.SDK
 		}
 
 		private async Task<TokenResponse> AuthenticateAsync(OAuthTokenRequest req) {
-			// http://tutorials.jenkov.com/oauth2/resource-owner-credentials-request-response.html
+			// https://jenkov.com/tutorials/oauth2/resource-owner-credentials-request-response.html
 			var resp = await AuthClient
 				.Request("oauth/token")
 				.ConfigureRequest(settings => {
