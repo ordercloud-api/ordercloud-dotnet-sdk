@@ -7,6 +7,7 @@ using Flurl.Http;
 using Flurl.Http.Configuration;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using System.Linq;
 
 // allows test assemblies to access internal members, such as the Request method
 // https://stackoverflow.com/questions/1211707/how-to-access-classes-in-another-assembly-for-unit-testing-purposes
@@ -215,7 +216,8 @@ namespace OrderCloud.SDK
 					settings.OnErrorAsync = call => ThrowOcExceptionAsync<AuthErrorResponse>(call, r => new[] {
 						new ApiError {
 							ErrorCode = r.error,
-							Message = r.error_description
+							Message = r.error_description,
+							Data = r.Errors.FirstOrDefault()?.Data ?? null
 						}
 					}); ;
 					settings.JsonSerializer = Serializer;

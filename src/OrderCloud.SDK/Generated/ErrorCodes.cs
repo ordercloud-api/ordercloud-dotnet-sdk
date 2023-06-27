@@ -8,6 +8,8 @@ namespace OrderCloud.SDK
 		public const string NotFound = "NotFound";
 		/// <summary>Model or property was invalid.</summary>
 		public const string ValidationFailure = "ValidationFailure";
+		/// <summary>An unknown error has occurred on the server.</summary>
+		public const string ServerError = "ServerError";
 		public static class Address
 		{
 			/// <summary>This Address is registered as public and cannot be edited by this endpoint.</summary>
@@ -69,7 +71,7 @@ namespace OrderCloud.SDK
 			public const string UserNotAuthorizedToAdmin = "Auth.UserNotAuthorizedToAdmin";
 			/// <summary>User not found.</summary>
 			public const string UserNotFound = "Auth.UserNotFound";
-			/// <summary>Due to excessive login failures, this account has been locked out for a period of 30 minutes.</summary>
+			/// <summary>Due to excessive login failures, this account has been locked.</summary>
 			public const string LockedOut = "Auth.LockedOut";
 			/// <summary>Password does not meet security requirements.</summary>
 			public const string InsecurePassword = "Auth.InsecurePassword";
@@ -153,6 +155,8 @@ namespace OrderCloud.SDK
 			public const string BuyerNetworkBuyerIDRequired = "Impersonation.BuyerNetworkBuyerIDRequired";
 			/// <summary>Cannot delete a group or user assigned to an ImpersonationConfig.</summary>
 			public const string CannotDeleteImpersonateeParty = "Impersonation.CannotDeleteImpersonateeParty";
+			/// <summary>Cannot delete a security profile assigned to an ImpersonationConfig.</summary>
+			public const string CannotDeleteSecurityProfile = "Impersonation.CannotDeleteSecurityProfile";
 			/// <summary>Client ID not found or you do not have access to it.</summary>
 			public const string ClientIDNotFound = "Impersonation.ClientIDNotFound";
 			/// <summary>Buyer is not assigned to the API client.</summary>
@@ -478,6 +482,12 @@ namespace OrderCloud.SDK
 		{
 			/// <summary>Cannot exceed 500 product entries per Product Collection.</summary>
 			public const string ProductEntryLimit = "ProductCollection.ProductEntryLimit";
+			/// <summary>You cannot accept or decline an invitation to a ProductCollection you own.</summary>
+			public const string CannotAcceptOrDeclineOwnInvitation = "ProductCollection.CannotAcceptOrDeclineOwnInvitation";
+			/// <summary>You have already accepted an invitation to this product collection.</summary>
+			public const string AlreadyAcceptedInvitation = "ProductCollection.AlreadyAcceptedInvitation";
+			/// <summary>Not authorized to modify this Product Collection.</summary>
+			public const string CannotModify = "ProductCollection.CannotModify";
 		}
 		public static class ProductSyncConfig
 		{
@@ -633,6 +643,11 @@ namespace OrderCloud.SDK
 			public const string MustEnableInventory = "Variant.MustEnableInventory";
 			/// <summary>At least one price schedule ID must be non-null.</summary>
 			public const string MustHavePriceSchedule = "Variant.MustHavePriceSchedule";
+		}
+		public static class Webhook
+		{
+			/// <summary>Webhook URL secure scheme https is required.</summary>
+			public const string UrlSchemeHttps = "Webhook.UrlSchemeHttps";
 		}
 	}
 }
