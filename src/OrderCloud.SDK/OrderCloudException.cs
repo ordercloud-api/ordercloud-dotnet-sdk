@@ -40,6 +40,7 @@ namespace OrderCloud.SDK
 	{
 		public string error { get; set; }
 		public string error_description { get; set; }
+		public ApiError[] Errors { get; set; }
 	}
 
 	public class ApiError

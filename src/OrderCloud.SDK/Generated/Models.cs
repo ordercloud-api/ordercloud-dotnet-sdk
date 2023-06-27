@@ -4,12 +4,13 @@ using System.Dynamic;
 
 namespace OrderCloud.SDK
 {
-	public enum ApiRole { ApiClientAdmin, ApiClientReader, AddressAdmin, AddressReader, AdminAddressAdmin, AdminAddressReader, AdminUserAdmin, AdminUserGroupAdmin, AdminUserGroupReader, AdminUserReader, ApprovalRuleAdmin, ApprovalRuleReader, BuyerAdmin, BuyerImpersonation, BuyerReader, BuyerUserAdmin, BuyerUserReader, CatalogAdmin, CatalogReader, CategoryAdmin, CategoryReader, CostCenterAdmin, CostCenterReader, CreditCardAdmin, CreditCardReader, FullAccess, IncrementorAdmin, IncrementorReader, LocaleReader, LocaleAdmin, MeAddressAdmin, MeAdmin, MeCreditCardAdmin, MessageConfigAssignmentAdmin, MeSubscriptionAdmin, MeXpAdmin, OrderAdmin, OrderReader, OverrideShipping, OverrideTax, OverrideUnitPrice, PasswordReset, PriceScheduleAdmin, PriceScheduleReader, ProductAdmin, ProductAssignmentAdmin, ProductFacetAdmin, ProductFacetReader, ProductReader, PromotionAdmin, PromotionReader, SecurityProfileAdmin, SecurityProfileReader, SetSecurityProfile, ShipmentAdmin, ShipmentReader, Shopper, SpendingAccountAdmin, SpendingAccountReader, SubscriptionAdmin, SubscriptionReader, SupplierAddressAdmin, SupplierAddressReader, SupplierAdmin, SupplierReader, SupplierUserAdmin, SupplierUserGroupAdmin, SupplierUserGroupReader, SupplierUserReader, UnsubmittedOrderReader, UserGroupAdmin, UserGroupReader, OpenIDConnectReader, OpenIDConnectAdmin, MessageSenderReader, MessageSenderAdmin, XpIndexAdmin, WebhookReader, WebhookAdmin, IntegrationEventReader, IntegrationEventAdmin, TrackingEventReader, TrackingEventAdmin }
+	public enum AccessLevel { Private, Public, Shareable }
+	public enum ApiRole { ApiClientAdmin, ApiClientReader, AddressAdmin, AddressReader, AdminAddressAdmin, AdminAddressReader, AdminUserAdmin, AdminUserGroupAdmin, AdminUserGroupReader, AdminUserReader, ApprovalRuleAdmin, ApprovalRuleReader, BuyerAdmin, BuyerImpersonation, BuyerReader, BuyerUserAdmin, BuyerUserReader, CatalogAdmin, CatalogReader, CategoryAdmin, CategoryReader, CostCenterAdmin, CostCenterReader, CreditCardAdmin, CreditCardReader, FullAccess, IncrementorAdmin, IncrementorReader, LocaleReader, LocaleAdmin, MeAddressAdmin, MeAdmin, MeCreditCardAdmin, MessageConfigAssignmentAdmin, MeSubscriptionAdmin, MeXpAdmin, OrderAdmin, OrderReader, OverrideShipping, OverrideTax, OverrideUnitPrice, PasswordReset, PriceScheduleAdmin, PriceScheduleReader, ProductAdmin, ProductAssignmentAdmin, ProductCollectionReader, ProductFacetAdmin, ProductFacetReader, ProductReader, PromotionAdmin, PromotionReader, SecurityProfileAdmin, SecurityProfileReader, SetSecurityProfile, ShipmentAdmin, ShipmentReader, Shopper, SpendingAccountAdmin, SpendingAccountReader, SubscriptionAdmin, SubscriptionReader, SupplierAddressAdmin, SupplierAddressReader, SupplierAdmin, SupplierReader, SupplierUserAdmin, SupplierUserGroupAdmin, SupplierUserGroupReader, SupplierUserReader, UnsubmittedOrderReader, UserGroupAdmin, UserGroupReader, OpenIDConnectReader, OpenIDConnectAdmin, MessageSenderReader, MessageSenderAdmin, XpIndexAdmin, WebhookReader, WebhookAdmin, IntegrationEventReader, IntegrationEventAdmin, TrackingEventReader, TrackingEventAdmin }
 	public enum ApprovalStatus { Pending, Approved, Declined }
 	public enum ApprovalType { Order, OrderReturn }
 	public enum CommerceRole { Buyer, Seller, Supplier }
 	public enum IntegrationEventType { OrderCheckout, OpenIDConnect, OrderReturn, AddToCart }
-	public enum MessageType { OrderDeclined, OrderSubmitted, ShipmentCreated, ForgottenPassword, OrderSubmittedForYourApproval, OrderSubmittedForApproval, OrderApproved, OrderSubmittedForYourApprovalHasBeenApproved, OrderSubmittedForYourApprovalHasBeenDeclined, NewUserInvitation, OrderReturnDeclined, OrderReturnSubmitted, OrderReturnSubmittedForYourApproval, OrderReturnSubmittedForApproval, OrderReturnApproved, OrderReturnSubmittedForYourApprovalHasBeenApproved, OrderReturnSubmittedForYourApprovalHasBeenDeclined, OrderReturnCompleted, SubscriptionReminder }
+	public enum MessageType { OrderDeclined, OrderSubmitted, ShipmentCreated, ForgottenPassword, OrderSubmittedForYourApproval, OrderSubmittedForApproval, OrderApproved, OrderSubmittedForYourApprovalHasBeenApproved, OrderSubmittedForYourApprovalHasBeenDeclined, NewUserInvitation, OrderReturnDeclined, OrderReturnSubmitted, OrderReturnSubmittedForYourApproval, OrderReturnSubmittedForApproval, OrderReturnApproved, OrderReturnSubmittedForYourApprovalHasBeenApproved, OrderReturnSubmittedForYourApprovalHasBeenDeclined, OrderReturnCompleted, SubscriptionReminder, ProductCollectionInvitationAccepted, ProductCollectionInvitationDeclined }
 	public enum OrderDirection { Incoming, Outgoing, All }
 	public enum OrderStatus { Unsubmitted, AwaitingApproval, Declined, Open, Completed, Canceled }
 	public enum PartyType { User, Group, Company }
@@ -1108,7 +1109,7 @@ namespace OrderCloud.SDK
 		/// <summary>Message config description of the message cc listener assignment.</summary>
 		[ApiReadOnly]
 		public string MessageConfigDescription { get => GetProp<string>("MessageConfigDescription"); set => SetProp<string>("MessageConfigDescription", value); }
-		/// <summary>Message type of the message cc listener assignment. Required. Possible values: OrderDeclined, OrderSubmitted, ShipmentCreated, ForgottenPassword, OrderSubmittedForYourApproval, OrderSubmittedForApproval, OrderApproved, OrderSubmittedForYourApprovalHasBeenApproved, OrderSubmittedForYourApprovalHasBeenDeclined, NewUserInvitation, OrderReturnDeclined, OrderReturnSubmitted, OrderReturnSubmittedForYourApproval, OrderReturnSubmittedForApproval, OrderReturnApproved, OrderReturnSubmittedForYourApprovalHasBeenApproved, OrderReturnSubmittedForYourApprovalHasBeenDeclined, OrderReturnCompleted, SubscriptionReminder.</summary>
+		/// <summary>Message type of the message cc listener assignment. Required. Possible values: OrderDeclined, OrderSubmitted, ShipmentCreated, ForgottenPassword, OrderSubmittedForYourApproval, OrderSubmittedForApproval, OrderApproved, OrderSubmittedForYourApprovalHasBeenApproved, OrderSubmittedForYourApprovalHasBeenDeclined, NewUserInvitation, OrderReturnDeclined, OrderReturnSubmitted, OrderReturnSubmittedForYourApproval, OrderReturnSubmittedForApproval, OrderReturnApproved, OrderReturnSubmittedForYourApprovalHasBeenApproved, OrderReturnSubmittedForYourApprovalHasBeenDeclined, OrderReturnCompleted, SubscriptionReminder, ProductCollectionInvitationAccepted, ProductCollectionInvitationDeclined.</summary>
 		[Required]
 		public MessageType MessageType { get => GetProp<MessageType>("MessageType"); set => SetProp<MessageType>("MessageType", value); }
 		/// <summary>ID of the buyer. Searchable: priority level 0. Sortable: priority level 0.</summary>
@@ -1979,11 +1980,37 @@ namespace OrderCloud.SDK
 		public string Name { get => GetProp<string>("Name"); set => SetProp<string>("Name", value); }
 		/// <summary>Container for extended (custom) properties of the product collection.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
+		/// <summary>Access level of the product collection. Possible values: Private, Public, Shareable.</summary>
+		public AccessLevel AccessLevel { get => GetProp<AccessLevel>("AccessLevel"); set => SetProp<AccessLevel>("AccessLevel", value); }
 	}
 	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic ProductCollection class instead.</typeparam>
 	public class ProductCollection<Txp> : ProductCollection
 	{
 		/// <summary>Container for extended (custom) properties of the product collection.</summary>
+		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
+	}
+	public class ProductCollectionInvitation : OrderCloudModel
+	{
+		/// <summary>ID of the product collection invitation. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 2.</summary>
+		[ApiReadOnly]
+		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
+		/// <summary>Name of the product collection invitation. Required. Max length 100 characters. Searchable: priority level 2. Sortable: priority level 1.</summary>
+		[Required]
+		public string Name { get => GetProp<string>("Name"); set => SetProp<string>("Name", value); }
+		/// <summary>Admin of the product collection invitation.</summary>
+		public bool Admin { get => GetProp<bool>("Admin", false); set => SetProp<bool>("Admin", value); }
+		/// <summary>Updated when accepted.</summary>
+		[ApiReadOnly]
+		public bool Accepted { get => GetProp<bool>("Accepted", false); set => SetProp<bool>("Accepted", value); }
+		/// <summary>Invitation Expiration Date defaults to 30 days from create, maximum 1 year.</summary>
+		public DateTimeOffset? ExpirationDate { get => GetProp<DateTimeOffset?>("ExpirationDate"); set => SetProp<DateTimeOffset?>("ExpirationDate", value); }
+		/// <summary>Container for extended (custom) properties of the product collection invitation.</summary>
+		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
+	}
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic ProductCollectionInvitation class instead.</typeparam>
+	public class ProductCollectionInvitation<Txp> : ProductCollectionInvitation
+	{
+		/// <summary>Container for extended (custom) properties of the product collection invitation.</summary>
 		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
 	}
 	public class ProductFacet : OrderCloudModel
@@ -2690,7 +2717,7 @@ namespace OrderCloud.SDK
 	{
 		/// <summary>ID of the variant. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 1.</summary>
 		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
-		/// <summary>Name of the variant. Searchable: priority level 2. Sortable: priority level 2.</summary>
+		/// <summary>Name of the variant. Max length 100 characters. Searchable: priority level 2. Sortable: priority level 2.</summary>
 		public string Name { get => GetProp<string>("Name"); set => SetProp<string>("Name", value); }
 		/// <summary>Description of the variant. Max length 2000 characters. Searchable: priority level 3.</summary>
 		public string Description { get => GetProp<string>("Description"); set => SetProp<string>("Description", value); }
@@ -2907,6 +2934,10 @@ namespace OrderCloud.SDK
 	public class PartialProductCollection : ProductCollection, IPartial { }
 	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic PartialProductCollection class instead.</typeparam>
 	public class PartialProductCollection<Txp> : PartialProductCollection
+	{ }
+	public class PartialProductCollectionInvitation : ProductCollectionInvitation, IPartial { }
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic PartialProductCollectionInvitation class instead.</typeparam>
+	public class PartialProductCollectionInvitation<Txp> : PartialProductCollectionInvitation
 	{ }
 	public class PartialProductFacet : ProductFacet, IPartial { }
 	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic PartialProductFacet class instead.</typeparam>
