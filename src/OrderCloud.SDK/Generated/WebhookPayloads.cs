@@ -1182,6 +1182,62 @@ namespace OrderCloud.SDK
 				public string CreditCardID { get; set; }
 			}
 		}
+		public static class DeliveryConfigurations
+		{
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/integrations/deliveryconfig.</summary>
+			[SentOn("POST", "v1/integrations/deliveryconfig")]
+			public class Create : WebhookPayload<DeliveryConfig, DeliveryConfig, object, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/integrations/deliveryconfig.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TDeliveryConfig">Specific type of the DeliveryConfig. If not using a custom type, specify DeliveryConfig.</typeparam>
+			[SentOn("POST", "v1/integrations/deliveryconfig")]
+			public class Create<TConfigData, TDeliveryConfig> : WebhookPayload<TDeliveryConfig, TDeliveryConfig, object, TConfigData>
+				where TDeliveryConfig : DeliveryConfig
+			{ }
+			/// <summary>Webhook payload sent by OrderCloud on PUT v1/integrations/deliveryconfig/{deliveryConfigID}.</summary>
+			[SentOn("PUT", "v1/integrations/deliveryconfig/{deliveryConfigID}")]
+			public class Save : WebhookPayload<DeliveryConfig, DeliveryConfig, SaveRouteParams, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on PUT v1/integrations/deliveryconfig/{deliveryConfigID}.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TDeliveryConfig">Specific type of the DeliveryConfig. If not using a custom type, specify DeliveryConfig.</typeparam>
+			[SentOn("PUT", "v1/integrations/deliveryconfig/{deliveryConfigID}")]
+			public class Save<TConfigData, TDeliveryConfig> : WebhookPayload<TDeliveryConfig, TDeliveryConfig, SaveRouteParams, TConfigData>
+				where TDeliveryConfig : DeliveryConfig
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/integrations/deliveryconfig/{deliveryConfigID}.</summary>
+			public class SaveRouteParams
+			{
+				public string DeliveryConfigID { get; set; }
+			}
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/integrations/deliveryconfig/{deliveryConfigID}.</summary>
+			[SentOn("DELETE", "v1/integrations/deliveryconfig/{deliveryConfigID}")]
+			public class Delete : WebhookPayload<object, object, DeleteRouteParams, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/integrations/deliveryconfig/{deliveryConfigID}.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, use the non-generic payload type instead.</typeparam>
+			[SentOn("DELETE", "v1/integrations/deliveryconfig/{deliveryConfigID}")]
+			public class Delete<TConfigData> : WebhookPayload<object, object, DeleteRouteParams, TConfigData>
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/integrations/deliveryconfig/{deliveryConfigID}.</summary>
+			public class DeleteRouteParams
+			{
+				public string DeliveryConfigID { get; set; }
+			}
+			/// <summary>Webhook payload sent by OrderCloud on PATCH v1/integrations/deliveryconfig/{deliveryConfigID}.</summary>
+			[SentOn("PATCH", "v1/integrations/deliveryconfig/{deliveryConfigID}")]
+			public class Patch : WebhookPayload<DeliveryConfig, DeliveryConfig, PatchRouteParams, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on PATCH v1/integrations/deliveryconfig/{deliveryConfigID}.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TDeliveryConfig">Specific type of the DeliveryConfig. If not using a custom type, specify DeliveryConfig.</typeparam>
+			[SentOn("PATCH", "v1/integrations/deliveryconfig/{deliveryConfigID}")]
+			public class Patch<TConfigData, TDeliveryConfig> : WebhookPayload<TDeliveryConfig, TDeliveryConfig, PatchRouteParams, TConfigData>
+				where TDeliveryConfig : DeliveryConfig
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/integrations/deliveryconfig/{deliveryConfigID}.</summary>
+			public class PatchRouteParams
+			{
+				public string DeliveryConfigID { get; set; }
+			}
+		}
 		public static class ImpersonationConfigs
 		{
 			/// <summary>Webhook payload sent by OrderCloud on POST v1/impersonationconfig.</summary>
