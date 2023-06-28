@@ -19,6 +19,7 @@ namespace OrderCloud.SDK
 		ICertsResource Certs { get; }
 		ICostCentersResource CostCenters { get; }
 		ICreditCardsResource CreditCards { get; }
+		IDeliveryConfigurationsResource DeliveryConfigurations { get; }
 		IImpersonationConfigsResource ImpersonationConfigs { get; }
 		IIncrementorsResource Incrementors { get; }
 		IIntegrationEventsResource IntegrationEvents { get; }
@@ -1386,6 +1387,45 @@ namespace OrderCloud.SDK
 		/// <param name="userGroupID">ID of the user group.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task DeleteAssignmentAsync(string buyerID, string creditCardID, string userID = null, string userGroupID = null, string accessToken = null);
+	}
+
+	public interface IDeliveryConfigurationsResource
+	{
+		/// <summary>Get a single delivery configuration.</summary>
+		/// <param name="deliveryConfigID">ID of the delivery config.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<DeliveryConfig> GetAsync(string deliveryConfigID, string accessToken = null);
+		/// <summary>Get a list of delivery configurations.</summary>
+		/// <param name="search">Word or phrase to search for.</param>
+		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
+		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<DeliveryConfig>> ListAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
+		/// <summary>Get a list of delivery configurations.</summary>
+		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<DeliveryConfig>> ListAsync(Action<ListOptionsBuilder<DeliveryConfig>> buildListOpts, string accessToken = null);
+		/// <summary>Create a new delivery configuration. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <param name="deliveryConfig">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<DeliveryConfig> CreateAsync(DeliveryConfig deliveryConfig, string accessToken = null);
+		/// <summary>Create or update a delivery configuration. If an object with the same ID already exists, it will be overwritten.</summary>
+		/// <param name="deliveryConfigID">ID of the delivery config.</param>
+		/// <param name="deliveryConfig">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<DeliveryConfig> SaveAsync(string deliveryConfigID, DeliveryConfig deliveryConfig, string accessToken = null);
+		/// <summary>Delete a delivery configuration.</summary>
+		/// <param name="deliveryConfigID">ID of the delivery config.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task DeleteAsync(string deliveryConfigID, string accessToken = null);
+		/// <summary>Partially update a delivery configuration.</summary>
+		/// <param name="deliveryConfigID">ID of the delivery config. Required.</param>
+		/// <param name="partialDeliveryConfig">The object that will be partially serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<DeliveryConfig> PatchAsync(string deliveryConfigID, PartialDeliveryConfig partialDeliveryConfig, string accessToken = null);
 	}
 
 	public interface IImpersonationConfigsResource
@@ -5988,6 +6028,7 @@ namespace OrderCloud.SDK
 			Certs = new CertsResource(this);
 			CostCenters = new CostCentersResource(this);
 			CreditCards = new CreditCardsResource(this);
+			DeliveryConfigurations = new DeliveryConfigurationsResource(this);
 			ImpersonationConfigs = new ImpersonationConfigsResource(this);
 			Incrementors = new IncrementorsResource(this);
 			IntegrationEvents = new IntegrationEventsResource(this);
@@ -6038,6 +6079,7 @@ namespace OrderCloud.SDK
 		public ICertsResource Certs { get; private set; }
 		public ICostCentersResource CostCenters { get; private set; }
 		public ICreditCardsResource CreditCards { get; private set; }
+		public IDeliveryConfigurationsResource DeliveryConfigurations { get; private set; }
 		public IImpersonationConfigsResource ImpersonationConfigs { get; private set; }
 		public IIncrementorsResource Incrementors { get; private set; }
 		public IIntegrationEventsResource IntegrationEvents { get; private set; }
@@ -6373,6 +6415,18 @@ namespace OrderCloud.SDK
 		public Task<ListPage<CreditCardAssignment>> ListAssignmentsAsync(string buyerID, string creditCardID = null, string userID = null, string userGroupID = null, PartyType? level = null, int? page = null, int? pageSize = null, string accessToken = null) => Request("v1", "buyers", buyerID, "creditcards", "assignments").WithOAuthBearerToken(accessToken).SetQueryParams(new { creditCardID, userID, userGroupID, level, page, pageSize }).GetJsonAsync<ListPage<CreditCardAssignment>>();
 		public Task SaveAssignmentAsync(string buyerID, CreditCardAssignment creditCardAssignment, string accessToken = null) => Request("v1", "buyers", buyerID, "creditcards", "assignments").WithOAuthBearerToken(accessToken).PostJsonAsync(ValidateModel(creditCardAssignment));
 		public Task DeleteAssignmentAsync(string buyerID, string creditCardID, string userID = null, string userGroupID = null, string accessToken = null) => Request("v1", "buyers", buyerID, "creditcards", creditCardID, "assignments").WithOAuthBearerToken(accessToken).SetQueryParams(new { userID, userGroupID }).DeleteAsync();
+	}
+
+	public class DeliveryConfigurationsResource : OrderCloudResource, IDeliveryConfigurationsResource
+	{
+		internal DeliveryConfigurationsResource(OrderCloudClient client) : base(client) { }
+		public Task<DeliveryConfig> GetAsync(string deliveryConfigID, string accessToken = null) => Request("v1", "integrations", "deliveryconfig", deliveryConfigID).WithOAuthBearerToken(accessToken).GetJsonAsync<DeliveryConfig>();
+		public Task<ListPage<DeliveryConfig>> ListAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) => Request("v1", "integrations", "deliveryconfig").WithOAuthBearerToken(accessToken).SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<DeliveryConfig>>();
+		public Task<ListPage<DeliveryConfig>> ListAsync(Action<ListOptionsBuilder<DeliveryConfig>> buildListOpts, string accessToken = null) => Request("v1", "integrations", "deliveryconfig").WithOAuthBearerToken(accessToken).SetListOptions(buildListOpts).GetJsonAsync<ListPage<DeliveryConfig>>();
+		public Task<DeliveryConfig> CreateAsync(DeliveryConfig deliveryConfig, string accessToken = null) => Request("v1", "integrations", "deliveryconfig").WithOAuthBearerToken(accessToken).PostJsonAsync(ValidateModel(deliveryConfig)).ReceiveJson<DeliveryConfig>();
+		public Task<DeliveryConfig> SaveAsync(string deliveryConfigID, DeliveryConfig deliveryConfig, string accessToken = null) => Request("v1", "integrations", "deliveryconfig", deliveryConfigID).WithOAuthBearerToken(accessToken).PutJsonAsync(ValidateModel(deliveryConfig)).ReceiveJson<DeliveryConfig>();
+		public Task DeleteAsync(string deliveryConfigID, string accessToken = null) => Request("v1", "integrations", "deliveryconfig", deliveryConfigID).WithOAuthBearerToken(accessToken).DeleteAsync();
+		public Task<DeliveryConfig> PatchAsync(string deliveryConfigID, PartialDeliveryConfig partialDeliveryConfig, string accessToken = null) => Request("v1", "integrations", "deliveryconfig", deliveryConfigID).WithOAuthBearerToken(accessToken).PatchJsonAsync(ValidateModel(partialDeliveryConfig)).ReceiveJson<DeliveryConfig>();
 	}
 
 	public class ImpersonationConfigsResource : OrderCloudResource, IImpersonationConfigsResource

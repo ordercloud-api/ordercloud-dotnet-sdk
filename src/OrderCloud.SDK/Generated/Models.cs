@@ -551,6 +551,55 @@ namespace OrderCloud.SDK
 		/// <summary>ID of the user group. Sortable: priority level 3.</summary>
 		public string UserGroupID { get => GetProp<string>("UserGroupID"); set => SetProp<string>("UserGroupID", value); }
 	}
+	public class DeliveryConfig : OrderCloudModel
+	{
+		/// <summary>ID of the delivery config. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 1.</summary>
+		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
+		/// <summary>Name of the delivery config. Required. Max length 128 characters. Searchable: priority level 2. Sortable: priority level 2.</summary>
+		[Required]
+		public string Name { get => GetProp<string>("Name"); set => SetProp<string>("Name", value); }
+		/// <summary>Enabled of the delivery config.</summary>
+		public bool Enabled { get => GetProp<bool>("Enabled"); set => SetProp<bool>("Enabled", value); }
+		/// <summary>Delivery targets of the delivery config. Required.</summary>
+		[Required]
+		public DeliveryTargets DeliveryTargets { get => GetProp<DeliveryTargets>("DeliveryTargets"); set => SetProp<DeliveryTargets>("DeliveryTargets", value); }
+	}
+	public class DeliveryTargets : OrderCloudModel
+	{
+		/// <summary>Kafka of the delivery target.</summary>
+		public KafkaConfig Kafka { get => GetProp<KafkaConfig>("Kafka"); set => SetProp<KafkaConfig>("Kafka", value); }
+		/// <summary>Http of the delivery target.</summary>
+		public HttpConfig Http { get => GetProp<HttpConfig>("Http"); set => SetProp<HttpConfig>("Http", value); }
+		/// <summary>Send event of the delivery target.</summary>
+		public SendEvent SendEvent { get => GetProp<SendEvent>("SendEvent"); set => SetProp<SendEvent>("SendEvent", value); }
+		/// <summary>Discover event of the delivery target.</summary>
+		public DiscoverEvent DiscoverEvent { get => GetProp<DiscoverEvent>("DiscoverEvent"); set => SetProp<DiscoverEvent>("DiscoverEvent", value); }
+		/// <summary>Event hub of the delivery target.</summary>
+		public EventHubConfig EventHub { get => GetProp<EventHubConfig>("EventHub"); set => SetProp<EventHubConfig>("EventHub", value); }
+	}
+	public class DiscoverEvent : OrderCloudModel
+	{
+		/// <summary>ID of the client. Required.</summary>
+		[Required]
+		public string ClientID { get => GetProp<string>("ClientID"); set => SetProp<string>("ClientID", value); }
+		/// <summary>Api key of the discover event. Required.</summary>
+		[Required]
+		[ApiWriteOnly]
+		public string ApiKey { get => GetProp<string>("ApiKey"); set => SetProp<string>("ApiKey", value); }
+		/// <summary>Service endpoint of the discover event. Required.</summary>
+		[Required]
+		public string ServiceEndpoint { get => GetProp<string>("ServiceEndpoint"); set => SetProp<string>("ServiceEndpoint", value); }
+	}
+	public class EventHubConfig : OrderCloudModel
+	{
+		/// <summary>Event hub name of the event hub config. Required.</summary>
+		[Required]
+		public string EventHubName { get => GetProp<string>("EventHubName"); set => SetProp<string>("EventHubName", value); }
+		/// <summary>Connection string of the event hub config. Required.</summary>
+		[Required]
+		[ApiWriteOnly]
+		public string ConnectionString { get => GetProp<string>("ConnectionString"); set => SetProp<string>("ConnectionString", value); }
+	}
 	public class ExtendedLineItem : OrderCloudModel
 	{
 		/// <summary>ID of the order.</summary>
@@ -745,6 +794,12 @@ namespace OrderCloud.SDK
 		[ApiReadOnly]
 		public new TBillingAddress BillingAddress { get => GetProp<TBillingAddress>("BillingAddress"); set => SetProp<TBillingAddress>("BillingAddress", value); }
 	}
+	public class HttpConfig : OrderCloudModel
+	{
+		/// <summary>Endpoint of the http config. Required.</summary>
+		[Required]
+		public string Endpoint { get => GetProp<string>("Endpoint"); set => SetProp<string>("Endpoint", value); }
+	}
 	public class ImpersonateTokenRequest : OrderCloudModel
 	{
 		/// <summary>ID of the client. Required.</summary>
@@ -874,6 +929,22 @@ namespace OrderCloud.SDK
 		public string BuyerID { get => GetProp<string>("BuyerID"); set => SetProp<string>("BuyerID", value); }
 		/// <summary>ID of the user group. Sortable: priority level 3.</summary>
 		public string UserGroupID { get => GetProp<string>("UserGroupID"); set => SetProp<string>("UserGroupID", value); }
+	}
+	public class KafkaConfig : OrderCloudModel
+	{
+		/// <summary>Bootstrap servers of the kafka config. Required.</summary>
+		[Required]
+		public string BootstrapServers { get => GetProp<string>("BootstrapServers"); set => SetProp<string>("BootstrapServers", value); }
+		/// <summary>Sasl username of the kafka config. Required.</summary>
+		[Required]
+		public string SaslUsername { get => GetProp<string>("SaslUsername"); set => SetProp<string>("SaslUsername", value); }
+		/// <summary>Sasl password of the kafka config. Required.</summary>
+		[Required]
+		[ApiWriteOnly]
+		public string SaslPassword { get => GetProp<string>("SaslPassword"); set => SetProp<string>("SaslPassword", value); }
+		/// <summary>Topic of the kafka config. Required.</summary>
+		[Required]
+		public string Topic { get => GetProp<string>("Topic"); set => SetProp<string>("Topic", value); }
 	}
 	public class LineItem : OrderCloudModel
 	{
@@ -2202,6 +2273,15 @@ namespace OrderCloud.SDK
 		/// <summary>Container for extended (custom) properties of the seller approval rule.</summary>
 		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
 	}
+	public class SendEvent : OrderCloudModel
+	{
+		/// <summary>ID of the site. Required.</summary>
+		[Required]
+		public string SiteID { get => GetProp<string>("SiteID"); set => SetProp<string>("SiteID", value); }
+		/// <summary>Service endpoint of the send event. Required.</summary>
+		[Required]
+		public string ServiceEndpoint { get => GetProp<string>("ServiceEndpoint"); set => SetProp<string>("ServiceEndpoint", value); }
+	}
 	public class ShipEstimate : OrderCloudModel
 	{
 		/// <summary>ID of the ship estimate.</summary>
@@ -2635,6 +2715,9 @@ namespace OrderCloud.SDK
 		public string Name { get => GetProp<string>("Name"); set => SetProp<string>("Name", value); }
 		/// <summary>Config data of the tracking event.</summary>
 		public object ConfigData { get => GetProp<object>("ConfigData"); set => SetProp<object>("ConfigData", value); }
+		/// <summary>ID of the delivery config. Required.</summary>
+		[Required]
+		public string DeliveryConfigID { get => GetProp<string>("DeliveryConfigID"); set => SetProp<string>("DeliveryConfigID", value); }
 	}
 	public class User : OrderCloudModel
 	{
@@ -2854,6 +2937,11 @@ namespace OrderCloud.SDK
 	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic PartialCreditCard class instead.</typeparam>
 	public class PartialCreditCard<Txp> : PartialCreditCard
 	{ }
+	public class PartialDeliveryConfig : DeliveryConfig, IPartial { }
+	public class PartialDeliveryTargets : DeliveryTargets, IPartial { }
+	public class PartialDiscoverEvent : DiscoverEvent, IPartial { }
+	public class PartialEventHubConfig : EventHubConfig, IPartial { }
+	public class PartialHttpConfig : HttpConfig, IPartial { }
 	public class PartialImpersonationConfig : ImpersonationConfig, IPartial { }
 	public class PartialIncrementor : Incrementor, IPartial { }
 	public class PartialIntegrationEvent : IntegrationEvent, IPartial { }
@@ -2864,6 +2952,7 @@ namespace OrderCloud.SDK
 	public class PartialInventoryRecord<Txp, TAddress> : PartialInventoryRecord
 		where TAddress : Address
 	{ }
+	public class PartialKafkaConfig : KafkaConfig, IPartial { }
 	public class PartialLineItem : LineItem, IPartial { }
 	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, specify dynamic.</typeparam>
 	/// <typeparam name="TProduct">Specific type of the Product property. If not using a custom type, specify LineItemProduct.</typeparam>
@@ -2952,6 +3041,7 @@ namespace OrderCloud.SDK
 	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic PartialSellerApprovalRule class instead.</typeparam>
 	public class PartialSellerApprovalRule<Txp> : PartialSellerApprovalRule
 	{ }
+	public class PartialSendEvent : SendEvent, IPartial { }
 	public class PartialShipment : Shipment, IPartial { }
 	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, specify dynamic.</typeparam>
 	/// <typeparam name="TFromAddress">Specific type of the FromAddress property. If not using a custom type, specify Address.</typeparam>

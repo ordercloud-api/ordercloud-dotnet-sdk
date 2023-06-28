@@ -132,6 +132,11 @@ namespace OrderCloud.SDK
 			/// <summary>This Credit Card is registered as public and cannot be edited by this endpoint.</summary>
 			public const string CannotEditPublic = "CreditCard.CannotEditPublic";
 		}
+		public static class DeliveryConfig
+		{
+			/// <summary>This Delivery Configuration cannot be deleted because it is in use.</summary>
+			public const string CannotDeleteConfigInUse = "DeliveryConfig.CannotDeleteConfigInUse";
+		}
 		public static class Expression
 		{
 			/// <summary>Function has invalid number of arguments.</summary>
@@ -606,6 +611,8 @@ namespace OrderCloud.SDK
 			public const string CannotUpdateProperty = "TrackingEvent.CannotUpdateProperty";
 			/// <summary>The ApiClient specified by ClientID in the request does not exist.</summary>
 			public const string InvalidClientID = "TrackingEvent.InvalidClientID";
+			/// <summary>The specified delivery configuration (DeliveryConfigID) in the request does not exist.</summary>
+			public const string InvalidDeliveryConfigID = "TrackingEvent.InvalidDeliveryConfigID";
 		}
 		public static class User
 		{
