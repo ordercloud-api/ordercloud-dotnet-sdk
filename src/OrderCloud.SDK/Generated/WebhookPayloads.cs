@@ -1613,6 +1613,37 @@ namespace OrderCloud.SDK
 				public string ProductID { get; set; }
 				public string InventoryRecordID { get; set; }
 			}
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/products/{productID}/variants/{variantID}/inventoryrecords/assignments.</summary>
+			[SentOn("POST", "v1/products/{productID}/variants/{variantID}/inventoryrecords/assignments")]
+			public class SaveVariantAssignment : WebhookPayload<InventoryRecordAssignment, object, SaveVariantAssignmentRouteParams, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/products/{productID}/variants/{variantID}/inventoryrecords/assignments.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TInventoryRecordAssignment">Specific type of the InventoryRecordAssignment. If not using a custom type, specify InventoryRecordAssignment.</typeparam>
+			[SentOn("POST", "v1/products/{productID}/variants/{variantID}/inventoryrecords/assignments")]
+			public class SaveVariantAssignment<TConfigData, TInventoryRecordAssignment> : WebhookPayload<TInventoryRecordAssignment, object, SaveVariantAssignmentRouteParams, TConfigData>
+				where TInventoryRecordAssignment : InventoryRecordAssignment
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/products/{productID}/variants/{variantID}/inventoryrecords/assignments.</summary>
+			public class SaveVariantAssignmentRouteParams
+			{
+				public string ProductID { get; set; }
+				public string VariantID { get; set; }
+			}
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/products/{productID}/variants/{variantID}/inventoryrecords/{inventoryRecordID}/assignments.</summary>
+			[SentOn("DELETE", "v1/products/{productID}/variants/{variantID}/inventoryrecords/{inventoryRecordID}/assignments")]
+			public class DeleteVariantAssignment : WebhookPayload<object, object, DeleteVariantAssignmentRouteParams, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/products/{productID}/variants/{variantID}/inventoryrecords/{inventoryRecordID}/assignments.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, use the non-generic payload type instead.</typeparam>
+			[SentOn("DELETE", "v1/products/{productID}/variants/{variantID}/inventoryrecords/{inventoryRecordID}/assignments")]
+			public class DeleteVariantAssignment<TConfigData> : WebhookPayload<object, object, DeleteVariantAssignmentRouteParams, TConfigData>
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/products/{productID}/variants/{variantID}/inventoryrecords/{inventoryRecordID}/assignments.</summary>
+			public class DeleteVariantAssignmentRouteParams
+			{
+				public string ProductID { get; set; }
+				public string VariantID { get; set; }
+				public string InventoryRecordID { get; set; }
+			}
 		}
 		public static class LineItems
 		{
