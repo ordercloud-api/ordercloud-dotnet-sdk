@@ -1784,6 +1784,33 @@ namespace OrderCloud.SDK
 		/// <param name="userGroupID">ID of the user group.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task DeleteAssignmentAsync(string productID, string inventoryRecordID, string buyerID, string userID = null, string userGroupID = null, string accessToken = null);
+		/// <summary>Get a list of inventory record variant assignments.</summary>
+		/// <param name="productID">ID of the product.</param>
+		/// <param name="variantID">ID of the variant.</param>
+		/// <param name="buyerID">ID of the buyer.</param>
+		/// <param name="inventoryRecordInteropID">ID of the inventory record interop.</param>
+		/// <param name="userID">ID of the user.</param>
+		/// <param name="userGroupID">ID of the user group.</param>
+		/// <param name="level">Level of the inventory record assignment. Possible values: User, Group, Company.</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<InventoryRecordAssignment>> ListVariantAssignmentsAsync(string productID, string variantID, string buyerID = null, string inventoryRecordInteropID = null, string userID = null, string userGroupID = null, PartyType? level = null, int? page = null, int? pageSize = null, string accessToken = null);
+		/// <summary>Create or update an inventory record variant assignment.</summary>
+		/// <param name="productID">ID of the product.</param>
+		/// <param name="variantID">ID of the variant.</param>
+		/// <param name="inventoryRecordAssignment">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task SaveVariantAssignmentAsync(string productID, string variantID, InventoryRecordAssignment inventoryRecordAssignment, string accessToken = null);
+		/// <summary>Delete an inventory record variant assignment.</summary>
+		/// <param name="productID">ID of the product.</param>
+		/// <param name="variantID">ID of the variant.</param>
+		/// <param name="inventoryRecordID">ID of the inventory record.</param>
+		/// <param name="buyerID">ID of the buyer.</param>
+		/// <param name="userID">ID of the user.</param>
+		/// <param name="userGroupID">ID of the user group.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task DeleteVariantAssignmentAsync(string productID, string variantID, string inventoryRecordID, string buyerID, string userID = null, string userGroupID = null, string accessToken = null);
 	}
 
 	public interface ILineItemsResource
@@ -3074,6 +3101,36 @@ namespace OrderCloud.SDK
 		/// <param name="subscriptionItemID">ID of the subscription item.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task DeleteSubscriptionItemAsync(string subscriptionID, string subscriptionItemID, string accessToken = null);
+		/// <summary>Get a list of product sellers visible to this user. Only available to Buyer Users.</summary>
+		/// <param name="productID">ID of the product.</param>
+		/// <param name="search">Word or phrase to search for.</param>
+		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
+		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<ProductSeller>> ListProductSellersAsync(string productID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
+		/// <summary>Get a list of product sellers visible to this user. Only available to Buyer Users.</summary>
+		/// <param name="productID">ID of the product.</param>
+		/// <param name="search">Word or phrase to search for.</param>
+		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
+		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<TProductSeller>> ListProductSellersAsync<TProductSeller>(string productID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TProductSeller : ProductSeller;
+		/// <summary>Get a list of product sellers visible to this user. Only available to Buyer Users.</summary>
+		/// <param name="productID">ID of the product.</param>
+		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<ProductSeller>> ListProductSellersAsync(string productID, Action<ListOptionsBuilder<ProductSeller>> buildListOpts, string accessToken = null);
+		/// <summary>Get a list of product sellers visible to this user. Only available to Buyer Users.</summary>
+		/// <param name="productID">ID of the product.</param>
+		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<TProductSeller>> ListProductSellersAsync<TProductSeller>(string productID, Action<ListOptionsBuilder<TProductSeller>> buildListOpts, string accessToken = null) where TProductSeller : ProductSeller;
 	}
 
 	public interface IMessageSendersResource
@@ -6505,6 +6562,9 @@ namespace OrderCloud.SDK
 		public Task<ListPage<InventoryRecordAssignment>> ListAssignmentsAsync(string productID, string buyerID = null, string inventoryRecordInteropID = null, string userID = null, string userGroupID = null, PartyType? level = null, int? page = null, int? pageSize = null, string accessToken = null) => Request("v1", "products", productID, "inventoryrecords", "assignments").WithOAuthBearerToken(accessToken).SetQueryParams(new { buyerID, inventoryRecordInteropID, userID, userGroupID, level, page, pageSize }).GetJsonAsync<ListPage<InventoryRecordAssignment>>();
 		public Task SaveAssignmentAsync(string productID, InventoryRecordAssignment inventoryRecordAssignment, string accessToken = null) => Request("v1", "products", productID, "inventoryrecords", "assignments").WithOAuthBearerToken(accessToken).PostJsonAsync(ValidateModel(inventoryRecordAssignment));
 		public Task DeleteAssignmentAsync(string productID, string inventoryRecordID, string buyerID, string userID = null, string userGroupID = null, string accessToken = null) => Request("v1", "products", productID, "inventoryrecords", inventoryRecordID, "assignments").WithOAuthBearerToken(accessToken).SetQueryParams(new { buyerID, userID, userGroupID }).DeleteAsync();
+		public Task<ListPage<InventoryRecordAssignment>> ListVariantAssignmentsAsync(string productID, string variantID, string buyerID = null, string inventoryRecordInteropID = null, string userID = null, string userGroupID = null, PartyType? level = null, int? page = null, int? pageSize = null, string accessToken = null) => Request("v1", "products", productID, "variants", variantID, "inventoryrecords", "assignments").WithOAuthBearerToken(accessToken).SetQueryParams(new { buyerID, inventoryRecordInteropID, userID, userGroupID, level, page, pageSize }).GetJsonAsync<ListPage<InventoryRecordAssignment>>();
+		public Task SaveVariantAssignmentAsync(string productID, string variantID, InventoryRecordAssignment inventoryRecordAssignment, string accessToken = null) => Request("v1", "products", productID, "variants", variantID, "inventoryrecords", "assignments").WithOAuthBearerToken(accessToken).PostJsonAsync(ValidateModel(inventoryRecordAssignment));
+		public Task DeleteVariantAssignmentAsync(string productID, string variantID, string inventoryRecordID, string buyerID, string userID = null, string userGroupID = null, string accessToken = null) => Request("v1", "products", productID, "variants", variantID, "inventoryrecords", inventoryRecordID, "assignments").WithOAuthBearerToken(accessToken).SetQueryParams(new { buyerID, userID, userGroupID }).DeleteAsync();
 	}
 
 	public class LineItemsResource : OrderCloudResource, ILineItemsResource
@@ -6720,6 +6780,10 @@ namespace OrderCloud.SDK
 		public Task<LineItem> PatchSubscriptionItemAsync(string subscriptionID, string subscriptionItemID, PartialLineItem partialLineItem, string accessToken = null) => PatchSubscriptionItemAsync<LineItem>(subscriptionID, subscriptionItemID, partialLineItem, accessToken);
 		public Task<TLineItem> PatchSubscriptionItemAsync<TLineItem>(string subscriptionID, string subscriptionItemID, PartialLineItem partialLineItem, string accessToken = null) where TLineItem : LineItem => Request("v1", "me", "subscriptions", subscriptionID, "items", subscriptionItemID).WithOAuthBearerToken(accessToken).PatchJsonAsync(ValidateModel(partialLineItem)).ReceiveJson<TLineItem>();
 		public Task DeleteSubscriptionItemAsync(string subscriptionID, string subscriptionItemID, string accessToken = null) => Request("v1", "me", "subscriptions", subscriptionID, "items", subscriptionItemID).WithOAuthBearerToken(accessToken).DeleteAsync();
+		public Task<ListPage<ProductSeller>> ListProductSellersAsync(string productID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) => ListProductSellersAsync<ProductSeller>(productID, search, searchOn, sortBy, page, pageSize, filters, accessToken);
+		public Task<ListPage<TProductSeller>> ListProductSellersAsync<TProductSeller>(string productID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TProductSeller : ProductSeller => Request("v1", "me", "products", productID, "sellers").WithOAuthBearerToken(accessToken).SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<TProductSeller>>();
+		public Task<ListPage<ProductSeller>> ListProductSellersAsync(string productID, Action<ListOptionsBuilder<ProductSeller>> buildListOpts, string accessToken = null) => ListProductSellersAsync<ProductSeller>(productID, buildListOpts, accessToken);
+		public Task<ListPage<TProductSeller>> ListProductSellersAsync<TProductSeller>(string productID, Action<ListOptionsBuilder<TProductSeller>> buildListOpts, string accessToken = null) where TProductSeller : ProductSeller => Request("v1", "me", "products", productID, "sellers").WithOAuthBearerToken(accessToken).SetListOptions(buildListOpts).GetJsonAsync<ListPage<TProductSeller>>();
 	}
 
 	public class MessageSendersResource : OrderCloudResource, IMessageSendersResource

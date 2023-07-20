@@ -2106,6 +2106,22 @@ namespace OrderCloud.SDK
 		/// <summary>Container for extended (custom) properties of the product facet.</summary>
 		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
 	}
+	public class ProductSeller : OrderCloudModel
+	{
+		/// <summary>Price schedule of the product seller.</summary>
+		public PriceSchedule PriceSchedule { get => GetProp<PriceSchedule>("PriceSchedule"); set => SetProp<PriceSchedule>("PriceSchedule", value); }
+		/// <summary>ID of the product seller. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 2.</summary>
+		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
+		/// <summary>Name of the product seller. Max length 100 characters. Searchable: priority level 2. Sortable: priority level 1.</summary>
+		public string Name { get => GetProp<string>("Name"); set => SetProp<string>("Name", value); }
+	}
+	/// <typeparam name="TPriceSchedule">Specific type of the PriceSchedule property. If not using a custom type, use the non-generic ProductSeller class instead.</typeparam>
+	public class ProductSeller<TPriceSchedule> : ProductSeller
+		where TPriceSchedule : PriceSchedule
+	{
+		/// <summary>Price schedule of the product seller.</summary>
+		public new TPriceSchedule PriceSchedule { get => GetProp<TPriceSchedule>("PriceSchedule"); set => SetProp<TPriceSchedule>("PriceSchedule", value); }
+	}
 	public class ProductSupplier : OrderCloudModel
 	{
 		/// <summary>ID of the default price schedule.</summary>
