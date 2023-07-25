@@ -799,6 +799,10 @@ namespace OrderCloud.SDK
 		/// <summary>Endpoint of the http config. Required.</summary>
 		[Required]
 		public string Endpoint { get => GetProp<string>("Endpoint"); set => SetProp<string>("Endpoint", value); }
+		/// <summary>Secret of the http config. Required. Max length 50 characters.</summary>
+		[Required]
+		[ApiWriteOnly]
+		public string Secret { get => GetProp<string>("Secret"); set => SetProp<string>("Secret", value); }
 	}
 	public class ImpersonateTokenRequest : OrderCloudModel
 	{
