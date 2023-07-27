@@ -37,6 +37,7 @@ namespace OrderCloud.SDK
 		IProductCollectionsResource ProductCollections { get; }
 		IProductFacetsResource ProductFacets { get; }
 		IProductsResource Products { get; }
+		IProductSyncsResource ProductSyncs { get; }
 		IPromotionsResource Promotions { get; }
 		ISecurityProfilesResource SecurityProfiles { get; }
 		ISellerApprovalRulesResource SellerApprovalRules { get; }
@@ -4529,6 +4530,24 @@ namespace OrderCloud.SDK
 		Task DeleteAssignmentAsync(string productID, string buyerID, string userID = null, string userGroupID = null, string sellerID = null, string accessToken = null);
 	}
 
+	public interface IProductSyncsResource
+	{
+		/// <summary>Get a single product sync.</summary>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ProductSyncConfig> GetAsync(string accessToken = null);
+		/// <summary>Delete a product sync.</summary>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task DeleteAsync(string accessToken = null);
+		/// <summary>Create or update a product sync. If an object with the same ID already exists, it will be overwritten.</summary>
+		/// <param name="productSyncConfig">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ProductSyncConfig> SaveAsync(ProductSyncConfig productSyncConfig, string accessToken = null);
+		/// <summary>Partially update a product sync.</summary>
+		/// <param name="partialProductSyncConfig">The object that will be partially serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ProductSyncConfig> PatchAsync(PartialProductSyncConfig partialProductSyncConfig, string accessToken = null);
+	}
+
 	public interface IPromotionsResource
 	{
 		/// <summary>Get a single promotion.</summary>
@@ -6103,6 +6122,7 @@ namespace OrderCloud.SDK
 			ProductCollections = new ProductCollectionsResource(this);
 			ProductFacets = new ProductFacetsResource(this);
 			Products = new ProductsResource(this);
+			ProductSyncs = new ProductSyncsResource(this);
 			Promotions = new PromotionsResource(this);
 			SecurityProfiles = new SecurityProfilesResource(this);
 			SellerApprovalRules = new SellerApprovalRulesResource(this);
@@ -6154,6 +6174,7 @@ namespace OrderCloud.SDK
 		public IProductCollectionsResource ProductCollections { get; private set; }
 		public IProductFacetsResource ProductFacets { get; private set; }
 		public IProductsResource Products { get; private set; }
+		public IProductSyncsResource ProductSyncs { get; private set; }
 		public IPromotionsResource Promotions { get; private set; }
 		public ISecurityProfilesResource SecurityProfiles { get; private set; }
 		public ISellerApprovalRulesResource SellerApprovalRules { get; private set; }
@@ -7052,6 +7073,15 @@ namespace OrderCloud.SDK
 		public Task SaveAssignmentAsync(ProductAssignment productAssignment, string accessToken = null) => Request("v1", "products", "assignments").WithOAuthBearerToken(accessToken).PostJsonAsync(ValidateModel(productAssignment));
 		public Task<ListPage<ProductAssignment>> ListAssignmentsAsync(string productID = null, string priceScheduleID = null, string buyerID = null, string userID = null, string userGroupID = null, PartyType? level = null, int? page = null, int? pageSize = null, string accessToken = null) => Request("v1", "products", "assignments").WithOAuthBearerToken(accessToken).SetQueryParams(new { productID, priceScheduleID, buyerID, userID, userGroupID, level, page, pageSize }).GetJsonAsync<ListPage<ProductAssignment>>();
 		public Task DeleteAssignmentAsync(string productID, string buyerID, string userID = null, string userGroupID = null, string sellerID = null, string accessToken = null) => Request("v1", "products", productID, "assignments", buyerID).WithOAuthBearerToken(accessToken).SetQueryParams(new { userID, userGroupID, sellerID }).DeleteAsync();
+	}
+
+	public class ProductSyncsResource : OrderCloudResource, IProductSyncsResource
+	{
+		internal ProductSyncsResource(OrderCloudClient client) : base(client) { }
+		public Task<ProductSyncConfig> GetAsync(string accessToken = null) => Request("v1", "integrations", "productsync").WithOAuthBearerToken(accessToken).GetJsonAsync<ProductSyncConfig>();
+		public Task DeleteAsync(string accessToken = null) => Request("v1", "integrations", "productsync").WithOAuthBearerToken(accessToken).DeleteAsync();
+		public Task<ProductSyncConfig> SaveAsync(ProductSyncConfig productSyncConfig, string accessToken = null) => Request("v1", "integrations", "productsync").WithOAuthBearerToken(accessToken).PutJsonAsync(ValidateModel(productSyncConfig)).ReceiveJson<ProductSyncConfig>();
+		public Task<ProductSyncConfig> PatchAsync(PartialProductSyncConfig partialProductSyncConfig, string accessToken = null) => Request("v1", "integrations", "productsync").WithOAuthBearerToken(accessToken).PatchJsonAsync(ValidateModel(partialProductSyncConfig)).ReceiveJson<ProductSyncConfig>();
 	}
 
 	public class PromotionsResource : OrderCloudResource, IPromotionsResource
