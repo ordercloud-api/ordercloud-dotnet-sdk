@@ -39,6 +39,8 @@ namespace OrderCloud.SDK
 			public const string InvalidClientID = "ApiClient.InvalidClientID";
 			/// <summary>Cannot delete API Client used by a Subscription Integration.</summary>
 			public const string UsedByIntegration = "ApiClient.UsedByIntegration";
+			/// <summary>Cannot delete API Client used by an impersonation config.</summary>
+			public const string UsedByImpersonationConfig = "ApiClient.UsedByImpersonationConfig";
 		}
 		public static class ApprovalRule
 		{
@@ -334,6 +336,13 @@ namespace OrderCloud.SDK
 			public const string NotEligibleToApproveOrDecline = "OrderReturn.NotEligibleToApproveOrDecline";
 			/// <summary>LineItemID must be unique across ItemsToReturn.</summary>
 			public const string CannotCreateDuplicateItemToReturn = "OrderReturn.CannotCreateDuplicateItemToReturn";
+			/// <summary>RefundAmount must not be negative.</summary>
+			public const string RefundAmountMustNotBeNegative = "OrderReturn.RefundAmountMustNotBeNegative";
+		}
+		public static class OrderSyncConfig
+		{
+			/// <summary>Only one order sync can be configured for a marketplace.</summary>
+			public const string OnlyOneConfigPerMarketplace = "OrderSyncConfig.OnlyOneConfigPerMarketplace";
 		}
 		public static class PartyAssignment
 		{
@@ -602,6 +611,8 @@ namespace OrderCloud.SDK
 			public const string CannotUseApiClient = "SubscriptionIntegration.CannotUseApiClient";
 			/// <summary>DefaultContextUser must be defined to use this API Client ID.</summary>
 			public const string DefaultContextUser = "SubscriptionIntegration.DefaultContextUser";
+			/// <summary>You have exceeded the maximum number of subscription integration runs per hour.</summary>
+			public const string ExceedsSelfServiceLimit = "SubscriptionIntegration.ExceedsSelfServiceLimit";
 		}
 		public static class TrackingEvent
 		{
@@ -655,6 +666,10 @@ namespace OrderCloud.SDK
 		{
 			/// <summary>Webhook URL secure scheme https is required.</summary>
 			public const string UrlSchemeHttps = "Webhook.UrlSchemeHttps";
+			/// <summary>Delivery Configuration is not valid for PreHooks</summary>
+			public const string InvalidDeliveryConfig = "Webhook.InvalidDeliveryConfig";
+			/// <summary>HashKey is required for this webhook</summary>
+			public const string MissingHashKey = "Webhook.MissingHashKey";
 		}
 	}
 }

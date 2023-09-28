@@ -2905,6 +2905,37 @@ namespace OrderCloud.SDK
 				public string OrderID { get; set; }
 			}
 		}
+		public static class OrderSyncs
+		{
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/integrations/OrderSync.</summary>
+			[SentOn("DELETE", "v1/integrations/OrderSync")]
+			public class Delete : WebhookPayload<object, object, object, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/integrations/OrderSync.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, use the non-generic payload type instead.</typeparam>
+			[SentOn("DELETE", "v1/integrations/OrderSync")]
+			public class Delete<TConfigData> : WebhookPayload<object, object, object, TConfigData>
+			{ }
+			/// <summary>Webhook payload sent by OrderCloud on PUT v1/integrations/OrderSync.</summary>
+			[SentOn("PUT", "v1/integrations/OrderSync")]
+			public class Save : WebhookPayload<OrderSyncConfig, OrderSyncConfig, object, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on PUT v1/integrations/OrderSync.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TOrderSyncConfig">Specific type of the OrderSyncConfig. If not using a custom type, specify OrderSyncConfig.</typeparam>
+			[SentOn("PUT", "v1/integrations/OrderSync")]
+			public class Save<TConfigData, TOrderSyncConfig> : WebhookPayload<TOrderSyncConfig, TOrderSyncConfig, object, TConfigData>
+				where TOrderSyncConfig : OrderSyncConfig
+			{ }
+			/// <summary>Webhook payload sent by OrderCloud on PATCH v1/integrations/OrderSync.</summary>
+			[SentOn("PATCH", "v1/integrations/OrderSync")]
+			public class Patch : WebhookPayload<OrderSyncConfig, OrderSyncConfig, object, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on PATCH v1/integrations/OrderSync.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TOrderSyncConfig">Specific type of the OrderSyncConfig. If not using a custom type, specify OrderSyncConfig.</typeparam>
+			[SentOn("PATCH", "v1/integrations/OrderSync")]
+			public class Patch<TConfigData, TOrderSyncConfig> : WebhookPayload<TOrderSyncConfig, TOrderSyncConfig, object, TConfigData>
+				where TOrderSyncConfig : OrderSyncConfig
+			{ }
+		}
 		public static class PasswordResets
 		{
 			/// <summary>Webhook payload sent by OrderCloud on POST v1/password/reset.</summary>
