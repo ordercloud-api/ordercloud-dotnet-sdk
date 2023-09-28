@@ -31,6 +31,7 @@ namespace OrderCloud.SDK
 		IOpenIdConnectsResource OpenIdConnects { get; }
 		IOrderReturnsResource OrderReturns { get; }
 		IOrdersResource Orders { get; }
+		IOrderSyncsResource OrderSyncs { get; }
 		IPasswordResetsResource PasswordResets { get; }
 		IPaymentsResource Payments { get; }
 		IPriceSchedulesResource PriceSchedules { get; }
@@ -1764,14 +1765,14 @@ namespace OrderCloud.SDK
 		/// <summary>Get a list of inventory record assignments.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="buyerID">ID of the buyer.</param>
-		/// <param name="inventoryRecordInteropID">ID of the inventory record interop.</param>
+		/// <param name="inventoryRecordID">ID of the inventory record.</param>
 		/// <param name="userID">ID of the user.</param>
 		/// <param name="userGroupID">ID of the user group.</param>
 		/// <param name="level">Level of the inventory record assignment. Possible values: User, Group, Company.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
-		Task<ListPage<InventoryRecordAssignment>> ListAssignmentsAsync(string productID, string buyerID = null, string inventoryRecordInteropID = null, string userID = null, string userGroupID = null, PartyType? level = null, int? page = null, int? pageSize = null, string accessToken = null);
+		Task<ListPage<InventoryRecordAssignment>> ListAssignmentsAsync(string productID, string buyerID = null, string inventoryRecordID = null, string userID = null, string userGroupID = null, PartyType? level = null, int? page = null, int? pageSize = null, string accessToken = null);
 		/// <summary>Create or update an inventory record assignment.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="inventoryRecordAssignment">The object that will be serialized to JSON and sent in the request body.</param>
@@ -1789,14 +1790,14 @@ namespace OrderCloud.SDK
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="variantID">ID of the variant.</param>
 		/// <param name="buyerID">ID of the buyer.</param>
-		/// <param name="inventoryRecordInteropID">ID of the inventory record interop.</param>
+		/// <param name="inventoryRecordID">ID of the inventory record.</param>
 		/// <param name="userID">ID of the user.</param>
 		/// <param name="userGroupID">ID of the user group.</param>
 		/// <param name="level">Level of the inventory record assignment. Possible values: User, Group, Company.</param>
 		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
-		Task<ListPage<InventoryRecordAssignment>> ListVariantAssignmentsAsync(string productID, string variantID, string buyerID = null, string inventoryRecordInteropID = null, string userID = null, string userGroupID = null, PartyType? level = null, int? page = null, int? pageSize = null, string accessToken = null);
+		Task<ListPage<InventoryRecordAssignment>> ListVariantAssignmentsAsync(string productID, string variantID, string buyerID = null, string inventoryRecordID = null, string userID = null, string userGroupID = null, PartyType? level = null, int? page = null, int? pageSize = null, string accessToken = null);
 		/// <summary>Create or update an inventory record variant assignment.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="variantID">ID of the variant.</param>
@@ -3925,6 +3926,24 @@ namespace OrderCloud.SDK
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task ValidateAsync(OrderDirection direction, string orderID, string accessToken = null);
+	}
+
+	public interface IOrderSyncsResource
+	{
+		/// <summary>Get a single order sync.</summary>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<OrderSyncConfig> GetAsync(string accessToken = null);
+		/// <summary>Delete an order sync.</summary>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task DeleteAsync(string accessToken = null);
+		/// <summary>Create or update an order sync. If an object with the same ID already exists, it will be overwritten.</summary>
+		/// <param name="orderSyncConfig">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<OrderSyncConfig> SaveAsync(OrderSyncConfig orderSyncConfig, string accessToken = null);
+		/// <summary>Partially update an order sync.</summary>
+		/// <param name="partialOrderSyncConfig">The object that will be partially serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<OrderSyncConfig> PatchAsync(PartialOrderSyncConfig partialOrderSyncConfig, string accessToken = null);
 	}
 
 	public interface IPasswordResetsResource
@@ -6116,6 +6135,7 @@ namespace OrderCloud.SDK
 			OpenIdConnects = new OpenIdConnectsResource(this);
 			OrderReturns = new OrderReturnsResource(this);
 			Orders = new OrdersResource(this);
+			OrderSyncs = new OrderSyncsResource(this);
 			PasswordResets = new PasswordResetsResource(this);
 			Payments = new PaymentsResource(this);
 			PriceSchedules = new PriceSchedulesResource(this);
@@ -6168,6 +6188,7 @@ namespace OrderCloud.SDK
 		public IOpenIdConnectsResource OpenIdConnects { get; private set; }
 		public IOrderReturnsResource OrderReturns { get; private set; }
 		public IOrdersResource Orders { get; private set; }
+		public IOrderSyncsResource OrderSyncs { get; private set; }
 		public IPasswordResetsResource PasswordResets { get; private set; }
 		public IPaymentsResource Payments { get; private set; }
 		public IPriceSchedulesResource PriceSchedules { get; private set; }
@@ -6580,10 +6601,10 @@ namespace OrderCloud.SDK
 		public Task<InventoryRecord> PatchVariantAsync(string productID, string variantID, string inventoryRecordID, PartialInventoryRecord partialInventoryRecord, string accessToken = null) => PatchVariantAsync<InventoryRecord>(productID, variantID, inventoryRecordID, partialInventoryRecord, accessToken);
 		public Task<TInventoryRecord> PatchVariantAsync<TInventoryRecord>(string productID, string variantID, string inventoryRecordID, PartialInventoryRecord partialInventoryRecord, string accessToken = null) where TInventoryRecord : InventoryRecord => Request("v1", "products", productID, "variants", variantID, "inventoryrecords", inventoryRecordID).WithOAuthBearerToken(accessToken).PatchJsonAsync(ValidateModel(partialInventoryRecord)).ReceiveJson<TInventoryRecord>();
 		public Task DeleteVariantAsync(string productID, string variantID, string inventoryRecordID, string accessToken = null) => Request("v1", "products", productID, "variants", variantID, "inventoryrecords", inventoryRecordID).WithOAuthBearerToken(accessToken).DeleteAsync();
-		public Task<ListPage<InventoryRecordAssignment>> ListAssignmentsAsync(string productID, string buyerID = null, string inventoryRecordInteropID = null, string userID = null, string userGroupID = null, PartyType? level = null, int? page = null, int? pageSize = null, string accessToken = null) => Request("v1", "products", productID, "inventoryrecords", "assignments").WithOAuthBearerToken(accessToken).SetQueryParams(new { buyerID, inventoryRecordInteropID, userID, userGroupID, level, page, pageSize }).GetJsonAsync<ListPage<InventoryRecordAssignment>>();
+		public Task<ListPage<InventoryRecordAssignment>> ListAssignmentsAsync(string productID, string buyerID = null, string inventoryRecordID = null, string userID = null, string userGroupID = null, PartyType? level = null, int? page = null, int? pageSize = null, string accessToken = null) => Request("v1", "products", productID, "inventoryrecords", "assignments").WithOAuthBearerToken(accessToken).SetQueryParams(new { buyerID, inventoryRecordID, userID, userGroupID, level, page, pageSize }).GetJsonAsync<ListPage<InventoryRecordAssignment>>();
 		public Task SaveAssignmentAsync(string productID, InventoryRecordAssignment inventoryRecordAssignment, string accessToken = null) => Request("v1", "products", productID, "inventoryrecords", "assignments").WithOAuthBearerToken(accessToken).PostJsonAsync(ValidateModel(inventoryRecordAssignment));
 		public Task DeleteAssignmentAsync(string productID, string inventoryRecordID, string buyerID, string userID = null, string userGroupID = null, string accessToken = null) => Request("v1", "products", productID, "inventoryrecords", inventoryRecordID, "assignments").WithOAuthBearerToken(accessToken).SetQueryParams(new { buyerID, userID, userGroupID }).DeleteAsync();
-		public Task<ListPage<InventoryRecordAssignment>> ListVariantAssignmentsAsync(string productID, string variantID, string buyerID = null, string inventoryRecordInteropID = null, string userID = null, string userGroupID = null, PartyType? level = null, int? page = null, int? pageSize = null, string accessToken = null) => Request("v1", "products", productID, "variants", variantID, "inventoryrecords", "assignments").WithOAuthBearerToken(accessToken).SetQueryParams(new { buyerID, inventoryRecordInteropID, userID, userGroupID, level, page, pageSize }).GetJsonAsync<ListPage<InventoryRecordAssignment>>();
+		public Task<ListPage<InventoryRecordAssignment>> ListVariantAssignmentsAsync(string productID, string variantID, string buyerID = null, string inventoryRecordID = null, string userID = null, string userGroupID = null, PartyType? level = null, int? page = null, int? pageSize = null, string accessToken = null) => Request("v1", "products", productID, "variants", variantID, "inventoryrecords", "assignments").WithOAuthBearerToken(accessToken).SetQueryParams(new { buyerID, inventoryRecordID, userID, userGroupID, level, page, pageSize }).GetJsonAsync<ListPage<InventoryRecordAssignment>>();
 		public Task SaveVariantAssignmentAsync(string productID, string variantID, InventoryRecordAssignment inventoryRecordAssignment, string accessToken = null) => Request("v1", "products", productID, "variants", variantID, "inventoryrecords", "assignments").WithOAuthBearerToken(accessToken).PostJsonAsync(ValidateModel(inventoryRecordAssignment));
 		public Task DeleteVariantAssignmentAsync(string productID, string variantID, string inventoryRecordID, string buyerID, string userID = null, string userGroupID = null, string accessToken = null) => Request("v1", "products", productID, "variants", variantID, "inventoryrecords", inventoryRecordID, "assignments").WithOAuthBearerToken(accessToken).SetQueryParams(new { buyerID, userID, userGroupID }).DeleteAsync();
 	}
@@ -6950,6 +6971,15 @@ namespace OrderCloud.SDK
 		public Task<Order> ApplyPromotionsAsync(OrderDirection direction, string orderID, string accessToken = null) => ApplyPromotionsAsync<Order>(direction, orderID, accessToken);
 		public Task<TOrder> ApplyPromotionsAsync<TOrder>(OrderDirection direction, string orderID, string accessToken = null) where TOrder : Order => Request("v1", "orders", direction, orderID, "applypromotions").WithOAuthBearerToken(accessToken).PostAsync(null).ReceiveJson<TOrder>();
 		public Task ValidateAsync(OrderDirection direction, string orderID, string accessToken = null) => Request("v1", "orders", direction, orderID, "validate").WithOAuthBearerToken(accessToken).PostAsync(null);
+	}
+
+	public class OrderSyncsResource : OrderCloudResource, IOrderSyncsResource
+	{
+		internal OrderSyncsResource(OrderCloudClient client) : base(client) { }
+		public Task<OrderSyncConfig> GetAsync(string accessToken = null) => Request("v1", "integrations", "OrderSync").WithOAuthBearerToken(accessToken).GetJsonAsync<OrderSyncConfig>();
+		public Task DeleteAsync(string accessToken = null) => Request("v1", "integrations", "OrderSync").WithOAuthBearerToken(accessToken).DeleteAsync();
+		public Task<OrderSyncConfig> SaveAsync(OrderSyncConfig orderSyncConfig, string accessToken = null) => Request("v1", "integrations", "OrderSync").WithOAuthBearerToken(accessToken).PutJsonAsync(ValidateModel(orderSyncConfig)).ReceiveJson<OrderSyncConfig>();
+		public Task<OrderSyncConfig> PatchAsync(PartialOrderSyncConfig partialOrderSyncConfig, string accessToken = null) => Request("v1", "integrations", "OrderSync").WithOAuthBearerToken(accessToken).PatchJsonAsync(ValidateModel(partialOrderSyncConfig)).ReceiveJson<OrderSyncConfig>();
 	}
 
 	public class PasswordResetsResource : OrderCloudResource, IPasswordResetsResource
