@@ -89,6 +89,21 @@ namespace OrderCloud.SDK
 			/// <summary>Cannot PATCH a billing address that was set by ID. Either PATCH the saved address at /addresses/{{id}}, or PUT a complete address at /billto.</summary>
 			public const string CannotPatchSetByID = "BillingAddress.CannotPatchSetByID";
 		}
+		public static class Bundle
+		{
+			/// <summary>Cannot assign a product to a bundle with a different OwnerID.</summary>
+			public const string OwnerIDMustMatch = "Bundle.OwnerIDMustMatch";
+			/// <summary>Cannot assign a child product to a bundle the parent proudct is already assigned to. Delete the parent product assignment to the bundle first.</summary>
+			public const string ParentProductAssigned = "Bundle.ParentProductAssigned";
+			/// <summary>Cannot assign a parent product to a bundle that child products are already assigned to. Delete the child product assignments to the bundle first.</summary>
+			public const string ChildProductsAssigned = "Bundle.ChildProductsAssigned";
+			/// <summary>This product is not assigned to the specified bundle.</summary>
+			public const string ProductNotAssigned = "Bundle.ProductNotAssigned";
+			/// <summary>One or more required bundle items is missing.</summary>
+			public const string RequiredBundleItemMissing = "Bundle.RequiredBundleItemMissing";
+			/// <summary>Default quantity is not specified for one or more required bundle items.</summary>
+			public const string DefaultQuantityMissing = "Bundle.DefaultQuantityMissing";
+		}
 		public static class Buyer
 		{
 			/// <summary>You must provide the ID of the Buyer User you are creating the order on behalf of.</summary>
@@ -192,6 +207,8 @@ namespace OrderCloud.SDK
 			public const string AllowSellerApiClientRequired = "IntegrationEvent.AllowSellerApiClientRequired";
 			/// <summary>You must estimate shipping costs prior to setting your shipping method.</summary>
 			public const string MustCalculateShipping = "IntegrationEvent.MustCalculateShipping";
+			/// <summary>There are no ShipEstimates in your ShipEstimateResponse. Estimate Shipping needs to return at least one ShipEstimate before saving a shipping method.</summary>
+			public const string MustHaveShipEstimates = "IntegrationEvent.MustHaveShipEstimates";
 		}
 		public static class Inventory
 		{
@@ -240,6 +257,14 @@ namespace OrderCloud.SDK
 			public const string CannotSearchByOrderOrLineItem = "LineItem.CannotSearchByOrderOrLineItem";
 			/// <summary>Parent product is not purchasable.</summary>
 			public const string CannotPurchaseParentProduct = "LineItem.CannotPurchaseParentProduct";
+			/// <summary>Bundle is not purchasable.</summary>
+			public const string CannotPurchaseBundleProduct = "LineItem.CannotPurchaseBundleProduct";
+			/// <summary>Cannot delete a bundle using this endpoint.</summary>
+			public const string CannotRemoveBundle = "LineItem.CannotRemoveBundle";
+			/// <summary>Cannot delete a bundle item using this endpoint.</summary>
+			public const string CannotRemoveBundleItem = "LineItem.CannotRemoveBundleItem";
+			/// <summary>Required bundle item cannot be removed.</summary>
+			public const string CannotRemoveRequiredBundleItem = "LineItem.CannotRemoveRequiredBundleItem";
 		}
 		public static class List
 		{
@@ -338,6 +363,11 @@ namespace OrderCloud.SDK
 			public const string CannotCreateDuplicateItemToReturn = "OrderReturn.CannotCreateDuplicateItemToReturn";
 			/// <summary>RefundAmount must not be negative.</summary>
 			public const string RefundAmountMustNotBeNegative = "OrderReturn.RefundAmountMustNotBeNegative";
+		}
+		public static class OrderSync
+		{
+			/// <summary>The supplied date range was invalid.</summary>
+			public const string InvalidDateRangeForSyncOperation = "OrderSync.InvalidDateRangeForSyncOperation";
 		}
 		public static class OrderSyncConfig
 		{
@@ -484,6 +514,12 @@ namespace OrderCloud.SDK
 			public const string ParentChildProductOwnersShouldMatch = "Product.ParentChildProductOwnersShouldMatch";
 			/// <summary>Parent and child products cannot have variants.</summary>
 			public const string ParentChildProductsCannotHaveVariants = "Product.ParentChildProductsCannotHaveVariants";
+			/// <summary>Bundle cannot have variants.</summary>
+			public const string BundleProductCannotHaveVariants = "Product.BundleProductCannotHaveVariants";
+			/// <summary>Parent product cannot be a bundle.</summary>
+			public const string ParentProductCannotBeABundle = "Product.ParentProductCannotBeABundle";
+			/// <summary>Cannot delete a product assigned to bundle.</summary>
+			public const string CannotDeleteProductAssingedToBundle = "Product.CannotDeleteProductAssingedToBundle";
 		}
 		public static class ProductAssigment
 		{
@@ -491,6 +527,8 @@ namespace OrderCloud.SDK
 			public const string MustSpecifyPriceScheduleID = "ProductAssigment.MustSpecifyPriceScheduleID";
 			/// <summary>Spec that defines a variant cannot be assigned to a parent/child product.</summary>
 			public const string ParentChildProductCannotBeAssignedToVariantSpec = "ProductAssigment.ParentChildProductCannotBeAssignedToVariantSpec";
+			/// <summary>Spec that defines a variant cannot be assigned to a bundle.</summary>
+			public const string BundleProductCannotBeAssignedToVariantSpec = "ProductAssigment.BundleProductCannotBeAssignedToVariantSpec";
 		}
 		public static class ProductCollection
 		{
@@ -568,6 +606,8 @@ namespace OrderCloud.SDK
 		{
 			/// <summary>The quantity shipped cannot exceed the requested ammount on the order.</summary>
 			public const string QuantityExceeded = "ShipmentItem.QuantityExceeded";
+			/// <summary>Cannot create a shipment item for a line item where IsBundle = true. This line item is excluded from determining if an order is completed.</summary>
+			public const string CannotBeBundle = "ShipmentItem.CannotBeBundle";
 		}
 		public static class ShippingAddress
 		{
@@ -666,9 +706,9 @@ namespace OrderCloud.SDK
 		{
 			/// <summary>Webhook URL secure scheme https is required.</summary>
 			public const string UrlSchemeHttps = "Webhook.UrlSchemeHttps";
-			/// <summary>Delivery Configuration is not valid for PreHooks</summary>
+			/// <summary>Delivery Configuration is not valid for PreHooks.</summary>
 			public const string InvalidDeliveryConfig = "Webhook.InvalidDeliveryConfig";
-			/// <summary>HashKey is required for this webhook</summary>
+			/// <summary>HashKey is required for this webhook.</summary>
 			public const string MissingHashKey = "Webhook.MissingHashKey";
 		}
 	}

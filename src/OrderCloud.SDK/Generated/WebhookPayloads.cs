@@ -447,6 +447,148 @@ namespace OrderCloud.SDK
 				public string ApprovalRuleID { get; set; }
 			}
 		}
+		public static class BundleLineItems
+		{
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/orders/{direction}/{orderID}/bundles/{bundleID}.</summary>
+			[SentOn("POST", "v1/orders/{direction}/{orderID}/bundles/{bundleID}")]
+			public class Create : WebhookPayload<BundleItems, LineItem, CreateRouteParams, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/orders/{direction}/{orderID}/bundles/{bundleID}.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TBundleItems">Specific type of the BundleItems. If not using a custom type, specify BundleItems.</typeparam>
+			/// <typeparam name="TLineItem">Specific type of the LineItem. If not using a custom type, specify LineItem.</typeparam>
+			[SentOn("POST", "v1/orders/{direction}/{orderID}/bundles/{bundleID}")]
+			public class Create<TConfigData, TBundleItems, TLineItem> : WebhookPayload<TBundleItems, TLineItem, CreateRouteParams, TConfigData>
+				where TBundleItems : BundleItems
+				where TLineItem : LineItem
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/orders/{direction}/{orderID}/bundles/{bundleID}.</summary>
+			public class CreateRouteParams
+			{
+				public OrderDirection Direction { get; set; }
+				public string OrderID { get; set; }
+				public string BundleID { get; set; }
+			}
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/orders/{direction}/{orderID}/bundles/{bundleID}/{bundleItemID}.</summary>
+			[SentOn("DELETE", "v1/orders/{direction}/{orderID}/bundles/{bundleID}/{bundleItemID}")]
+			public class Delete : WebhookPayload<object, object, DeleteRouteParams, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/orders/{direction}/{orderID}/bundles/{bundleID}/{bundleItemID}.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, use the non-generic payload type instead.</typeparam>
+			[SentOn("DELETE", "v1/orders/{direction}/{orderID}/bundles/{bundleID}/{bundleItemID}")]
+			public class Delete<TConfigData> : WebhookPayload<object, object, DeleteRouteParams, TConfigData>
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/orders/{direction}/{orderID}/bundles/{bundleID}/{bundleItemID}.</summary>
+			public class DeleteRouteParams
+			{
+				public OrderDirection Direction { get; set; }
+				public string OrderID { get; set; }
+				public string BundleID { get; set; }
+				public string BundleItemID { get; set; }
+			}
+		}
+		public static class Bundles
+		{
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/bundles.</summary>
+			[SentOn("POST", "v1/bundles")]
+			public class Create : WebhookPayload<Bundle, Bundle, object, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/bundles.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TBundle">Specific type of the Bundle. If not using a custom type, specify Bundle.</typeparam>
+			[SentOn("POST", "v1/bundles")]
+			public class Create<TConfigData, TBundle> : WebhookPayload<TBundle, TBundle, object, TConfigData>
+				where TBundle : Bundle
+			{ }
+			/// <summary>Webhook payload sent by OrderCloud on PUT v1/bundles/{bundleID}.</summary>
+			[SentOn("PUT", "v1/bundles/{bundleID}")]
+			public class Save : WebhookPayload<Bundle, Bundle, SaveRouteParams, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on PUT v1/bundles/{bundleID}.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TBundle">Specific type of the Bundle. If not using a custom type, specify Bundle.</typeparam>
+			[SentOn("PUT", "v1/bundles/{bundleID}")]
+			public class Save<TConfigData, TBundle> : WebhookPayload<TBundle, TBundle, SaveRouteParams, TConfigData>
+				where TBundle : Bundle
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/bundles/{bundleID}.</summary>
+			public class SaveRouteParams
+			{
+				public string BundleID { get; set; }
+			}
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/bundles/{bundleID}.</summary>
+			[SentOn("DELETE", "v1/bundles/{bundleID}")]
+			public class Delete : WebhookPayload<object, object, DeleteRouteParams, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/bundles/{bundleID}.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, use the non-generic payload type instead.</typeparam>
+			[SentOn("DELETE", "v1/bundles/{bundleID}")]
+			public class Delete<TConfigData> : WebhookPayload<object, object, DeleteRouteParams, TConfigData>
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/bundles/{bundleID}.</summary>
+			public class DeleteRouteParams
+			{
+				public string BundleID { get; set; }
+			}
+			/// <summary>Webhook payload sent by OrderCloud on PATCH v1/bundles/{bundleID}.</summary>
+			[SentOn("PATCH", "v1/bundles/{bundleID}")]
+			public class Patch : WebhookPayload<Bundle, Bundle, PatchRouteParams, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on PATCH v1/bundles/{bundleID}.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TBundle">Specific type of the Bundle. If not using a custom type, specify Bundle.</typeparam>
+			[SentOn("PATCH", "v1/bundles/{bundleID}")]
+			public class Patch<TConfigData, TBundle> : WebhookPayload<TBundle, TBundle, PatchRouteParams, TConfigData>
+				where TBundle : Bundle
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/bundles/{bundleID}.</summary>
+			public class PatchRouteParams
+			{
+				public string BundleID { get; set; }
+			}
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/bundles/productassignments.</summary>
+			[SentOn("POST", "v1/bundles/productassignments")]
+			public class SaveProductAssignment : WebhookPayload<BundleProductAssignment, object, object, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/bundles/productassignments.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TBundleProductAssignment">Specific type of the BundleProductAssignment. If not using a custom type, specify BundleProductAssignment.</typeparam>
+			[SentOn("POST", "v1/bundles/productassignments")]
+			public class SaveProductAssignment<TConfigData, TBundleProductAssignment> : WebhookPayload<TBundleProductAssignment, object, object, TConfigData>
+				where TBundleProductAssignment : BundleProductAssignment
+			{ }
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/bundles/{bundleID}/productassignments/{productID}.</summary>
+			[SentOn("DELETE", "v1/bundles/{bundleID}/productassignments/{productID}")]
+			public class DeleteProductAssignment : WebhookPayload<object, object, DeleteProductAssignmentRouteParams, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/bundles/{bundleID}/productassignments/{productID}.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, use the non-generic payload type instead.</typeparam>
+			[SentOn("DELETE", "v1/bundles/{bundleID}/productassignments/{productID}")]
+			public class DeleteProductAssignment<TConfigData> : WebhookPayload<object, object, DeleteProductAssignmentRouteParams, TConfigData>
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/bundles/{bundleID}/productassignments/{productID}.</summary>
+			public class DeleteProductAssignmentRouteParams
+			{
+				public string BundleID { get; set; }
+				public string ProductID { get; set; }
+			}
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/bundles/assignments.</summary>
+			[SentOn("POST", "v1/bundles/assignments")]
+			public class SaveAssignment : WebhookPayload<BundleAssignment, object, object, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/bundles/assignments.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TBundleAssignment">Specific type of the BundleAssignment. If not using a custom type, specify BundleAssignment.</typeparam>
+			[SentOn("POST", "v1/bundles/assignments")]
+			public class SaveAssignment<TConfigData, TBundleAssignment> : WebhookPayload<TBundleAssignment, object, object, TConfigData>
+				where TBundleAssignment : BundleAssignment
+			{ }
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/bundles/{bundleID}/assignments/{buyerID}.</summary>
+			[SentOn("DELETE", "v1/bundles/{bundleID}/assignments/{buyerID}")]
+			public class DeleteAssignment : WebhookPayload<object, object, DeleteAssignmentRouteParams, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/bundles/{bundleID}/assignments/{buyerID}.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, use the non-generic payload type instead.</typeparam>
+			[SentOn("DELETE", "v1/bundles/{bundleID}/assignments/{buyerID}")]
+			public class DeleteAssignment<TConfigData> : WebhookPayload<object, object, DeleteAssignmentRouteParams, TConfigData>
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/bundles/{bundleID}/assignments/{buyerID}.</summary>
+			public class DeleteAssignmentRouteParams
+			{
+				public string BundleID { get; set; }
+				public string BuyerID { get; set; }
+			}
+		}
 		public static class Buyers
 		{
 			/// <summary>Webhook payload sent by OrderCloud on POST v1/buyers.</summary>
@@ -598,6 +740,37 @@ namespace OrderCloud.SDK
 			public class DeleteLineItemRouteParams
 			{
 				public string LineItemID { get; set; }
+			}
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/cart/bundles/{bundleID}.</summary>
+			[SentOn("POST", "v1/cart/bundles/{bundleID}")]
+			public class AddBundle : WebhookPayload<BundleItems, LineItem, AddBundleRouteParams, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/cart/bundles/{bundleID}.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TBundleItems">Specific type of the BundleItems. If not using a custom type, specify BundleItems.</typeparam>
+			/// <typeparam name="TLineItem">Specific type of the LineItem. If not using a custom type, specify LineItem.</typeparam>
+			[SentOn("POST", "v1/cart/bundles/{bundleID}")]
+			public class AddBundle<TConfigData, TBundleItems, TLineItem> : WebhookPayload<TBundleItems, TLineItem, AddBundleRouteParams, TConfigData>
+				where TBundleItems : BundleItems
+				where TLineItem : LineItem
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/cart/bundles/{bundleID}.</summary>
+			public class AddBundleRouteParams
+			{
+				public string BundleID { get; set; }
+			}
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/cart/bundles/{bundleID}/{bundleItemID}.</summary>
+			[SentOn("DELETE", "v1/cart/bundles/{bundleID}/{bundleItemID}")]
+			public class DeleteBundle : WebhookPayload<object, object, DeleteBundleRouteParams, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/cart/bundles/{bundleID}/{bundleItemID}.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, use the non-generic payload type instead.</typeparam>
+			[SentOn("DELETE", "v1/cart/bundles/{bundleID}/{bundleItemID}")]
+			public class DeleteBundle<TConfigData> : WebhookPayload<object, object, DeleteBundleRouteParams, TConfigData>
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/cart/bundles/{bundleID}/{bundleItemID}.</summary>
+			public class DeleteBundleRouteParams
+			{
+				public string BundleID { get; set; }
+				public string BundleItemID { get; set; }
 			}
 			/// <summary>Webhook payload sent by OrderCloud on POST v1/cart/promotions/{promoCode}.</summary>
 			[SentOn("POST", "v1/cart/promotions/{promoCode}")]
@@ -869,6 +1042,30 @@ namespace OrderCloud.SDK
 				public string CatalogID { get; set; }
 				public string ProductID { get; set; }
 			}
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/catalogs/bundleassignments.</summary>
+			[SentOn("POST", "v1/catalogs/bundleassignments")]
+			public class SaveBundleAssignment : WebhookPayload<BundleCatalogAssignment, object, object, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/catalogs/bundleassignments.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TBundleCatalogAssignment">Specific type of the BundleCatalogAssignment. If not using a custom type, specify BundleCatalogAssignment.</typeparam>
+			[SentOn("POST", "v1/catalogs/bundleassignments")]
+			public class SaveBundleAssignment<TConfigData, TBundleCatalogAssignment> : WebhookPayload<TBundleCatalogAssignment, object, object, TConfigData>
+				where TBundleCatalogAssignment : BundleCatalogAssignment
+			{ }
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/catalogs/{catalogID}/bundleassignments/{bundleID}.</summary>
+			[SentOn("DELETE", "v1/catalogs/{catalogID}/bundleassignments/{bundleID}")]
+			public class DeleteBundleAssignment : WebhookPayload<object, object, DeleteBundleAssignmentRouteParams, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/catalogs/{catalogID}/bundleassignments/{bundleID}.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, use the non-generic payload type instead.</typeparam>
+			[SentOn("DELETE", "v1/catalogs/{catalogID}/bundleassignments/{bundleID}")]
+			public class DeleteBundleAssignment<TConfigData> : WebhookPayload<object, object, DeleteBundleAssignmentRouteParams, TConfigData>
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/catalogs/{catalogID}/bundleassignments/{bundleID}.</summary>
+			public class DeleteBundleAssignmentRouteParams
+			{
+				public string CatalogID { get; set; }
+				public string BundleID { get; set; }
+			}
 		}
 		public static class Categories
 		{
@@ -991,6 +1188,36 @@ namespace OrderCloud.SDK
 				public string CatalogID { get; set; }
 				public string CategoryID { get; set; }
 				public string ProductID { get; set; }
+			}
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/catalogs/{catalogID}/categories/bundleassignments.</summary>
+			[SentOn("POST", "v1/catalogs/{catalogID}/categories/bundleassignments")]
+			public class SaveBundleAssignment : WebhookPayload<CategoryBundleAssignment, object, SaveBundleAssignmentRouteParams, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/catalogs/{catalogID}/categories/bundleassignments.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TCategoryBundleAssignment">Specific type of the CategoryBundleAssignment. If not using a custom type, specify CategoryBundleAssignment.</typeparam>
+			[SentOn("POST", "v1/catalogs/{catalogID}/categories/bundleassignments")]
+			public class SaveBundleAssignment<TConfigData, TCategoryBundleAssignment> : WebhookPayload<TCategoryBundleAssignment, object, SaveBundleAssignmentRouteParams, TConfigData>
+				where TCategoryBundleAssignment : CategoryBundleAssignment
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/catalogs/{catalogID}/categories/bundleassignments.</summary>
+			public class SaveBundleAssignmentRouteParams
+			{
+				public string CatalogID { get; set; }
+			}
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/catalogs/{catalogID}/categories/{categoryID}/bundleassignments/{bundleID}.</summary>
+			[SentOn("DELETE", "v1/catalogs/{catalogID}/categories/{categoryID}/bundleassignments/{bundleID}")]
+			public class DeleteBundleAssignment : WebhookPayload<object, object, DeleteBundleAssignmentRouteParams, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/catalogs/{catalogID}/categories/{categoryID}/bundleassignments/{bundleID}.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, use the non-generic payload type instead.</typeparam>
+			[SentOn("DELETE", "v1/catalogs/{catalogID}/categories/{categoryID}/bundleassignments/{bundleID}")]
+			public class DeleteBundleAssignment<TConfigData> : WebhookPayload<object, object, DeleteBundleAssignmentRouteParams, TConfigData>
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/catalogs/{catalogID}/categories/{categoryID}/bundleassignments/{bundleID}.</summary>
+			public class DeleteBundleAssignmentRouteParams
+			{
+				public string CatalogID { get; set; }
+				public string CategoryID { get; set; }
+				public string BundleID { get; set; }
 			}
 		}
 		public static class Certs

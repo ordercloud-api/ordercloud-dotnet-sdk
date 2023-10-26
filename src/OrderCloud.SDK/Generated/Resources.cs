@@ -12,6 +12,8 @@ namespace OrderCloud.SDK
 		IAdminUsersResource AdminUsers { get; }
 		IApiClientsResource ApiClients { get; }
 		IApprovalRulesResource ApprovalRules { get; }
+		IBundleLineItemsResource BundleLineItems { get; }
+		IBundlesResource Bundles { get; }
 		IBuyersResource Buyers { get; }
 		ICartResource Cart { get; }
 		ICatalogsResource Catalogs { get; }
@@ -567,6 +569,153 @@ namespace OrderCloud.SDK
 		Task<TApprovalRule> PatchAsync<TApprovalRule>(string buyerID, string approvalRuleID, PartialApprovalRule partialApprovalRule, string accessToken = null) where TApprovalRule : ApprovalRule;
 	}
 
+	public interface IBundleLineItemsResource
+	{
+		/// <summary>Create a new bundle line item. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <param name="orderID">ID of the order.</param>
+		/// <param name="bundleID">ID of the bundle.</param>
+		/// <param name="bundleItems">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<LineItem> CreateAsync(OrderDirection direction, string orderID, string bundleID, BundleItems bundleItems, string accessToken = null);
+		/// <summary>Create a new bundle line item. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <param name="orderID">ID of the order.</param>
+		/// <param name="bundleID">ID of the bundle.</param>
+		/// <param name="bundleItems">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TLineItem> CreateAsync<TLineItem>(OrderDirection direction, string orderID, string bundleID, BundleItems bundleItems, string accessToken = null) where TLineItem : LineItem;
+		/// <summary>Delete a bundle line item.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <param name="orderID">ID of the order.</param>
+		/// <param name="bundleID">ID of the bundle.</param>
+		/// <param name="bundleItemID">ID of the bundle item.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task DeleteAsync(OrderDirection direction, string orderID, string bundleID, string bundleItemID, string accessToken = null);
+	}
+
+	public interface IBundlesResource
+	{
+		/// <summary>Get a single bundle.</summary>
+		/// <param name="bundleID">ID of the bundle.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<Bundle> GetAsync(string bundleID, string accessToken = null);
+		/// <summary>Get a single bundle.</summary>
+		/// <param name="bundleID">ID of the bundle.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TBundle> GetAsync<TBundle>(string bundleID, string accessToken = null) where TBundle : Bundle;
+		/// <summary>Get a list of bundles.</summary>
+		/// <param name="catalogID">ID of the catalog.</param>
+		/// <param name="categoryID">ID of the category.</param>
+		/// <param name="supplierID">ID of the supplier.</param>
+		/// <param name="search">Word or phrase to search for.</param>
+		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
+		/// <param name="searchType">Type of search to perform. Possible values: AnyTerm (default), AllTermsAnyField, AllTermsSameField, ExactPhrase, ExactPhrasePrefix.</param>
+		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPageWithFacets<Bundle>> ListAsync(string catalogID = null, string categoryID = null, string supplierID = null, string search = null, string searchOn = null, SearchType searchType = SearchType.AnyTerm, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
+		/// <summary>Get a list of bundles.</summary>
+		/// <param name="catalogID">ID of the catalog.</param>
+		/// <param name="categoryID">ID of the category.</param>
+		/// <param name="supplierID">ID of the supplier.</param>
+		/// <param name="search">Word or phrase to search for.</param>
+		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
+		/// <param name="searchType">Type of search to perform. Possible values: AnyTerm (default), AllTermsAnyField, AllTermsSameField, ExactPhrase, ExactPhrasePrefix.</param>
+		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPageWithFacets<TBundle>> ListAsync<TBundle>(string catalogID = null, string categoryID = null, string supplierID = null, string search = null, string searchOn = null, SearchType searchType = SearchType.AnyTerm, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TBundle : Bundle;
+		/// <summary>Get a list of bundles.</summary>
+		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
+		/// <param name="catalogID">ID of the catalog.</param>
+		/// <param name="categoryID">ID of the category.</param>
+		/// <param name="supplierID">ID of the supplier.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPageWithFacets<Bundle>> ListAsync(Action<ListOptionsBuilder2<Bundle>> buildListOpts, string catalogID = null, string categoryID = null, string supplierID = null, string accessToken = null);
+		/// <summary>Get a list of bundles.</summary>
+		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
+		/// <param name="catalogID">ID of the catalog.</param>
+		/// <param name="categoryID">ID of the category.</param>
+		/// <param name="supplierID">ID of the supplier.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPageWithFacets<TBundle>> ListAsync<TBundle>(Action<ListOptionsBuilder2<TBundle>> buildListOpts, string catalogID = null, string categoryID = null, string supplierID = null, string accessToken = null) where TBundle : Bundle;
+		/// <summary>Create a new bundle. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <param name="bundle">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<Bundle> CreateAsync(Bundle bundle, string accessToken = null);
+		/// <summary>Create a new bundle. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <param name="bundle">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TBundle> CreateAsync<TBundle>(Bundle bundle, string accessToken = null) where TBundle : Bundle;
+		/// <summary>Create or update a bundle. If an object with the same ID already exists, it will be overwritten.</summary>
+		/// <param name="bundleID">ID of the bundle.</param>
+		/// <param name="bundle">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<Bundle> SaveAsync(string bundleID, Bundle bundle, string accessToken = null);
+		/// <summary>Create or update a bundle. If an object with the same ID already exists, it will be overwritten.</summary>
+		/// <param name="bundleID">ID of the bundle.</param>
+		/// <param name="bundle">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TBundle> SaveAsync<TBundle>(string bundleID, Bundle bundle, string accessToken = null) where TBundle : Bundle;
+		/// <summary>Delete a bundle.</summary>
+		/// <param name="bundleID">ID of the bundle.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task DeleteAsync(string bundleID, string accessToken = null);
+		/// <summary>Partially update a bundle.</summary>
+		/// <param name="bundleID">ID of the bundle.</param>
+		/// <param name="partialBundle">The object that will be partially serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<Bundle> PatchAsync(string bundleID, PartialBundle partialBundle, string accessToken = null);
+		/// <summary>Partially update a bundle.</summary>
+		/// <param name="bundleID">ID of the bundle.</param>
+		/// <param name="partialBundle">The object that will be partially serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TBundle> PatchAsync<TBundle>(string bundleID, PartialBundle partialBundle, string accessToken = null) where TBundle : Bundle;
+		/// <summary>Create or update a bundle product assignment.</summary>
+		/// <param name="bundleProductAssignment">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task SaveProductAssignmentAsync(BundleProductAssignment bundleProductAssignment, string accessToken = null);
+		/// <summary>Get a list of bundle product assignments.</summary>
+		/// <param name="bundleID">ID of the bundle.</param>
+		/// <param name="productID">ID of the product.</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<BundleProductAssignment>> ListProductAssignmentsAsync(string bundleID = null, string productID = null, int page = 1, int pageSize = 20, string accessToken = null);
+		/// <summary>Delete a bundle product assignment.</summary>
+		/// <param name="bundleID">ID of the bundle.</param>
+		/// <param name="productID">ID of the product.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task DeleteProductAssignmentAsync(string bundleID, string productID, string accessToken = null);
+		/// <summary>Get a list of bundle assignments.</summary>
+		/// <param name="bundleID">ID of the bundle.</param>
+		/// <param name="buyerID">ID of the buyer.</param>
+		/// <param name="userID">ID of the user.</param>
+		/// <param name="userGroupID">ID of the user group.</param>
+		/// <param name="level">Level of the bundle assignment. Possible values: User, Group, Company.</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<BundleAssignment>> ListAssignmentsAsync(string bundleID = null, string buyerID = null, string userID = null, string userGroupID = null, PartyType? level = null, int? page = null, int? pageSize = null, string accessToken = null);
+		/// <summary>Create or update a bundle assignment.</summary>
+		/// <param name="bundleAssignment">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task SaveAssignmentAsync(BundleAssignment bundleAssignment, string accessToken = null);
+		/// <summary>Delete a bundle assignment.</summary>
+		/// <param name="bundleID">ID of the bundle.</param>
+		/// <param name="buyerID">ID of the buyer.</param>
+		/// <param name="userID">ID of the user.</param>
+		/// <param name="userGroupID">ID of the user group.</param>
+		/// <param name="sellerID">ID of the seller.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task DeleteAssignmentAsync(string bundleID, string buyerID, string userID = null, string userGroupID = null, string sellerID = null, string accessToken = null);
+	}
+
 	public interface IBuyersResource
 	{
 		/// <summary>Get a single buyer.</summary>
@@ -749,6 +898,21 @@ namespace OrderCloud.SDK
 		/// <param name="lineItemID">ID of the line item.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task DeleteLineItemAsync(string lineItemID, string accessToken = null);
+		/// <summary>Add a bundle. Adds bundle line items to the cart</summary>
+		/// <param name="bundleID">ID of the bundle.</param>
+		/// <param name="bundleItems">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<LineItem> AddBundleAsync(string bundleID, BundleItems bundleItems, string accessToken = null);
+		/// <summary>Add a bundle. Adds bundle line items to the cart</summary>
+		/// <param name="bundleID">ID of the bundle.</param>
+		/// <param name="bundleItems">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TLineItem> AddBundleAsync<TLineItem>(string bundleID, BundleItems bundleItems, string accessToken = null) where TLineItem : LineItem;
+		/// <summary>Delete a cart bundle.</summary>
+		/// <param name="bundleID">ID of the bundle.</param>
+		/// <param name="bundleItemID">ID of the bundle item.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task DeleteBundleAsync(string bundleID, string bundleItemID, string accessToken = null);
 		/// <summary>Get a list of cart promotions.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
@@ -1035,6 +1199,22 @@ namespace OrderCloud.SDK
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task DeleteProductAssignmentAsync(string catalogID, string productID, string accessToken = null);
+		/// <summary>Get a list of catalog bundle assignments.</summary>
+		/// <param name="catalogID">ID of the catalog.</param>
+		/// <param name="bundleID">ID of the bundle.</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<BundleCatalogAssignment>> ListBundleAssignmentsAsync(string catalogID = null, string bundleID = null, int page = 1, int pageSize = 20, string accessToken = null);
+		/// <summary>Create or update a catalog bundle assignment.</summary>
+		/// <param name="bundleCatalogAssignment">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task SaveBundleAssignmentAsync(BundleCatalogAssignment bundleCatalogAssignment, string accessToken = null);
+		/// <summary>Delete a catalog bundle assignment.</summary>
+		/// <param name="catalogID">ID of the catalog.</param>
+		/// <param name="bundleID">ID of the bundle.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task DeleteBundleAssignmentAsync(string catalogID, string bundleID, string accessToken = null);
 	}
 
 	public interface ICategoriesResource
@@ -1171,6 +1351,25 @@ namespace OrderCloud.SDK
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task DeleteProductAssignmentAsync(string catalogID, string categoryID, string productID, string accessToken = null);
+		/// <summary>Get a list of category bundle assignments.</summary>
+		/// <param name="catalogID">ID of the catalog.</param>
+		/// <param name="categoryID">ID of the category.</param>
+		/// <param name="bundleID">ID of the bundle.</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<CategoryBundleAssignment>> ListBundleAssignmentsAsync(string catalogID, string categoryID = null, string bundleID = null, int page = 1, int pageSize = 20, string accessToken = null);
+		/// <summary>Create or update a category bundle assignment.</summary>
+		/// <param name="catalogID">ID of the catalog.</param>
+		/// <param name="categoryBundleAssignment">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task SaveBundleAssignmentAsync(string catalogID, CategoryBundleAssignment categoryBundleAssignment, string accessToken = null);
+		/// <summary>Delete a category bundle assignment.</summary>
+		/// <param name="catalogID">ID of the catalog.</param>
+		/// <param name="categoryID">ID of the category.</param>
+		/// <param name="bundleID">ID of the bundle.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task DeleteBundleAssignmentAsync(string catalogID, string categoryID, string bundleID, string accessToken = null);
 	}
 
 	public interface ICertsResource
@@ -6116,6 +6315,8 @@ namespace OrderCloud.SDK
 			AdminUsers = new AdminUsersResource(this);
 			ApiClients = new ApiClientsResource(this);
 			ApprovalRules = new ApprovalRulesResource(this);
+			BundleLineItems = new BundleLineItemsResource(this);
+			Bundles = new BundlesResource(this);
 			Buyers = new BuyersResource(this);
 			Cart = new CartResource(this);
 			Catalogs = new CatalogsResource(this);
@@ -6169,6 +6370,8 @@ namespace OrderCloud.SDK
 		public IAdminUsersResource AdminUsers { get; private set; }
 		public IApiClientsResource ApiClients { get; private set; }
 		public IApprovalRulesResource ApprovalRules { get; private set; }
+		public IBundleLineItemsResource BundleLineItems { get; private set; }
+		public IBundlesResource Bundles { get; private set; }
 		public IBuyersResource Buyers { get; private set; }
 		public ICartResource Cart { get; private set; }
 		public ICatalogsResource Catalogs { get; private set; }
@@ -6334,6 +6537,38 @@ namespace OrderCloud.SDK
 		public Task<TApprovalRule> PatchAsync<TApprovalRule>(string buyerID, string approvalRuleID, PartialApprovalRule partialApprovalRule, string accessToken = null) where TApprovalRule : ApprovalRule => Request("v1", "buyers", buyerID, "approvalrules", approvalRuleID).WithOAuthBearerToken(accessToken).PatchJsonAsync(ValidateModel(partialApprovalRule)).ReceiveJson<TApprovalRule>();
 	}
 
+	public class BundleLineItemsResource : OrderCloudResource, IBundleLineItemsResource
+	{
+		internal BundleLineItemsResource(OrderCloudClient client) : base(client) { }
+		public Task<LineItem> CreateAsync(OrderDirection direction, string orderID, string bundleID, BundleItems bundleItems, string accessToken = null) => CreateAsync<LineItem>(direction, orderID, bundleID, bundleItems, accessToken);
+		public Task<TLineItem> CreateAsync<TLineItem>(OrderDirection direction, string orderID, string bundleID, BundleItems bundleItems, string accessToken = null) where TLineItem : LineItem => Request("v1", "orders", direction, orderID, "bundles", bundleID).WithOAuthBearerToken(accessToken).PostJsonAsync(ValidateModel(bundleItems)).ReceiveJson<TLineItem>();
+		public Task DeleteAsync(OrderDirection direction, string orderID, string bundleID, string bundleItemID, string accessToken = null) => Request("v1", "orders", direction, orderID, "bundles", bundleID, bundleItemID).WithOAuthBearerToken(accessToken).DeleteAsync();
+	}
+
+	public class BundlesResource : OrderCloudResource, IBundlesResource
+	{
+		internal BundlesResource(OrderCloudClient client) : base(client) { }
+		public Task<Bundle> GetAsync(string bundleID, string accessToken = null) => GetAsync<Bundle>(bundleID, accessToken);
+		public Task<TBundle> GetAsync<TBundle>(string bundleID, string accessToken = null) where TBundle : Bundle => Request("v1", "bundles", bundleID).WithOAuthBearerToken(accessToken).GetJsonAsync<TBundle>();
+		public Task<ListPageWithFacets<Bundle>> ListAsync(string catalogID = null, string categoryID = null, string supplierID = null, string search = null, string searchOn = null, SearchType searchType = SearchType.AnyTerm, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) => ListAsync<Bundle>(catalogID, categoryID, supplierID, search, searchOn, searchType, sortBy, page, pageSize, filters, accessToken);
+		public Task<ListPageWithFacets<TBundle>> ListAsync<TBundle>(string catalogID = null, string categoryID = null, string supplierID = null, string search = null, string searchOn = null, SearchType searchType = SearchType.AnyTerm, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TBundle : Bundle => Request("v1", "bundles").WithOAuthBearerToken(accessToken).SetQueryParams(new { catalogID, categoryID, supplierID, search, searchOn, searchType, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPageWithFacets<TBundle>>();
+		public Task<ListPageWithFacets<Bundle>> ListAsync(Action<ListOptionsBuilder2<Bundle>> buildListOpts, string catalogID = null, string categoryID = null, string supplierID = null, string accessToken = null) => ListAsync<Bundle>(buildListOpts, catalogID, categoryID, supplierID, accessToken);
+		public Task<ListPageWithFacets<TBundle>> ListAsync<TBundle>(Action<ListOptionsBuilder2<TBundle>> buildListOpts, string catalogID = null, string categoryID = null, string supplierID = null, string accessToken = null) where TBundle : Bundle => Request("v1", "bundles").WithOAuthBearerToken(accessToken).SetQueryParams(new { catalogID, categoryID, supplierID }).SetListOptions(buildListOpts).GetJsonAsync<ListPageWithFacets<TBundle>>();
+		public Task<Bundle> CreateAsync(Bundle bundle, string accessToken = null) => CreateAsync<Bundle>(bundle, accessToken);
+		public Task<TBundle> CreateAsync<TBundle>(Bundle bundle, string accessToken = null) where TBundle : Bundle => Request("v1", "bundles").WithOAuthBearerToken(accessToken).PostJsonAsync(ValidateModel(bundle)).ReceiveJson<TBundle>();
+		public Task<Bundle> SaveAsync(string bundleID, Bundle bundle, string accessToken = null) => SaveAsync<Bundle>(bundleID, bundle, accessToken);
+		public Task<TBundle> SaveAsync<TBundle>(string bundleID, Bundle bundle, string accessToken = null) where TBundle : Bundle => Request("v1", "bundles", bundleID).WithOAuthBearerToken(accessToken).PutJsonAsync(ValidateModel(bundle)).ReceiveJson<TBundle>();
+		public Task DeleteAsync(string bundleID, string accessToken = null) => Request("v1", "bundles", bundleID).WithOAuthBearerToken(accessToken).DeleteAsync();
+		public Task<Bundle> PatchAsync(string bundleID, PartialBundle partialBundle, string accessToken = null) => PatchAsync<Bundle>(bundleID, partialBundle, accessToken);
+		public Task<TBundle> PatchAsync<TBundle>(string bundleID, PartialBundle partialBundle, string accessToken = null) where TBundle : Bundle => Request("v1", "bundles", bundleID).WithOAuthBearerToken(accessToken).PatchJsonAsync(ValidateModel(partialBundle)).ReceiveJson<TBundle>();
+		public Task SaveProductAssignmentAsync(BundleProductAssignment bundleProductAssignment, string accessToken = null) => Request("v1", "bundles", "productassignments").WithOAuthBearerToken(accessToken).PostJsonAsync(ValidateModel(bundleProductAssignment));
+		public Task<ListPage<BundleProductAssignment>> ListProductAssignmentsAsync(string bundleID = null, string productID = null, int page = 1, int pageSize = 20, string accessToken = null) => Request("v1", "bundles", "productassignments").WithOAuthBearerToken(accessToken).SetQueryParams(new { bundleID, productID, page, pageSize }).GetJsonAsync<ListPage<BundleProductAssignment>>();
+		public Task DeleteProductAssignmentAsync(string bundleID, string productID, string accessToken = null) => Request("v1", "bundles", bundleID, "productassignments", productID).WithOAuthBearerToken(accessToken).DeleteAsync();
+		public Task<ListPage<BundleAssignment>> ListAssignmentsAsync(string bundleID = null, string buyerID = null, string userID = null, string userGroupID = null, PartyType? level = null, int? page = null, int? pageSize = null, string accessToken = null) => Request("v1", "bundles", "assignments").WithOAuthBearerToken(accessToken).SetQueryParams(new { bundleID, buyerID, userID, userGroupID, level, page, pageSize }).GetJsonAsync<ListPage<BundleAssignment>>();
+		public Task SaveAssignmentAsync(BundleAssignment bundleAssignment, string accessToken = null) => Request("v1", "bundles", "assignments").WithOAuthBearerToken(accessToken).PostJsonAsync(ValidateModel(bundleAssignment));
+		public Task DeleteAssignmentAsync(string bundleID, string buyerID, string userID = null, string userGroupID = null, string sellerID = null, string accessToken = null) => Request("v1", "bundles", bundleID, "assignments", buyerID).WithOAuthBearerToken(accessToken).SetQueryParams(new { userID, userGroupID, sellerID }).DeleteAsync();
+	}
+
 	public class BuyersResource : OrderCloudResource, IBuyersResource
 	{
 		internal BuyersResource(OrderCloudClient client) : base(client) { }
@@ -6378,6 +6613,9 @@ namespace OrderCloud.SDK
 		public Task<LineItem> PatchLineItemAsync(string lineItemID, PartialLineItem partialLineItem, string accessToken = null) => PatchLineItemAsync<LineItem>(lineItemID, partialLineItem, accessToken);
 		public Task<TLineItem> PatchLineItemAsync<TLineItem>(string lineItemID, PartialLineItem partialLineItem, string accessToken = null) where TLineItem : LineItem => Request("v1", "cart", "lineitems", lineItemID).WithOAuthBearerToken(accessToken).PatchJsonAsync(ValidateModel(partialLineItem)).ReceiveJson<TLineItem>();
 		public Task DeleteLineItemAsync(string lineItemID, string accessToken = null) => Request("v1", "cart", "lineitems", lineItemID).WithOAuthBearerToken(accessToken).DeleteAsync();
+		public Task<LineItem> AddBundleAsync(string bundleID, BundleItems bundleItems, string accessToken = null) => AddBundleAsync<LineItem>(bundleID, bundleItems, accessToken);
+		public Task<TLineItem> AddBundleAsync<TLineItem>(string bundleID, BundleItems bundleItems, string accessToken = null) where TLineItem : LineItem => Request("v1", "cart", "bundles", bundleID).WithOAuthBearerToken(accessToken).PostJsonAsync(ValidateModel(bundleItems)).ReceiveJson<TLineItem>();
+		public Task DeleteBundleAsync(string bundleID, string bundleItemID, string accessToken = null) => Request("v1", "cart", "bundles", bundleID, bundleItemID).WithOAuthBearerToken(accessToken).DeleteAsync();
 		public Task<ListPage<OrderPromotion>> ListPromotionsAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) => ListPromotionsAsync<OrderPromotion>(search, searchOn, sortBy, page, pageSize, filters, accessToken);
 		public Task<ListPage<TOrderPromotion>> ListPromotionsAsync<TOrderPromotion>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TOrderPromotion : OrderPromotion => Request("v1", "cart", "promotions").WithOAuthBearerToken(accessToken).SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<TOrderPromotion>>();
 		public Task<ListPage<OrderPromotion>> ListPromotionsAsync(Action<ListOptionsBuilder<OrderPromotion>> buildListOpts, string accessToken = null) => ListPromotionsAsync<OrderPromotion>(buildListOpts, accessToken);
@@ -6442,6 +6680,9 @@ namespace OrderCloud.SDK
 		public Task<ListPage<ProductCatalogAssignment>> ListProductAssignmentsAsync(string catalogID = null, string productID = null, int page = 1, int pageSize = 20, string accessToken = null) => Request("v1", "catalogs", "productassignments").WithOAuthBearerToken(accessToken).SetQueryParams(new { catalogID, productID, page, pageSize }).GetJsonAsync<ListPage<ProductCatalogAssignment>>();
 		public Task SaveProductAssignmentAsync(ProductCatalogAssignment productCatalogAssignment, string accessToken = null) => Request("v1", "catalogs", "productassignments").WithOAuthBearerToken(accessToken).PostJsonAsync(ValidateModel(productCatalogAssignment));
 		public Task DeleteProductAssignmentAsync(string catalogID, string productID, string accessToken = null) => Request("v1", "catalogs", catalogID, "productassignments", productID).WithOAuthBearerToken(accessToken).DeleteAsync();
+		public Task<ListPage<BundleCatalogAssignment>> ListBundleAssignmentsAsync(string catalogID = null, string bundleID = null, int page = 1, int pageSize = 20, string accessToken = null) => Request("v1", "catalogs", "bundleassignments").WithOAuthBearerToken(accessToken).SetQueryParams(new { catalogID, bundleID, page, pageSize }).GetJsonAsync<ListPage<BundleCatalogAssignment>>();
+		public Task SaveBundleAssignmentAsync(BundleCatalogAssignment bundleCatalogAssignment, string accessToken = null) => Request("v1", "catalogs", "bundleassignments").WithOAuthBearerToken(accessToken).PostJsonAsync(ValidateModel(bundleCatalogAssignment));
+		public Task DeleteBundleAssignmentAsync(string catalogID, string bundleID, string accessToken = null) => Request("v1", "catalogs", catalogID, "bundleassignments", bundleID).WithOAuthBearerToken(accessToken).DeleteAsync();
 	}
 
 	public class CategoriesResource : OrderCloudResource, ICategoriesResource
@@ -6466,6 +6707,9 @@ namespace OrderCloud.SDK
 		public Task<ListPage<CategoryProductAssignment>> ListProductAssignmentsAsync(string catalogID, string categoryID = null, string productID = null, int page = 1, int pageSize = 20, string accessToken = null) => Request("v1", "catalogs", catalogID, "categories", "productassignments").WithOAuthBearerToken(accessToken).SetQueryParams(new { categoryID, productID, page, pageSize }).GetJsonAsync<ListPage<CategoryProductAssignment>>();
 		public Task SaveProductAssignmentAsync(string catalogID, CategoryProductAssignment categoryProductAssignment, string accessToken = null) => Request("v1", "catalogs", catalogID, "categories", "productassignments").WithOAuthBearerToken(accessToken).PostJsonAsync(ValidateModel(categoryProductAssignment));
 		public Task DeleteProductAssignmentAsync(string catalogID, string categoryID, string productID, string accessToken = null) => Request("v1", "catalogs", catalogID, "categories", categoryID, "productassignments", productID).WithOAuthBearerToken(accessToken).DeleteAsync();
+		public Task<ListPage<CategoryBundleAssignment>> ListBundleAssignmentsAsync(string catalogID, string categoryID = null, string bundleID = null, int page = 1, int pageSize = 20, string accessToken = null) => Request("v1", "catalogs", catalogID, "categories", "bundleassignments").WithOAuthBearerToken(accessToken).SetQueryParams(new { categoryID, bundleID, page, pageSize }).GetJsonAsync<ListPage<CategoryBundleAssignment>>();
+		public Task SaveBundleAssignmentAsync(string catalogID, CategoryBundleAssignment categoryBundleAssignment, string accessToken = null) => Request("v1", "catalogs", catalogID, "categories", "bundleassignments").WithOAuthBearerToken(accessToken).PostJsonAsync(ValidateModel(categoryBundleAssignment));
+		public Task DeleteBundleAssignmentAsync(string catalogID, string categoryID, string bundleID, string accessToken = null) => Request("v1", "catalogs", catalogID, "categories", categoryID, "bundleassignments", bundleID).WithOAuthBearerToken(accessToken).DeleteAsync();
 	}
 
 	public class CertsResource : OrderCloudResource, ICertsResource

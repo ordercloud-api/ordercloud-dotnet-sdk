@@ -5,7 +5,7 @@ using System.Dynamic;
 namespace OrderCloud.SDK
 {
 	public enum AccessLevel { Private, Public, Shareable }
-	public enum ApiRole { ApiClientAdmin, ApiClientReader, AddressAdmin, AddressReader, AdminAddressAdmin, AdminAddressReader, AdminUserAdmin, AdminUserGroupAdmin, AdminUserGroupReader, AdminUserReader, ApprovalRuleAdmin, ApprovalRuleReader, BuyerAdmin, BuyerImpersonation, BuyerReader, BuyerUserAdmin, BuyerUserReader, CatalogAdmin, CatalogReader, CategoryAdmin, CategoryReader, CostCenterAdmin, CostCenterReader, CreditCardAdmin, CreditCardReader, FullAccess, IncrementorAdmin, IncrementorReader, LocaleReader, LocaleAdmin, MeAddressAdmin, MeAdmin, MeCreditCardAdmin, MessageConfigAssignmentAdmin, MeSubscriptionAdmin, MeXpAdmin, OrderAdmin, OrderReader, OverrideShipping, OverrideTax, OverrideUnitPrice, PasswordReset, PriceScheduleAdmin, PriceScheduleReader, ProductAdmin, ProductAssignmentAdmin, ProductCollectionReader, ProductFacetAdmin, ProductFacetReader, ProductReader, ProductSyncConfigAdmin, PromotionAdmin, PromotionReader, SecurityProfileAdmin, SecurityProfileReader, SetSecurityProfile, ShipmentAdmin, ShipmentReader, Shopper, SpendingAccountAdmin, SpendingAccountReader, SubscriptionAdmin, SubscriptionReader, SupplierAddressAdmin, SupplierAddressReader, SupplierAdmin, SupplierReader, SupplierUserAdmin, SupplierUserGroupAdmin, SupplierUserGroupReader, SupplierUserReader, UnsubmittedOrderReader, UserGroupAdmin, UserGroupReader, OpenIDConnectReader, OpenIDConnectAdmin, MessageSenderReader, MessageSenderAdmin, XpIndexAdmin, WebhookReader, WebhookAdmin, IntegrationEventReader, IntegrationEventAdmin, TrackingEventReader, TrackingEventAdmin, DeliveryConfigAdmin, OrderSyncConfigAdmin }
+	public enum ApiRole { ApiClientAdmin, ApiClientReader, AddressAdmin, AddressReader, AdminAddressAdmin, AdminAddressReader, AdminUserAdmin, AdminUserGroupAdmin, AdminUserGroupReader, AdminUserReader, ApprovalRuleAdmin, ApprovalRuleReader, BundleAdmin, BundleAssignmentAdmin, BundleReader, BuyerAdmin, BuyerImpersonation, BuyerReader, BuyerUserAdmin, BuyerUserReader, CatalogAdmin, CatalogReader, CategoryAdmin, CategoryReader, CostCenterAdmin, CostCenterReader, CreditCardAdmin, CreditCardReader, FullAccess, IncrementorAdmin, IncrementorReader, LocaleReader, LocaleAdmin, MeAddressAdmin, MeAdmin, MeCreditCardAdmin, MessageConfigAssignmentAdmin, MeSubscriptionAdmin, MeXpAdmin, OrderAdmin, OrderReader, OverrideShipping, OverrideTax, OverrideUnitPrice, PasswordReset, PriceScheduleAdmin, PriceScheduleReader, ProductAdmin, ProductAssignmentAdmin, ProductCollectionReader, ProductFacetAdmin, ProductFacetReader, ProductReader, ProductSyncConfigAdmin, PromotionAdmin, PromotionReader, SecurityProfileAdmin, SecurityProfileReader, SetSecurityProfile, ShipmentAdmin, ShipmentReader, Shopper, SpendingAccountAdmin, SpendingAccountReader, SubscriptionAdmin, SubscriptionReader, SupplierAddressAdmin, SupplierAddressReader, SupplierAdmin, SupplierReader, SupplierUserAdmin, SupplierUserGroupAdmin, SupplierUserGroupReader, SupplierUserReader, UnsubmittedOrderReader, UserGroupAdmin, UserGroupReader, OpenIDConnectReader, OpenIDConnectAdmin, MessageSenderReader, MessageSenderAdmin, XpIndexAdmin, WebhookReader, WebhookAdmin, IntegrationEventReader, IntegrationEventAdmin, TrackingEventReader, TrackingEventAdmin, DeliveryConfigAdmin, OrderSyncConfigAdmin }
 	public enum ApprovalStatus { Pending, Approved, Declined }
 	public enum ApprovalType { Order, OrderReturn }
 	public enum CommerceRole { Buyer, Seller, Supplier }
@@ -229,6 +229,83 @@ namespace OrderCloud.SDK
 		/// <summary>Container for extended (custom) properties of the approval rule.</summary>
 		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
 	}
+	public class AzureBlobConfig : OrderCloudModel
+	{
+		/// <summary>Connection string of the azure blob config. Required.</summary>
+		[Required]
+		[ApiWriteOnly]
+		public string ConnectionString { get => GetProp<string>("ConnectionString"); set => SetProp<string>("ConnectionString", value); }
+	}
+	public class Bundle : OrderCloudModel
+	{
+		/// <summary>ID of the bundle. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 3.</summary>
+		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
+		/// <summary>ID of the organization that owns the Bundle. Only the Marketplace Owner can override the OwnerID on create.</summary>
+		public string OwnerID { get => GetProp<string>("OwnerID"); set => SetProp<string>("OwnerID", value); }
+		/// <summary>Name of the bundle. Required. Max length 100 characters. Searchable: priority level 2. Sortable: priority level 2.</summary>
+		[Required]
+		public string Name { get => GetProp<string>("Name"); set => SetProp<string>("Name", value); }
+		/// <summary>Description of the bundle. Max length 2000 characters. Searchable: priority level 3.</summary>
+		public string Description { get => GetProp<string>("Description"); set => SetProp<string>("Description", value); }
+		/// <summary>If false, bundle is not visible or purchasable from the Shopper perspective.</summary>
+		public bool Active { get => GetProp<bool>("Active"); set => SetProp<bool>("Active", value); }
+		/// <summary>Consider keeping bundle and product xp schemas consistent. Defining conflicting xp types will result in indexing problems.</summary>
+		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
+	}
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic Bundle class instead.</typeparam>
+	public class Bundle<Txp> : Bundle
+	{
+		/// <summary>Consider keeping bundle and product xp schemas consistent. Defining conflicting xp types will result in indexing problems.</summary>
+		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
+	}
+	public class BundleAssignment : OrderCloudModel
+	{
+		/// <summary>Marketplace owner can write to this property when creating bundle assignments for other sellers.</summary>
+		public string SellerID { get => GetProp<string>("SellerID"); set => SetProp<string>("SellerID", value); }
+		/// <summary>ID of the bundle. Required.</summary>
+		[Required]
+		public string BundleID { get => GetProp<string>("BundleID"); set => SetProp<string>("BundleID", value); }
+		/// <summary>ID of the buyer. Required.</summary>
+		[Required]
+		public string BuyerID { get => GetProp<string>("BuyerID"); set => SetProp<string>("BuyerID", value); }
+		/// <summary>ID of the user group.</summary>
+		public string UserGroupID { get => GetProp<string>("UserGroupID"); set => SetProp<string>("UserGroupID", value); }
+	}
+	public class BundleCatalogAssignment : OrderCloudModel
+	{
+		/// <summary>ID of the catalog. Required.</summary>
+		[Required]
+		public string CatalogID { get => GetProp<string>("CatalogID"); set => SetProp<string>("CatalogID", value); }
+		/// <summary>ID of the bundle. Required.</summary>
+		[Required]
+		public string BundleID { get => GetProp<string>("BundleID"); set => SetProp<string>("BundleID", value); }
+	}
+	public class BundleItems : OrderCloudModel
+	{
+		/// <summary>Line items of the bundle item.</summary>
+		public IList<LineItem> LineItems { get => GetProp<IList<LineItem>>("LineItems", new List<LineItem>()); set => SetProp<IList<LineItem>>("LineItems", value); }
+	}
+	/// <typeparam name="TLineItems">Specific type of the LineItems property. If not using a custom type, use the non-generic BundleItems class instead.</typeparam>
+	public class BundleItems<TLineItems> : BundleItems
+		where TLineItems : LineItem
+	{
+		/// <summary>Line items of the bundle item.</summary>
+		public new IList<TLineItems> LineItems { get => GetProp<IList<TLineItems>>("LineItems", new List<TLineItems>()); set => SetProp<IList<TLineItems>>("LineItems", value); }
+	}
+	public class BundleProductAssignment : OrderCloudModel
+	{
+		/// <summary>ID of the product. Required.</summary>
+		[Required]
+		public string ProductID { get => GetProp<string>("ProductID"); set => SetProp<string>("ProductID", value); }
+		/// <summary>ID of the bundle. Required.</summary>
+		[Required]
+		public string BundleID { get => GetProp<string>("BundleID"); set => SetProp<string>("BundleID", value); }
+		/// <summary>Required of the bundle product assignment. Required.</summary>
+		[Required]
+		public bool Required { get => GetProp<bool>("Required"); set => SetProp<bool>("Required", value); }
+		/// <summary>Default quantity of the bundle product assignment.</summary>
+		public int? DefaultQuantity { get => GetProp<int?>("DefaultQuantity"); set => SetProp<int?>("DefaultQuantity", value); }
+	}
 	public class Buyer : OrderCloudModel
 	{
 		/// <summary>ID of the buyer. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 2. Sortable: priority level 1.</summary>
@@ -344,6 +421,9 @@ namespace OrderCloud.SDK
 		public string ParentID { get => GetProp<string>("ParentID"); set => SetProp<string>("ParentID", value); }
 		/// <summary>If true, ParentID must be null, as a parent product cannot have a parent itself.</summary>
 		public bool IsParent { get => GetProp<bool>("IsParent"); set => SetProp<bool>("IsParent", value); }
+		/// <summary>If true, IsParent must be false, as a parent product cannot be a bundle.</summary>
+		[ApiReadOnly]
+		public bool IsBundle { get => GetProp<bool>("IsBundle"); set => SetProp<bool>("IsBundle", value); }
 		/// <summary>Name of the product. Required. Max length 100 characters. Searchable: priority level 3. Sortable: priority level 2.</summary>
 		[Required]
 		public string Name { get => GetProp<string>("Name"); set => SetProp<string>("Name", value); }
@@ -478,6 +558,17 @@ namespace OrderCloud.SDK
 		/// <summary>Optional. Set to null to inherit from parent category or catalog level.</summary>
 		public bool? ViewAllProducts { get => GetProp<bool?>("ViewAllProducts"); set => SetProp<bool?>("ViewAllProducts", value); }
 	}
+	public class CategoryBundleAssignment : OrderCloudModel
+	{
+		/// <summary>ID of the category. Required.</summary>
+		[Required]
+		public string CategoryID { get => GetProp<string>("CategoryID"); set => SetProp<string>("CategoryID", value); }
+		/// <summary>ID of the bundle. Required.</summary>
+		[Required]
+		public string BundleID { get => GetProp<string>("BundleID"); set => SetProp<string>("BundleID", value); }
+		/// <summary>List order of the category bundle assignment.</summary>
+		public int? ListOrder { get => GetProp<int?>("ListOrder"); set => SetProp<int?>("ListOrder", value); }
+	}
 	public class CategoryProductAssignment : OrderCloudModel
 	{
 		/// <summary>ID of the category. Required.</summary>
@@ -570,12 +661,16 @@ namespace OrderCloud.SDK
 		public KafkaConfig Kafka { get => GetProp<KafkaConfig>("Kafka"); set => SetProp<KafkaConfig>("Kafka", value); }
 		/// <summary>Http of the delivery target.</summary>
 		public HttpConfig Http { get => GetProp<HttpConfig>("Http"); set => SetProp<HttpConfig>("Http", value); }
+		/// <summary>Search ingestion of the delivery target.</summary>
+		public SearchIngestion SearchIngestion { get => GetProp<SearchIngestion>("SearchIngestion"); set => SetProp<SearchIngestion>("SearchIngestion", value); }
 		/// <summary>Send event of the delivery target.</summary>
 		public SendEvent SendEvent { get => GetProp<SendEvent>("SendEvent"); set => SetProp<SendEvent>("SendEvent", value); }
 		/// <summary>Discover event of the delivery target.</summary>
 		public DiscoverEvent DiscoverEvent { get => GetProp<DiscoverEvent>("DiscoverEvent"); set => SetProp<DiscoverEvent>("DiscoverEvent", value); }
 		/// <summary>Event hub of the delivery target.</summary>
 		public EventHubConfig EventHub { get => GetProp<EventHubConfig>("EventHub"); set => SetProp<EventHubConfig>("EventHub", value); }
+		/// <summary>Azure blob of the delivery target.</summary>
+		public AzureBlobConfig AzureBlob { get => GetProp<AzureBlobConfig>("AzureBlob"); set => SetProp<AzureBlobConfig>("AzureBlob", value); }
 	}
 	public class DiscoverEvent : OrderCloudModel
 	{
@@ -613,6 +708,12 @@ namespace OrderCloud.SDK
 		public string ProductID { get => GetProp<string>("ProductID"); set => SetProp<string>("ProductID", value); }
 		/// <summary>Quantity of the extended line item. Must be at least 1.</summary>
 		public int Quantity { get => GetProp<int>("Quantity", 1); set => SetProp<int>("Quantity", value); }
+		/// <summary>The ID of the Line Item that represents the bundle. Signifies that the Product is being purchased as part of a Bundle.</summary>
+		[ApiReadOnly]
+		public string BundleItemID { get => GetProp<string>("BundleItemID"); set => SetProp<string>("BundleItemID", value); }
+		/// <summary>When true, this item represents a Bundle being purchased.</summary>
+		[ApiReadOnly]
+		public bool IsBundle { get => GetProp<bool>("IsBundle"); set => SetProp<bool>("IsBundle", value); }
 		/// <summary>Date added of the extended line item. Sortable: priority level 1.</summary>
 		[ApiReadOnly]
 		public DateTimeOffset DateAdded { get => GetProp<DateTimeOffset>("DateAdded"); set => SetProp<DateTimeOffset>("DateAdded", value); }
@@ -959,6 +1060,12 @@ namespace OrderCloud.SDK
 		public string ProductID { get => GetProp<string>("ProductID"); set => SetProp<string>("ProductID", value); }
 		/// <summary>Quantity of the line item. Must be at least 1.</summary>
 		public int Quantity { get => GetProp<int>("Quantity", 1); set => SetProp<int>("Quantity", value); }
+		/// <summary>The ID of the Line Item that represents the bundle. Signifies that the Product is being purchased as part of a Bundle.</summary>
+		[ApiReadOnly]
+		public string BundleItemID { get => GetProp<string>("BundleItemID"); set => SetProp<string>("BundleItemID", value); }
+		/// <summary>When true, this item represents a Bundle being purchased.</summary>
+		[ApiReadOnly]
+		public bool IsBundle { get => GetProp<bool>("IsBundle"); set => SetProp<bool>("IsBundle", value); }
 		/// <summary>Date added of the line item. Sortable: priority level 1.</summary>
 		[ApiReadOnly]
 		public DateTimeOffset DateAdded { get => GetProp<DateTimeOffset>("DateAdded"); set => SetProp<DateTimeOffset>("DateAdded", value); }
@@ -1934,6 +2041,8 @@ namespace OrderCloud.SDK
 		public decimal? SalePrice { get => GetProp<decimal?>("SalePrice"); set => SetProp<decimal?>("SalePrice", value); }
 		/// <summary>Optional. Subscription Price per unit. If set, this price is used when a subscription order is created.</summary>
 		public decimal? SubscriptionPrice { get => GetProp<decimal?>("SubscriptionPrice"); set => SetProp<decimal?>("SubscriptionPrice", value); }
+		/// <summary>Optional. Bundle Price per unit. If set, this price is used when an item being added to an order is part of a bundle.</summary>
+		public decimal? BundlePrice { get => GetProp<decimal?>("BundlePrice"); set => SetProp<decimal?>("BundlePrice", value); }
 	}
 	public class PriceSchedule : OrderCloudModel
 	{
@@ -1990,6 +2099,9 @@ namespace OrderCloud.SDK
 		public string ParentID { get => GetProp<string>("ParentID"); set => SetProp<string>("ParentID", value); }
 		/// <summary>If true, ParentID must be null, as a parent product cannot have a parent itself.</summary>
 		public bool IsParent { get => GetProp<bool>("IsParent"); set => SetProp<bool>("IsParent", value); }
+		/// <summary>If true, IsParent must be false, as a parent product cannot be a bundle.</summary>
+		[ApiReadOnly]
+		public bool IsBundle { get => GetProp<bool>("IsBundle"); set => SetProp<bool>("IsBundle", value); }
 		/// <summary>Name of the product. Required. Max length 100 characters. Searchable: priority level 3. Sortable: priority level 2.</summary>
 		[Required]
 		public string Name { get => GetProp<string>("Name"); set => SetProp<string>("Name", value); }
@@ -2260,6 +2372,25 @@ namespace OrderCloud.SDK
 		public string use { get => GetProp<string>("use"); set => SetProp<string>("use", value); }
 		/// <summary>Kid of the public key.</summary>
 		public string kid { get => GetProp<string>("kid"); set => SetProp<string>("kid", value); }
+	}
+	public class SearchIngestion : OrderCloudModel
+	{
+		/// <summary>Domain of the search ingestion. Required.</summary>
+		[Required]
+		public string Domain { get => GetProp<string>("Domain"); set => SetProp<string>("Domain", value); }
+		/// <summary>Source of the search ingestion. Required.</summary>
+		[Required]
+		public string Source { get => GetProp<string>("Source"); set => SetProp<string>("Source", value); }
+		/// <summary>Endpoint of the search ingestion. Required.</summary>
+		[Required]
+		public string Endpoint { get => GetProp<string>("Endpoint"); set => SetProp<string>("Endpoint", value); }
+		/// <summary>Entity of the search ingestion. Required.</summary>
+		[Required]
+		public string Entity { get => GetProp<string>("Entity"); set => SetProp<string>("Entity", value); }
+		/// <summary>Api key of the search ingestion. Required.</summary>
+		[Required]
+		[ApiWriteOnly]
+		public string ApiKey { get => GetProp<string>("ApiKey"); set => SetProp<string>("ApiKey", value); }
 	}
 	public class SecurityProfile : OrderCloudModel
 	{
@@ -2953,6 +3084,11 @@ namespace OrderCloud.SDK
 	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic PartialApprovalRule class instead.</typeparam>
 	public class PartialApprovalRule<Txp> : PartialApprovalRule
 	{ }
+	public class PartialAzureBlobConfig : AzureBlobConfig, IPartial { }
+	public class PartialBundle : Bundle, IPartial { }
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic PartialBundle class instead.</typeparam>
+	public class PartialBundle<Txp> : PartialBundle
+	{ }
 	public class PartialBuyer : Buyer, IPartial { }
 	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic PartialBuyer class instead.</typeparam>
 	public class PartialBuyer<Txp> : PartialBuyer
@@ -3082,6 +3218,7 @@ namespace OrderCloud.SDK
 	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic PartialPromotion class instead.</typeparam>
 	public class PartialPromotion<Txp> : PartialPromotion
 	{ }
+	public class PartialSearchIngestion : SearchIngestion, IPartial { }
 	public class PartialSecurityProfile : SecurityProfile, IPartial { }
 	public class PartialSellerApprovalRule : SellerApprovalRule, IPartial { }
 	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic PartialSellerApprovalRule class instead.</typeparam>
