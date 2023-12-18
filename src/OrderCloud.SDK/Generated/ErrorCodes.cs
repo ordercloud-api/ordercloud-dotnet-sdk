@@ -168,6 +168,8 @@ namespace OrderCloud.SDK
 			public const string ItemNotAllowed = "Expression.ItemNotAllowed";
 			/// <summary>This expression must contain 'item' token.</summary>
 			public const string ItemRequired = "Expression.ItemRequired";
+			/// <summary>Using order history in expressions requires premium order search to be enabled.</summary>
+			public const string OrderHistoryCannotBeUsed = "Expression.OrderHistoryCannotBeUsed";
 		}
 		public static class Impersonation
 		{
@@ -540,6 +542,11 @@ namespace OrderCloud.SDK
 			public const string AlreadyAcceptedInvitation = "ProductCollection.AlreadyAcceptedInvitation";
 			/// <summary>Not authorized to modify this Product Collection.</summary>
 			public const string CannotModify = "ProductCollection.CannotModify";
+		}
+		public static class ProductFacet
+		{
+			/// <summary>This XpPath is already in use on another facet, it needs to be unique across a marketplace.</summary>
+			public const string XpPathInUse = "ProductFacet.XpPathInUse";
 		}
 		public static class ProductSyncConfig
 		{
