@@ -5,7 +5,7 @@ using System.Dynamic;
 namespace OrderCloud.SDK
 {
 	public enum AccessLevel { Private, Public, Shareable }
-	public enum ApiRole { ApiClientAdmin, ApiClientReader, AddressAdmin, AddressReader, AdminAddressAdmin, AdminAddressReader, AdminUserAdmin, AdminUserGroupAdmin, AdminUserGroupReader, AdminUserReader, ApprovalRuleAdmin, ApprovalRuleReader, BundleAdmin, BundleAssignmentAdmin, BundleReader, BuyerAdmin, BuyerImpersonation, BuyerReader, BuyerUserAdmin, BuyerUserReader, CatalogAdmin, CatalogReader, CategoryAdmin, CategoryReader, CostCenterAdmin, CostCenterReader, CreditCardAdmin, CreditCardReader, FullAccess, IncrementorAdmin, IncrementorReader, LocaleReader, LocaleAdmin, MeAddressAdmin, MeAdmin, MeCreditCardAdmin, MessageConfigAssignmentAdmin, MeSubscriptionAdmin, MeXpAdmin, OrderAdmin, OrderReader, OverrideShipping, OverrideTax, OverrideUnitPrice, PasswordReset, PriceScheduleAdmin, PriceScheduleReader, ProductAdmin, ProductAssignmentAdmin, ProductCollectionReader, ProductFacetAdmin, ProductFacetReader, ProductReader, ProductSyncConfigAdmin, PromotionAdmin, PromotionReader, SecurityProfileAdmin, SecurityProfileReader, SetSecurityProfile, ShipmentAdmin, ShipmentReader, Shopper, SpendingAccountAdmin, SpendingAccountReader, SubscriptionAdmin, SubscriptionReader, SupplierAddressAdmin, SupplierAddressReader, SupplierAdmin, SupplierReader, SupplierUserAdmin, SupplierUserGroupAdmin, SupplierUserGroupReader, SupplierUserReader, UnsubmittedOrderReader, UserGroupAdmin, UserGroupReader, OpenIDConnectReader, OpenIDConnectAdmin, MessageSenderReader, MessageSenderAdmin, XpIndexAdmin, WebhookReader, WebhookAdmin, IntegrationEventReader, IntegrationEventAdmin, TrackingEventReader, TrackingEventAdmin, DeliveryConfigAdmin, OrderSyncConfigAdmin }
+	public enum ApiRole { ApiClientAdmin, ApiClientReader, AddressAdmin, AddressReader, AdminAddressAdmin, AdminAddressReader, AdminUserAdmin, AdminUserGroupAdmin, AdminUserGroupReader, AdminUserReader, ApprovalRuleAdmin, ApprovalRuleReader, BundleAdmin, BundleAssignmentAdmin, BundleReader, BuyerAdmin, BuyerImpersonation, BuyerReader, BuyerUserAdmin, BuyerUserReader, CatalogAdmin, CatalogReader, CategoryAdmin, CategoryReader, CostCenterAdmin, CostCenterReader, CreditCardAdmin, CreditCardReader, FullAccess, IncrementorAdmin, IncrementorReader, LocaleReader, LocaleAdmin, MeAddressAdmin, MeAdmin, MeCreditCardAdmin, MessageConfigAssignmentAdmin, MeSubscriptionAdmin, MeXpAdmin, OrderAdmin, OrderReader, OverrideShipping, OverrideTax, OverrideUnitPrice, PasswordReset, PriceScheduleAdmin, PriceScheduleReader, ProductAdmin, ProductAssignmentAdmin, ProductCollectionReader, ProductFacetAdmin, ProductFacetReader, ProductReader, ProductSyncConfigAdmin, PromotionAdmin, PromotionReader, SecurityProfileAdmin, SecurityProfileReader, SetSecurityProfile, ShipmentAdmin, ShipmentReader, Shopper, SpendingAccountAdmin, SpendingAccountReader, SubscriptionAdmin, SubscriptionReader, SupplierAddressAdmin, SupplierAddressReader, SupplierAdmin, SupplierReader, SupplierUserAdmin, SupplierUserGroupAdmin, SupplierUserGroupReader, SupplierUserReader, UnsubmittedOrderReader, UserGroupAdmin, UserGroupReader, OpenIDConnectReader, OpenIDConnectAdmin, MessageSenderReader, MessageSenderAdmin, XpIndexAdmin, WebhookReader, WebhookAdmin, IntegrationEventReader, IntegrationEventAdmin, TrackingEventReader, TrackingEventAdmin, DeliveryConfigAdmin, OrderSyncConfigAdmin, ErrorConfigAdmin }
 	public enum ApprovalStatus { Pending, Approved, Declined }
 	public enum ApprovalType { Order, OrderReturn }
 	public enum CommerceRole { Buyer, Seller, Supplier }
@@ -685,6 +685,12 @@ namespace OrderCloud.SDK
 		[Required]
 		public string ServiceEndpoint { get => GetProp<string>("ServiceEndpoint"); set => SetProp<string>("ServiceEndpoint", value); }
 	}
+	public class ErrorConfig : OrderCloudModel
+	{
+		/// <summary>ID of the delivery config. Required.</summary>
+		[Required]
+		public string DeliveryConfigID { get => GetProp<string>("DeliveryConfigID"); set => SetProp<string>("DeliveryConfigID", value); }
+	}
 	public class EventHubConfig : OrderCloudModel
 	{
 		/// <summary>Event hub name of the event hub config. Required.</summary>
@@ -926,8 +932,7 @@ namespace OrderCloud.SDK
 		public string ImpersonationGroupID { get => GetProp<string>("ImpersonationGroupID"); set => SetProp<string>("ImpersonationGroupID", value); }
 		/// <summary>The UserID of the impersonator (party doing the impersonating)</summary>
 		public string ImpersonationUserID { get => GetProp<string>("ImpersonationUserID"); set => SetProp<string>("ImpersonationUserID", value); }
-		/// <summary>The BuyerID of the impersonatee (party being impersonated)</summary>
-		[Required]
+		/// <summary>The BuyerID of the impersonatee (party being impersonated). If null, the config can be used to impersonate users in any buyer in the marketplace that is able to access the specified ClientID.</summary>
 		public string BuyerID { get => GetProp<string>("BuyerID"); set => SetProp<string>("BuyerID", value); }
 		/// <summary>The UserGroupID of the impersonatee (party being impersonated)</summary>
 		public string GroupID { get => GetProp<string>("GroupID"); set => SetProp<string>("GroupID", value); }
@@ -1683,7 +1688,7 @@ namespace OrderCloud.SDK
 		public bool AutoApply { get => GetProp<bool>("AutoApply", false); set => SetProp<bool>("AutoApply", value); }
 		/// <summary>Active of the order promotion. Sortable.</summary>
 		public bool Active { get => GetProp<bool>("Active", true); set => SetProp<bool>("Active", value); }
-		/// <summary>Priority of the order promotion. Sortable.</summary>
+		/// <summary>Used to control the order in which promotions are applied when calling the auto apply endpoint.</summary>
 		public int? Priority { get => GetProp<int?>("Priority"); set => SetProp<int?>("Priority", value); }
 		/// <summary>Container for extended (custom) properties of the order promotion.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
@@ -1942,7 +1947,8 @@ namespace OrderCloud.SDK
 		/// <summary>ID of the client. Required.</summary>
 		[Required]
 		public string ClientID { get => GetProp<string>("ClientID"); set => SetProp<string>("ClientID", value); }
-		/// <summary>Username of the password reset.</summary>
+		/// <summary>Username of the password reset. Required.</summary>
+		[Required]
 		public string Username { get => GetProp<string>("Username"); set => SetProp<string>("Username", value); }
 		/// <summary>Password of the password reset.</summary>
 		public string Password { get => GetProp<string>("Password"); set => SetProp<string>("Password", value); }
@@ -2329,7 +2335,7 @@ namespace OrderCloud.SDK
 		public bool AutoApply { get => GetProp<bool>("AutoApply", false); set => SetProp<bool>("AutoApply", value); }
 		/// <summary>Active of the promotion. Sortable.</summary>
 		public bool Active { get => GetProp<bool>("Active", true); set => SetProp<bool>("Active", value); }
-		/// <summary>Priority of the promotion. Sortable.</summary>
+		/// <summary>Used to control the order in which promotions are applied when calling the auto apply endpoint.</summary>
 		public int? Priority { get => GetProp<int?>("Priority"); set => SetProp<int?>("Priority", value); }
 		/// <summary>Container for extended (custom) properties of the promotion.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
@@ -2764,7 +2770,7 @@ namespace OrderCloud.SDK
 		/// <summary>Used to define how often to process the subscription. The subscription will process once every {Frequency} {Interval}.</summary>
 		[Required]
 		public SubscriptionInterval Interval { get => GetProp<SubscriptionInterval>("Interval"); set => SetProp<SubscriptionInterval>("Interval", value); }
-		/// <summary>Next order date of the subscription. Required. Sortable: priority level 1.</summary>
+		/// <summary>Next order date of the subscription. The hourly process that creates subscription orders will query for subscriptions with a NextOrderDate between now and five hours ago.</summary>
 		[Required]
 		public DateTimeOffset? NextOrderDate { get => GetProp<DateTimeOffset?>("NextOrderDate"); set => SetProp<DateTimeOffset?>("NextOrderDate", value); }
 		/// <summary>Last order date of the subscription. Sortable: priority level 2.</summary>
@@ -3120,6 +3126,7 @@ namespace OrderCloud.SDK
 	public class PartialDeliveryConfig : DeliveryConfig, IPartial { }
 	public class PartialDeliveryTargets : DeliveryTargets, IPartial { }
 	public class PartialDiscoverEvent : DiscoverEvent, IPartial { }
+	public class PartialErrorConfig : ErrorConfig, IPartial { }
 	public class PartialEventHubConfig : EventHubConfig, IPartial { }
 	public class PartialHttpConfig : HttpConfig, IPartial { }
 	public class PartialImpersonationConfig : ImpersonationConfig, IPartial { }

@@ -14,6 +14,7 @@ namespace OrderCloud.SDK
 		IApprovalRulesResource ApprovalRules { get; }
 		IBundleLineItemsResource BundleLineItems { get; }
 		IBundlesResource Bundles { get; }
+		IBundleSubscriptionItemsResource BundleSubscriptionItems { get; }
 		IBuyersResource Buyers { get; }
 		ICartResource Cart { get; }
 		ICatalogsResource Catalogs { get; }
@@ -22,6 +23,7 @@ namespace OrderCloud.SDK
 		ICostCentersResource CostCenters { get; }
 		ICreditCardsResource CreditCards { get; }
 		IDeliveryConfigurationsResource DeliveryConfigurations { get; }
+		IErrorConfigsResource ErrorConfigs { get; }
 		IImpersonationConfigsResource ImpersonationConfigs { get; }
 		IIncrementorsResource Incrementors { get; }
 		IIntegrationEventsResource IntegrationEvents { get; }
@@ -716,6 +718,28 @@ namespace OrderCloud.SDK
 		Task DeleteAssignmentAsync(string bundleID, string buyerID, string userID = null, string userGroupID = null, string sellerID = null, string accessToken = null);
 	}
 
+	public interface IBundleSubscriptionItemsResource
+	{
+		/// <summary>Create a new bundle subscription item. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <param name="subscriptionID">ID of the subscription.</param>
+		/// <param name="bundleID">ID of the bundle.</param>
+		/// <param name="bundleItems">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<LineItem> CreateAsync(string subscriptionID, string bundleID, BundleItems bundleItems, string accessToken = null);
+		/// <summary>Create a new bundle subscription item. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <param name="subscriptionID">ID of the subscription.</param>
+		/// <param name="bundleID">ID of the bundle.</param>
+		/// <param name="bundleItems">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TLineItem> CreateAsync<TLineItem>(string subscriptionID, string bundleID, BundleItems bundleItems, string accessToken = null) where TLineItem : LineItem;
+		/// <summary>Delete a bundle subscription item.</summary>
+		/// <param name="subscriptionID">ID of the subscription.</param>
+		/// <param name="bundleID">ID of the bundle.</param>
+		/// <param name="bundleItemID">ID of the bundle item.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task DeleteAsync(string subscriptionID, string bundleID, string bundleItemID, string accessToken = null);
+	}
+
 	public interface IBuyersResource
 	{
 		/// <summary>Get a single buyer.</summary>
@@ -898,21 +922,21 @@ namespace OrderCloud.SDK
 		/// <param name="lineItemID">ID of the line item.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task DeleteLineItemAsync(string lineItemID, string accessToken = null);
-		/// <summary>Add a bundle. Adds bundle line items to the cart</summary>
+		/// <summary>Create a new cart bundle item. Adds bundle line items to the cart</summary>
 		/// <param name="bundleID">ID of the bundle.</param>
 		/// <param name="bundleItems">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
-		Task<LineItem> AddBundleAsync(string bundleID, BundleItems bundleItems, string accessToken = null);
-		/// <summary>Add a bundle. Adds bundle line items to the cart</summary>
+		Task<LineItem> CreateBundleItemAsync(string bundleID, BundleItems bundleItems, string accessToken = null);
+		/// <summary>Create a new cart bundle item. Adds bundle line items to the cart</summary>
 		/// <param name="bundleID">ID of the bundle.</param>
 		/// <param name="bundleItems">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
-		Task<TLineItem> AddBundleAsync<TLineItem>(string bundleID, BundleItems bundleItems, string accessToken = null) where TLineItem : LineItem;
-		/// <summary>Delete a cart bundle.</summary>
+		Task<TLineItem> CreateBundleItemAsync<TLineItem>(string bundleID, BundleItems bundleItems, string accessToken = null) where TLineItem : LineItem;
+		/// <summary>Delete a cart bundle item.</summary>
 		/// <param name="bundleID">ID of the bundle.</param>
 		/// <param name="bundleItemID">ID of the bundle item.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
-		Task DeleteBundleAsync(string bundleID, string bundleItemID, string accessToken = null);
+		Task DeleteBundleItemAsync(string bundleID, string bundleItemID, string accessToken = null);
 		/// <summary>Get a list of cart promotions.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
@@ -1097,6 +1121,38 @@ namespace OrderCloud.SDK
 		/// <param name="orderShipMethodSelection">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TOrderWorksheet> SelectShipMethodsAsync<TOrderWorksheet>(OrderShipMethodSelection orderShipMethodSelection, string accessToken = null) where TOrderWorksheet : OrderWorksheet;
+		/// <summary>Set a shipping address.</summary>
+		/// <param name="address">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<Order> SetShippingAddressAsync(Address address, string accessToken = null);
+		/// <summary>Set a shipping address.</summary>
+		/// <param name="address">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TOrder> SetShippingAddressAsync<TOrder>(Address address, string accessToken = null) where TOrder : Order;
+		/// <summary>Partially update a cart shipping address. Not allowed on carts where ShippingAddressID has been set. In that case, use the Addresses resource to update the saved address.</summary>
+		/// <param name="partialAddress">The object that will be partially serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<Order> PatchShippingAddressAsync(PartialAddress partialAddress, string accessToken = null);
+		/// <summary>Partially update a cart shipping address. Not allowed on carts where ShippingAddressID has been set. In that case, use the Addresses resource to update the saved address.</summary>
+		/// <param name="partialAddress">The object that will be partially serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TOrder> PatchShippingAddressAsync<TOrder>(PartialAddress partialAddress, string accessToken = null) where TOrder : Order;
+		/// <summary>Set a billing address. Use only when the address is not to be saved/reused. To use a saved address (i.e. from the Addresses resource), PATCH the order's BillingAddressID property instead.</summary>
+		/// <param name="address">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<Order> SetBillingAddressAsync(Address address, string accessToken = null);
+		/// <summary>Set a billing address. Use only when the address is not to be saved/reused. To use a saved address (i.e. from the Addresses resource), PATCH the order's BillingAddressID property instead.</summary>
+		/// <param name="address">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TOrder> SetBillingAddressAsync<TOrder>(Address address, string accessToken = null) where TOrder : Order;
+		/// <summary>Partially update a cart billing address. Not allowed on carts where BillingAddressID has been set. In that case, use the Addresses resource to update the saved address.</summary>
+		/// <param name="partialAddress">The object that will be partially serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<Order> PatchBillingAddressAsync(PartialAddress partialAddress, string accessToken = null);
+		/// <summary>Partially update a cart billing address. Not allowed on carts where BillingAddressID has been set. In that case, use the Addresses resource to update the saved address.</summary>
+		/// <param name="partialAddress">The object that will be partially serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TOrder> PatchBillingAddressAsync<TOrder>(PartialAddress partialAddress, string accessToken = null) where TOrder : Order;
 	}
 
 	public interface ICatalogsResource
@@ -1627,6 +1683,24 @@ namespace OrderCloud.SDK
 		/// <param name="partialDeliveryConfig">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<DeliveryConfig> PatchAsync(string deliveryConfigID, PartialDeliveryConfig partialDeliveryConfig, string accessToken = null);
+	}
+
+	public interface IErrorConfigsResource
+	{
+		/// <summary>Get a single error config.</summary>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ErrorConfig> GetAsync(string accessToken = null);
+		/// <summary>Delete an error config.</summary>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task DeleteAsync(string accessToken = null);
+		/// <summary>Create or update an error config. If an object with the same ID already exists, it will be overwritten.</summary>
+		/// <param name="errorConfig">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ErrorConfig> SaveAsync(ErrorConfig errorConfig, string accessToken = null);
+		/// <summary>Partially update an error config.</summary>
+		/// <param name="partialErrorConfig">The object that will be partially serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ErrorConfig> PatchAsync(PartialErrorConfig partialErrorConfig, string accessToken = null);
 	}
 
 	public interface IImpersonationConfigsResource
@@ -3302,6 +3376,24 @@ namespace OrderCloud.SDK
 		/// <param name="subscriptionItemID">ID of the subscription item.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task DeleteSubscriptionItemAsync(string subscriptionID, string subscriptionItemID, string accessToken = null);
+		/// <summary>Create a new subscription bundle item.</summary>
+		/// <param name="subscriptionID">ID of the subscription.</param>
+		/// <param name="bundleID">ID of the bundle.</param>
+		/// <param name="bundleItems">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<LineItem> CreateSubscriptionBundleItemAsync(string subscriptionID, string bundleID, BundleItems bundleItems, string accessToken = null);
+		/// <summary>Create a new subscription bundle item.</summary>
+		/// <param name="subscriptionID">ID of the subscription.</param>
+		/// <param name="bundleID">ID of the bundle.</param>
+		/// <param name="bundleItems">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TLineItem> CreateSubscriptionBundleItemAsync<TLineItem>(string subscriptionID, string bundleID, BundleItems bundleItems, string accessToken = null) where TLineItem : LineItem;
+		/// <summary>Delete a subscription bundle item.</summary>
+		/// <param name="subscriptionID">ID of the subscription.</param>
+		/// <param name="bundleID">ID of the bundle.</param>
+		/// <param name="bundleItemID">ID of the bundle item.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task DeleteSubscriptionBundleItemAsync(string subscriptionID, string bundleID, string bundleItemID, string accessToken = null);
 		/// <summary>Get a list of product sellers visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="search">Word or phrase to search for.</param>
@@ -6317,6 +6409,7 @@ namespace OrderCloud.SDK
 			ApprovalRules = new ApprovalRulesResource(this);
 			BundleLineItems = new BundleLineItemsResource(this);
 			Bundles = new BundlesResource(this);
+			BundleSubscriptionItems = new BundleSubscriptionItemsResource(this);
 			Buyers = new BuyersResource(this);
 			Cart = new CartResource(this);
 			Catalogs = new CatalogsResource(this);
@@ -6325,6 +6418,7 @@ namespace OrderCloud.SDK
 			CostCenters = new CostCentersResource(this);
 			CreditCards = new CreditCardsResource(this);
 			DeliveryConfigurations = new DeliveryConfigurationsResource(this);
+			ErrorConfigs = new ErrorConfigsResource(this);
 			ImpersonationConfigs = new ImpersonationConfigsResource(this);
 			Incrementors = new IncrementorsResource(this);
 			IntegrationEvents = new IntegrationEventsResource(this);
@@ -6372,6 +6466,7 @@ namespace OrderCloud.SDK
 		public IApprovalRulesResource ApprovalRules { get; private set; }
 		public IBundleLineItemsResource BundleLineItems { get; private set; }
 		public IBundlesResource Bundles { get; private set; }
+		public IBundleSubscriptionItemsResource BundleSubscriptionItems { get; private set; }
 		public IBuyersResource Buyers { get; private set; }
 		public ICartResource Cart { get; private set; }
 		public ICatalogsResource Catalogs { get; private set; }
@@ -6380,6 +6475,7 @@ namespace OrderCloud.SDK
 		public ICostCentersResource CostCenters { get; private set; }
 		public ICreditCardsResource CreditCards { get; private set; }
 		public IDeliveryConfigurationsResource DeliveryConfigurations { get; private set; }
+		public IErrorConfigsResource ErrorConfigs { get; private set; }
 		public IImpersonationConfigsResource ImpersonationConfigs { get; private set; }
 		public IIncrementorsResource Incrementors { get; private set; }
 		public IIntegrationEventsResource IntegrationEvents { get; private set; }
@@ -6569,6 +6665,14 @@ namespace OrderCloud.SDK
 		public Task DeleteAssignmentAsync(string bundleID, string buyerID, string userID = null, string userGroupID = null, string sellerID = null, string accessToken = null) => Request("v1", "bundles", bundleID, "assignments", buyerID).WithOAuthBearerToken(accessToken).SetQueryParams(new { userID, userGroupID, sellerID }).DeleteAsync();
 	}
 
+	public class BundleSubscriptionItemsResource : OrderCloudResource, IBundleSubscriptionItemsResource
+	{
+		internal BundleSubscriptionItemsResource(OrderCloudClient client) : base(client) { }
+		public Task<LineItem> CreateAsync(string subscriptionID, string bundleID, BundleItems bundleItems, string accessToken = null) => CreateAsync<LineItem>(subscriptionID, bundleID, bundleItems, accessToken);
+		public Task<TLineItem> CreateAsync<TLineItem>(string subscriptionID, string bundleID, BundleItems bundleItems, string accessToken = null) where TLineItem : LineItem => Request("v1", "subscriptions", subscriptionID, "bundles", bundleID).WithOAuthBearerToken(accessToken).PostJsonAsync(ValidateModel(bundleItems)).ReceiveJson<TLineItem>();
+		public Task DeleteAsync(string subscriptionID, string bundleID, string bundleItemID, string accessToken = null) => Request("v1", "subscriptions", subscriptionID, "bundles", bundleID, bundleItemID).WithOAuthBearerToken(accessToken).DeleteAsync();
+	}
+
 	public class BuyersResource : OrderCloudResource, IBuyersResource
 	{
 		internal BuyersResource(OrderCloudClient client) : base(client) { }
@@ -6613,9 +6717,9 @@ namespace OrderCloud.SDK
 		public Task<LineItem> PatchLineItemAsync(string lineItemID, PartialLineItem partialLineItem, string accessToken = null) => PatchLineItemAsync<LineItem>(lineItemID, partialLineItem, accessToken);
 		public Task<TLineItem> PatchLineItemAsync<TLineItem>(string lineItemID, PartialLineItem partialLineItem, string accessToken = null) where TLineItem : LineItem => Request("v1", "cart", "lineitems", lineItemID).WithOAuthBearerToken(accessToken).PatchJsonAsync(ValidateModel(partialLineItem)).ReceiveJson<TLineItem>();
 		public Task DeleteLineItemAsync(string lineItemID, string accessToken = null) => Request("v1", "cart", "lineitems", lineItemID).WithOAuthBearerToken(accessToken).DeleteAsync();
-		public Task<LineItem> AddBundleAsync(string bundleID, BundleItems bundleItems, string accessToken = null) => AddBundleAsync<LineItem>(bundleID, bundleItems, accessToken);
-		public Task<TLineItem> AddBundleAsync<TLineItem>(string bundleID, BundleItems bundleItems, string accessToken = null) where TLineItem : LineItem => Request("v1", "cart", "bundles", bundleID).WithOAuthBearerToken(accessToken).PostJsonAsync(ValidateModel(bundleItems)).ReceiveJson<TLineItem>();
-		public Task DeleteBundleAsync(string bundleID, string bundleItemID, string accessToken = null) => Request("v1", "cart", "bundles", bundleID, bundleItemID).WithOAuthBearerToken(accessToken).DeleteAsync();
+		public Task<LineItem> CreateBundleItemAsync(string bundleID, BundleItems bundleItems, string accessToken = null) => CreateBundleItemAsync<LineItem>(bundleID, bundleItems, accessToken);
+		public Task<TLineItem> CreateBundleItemAsync<TLineItem>(string bundleID, BundleItems bundleItems, string accessToken = null) where TLineItem : LineItem => Request("v1", "cart", "bundles", bundleID).WithOAuthBearerToken(accessToken).PostJsonAsync(ValidateModel(bundleItems)).ReceiveJson<TLineItem>();
+		public Task DeleteBundleItemAsync(string bundleID, string bundleItemID, string accessToken = null) => Request("v1", "cart", "bundles", bundleID, bundleItemID).WithOAuthBearerToken(accessToken).DeleteAsync();
 		public Task<ListPage<OrderPromotion>> ListPromotionsAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) => ListPromotionsAsync<OrderPromotion>(search, searchOn, sortBy, page, pageSize, filters, accessToken);
 		public Task<ListPage<TOrderPromotion>> ListPromotionsAsync<TOrderPromotion>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TOrderPromotion : OrderPromotion => Request("v1", "cart", "promotions").WithOAuthBearerToken(accessToken).SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<TOrderPromotion>>();
 		public Task<ListPage<OrderPromotion>> ListPromotionsAsync(Action<ListOptionsBuilder<OrderPromotion>> buildListOpts, string accessToken = null) => ListPromotionsAsync<OrderPromotion>(buildListOpts, accessToken);
@@ -6656,6 +6760,14 @@ namespace OrderCloud.SDK
 		public Task<TOrderWorksheet> EstimateShippingAsync<TOrderWorksheet>(string accessToken = null) where TOrderWorksheet : OrderWorksheet => Request("v1", "cart", "estimateshipping").WithOAuthBearerToken(accessToken).PostAsync(null).ReceiveJson<TOrderWorksheet>();
 		public Task<OrderWorksheet> SelectShipMethodsAsync(OrderShipMethodSelection orderShipMethodSelection, string accessToken = null) => SelectShipMethodsAsync<OrderWorksheet>(orderShipMethodSelection, accessToken);
 		public Task<TOrderWorksheet> SelectShipMethodsAsync<TOrderWorksheet>(OrderShipMethodSelection orderShipMethodSelection, string accessToken = null) where TOrderWorksheet : OrderWorksheet => Request("v1", "cart", "shipmethods").WithOAuthBearerToken(accessToken).PostJsonAsync(ValidateModel(orderShipMethodSelection)).ReceiveJson<TOrderWorksheet>();
+		public Task<Order> SetShippingAddressAsync(Address address, string accessToken = null) => SetShippingAddressAsync<Order>(address, accessToken);
+		public Task<TOrder> SetShippingAddressAsync<TOrder>(Address address, string accessToken = null) where TOrder : Order => Request("v1", "cart", "shipto").WithOAuthBearerToken(accessToken).PutJsonAsync(ValidateModel(address)).ReceiveJson<TOrder>();
+		public Task<Order> PatchShippingAddressAsync(PartialAddress partialAddress, string accessToken = null) => PatchShippingAddressAsync<Order>(partialAddress, accessToken);
+		public Task<TOrder> PatchShippingAddressAsync<TOrder>(PartialAddress partialAddress, string accessToken = null) where TOrder : Order => Request("v1", "cart", "shipto").WithOAuthBearerToken(accessToken).PatchJsonAsync(ValidateModel(partialAddress)).ReceiveJson<TOrder>();
+		public Task<Order> SetBillingAddressAsync(Address address, string accessToken = null) => SetBillingAddressAsync<Order>(address, accessToken);
+		public Task<TOrder> SetBillingAddressAsync<TOrder>(Address address, string accessToken = null) where TOrder : Order => Request("v1", "cart", "billto").WithOAuthBearerToken(accessToken).PutJsonAsync(ValidateModel(address)).ReceiveJson<TOrder>();
+		public Task<Order> PatchBillingAddressAsync(PartialAddress partialAddress, string accessToken = null) => PatchBillingAddressAsync<Order>(partialAddress, accessToken);
+		public Task<TOrder> PatchBillingAddressAsync<TOrder>(PartialAddress partialAddress, string accessToken = null) where TOrder : Order => Request("v1", "cart", "billto").WithOAuthBearerToken(accessToken).PatchJsonAsync(ValidateModel(partialAddress)).ReceiveJson<TOrder>();
 	}
 
 	public class CatalogsResource : OrderCloudResource, ICatalogsResource
@@ -6770,6 +6882,15 @@ namespace OrderCloud.SDK
 		public Task<DeliveryConfig> SaveAsync(string deliveryConfigID, DeliveryConfig deliveryConfig, string accessToken = null) => Request("v1", "integrations", "deliveryconfig", deliveryConfigID).WithOAuthBearerToken(accessToken).PutJsonAsync(ValidateModel(deliveryConfig)).ReceiveJson<DeliveryConfig>();
 		public Task DeleteAsync(string deliveryConfigID, string accessToken = null) => Request("v1", "integrations", "deliveryconfig", deliveryConfigID).WithOAuthBearerToken(accessToken).DeleteAsync();
 		public Task<DeliveryConfig> PatchAsync(string deliveryConfigID, PartialDeliveryConfig partialDeliveryConfig, string accessToken = null) => Request("v1", "integrations", "deliveryconfig", deliveryConfigID).WithOAuthBearerToken(accessToken).PatchJsonAsync(ValidateModel(partialDeliveryConfig)).ReceiveJson<DeliveryConfig>();
+	}
+
+	public class ErrorConfigsResource : OrderCloudResource, IErrorConfigsResource
+	{
+		internal ErrorConfigsResource(OrderCloudClient client) : base(client) { }
+		public Task<ErrorConfig> GetAsync(string accessToken = null) => Request("v1", "integrations", "ErrorConfig").WithOAuthBearerToken(accessToken).GetJsonAsync<ErrorConfig>();
+		public Task DeleteAsync(string accessToken = null) => Request("v1", "integrations", "ErrorConfig").WithOAuthBearerToken(accessToken).DeleteAsync();
+		public Task<ErrorConfig> SaveAsync(ErrorConfig errorConfig, string accessToken = null) => Request("v1", "integrations", "ErrorConfig").WithOAuthBearerToken(accessToken).PutJsonAsync(ValidateModel(errorConfig)).ReceiveJson<ErrorConfig>();
+		public Task<ErrorConfig> PatchAsync(PartialErrorConfig partialErrorConfig, string accessToken = null) => Request("v1", "integrations", "ErrorConfig").WithOAuthBearerToken(accessToken).PatchJsonAsync(ValidateModel(partialErrorConfig)).ReceiveJson<ErrorConfig>();
 	}
 
 	public class ImpersonationConfigsResource : OrderCloudResource, IImpersonationConfigsResource
@@ -7066,6 +7187,9 @@ namespace OrderCloud.SDK
 		public Task<LineItem> PatchSubscriptionItemAsync(string subscriptionID, string subscriptionItemID, PartialLineItem partialLineItem, string accessToken = null) => PatchSubscriptionItemAsync<LineItem>(subscriptionID, subscriptionItemID, partialLineItem, accessToken);
 		public Task<TLineItem> PatchSubscriptionItemAsync<TLineItem>(string subscriptionID, string subscriptionItemID, PartialLineItem partialLineItem, string accessToken = null) where TLineItem : LineItem => Request("v1", "me", "subscriptions", subscriptionID, "items", subscriptionItemID).WithOAuthBearerToken(accessToken).PatchJsonAsync(ValidateModel(partialLineItem)).ReceiveJson<TLineItem>();
 		public Task DeleteSubscriptionItemAsync(string subscriptionID, string subscriptionItemID, string accessToken = null) => Request("v1", "me", "subscriptions", subscriptionID, "items", subscriptionItemID).WithOAuthBearerToken(accessToken).DeleteAsync();
+		public Task<LineItem> CreateSubscriptionBundleItemAsync(string subscriptionID, string bundleID, BundleItems bundleItems, string accessToken = null) => CreateSubscriptionBundleItemAsync<LineItem>(subscriptionID, bundleID, bundleItems, accessToken);
+		public Task<TLineItem> CreateSubscriptionBundleItemAsync<TLineItem>(string subscriptionID, string bundleID, BundleItems bundleItems, string accessToken = null) where TLineItem : LineItem => Request("v1", "me", "subscriptions", subscriptionID, "items", "bundles", bundleID).WithOAuthBearerToken(accessToken).PostJsonAsync(ValidateModel(bundleItems)).ReceiveJson<TLineItem>();
+		public Task DeleteSubscriptionBundleItemAsync(string subscriptionID, string bundleID, string bundleItemID, string accessToken = null) => Request("v1", "me", "subscriptions", subscriptionID, "items", "bundles", bundleID, bundleItemID).WithOAuthBearerToken(accessToken).DeleteAsync();
 		public Task<ListPage<ProductSeller>> ListProductSellersAsync(string productID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) => ListProductSellersAsync<ProductSeller>(productID, search, searchOn, sortBy, page, pageSize, filters, accessToken);
 		public Task<ListPage<TProductSeller>> ListProductSellersAsync<TProductSeller>(string productID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TProductSeller : ProductSeller => Request("v1", "me", "products", productID, "sellers").WithOAuthBearerToken(accessToken).SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<TProductSeller>>();
 		public Task<ListPage<ProductSeller>> ListProductSellersAsync(string productID, Action<ListOptionsBuilder<ProductSeller>> buildListOpts, string accessToken = null) => ListProductSellersAsync<ProductSeller>(productID, buildListOpts, accessToken);
