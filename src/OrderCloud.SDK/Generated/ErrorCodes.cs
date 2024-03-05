@@ -454,6 +454,8 @@ namespace OrderCloud.SDK
 			public const string NotAuthorizedToPatch = "Payment.NotAuthorizedToPatch";
 			/// <summary>You must include a corresponding ID when creating a payment of type SpendingAccount.</summary>
 			public const string SpendingAccountIdMissing = "Payment.SpendingAccountIdMissing";
+			/// <summary>You cannot delete a Spending Account that has been used as a Payment.</summary>
+			public const string CannotDeleteSpendingAccount = "Payment.CannotDeleteSpendingAccount";
 			/// <summary>When creating a payment Amount must be null or greater than zero.</summary>
 			public const string AmountGreaterThanZero = "Payment.AmountGreaterThanZero";
 		}
