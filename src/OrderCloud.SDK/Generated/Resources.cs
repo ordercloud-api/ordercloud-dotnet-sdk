@@ -23,6 +23,7 @@ namespace OrderCloud.SDK
 		ICostCentersResource CostCenters { get; }
 		ICreditCardsResource CreditCards { get; }
 		IDeliveryConfigurationsResource DeliveryConfigurations { get; }
+		IEntitySyncsResource EntitySyncs { get; }
 		IErrorConfigsResource ErrorConfigs { get; }
 		IForgottenCredentialsResource ForgottenCredentials { get; }
 		IImpersonationConfigsResource ImpersonationConfigs { get; }
@@ -1683,6 +1684,20 @@ namespace OrderCloud.SDK
 		/// <param name="partialDeliveryConfig">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<DeliveryConfig> PatchAsync(string deliveryConfigID, PartialDeliveryConfig partialDeliveryConfig, string accessToken = null);
+	}
+
+	public interface IEntitySyncsResource
+	{
+		/// <summary>Get the entity sync delivery configuration for categories Get the entity sync delivery configuration for categories</summary>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<EntitySyncConfig> GetCategoriesAsync(string accessToken = null);
+		/// <summary>Delete the entity sync delivery configuration for categories Delete the entity sync delivery configuration for categories</summary>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task DeleteCategoriesAsync(string accessToken = null);
+		/// <summary>Create or update the entity sync delivery configuration for categories Create or update the entity sync delivery configuration for categories</summary>
+		/// <param name="entitySyncConfig">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<EntitySyncConfig> SaveCategoriesAsync(EntitySyncConfig entitySyncConfig, string accessToken = null);
 	}
 
 	public interface IErrorConfigsResource
@@ -6426,6 +6441,7 @@ namespace OrderCloud.SDK
 			CostCenters = new CostCentersResource(this);
 			CreditCards = new CreditCardsResource(this);
 			DeliveryConfigurations = new DeliveryConfigurationsResource(this);
+			EntitySyncs = new EntitySyncsResource(this);
 			ErrorConfigs = new ErrorConfigsResource(this);
 			ForgottenCredentials = new ForgottenCredentialsResource(this);
 			ImpersonationConfigs = new ImpersonationConfigsResource(this);
@@ -6483,6 +6499,7 @@ namespace OrderCloud.SDK
 		public ICostCentersResource CostCenters { get; private set; }
 		public ICreditCardsResource CreditCards { get; private set; }
 		public IDeliveryConfigurationsResource DeliveryConfigurations { get; private set; }
+		public IEntitySyncsResource EntitySyncs { get; private set; }
 		public IErrorConfigsResource ErrorConfigs { get; private set; }
 		public IForgottenCredentialsResource ForgottenCredentials { get; private set; }
 		public IImpersonationConfigsResource ImpersonationConfigs { get; private set; }
@@ -6890,6 +6907,14 @@ namespace OrderCloud.SDK
 		public Task<DeliveryConfig> SaveAsync(string deliveryConfigID, DeliveryConfig deliveryConfig, string accessToken = null) => Request("v1", "integrations", "deliveryconfig", deliveryConfigID).WithOAuthBearerToken(accessToken).PutJsonAsync(ValidateModel(deliveryConfig)).ReceiveJson<DeliveryConfig>();
 		public Task DeleteAsync(string deliveryConfigID, string accessToken = null) => Request("v1", "integrations", "deliveryconfig", deliveryConfigID).WithOAuthBearerToken(accessToken).DeleteAsync();
 		public Task<DeliveryConfig> PatchAsync(string deliveryConfigID, PartialDeliveryConfig partialDeliveryConfig, string accessToken = null) => Request("v1", "integrations", "deliveryconfig", deliveryConfigID).WithOAuthBearerToken(accessToken).PatchJsonAsync(ValidateModel(partialDeliveryConfig)).ReceiveJson<DeliveryConfig>();
+	}
+
+	public class EntitySyncsResource : OrderCloudResource, IEntitySyncsResource
+	{
+		internal EntitySyncsResource(OrderCloudClient client) : base(client) { }
+		public Task<EntitySyncConfig> GetCategoriesAsync(string accessToken = null) => Request("v1", "integrations", "entitysync", "categories").WithOAuthBearerToken(accessToken).GetJsonAsync<EntitySyncConfig>();
+		public Task DeleteCategoriesAsync(string accessToken = null) => Request("v1", "integrations", "entitysync", "categories").WithOAuthBearerToken(accessToken).DeleteAsync();
+		public Task<EntitySyncConfig> SaveCategoriesAsync(EntitySyncConfig entitySyncConfig, string accessToken = null) => Request("v1", "integrations", "entitysync", "categories").WithOAuthBearerToken(accessToken).PutJsonAsync(ValidateModel(entitySyncConfig)).ReceiveJson<EntitySyncConfig>();
 	}
 
 	public class ErrorConfigsResource : OrderCloudResource, IErrorConfigsResource

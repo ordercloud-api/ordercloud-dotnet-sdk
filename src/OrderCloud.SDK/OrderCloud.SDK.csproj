@@ -4,7 +4,7 @@
 		<!-- https://docs.microsoft.com/en-us/dotnet/core/tools/csproj -->
 		<TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<Version>0.13.0</Version>
+		<Version>0.13.1</Version>
 		<PackageId>OrderCloud.SDK</PackageId>
 		<Title>OrderCloud SDK</Title>
 		<Authors>Todd Menier</Authors>
