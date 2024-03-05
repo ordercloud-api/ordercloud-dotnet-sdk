@@ -81,6 +81,8 @@ namespace OrderCloud.SDK
 			public const string AnonUserProhibited = "Auth.AnonUserProhibited";
 			/// <summary>The token provided is invalid. Please provide an anonymous user token and try again.</summary>
 			public const string MustPassAnonUserToken = "Auth.MustPassAnonUserToken";
+			/// <summary>Both clientID and email are required.</summary>
+			public const string ClientIDAndEmailRequired = "Auth.ClientIDAndEmailRequired";
 		}
 		public static class BillingAddress
 		{
@@ -153,6 +155,11 @@ namespace OrderCloud.SDK
 		{
 			/// <summary>This Delivery Configuration cannot be deleted because it is in use.</summary>
 			public const string CannotDeleteConfigInUse = "DeliveryConfig.CannotDeleteConfigInUse";
+		}
+		public static class EntitySyncConfig
+		{
+			/// <summary>Only one entity sync per entity type can be configured for a marketplace.</summary>
+			public const string OnlyOneConfigPerMarketplace = "EntitySyncConfig.OnlyOneConfigPerMarketplace";
 		}
 		public static class Expression
 		{
@@ -286,6 +293,13 @@ namespace OrderCloud.SDK
 			/// <summary>You are allowed only a single language/currency combination per marketplace.</summary>
 			public const string DuplicateLanguageAndCurrency = "Locale.DuplicateLanguageAndCurrency";
 		}
+		public static class MessageSenders
+		{
+			/// <summary>Url is required when no delivery configuration is specified.</summary>
+			public const string UrlRequired = "MessageSenders.UrlRequired";
+			/// <summary>SharedKey is required when no delivery configuration is specified.</summary>
+			public const string SharedKeyRequired = "MessageSenders.SharedKeyRequired";
+		}
 		public static class Order
 		{
 			/// <summary>Order search index is being built. Please try again later.</summary>
@@ -336,6 +350,8 @@ namespace OrderCloud.SDK
 			public const string AllowedOnSubmittedOnly = "Order.AllowedOnSubmittedOnly";
 			/// <summary>You cannot request both submitted and unsubmitted orders in the same list.</summary>
 			public const string CannotMixSubmittedAndUnsubmitted = "Order.CannotMixSubmittedAndUnsubmitted";
+			/// <summary>Order status must be Unsubmitted or Awaiting Approval to apply a promotion.</summary>
+			public const string CannotApplyPromoBadStatus = "Order.CannotApplyPromoBadStatus";
 		}
 		public static class OrderReturn
 		{
@@ -477,8 +493,6 @@ namespace OrderCloud.SDK
 			public const string CannotModify = "PriceSchedule.CannotModify";
 			/// <summary>The DefaultPriceScheduleID for a given product supplier must be owned by the Marketplace Owner or the Supplier.</summary>
 			public const string InvalidDefaultPriceScheduleID = "PriceSchedule.InvalidDefaultPriceScheduleID";
-			/// <summary>The PriceSchedule.OwnerID must match the SellerID.</summary>
-			public const string SellerIDMustMatchOwnerID = "PriceSchedule.SellerIDMustMatchOwnerID";
 			/// <summary>The party's assigned Locale must match the Price Schedule's Currency.</summary>
 			public const string CurrencyMismatch = "PriceSchedule.CurrencyMismatch";
 			/// <summary>The SaleStart DateTime must be before the SaleEnd DateTime.</summary>
@@ -641,11 +655,6 @@ namespace OrderCloud.SDK
 			public const string RequiresValue = "Spec.RequiresValue";
 			/// <summary>Cannot assign spec to this product. Product must be owned by the Spec owner.</summary>
 			public const string CannotAssignProduct = "Spec.CannotAssignProduct";
-		}
-		public static class SpendingAccount
-		{
-			/// <summary>The redemption code specified is already in use.</summary>
-			public const string InvalidRedemptionCode = "SpendingAccount.InvalidRedemptionCode";
 		}
 		public static class Subscription
 		{

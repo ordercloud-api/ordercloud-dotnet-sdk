@@ -24,6 +24,7 @@ namespace OrderCloud.SDK
 		ICreditCardsResource CreditCards { get; }
 		IDeliveryConfigurationsResource DeliveryConfigurations { get; }
 		IErrorConfigsResource ErrorConfigs { get; }
+		IForgottenCredentialsResource ForgottenCredentials { get; }
 		IImpersonationConfigsResource ImpersonationConfigs { get; }
 		IIncrementorsResource Incrementors { get; }
 		IIntegrationEventsResource IntegrationEvents { get; }
@@ -36,7 +37,6 @@ namespace OrderCloud.SDK
 		IOrderReturnsResource OrderReturns { get; }
 		IOrdersResource Orders { get; }
 		IOrderSyncsResource OrderSyncs { get; }
-		IPasswordResetsResource PasswordResets { get; }
 		IPaymentsResource Payments { get; }
 		IPriceSchedulesResource PriceSchedules { get; }
 		IProductCollectionsResource ProductCollections { get; }
@@ -1092,7 +1092,7 @@ namespace OrderCloud.SDK
 		/// <summary>Submit the cart.</summary>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TOrder> SubmitAsync<TOrder>(string accessToken = null) where TOrder : Order;
-		/// <summary>Validate a cart validate.</summary>
+		/// <summary>Validate the cart in it's current state.</summary>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task ValidateAsync(string accessToken = null);
 		/// <summary>Calculate the cart.</summary>
@@ -1701,6 +1701,27 @@ namespace OrderCloud.SDK
 		/// <param name="partialErrorConfig">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ErrorConfig> PatchAsync(PartialErrorConfig partialErrorConfig, string accessToken = null);
+		/// <summary>Validates an error config.</summary>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task ValidateAsync(string accessToken = null);
+	}
+
+	public interface IForgottenCredentialsResource
+	{
+		/// <summary>Send a verification code. Sends a temporary verification code via email, which must subsequently be passed in a Reset Password call. The verification code expires in 120 minutes.</summary>
+		/// <param name="passwordResetRequest">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task SendVerificationCodeAsync(PasswordResetRequest passwordResetRequest, string accessToken = null);
+		/// <summary>Reset a password by verification code.</summary>
+		/// <param name="verificationCode">Verification code of the password reset.</param>
+		/// <param name="passwordReset">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task ResetPasswordByVerificationCodeAsync(string verificationCode, PasswordReset passwordReset, string accessToken = null);
+		/// <summary>Retrieve a username. Sends an email with username for every username associated with an email. Always returns a 200 success regardless of if email doesn’t exist in the clientID.</summary>
+		/// <param name="clientID">ID of the client.</param>
+		/// <param name="email">Email of the forgotten credentials.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task RetrieveUsernameAsync(string clientID, string email, string accessToken = null);
 	}
 
 	public interface IImpersonationConfigsResource
@@ -1943,7 +1964,7 @@ namespace OrderCloud.SDK
 		/// <param name="partialInventoryRecord">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TInventoryRecord> PatchAsync<TInventoryRecord>(string productID, string inventoryRecordID, PartialInventoryRecord partialInventoryRecord, string accessToken = null) where TInventoryRecord : InventoryRecord;
-		/// <summary>Get a list of inventory record variants.</summary>
+		/// <summary>Get a list of variant inventory records.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="variantID">ID of the variant.</param>
 		/// <param name="search">Word or phrase to search for.</param>
@@ -1954,7 +1975,7 @@ namespace OrderCloud.SDK
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<InventoryRecord>> ListVariantAsync(string productID, string variantID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of inventory record variants.</summary>
+		/// <summary>Get a list of variant inventory records.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="variantID">ID of the variant.</param>
 		/// <param name="search">Word or phrase to search for.</param>
@@ -1965,71 +1986,71 @@ namespace OrderCloud.SDK
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TInventoryRecord>> ListVariantAsync<TInventoryRecord>(string productID, string variantID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TInventoryRecord : InventoryRecord;
-		/// <summary>Get a list of inventory record variants.</summary>
+		/// <summary>Get a list of variant inventory records.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="variantID">ID of the variant.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<InventoryRecord>> ListVariantAsync(string productID, string variantID, Action<ListOptionsBuilder<InventoryRecord>> buildListOpts, string accessToken = null);
-		/// <summary>Get a list of inventory record variants.</summary>
+		/// <summary>Get a list of variant inventory records.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="variantID">ID of the variant.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TInventoryRecord>> ListVariantAsync<TInventoryRecord>(string productID, string variantID, Action<ListOptionsBuilder<TInventoryRecord>> buildListOpts, string accessToken = null) where TInventoryRecord : InventoryRecord;
-		/// <summary>Get a single inventory record variant.</summary>
+		/// <summary>Get a single variant inventory record.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="variantID">ID of the variant.</param>
 		/// <param name="inventoryRecordID">ID of the inventory record.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<InventoryRecord> GetVariantAsync(string productID, string variantID, string inventoryRecordID, string accessToken = null);
-		/// <summary>Get a single inventory record variant.</summary>
+		/// <summary>Get a single variant inventory record.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="variantID">ID of the variant.</param>
 		/// <param name="inventoryRecordID">ID of the inventory record.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TInventoryRecord> GetVariantAsync<TInventoryRecord>(string productID, string variantID, string inventoryRecordID, string accessToken = null) where TInventoryRecord : InventoryRecord;
-		/// <summary>Create a new inventory record variant.</summary>
+		/// <summary>Create a new variant inventory record.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="variantID">ID of the variant.</param>
 		/// <param name="inventoryRecord">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<InventoryRecord> CreateVariantAsync(string productID, string variantID, InventoryRecord inventoryRecord, string accessToken = null);
-		/// <summary>Create a new inventory record variant.</summary>
+		/// <summary>Create a new variant inventory record.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="variantID">ID of the variant.</param>
 		/// <param name="inventoryRecord">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TInventoryRecord> CreateVariantAsync<TInventoryRecord>(string productID, string variantID, InventoryRecord inventoryRecord, string accessToken = null) where TInventoryRecord : InventoryRecord;
-		/// <summary>Create or update an inventory record variant.</summary>
+		/// <summary>Create or update a variant inventory record.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="variantID">ID of the variant.</param>
 		/// <param name="inventoryRecordID">ID of the inventory record.</param>
 		/// <param name="inventoryRecord">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<InventoryRecord> SaveVariantAsync(string productID, string variantID, string inventoryRecordID, InventoryRecord inventoryRecord, string accessToken = null);
-		/// <summary>Create or update an inventory record variant.</summary>
+		/// <summary>Create or update a variant inventory record.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="variantID">ID of the variant.</param>
 		/// <param name="inventoryRecordID">ID of the inventory record.</param>
 		/// <param name="inventoryRecord">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TInventoryRecord> SaveVariantAsync<TInventoryRecord>(string productID, string variantID, string inventoryRecordID, InventoryRecord inventoryRecord, string accessToken = null) where TInventoryRecord : InventoryRecord;
-		/// <summary>Partially update an inventory record variant.</summary>
+		/// <summary>Partially update a variant inventory record.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="variantID">ID of the variant.</param>
 		/// <param name="inventoryRecordID">ID of the inventory record.</param>
 		/// <param name="partialInventoryRecord">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<InventoryRecord> PatchVariantAsync(string productID, string variantID, string inventoryRecordID, PartialInventoryRecord partialInventoryRecord, string accessToken = null);
-		/// <summary>Partially update an inventory record variant.</summary>
+		/// <summary>Partially update a variant inventory record.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="variantID">ID of the variant.</param>
 		/// <param name="inventoryRecordID">ID of the inventory record.</param>
 		/// <param name="partialInventoryRecord">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TInventoryRecord> PatchVariantAsync<TInventoryRecord>(string productID, string variantID, string inventoryRecordID, PartialInventoryRecord partialInventoryRecord, string accessToken = null) where TInventoryRecord : InventoryRecord;
-		/// <summary>Delete an inventory record variant.</summary>
+		/// <summary>Delete a variant inventory record.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="variantID">ID of the variant.</param>
 		/// <param name="inventoryRecordID">ID of the inventory record.</param>
@@ -2988,7 +3009,7 @@ namespace OrderCloud.SDK
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TShipmentItem>> ListShipmentItemsAsync<TShipmentItem>(string shipmentID, Action<ListOptionsBuilder<TShipmentItem>> buildListOpts, string orderID = null, string accessToken = null) where TShipmentItem : ShipmentItem;
-		/// <summary>Register a register.</summary>
+		/// <summary>Register a User.</summary>
 		/// <param name="meUser">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="anonUserToken">Anon user token of the user.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -3031,7 +3052,7 @@ namespace OrderCloud.SDK
 		/// <param name="catalogID">ID of the catalog.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TCatalog> GetCatalogAsync<TCatalog>(string catalogID, string accessToken = null) where TCatalog : Catalog;
-		/// <summary>Get a list of buyer sellers visible to this user. Organizations you can place orders directly to.</summary>
+		/// <summary>Get a list of sellers this user can purchase from. Organizations you can place orders directly to.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
@@ -3040,7 +3061,7 @@ namespace OrderCloud.SDK
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<BuyerSupplier>> ListBuyerSellersAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of buyer sellers visible to this user. Organizations you can place orders directly to.</summary>
+		/// <summary>Get a list of sellers this user can purchase from. Organizations you can place orders directly to.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<BuyerSupplier>> ListBuyerSellersAsync(Action<ListOptionsBuilder<BuyerSupplier>> buildListOpts, string accessToken = null);
@@ -3673,11 +3694,11 @@ namespace OrderCloud.SDK
 		/// <param name="returnID">ID of the return.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TOrderReturn> CompleteAsync<TOrderReturn>(string returnID, string accessToken = null) where TOrderReturn : OrderReturn;
-		/// <summary>Submit an order return submit.</summary>
+		/// <summary>Submit an order return.</summary>
 		/// <param name="returnID">ID of the return.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<OrderReturn> SubmitAsync(string returnID, string accessToken = null);
-		/// <summary>Submit an order return submit.</summary>
+		/// <summary>Submit an order return.</summary>
 		/// <param name="returnID">ID of the return.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TOrderReturn> SubmitAsync<TOrderReturn>(string returnID, string accessToken = null) where TOrderReturn : OrderReturn;
@@ -3930,12 +3951,12 @@ namespace OrderCloud.SDK
 		/// <param name="partialOrder">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TOrder> PatchAsync<TOrder>(OrderDirection direction, string orderID, PartialOrder partialOrder, string accessToken = null) where TOrder : Order;
-		/// <summary>Submit an order submit.</summary>
+		/// <summary>Submit an order.</summary>
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Order> SubmitAsync(OrderDirection direction, string orderID, string accessToken = null);
-		/// <summary>Submit an order submit.</summary>
+		/// <summary>Submit an order.</summary>
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -4235,19 +4256,6 @@ namespace OrderCloud.SDK
 		/// <param name="partialOrderSyncConfig">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<OrderSyncConfig> PatchAsync(PartialOrderSyncConfig partialOrderSyncConfig, string accessToken = null);
-	}
-
-	public interface IPasswordResetsResource
-	{
-		/// <summary>Send a verification code. Sends a temporary verification code via email, which must subsequently be passed in a Reset Password call. The verification code expires in 120 minutes.</summary>
-		/// <param name="passwordResetRequest">The object that will be serialized to JSON and sent in the request body.</param>
-		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
-		Task SendVerificationCodeAsync(PasswordResetRequest passwordResetRequest, string accessToken = null);
-		/// <summary>Reset a password by verification code.</summary>
-		/// <param name="verificationCode">Verification code of the password reset.</param>
-		/// <param name="passwordReset">The object that will be serialized to JSON and sent in the request body.</param>
-		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
-		Task ResetPasswordByVerificationCodeAsync(string verificationCode, PasswordReset passwordReset, string accessToken = null);
 	}
 
 	public interface IPaymentsResource
@@ -4670,12 +4678,12 @@ namespace OrderCloud.SDK
 		/// <param name="partialProduct">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TProduct> PatchAsync<TProduct>(string productID, PartialProduct partialProduct, string accessToken = null) where TProduct : Product;
-		/// <summary>Generate a variants.</summary>
+		/// <summary>Generate variants.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="overwriteExisting">Overwrite existing of the product.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Product> GenerateVariantsAsync(string productID, bool overwriteExisting = false, string accessToken = null);
-		/// <summary>Generate a variants.</summary>
+		/// <summary>Generate variants.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="overwriteExisting">Overwrite existing of the product.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -6419,6 +6427,7 @@ namespace OrderCloud.SDK
 			CreditCards = new CreditCardsResource(this);
 			DeliveryConfigurations = new DeliveryConfigurationsResource(this);
 			ErrorConfigs = new ErrorConfigsResource(this);
+			ForgottenCredentials = new ForgottenCredentialsResource(this);
 			ImpersonationConfigs = new ImpersonationConfigsResource(this);
 			Incrementors = new IncrementorsResource(this);
 			IntegrationEvents = new IntegrationEventsResource(this);
@@ -6431,7 +6440,6 @@ namespace OrderCloud.SDK
 			OrderReturns = new OrderReturnsResource(this);
 			Orders = new OrdersResource(this);
 			OrderSyncs = new OrderSyncsResource(this);
-			PasswordResets = new PasswordResetsResource(this);
 			Payments = new PaymentsResource(this);
 			PriceSchedules = new PriceSchedulesResource(this);
 			ProductCollections = new ProductCollectionsResource(this);
@@ -6476,6 +6484,7 @@ namespace OrderCloud.SDK
 		public ICreditCardsResource CreditCards { get; private set; }
 		public IDeliveryConfigurationsResource DeliveryConfigurations { get; private set; }
 		public IErrorConfigsResource ErrorConfigs { get; private set; }
+		public IForgottenCredentialsResource ForgottenCredentials { get; private set; }
 		public IImpersonationConfigsResource ImpersonationConfigs { get; private set; }
 		public IIncrementorsResource Incrementors { get; private set; }
 		public IIntegrationEventsResource IntegrationEvents { get; private set; }
@@ -6488,7 +6497,6 @@ namespace OrderCloud.SDK
 		public IOrderReturnsResource OrderReturns { get; private set; }
 		public IOrdersResource Orders { get; private set; }
 		public IOrderSyncsResource OrderSyncs { get; private set; }
-		public IPasswordResetsResource PasswordResets { get; private set; }
 		public IPaymentsResource Payments { get; private set; }
 		public IPriceSchedulesResource PriceSchedules { get; private set; }
 		public IProductCollectionsResource ProductCollections { get; private set; }
@@ -6891,6 +6899,15 @@ namespace OrderCloud.SDK
 		public Task DeleteAsync(string accessToken = null) => Request("v1", "integrations", "ErrorConfig").WithOAuthBearerToken(accessToken).DeleteAsync();
 		public Task<ErrorConfig> SaveAsync(ErrorConfig errorConfig, string accessToken = null) => Request("v1", "integrations", "ErrorConfig").WithOAuthBearerToken(accessToken).PutJsonAsync(ValidateModel(errorConfig)).ReceiveJson<ErrorConfig>();
 		public Task<ErrorConfig> PatchAsync(PartialErrorConfig partialErrorConfig, string accessToken = null) => Request("v1", "integrations", "ErrorConfig").WithOAuthBearerToken(accessToken).PatchJsonAsync(ValidateModel(partialErrorConfig)).ReceiveJson<ErrorConfig>();
+		public Task ValidateAsync(string accessToken = null) => Request("v1", "integrations", "ErrorConfig", "validate").WithOAuthBearerToken(accessToken).PostAsync(null);
+	}
+
+	public class ForgottenCredentialsResource : OrderCloudResource, IForgottenCredentialsResource
+	{
+		internal ForgottenCredentialsResource(OrderCloudClient client) : base(client) { }
+		public Task SendVerificationCodeAsync(PasswordResetRequest passwordResetRequest, string accessToken = null) => Request("v1", "password", "reset").WithOAuthBearerToken(accessToken).PostJsonAsync(ValidateModel(passwordResetRequest));
+		public Task ResetPasswordByVerificationCodeAsync(string verificationCode, PasswordReset passwordReset, string accessToken = null) => Request("v1", "password", "reset", verificationCode).WithOAuthBearerToken(accessToken).PutJsonAsync(ValidateModel(passwordReset));
+		public Task RetrieveUsernameAsync(string clientID, string email, string accessToken = null) => Request("v1", "username", "retrieve").WithOAuthBearerToken(accessToken).SetQueryParams(new { clientID, email }).PostAsync(null);
 	}
 
 	public class ImpersonationConfigsResource : OrderCloudResource, IImpersonationConfigsResource
@@ -7348,13 +7365,6 @@ namespace OrderCloud.SDK
 		public Task DeleteAsync(string accessToken = null) => Request("v1", "integrations", "OrderSync").WithOAuthBearerToken(accessToken).DeleteAsync();
 		public Task<OrderSyncConfig> SaveAsync(OrderSyncConfig orderSyncConfig, string accessToken = null) => Request("v1", "integrations", "OrderSync").WithOAuthBearerToken(accessToken).PutJsonAsync(ValidateModel(orderSyncConfig)).ReceiveJson<OrderSyncConfig>();
 		public Task<OrderSyncConfig> PatchAsync(PartialOrderSyncConfig partialOrderSyncConfig, string accessToken = null) => Request("v1", "integrations", "OrderSync").WithOAuthBearerToken(accessToken).PatchJsonAsync(ValidateModel(partialOrderSyncConfig)).ReceiveJson<OrderSyncConfig>();
-	}
-
-	public class PasswordResetsResource : OrderCloudResource, IPasswordResetsResource
-	{
-		internal PasswordResetsResource(OrderCloudClient client) : base(client) { }
-		public Task SendVerificationCodeAsync(PasswordResetRequest passwordResetRequest, string accessToken = null) => Request("v1", "password", "reset").WithOAuthBearerToken(accessToken).PostJsonAsync(ValidateModel(passwordResetRequest));
-		public Task ResetPasswordByVerificationCodeAsync(string verificationCode, PasswordReset passwordReset, string accessToken = null) => Request("v1", "password", "reset", verificationCode).WithOAuthBearerToken(accessToken).PutJsonAsync(ValidateModel(passwordReset));
 	}
 
 	public class PaymentsResource : OrderCloudResource, IPaymentsResource
