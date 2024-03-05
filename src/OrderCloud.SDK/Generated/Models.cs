@@ -10,7 +10,7 @@ namespace OrderCloud.SDK
 	public enum ApprovalType { Order, OrderReturn }
 	public enum CommerceRole { Buyer, Seller, Supplier }
 	public enum IntegrationEventType { OrderCheckout, OpenIDConnect, OrderReturn, AddToCart }
-	public enum MessageType { OrderDeclined, OrderSubmitted, ShipmentCreated, ForgottenPassword, OrderSubmittedForYourApproval, OrderSubmittedForApproval, OrderApproved, OrderSubmittedForYourApprovalHasBeenApproved, OrderSubmittedForYourApprovalHasBeenDeclined, NewUserInvitation, OrderReturnDeclined, OrderReturnSubmitted, OrderReturnSubmittedForYourApproval, OrderReturnSubmittedForApproval, OrderReturnApproved, OrderReturnSubmittedForYourApprovalHasBeenApproved, OrderReturnSubmittedForYourApprovalHasBeenDeclined, OrderReturnCompleted, SubscriptionReminder, ProductCollectionInvitationAccepted, ProductCollectionInvitationDeclined }
+	public enum MessageType { OrderDeclined, OrderSubmitted, ShipmentCreated, ForgottenPassword, ForgottenUsername, OrderSubmittedForYourApproval, OrderSubmittedForApproval, OrderApproved, OrderSubmittedForYourApprovalHasBeenApproved, OrderSubmittedForYourApprovalHasBeenDeclined, NewUserInvitation, OrderReturnDeclined, OrderReturnSubmitted, OrderReturnSubmittedForYourApproval, OrderReturnSubmittedForApproval, OrderReturnApproved, OrderReturnSubmittedForYourApprovalHasBeenApproved, OrderReturnSubmittedForYourApprovalHasBeenDeclined, OrderReturnCompleted, SubscriptionReminder, ProductCollectionInvitationAccepted, ProductCollectionInvitationDeclined }
 	public enum OrderDirection { Incoming, Outgoing, All }
 	public enum OrderStatus { Unsubmitted, AwaitingApproval, Declined, Open, Completed, Canceled }
 	public enum PartyType { User, Group, Company }
@@ -671,6 +671,10 @@ namespace OrderCloud.SDK
 		public EventHubConfig EventHub { get => GetProp<EventHubConfig>("EventHub"); set => SetProp<EventHubConfig>("EventHub", value); }
 		/// <summary>Azure blob of the delivery target.</summary>
 		public AzureBlobConfig AzureBlob { get => GetProp<AzureBlobConfig>("AzureBlob"); set => SetProp<AzureBlobConfig>("AzureBlob", value); }
+		/// <summary>Mandrill of the delivery target.</summary>
+		public MandrillConfig Mandrill { get => GetProp<MandrillConfig>("Mandrill"); set => SetProp<MandrillConfig>("Mandrill", value); }
+		/// <summary>Message sender of the delivery target.</summary>
+		public MessageSenderConfig MessageSender { get => GetProp<MessageSenderConfig>("MessageSender"); set => SetProp<MessageSenderConfig>("MessageSender", value); }
 	}
 	public class DiscoverEvent : OrderCloudModel
 	{
@@ -767,11 +771,20 @@ namespace OrderCloud.SDK
 		/// <summary>ID of the Price Schedule used to determine Unit price.</summary>
 		[ApiReadOnly]
 		public string PriceScheduleID { get => GetProp<string>("PriceScheduleID"); set => SetProp<string>("PriceScheduleID", value); }
+		/// <summary>True when the price schedule and price break has an active SalePrice.</summary>
+		[ApiReadOnly]
+		public bool IsOnSale { get => GetProp<bool>("IsOnSale"); set => SetProp<bool>("IsOnSale", value); }
 		/// <summary>If true, UnitPrice was overwritten.</summary>
 		[ApiReadOnly]
 		public bool PriceOverridden { get => GetProp<bool>("PriceOverridden"); set => SetProp<bool>("PriceOverridden", value); }
 		/// <summary>Specs of the extended line item.</summary>
 		public IList<LineItemSpec> Specs { get => GetProp<IList<LineItemSpec>>("Specs", new List<LineItemSpec>()); set => SetProp<IList<LineItemSpec>>("Specs", value); }
+		/// <summary>ID of the original order. Only returns a value for the Marketplace Owner.</summary>
+		[ApiReadOnly]
+		public string IncomingOrderID { get => GetProp<string>("IncomingOrderID"); set => SetProp<string>("IncomingOrderID", value); }
+		/// <summary>ID of the split or forwarded order. Only returns a value for the Marketplace Owner.</summary>
+		[ApiReadOnly]
+		public string OutgoingOrderID { get => GetProp<string>("OutgoingOrderID"); set => SetProp<string>("OutgoingOrderID", value); }
 		/// <summary>Container for extended (custom) properties of the extended line item.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
@@ -1118,11 +1131,20 @@ namespace OrderCloud.SDK
 		/// <summary>ID of the Price Schedule used to determine Unit price.</summary>
 		[ApiReadOnly]
 		public string PriceScheduleID { get => GetProp<string>("PriceScheduleID"); set => SetProp<string>("PriceScheduleID", value); }
+		/// <summary>True when the price schedule and price break has an active SalePrice.</summary>
+		[ApiReadOnly]
+		public bool IsOnSale { get => GetProp<bool>("IsOnSale"); set => SetProp<bool>("IsOnSale", value); }
 		/// <summary>If true, UnitPrice was overwritten.</summary>
 		[ApiReadOnly]
 		public bool PriceOverridden { get => GetProp<bool>("PriceOverridden"); set => SetProp<bool>("PriceOverridden", value); }
 		/// <summary>Specs of the line item.</summary>
 		public IList<LineItemSpec> Specs { get => GetProp<IList<LineItemSpec>>("Specs", new List<LineItemSpec>()); set => SetProp<IList<LineItemSpec>>("Specs", value); }
+		/// <summary>ID of the original order. Only returns a value for the Marketplace Owner.</summary>
+		[ApiReadOnly]
+		public string IncomingOrderID { get => GetProp<string>("IncomingOrderID"); set => SetProp<string>("IncomingOrderID", value); }
+		/// <summary>ID of the split or forwarded order. Only returns a value for the Marketplace Owner.</summary>
+		[ApiReadOnly]
+		public string OutgoingOrderID { get => GetProp<string>("OutgoingOrderID"); set => SetProp<string>("OutgoingOrderID", value); }
 		/// <summary>Container for extended (custom) properties of the line item.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
@@ -1272,6 +1294,13 @@ namespace OrderCloud.SDK
 		/// <summary>ID of the user group. Sortable: priority level 3.</summary>
 		public string UserGroupID { get => GetProp<string>("UserGroupID"); set => SetProp<string>("UserGroupID", value); }
 	}
+	public class MandrillConfig : OrderCloudModel
+	{
+		/// <summary>Api key of the mandrill config. Required. Max length 50 characters.</summary>
+		[Required]
+		[ApiWriteOnly]
+		public string ApiKey { get => GetProp<string>("ApiKey"); set => SetProp<string>("ApiKey", value); }
+	}
 	public class MeBuyer : OrderCloudModel
 	{
 		/// <summary>ID of the buyer. Can only contain characters Aa-Zz, 0-9, -, and _.</summary>
@@ -1298,7 +1327,7 @@ namespace OrderCloud.SDK
 		/// <summary>Message config description of the message cc listener assignment.</summary>
 		[ApiReadOnly]
 		public string MessageConfigDescription { get => GetProp<string>("MessageConfigDescription"); set => SetProp<string>("MessageConfigDescription", value); }
-		/// <summary>Message type of the message cc listener assignment. Required. Possible values: OrderDeclined, OrderSubmitted, ShipmentCreated, ForgottenPassword, OrderSubmittedForYourApproval, OrderSubmittedForApproval, OrderApproved, OrderSubmittedForYourApprovalHasBeenApproved, OrderSubmittedForYourApprovalHasBeenDeclined, NewUserInvitation, OrderReturnDeclined, OrderReturnSubmitted, OrderReturnSubmittedForYourApproval, OrderReturnSubmittedForApproval, OrderReturnApproved, OrderReturnSubmittedForYourApprovalHasBeenApproved, OrderReturnSubmittedForYourApprovalHasBeenDeclined, OrderReturnCompleted, SubscriptionReminder, ProductCollectionInvitationAccepted, ProductCollectionInvitationDeclined.</summary>
+		/// <summary>Message type of the message cc listener assignment. Required. Possible values: OrderDeclined, OrderSubmitted, ShipmentCreated, ForgottenPassword, ForgottenUsername, OrderSubmittedForYourApproval, OrderSubmittedForApproval, OrderApproved, OrderSubmittedForYourApprovalHasBeenApproved, OrderSubmittedForYourApprovalHasBeenDeclined, NewUserInvitation, OrderReturnDeclined, OrderReturnSubmitted, OrderReturnSubmittedForYourApproval, OrderReturnSubmittedForApproval, OrderReturnApproved, OrderReturnSubmittedForYourApprovalHasBeenApproved, OrderReturnSubmittedForYourApprovalHasBeenDeclined, OrderReturnCompleted, SubscriptionReminder, ProductCollectionInvitationAccepted, ProductCollectionInvitationDeclined.</summary>
 		[Required]
 		public MessageType MessageType { get => GetProp<MessageType>("MessageType"); set => SetProp<MessageType>("MessageType", value); }
 		/// <summary>ID of the buyer. Searchable: priority level 0. Sortable: priority level 0.</summary>
@@ -1323,15 +1352,15 @@ namespace OrderCloud.SDK
 		/// <summary>Description of the message sender.</summary>
 		public string Description { get => GetProp<string>("Description"); set => SetProp<string>("Description", value); }
 		/// <summary>URL the MessageSender will POST data to, likely a route within your middleware.</summary>
-		[Required]
 		public string URL { get => GetProp<string>("URL"); set => SetProp<string>("URL", value); }
 		/// <summary>If additional data not provided by the message sender is needed, provide any elevated roles needed to make additional calls.</summary>
 		public IList<ApiRole> ElevatedRoles { get => GetProp<IList<ApiRole>>("ElevatedRoles", new List<ApiRole>()); set => SetProp<IList<ApiRole>>("ElevatedRoles", value); }
 		/// <summary>Security feature that allows your middleware to verify the digital signature in the request header to ensure you only accept trusted data.</summary>
-		[Required]
 		public string SharedKey { get => GetProp<string>("SharedKey"); set => SetProp<string>("SharedKey", value); }
 		/// <summary>Container for extended (custom) properties of the message sender.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
+		/// <summary>ID of the delivery config.</summary>
+		public string DeliveryConfigID { get => GetProp<string>("DeliveryConfigID"); set => SetProp<string>("DeliveryConfigID", value); }
 	}
 	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic MessageSender class instead.</typeparam>
 	public class MessageSender<Txp> : MessageSender
@@ -1356,6 +1385,16 @@ namespace OrderCloud.SDK
 		/// <summary>Message config description of the message sender assignment.</summary>
 		[ApiReadOnly]
 		public string MessageConfigDescription { get => GetProp<string>("MessageConfigDescription"); set => SetProp<string>("MessageConfigDescription", value); }
+	}
+	public class MessageSenderConfig : OrderCloudModel
+	{
+		/// <summary>Secret of the message sender config. Required. Max length 50 characters.</summary>
+		[Required]
+		[ApiWriteOnly]
+		public string Secret { get => GetProp<string>("Secret"); set => SetProp<string>("Secret", value); }
+		/// <summary>Endpoint of the message sender config. Required.</summary>
+		[Required]
+		public string Endpoint { get => GetProp<string>("Endpoint"); set => SetProp<string>("Endpoint", value); }
 	}
 	public class MeSupplier : OrderCloudModel
 	{
@@ -1585,7 +1624,7 @@ namespace OrderCloud.SDK
 	}
 	public class OrderApprovalInfo : OrderCloudModel
 	{
-		/// <summary>Only relevant when declining an order. Changes the Order Status back to Open and allows the user to make changes and resubmit.</summary>
+		/// <summary>Only relevant when declining an order. Changes the Order Status back to Unsubmitted and allows the user to make changes and resubmit.</summary>
 		public bool AllowResubmit { get => GetProp<bool>("AllowResubmit"); set => SetProp<bool>("AllowResubmit", value); }
 		/// <summary>Comments to be saved with the order approval or denial.</summary>
 		public string Comments { get => GetProp<string>("Comments"); set => SetProp<string>("Comments", value); }
@@ -1985,7 +2024,7 @@ namespace OrderCloud.SDK
 		public string Currency { get => GetProp<string>("Currency"); set => SetProp<string>("Currency", value); }
 		/// <summary>If null, Payment applies to order total (or total of specific Line Items, if set), minus any other Payments where Amount is set. Value can only be negative if processing a payment for an OrderReturn.</summary>
 		public decimal? Amount { get => GetProp<decimal?>("Amount"); set => SetProp<decimal?>("Amount", value); }
-		/// <summary>All payments must be Accepted to submit an order.</summary>
+		/// <summary>All payments must be Accepted to submit an order. This property should be updated after authorizing or capturing the payment in your middleware by a user with the elevated OrderAdmin role.</summary>
 		public bool? Accepted { get => GetProp<bool?>("Accepted"); set => SetProp<bool?>("Accepted", value); }
 		/// <summary>Used to indicate this payment is associated with an Order Return.</summary>
 		public string OrderReturnID { get => GetProp<string>("OrderReturnID"); set => SetProp<string>("OrderReturnID", value); }
@@ -2079,7 +2118,7 @@ namespace OrderCloud.SDK
 		public DateTimeOffset? SaleStart { get => GetProp<DateTimeOffset?>("SaleStart", null); set => SetProp<DateTimeOffset?>("SaleStart", value); }
 		/// <summary>Optional. Ending date/time for PriceBreak.SalePrice to be used as the price for the LineItem. Requires that the PriceBreak.SalePrice value is set.</summary>
 		public DateTimeOffset? SaleEnd { get => GetProp<DateTimeOffset?>("SaleEnd", null); set => SetProp<DateTimeOffset?>("SaleEnd", value); }
-		/// <summary>Is the price currently a sale price. Determined by the SaleStart and SaleEnd date/times and the presence of PriceBreak.SalePrice value being set.</summary>
+		/// <summary>True when at least one PriceBreak has a SalePrice defined, and it falls between the SaleStart and SaleEnd date, if applicable.</summary>
 		[ApiReadOnly]
 		public bool IsOnSale { get => GetProp<bool>("IsOnSale"); set => SetProp<bool>("IsOnSale", value); }
 		/// <summary>Container for extended (custom) properties of the price schedule.</summary>
@@ -2733,8 +2772,6 @@ namespace OrderCloud.SDK
 		public decimal Balance { get => GetProp<decimal>("Balance"); set => SetProp<decimal>("Balance", value); }
 		/// <summary>If true, a Payment can be created referencing the SpendingAccountID.</summary>
 		public bool AllowAsPaymentMethod { get => GetProp<bool>("AllowAsPaymentMethod"); set => SetProp<bool>("AllowAsPaymentMethod", value); }
-		/// <summary>For reference only, does not influence any OrderCloud behavior at this time.</summary>
-		public string RedemptionCode { get => GetProp<string>("RedemptionCode"); set => SetProp<string>("RedemptionCode", value); }
 		/// <summary>Start date of the spending account.</summary>
 		public DateTimeOffset? StartDate { get => GetProp<DateTimeOffset?>("StartDate"); set => SetProp<DateTimeOffset?>("StartDate", value); }
 		/// <summary>End date of the spending account.</summary>
@@ -3162,12 +3199,14 @@ namespace OrderCloud.SDK
 	public class PartialLineItemVariant<Txp> : PartialLineItemVariant
 	{ }
 	public class PartialLocale : Locale, IPartial { }
+	public class PartialMandrillConfig : MandrillConfig, IPartial { }
 	public class PartialMeBuyer : MeBuyer, IPartial { }
 	public class PartialMeSeller : MeSeller, IPartial { }
 	public class PartialMessageSender : MessageSender, IPartial { }
 	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic PartialMessageSender class instead.</typeparam>
 	public class PartialMessageSender<Txp> : PartialMessageSender
 	{ }
+	public class PartialMessageSenderConfig : MessageSenderConfig, IPartial { }
 	public class PartialMeSupplier : MeSupplier, IPartial { }
 	public class PartialMeUser : MeUser, IPartial { }
 	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic PartialMeUser class instead.</typeparam>

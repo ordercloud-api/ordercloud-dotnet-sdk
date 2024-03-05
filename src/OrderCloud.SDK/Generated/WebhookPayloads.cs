@@ -1579,6 +1579,50 @@ namespace OrderCloud.SDK
 			public class Patch<TConfigData, TErrorConfig> : WebhookPayload<TErrorConfig, TErrorConfig, object, TConfigData>
 				where TErrorConfig : ErrorConfig
 			{ }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/integrations/ErrorConfig/validate.</summary>
+			[SentOn("POST", "v1/integrations/ErrorConfig/validate")]
+			public class Validate : WebhookPayload<object, object, object, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/integrations/ErrorConfig/validate.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, use the non-generic payload type instead.</typeparam>
+			[SentOn("POST", "v1/integrations/ErrorConfig/validate")]
+			public class Validate<TConfigData> : WebhookPayload<object, object, object, TConfigData>
+			{ }
+		}
+		public static class ForgottenCredentials
+		{
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/password/reset.</summary>
+			[SentOn("POST", "v1/password/reset")]
+			public class SendVerificationCode : WebhookPayload<PasswordResetRequest, object, object, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/password/reset.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TPasswordResetRequest">Specific type of the PasswordResetRequest. If not using a custom type, specify PasswordResetRequest.</typeparam>
+			[SentOn("POST", "v1/password/reset")]
+			public class SendVerificationCode<TConfigData, TPasswordResetRequest> : WebhookPayload<TPasswordResetRequest, object, object, TConfigData>
+				where TPasswordResetRequest : PasswordResetRequest
+			{ }
+			/// <summary>Webhook payload sent by OrderCloud on PUT v1/password/reset/{verificationCode}.</summary>
+			[SentOn("PUT", "v1/password/reset/{verificationCode}")]
+			public class ResetPasswordByVerificationCode : WebhookPayload<PasswordReset, object, ResetPasswordByVerificationCodeRouteParams, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on PUT v1/password/reset/{verificationCode}.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TPasswordReset">Specific type of the PasswordReset. If not using a custom type, specify PasswordReset.</typeparam>
+			[SentOn("PUT", "v1/password/reset/{verificationCode}")]
+			public class ResetPasswordByVerificationCode<TConfigData, TPasswordReset> : WebhookPayload<TPasswordReset, object, ResetPasswordByVerificationCodeRouteParams, TConfigData>
+				where TPasswordReset : PasswordReset
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/password/reset/{verificationCode}.</summary>
+			public class ResetPasswordByVerificationCodeRouteParams
+			{
+				public string VerificationCode { get; set; }
+			}
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/username/retrieve.</summary>
+			[SentOn("POST", "v1/username/retrieve")]
+			public class RetrieveUsername : WebhookPayload<object, object, object, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/username/retrieve.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, use the non-generic payload type instead.</typeparam>
+			[SentOn("POST", "v1/username/retrieve")]
+			public class RetrieveUsername<TConfigData> : WebhookPayload<object, object, object, TConfigData>
+			{ }
 		}
 		public static class ImpersonationConfigs
 		{
@@ -3310,34 +3354,6 @@ namespace OrderCloud.SDK
 			public class Patch<TConfigData, TOrderSyncConfig> : WebhookPayload<TOrderSyncConfig, TOrderSyncConfig, object, TConfigData>
 				where TOrderSyncConfig : OrderSyncConfig
 			{ }
-		}
-		public static class PasswordResets
-		{
-			/// <summary>Webhook payload sent by OrderCloud on POST v1/password/reset.</summary>
-			[SentOn("POST", "v1/password/reset")]
-			public class SendVerificationCode : WebhookPayload<PasswordResetRequest, object, object, dynamic> { }
-			/// <summary>Webhook payload sent by OrderCloud on POST v1/password/reset.</summary>
-			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
-			/// <typeparam name="TPasswordResetRequest">Specific type of the PasswordResetRequest. If not using a custom type, specify PasswordResetRequest.</typeparam>
-			[SentOn("POST", "v1/password/reset")]
-			public class SendVerificationCode<TConfigData, TPasswordResetRequest> : WebhookPayload<TPasswordResetRequest, object, object, TConfigData>
-				where TPasswordResetRequest : PasswordResetRequest
-			{ }
-			/// <summary>Webhook payload sent by OrderCloud on PUT v1/password/reset/{verificationCode}.</summary>
-			[SentOn("PUT", "v1/password/reset/{verificationCode}")]
-			public class ResetPasswordByVerificationCode : WebhookPayload<PasswordReset, object, ResetPasswordByVerificationCodeRouteParams, dynamic> { }
-			/// <summary>Webhook payload sent by OrderCloud on PUT v1/password/reset/{verificationCode}.</summary>
-			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
-			/// <typeparam name="TPasswordReset">Specific type of the PasswordReset. If not using a custom type, specify PasswordReset.</typeparam>
-			[SentOn("PUT", "v1/password/reset/{verificationCode}")]
-			public class ResetPasswordByVerificationCode<TConfigData, TPasswordReset> : WebhookPayload<TPasswordReset, object, ResetPasswordByVerificationCodeRouteParams, TConfigData>
-				where TPasswordReset : PasswordReset
-			{ }
-			/// <summary>Type used to represent route parameter name/value pairs for v1/password/reset/{verificationCode}.</summary>
-			public class ResetPasswordByVerificationCodeRouteParams
-			{
-				public string VerificationCode { get; set; }
-			}
 		}
 		public static class Payments
 		{
