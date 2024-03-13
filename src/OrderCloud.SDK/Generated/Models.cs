@@ -1367,6 +1367,8 @@ namespace OrderCloud.SDK
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 		/// <summary>ID of the delivery config.</summary>
 		public string DeliveryConfigID { get => GetProp<string>("DeliveryConfigID"); set => SetProp<string>("DeliveryConfigID", value); }
+		/// <summary>Allow MessageSender to send to all buyers in your marketplace without creating explicit assignments, defaults to false.</summary>
+		public bool AllowAllBuyers { get => GetProp<bool>("AllowAllBuyers"); set => SetProp<bool>("AllowAllBuyers", value); }
 	}
 	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic MessageSender class instead.</typeparam>
 	public class MessageSender<Txp> : MessageSender
@@ -2822,6 +2824,9 @@ namespace OrderCloud.SDK
 		/// <summary>Date that Subscription Order reminder email message sender will be sent if used. Value is the result of NextOrderDate minus NotificationDays on SubscriptionIntegration.</summary>
 		[ApiReadOnly]
 		public DateTimeOffset? NotificationDate { get => GetProp<DateTimeOffset?>("NotificationDate"); set => SetProp<DateTimeOffset?>("NotificationDate", value); }
+		/// <summary>Date created of the subscription. Sortable: priority level 3.</summary>
+		[ApiReadOnly]
+		public DateTimeOffset? DateCreated { get => GetProp<DateTimeOffset?>("DateCreated"); set => SetProp<DateTimeOffset?>("DateCreated", value); }
 		/// <summary>End date of the subscription. Sortable.</summary>
 		public DateTimeOffset? EndDate { get => GetProp<DateTimeOffset?>("EndDate"); set => SetProp<DateTimeOffset?>("EndDate", value); }
 		/// <summary>Active of the subscription.</summary>
