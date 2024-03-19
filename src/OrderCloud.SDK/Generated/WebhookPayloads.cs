@@ -1569,6 +1569,60 @@ namespace OrderCloud.SDK
 			public class SaveCategories<TConfigData, TEntitySyncConfig> : WebhookPayload<TEntitySyncConfig, TEntitySyncConfig, object, TConfigData>
 				where TEntitySyncConfig : EntitySyncConfig
 			{ }
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/integrations/entitysync/buyers/users.</summary>
+			[SentOn("DELETE", "v1/integrations/entitysync/buyers/users")]
+			public class DeleteBuyerUsersEntitySyncConfig : WebhookPayload<object, object, object, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/integrations/entitysync/buyers/users.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, use the non-generic payload type instead.</typeparam>
+			[SentOn("DELETE", "v1/integrations/entitysync/buyers/users")]
+			public class DeleteBuyerUsersEntitySyncConfig<TConfigData> : WebhookPayload<object, object, object, TConfigData>
+			{ }
+			/// <summary>Webhook payload sent by OrderCloud on PUT v1/integrations/entitysync/buyers/users.</summary>
+			[SentOn("PUT", "v1/integrations/entitysync/buyers/users")]
+			public class SaveBuyerUsersEntitySyncConfig : WebhookPayload<EntitySyncConfig, EntitySyncConfig, object, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on PUT v1/integrations/entitysync/buyers/users.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TEntitySyncConfig">Specific type of the EntitySyncConfig. If not using a custom type, specify EntitySyncConfig.</typeparam>
+			[SentOn("PUT", "v1/integrations/entitysync/buyers/users")]
+			public class SaveBuyerUsersEntitySyncConfig<TConfigData, TEntitySyncConfig> : WebhookPayload<TEntitySyncConfig, TEntitySyncConfig, object, TConfigData>
+				where TEntitySyncConfig : EntitySyncConfig
+			{ }
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/integrations/entitysync/suppliers/users.</summary>
+			[SentOn("DELETE", "v1/integrations/entitysync/suppliers/users")]
+			public class DeleteSupplierUsersEntitySyncConfig : WebhookPayload<object, object, object, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/integrations/entitysync/suppliers/users.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, use the non-generic payload type instead.</typeparam>
+			[SentOn("DELETE", "v1/integrations/entitysync/suppliers/users")]
+			public class DeleteSupplierUsersEntitySyncConfig<TConfigData> : WebhookPayload<object, object, object, TConfigData>
+			{ }
+			/// <summary>Webhook payload sent by OrderCloud on PUT v1/integrations/entitysync/suppliers/users.</summary>
+			[SentOn("PUT", "v1/integrations/entitysync/suppliers/users")]
+			public class SaveSupplierUsersEntitySyncConfig : WebhookPayload<EntitySyncConfig, EntitySyncConfig, object, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on PUT v1/integrations/entitysync/suppliers/users.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TEntitySyncConfig">Specific type of the EntitySyncConfig. If not using a custom type, specify EntitySyncConfig.</typeparam>
+			[SentOn("PUT", "v1/integrations/entitysync/suppliers/users")]
+			public class SaveSupplierUsersEntitySyncConfig<TConfigData, TEntitySyncConfig> : WebhookPayload<TEntitySyncConfig, TEntitySyncConfig, object, TConfigData>
+				where TEntitySyncConfig : EntitySyncConfig
+			{ }
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/integrations/entitysync/adminusers.</summary>
+			[SentOn("DELETE", "v1/integrations/entitysync/adminusers")]
+			public class DeleteAdminUsersEntitySyncConfig : WebhookPayload<object, object, object, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/integrations/entitysync/adminusers.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, use the non-generic payload type instead.</typeparam>
+			[SentOn("DELETE", "v1/integrations/entitysync/adminusers")]
+			public class DeleteAdminUsersEntitySyncConfig<TConfigData> : WebhookPayload<object, object, object, TConfigData>
+			{ }
+			/// <summary>Webhook payload sent by OrderCloud on PUT v1/integrations/entitysync/adminusers.</summary>
+			[SentOn("PUT", "v1/integrations/entitysync/adminusers")]
+			public class SaveAdminUsersEntitySyncConfig : WebhookPayload<EntitySyncConfig, EntitySyncConfig, object, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on PUT v1/integrations/entitysync/adminusers.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TEntitySyncConfig">Specific type of the EntitySyncConfig. If not using a custom type, specify EntitySyncConfig.</typeparam>
+			[SentOn("PUT", "v1/integrations/entitysync/adminusers")]
+			public class SaveAdminUsersEntitySyncConfig<TConfigData, TEntitySyncConfig> : WebhookPayload<TEntitySyncConfig, TEntitySyncConfig, object, TConfigData>
+				where TEntitySyncConfig : EntitySyncConfig
+			{ }
 		}
 		public static class ErrorConfigs
 		{
