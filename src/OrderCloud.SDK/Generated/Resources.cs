@@ -1698,6 +1698,16 @@ namespace OrderCloud.SDK
 		/// <param name="entitySyncConfig">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<EntitySyncConfig> SaveCategoriesAsync(EntitySyncConfig entitySyncConfig, string accessToken = null);
+		/// <summary>Get the entity sync delivery configuration for Suppliers Get the entity sync delivery configuration for Suppliers</summary>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<EntitySyncConfig> GetSuppliersEntitySyncConfigAsync(string accessToken = null);
+		/// <summary>Delete the entity sync delivery configuration for Suppliers Delete the entity sync delivery configuration for Suppliers</summary>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task DeleteSuppliersEntitySyncConfigAsync(string accessToken = null);
+		/// <summary>Create or update the entity sync delivery configuration for Suppliers Create or update the entity sync delivery configuration for Suppliers</summary>
+		/// <param name="entitySyncConfig">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<EntitySyncConfig> SaveSuppliersEntitySyncConfigAsync(EntitySyncConfig entitySyncConfig, string accessToken = null);
 		/// <summary>Get the entity sync delivery configuration for BuyerUsers Get the entity sync delivery configuration for BuyerUsers</summary>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<EntitySyncConfig> GetBuyerUsersEntitySyncConfigAsync(string accessToken = null);
@@ -6945,6 +6955,9 @@ namespace OrderCloud.SDK
 		public Task<EntitySyncConfig> GetCategoriesAsync(string accessToken = null) => Request("v1", "integrations", "entitysync", "categories").WithOAuthBearerToken(accessToken).GetJsonAsync<EntitySyncConfig>();
 		public Task DeleteCategoriesAsync(string accessToken = null) => Request("v1", "integrations", "entitysync", "categories").WithOAuthBearerToken(accessToken).DeleteAsync();
 		public Task<EntitySyncConfig> SaveCategoriesAsync(EntitySyncConfig entitySyncConfig, string accessToken = null) => Request("v1", "integrations", "entitysync", "categories").WithOAuthBearerToken(accessToken).PutJsonAsync(ValidateModel(entitySyncConfig)).ReceiveJson<EntitySyncConfig>();
+		public Task<EntitySyncConfig> GetSuppliersEntitySyncConfigAsync(string accessToken = null) => Request("v1", "integrations", "entitysync", "suppliers").WithOAuthBearerToken(accessToken).GetJsonAsync<EntitySyncConfig>();
+		public Task DeleteSuppliersEntitySyncConfigAsync(string accessToken = null) => Request("v1", "integrations", "entitysync", "suppliers").WithOAuthBearerToken(accessToken).DeleteAsync();
+		public Task<EntitySyncConfig> SaveSuppliersEntitySyncConfigAsync(EntitySyncConfig entitySyncConfig, string accessToken = null) => Request("v1", "integrations", "entitysync", "suppliers").WithOAuthBearerToken(accessToken).PutJsonAsync(ValidateModel(entitySyncConfig)).ReceiveJson<EntitySyncConfig>();
 		public Task<EntitySyncConfig> GetBuyerUsersEntitySyncConfigAsync(string accessToken = null) => Request("v1", "integrations", "entitysync", "buyers", "users").WithOAuthBearerToken(accessToken).GetJsonAsync<EntitySyncConfig>();
 		public Task DeleteBuyerUsersEntitySyncConfigAsync(string accessToken = null) => Request("v1", "integrations", "entitysync", "buyers", "users").WithOAuthBearerToken(accessToken).DeleteAsync();
 		public Task<EntitySyncConfig> SaveBuyerUsersEntitySyncConfigAsync(EntitySyncConfig entitySyncConfig, string accessToken = null) => Request("v1", "integrations", "entitysync", "buyers", "users").WithOAuthBearerToken(accessToken).PutJsonAsync(ValidateModel(entitySyncConfig)).ReceiveJson<EntitySyncConfig>();
