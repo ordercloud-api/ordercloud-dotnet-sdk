@@ -1569,6 +1569,24 @@ namespace OrderCloud.SDK
 			public class SaveCategories<TConfigData, TEntitySyncConfig> : WebhookPayload<TEntitySyncConfig, TEntitySyncConfig, object, TConfigData>
 				where TEntitySyncConfig : EntitySyncConfig
 			{ }
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/integrations/entitysync/suppliers.</summary>
+			[SentOn("DELETE", "v1/integrations/entitysync/suppliers")]
+			public class DeleteSuppliersEntitySyncConfig : WebhookPayload<object, object, object, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/integrations/entitysync/suppliers.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, use the non-generic payload type instead.</typeparam>
+			[SentOn("DELETE", "v1/integrations/entitysync/suppliers")]
+			public class DeleteSuppliersEntitySyncConfig<TConfigData> : WebhookPayload<object, object, object, TConfigData>
+			{ }
+			/// <summary>Webhook payload sent by OrderCloud on PUT v1/integrations/entitysync/suppliers.</summary>
+			[SentOn("PUT", "v1/integrations/entitysync/suppliers")]
+			public class SaveSuppliersEntitySyncConfig : WebhookPayload<EntitySyncConfig, EntitySyncConfig, object, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on PUT v1/integrations/entitysync/suppliers.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TEntitySyncConfig">Specific type of the EntitySyncConfig. If not using a custom type, specify EntitySyncConfig.</typeparam>
+			[SentOn("PUT", "v1/integrations/entitysync/suppliers")]
+			public class SaveSuppliersEntitySyncConfig<TConfigData, TEntitySyncConfig> : WebhookPayload<TEntitySyncConfig, TEntitySyncConfig, object, TConfigData>
+				where TEntitySyncConfig : EntitySyncConfig
+			{ }
 			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/integrations/entitysync/buyers/users.</summary>
 			[SentOn("DELETE", "v1/integrations/entitysync/buyers/users")]
 			public class DeleteBuyerUsersEntitySyncConfig : WebhookPayload<object, object, object, dynamic> { }
