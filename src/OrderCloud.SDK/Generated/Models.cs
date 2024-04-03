@@ -231,10 +231,12 @@ namespace OrderCloud.SDK
 	}
 	public class AzureBlobConfig : OrderCloudModel
 	{
-		/// <summary>Connection string of the azure blob config. Required.</summary>
+		/// <summary>Storage account connection string.</summary>
 		[Required]
 		[ApiWriteOnly]
 		public string ConnectionString { get => GetProp<string>("ConnectionString"); set => SetProp<string>("ConnectionString", value); }
+		/// <summary>Override container name of the azure blob config.</summary>
+		public string OverrideContainerName { get => GetProp<string>("OverrideContainerName"); set => SetProp<string>("OverrideContainerName", value); }
 	}
 	public class Bundle : OrderCloudModel
 	{

@@ -1688,13 +1688,13 @@ namespace OrderCloud.SDK
 
 	public interface IEntitySyncsResource
 	{
-		/// <summary>Get the entity sync delivery configuration for categories Get the entity sync delivery configuration for categories</summary>
+		/// <summary>Get the entity sync delivery configuration for Categories Get the entity sync delivery configuration for Categories</summary>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<EntitySyncConfig> GetCategoriesAsync(string accessToken = null);
-		/// <summary>Delete the entity sync delivery configuration for categories Delete the entity sync delivery configuration for categories</summary>
+		/// <summary>Delete the entity sync delivery configuration for Categories Delete the entity sync delivery configuration for Categories</summary>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task DeleteCategoriesAsync(string accessToken = null);
-		/// <summary>Create or update the entity sync delivery configuration for categories Create or update the entity sync delivery configuration for categories</summary>
+		/// <summary>Create or update the entity sync delivery configuration for Categories Create or update the entity sync delivery configuration for Categories</summary>
 		/// <param name="entitySyncConfig">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<EntitySyncConfig> SaveCategoriesAsync(EntitySyncConfig entitySyncConfig, string accessToken = null);
