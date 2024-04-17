@@ -238,6 +238,15 @@ namespace OrderCloud.SDK
 		/// <summary>Override container name of the azure blob config.</summary>
 		public string OverrideContainerName { get => GetProp<string>("OverrideContainerName"); set => SetProp<string>("OverrideContainerName", value); }
 	}
+	public class AzureTableConfig : OrderCloudModel
+	{
+		/// <summary>Storage account connection string.</summary>
+		[Required]
+		[ApiWriteOnly]
+		public string ConnectionString { get => GetProp<string>("ConnectionString"); set => SetProp<string>("ConnectionString", value); }
+		/// <summary>Override table name of the azure table config.</summary>
+		public string OverrideTableName { get => GetProp<string>("OverrideTableName"); set => SetProp<string>("OverrideTableName", value); }
+	}
 	public class Bundle : OrderCloudModel
 	{
 		/// <summary>ID of the bundle. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 3.</summary>
@@ -673,6 +682,8 @@ namespace OrderCloud.SDK
 		public EventHubConfig EventHub { get => GetProp<EventHubConfig>("EventHub"); set => SetProp<EventHubConfig>("EventHub", value); }
 		/// <summary>Azure blob of the delivery target.</summary>
 		public AzureBlobConfig AzureBlob { get => GetProp<AzureBlobConfig>("AzureBlob"); set => SetProp<AzureBlobConfig>("AzureBlob", value); }
+		/// <summary>Azure table of the delivery target.</summary>
+		public AzureTableConfig AzureTable { get => GetProp<AzureTableConfig>("AzureTable"); set => SetProp<AzureTableConfig>("AzureTable", value); }
 		/// <summary>Mandrill of the delivery target.</summary>
 		public MandrillConfig Mandrill { get => GetProp<MandrillConfig>("Mandrill"); set => SetProp<MandrillConfig>("Mandrill", value); }
 		/// <summary>Message sender of the delivery target.</summary>
@@ -3141,6 +3152,7 @@ namespace OrderCloud.SDK
 	public class PartialApprovalRule<Txp> : PartialApprovalRule
 	{ }
 	public class PartialAzureBlobConfig : AzureBlobConfig, IPartial { }
+	public class PartialAzureTableConfig : AzureTableConfig, IPartial { }
 	public class PartialBundle : Bundle, IPartial { }
 	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic PartialBundle class instead.</typeparam>
 	public class PartialBundle<Txp> : PartialBundle
