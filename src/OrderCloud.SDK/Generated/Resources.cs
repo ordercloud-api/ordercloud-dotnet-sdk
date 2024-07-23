@@ -1076,17 +1076,17 @@ namespace OrderCloud.SDK
 		/// <param name="paymentID">ID of the payment.</param>
 		/// <param name="paymentTransaction">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
-		Task<PaymentTransaction> CreatePaymentTransactionAsync(string paymentID, PaymentTransaction paymentTransaction, string accessToken = null);
-		/// <summary>Create a new cart payment transaction.</summary>
-		/// <param name="paymentID">ID of the payment.</param>
-		/// <param name="paymentTransaction">The object that will be serialized to JSON and sent in the request body.</param>
-		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
-		Task<TPaymentTransaction> CreatePaymentTransactionAsync<TPaymentTransaction>(string paymentID, PaymentTransaction paymentTransaction, string accessToken = null) where TPaymentTransaction : PaymentTransaction;
-		/// <summary>Delete a cart payment transaction.</summary>
-		/// <param name="paymentID">ID of the payment.</param>
-		/// <param name="transactionID">ID of the transaction.</param>
-		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
-		Task DeletePaymentTransactionAsync(string paymentID, string transactionID, string accessToken = null);
+		Task<Payment> CreatePaymentTransactionAsync(string paymentID, PaymentTransaction paymentTransaction, string accessToken = null);
+        /// <summary>Create a new cart payment transaction.</summary>
+        /// <param name="paymentID">ID of the payment.</param>
+        /// <param name="paymentTransaction">The object that will be serialized to JSON and sent in the request body.</param>
+        /// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+        Task<TPayment> CreatePaymentTransactionAsync<TPayment>(string paymentID, PaymentTransaction paymentTransaction, string accessToken = null) where TPayment : Payment;
+        /// <summary>Delete a cart payment transaction.</summary>
+        /// <param name="paymentID">ID of the payment.</param>
+        /// <param name="transactionID">ID of the transaction.</param>
+        /// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+        Task DeletePaymentTransactionAsync(string paymentID, string transactionID, string accessToken = null);
 		/// <summary>Submit the cart.</summary>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Order> SubmitAsync(string accessToken = null);
@@ -6811,8 +6811,8 @@ namespace OrderCloud.SDK
 		public Task<Payment> PatchPaymentAsync(string paymentID, PartialPayment partialPayment, string accessToken = null) => PatchPaymentAsync<Payment>(paymentID, partialPayment, accessToken);
 		public Task<TPayment> PatchPaymentAsync<TPayment>(string paymentID, PartialPayment partialPayment, string accessToken = null) where TPayment : Payment => Request("v1", "cart", "payments", paymentID).WithOAuthBearerToken(accessToken).PatchJsonAsync(ValidateModel(partialPayment)).ReceiveJson<TPayment>();
 		public Task DeletePaymentAsync(string paymentID, string accessToken = null) => Request("v1", "cart", "payments", paymentID).WithOAuthBearerToken(accessToken).DeleteAsync();
-		public Task<PaymentTransaction> CreatePaymentTransactionAsync(string paymentID, PaymentTransaction paymentTransaction, string accessToken = null) => CreatePaymentTransactionAsync<PaymentTransaction>(paymentID, paymentTransaction, accessToken);
-		public Task<TPaymentTransaction> CreatePaymentTransactionAsync<TPaymentTransaction>(string paymentID, PaymentTransaction paymentTransaction, string accessToken = null) where TPaymentTransaction : PaymentTransaction => Request("v1", "cart", "payments", paymentID, "transactions").WithOAuthBearerToken(accessToken).PostJsonAsync(ValidateModel(paymentTransaction)).ReceiveJson<TPaymentTransaction>();
+		public Task<Payment> CreatePaymentTransactionAsync(string paymentID, PaymentTransaction paymentTransaction, string accessToken = null) => CreatePaymentTransactionAsync<Payment>(paymentID, paymentTransaction, accessToken);
+		public Task<TPayment> CreatePaymentTransactionAsync<TPayment>(string paymentID, PaymentTransaction paymentTransaction, string accessToken = null) where TPayment : Payment => Request("v1", "cart", "payments", paymentID, "transactions").WithOAuthBearerToken(accessToken).PostJsonAsync(ValidateModel(paymentTransaction)).ReceiveJson<TPayment>();
 		public Task DeletePaymentTransactionAsync(string paymentID, string transactionID, string accessToken = null) => Request("v1", "cart", "payments", paymentID, "transactions", transactionID).WithOAuthBearerToken(accessToken).DeleteAsync();
 		public Task<Order> SubmitAsync(string accessToken = null) => SubmitAsync<Order>(accessToken);
 		public Task<TOrder> SubmitAsync<TOrder>(string accessToken = null) where TOrder : Order => Request("v1", "cart", "submit").WithOAuthBearerToken(accessToken).PostAsync(null).ReceiveJson<TOrder>();
