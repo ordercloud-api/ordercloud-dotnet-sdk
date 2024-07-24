@@ -591,6 +591,30 @@ namespace OrderCloud.SDK
 		/// <summary>List order of the category product assignment.</summary>
 		public int? ListOrder { get => GetProp<int?>("ListOrder"); set => SetProp<int?>("ListOrder", value); }
 	}
+	public class ContentHubConfig : OrderCloudModel
+	{
+		/// <summary>Api key of the content hub config. Required. Max length 50 characters.</summary>
+		[Required]
+		[ApiWriteOnly]
+		public string ApiKey { get => GetProp<string>("ApiKey"); set => SetProp<string>("ApiKey", value); }
+		/// <summary>Endpoint of the content hub config. Required.</summary>
+		[Required]
+		public string Endpoint { get => GetProp<string>("Endpoint"); set => SetProp<string>("Endpoint", value); }
+		/// <summary>Target schema name of the content hub config. Required.</summary>
+		[Required]
+		public string TargetSchemaName { get => GetProp<string>("TargetSchemaName"); set => SetProp<string>("TargetSchemaName", value); }
+		/// <summary>Any custom property mapping should be included here.</summary>
+		public object ConfigData { get => GetProp<object>("ConfigData"); set => SetProp<object>("ConfigData", value); }
+	}
+	public class CosmosDbConfig : OrderCloudModel
+	{
+		/// <summary>Storage account connection string.</summary>
+		[Required]
+		[ApiWriteOnly]
+		public string ConnectionString { get => GetProp<string>("ConnectionString"); set => SetProp<string>("ConnectionString", value); }
+		/// <summary>Override database name of the cosmos db config.</summary>
+		public string OverrideDatabaseName { get => GetProp<string>("OverrideDatabaseName"); set => SetProp<string>("OverrideDatabaseName", value); }
+	}
 	public class CostCenter : OrderCloudModel
 	{
 		/// <summary>ID of the cost center. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 2.</summary>
@@ -684,10 +708,14 @@ namespace OrderCloud.SDK
 		public AzureBlobConfig AzureBlob { get => GetProp<AzureBlobConfig>("AzureBlob"); set => SetProp<AzureBlobConfig>("AzureBlob", value); }
 		/// <summary>Azure table of the delivery target.</summary>
 		public AzureTableConfig AzureTable { get => GetProp<AzureTableConfig>("AzureTable"); set => SetProp<AzureTableConfig>("AzureTable", value); }
+		/// <summary>Cosmos db of the delivery target.</summary>
+		public CosmosDbConfig CosmosDb { get => GetProp<CosmosDbConfig>("CosmosDb"); set => SetProp<CosmosDbConfig>("CosmosDb", value); }
 		/// <summary>Mandrill of the delivery target.</summary>
 		public MandrillConfig Mandrill { get => GetProp<MandrillConfig>("Mandrill"); set => SetProp<MandrillConfig>("Mandrill", value); }
 		/// <summary>Message sender of the delivery target.</summary>
 		public MessageSenderConfig MessageSender { get => GetProp<MessageSenderConfig>("MessageSender"); set => SetProp<MessageSenderConfig>("MessageSender", value); }
+		/// <summary>This feature is in preview and functionality is subject to change.</summary>
+		public ContentHubConfig ContentHub { get => GetProp<ContentHubConfig>("ContentHub"); set => SetProp<ContentHubConfig>("ContentHub", value); }
 	}
 	public class DiscoverEvent : OrderCloudModel
 	{
@@ -1724,6 +1752,10 @@ namespace OrderCloud.SDK
 		/// <summary>The number of times this promotion has been applied to an order.</summary>
 		[ApiReadOnly]
 		public int RedemptionCount { get => GetProp<int>("RedemptionCount"); set => SetProp<int>("RedemptionCount", value); }
+		/// <summary>Can only be used when LineItemLevel is true. Limits the number of items the promotion will apply to when eligible. When no ItemSortBy is defined, items will be sorted by DateAdded ascending.</summary>
+		public int? ItemLimitPerOrder { get => GetProp<int?>("ItemLimitPerOrder"); set => SetProp<int?>("ItemLimitPerOrder", value); }
+		/// <summary>Comma delimited list of properties to sort by. Can only be used when ItemLimitPerOrder is true. Used to determine the order in which the promotion is applied to the specified limit of items. Use ! to reverse sort order on a property.</summary>
+		public string ItemSortBy { get => GetProp<string>("ItemSortBy"); set => SetProp<string>("ItemSortBy", value); }
 		/// <summary>Description of the order promotion. Max length 2000 characters. Searchable: priority level 4.</summary>
 		public string Description { get => GetProp<string>("Description"); set => SetProp<string>("Description", value); }
 		/// <summary>Terms, conditions, and other legal jargon.</summary>
@@ -2371,6 +2403,10 @@ namespace OrderCloud.SDK
 		/// <summary>The number of times this promotion has been applied to an order.</summary>
 		[ApiReadOnly]
 		public int RedemptionCount { get => GetProp<int>("RedemptionCount"); set => SetProp<int>("RedemptionCount", value); }
+		/// <summary>Can only be used when LineItemLevel is true. Limits the number of items the promotion will apply to when eligible. When no ItemSortBy is defined, items will be sorted by DateAdded ascending.</summary>
+		public int? ItemLimitPerOrder { get => GetProp<int?>("ItemLimitPerOrder"); set => SetProp<int?>("ItemLimitPerOrder", value); }
+		/// <summary>Comma delimited list of properties to sort by. Can only be used when ItemLimitPerOrder is true. Used to determine the order in which the promotion is applied to the specified limit of items. Use ! to reverse sort order on a property.</summary>
+		public string ItemSortBy { get => GetProp<string>("ItemSortBy"); set => SetProp<string>("ItemSortBy", value); }
 		/// <summary>Description of the promotion. Max length 2000 characters. Searchable: priority level 4.</summary>
 		public string Description { get => GetProp<string>("Description"); set => SetProp<string>("Description", value); }
 		/// <summary>Terms, conditions, and other legal jargon.</summary>
@@ -3177,6 +3213,8 @@ namespace OrderCloud.SDK
 	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic PartialCategory class instead.</typeparam>
 	public class PartialCategory<Txp> : PartialCategory
 	{ }
+	public class PartialContentHubConfig : ContentHubConfig, IPartial { }
+	public class PartialCosmosDbConfig : CosmosDbConfig, IPartial { }
 	public class PartialCostCenter : CostCenter, IPartial { }
 	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic PartialCostCenter class instead.</typeparam>
 	public class PartialCostCenter<Txp> : PartialCostCenter

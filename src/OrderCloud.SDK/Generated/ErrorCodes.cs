@@ -41,6 +41,8 @@ namespace OrderCloud.SDK
 			public const string UsedByIntegration = "ApiClient.UsedByIntegration";
 			/// <summary>Cannot delete API Client used by an impersonation config.</summary>
 			public const string UsedByImpersonationConfig = "ApiClient.UsedByImpersonationConfig";
+			/// <summary>IsAnonBuyer can be true only when a buyer user is set as the Default Context User.</summary>
+			public const string RequiredNotAnonBuyer = "ApiClient.RequiredNotAnonBuyer";
 		}
 		public static class ApprovalRule
 		{
@@ -143,8 +145,6 @@ namespace OrderCloud.SDK
 			public const string InvalidDepth = "Category.InvalidDepth";
 			/// <summary>Buyer not specified.</summary>
 			public const string NoBuyer = "Category.NoBuyer";
-			/// <summary>Cannot assign a child product to a category.</summary>
-			public const string CannotAssignChildProduct = "Category.CannotAssignChildProduct";
 		}
 		public static class CreditCard
 		{
@@ -155,11 +155,18 @@ namespace OrderCloud.SDK
 		{
 			/// <summary>This Delivery Configuration cannot be deleted because it is in use.</summary>
 			public const string CannotDeleteConfigInUse = "DeliveryConfig.CannotDeleteConfigInUse";
+			/// <summary>The requested synchronization cannot be performed because the associated delivery configuration is disabled.</summary>
+			public const string ConfigurationDisabled = "DeliveryConfig.ConfigurationDisabled";
 		}
 		public static class EntitySyncConfig
 		{
 			/// <summary>Only one entity sync per entity type can be configured for a marketplace.</summary>
 			public const string OnlyOneConfigPerMarketplace = "EntitySyncConfig.OnlyOneConfigPerMarketplace";
+		}
+		public static class ErrorConfig
+		{
+			/// <summary>The error or validation message cannot be sent because the associated delivery configuration is disabled.</summary>
+			public const string DeliveryConfigDisabled = "ErrorConfig.DeliveryConfigDisabled";
 		}
 		public static class Expression
 		{
@@ -328,6 +335,10 @@ namespace OrderCloud.SDK
 			public const string CannotSubmitWithUnaccceptedPayments = "Order.CannotSubmitWithUnaccceptedPayments";
 			/// <summary>Cannot submit an order with not purchasable parent product.</summary>
 			public const string CannotSubmitWithParentProduct = "Order.CannotSubmitWithParentProduct";
+			/// <summary>Cannot submit an order with an inactive product.</summary>
+			public const string CannotSubmitWithInactiveProduct = "Order.CannotSubmitWithInactiveProduct";
+			/// <summary>Cannot submit an order because the following products are not accessible any more.</summary>
+			public const string ProductsNotFound = "Order.ProductsNotFound";
 			/// <summary>Cannot ship full order because it contains line items that are on other shipments. The returned data contains these conflicting line items.</summary>
 			public const string ConflictsWithOtherShipments = "Order.ConflictsWithOtherShipments";
 			/// <summary>To create an incoming order, you must provide both FromCompanyID and FromUserID.</summary>
@@ -587,10 +598,14 @@ namespace OrderCloud.SDK
 			public const string NotEligible = "Promotion.NotEligible";
 			/// <summary>Promotion is not yet valid.</summary>
 			public const string NotYetValid = "Promotion.NotYetValid";
-			/// <summary>ToCompanyID represents a Supplier. Only promotions with a matching OwnerID may be applied to this order.</summary>
+			/// <summary>ToCompanyID represents a Supplier. Only promotions with a matching OwnerID or owned by the marketplace owner may be applied to this order.</summary>
 			public const string OwnerIDMustMatchOrderToCompanyID = "Promotion.OwnerIDMustMatchOrderToCompanyID";
 			/// <summary>Promotion is not active.</summary>
 			public const string NotActive = "Promotion.NotActive";
+			/// <summary>LineItemLevel must be true in order to use ItemLimitPerOrder.</summary>
+			public const string CannotSetItemLimitPerOrder = "Promotion.CannotSetItemLimitPerOrder";
+			/// <summary>LineItemLevel must be true and ItemLimitPerOrder must have a value in order to use ItemSortBy.</summary>
+			public const string CannotSetItemSortBy = "Promotion.CannotSetItemSortBy";
 		}
 		public static class Registration
 		{
@@ -619,6 +634,8 @@ namespace OrderCloud.SDK
 			public const string CannotProvideBuyerID = "SecurityProfile.CannotProvideBuyerID";
 			/// <summary>Cannot specify both SupplierID and non-Supplier CommerceRole.</summary>
 			public const string CannotProvideSupplierID = "SecurityProfile.CannotProvideSupplierID";
+			/// <summary>Cannot specify MinimumCharacterCount of less than 10.</summary>
+			public const string InvalidPasswordConfiguration = "SecurityProfile.InvalidPasswordConfiguration";
 		}
 		public static class Seller
 		{
@@ -722,7 +739,7 @@ namespace OrderCloud.SDK
 		}
 		public static class Webhook
 		{
-			/// <summary>Webhook URL secure scheme https is required.</summary>
+			/// <summary>Webhook URL must be well-formed and secure scheme https is required.</summary>
 			public const string UrlSchemeHttps = "Webhook.UrlSchemeHttps";
 			/// <summary>Delivery Configuration is not valid for PreHooks.</summary>
 			public const string InvalidDeliveryConfig = "Webhook.InvalidDeliveryConfig";
