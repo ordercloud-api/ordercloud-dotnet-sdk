@@ -898,13 +898,15 @@ namespace OrderCloud.SDK
 			}
 			/// <summary>Webhook payload sent by OrderCloud on POST v1/cart/payments/{paymentID}/transactions.</summary>
 			[SentOn("POST", "v1/cart/payments/{paymentID}/transactions")]
-			public class CreatePaymentTransaction : WebhookPayload<PaymentTransaction, PaymentTransaction, CreatePaymentTransactionRouteParams, dynamic> { }
+			public class CreatePaymentTransaction : WebhookPayload<PaymentTransaction, Payment, CreatePaymentTransactionRouteParams, dynamic> { }
 			/// <summary>Webhook payload sent by OrderCloud on POST v1/cart/payments/{paymentID}/transactions.</summary>
 			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
 			/// <typeparam name="TPaymentTransaction">Specific type of the PaymentTransaction. If not using a custom type, specify PaymentTransaction.</typeparam>
+			/// <typeparam name="TPayment">Specific type of the Payment. If not using a custom type, specify Payment.</typeparam>
 			[SentOn("POST", "v1/cart/payments/{paymentID}/transactions")]
-			public class CreatePaymentTransaction<TConfigData, TPaymentTransaction> : WebhookPayload<TPaymentTransaction, TPaymentTransaction, CreatePaymentTransactionRouteParams, TConfigData>
+			public class CreatePaymentTransaction<TConfigData, TPaymentTransaction, TPayment> : WebhookPayload<TPaymentTransaction, TPayment, CreatePaymentTransactionRouteParams, TConfigData>
 				where TPaymentTransaction : PaymentTransaction
+				where TPayment : Payment
 			{ }
 			/// <summary>Type used to represent route parameter name/value pairs for v1/cart/payments/{paymentID}/transactions.</summary>
 			public class CreatePaymentTransactionRouteParams
