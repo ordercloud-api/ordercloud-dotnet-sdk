@@ -10,6 +10,8 @@ using NUnit.Framework;
 using Flurl.Http.Testing;
 using Newtonsoft.Json;
 using Flurl.Http;
+using NUnit.Framework.Legacy;
+using Assert = NUnit.Framework.Legacy.ClassicAssert;
 
 namespace OrderCloud.SDK.Tests
 {

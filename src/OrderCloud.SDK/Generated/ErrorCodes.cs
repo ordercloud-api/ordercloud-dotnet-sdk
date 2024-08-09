@@ -579,6 +579,8 @@ namespace OrderCloud.SDK
 		{
 			/// <summary>Only one product sync can be configured for a marketplace.</summary>
 			public const string OnlyOneConfigPerMarketplace = "ProductSyncConfig.OnlyOneConfigPerMarketplace";
+			/// <summary>The requested operation is not available because an administrative lock has been placed on product synchronization for this marketplace. Please contact support.</summary>
+			public const string AdminLockout = "ProductSyncConfig.AdminLockout";
 		}
 		public static class Promotion
 		{
