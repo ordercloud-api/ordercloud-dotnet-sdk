@@ -1752,7 +1752,9 @@ namespace OrderCloud.SDK
 		/// <summary>The number of times this promotion has been applied to an order.</summary>
 		[ApiReadOnly]
 		public int RedemptionCount { get => GetProp<int>("RedemptionCount"); set => SetProp<int>("RedemptionCount", value); }
-		/// <summary>Can only be used when LineItemLevel is true. Limits the number of items the promotion will apply to when eligible. When no ItemSortBy is defined, items will be sorted by DateAdded ascending.</summary>
+		/// <summary>Can only be used when LineItemLevel is true and ItemLimitPerOrder does not have a value. When defined the ValueExpression will be the discount applied to each qualifying quantity of eligible items. When no ItemSortBy is defined, items will be sorted by DateAdded ascending.</summary>
+		public int? QuantityLimitPerOrder { get => GetProp<int?>("QuantityLimitPerOrder"); set => SetProp<int?>("QuantityLimitPerOrder", value); }
+		/// <summary>Can only be used when LineItemLevel is true and QuantityLimitPerOrder does not have a value. Limits the number of items the promotion will apply to when eligible. When no ItemSortBy is defined, items will be sorted by DateAdded ascending.</summary>
 		public int? ItemLimitPerOrder { get => GetProp<int?>("ItemLimitPerOrder"); set => SetProp<int?>("ItemLimitPerOrder", value); }
 		/// <summary>Comma delimited list of properties to sort by. Can only be used when ItemLimitPerOrder is true. Used to determine the order in which the promotion is applied to the specified limit of items. Use ! to reverse sort order on a property.</summary>
 		public string ItemSortBy { get => GetProp<string>("ItemSortBy"); set => SetProp<string>("ItemSortBy", value); }
@@ -2403,7 +2405,9 @@ namespace OrderCloud.SDK
 		/// <summary>The number of times this promotion has been applied to an order.</summary>
 		[ApiReadOnly]
 		public int RedemptionCount { get => GetProp<int>("RedemptionCount"); set => SetProp<int>("RedemptionCount", value); }
-		/// <summary>Can only be used when LineItemLevel is true. Limits the number of items the promotion will apply to when eligible. When no ItemSortBy is defined, items will be sorted by DateAdded ascending.</summary>
+		/// <summary>Can only be used when LineItemLevel is true and ItemLimitPerOrder does not have a value. When defined the ValueExpression will be the discount applied to each qualifying quantity of eligible items. When no ItemSortBy is defined, items will be sorted by DateAdded ascending.</summary>
+		public int? QuantityLimitPerOrder { get => GetProp<int?>("QuantityLimitPerOrder"); set => SetProp<int?>("QuantityLimitPerOrder", value); }
+		/// <summary>Can only be used when LineItemLevel is true and QuantityLimitPerOrder does not have a value. Limits the number of items the promotion will apply to when eligible. When no ItemSortBy is defined, items will be sorted by DateAdded ascending.</summary>
 		public int? ItemLimitPerOrder { get => GetProp<int?>("ItemLimitPerOrder"); set => SetProp<int?>("ItemLimitPerOrder", value); }
 		/// <summary>Comma delimited list of properties to sort by. Can only be used when ItemLimitPerOrder is true. Used to determine the order in which the promotion is applied to the specified limit of items. Use ! to reverse sort order on a property.</summary>
 		public string ItemSortBy { get => GetProp<string>("ItemSortBy"); set => SetProp<string>("ItemSortBy", value); }

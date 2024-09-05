@@ -145,6 +145,8 @@ namespace OrderCloud.SDK
 			public const string InvalidDepth = "Category.InvalidDepth";
 			/// <summary>Buyer not specified.</summary>
 			public const string NoBuyer = "Category.NoBuyer";
+			/// <summary>Cannot assign a child product to a category in a catalog different from parent one.</summary>
+			public const string CannotAssignChildProduct = "Category.CannotAssignChildProduct";
 		}
 		public static class CreditCard
 		{
@@ -606,7 +608,11 @@ namespace OrderCloud.SDK
 			public const string NotActive = "Promotion.NotActive";
 			/// <summary>LineItemLevel must be true in order to use ItemLimitPerOrder.</summary>
 			public const string CannotSetItemLimitPerOrder = "Promotion.CannotSetItemLimitPerOrder";
-			/// <summary>LineItemLevel must be true and ItemLimitPerOrder must have a value in order to use ItemSortBy.</summary>
+			/// <summary>LineItemLevel must be true in order to use QuantityLimitPerOrder.</summary>
+			public const string CannotSetQuantityLimitPerOrder = "Promotion.CannotSetQuantityLimitPerOrder";
+			/// <summary>QuantityLimitPerOrder is not supported in conjuction with ItemLimitPerOrder.</summary>
+			public const string CannotSetQuantityAndItemLimitPerOrder = "Promotion.CannotSetQuantityAndItemLimitPerOrder";
+			/// <summary>LineItemLevel must be true and ItemLimitPerOrder or QuantityLimitPerOrder must have a value in order to use ItemSortBy.</summary>
 			public const string CannotSetItemSortBy = "Promotion.CannotSetItemSortBy";
 		}
 		public static class Registration
