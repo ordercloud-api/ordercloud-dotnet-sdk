@@ -1643,6 +1643,24 @@ namespace OrderCloud.SDK
 			public class SaveAdminUsersEntitySyncConfig<TConfigData, TEntitySyncConfig> : WebhookPayload<TEntitySyncConfig, TEntitySyncConfig, object, TConfigData>
 				where TEntitySyncConfig : EntitySyncConfig
 			{ }
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/integrations/entitysync/products/inventoryrecords.</summary>
+			[SentOn("DELETE", "v1/integrations/entitysync/products/inventoryrecords")]
+			public class DeleteInventoryRecordEntitySyncConfig : WebhookPayload<object, object, object, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/integrations/entitysync/products/inventoryrecords.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, use the non-generic payload type instead.</typeparam>
+			[SentOn("DELETE", "v1/integrations/entitysync/products/inventoryrecords")]
+			public class DeleteInventoryRecordEntitySyncConfig<TConfigData> : WebhookPayload<object, object, object, TConfigData>
+			{ }
+			/// <summary>Webhook payload sent by OrderCloud on PUT v1/integrations/entitysync/products/inventoryrecords.</summary>
+			[SentOn("PUT", "v1/integrations/entitysync/products/inventoryrecords")]
+			public class SaveInventoryRecordEntitySyncConfig : WebhookPayload<EntitySyncConfig, EntitySyncConfig, object, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on PUT v1/integrations/entitysync/products/inventoryrecords.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TEntitySyncConfig">Specific type of the EntitySyncConfig. If not using a custom type, specify EntitySyncConfig.</typeparam>
+			[SentOn("PUT", "v1/integrations/entitysync/products/inventoryrecords")]
+			public class SaveInventoryRecordEntitySyncConfig<TConfigData, TEntitySyncConfig> : WebhookPayload<TEntitySyncConfig, TEntitySyncConfig, object, TConfigData>
+				where TEntitySyncConfig : EntitySyncConfig
+			{ }
 		}
 		public static class ErrorConfigs
 		{

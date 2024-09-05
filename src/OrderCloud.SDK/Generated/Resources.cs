@@ -1738,6 +1738,16 @@ namespace OrderCloud.SDK
 		/// <param name="entitySyncConfig">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<EntitySyncConfig> SaveAdminUsersEntitySyncConfigAsync(EntitySyncConfig entitySyncConfig, string accessToken = null);
+		/// <summary>Get the entity sync delivery configuration for InventoryRecords Get the entity sync delivery configuration for InventoryRecords</summary>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<EntitySyncConfig> GetInventoryRecordEntitySyncConfigAsync(string accessToken = null);
+		/// <summary>Delete the entity sync delivery configuration for InventoryRecords Delete the entity sync delivery configuration for InventoryRecords</summary>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task DeleteInventoryRecordEntitySyncConfigAsync(string accessToken = null);
+		/// <summary>Create or update the entity sync delivery configuration for InventoryRecords Create or update the entity sync delivery configuration for InventoryRecords</summary>
+		/// <param name="entitySyncConfig">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<EntitySyncConfig> SaveInventoryRecordEntitySyncConfigAsync(EntitySyncConfig entitySyncConfig, string accessToken = null);
 	}
 
 	public interface IErrorConfigsResource
@@ -6967,6 +6977,9 @@ namespace OrderCloud.SDK
 		public Task<EntitySyncConfig> GetAdminUsersEntitySyncConfigAsync(string accessToken = null) => Request("v1", "integrations", "entitysync", "adminusers").WithOAuthBearerToken(accessToken).GetJsonAsync<EntitySyncConfig>();
 		public Task DeleteAdminUsersEntitySyncConfigAsync(string accessToken = null) => Request("v1", "integrations", "entitysync", "adminusers").WithOAuthBearerToken(accessToken).DeleteAsync();
 		public Task<EntitySyncConfig> SaveAdminUsersEntitySyncConfigAsync(EntitySyncConfig entitySyncConfig, string accessToken = null) => Request("v1", "integrations", "entitysync", "adminusers").WithOAuthBearerToken(accessToken).PutJsonAsync(ValidateModel(entitySyncConfig)).ReceiveJson<EntitySyncConfig>();
+		public Task<EntitySyncConfig> GetInventoryRecordEntitySyncConfigAsync(string accessToken = null) => Request("v1", "integrations", "entitysync", "products", "inventoryrecords").WithOAuthBearerToken(accessToken).GetJsonAsync<EntitySyncConfig>();
+		public Task DeleteInventoryRecordEntitySyncConfigAsync(string accessToken = null) => Request("v1", "integrations", "entitysync", "products", "inventoryrecords").WithOAuthBearerToken(accessToken).DeleteAsync();
+		public Task<EntitySyncConfig> SaveInventoryRecordEntitySyncConfigAsync(EntitySyncConfig entitySyncConfig, string accessToken = null) => Request("v1", "integrations", "entitysync", "products", "inventoryrecords").WithOAuthBearerToken(accessToken).PutJsonAsync(ValidateModel(entitySyncConfig)).ReceiveJson<EntitySyncConfig>();
 	}
 
 	public class ErrorConfigsResource : OrderCloudResource, IErrorConfigsResource
