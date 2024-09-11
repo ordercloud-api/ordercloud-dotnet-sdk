@@ -923,13 +923,15 @@ namespace OrderCloud.SDK
 		public decimal ShippingCost { get => GetProp<decimal>("ShippingCost"); set => SetProp<decimal>("ShippingCost", value); }
 		/// <summary>Modifying requires TaxOverride Role.</summary>
 		public decimal TaxCost { get => GetProp<decimal>("TaxCost"); set => SetProp<decimal>("TaxCost", value); }
+		/// <summary>Gratuity of the extended order. Must be at least 0. Sortable.</summary>
+		public decimal Gratuity { get => GetProp<decimal>("Gratuity", 0); set => SetProp<decimal>("Gratuity", value); }
 		/// <summary>Sum of all Promotion.Amounts applied to the order.</summary>
 		[ApiReadOnly]
 		public decimal PromotionDiscount { get => GetProp<decimal>("PromotionDiscount"); set => SetProp<decimal>("PromotionDiscount", value); }
 		/// <summary>Inherited from the user placing the order.</summary>
 		[ApiReadOnly]
 		public string Currency { get => GetProp<string>("Currency"); set => SetProp<string>("Currency", value); }
-		/// <summary>Subtotal + TaxCost + ShippingCost - PromotionDiscount</summary>
+		/// <summary>Subtotal + TaxCost + ShippingCost + Gratuity - PromotionDiscount</summary>
 		[ApiReadOnly]
 		public decimal Total { get => GetProp<decimal>("Total"); set => SetProp<decimal>("Total", value); }
 		/// <summary>True if this Order has been passed from the Buyer to the Marketplace Owner.</summary>
@@ -1602,13 +1604,15 @@ namespace OrderCloud.SDK
 		public decimal ShippingCost { get => GetProp<decimal>("ShippingCost"); set => SetProp<decimal>("ShippingCost", value); }
 		/// <summary>Modifying requires TaxOverride Role.</summary>
 		public decimal TaxCost { get => GetProp<decimal>("TaxCost"); set => SetProp<decimal>("TaxCost", value); }
+		/// <summary>Gratuity of the order. Must be at least 0. Sortable.</summary>
+		public decimal Gratuity { get => GetProp<decimal>("Gratuity", 0); set => SetProp<decimal>("Gratuity", value); }
 		/// <summary>Sum of all Promotion.Amounts applied to the order.</summary>
 		[ApiReadOnly]
 		public decimal PromotionDiscount { get => GetProp<decimal>("PromotionDiscount"); set => SetProp<decimal>("PromotionDiscount", value); }
 		/// <summary>Inherited from the user placing the order.</summary>
 		[ApiReadOnly]
 		public string Currency { get => GetProp<string>("Currency"); set => SetProp<string>("Currency", value); }
-		/// <summary>Subtotal + TaxCost + ShippingCost - PromotionDiscount</summary>
+		/// <summary>Subtotal + TaxCost + ShippingCost + Gratuity - PromotionDiscount</summary>
 		[ApiReadOnly]
 		public decimal Total { get => GetProp<decimal>("Total"); set => SetProp<decimal>("Total", value); }
 		/// <summary>True if this Order has been passed from the Buyer to the Marketplace Owner.</summary>
