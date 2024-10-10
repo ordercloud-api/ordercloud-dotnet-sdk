@@ -1774,7 +1774,6 @@ namespace OrderCloud.SDK
 		[Required]
 		public string EligibleExpression { get => GetProp<string>("EligibleExpression"); set => SetProp<string>("EligibleExpression", value); }
 		/// <summary>The expression evaluated to determine the discount amount of an eligible promotion. See Rules Engine documentation for formatting details.</summary>
-		[Required]
 		public string ValueExpression { get => GetProp<string>("ValueExpression"); set => SetProp<string>("ValueExpression", value); }
 		/// <summary>If true, the promotion can be applied to an order that already other promotions applied, as long as they can also be combined.</summary>
 		public bool CanCombine { get => GetProp<bool>("CanCombine"); set => SetProp<bool>("CanCombine", value); }
@@ -2027,7 +2026,7 @@ namespace OrderCloud.SDK
 		public int? MinimumPasswordAge { get => GetProp<int?>("MinimumPasswordAge"); set => SetProp<int?>("MinimumPasswordAge", value); }
 		/// <summary>The number of failed attempts before the account is Locked for the LockoutDuration.</summary>
 		public int? AllowedFailedAttempts { get => GetProp<int?>("AllowedFailedAttempts"); set => SetProp<int?>("AllowedFailedAttempts", value); }
-		/// <summary>The number of minutes an account is locked when the AllowedFailedAttempts is reached.</summary>
+		/// <summary>The number of minutes an account is locked when the AllowedFailedAttempts is reached. Use 0 to indicate that lockout should be indefinite (i.e. require the intervention of a user admininstrator).</summary>
 		public int? LockoutDuration { get => GetProp<int?>("LockoutDuration"); set => SetProp<int?>("LockoutDuration", value); }
 		/// <summary>At least one upper case character is required.</summary>
 		public bool UpperCaseRequired { get => GetProp<bool>("UpperCaseRequired"); set => SetProp<bool>("UpperCaseRequired", value); }
@@ -2427,7 +2426,6 @@ namespace OrderCloud.SDK
 		[Required]
 		public string EligibleExpression { get => GetProp<string>("EligibleExpression"); set => SetProp<string>("EligibleExpression", value); }
 		/// <summary>The expression evaluated to determine the discount amount of an eligible promotion. See Rules Engine documentation for formatting details.</summary>
-		[Required]
 		public string ValueExpression { get => GetProp<string>("ValueExpression"); set => SetProp<string>("ValueExpression", value); }
 		/// <summary>If true, the promotion can be applied to an order that already other promotions applied, as long as they can also be combined.</summary>
 		public bool CanCombine { get => GetProp<bool>("CanCombine"); set => SetProp<bool>("CanCombine", value); }

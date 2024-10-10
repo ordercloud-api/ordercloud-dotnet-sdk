@@ -612,8 +612,31 @@ namespace OrderCloud.SDK
 			public const string CannotSetQuantityLimitPerOrder = "Promotion.CannotSetQuantityLimitPerOrder";
 			/// <summary>QuantityLimitPerOrder is not supported in conjuction with ItemLimitPerOrder.</summary>
 			public const string CannotSetQuantityAndItemLimitPerOrder = "Promotion.CannotSetQuantityAndItemLimitPerOrder";
-			/// <summary>LineItemLevel must be true and ItemLimitPerOrder or QuantityLimitPerOrder must have a value in order to use ItemSortBy.</summary>
+			/// <summary>LineItemLevel must be true and ItemLimitPerOrder must have a value in order to use ItemSortBy.</summary>
 			public const string CannotSetItemSortBy = "Promotion.CannotSetItemSortBy";
+			/// <summary>Either set a ValueExpression, or define ValidatePromotion event for your client.</summary>
+			public const string ValueExpressionCannotBeNull = "Promotion.ValueExpressionCannotBeNull";
+			/// <summary>ValueExpression can be null only if UseIntegration is true.</summary>
+			public const string ValueExpressionCanBeNullIfUseIntegration = "Promotion.ValueExpressionCanBeNullIfUseIntegration";
+			/// <summary>UseIntegration must be false if ValueExpression is not null.</summary>
+			public const string UseIntegrationMustBeFalse = "Promotion.UseIntegrationMustBeFalse";
+		}
+		public static class PromotionIntegration
+		{
+			/// <summary>Failed to evaluate integration promotion.</summary>
+			public const string FailedToEvaluate = "PromotionIntegration.FailedToEvaluate";
+			/// <summary>Promotion integration returned the error.</summary>
+			public const string EvaluationErrorReturned = "PromotionIntegration.EvaluationErrorReturned";
+			/// <summary>Cannot delete a promotion integration if promotions exist where ValueExpression = null.</summary>
+			public const string CannotDeletePromotionIntegration = "PromotionIntegration.CannotDeletePromotionIntegration";
+			/// <summary>PromotionID in the response does not match any PromosRequested ID in the Promotion Integration payload.</summary>
+			public const string PromotionIDMismatch = "PromotionIntegration.PromotionIDMismatch";
+			/// <summary>LineItemId is required for LineItemLevel promotion.</summary>
+			public const string LineItemIdRequired = "PromotionIntegration.LineItemIdRequired";
+			/// <summary>LineItemId must be null for not LineItemLevel promotion.</summary>
+			public const string LineItemIdMustBeNull = "PromotionIntegration.LineItemIdMustBeNull";
+			/// <summary>Promotion cannot be used on this order.</summary>
+			public const string NotEligible = "PromotionIntegration.NotEligible";
 		}
 		public static class Registration
 		{
