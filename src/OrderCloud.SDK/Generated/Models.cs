@@ -141,7 +141,7 @@ namespace OrderCloud.SDK
 		/// <summary>App name of the api client. Required. Searchable: priority level 2. Sortable.</summary>
 		[Required]
 		public string AppName { get => GetProp<string>("AppName"); set => SetProp<string>("AppName", value); }
-		/// <summary>Refresh token duration of the api client. Must be between 0 and 43200.</summary>
+		/// <summary>Refresh token duration of the api client. Must be between 0 and 524160.</summary>
 		public int RefreshTokenDuration { get => GetProp<int>("RefreshTokenDuration"); set => SetProp<int>("RefreshTokenDuration", value); }
 		/// <summary>Optionally set a user that will be used when authenticating with a Client Credentials grant type flow. This grant type is often used for anonymous browsing on buyer applications and authentication on server integration layers.</summary>
 		public string DefaultContextUserName { get => GetProp<string>("DefaultContextUserName"); set => SetProp<string>("DefaultContextUserName", value); }
@@ -735,6 +735,12 @@ namespace OrderCloud.SDK
 		/// <summary>ID of the delivery config. Required.</summary>
 		[Required]
 		public string DeliveryConfigID { get => GetProp<string>("DeliveryConfigID"); set => SetProp<string>("DeliveryConfigID", value); }
+		/// <summary>Sync entity changed of the entity sync config. Required.</summary>
+		[Required]
+		public bool SyncEntityChanged { get => GetProp<bool>("SyncEntityChanged"); set => SetProp<bool>("SyncEntityChanged", value); }
+		/// <summary>Sync entity deleted of the entity sync config. Required.</summary>
+		[Required]
+		public bool SyncEntityDeleted { get => GetProp<bool>("SyncEntityDeleted"); set => SetProp<bool>("SyncEntityDeleted", value); }
 	}
 	public class ErrorConfig : OrderCloudModel
 	{

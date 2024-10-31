@@ -301,6 +301,19 @@ namespace OrderCloud.SDK
 			{
 				public string UserID { get; set; }
 			}
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/adminusers/{userID}/tokens.</summary>
+			[SentOn("DELETE", "v1/adminusers/{userID}/tokens")]
+			public class RevokeUserTokens : WebhookPayload<object, object, RevokeUserTokensRouteParams, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/adminusers/{userID}/tokens.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, use the non-generic payload type instead.</typeparam>
+			[SentOn("DELETE", "v1/adminusers/{userID}/tokens")]
+			public class RevokeUserTokens<TConfigData> : WebhookPayload<object, object, RevokeUserTokensRouteParams, TConfigData>
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/adminusers/{userID}/tokens.</summary>
+			public class RevokeUserTokensRouteParams
+			{
+				public string UserID { get; set; }
+			}
 		}
 		public static class ApiClients
 		{
@@ -2837,6 +2850,14 @@ namespace OrderCloud.SDK
 				public string BundleID { get; set; }
 				public string BundleItemID { get; set; }
 			}
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/me/tokens.</summary>
+			[SentOn("DELETE", "v1/me/tokens")]
+			public class RevokeTokens : WebhookPayload<object, object, object, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/me/tokens.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, use the non-generic payload type instead.</typeparam>
+			[SentOn("DELETE", "v1/me/tokens")]
+			public class RevokeTokens<TConfigData> : WebhookPayload<object, object, object, TConfigData>
+			{ }
 		}
 		public static class MessageSenders
 		{
@@ -4972,6 +4993,20 @@ namespace OrderCloud.SDK
 				public string SupplierID { get; set; }
 				public string UserID { get; set; }
 			}
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/suppliers/{supplierID}/users/{userID}/tokens.</summary>
+			[SentOn("DELETE", "v1/suppliers/{supplierID}/users/{userID}/tokens")]
+			public class RevokeUserTokens : WebhookPayload<object, object, RevokeUserTokensRouteParams, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/suppliers/{supplierID}/users/{userID}/tokens.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, use the non-generic payload type instead.</typeparam>
+			[SentOn("DELETE", "v1/suppliers/{supplierID}/users/{userID}/tokens")]
+			public class RevokeUserTokens<TConfigData> : WebhookPayload<object, object, RevokeUserTokensRouteParams, TConfigData>
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/suppliers/{supplierID}/users/{userID}/tokens.</summary>
+			public class RevokeUserTokensRouteParams
+			{
+				public string SupplierID { get; set; }
+				public string UserID { get; set; }
+			}
 		}
 		public static class TrackingEvents
 		{
@@ -5231,6 +5266,20 @@ namespace OrderCloud.SDK
 			{ }
 			/// <summary>Type used to represent route parameter name/value pairs for v1/buyers/{buyerID}/users/{userID}/unlock.</summary>
 			public class UnlockUserAccountRouteParams
+			{
+				public string BuyerID { get; set; }
+				public string UserID { get; set; }
+			}
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/buyers/{buyerID}/users/{userID}/tokens.</summary>
+			[SentOn("DELETE", "v1/buyers/{buyerID}/users/{userID}/tokens")]
+			public class RevokeUserTokens : WebhookPayload<object, object, RevokeUserTokensRouteParams, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/buyers/{buyerID}/users/{userID}/tokens.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, use the non-generic payload type instead.</typeparam>
+			[SentOn("DELETE", "v1/buyers/{buyerID}/users/{userID}/tokens")]
+			public class RevokeUserTokens<TConfigData> : WebhookPayload<object, object, RevokeUserTokensRouteParams, TConfigData>
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/buyers/{buyerID}/users/{userID}/tokens.</summary>
+			public class RevokeUserTokensRouteParams
 			{
 				public string BuyerID { get; set; }
 				public string UserID { get; set; }
