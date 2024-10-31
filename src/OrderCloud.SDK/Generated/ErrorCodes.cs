@@ -85,6 +85,8 @@ namespace OrderCloud.SDK
 			public const string MustPassAnonUserToken = "Auth.MustPassAnonUserToken";
 			/// <summary>Both clientID and email are required.</summary>
 			public const string ClientIDAndEmailRequired = "Auth.ClientIDAndEmailRequired";
+			/// <summary>The provided token has been revoked. Please re-authenticate.</summary>
+			public const string TokenRevoked = "Auth.TokenRevoked";
 		}
 		public static class BillingAddress
 		{
