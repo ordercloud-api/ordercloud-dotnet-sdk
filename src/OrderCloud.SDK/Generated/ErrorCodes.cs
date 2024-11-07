@@ -44,6 +44,13 @@ namespace OrderCloud.SDK
 			/// <summary>IsAnonBuyer can be true only when a buyer user is set as the Default Context User.</summary>
 			public const string RequiredNotAnonBuyer = "ApiClient.RequiredNotAnonBuyer";
 		}
+		public static class ApiClientSecret
+		{
+			/// <summary>The maximum number of client secrets has been reached for this API client.</summary>
+			public const string MaximumClientSecretsReached = "ApiClientSecret.MaximumClientSecretsReached";
+			/// <summary>Cannot create a client secret that is already expired.</summary>
+			public const string InvalidExpirationDate = "ApiClientSecret.InvalidExpirationDate";
+		}
 		public static class ApprovalRule
 		{
 			/// <summary>Cannot delete Approval Rule because it has pending Approvals.</summary>
