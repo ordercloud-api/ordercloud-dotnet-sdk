@@ -104,6 +104,11 @@ namespace OrderCloud.SDK
 
 		/// <inheritdoc/>
 		public Task<TokenResponse> AuthenticateAsync(string clientID, string username, string password, params ApiRole[] roles) {
+			return AuthenticateAsync(clientID, username, password, null, roles);
+		}
+
+		/// <inheritdoc/>
+		public Task<TokenResponse> AuthenticateAsync(string clientID, string username, string password, string clientSecret, params ApiRole[] roles) {
 			Require(clientID, nameof(clientID));
 			Require(username, nameof(username));
 			Require(password, nameof(password));
@@ -112,6 +117,7 @@ namespace OrderCloud.SDK
 				client_id = clientID,
 				username = username,
 				password = password,
+				client_secret = clientSecret,
 				scope = string.Join(" ", roles)
 			};
 			return AuthenticateAsync(req);
@@ -132,12 +138,17 @@ namespace OrderCloud.SDK
 		}
 
 		public Task<TokenResponse> RefreshTokenAsync(string clientID, string refreshToken) {
+			return RefreshTokenAsync(clientID, refreshToken, null);
+		}
+
+		public Task<TokenResponse> RefreshTokenAsync(string clientID, string refreshToken, string clientSecret) {
 			Require(clientID, nameof(clientID));
 			Require(refreshToken, nameof(refreshToken));
 
 			var req = new OAuthTokenRequestWithRefreshTokenGrant {
 				client_id = clientID,
-				refresh_token = refreshToken
+				refresh_token = refreshToken,
+				client_secret = clientSecret
 			};
 			return AuthenticateAsync(req);
 		}

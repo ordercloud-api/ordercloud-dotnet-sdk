@@ -27,6 +27,7 @@ namespace OrderCloud.SDK
 
 		public string username { get; set; }
 		public string password { get; set; }
+		public string client_secret { get; set; }
 	}
 
 	internal class OAuthTokenRequestWithClientCredentialsGrant : OAuthTokenRequest
@@ -45,5 +46,6 @@ namespace OrderCloud.SDK
 		}
         
 		public string refresh_token { get; set; }
+		public string client_secret { get; set; }
 	}
 }

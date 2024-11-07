@@ -408,6 +408,53 @@ namespace OrderCloud.SDK
 				public string ApiClientID { get; set; }
 				public string SupplierID { get; set; }
 			}
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/apiclients/{apiClientID}/secrets.</summary>
+			[SentOn("POST", "v1/apiclients/{apiClientID}/secrets")]
+			public class CreateSecret : WebhookPayload<ApiClientSecret, ApiClientSecretCreateResponse, CreateSecretRouteParams, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/apiclients/{apiClientID}/secrets.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TApiClientSecret">Specific type of the ApiClientSecret. If not using a custom type, specify ApiClientSecret.</typeparam>
+			/// <typeparam name="TApiClientSecretCreateResponse">Specific type of the ApiClientSecretCreateResponse. If not using a custom type, specify ApiClientSecretCreateResponse.</typeparam>
+			[SentOn("POST", "v1/apiclients/{apiClientID}/secrets")]
+			public class CreateSecret<TConfigData, TApiClientSecret, TApiClientSecretCreateResponse> : WebhookPayload<TApiClientSecret, TApiClientSecretCreateResponse, CreateSecretRouteParams, TConfigData>
+				where TApiClientSecret : ApiClientSecret
+				where TApiClientSecretCreateResponse : ApiClientSecretCreateResponse
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/apiclients/{apiClientID}/secrets.</summary>
+			public class CreateSecretRouteParams
+			{
+				public string ApiClientID { get; set; }
+			}
+			/// <summary>Webhook payload sent by OrderCloud on PATCH v1/apiclients/{apiClientID}/secrets/{apiClientSecretID}.</summary>
+			[SentOn("PATCH", "v1/apiclients/{apiClientID}/secrets/{apiClientSecretID}")]
+			public class PatchSecret : WebhookPayload<ApiClientSecret, ApiClientSecret, PatchSecretRouteParams, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on PATCH v1/apiclients/{apiClientID}/secrets/{apiClientSecretID}.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TApiClientSecret">Specific type of the ApiClientSecret. If not using a custom type, specify ApiClientSecret.</typeparam>
+			[SentOn("PATCH", "v1/apiclients/{apiClientID}/secrets/{apiClientSecretID}")]
+			public class PatchSecret<TConfigData, TApiClientSecret> : WebhookPayload<TApiClientSecret, TApiClientSecret, PatchSecretRouteParams, TConfigData>
+				where TApiClientSecret : ApiClientSecret
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/apiclients/{apiClientID}/secrets/{apiClientSecretID}.</summary>
+			public class PatchSecretRouteParams
+			{
+				public string ApiClientID { get; set; }
+				public string ApiClientSecretID { get; set; }
+			}
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/apiclients/{apiClientID}/secrets/{apiClientSecretID}.</summary>
+			[SentOn("DELETE", "v1/apiclients/{apiClientID}/secrets/{apiClientSecretID}")]
+			public class DeleteSecret : WebhookPayload<object, object, DeleteSecretRouteParams, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/apiclients/{apiClientID}/secrets/{apiClientSecretID}.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, use the non-generic payload type instead.</typeparam>
+			[SentOn("DELETE", "v1/apiclients/{apiClientID}/secrets/{apiClientSecretID}")]
+			public class DeleteSecret<TConfigData> : WebhookPayload<object, object, DeleteSecretRouteParams, TConfigData>
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/apiclients/{apiClientID}/secrets/{apiClientSecretID}.</summary>
+			public class DeleteSecretRouteParams
+			{
+				public string ApiClientID { get; set; }
+				public string ApiClientSecretID { get; set; }
+			}
 		}
 		public static class ApprovalRules
 		{

@@ -495,6 +495,42 @@ namespace OrderCloud.SDK
 		/// <param name="supplierID">ID of the supplier.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task DeleteSupplierAssignmentAsync(string apiClientID, string supplierID, string accessToken = null);
+		/// <summary>Get a single API client secret.</summary>
+		/// <param name="apiClientID">ID of the api client.</param>
+		/// <param name="apiClientSecretID">ID of the api client secret.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ApiClientSecret> GetSecretAsync(string apiClientID, string apiClientSecretID, string accessToken = null);
+		/// <summary>Get a list of API client secrets.</summary>
+		/// <param name="apiClientID">ID of the api client.</param>
+		/// <param name="search">Word or phrase to search for.</param>
+		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
+		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<ApiClientSecret>> ListSecretsAsync(string apiClientID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
+		/// <summary>Get a list of API client secrets.</summary>
+		/// <param name="apiClientID">ID of the api client.</param>
+		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<ApiClientSecret>> ListSecretsAsync(string apiClientID, Action<ListOptionsBuilder<ApiClientSecret>> buildListOpts, string accessToken = null);
+		/// <summary>Create a new API client secret.</summary>
+		/// <param name="apiClientID">ID of the api client.</param>
+		/// <param name="apiClientSecret">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ApiClientSecretCreateResponse> CreateSecretAsync(string apiClientID, ApiClientSecret apiClientSecret, string accessToken = null);
+		/// <summary>Partially update a API client secret.</summary>
+		/// <param name="apiClientID">ID of the api client.</param>
+		/// <param name="apiClientSecretID">ID of the api client secret.</param>
+		/// <param name="partialApiClientSecret">The object that will be partially serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ApiClientSecret> PatchSecretAsync(string apiClientID, string apiClientSecretID, PartialApiClientSecret partialApiClientSecret, string accessToken = null);
+		/// <summary>Delete a API client secret.</summary>
+		/// <param name="apiClientID">ID of the api client.</param>
+		/// <param name="apiClientSecretID">ID of the api client secret.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task DeleteSecretAsync(string apiClientID, string apiClientSecretID, string accessToken = null);
 	}
 
 	public interface IApprovalRulesResource
@@ -6741,6 +6777,12 @@ namespace OrderCloud.SDK
 		public Task SaveAssignmentAsync(ApiClientAssignment apiClientAssignment, string accessToken = null) => Request("v1", "apiclients", "assignments").WithOAuthBearerToken(accessToken).PostJsonAsync(ValidateModel(apiClientAssignment));
 		public Task DeleteBuyerAssignmentAsync(string apiClientID, string buyerID, string accessToken = null) => Request("v1", "buyers", buyerID, "ApiClients", "Assignments", apiClientID).WithOAuthBearerToken(accessToken).DeleteAsync();
 		public Task DeleteSupplierAssignmentAsync(string apiClientID, string supplierID, string accessToken = null) => Request("v1", "suppliers", supplierID, "ApiClients", "Assignments", apiClientID).WithOAuthBearerToken(accessToken).DeleteAsync();
+		public Task<ApiClientSecret> GetSecretAsync(string apiClientID, string apiClientSecretID, string accessToken = null) => Request("v1", "apiclients", apiClientID, "secrets", apiClientSecretID).WithOAuthBearerToken(accessToken).GetJsonAsync<ApiClientSecret>();
+		public Task<ListPage<ApiClientSecret>> ListSecretsAsync(string apiClientID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) => Request("v1", "apiclients", apiClientID, "secrets").WithOAuthBearerToken(accessToken).SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<ApiClientSecret>>();
+		public Task<ListPage<ApiClientSecret>> ListSecretsAsync(string apiClientID, Action<ListOptionsBuilder<ApiClientSecret>> buildListOpts, string accessToken = null) => Request("v1", "apiclients", apiClientID, "secrets").WithOAuthBearerToken(accessToken).SetListOptions(buildListOpts).GetJsonAsync<ListPage<ApiClientSecret>>();
+		public Task<ApiClientSecretCreateResponse> CreateSecretAsync(string apiClientID, ApiClientSecret apiClientSecret, string accessToken = null) => Request("v1", "apiclients", apiClientID, "secrets").WithOAuthBearerToken(accessToken).PostJsonAsync(ValidateModel(apiClientSecret)).ReceiveJson<ApiClientSecretCreateResponse>();
+		public Task<ApiClientSecret> PatchSecretAsync(string apiClientID, string apiClientSecretID, PartialApiClientSecret partialApiClientSecret, string accessToken = null) => Request("v1", "apiclients", apiClientID, "secrets", apiClientSecretID).WithOAuthBearerToken(accessToken).PatchJsonAsync(ValidateModel(partialApiClientSecret)).ReceiveJson<ApiClientSecret>();
+		public Task DeleteSecretAsync(string apiClientID, string apiClientSecretID, string accessToken = null) => Request("v1", "apiclients", apiClientID, "secrets", apiClientSecretID).WithOAuthBearerToken(accessToken).DeleteAsync();
 	}
 
 	public class ApprovalRulesResource : OrderCloudResource, IApprovalRulesResource

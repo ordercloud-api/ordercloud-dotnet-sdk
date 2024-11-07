@@ -201,6 +201,29 @@ namespace OrderCloud.SDK
 		/// <summary>ID of the supplier. Sortable: priority level 1.</summary>
 		public string SupplierID { get => GetProp<string>("SupplierID"); set => SetProp<string>("SupplierID", value); }
 	}
+	public class ApiClientSecret : OrderCloudModel
+	{
+		/// <summary>ID of the api client secret. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 1.</summary>
+		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
+		/// <summary>Name of the api client secret. Required.</summary>
+		[Required]
+		public string Name { get => GetProp<string>("Name"); set => SetProp<string>("Name", value); }
+		/// <summary>Expiration of the api client secret.</summary>
+		public DateTimeOffset? Expiration { get => GetProp<DateTimeOffset?>("Expiration"); set => SetProp<DateTimeOffset?>("Expiration", value); }
+	}
+	public class ApiClientSecretCreateResponse : OrderCloudModel
+	{
+		/// <summary>Client secret of the api client secret create response.</summary>
+		[ApiReadOnly]
+		public string ClientSecret { get => GetProp<string>("ClientSecret"); set => SetProp<string>("ClientSecret", value); }
+		/// <summary>ID of the api client secret create response. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 1.</summary>
+		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
+		/// <summary>Name of the api client secret create response. Required.</summary>
+		[Required]
+		public string Name { get => GetProp<string>("Name"); set => SetProp<string>("Name", value); }
+		/// <summary>Expiration of the api client secret create response.</summary>
+		public DateTimeOffset? Expiration { get => GetProp<DateTimeOffset?>("Expiration"); set => SetProp<DateTimeOffset?>("Expiration", value); }
+	}
 	public class ApprovalInfo : OrderCloudModel
 	{
 		/// <summary>Comments to be saved with the order approval or denial.</summary>
@@ -1080,6 +1103,8 @@ namespace OrderCloud.SDK
 		public bool OrderCanExceed { get => GetProp<bool>("OrderCanExceed"); set => SetProp<bool>("OrderCanExceed", value); }
 		/// <summary>Quantity available of the inventory record.</summary>
 		public int QuantityAvailable { get => GetProp<int>("QuantityAvailable"); set => SetProp<int>("QuantityAvailable", value); }
+		/// <summary>Notification point of the inventory record.</summary>
+		public int? NotificationPoint { get => GetProp<int?>("NotificationPoint"); set => SetProp<int?>("NotificationPoint", value); }
 		/// <summary>Last updated of the inventory record.</summary>
 		[ApiReadOnly]
 		public DateTimeOffset LastUpdated { get => GetProp<DateTimeOffset>("LastUpdated"); set => SetProp<DateTimeOffset>("LastUpdated", value); }
@@ -3122,6 +3147,8 @@ namespace OrderCloud.SDK
 	{
 		/// <summary>Quantity available of the variant inventory.</summary>
 		public int? QuantityAvailable { get => GetProp<int?>("QuantityAvailable"); set => SetProp<int?>("QuantityAvailable", value); }
+		/// <summary>Notification point of the variant inventory.</summary>
+		public int? NotificationPoint { get => GetProp<int?>("NotificationPoint"); set => SetProp<int?>("NotificationPoint", value); }
 		/// <summary>Last updated of the variant inventory.</summary>
 		[ApiReadOnly]
 		public DateTimeOffset LastUpdated { get => GetProp<DateTimeOffset>("LastUpdated"); set => SetProp<DateTimeOffset>("LastUpdated", value); }
@@ -3195,6 +3222,7 @@ namespace OrderCloud.SDK
 	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic PartialApiClient class instead.</typeparam>
 	public class PartialApiClient<Txp> : PartialApiClient
 	{ }
+	public class PartialApiClientSecret : ApiClientSecret, IPartial { }
 	public class PartialApprovalRule : ApprovalRule, IPartial { }
 	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic PartialApprovalRule class instead.</typeparam>
 	public class PartialApprovalRule<Txp> : PartialApprovalRule
