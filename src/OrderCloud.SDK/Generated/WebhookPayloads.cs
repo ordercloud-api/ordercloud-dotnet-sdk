@@ -2064,6 +2064,37 @@ namespace OrderCloud.SDK
 				public string OrderID { get; set; }
 			}
 		}
+		public static class InventoryIntegrations
+		{
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/integrations/inventory.</summary>
+			[SentOn("DELETE", "v1/integrations/inventory")]
+			public class Delete : WebhookPayload<object, object, object, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/integrations/inventory.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, use the non-generic payload type instead.</typeparam>
+			[SentOn("DELETE", "v1/integrations/inventory")]
+			public class Delete<TConfigData> : WebhookPayload<object, object, object, TConfigData>
+			{ }
+			/// <summary>Webhook payload sent by OrderCloud on PUT v1/integrations/inventory.</summary>
+			[SentOn("PUT", "v1/integrations/inventory")]
+			public class Save : WebhookPayload<InventoryIntegration, InventoryIntegration, object, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on PUT v1/integrations/inventory.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TInventoryIntegration">Specific type of the InventoryIntegration. If not using a custom type, specify InventoryIntegration.</typeparam>
+			[SentOn("PUT", "v1/integrations/inventory")]
+			public class Save<TConfigData, TInventoryIntegration> : WebhookPayload<TInventoryIntegration, TInventoryIntegration, object, TConfigData>
+				where TInventoryIntegration : InventoryIntegration
+			{ }
+			/// <summary>Webhook payload sent by OrderCloud on PATCH v1/integrations/inventory.</summary>
+			[SentOn("PATCH", "v1/integrations/inventory")]
+			public class Patch : WebhookPayload<InventoryIntegration, InventoryIntegration, object, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on PATCH v1/integrations/inventory.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TInventoryIntegration">Specific type of the InventoryIntegration. If not using a custom type, specify InventoryIntegration.</typeparam>
+			[SentOn("PATCH", "v1/integrations/inventory")]
+			public class Patch<TConfigData, TInventoryIntegration> : WebhookPayload<TInventoryIntegration, TInventoryIntegration, object, TConfigData>
+				where TInventoryIntegration : InventoryIntegration
+			{ }
+		}
 		public static class InventoryRecords
 		{
 			/// <summary>Webhook payload sent by OrderCloud on POST v1/products/{productID}/inventoryrecords.</summary>
@@ -2662,6 +2693,21 @@ namespace OrderCloud.SDK
 			{
 				public string ProductCollectionID { get; set; }
 				public string ProductID { get; set; }
+			}
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/me/productcollections/{productCollectionID}/products.</summary>
+			[SentOn("POST", "v1/me/productcollections/{productCollectionID}/products")]
+			public class SaveProductCollectionEntry : WebhookPayload<ProductCollectionEntry, object, SaveProductCollectionEntryRouteParams, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/me/productcollections/{productCollectionID}/products.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TProductCollectionEntry">Specific type of the ProductCollectionEntry. If not using a custom type, specify ProductCollectionEntry.</typeparam>
+			[SentOn("POST", "v1/me/productcollections/{productCollectionID}/products")]
+			public class SaveProductCollectionEntry<TConfigData, TProductCollectionEntry> : WebhookPayload<TProductCollectionEntry, object, SaveProductCollectionEntryRouteParams, TConfigData>
+				where TProductCollectionEntry : ProductCollectionEntry
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/me/productcollections/{productCollectionID}/products.</summary>
+			public class SaveProductCollectionEntryRouteParams
+			{
+				public string ProductCollectionID { get; set; }
 			}
 			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/me/productcollections/{productCollectionID}/{productID}.</summary>
 			[SentOn("DELETE", "v1/me/productcollections/{productCollectionID}/{productID}")]
