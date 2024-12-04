@@ -1073,7 +1073,7 @@ namespace OrderCloud.SDK
 	{
 		/// <summary>If true, inventory will be tracked and enforced.</summary>
 		public bool Enabled { get => GetProp<bool>("Enabled"); set => SetProp<bool>("Enabled", value); }
-		/// <summary>For reference only, does not influence any OrderCloud behavior at this time.</summary>
+		/// <summary>Notification point of the inventory.</summary>
 		public int? NotificationPoint { get => GetProp<int?>("NotificationPoint"); set => SetProp<int?>("NotificationPoint", value); }
 		/// <summary>If true, QuantityAvailable will be determined at the Variant level.</summary>
 		public bool VariantLevelTracking { get => GetProp<bool>("VariantLevelTracking"); set => SetProp<bool>("VariantLevelTracking", value); }
@@ -1084,6 +1084,14 @@ namespace OrderCloud.SDK
 		/// <summary>Last updated of the inventory.</summary>
 		[ApiReadOnly]
 		public DateTimeOffset? LastUpdated { get => GetProp<DateTimeOffset?>("LastUpdated"); set => SetProp<DateTimeOffset?>("LastUpdated", value); }
+	}
+	public class InventoryIntegration : OrderCloudModel
+	{
+		/// <summary>ID of the delivery config. Required.</summary>
+		[Required]
+		public string DeliveryConfigID { get => GetProp<string>("DeliveryConfigID"); set => SetProp<string>("DeliveryConfigID", value); }
+		/// <summary>Notification point only of the inventory integration.</summary>
+		public bool NotificationPointOnly { get => GetProp<bool>("NotificationPointOnly"); set => SetProp<bool>("NotificationPointOnly", value); }
 	}
 	public class InventoryRecord : OrderCloudModel
 	{
@@ -2320,6 +2328,79 @@ namespace OrderCloud.SDK
 		/// <summary>Container for extended (custom) properties of the product collection.</summary>
 		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
 	}
+	public class ProductCollectionBuyerProduct : OrderCloudModel
+	{
+		/// <summary>List order of the product collection buyer product.</summary>
+		public int? ListOrder { get => GetProp<int?>("ListOrder"); set => SetProp<int?>("ListOrder", value); }
+		/// <summary>Date added of the product collection buyer product.</summary>
+		public DateTimeOffset? DateAdded { get => GetProp<DateTimeOffset?>("DateAdded"); set => SetProp<DateTimeOffset?>("DateAdded", value); }
+		/// <summary>Price schedule of the product collection buyer product.</summary>
+		[ApiReadOnly]
+		public PriceSchedule PriceSchedule { get => GetProp<PriceSchedule>("PriceSchedule"); set => SetProp<PriceSchedule>("PriceSchedule", value); }
+		/// <summary>ID of the product collection buyer product. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 3.</summary>
+		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
+		/// <summary>ID of the parent product. If not null, IsParent should be false</summary>
+		public string ParentID { get => GetProp<string>("ParentID"); set => SetProp<string>("ParentID", value); }
+		/// <summary>If true, ParentID must be null, as a parent product cannot have a parent itself.</summary>
+		public bool IsParent { get => GetProp<bool>("IsParent"); set => SetProp<bool>("IsParent", value); }
+		/// <summary>If true, IsParent must be false, as a parent product cannot be a bundle.</summary>
+		[ApiReadOnly]
+		public bool IsBundle { get => GetProp<bool>("IsBundle"); set => SetProp<bool>("IsBundle", value); }
+		/// <summary>Name of the product collection buyer product. Required. Max length 100 characters. Searchable: priority level 3. Sortable: priority level 2.</summary>
+		[Required]
+		public string Name { get => GetProp<string>("Name"); set => SetProp<string>("Name", value); }
+		/// <summary>Description of the product collection buyer product. Max length 2000 characters. Searchable: priority level 4.</summary>
+		public string Description { get => GetProp<string>("Description"); set => SetProp<string>("Description", value); }
+		/// <summary>For reference only, does not influence any OrderCloud behavior. Used to indicate an amount per Quantity.</summary>
+		public int? QuantityMultiplier { get => GetProp<int?>("QuantityMultiplier", 1); set => SetProp<int?>("QuantityMultiplier", value); }
+		/// <summary>Ship weight of the product collection buyer product.</summary>
+		public decimal? ShipWeight { get => GetProp<decimal?>("ShipWeight"); set => SetProp<decimal?>("ShipWeight", value); }
+		/// <summary>Ship height of the product collection buyer product.</summary>
+		public decimal? ShipHeight { get => GetProp<decimal?>("ShipHeight"); set => SetProp<decimal?>("ShipHeight", value); }
+		/// <summary>Ship width of the product collection buyer product.</summary>
+		public decimal? ShipWidth { get => GetProp<decimal?>("ShipWidth"); set => SetProp<decimal?>("ShipWidth", value); }
+		/// <summary>Ship length of the product collection buyer product.</summary>
+		public decimal? ShipLength { get => GetProp<decimal?>("ShipLength"); set => SetProp<decimal?>("ShipLength", value); }
+		/// <summary>If false, product is not visible or purchasable from the Shopper perspective.</summary>
+		public bool Active { get => GetProp<bool>("Active"); set => SetProp<bool>("Active", value); }
+		/// <summary>Count of Specs assigned to the product.</summary>
+		[ApiReadOnly]
+		public int SpecCount { get => GetProp<int>("SpecCount"); set => SetProp<int>("SpecCount", value); }
+		/// <summary>Count of Variants generated from the product/spec combinations.</summary>
+		[ApiReadOnly]
+		public int VariantCount { get => GetProp<int>("VariantCount"); set => SetProp<int>("VariantCount", value); }
+		/// <summary>Marketplace Owner or Supplier AddressID where the product will be shipped from. Can be used to calculate shipping costs.</summary>
+		public string ShipFromAddressID { get => GetProp<string>("ShipFromAddressID"); set => SetProp<string>("ShipFromAddressID", value); }
+		/// <summary>Inventory of the product collection buyer product.</summary>
+		public Inventory Inventory { get => GetProp<Inventory>("Inventory"); set => SetProp<Inventory>("Inventory", value); }
+		/// <summary>If this property has a value and a SupplierID isn't explicitly passed when creating a LineItem, this SupplierID will be used.</summary>
+		public string DefaultSupplierID { get => GetProp<string>("DefaultSupplierID"); set => SetProp<string>("DefaultSupplierID", value); }
+		/// <summary>If true, all suppliers are eligible to opt into selling this product.</summary>
+		public bool AllSuppliersCanSell { get => GetProp<bool>("AllSuppliersCanSell"); set => SetProp<bool>("AllSuppliersCanSell", value); }
+		/// <summary>Returnable of the product collection buyer product.</summary>
+		public bool Returnable { get => GetProp<bool>("Returnable"); set => SetProp<bool>("Returnable", value); }
+		/// <summary>Container for extended (custom) properties of the product collection buyer product.</summary>
+		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
+	}
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, specify dynamic.</typeparam>
+	/// <typeparam name="TPriceSchedule">Specific type of the PriceSchedule property. If not using a custom type, specify PriceSchedule.</typeparam>
+	public class ProductCollectionBuyerProduct<Txp, TPriceSchedule> : ProductCollectionBuyerProduct
+		where TPriceSchedule : PriceSchedule
+	{
+		/// <summary>Container for extended (custom) properties of the product collection buyer product.</summary>
+		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
+		/// <summary>Price schedule of the product collection buyer product.</summary>
+		[ApiReadOnly]
+		public new TPriceSchedule PriceSchedule { get => GetProp<TPriceSchedule>("PriceSchedule"); set => SetProp<TPriceSchedule>("PriceSchedule", value); }
+	}
+	public class ProductCollectionEntry : OrderCloudModel
+	{
+		/// <summary>ID of the product. Required.</summary>
+		[Required]
+		public string ProductID { get => GetProp<string>("ProductID"); set => SetProp<string>("ProductID", value); }
+		/// <summary>List order of the product collection entry.</summary>
+		public int? ListOrder { get => GetProp<int?>("ListOrder"); set => SetProp<int?>("ListOrder", value); }
+	}
 	public class ProductCollectionInvitation : OrderCloudModel
 	{
 		/// <summary>ID of the product collection invitation. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 2.</summary>
@@ -2342,6 +2423,69 @@ namespace OrderCloud.SDK
 	public class ProductCollectionInvitation<Txp> : ProductCollectionInvitation
 	{
 		/// <summary>Container for extended (custom) properties of the product collection invitation.</summary>
+		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
+	}
+	public class ProductCollectionProduct : OrderCloudModel
+	{
+		/// <summary>List order of the product collection product.</summary>
+		public int? ListOrder { get => GetProp<int?>("ListOrder"); set => SetProp<int?>("ListOrder", value); }
+		/// <summary>Date added of the product collection product.</summary>
+		public DateTimeOffset? DateAdded { get => GetProp<DateTimeOffset?>("DateAdded"); set => SetProp<DateTimeOffset?>("DateAdded", value); }
+		/// <summary>ID of the organization that owns the Product. Only the Marketplace Owner can override the OwnerID on create.</summary>
+		public string OwnerID { get => GetProp<string>("OwnerID"); set => SetProp<string>("OwnerID", value); }
+		/// <summary>When provided, no explicit PriceSchedule assignment is required. When a PriceSchedule assignment exists, it will override any default provided.</summary>
+		public string DefaultPriceScheduleID { get => GetProp<string>("DefaultPriceScheduleID"); set => SetProp<string>("DefaultPriceScheduleID", value); }
+		/// <summary>If true, when this product is ordered by a Buyer, it will automatically be added to a new Order from the Marketplace Owner to the Default Supplier and submitted. Requires a valid DefaultSupplierID.</summary>
+		public bool AutoForward { get => GetProp<bool>("AutoForward"); set => SetProp<bool>("AutoForward", value); }
+		/// <summary>ID of the product collection product. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 3.</summary>
+		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
+		/// <summary>ID of the parent product. If not null, IsParent should be false</summary>
+		public string ParentID { get => GetProp<string>("ParentID"); set => SetProp<string>("ParentID", value); }
+		/// <summary>If true, ParentID must be null, as a parent product cannot have a parent itself.</summary>
+		public bool IsParent { get => GetProp<bool>("IsParent"); set => SetProp<bool>("IsParent", value); }
+		/// <summary>If true, IsParent must be false, as a parent product cannot be a bundle.</summary>
+		[ApiReadOnly]
+		public bool IsBundle { get => GetProp<bool>("IsBundle"); set => SetProp<bool>("IsBundle", value); }
+		/// <summary>Name of the product collection product. Required. Max length 100 characters. Searchable: priority level 3. Sortable: priority level 2.</summary>
+		[Required]
+		public string Name { get => GetProp<string>("Name"); set => SetProp<string>("Name", value); }
+		/// <summary>Description of the product collection product. Max length 2000 characters. Searchable: priority level 4.</summary>
+		public string Description { get => GetProp<string>("Description"); set => SetProp<string>("Description", value); }
+		/// <summary>For reference only, does not influence any OrderCloud behavior. Used to indicate an amount per Quantity.</summary>
+		public int? QuantityMultiplier { get => GetProp<int?>("QuantityMultiplier", 1); set => SetProp<int?>("QuantityMultiplier", value); }
+		/// <summary>Ship weight of the product collection product.</summary>
+		public decimal? ShipWeight { get => GetProp<decimal?>("ShipWeight"); set => SetProp<decimal?>("ShipWeight", value); }
+		/// <summary>Ship height of the product collection product.</summary>
+		public decimal? ShipHeight { get => GetProp<decimal?>("ShipHeight"); set => SetProp<decimal?>("ShipHeight", value); }
+		/// <summary>Ship width of the product collection product.</summary>
+		public decimal? ShipWidth { get => GetProp<decimal?>("ShipWidth"); set => SetProp<decimal?>("ShipWidth", value); }
+		/// <summary>Ship length of the product collection product.</summary>
+		public decimal? ShipLength { get => GetProp<decimal?>("ShipLength"); set => SetProp<decimal?>("ShipLength", value); }
+		/// <summary>If false, product is not visible or purchasable from the Shopper perspective.</summary>
+		public bool Active { get => GetProp<bool>("Active"); set => SetProp<bool>("Active", value); }
+		/// <summary>Count of Specs assigned to the product.</summary>
+		[ApiReadOnly]
+		public int SpecCount { get => GetProp<int>("SpecCount"); set => SetProp<int>("SpecCount", value); }
+		/// <summary>Count of Variants generated from the product/spec combinations.</summary>
+		[ApiReadOnly]
+		public int VariantCount { get => GetProp<int>("VariantCount"); set => SetProp<int>("VariantCount", value); }
+		/// <summary>Marketplace Owner or Supplier AddressID where the product will be shipped from. Can be used to calculate shipping costs.</summary>
+		public string ShipFromAddressID { get => GetProp<string>("ShipFromAddressID"); set => SetProp<string>("ShipFromAddressID", value); }
+		/// <summary>Inventory of the product collection product.</summary>
+		public Inventory Inventory { get => GetProp<Inventory>("Inventory"); set => SetProp<Inventory>("Inventory", value); }
+		/// <summary>If this property has a value and a SupplierID isn't explicitly passed when creating a LineItem, this SupplierID will be used.</summary>
+		public string DefaultSupplierID { get => GetProp<string>("DefaultSupplierID"); set => SetProp<string>("DefaultSupplierID", value); }
+		/// <summary>If true, all suppliers are eligible to opt into selling this product.</summary>
+		public bool AllSuppliersCanSell { get => GetProp<bool>("AllSuppliersCanSell"); set => SetProp<bool>("AllSuppliersCanSell", value); }
+		/// <summary>Returnable of the product collection product.</summary>
+		public bool Returnable { get => GetProp<bool>("Returnable"); set => SetProp<bool>("Returnable", value); }
+		/// <summary>Container for extended (custom) properties of the product collection product.</summary>
+		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
+	}
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic ProductCollectionProduct class instead.</typeparam>
+	public class ProductCollectionProduct<Txp> : ProductCollectionProduct
+	{
+		/// <summary>Container for extended (custom) properties of the product collection product.</summary>
 		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
 	}
 	public class ProductFacet : OrderCloudModel
@@ -3273,6 +3417,7 @@ namespace OrderCloud.SDK
 	public class PartialIncrementor : Incrementor, IPartial { }
 	public class PartialIntegrationEvent : IntegrationEvent, IPartial { }
 	public class PartialInventory : Inventory, IPartial { }
+	public class PartialInventoryIntegration : InventoryIntegration, IPartial { }
 	public class PartialInventoryRecord : InventoryRecord, IPartial { }
 	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, specify dynamic.</typeparam>
 	/// <typeparam name="TAddress">Specific type of the Address property. If not using a custom type, specify Address.</typeparam>

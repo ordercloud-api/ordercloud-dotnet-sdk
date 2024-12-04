@@ -94,6 +94,8 @@ namespace OrderCloud.SDK
 			public const string ClientIDAndEmailRequired = "Auth.ClientIDAndEmailRequired";
 			/// <summary>The provided token has been revoked. Please re-authenticate.</summary>
 			public const string TokenRevoked = "Auth.TokenRevoked";
+			/// <summary>Features in beta are subject to change and are not available in production.</summary>
+			public const string BetaForbiddenProduction = "Auth.BetaForbiddenProduction";
 		}
 		public static class BillingAddress
 		{
@@ -256,6 +258,13 @@ namespace OrderCloud.SDK
 			public const string ProductInventoryMustExist = "InventoryConfiguration.ProductInventoryMustExist";
 			/// <summary>Product.Inventory.VariantLevelTracking must be false in order to create InventoryRecords at the product level, and true in order to create InventoryRecords at the variant level.</summary>
 			public const string InvalidVariantLevelTracking = "InventoryConfiguration.InvalidVariantLevelTracking";
+		}
+		public static class InventoryIntegration
+		{
+			/// <summary>Inventory integration returned the error.</summary>
+			public const string IntegrationErrorReturned = "InventoryIntegration.IntegrationErrorReturned";
+			/// <summary>DeliveryConfigID is required for InventoryIntegration.</summary>
+			public const string DeliveryConfigIDRequired = "InventoryIntegration.DeliveryConfigIDRequired";
 		}
 		public static class InventoryRecord
 		{
