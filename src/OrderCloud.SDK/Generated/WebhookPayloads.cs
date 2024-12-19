@@ -4048,6 +4048,37 @@ namespace OrderCloud.SDK
 				where TProductSyncConfig : ProductSyncConfig
 			{ }
 		}
+		public static class PromotionIntegrations
+		{
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/integrations/promotion.</summary>
+			[SentOn("DELETE", "v1/integrations/promotion")]
+			public class Delete : WebhookPayload<object, object, object, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/integrations/promotion.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, use the non-generic payload type instead.</typeparam>
+			[SentOn("DELETE", "v1/integrations/promotion")]
+			public class Delete<TConfigData> : WebhookPayload<object, object, object, TConfigData>
+			{ }
+			/// <summary>Webhook payload sent by OrderCloud on PUT v1/integrations/promotion.</summary>
+			[SentOn("PUT", "v1/integrations/promotion")]
+			public class Save : WebhookPayload<PromotionIntegration, PromotionIntegration, object, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on PUT v1/integrations/promotion.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TPromotionIntegration">Specific type of the PromotionIntegration. If not using a custom type, specify PromotionIntegration.</typeparam>
+			[SentOn("PUT", "v1/integrations/promotion")]
+			public class Save<TConfigData, TPromotionIntegration> : WebhookPayload<TPromotionIntegration, TPromotionIntegration, object, TConfigData>
+				where TPromotionIntegration : PromotionIntegration
+			{ }
+			/// <summary>Webhook payload sent by OrderCloud on PATCH v1/integrations/promotion.</summary>
+			[SentOn("PATCH", "v1/integrations/promotion")]
+			public class Patch : WebhookPayload<PromotionIntegration, PromotionIntegration, object, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on PATCH v1/integrations/promotion.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TPromotionIntegration">Specific type of the PromotionIntegration. If not using a custom type, specify PromotionIntegration.</typeparam>
+			[SentOn("PATCH", "v1/integrations/promotion")]
+			public class Patch<TConfigData, TPromotionIntegration> : WebhookPayload<TPromotionIntegration, TPromotionIntegration, object, TConfigData>
+				where TPromotionIntegration : PromotionIntegration
+			{ }
+		}
 		public static class Promotions
 		{
 			/// <summary>Webhook payload sent by OrderCloud on POST v1/promotions.</summary>

@@ -785,7 +785,7 @@ namespace OrderCloud.SDK
 	{
 		/// <summary>ID of the order.</summary>
 		public string OrderID { get => GetProp<string>("OrderID"); set => SetProp<string>("OrderID", value); }
-		/// <summary>Returned only when include=Order (or include=Order.???) is provided in the query string.</summary>
+		/// <summary>Currently unused.</summary>
 		public Order Order { get => GetProp<Order>("Order"); set => SetProp<Order>("Order", value); }
 		/// <summary>ID of the extended line item. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable.</summary>
 		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
@@ -879,7 +879,7 @@ namespace OrderCloud.SDK
 	{
 		/// <summary>Container for extended (custom) properties of the extended line item.</summary>
 		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
-		/// <summary>Returned only when include=Order (or include=Order.???) is provided in the query string.</summary>
+		/// <summary>Currently unused.</summary>
 		public new TOrder Order { get => GetProp<TOrder>("Order"); set => SetProp<TOrder>("Order", value); }
 		/// <summary>Product of the extended line item.</summary>
 		[ApiReadOnly]
@@ -1824,6 +1824,8 @@ namespace OrderCloud.SDK
 		public bool AutoApply { get => GetProp<bool>("AutoApply", false); set => SetProp<bool>("AutoApply", value); }
 		/// <summary>Active of the order promotion. Sortable.</summary>
 		public bool Active { get => GetProp<bool>("Active", true); set => SetProp<bool>("Active", value); }
+		/// <summary>Use integration of the order promotion.</summary>
+		public bool UseIntegration { get => GetProp<bool>("UseIntegration"); set => SetProp<bool>("UseIntegration", value); }
 		/// <summary>Used to control the order in which promotions are applied when calling the auto apply endpoint.</summary>
 		public int? Priority { get => GetProp<int?>("Priority"); set => SetProp<int?>("Priority", value); }
 		/// <summary>Container for extended (custom) properties of the order promotion.</summary>
@@ -2612,6 +2614,8 @@ namespace OrderCloud.SDK
 		public bool AutoApply { get => GetProp<bool>("AutoApply", false); set => SetProp<bool>("AutoApply", value); }
 		/// <summary>Active of the promotion. Sortable.</summary>
 		public bool Active { get => GetProp<bool>("Active", true); set => SetProp<bool>("Active", value); }
+		/// <summary>Use integration of the promotion.</summary>
+		public bool UseIntegration { get => GetProp<bool>("UseIntegration"); set => SetProp<bool>("UseIntegration", value); }
 		/// <summary>Used to control the order in which promotions are applied when calling the auto apply endpoint.</summary>
 		public int? Priority { get => GetProp<int?>("Priority"); set => SetProp<int?>("Priority", value); }
 		/// <summary>Container for extended (custom) properties of the promotion.</summary>
@@ -2633,6 +2637,14 @@ namespace OrderCloud.SDK
 		public string BuyerID { get => GetProp<string>("BuyerID"); set => SetProp<string>("BuyerID", value); }
 		/// <summary>ID of the user group. Sortable: priority level 4.</summary>
 		public string UserGroupID { get => GetProp<string>("UserGroupID"); set => SetProp<string>("UserGroupID", value); }
+	}
+	public class PromotionIntegration : OrderCloudModel
+	{
+		/// <summary>Security feature that allows your middleware to verify the digital signature in the request header to ensure you only accept trusted data.</summary>
+		[Required]
+		public string HashKey { get => GetProp<string>("HashKey"); set => SetProp<string>("HashKey", value); }
+		/// <summary>Url of the promotion integration.</summary>
+		public string Url { get => GetProp<string>("Url"); set => SetProp<string>("Url", value); }
 	}
 	public class PromotionOverride : OrderCloudModel
 	{
@@ -3512,6 +3524,7 @@ namespace OrderCloud.SDK
 	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic PartialPromotion class instead.</typeparam>
 	public class PartialPromotion<Txp> : PartialPromotion
 	{ }
+	public class PartialPromotionIntegration : PromotionIntegration, IPartial { }
 	public class PartialSearchIngestion : SearchIngestion, IPartial { }
 	public class PartialSecurityProfile : SecurityProfile, IPartial { }
 	public class PartialSellerApprovalRule : SellerApprovalRule, IPartial { }

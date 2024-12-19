@@ -45,6 +45,7 @@ namespace OrderCloud.SDK
 		IProductFacetsResource ProductFacets { get; }
 		IProductsResource Products { get; }
 		IProductSyncsResource ProductSyncs { get; }
+		IPromotionIntegrationsResource PromotionIntegrations { get; }
 		IPromotionsResource Promotions { get; }
 		ISecurityProfilesResource SecurityProfiles { get; }
 		ISellerApprovalRulesResource SellerApprovalRules { get; }
@@ -5022,6 +5023,24 @@ namespace OrderCloud.SDK
 		Task<ProductSyncConfig> PatchAsync(PartialProductSyncConfig partialProductSyncConfig, string accessToken = null);
 	}
 
+	public interface IPromotionIntegrationsResource
+	{
+		/// <summary>Get a single promotion integration.</summary>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<PromotionIntegration> GetAsync(string accessToken = null);
+		/// <summary>Delete a promotion integration.</summary>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task DeleteAsync(string accessToken = null);
+		/// <summary>Create or update a promotion integration. If an object with the same ID already exists, it will be overwritten.</summary>
+		/// <param name="promotionIntegration">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<PromotionIntegration> SaveAsync(PromotionIntegration promotionIntegration, string accessToken = null);
+		/// <summary>Partially update a promotion integration.</summary>
+		/// <param name="partialPromotionIntegration">The object that will be partially serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<PromotionIntegration> PatchAsync(PartialPromotionIntegration partialPromotionIntegration, string accessToken = null);
+	}
+
 	public interface IPromotionsResource
 	{
 		/// <summary>Get a single promotion.</summary>
@@ -6624,6 +6643,7 @@ namespace OrderCloud.SDK
 			ProductFacets = new ProductFacetsResource(this);
 			Products = new ProductsResource(this);
 			ProductSyncs = new ProductSyncsResource(this);
+			PromotionIntegrations = new PromotionIntegrationsResource(this);
 			Promotions = new PromotionsResource(this);
 			SecurityProfiles = new SecurityProfilesResource(this);
 			SellerApprovalRules = new SellerApprovalRulesResource(this);
@@ -6683,6 +6703,7 @@ namespace OrderCloud.SDK
 		public IProductFacetsResource ProductFacets { get; private set; }
 		public IProductsResource Products { get; private set; }
 		public IProductSyncsResource ProductSyncs { get; private set; }
+		public IPromotionIntegrationsResource PromotionIntegrations { get; private set; }
 		public IPromotionsResource Promotions { get; private set; }
 		public ISecurityProfilesResource SecurityProfiles { get; private set; }
 		public ISellerApprovalRulesResource SellerApprovalRules { get; private set; }
@@ -7718,6 +7739,15 @@ namespace OrderCloud.SDK
 		public Task DeleteAsync(string accessToken = null) => Request("v1", "integrations", "productsync").WithOAuthBearerToken(accessToken).DeleteAsync();
 		public Task<ProductSyncConfig> SaveAsync(ProductSyncConfig productSyncConfig, string accessToken = null) => Request("v1", "integrations", "productsync").WithOAuthBearerToken(accessToken).PutJsonAsync(ValidateModel(productSyncConfig)).ReceiveJson<ProductSyncConfig>();
 		public Task<ProductSyncConfig> PatchAsync(PartialProductSyncConfig partialProductSyncConfig, string accessToken = null) => Request("v1", "integrations", "productsync").WithOAuthBearerToken(accessToken).PatchJsonAsync(ValidateModel(partialProductSyncConfig)).ReceiveJson<ProductSyncConfig>();
+	}
+
+	public class PromotionIntegrationsResource : OrderCloudResource, IPromotionIntegrationsResource
+	{
+		internal PromotionIntegrationsResource(OrderCloudClient client) : base(client) { }
+		public Task<PromotionIntegration> GetAsync(string accessToken = null) => Request("v1", "integrations", "promotion").WithOAuthBearerToken(accessToken).GetJsonAsync<PromotionIntegration>();
+		public Task DeleteAsync(string accessToken = null) => Request("v1", "integrations", "promotion").WithOAuthBearerToken(accessToken).DeleteAsync();
+		public Task<PromotionIntegration> SaveAsync(PromotionIntegration promotionIntegration, string accessToken = null) => Request("v1", "integrations", "promotion").WithOAuthBearerToken(accessToken).PutJsonAsync(ValidateModel(promotionIntegration)).ReceiveJson<PromotionIntegration>();
+		public Task<PromotionIntegration> PatchAsync(PartialPromotionIntegration partialPromotionIntegration, string accessToken = null) => Request("v1", "integrations", "promotion").WithOAuthBearerToken(accessToken).PatchJsonAsync(ValidateModel(partialPromotionIntegration)).ReceiveJson<PromotionIntegration>();
 	}
 
 	public class PromotionsResource : OrderCloudResource, IPromotionsResource
