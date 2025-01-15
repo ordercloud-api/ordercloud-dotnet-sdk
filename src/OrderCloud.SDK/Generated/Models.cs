@@ -1062,6 +1062,11 @@ namespace OrderCloud.SDK
 		/// <summary>URL the IntegrationEvent will POST data to, likely a route within your middleware.</summary>
 		[Required]
 		public string CustomImplementationUrl { get => GetProp<string>("CustomImplementationUrl"); set => SetProp<string>("CustomImplementationUrl", value); }
+		/// <summary>The header name that can be passed to your middleware.</summary>
+		public string CustomAuthHeaderName { get => GetProp<string>("CustomAuthHeaderName"); set => SetProp<string>("CustomAuthHeaderName", value); }
+		/// <summary>The header value that can be passed to your middleware.</summary>
+		[ApiWriteOnly]
+		public string CustomAuthHeaderValue { get => GetProp<string>("CustomAuthHeaderValue"); set => SetProp<string>("CustomAuthHeaderValue", value); }
 		/// <summary>Name of the integration event. Required. Searchable: priority level 3. Sortable: priority level 3.</summary>
 		[Required]
 		public string Name { get => GetProp<string>("Name"); set => SetProp<string>("Name", value); }

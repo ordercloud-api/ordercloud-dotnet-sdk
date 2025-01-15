@@ -198,6 +198,11 @@ namespace OrderCloud.SDK
 			/// <summary>Using order history in expressions requires premium order search to be enabled.</summary>
 			public const string OrderHistoryCannotBeUsed = "Expression.OrderHistoryCannotBeUsed";
 		}
+		public static class FullSyncStatus
+		{
+			/// <summary>A full sync for this type is already running.</summary>
+			public const string FullSyncAlreadyRunning = "FullSyncStatus.FullSyncAlreadyRunning";
+		}
 		public static class Impersonation
 		{
 			/// <summary>Invalid ApiClient. Not a buyer network and CompanyID is null.</summary>
