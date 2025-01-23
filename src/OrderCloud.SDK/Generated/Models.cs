@@ -2650,6 +2650,11 @@ namespace OrderCloud.SDK
 		public string HashKey { get => GetProp<string>("HashKey"); set => SetProp<string>("HashKey", value); }
 		/// <summary>Url of the promotion integration.</summary>
 		public string Url { get => GetProp<string>("Url"); set => SetProp<string>("Url", value); }
+		/// <summary>The header name that can be passed to your middleware.</summary>
+		public string CustomAuthHeaderName { get => GetProp<string>("CustomAuthHeaderName"); set => SetProp<string>("CustomAuthHeaderName", value); }
+		/// <summary>The header value that can be passed to your middleware.</summary>
+		[ApiWriteOnly]
+		public string CustomAuthHeaderValue { get => GetProp<string>("CustomAuthHeaderValue"); set => SetProp<string>("CustomAuthHeaderValue", value); }
 	}
 	public class PromotionOverride : OrderCloudModel
 	{
@@ -3117,6 +3122,11 @@ namespace OrderCloud.SDK
 		public string Url { get => GetProp<string>("Url"); set => SetProp<string>("Url", value); }
 		/// <summary>Container for extended (custom) properties of the subscription integration.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
+		/// <summary>The header name that can be passed to your middleware.</summary>
+		public string CustomAuthHeaderName { get => GetProp<string>("CustomAuthHeaderName"); set => SetProp<string>("CustomAuthHeaderName", value); }
+		/// <summary>The header value that can be passed to your middleware.</summary>
+		[ApiWriteOnly]
+		public string CustomAuthHeaderValue { get => GetProp<string>("CustomAuthHeaderValue"); set => SetProp<string>("CustomAuthHeaderValue", value); }
 	}
 	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic SubscriptionIntegration class instead.</typeparam>
 	public class SubscriptionIntegration<Txp> : SubscriptionIntegration
@@ -3356,6 +3366,11 @@ namespace OrderCloud.SDK
 		public IList<WebhookRoute> WebhookRoutes { get => GetProp<IList<WebhookRoute>>("WebhookRoutes", new List<WebhookRoute>()); set => SetProp<IList<WebhookRoute>>("WebhookRoutes", value); }
 		/// <summary>ID of the delivery config.</summary>
 		public string DeliveryConfigID { get => GetProp<string>("DeliveryConfigID"); set => SetProp<string>("DeliveryConfigID", value); }
+		/// <summary>The header name that can be passed to your middleware.</summary>
+		public string CustomAuthHeaderName { get => GetProp<string>("CustomAuthHeaderName"); set => SetProp<string>("CustomAuthHeaderName", value); }
+		/// <summary>The header value that can be passed to your middleware.</summary>
+		[ApiWriteOnly]
+		public string CustomAuthHeaderValue { get => GetProp<string>("CustomAuthHeaderValue"); set => SetProp<string>("CustomAuthHeaderValue", value); }
 	}
 	public class WebhookRoute : OrderCloudModel
 	{
