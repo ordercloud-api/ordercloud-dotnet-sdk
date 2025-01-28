@@ -494,6 +494,8 @@ namespace OrderCloud.SDK
 			public const string CannotDeleteSpendingAccount = "Payment.CannotDeleteSpendingAccount";
 			/// <summary>When creating a payment Amount must be null or greater than zero.</summary>
 			public const string AmountGreaterThanZero = "Payment.AmountGreaterThanZero";
+			/// <summary>Payment is required for a Subscription.</summary>
+			public const string MethodRequired = "Payment.MethodRequired";
 		}
 		public static class PriceSchedule
 		{
