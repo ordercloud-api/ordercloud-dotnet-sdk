@@ -491,6 +491,9 @@ namespace OrderCloud.SDK
 		public bool AllSuppliersCanSell { get => GetProp<bool>("AllSuppliersCanSell"); set => SetProp<bool>("AllSuppliersCanSell", value); }
 		/// <summary>Returnable of the product.</summary>
 		public bool Returnable { get => GetProp<bool>("Returnable"); set => SetProp<bool>("Returnable", value); }
+		/// <summary>Date created of the product.</summary>
+		[ApiReadOnly]
+		public DateTimeOffset? DateCreated { get => GetProp<DateTimeOffset?>("DateCreated"); set => SetProp<DateTimeOffset?>("DateCreated", value); }
 		/// <summary>Container for extended (custom) properties of the product.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
@@ -1095,8 +1098,8 @@ namespace OrderCloud.SDK
 		/// <summary>ID of the delivery config. Required.</summary>
 		[Required]
 		public string DeliveryConfigID { get => GetProp<string>("DeliveryConfigID"); set => SetProp<string>("DeliveryConfigID", value); }
-		/// <summary>Notification point only of the inventory integration.</summary>
-		public bool NotificationPointOnly { get => GetProp<bool>("NotificationPointOnly"); set => SetProp<bool>("NotificationPointOnly", value); }
+		/// <summary>When true, events will only fire when QuantityAvailable changes in the following ways: is equal to or less than 0, increases from 0 or less than 0 to a positive number, is equal to or less than NotificationPoint, increases from a number equal to or less than the NotificationPoint to a number greater than the NotificationPoint.</summary>
+		public bool LimitNotifications { get => GetProp<bool>("LimitNotifications"); set => SetProp<bool>("LimitNotifications", value); }
 	}
 	public class InventoryRecord : OrderCloudModel
 	{
@@ -2284,6 +2287,9 @@ namespace OrderCloud.SDK
 		public bool AllSuppliersCanSell { get => GetProp<bool>("AllSuppliersCanSell"); set => SetProp<bool>("AllSuppliersCanSell", value); }
 		/// <summary>Returnable of the product.</summary>
 		public bool Returnable { get => GetProp<bool>("Returnable"); set => SetProp<bool>("Returnable", value); }
+		/// <summary>Date created of the product.</summary>
+		[ApiReadOnly]
+		public DateTimeOffset? DateCreated { get => GetProp<DateTimeOffset?>("DateCreated"); set => SetProp<DateTimeOffset?>("DateCreated", value); }
 		/// <summary>Container for extended (custom) properties of the product.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
@@ -2386,6 +2392,9 @@ namespace OrderCloud.SDK
 		public bool AllSuppliersCanSell { get => GetProp<bool>("AllSuppliersCanSell"); set => SetProp<bool>("AllSuppliersCanSell", value); }
 		/// <summary>Returnable of the product collection buyer product.</summary>
 		public bool Returnable { get => GetProp<bool>("Returnable"); set => SetProp<bool>("Returnable", value); }
+		/// <summary>Date created of the product collection buyer product.</summary>
+		[ApiReadOnly]
+		public DateTimeOffset? DateCreated { get => GetProp<DateTimeOffset?>("DateCreated"); set => SetProp<DateTimeOffset?>("DateCreated", value); }
 		/// <summary>Container for extended (custom) properties of the product collection buyer product.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
@@ -2486,6 +2495,9 @@ namespace OrderCloud.SDK
 		public bool AllSuppliersCanSell { get => GetProp<bool>("AllSuppliersCanSell"); set => SetProp<bool>("AllSuppliersCanSell", value); }
 		/// <summary>Returnable of the product collection product.</summary>
 		public bool Returnable { get => GetProp<bool>("Returnable"); set => SetProp<bool>("Returnable", value); }
+		/// <summary>Date created of the product collection product.</summary>
+		[ApiReadOnly]
+		public DateTimeOffset? DateCreated { get => GetProp<DateTimeOffset?>("DateCreated"); set => SetProp<DateTimeOffset?>("DateCreated", value); }
 		/// <summary>Container for extended (custom) properties of the product collection product.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
