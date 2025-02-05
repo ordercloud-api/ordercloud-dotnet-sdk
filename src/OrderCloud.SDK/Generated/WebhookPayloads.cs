@@ -1846,6 +1846,25 @@ namespace OrderCloud.SDK
 			public class RetrieveUsername<TConfigData> : WebhookPayload<object, object, object, TConfigData>
 			{ }
 		}
+		/// <summary>Features in beta are subject to change and are not available in production.</summary>
+		public static class GroupOrders
+		{
+			/// <summary>Features in beta are subject to change and are not available in production. Webhook payload sent by OrderCloud on POST v1/grouporders/{invitationID}/token.</summary>
+			[SentOn("POST", "v1/grouporders/{invitationID}/token")]
+			public class GetToken : WebhookPayload<object, AccessToken, GetTokenRouteParams, dynamic> { }
+			/// <summary>Features in beta are subject to change and are not available in production. Webhook payload sent by OrderCloud on POST v1/grouporders/{invitationID}/token.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TAccessToken">Specific type of the AccessToken. If not using a custom type, specify AccessToken.</typeparam>
+			[SentOn("POST", "v1/grouporders/{invitationID}/token")]
+			public class GetToken<TConfigData, TAccessToken> : WebhookPayload<object, TAccessToken, GetTokenRouteParams, TConfigData>
+				where TAccessToken : AccessToken
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/grouporders/{invitationID}/token.</summary>
+			public class GetTokenRouteParams
+			{
+				public string InvitationID { get; set; }
+			}
+		}
 		public static class ImpersonationConfigs
 		{
 			/// <summary>Webhook payload sent by OrderCloud on POST v1/impersonationconfig.</summary>
@@ -2942,6 +2961,44 @@ namespace OrderCloud.SDK
 				public string SubscriptionID { get; set; }
 				public string BundleID { get; set; }
 				public string BundleItemID { get; set; }
+			}
+			/// <summary>Features in beta are subject to change and are not available in production. Webhook payload sent by OrderCloud on POST v1/me/orderinvitations.</summary>
+			[SentOn("POST", "v1/me/orderinvitations")]
+			public class CreateGroupOrderInvitation : WebhookPayload<GroupOrderInvitation, GroupOrderInvitation, object, dynamic> { }
+			/// <summary>Features in beta are subject to change and are not available in production. Webhook payload sent by OrderCloud on POST v1/me/orderinvitations.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TGroupOrderInvitation">Specific type of the GroupOrderInvitation. If not using a custom type, specify GroupOrderInvitation.</typeparam>
+			[SentOn("POST", "v1/me/orderinvitations")]
+			public class CreateGroupOrderInvitation<TConfigData, TGroupOrderInvitation> : WebhookPayload<TGroupOrderInvitation, TGroupOrderInvitation, object, TConfigData>
+				where TGroupOrderInvitation : GroupOrderInvitation
+			{ }
+			/// <summary>Features in beta are subject to change and are not available in production. Webhook payload sent by OrderCloud on PATCH v1/me/orderinvitations/{invitationID}.</summary>
+			[SentOn("PATCH", "v1/me/orderinvitations/{invitationID}")]
+			public class PatchGroupOrderInvitation : WebhookPayload<GroupOrderInvitation, GroupOrderInvitation, PatchGroupOrderInvitationRouteParams, dynamic> { }
+			/// <summary>Features in beta are subject to change and are not available in production. Webhook payload sent by OrderCloud on PATCH v1/me/orderinvitations/{invitationID}.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TGroupOrderInvitation">Specific type of the GroupOrderInvitation. If not using a custom type, specify GroupOrderInvitation.</typeparam>
+			[SentOn("PATCH", "v1/me/orderinvitations/{invitationID}")]
+			public class PatchGroupOrderInvitation<TConfigData, TGroupOrderInvitation> : WebhookPayload<TGroupOrderInvitation, TGroupOrderInvitation, PatchGroupOrderInvitationRouteParams, TConfigData>
+				where TGroupOrderInvitation : GroupOrderInvitation
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/me/orderinvitations/{invitationID}.</summary>
+			public class PatchGroupOrderInvitationRouteParams
+			{
+				public string InvitationID { get; set; }
+			}
+			/// <summary>Features in beta are subject to change and are not available in production. Webhook payload sent by OrderCloud on DELETE v1/me/orderinvitations/{invitationID}.</summary>
+			[SentOn("DELETE", "v1/me/orderinvitations/{invitationID}")]
+			public class DeleteGroupOrderInvitation : WebhookPayload<object, object, DeleteGroupOrderInvitationRouteParams, dynamic> { }
+			/// <summary>Features in beta are subject to change and are not available in production. Webhook payload sent by OrderCloud on DELETE v1/me/orderinvitations/{invitationID}.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, use the non-generic payload type instead.</typeparam>
+			[SentOn("DELETE", "v1/me/orderinvitations/{invitationID}")]
+			public class DeleteGroupOrderInvitation<TConfigData> : WebhookPayload<object, object, DeleteGroupOrderInvitationRouteParams, TConfigData>
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/me/orderinvitations/{invitationID}.</summary>
+			public class DeleteGroupOrderInvitationRouteParams
+			{
+				public string InvitationID { get; set; }
 			}
 			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/me/tokens.</summary>
 			[SentOn("DELETE", "v1/me/tokens")]

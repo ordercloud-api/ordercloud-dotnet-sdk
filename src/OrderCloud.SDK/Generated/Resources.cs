@@ -26,6 +26,7 @@ namespace OrderCloud.SDK
 		IEntitySyncsResource EntitySyncs { get; }
 		IErrorConfigsResource ErrorConfigs { get; }
 		IForgottenCredentialsResource ForgottenCredentials { get; }
+		IGroupOrdersResource GroupOrders { get; }
 		IImpersonationConfigsResource ImpersonationConfigs { get; }
 		IIncrementorsResource Incrementors { get; }
 		IIntegrationEventsResource IntegrationEvents { get; }
@@ -1855,6 +1856,15 @@ namespace OrderCloud.SDK
 		Task RetrieveUsernameAsync(string clientID, string email, string accessToken = null);
 	}
 
+	/// <summary>Features in beta are subject to change and are not available in production.</summary>
+	public interface IGroupOrdersResource
+	{
+		/// <summary>Features in beta are subject to change and are not available in production. Get a single group order token.</summary>
+		/// <param name="invitationID">ID of the invitation.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<AccessToken> GetTokenAsync(string invitationID, string accessToken = null);
+	}
+
 	public interface IImpersonationConfigsResource
 	{
 		/// <summary>Get a single impersonation config.</summary>
@@ -3569,6 +3579,62 @@ namespace OrderCloud.SDK
 		/// <param name="bundleItemID">ID of the bundle item.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task DeleteSubscriptionBundleItemAsync(string subscriptionID, string bundleID, string bundleItemID, string accessToken = null);
+		/// <summary>Features in beta are subject to change and are not available in production. Get a list of group order invitations visible to this user.</summary>
+		/// <param name="search">Word or phrase to search for.</param>
+		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
+		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<GroupOrderInvitation>> ListGroupOrderInvitationsAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
+		/// <summary>Features in beta are subject to change and are not available in production. Get a list of group order invitations visible to this user.</summary>
+		/// <param name="search">Word or phrase to search for.</param>
+		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
+		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
+		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<TGroupOrderInvitation>> ListGroupOrderInvitationsAsync<TGroupOrderInvitation>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TGroupOrderInvitation : GroupOrderInvitation;
+		/// <summary>Features in beta are subject to change and are not available in production. Get a list of group order invitations visible to this user.</summary>
+		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<GroupOrderInvitation>> ListGroupOrderInvitationsAsync(Action<ListOptionsBuilder<GroupOrderInvitation>> buildListOpts, string accessToken = null);
+		/// <summary>Features in beta are subject to change and are not available in production. Get a list of group order invitations visible to this user.</summary>
+		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<TGroupOrderInvitation>> ListGroupOrderInvitationsAsync<TGroupOrderInvitation>(Action<ListOptionsBuilder<TGroupOrderInvitation>> buildListOpts, string accessToken = null) where TGroupOrderInvitation : GroupOrderInvitation;
+		/// <summary>Features in beta are subject to change and are not available in production. Get a single group order invitation.</summary>
+		/// <param name="invitationID">ID of the invitation.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<GroupOrderInvitation> GetGroupOrderInvitationAsync(string invitationID, string accessToken = null);
+		/// <summary>Features in beta are subject to change and are not available in production. Get a single group order invitation.</summary>
+		/// <param name="invitationID">ID of the invitation.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TGroupOrderInvitation> GetGroupOrderInvitationAsync<TGroupOrderInvitation>(string invitationID, string accessToken = null) where TGroupOrderInvitation : GroupOrderInvitation;
+		/// <summary>Features in beta are subject to change and are not available in production. Create a new group order invitation.</summary>
+		/// <param name="groupOrderInvitation">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<GroupOrderInvitation> CreateGroupOrderInvitationAsync(GroupOrderInvitation groupOrderInvitation, string accessToken = null);
+		/// <summary>Features in beta are subject to change and are not available in production. Create a new group order invitation.</summary>
+		/// <param name="groupOrderInvitation">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TGroupOrderInvitation> CreateGroupOrderInvitationAsync<TGroupOrderInvitation>(GroupOrderInvitation groupOrderInvitation, string accessToken = null) where TGroupOrderInvitation : GroupOrderInvitation;
+		/// <summary>Features in beta are subject to change and are not available in production. Partially update a group order invitation.</summary>
+		/// <param name="invitationID">ID of the invitation.</param>
+		/// <param name="partialGroupOrderInvitation">The object that will be partially serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<GroupOrderInvitation> PatchGroupOrderInvitationAsync(string invitationID, PartialGroupOrderInvitation partialGroupOrderInvitation, string accessToken = null);
+		/// <summary>Features in beta are subject to change and are not available in production. Partially update a group order invitation.</summary>
+		/// <param name="invitationID">ID of the invitation.</param>
+		/// <param name="partialGroupOrderInvitation">The object that will be partially serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TGroupOrderInvitation> PatchGroupOrderInvitationAsync<TGroupOrderInvitation>(string invitationID, PartialGroupOrderInvitation partialGroupOrderInvitation, string accessToken = null) where TGroupOrderInvitation : GroupOrderInvitation;
+		/// <summary>Features in beta are subject to change and are not available in production. Delete a group order invitation.</summary>
+		/// <param name="invitationID">ID of the invitation.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task DeleteGroupOrderInvitationAsync(string invitationID, string accessToken = null);
 		/// <summary>Get a list of product sellers visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="search">Word or phrase to search for.</param>
@@ -6591,7 +6657,7 @@ namespace OrderCloud.SDK
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<XpIndex>> ListAsync(Action<ListOptionsBuilder<XpIndex>> buildListOpts, string accessToken = null);
 		/// <summary>Delete a XP index.</summary>
-		/// <param name="thingType">Thing type of the xp index. Possible values: Address, Variant, Order, OrderReturn, LineItem, CostCenter, CreditCard, Payment, Spec, SpecOption, UserGroup, Company, Category, PriceSchedule, Shipment, SpendingAccount, User, Promotion, ApprovalRule, SellerApprovalRule, Catalog, ProductFacet, MessageSender, InventoryRecord, ProductCollection, Subscription.</param>
+		/// <param name="thingType">Thing type of the xp index. Possible values: Address, Variant, Order, OrderReturn, LineItem, CostCenter, CreditCard, Payment, Spec, SpecOption, UserGroup, Company, Category, PriceSchedule, Shipment, SpendingAccount, User, Promotion, ApprovalRule, SellerApprovalRule, Catalog, ProductFacet, MessageSender, InventoryRecord, ProductCollection, Subscription, GroupOrderInvitation.</param>
 		/// <param name="key">Key of the xp index.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task DeleteAsync(XpThingType thingType, string key, string accessToken = null);
@@ -6624,6 +6690,7 @@ namespace OrderCloud.SDK
 			EntitySyncs = new EntitySyncsResource(this);
 			ErrorConfigs = new ErrorConfigsResource(this);
 			ForgottenCredentials = new ForgottenCredentialsResource(this);
+			GroupOrders = new GroupOrdersResource(this);
 			ImpersonationConfigs = new ImpersonationConfigsResource(this);
 			Incrementors = new IncrementorsResource(this);
 			IntegrationEvents = new IntegrationEventsResource(this);
@@ -6684,6 +6751,7 @@ namespace OrderCloud.SDK
 		public IEntitySyncsResource EntitySyncs { get; private set; }
 		public IErrorConfigsResource ErrorConfigs { get; private set; }
 		public IForgottenCredentialsResource ForgottenCredentials { get; private set; }
+		public IGroupOrdersResource GroupOrders { get; private set; }
 		public IImpersonationConfigsResource ImpersonationConfigs { get; private set; }
 		public IIncrementorsResource Incrementors { get; private set; }
 		public IIntegrationEventsResource IntegrationEvents { get; private set; }
@@ -7148,6 +7216,12 @@ namespace OrderCloud.SDK
 		public Task RetrieveUsernameAsync(string clientID, string email, string accessToken = null) => Request("v1", "username", "retrieve").WithOAuthBearerToken(accessToken).SetQueryParams(new { clientID, email }).PostAsync(null);
 	}
 
+	public class GroupOrdersResource : OrderCloudResource, IGroupOrdersResource
+	{
+		internal GroupOrdersResource(OrderCloudClient client) : base(client) { }
+		public Task<AccessToken> GetTokenAsync(string invitationID, string accessToken = null) => Request("v1", "grouporders", invitationID, "token").WithOAuthBearerToken(accessToken).PostAsync(null).ReceiveJson<AccessToken>();
+	}
+
 	public class ImpersonationConfigsResource : OrderCloudResource, IImpersonationConfigsResource
 	{
 		internal ImpersonationConfigsResource(OrderCloudClient client) : base(client) { }
@@ -7455,6 +7529,17 @@ namespace OrderCloud.SDK
 		public Task<LineItem> CreateSubscriptionBundleItemAsync(string subscriptionID, string bundleID, BundleItems bundleItems, string accessToken = null) => CreateSubscriptionBundleItemAsync<LineItem>(subscriptionID, bundleID, bundleItems, accessToken);
 		public Task<TLineItem> CreateSubscriptionBundleItemAsync<TLineItem>(string subscriptionID, string bundleID, BundleItems bundleItems, string accessToken = null) where TLineItem : LineItem => Request("v1", "me", "subscriptions", subscriptionID, "items", "bundles", bundleID).WithOAuthBearerToken(accessToken).PostJsonAsync(ValidateModel(bundleItems)).ReceiveJson<TLineItem>();
 		public Task DeleteSubscriptionBundleItemAsync(string subscriptionID, string bundleID, string bundleItemID, string accessToken = null) => Request("v1", "me", "subscriptions", subscriptionID, "items", "bundles", bundleID, bundleItemID).WithOAuthBearerToken(accessToken).DeleteAsync();
+		public Task<ListPage<GroupOrderInvitation>> ListGroupOrderInvitationsAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) => ListGroupOrderInvitationsAsync<GroupOrderInvitation>(search, searchOn, sortBy, page, pageSize, filters, accessToken);
+		public Task<ListPage<TGroupOrderInvitation>> ListGroupOrderInvitationsAsync<TGroupOrderInvitation>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TGroupOrderInvitation : GroupOrderInvitation => Request("v1", "me", "orderinvitations").WithOAuthBearerToken(accessToken).SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<TGroupOrderInvitation>>();
+		public Task<ListPage<GroupOrderInvitation>> ListGroupOrderInvitationsAsync(Action<ListOptionsBuilder<GroupOrderInvitation>> buildListOpts, string accessToken = null) => ListGroupOrderInvitationsAsync<GroupOrderInvitation>(buildListOpts, accessToken);
+		public Task<ListPage<TGroupOrderInvitation>> ListGroupOrderInvitationsAsync<TGroupOrderInvitation>(Action<ListOptionsBuilder<TGroupOrderInvitation>> buildListOpts, string accessToken = null) where TGroupOrderInvitation : GroupOrderInvitation => Request("v1", "me", "orderinvitations").WithOAuthBearerToken(accessToken).SetListOptions(buildListOpts).GetJsonAsync<ListPage<TGroupOrderInvitation>>();
+		public Task<GroupOrderInvitation> GetGroupOrderInvitationAsync(string invitationID, string accessToken = null) => GetGroupOrderInvitationAsync<GroupOrderInvitation>(invitationID, accessToken);
+		public Task<TGroupOrderInvitation> GetGroupOrderInvitationAsync<TGroupOrderInvitation>(string invitationID, string accessToken = null) where TGroupOrderInvitation : GroupOrderInvitation => Request("v1", "me", "orderinvitations", invitationID).WithOAuthBearerToken(accessToken).GetJsonAsync<TGroupOrderInvitation>();
+		public Task<GroupOrderInvitation> CreateGroupOrderInvitationAsync(GroupOrderInvitation groupOrderInvitation, string accessToken = null) => CreateGroupOrderInvitationAsync<GroupOrderInvitation>(groupOrderInvitation, accessToken);
+		public Task<TGroupOrderInvitation> CreateGroupOrderInvitationAsync<TGroupOrderInvitation>(GroupOrderInvitation groupOrderInvitation, string accessToken = null) where TGroupOrderInvitation : GroupOrderInvitation => Request("v1", "me", "orderinvitations").WithOAuthBearerToken(accessToken).PostJsonAsync(ValidateModel(groupOrderInvitation)).ReceiveJson<TGroupOrderInvitation>();
+		public Task<GroupOrderInvitation> PatchGroupOrderInvitationAsync(string invitationID, PartialGroupOrderInvitation partialGroupOrderInvitation, string accessToken = null) => PatchGroupOrderInvitationAsync<GroupOrderInvitation>(invitationID, partialGroupOrderInvitation, accessToken);
+		public Task<TGroupOrderInvitation> PatchGroupOrderInvitationAsync<TGroupOrderInvitation>(string invitationID, PartialGroupOrderInvitation partialGroupOrderInvitation, string accessToken = null) where TGroupOrderInvitation : GroupOrderInvitation => Request("v1", "me", "orderinvitations", invitationID).WithOAuthBearerToken(accessToken).PatchJsonAsync(ValidateModel(partialGroupOrderInvitation)).ReceiveJson<TGroupOrderInvitation>();
+		public Task DeleteGroupOrderInvitationAsync(string invitationID, string accessToken = null) => Request("v1", "me", "orderinvitations", invitationID).WithOAuthBearerToken(accessToken).DeleteAsync();
 		public Task<ListPage<ProductSeller>> ListProductSellersAsync(string productID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) => ListProductSellersAsync<ProductSeller>(productID, search, searchOn, sortBy, page, pageSize, filters, accessToken);
 		public Task<ListPage<TProductSeller>> ListProductSellersAsync<TProductSeller>(string productID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TProductSeller : ProductSeller => Request("v1", "me", "products", productID, "sellers").WithOAuthBearerToken(accessToken).SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<TProductSeller>>();
 		public Task<ListPage<ProductSeller>> ListProductSellersAsync(string productID, Action<ListOptionsBuilder<ProductSeller>> buildListOpts, string accessToken = null) => ListProductSellersAsync<ProductSeller>(productID, buildListOpts, accessToken);

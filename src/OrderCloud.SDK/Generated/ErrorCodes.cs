@@ -92,6 +92,8 @@ namespace OrderCloud.SDK
 			public const string MustPassAnonUserToken = "Auth.MustPassAnonUserToken";
 			/// <summary>Both clientID and email are required.</summary>
 			public const string ClientIDAndEmailRequired = "Auth.ClientIDAndEmailRequired";
+			/// <summary>User is not authorized.</summary>
+			public const string UnauthorizedRole = "Auth.UnauthorizedRole";
 			/// <summary>The provided token has been revoked. Please re-authenticate.</summary>
 			public const string TokenRevoked = "Auth.TokenRevoked";
 			/// <summary>Features in beta are subject to change and are not available in production.</summary>
@@ -202,6 +204,24 @@ namespace OrderCloud.SDK
 		{
 			/// <summary>A full sync for this type is already running.</summary>
 			public const string FullSyncAlreadyRunning = "FullSyncStatus.FullSyncAlreadyRunning";
+		}
+		public static class GroupOrderInvitation
+		{
+			/// <summary>No more than 100 invitations are permitted per order.</summary>
+			public const string InvitationQuantityExceeded = "GroupOrderInvitation.InvitationQuantityExceeded";
+			/// <summary>This invitation has expired.</summary>
+			public const string InvitationExpired = "GroupOrderInvitation.InvitationExpired";
+			/// <summary>ExpirationDate cannot be in the past or more than 1 year in the future.</summary>
+			public const string InvalidExpiration = "GroupOrderInvitation.InvalidExpiration";
+		}
+		public static class GroupOrder
+		{
+			/// <summary>Must be order creator to administer order invitations.</summary>
+			public const string CannotModify = "GroupOrder.CannotModify";
+			/// <summary>This action is restricted to the order from user. Your token is read-only after the order is submitted.</summary>
+			public const string CannotModifySubmittedOrder = "GroupOrder.CannotModifySubmittedOrder";
+			/// <summary>This GroupOrderInvitation is referenced on 1 or more LineItems, you must delete the associated LineItems prior to deleting the invitation.</summary>
+			public const string CannotDeleteWithLineItems = "GroupOrder.CannotDeleteWithLineItems";
 		}
 		public static class Impersonation
 		{
@@ -494,8 +514,6 @@ namespace OrderCloud.SDK
 			public const string CannotDeleteSpendingAccount = "Payment.CannotDeleteSpendingAccount";
 			/// <summary>When creating a payment Amount must be null or greater than zero.</summary>
 			public const string AmountGreaterThanZero = "Payment.AmountGreaterThanZero";
-			/// <summary>Payment is required for a Subscription.</summary>
-			public const string MethodRequired = "Payment.MethodRequired";
 		}
 		public static class PriceSchedule
 		{

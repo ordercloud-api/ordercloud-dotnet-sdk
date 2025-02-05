@@ -20,7 +20,7 @@ namespace OrderCloud.SDK
 	public enum SubscriptionInterval { Days, Weeks, Months }
 	public enum TrackingEventType { UserLoggedIn, LineItemAdded, LineItemUpdated, OrderSubmitted }
 	public enum UserOrderMoveOption { None, Unsubmitted, All }
-	public enum XpThingType { Address, Variant, Order, OrderReturn, LineItem, CostCenter, CreditCard, Payment, Spec, SpecOption, UserGroup, Company, Category, PriceSchedule, Shipment, SpendingAccount, User, Promotion, ApprovalRule, SellerApprovalRule, Catalog, ProductFacet, MessageSender, InventoryRecord, ProductCollection, Subscription }
+	public enum XpThingType { Address, Variant, Order, OrderReturn, LineItem, CostCenter, CreditCard, Payment, Spec, SpecOption, UserGroup, Company, Category, PriceSchedule, Shipment, SpendingAccount, User, Promotion, ApprovalRule, SellerApprovalRule, Catalog, ProductFacet, MessageSender, InventoryRecord, ProductCollection, Subscription, GroupOrderInvitation }
 	public class AccessToken : OrderCloudModel
 	{
 		/// <summary>Access token of the access token.</summary>
@@ -864,6 +864,9 @@ namespace OrderCloud.SDK
 		/// <summary>ID of the split or forwarded order. Only returns a value for the Marketplace Owner.</summary>
 		[ApiReadOnly]
 		public string OutgoingOrderID { get => GetProp<string>("OutgoingOrderID"); set => SetProp<string>("OutgoingOrderID", value); }
+		/// <summary>Features in beta are subject to change and are not available in production. ID of the invitation.</summary>
+		[ApiReadOnly]
+		public string InvitationID { get => GetProp<string>("InvitationID"); set => SetProp<string>("InvitationID", value); }
 		/// <summary>Container for extended (custom) properties of the extended line item.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
@@ -995,6 +998,33 @@ namespace OrderCloud.SDK
 		[ApiReadOnly]
 		public new TBillingAddress BillingAddress { get => GetProp<TBillingAddress>("BillingAddress"); set => SetProp<TBillingAddress>("BillingAddress", value); }
 	}
+	/// <summary>Features in beta are subject to change and are not available in production.</summary>
+	public class GroupOrderInvitation : OrderCloudModel
+	{
+		/// <summary>ID of the group order invitation. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 1.</summary>
+		[ApiReadOnly]
+		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
+		/// <summary>maximum 1 year.</summary>
+		[Required]
+		public DateTimeOffset? ExpirationDate { get => GetProp<DateTimeOffset?>("ExpirationDate"); set => SetProp<DateTimeOffset?>("ExpirationDate", value); }
+		/// <summary>Name of the group order invitation. Max length 100 characters. Searchable: priority level 2. Sortable: priority level 2.</summary>
+		public string Name { get => GetProp<string>("Name"); set => SetProp<string>("Name", value); }
+		/// <summary>ID of the order. Required. Searchable: priority level 3. Sortable: priority level 3.</summary>
+		[Required]
+		public string OrderID { get => GetProp<string>("OrderID"); set => SetProp<string>("OrderID", value); }
+		/// <summary>Order status of the group order invitation. Searchable: priority level 4. Sortable: priority level 4. Possible values: Unsubmitted, AwaitingApproval, Declined, Open, Completed, Canceled.</summary>
+		[ApiReadOnly]
+		public OrderStatus OrderStatus { get => GetProp<OrderStatus>("OrderStatus"); set => SetProp<OrderStatus>("OrderStatus", value); }
+		/// <summary>Container for extended (custom) properties of the group order invitation.</summary>
+		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
+	}
+	/// <summary>Features in beta are subject to change and are not available in production.</summary>
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic GroupOrderInvitation class instead.</typeparam>
+	public class GroupOrderInvitation<Txp> : GroupOrderInvitation
+	{
+		/// <summary>Container for extended (custom) properties of the group order invitation.</summary>
+		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
+	}
 	public class HttpConfig : OrderCloudModel
 	{
 		/// <summary>Endpoint of the http config. Required.</summary>
@@ -1004,6 +1034,11 @@ namespace OrderCloud.SDK
 		[Required]
 		[ApiWriteOnly]
 		public string Secret { get => GetProp<string>("Secret"); set => SetProp<string>("Secret", value); }
+		/// <summary>Custom auth header name of the http config.</summary>
+		public string CustomAuthHeaderName { get => GetProp<string>("CustomAuthHeaderName"); set => SetProp<string>("CustomAuthHeaderName", value); }
+		/// <summary>Custom auth header value of the http config. Max length 50 characters.</summary>
+		[ApiWriteOnly]
+		public string CustomAuthHeaderValue { get => GetProp<string>("CustomAuthHeaderValue"); set => SetProp<string>("CustomAuthHeaderValue", value); }
 	}
 	public class ImpersonateTokenRequest : OrderCloudModel
 	{
@@ -1241,6 +1276,9 @@ namespace OrderCloud.SDK
 		/// <summary>ID of the split or forwarded order. Only returns a value for the Marketplace Owner.</summary>
 		[ApiReadOnly]
 		public string OutgoingOrderID { get => GetProp<string>("OutgoingOrderID"); set => SetProp<string>("OutgoingOrderID", value); }
+		/// <summary>Features in beta are subject to change and are not available in production. ID of the invitation.</summary>
+		[ApiReadOnly]
+		public string InvitationID { get => GetProp<string>("InvitationID"); set => SetProp<string>("InvitationID", value); }
 		/// <summary>Container for extended (custom) properties of the line item.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
@@ -3393,7 +3431,7 @@ namespace OrderCloud.SDK
 	}
 	public class XpIndex : OrderCloudModel
 	{
-		/// <summary>Thing type of the xp index. Searchable: priority level 0. Sortable: priority level 0. Possible values: Address, Variant, Order, OrderReturn, LineItem, CostCenter, CreditCard, Payment, Spec, SpecOption, UserGroup, Company, Category, PriceSchedule, Shipment, SpendingAccount, User, Promotion, ApprovalRule, SellerApprovalRule, Catalog, ProductFacet, MessageSender, InventoryRecord, ProductCollection, Subscription.</summary>
+		/// <summary>Thing type of the xp index. Searchable: priority level 0. Sortable: priority level 0. Possible values: Address, Variant, Order, OrderReturn, LineItem, CostCenter, CreditCard, Payment, Spec, SpecOption, UserGroup, Company, Category, PriceSchedule, Shipment, SpendingAccount, User, Promotion, ApprovalRule, SellerApprovalRule, Catalog, ProductFacet, MessageSender, InventoryRecord, ProductCollection, Subscription, GroupOrderInvitation.</summary>
 		public XpThingType ThingType { get => GetProp<XpThingType>("ThingType"); set => SetProp<XpThingType>("ThingType", value); }
 		/// <summary>Key of the xp index. Searchable: priority level 1. Sortable: priority level 1.</summary>
 		public string Key { get => GetProp<string>("Key"); set => SetProp<string>("Key", value); }
@@ -3456,6 +3494,12 @@ namespace OrderCloud.SDK
 	public class PartialDiscoverEvent : DiscoverEvent, IPartial { }
 	public class PartialErrorConfig : ErrorConfig, IPartial { }
 	public class PartialEventHubConfig : EventHubConfig, IPartial { }
+	/// <summary>Features in beta are subject to change and are not available in production.</summary>
+	public class PartialGroupOrderInvitation : GroupOrderInvitation, IPartial { }
+	/// <summary>Features in beta are subject to change and are not available in production.</summary>
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic PartialGroupOrderInvitation class instead.</typeparam>
+	public class PartialGroupOrderInvitation<Txp> : PartialGroupOrderInvitation
+	{ }
 	public class PartialHttpConfig : HttpConfig, IPartial { }
 	public class PartialImpersonationConfig : ImpersonationConfig, IPartial { }
 	public class PartialIncrementor : Incrementor, IPartial { }
