@@ -19,7 +19,6 @@ namespace OrderCloud.SDK
 		ICartResource Cart { get; }
 		ICatalogsResource Catalogs { get; }
 		ICategoriesResource Categories { get; }
-		ICertsResource Certs { get; }
 		ICostCentersResource CostCenters { get; }
 		ICreditCardsResource CreditCards { get; }
 		IDeliveryConfigurationsResource DeliveryConfigurations { get; }
@@ -1019,7 +1018,7 @@ namespace OrderCloud.SDK
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
-		Task<ListPage<OrderPromotion>> ListEligiblePromotionsAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
+		Task<ListPage<EligiblePromotion>> ListEligiblePromotionsAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
 		/// <summary>List eligible promotions. Get a list of promotions eligible for the cart.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
@@ -1028,15 +1027,15 @@ namespace OrderCloud.SDK
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
-		Task<ListPage<TOrderPromotion>> ListEligiblePromotionsAsync<TOrderPromotion>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TOrderPromotion : OrderPromotion;
+		Task<ListPage<TEligiblePromotion>> ListEligiblePromotionsAsync<TEligiblePromotion>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TEligiblePromotion : EligiblePromotion;
 		/// <summary>List eligible promotions. Get a list of promotions eligible for the cart.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
-		Task<ListPage<OrderPromotion>> ListEligiblePromotionsAsync(Action<ListOptionsBuilder<OrderPromotion>> buildListOpts, string accessToken = null);
+		Task<ListPage<EligiblePromotion>> ListEligiblePromotionsAsync(Action<ListOptionsBuilder<EligiblePromotion>> buildListOpts, string accessToken = null);
 		/// <summary>List eligible promotions. Get a list of promotions eligible for the cart.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
-		Task<ListPage<TOrderPromotion>> ListEligiblePromotionsAsync<TOrderPromotion>(Action<ListOptionsBuilder<TOrderPromotion>> buildListOpts, string accessToken = null) where TOrderPromotion : OrderPromotion;
+		Task<ListPage<TEligiblePromotion>> ListEligiblePromotionsAsync<TEligiblePromotion>(Action<ListOptionsBuilder<TEligiblePromotion>> buildListOpts, string accessToken = null) where TEligiblePromotion : EligiblePromotion;
 		/// <summary>Add a promotion.</summary>
 		/// <param name="promoCode">Promo code of the order promotion.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -1474,14 +1473,6 @@ namespace OrderCloud.SDK
 		/// <param name="bundleID">ID of the bundle.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task DeleteBundleAssignmentAsync(string catalogID, string categoryID, string bundleID, string accessToken = null);
-	}
-
-	public interface ICertsResource
-	{
-		/// <summary>Get a single cert public key. Returns a JSON Web Key (JWK). Can be used for validating the token was signed by OrderCloud.</summary>
-		/// <param name="ID">ID of the public key.</param>
-		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
-		Task<PublicKey> GetPublicKeyAsync(string ID, string accessToken = null);
 	}
 
 	public interface ICostCentersResource
@@ -3665,7 +3656,7 @@ namespace OrderCloud.SDK
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TProductSeller>> ListProductSellersAsync<TProductSeller>(string productID, Action<ListOptionsBuilder<TProductSeller>> buildListOpts, string accessToken = null) where TProductSeller : ProductSeller;
-		/// <summary>Revokes all tokens previously issued to the current user and forces them to reauthenticate.</summary>
+		/// <summary>Revoke tokens Revokes all tokens previously issued to the current user and forces them to reauthenticate.</summary>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task RevokeTokensAsync(string accessToken = null);
 	}
@@ -4364,7 +4355,7 @@ namespace OrderCloud.SDK
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
-		Task<ListPage<OrderPromotion>> ListEligiblePromotionsAsync(OrderDirection direction, string orderID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
+		Task<ListPage<EligiblePromotion>> ListEligiblePromotionsAsync(OrderDirection direction, string orderID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
 		/// <summary>List eligible promotions. Get a list of promotions eligible for an order.</summary>
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
 		/// <param name="orderID">ID of the order.</param>
@@ -4375,19 +4366,19 @@ namespace OrderCloud.SDK
 		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
-		Task<ListPage<TOrderPromotion>> ListEligiblePromotionsAsync<TOrderPromotion>(OrderDirection direction, string orderID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TOrderPromotion : OrderPromotion;
+		Task<ListPage<TEligiblePromotion>> ListEligiblePromotionsAsync<TEligiblePromotion>(OrderDirection direction, string orderID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TEligiblePromotion : EligiblePromotion;
 		/// <summary>List eligible promotions. Get a list of promotions eligible for an order.</summary>
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
-		Task<ListPage<OrderPromotion>> ListEligiblePromotionsAsync(OrderDirection direction, string orderID, Action<ListOptionsBuilder<OrderPromotion>> buildListOpts, string accessToken = null);
+		Task<ListPage<EligiblePromotion>> ListEligiblePromotionsAsync(OrderDirection direction, string orderID, Action<ListOptionsBuilder<EligiblePromotion>> buildListOpts, string accessToken = null);
 		/// <summary>List eligible promotions. Get a list of promotions eligible for an order.</summary>
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
-		Task<ListPage<TOrderPromotion>> ListEligiblePromotionsAsync<TOrderPromotion>(OrderDirection direction, string orderID, Action<ListOptionsBuilder<TOrderPromotion>> buildListOpts, string accessToken = null) where TOrderPromotion : OrderPromotion;
+		Task<ListPage<TEligiblePromotion>> ListEligiblePromotionsAsync<TEligiblePromotion>(OrderDirection direction, string orderID, Action<ListOptionsBuilder<TEligiblePromotion>> buildListOpts, string accessToken = null) where TEligiblePromotion : EligiblePromotion;
 		/// <summary>Add a promotion to an order.</summary>
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
 		/// <param name="orderID">ID of the order.</param>
@@ -6683,7 +6674,6 @@ namespace OrderCloud.SDK
 			Cart = new CartResource(this);
 			Catalogs = new CatalogsResource(this);
 			Categories = new CategoriesResource(this);
-			Certs = new CertsResource(this);
 			CostCenters = new CostCentersResource(this);
 			CreditCards = new CreditCardsResource(this);
 			DeliveryConfigurations = new DeliveryConfigurationsResource(this);
@@ -6744,7 +6734,6 @@ namespace OrderCloud.SDK
 		public ICartResource Cart { get; private set; }
 		public ICatalogsResource Catalogs { get; private set; }
 		public ICategoriesResource Categories { get; private set; }
-		public ICertsResource Certs { get; private set; }
 		public ICostCentersResource CostCenters { get; private set; }
 		public ICreditCardsResource CreditCards { get; private set; }
 		public IDeliveryConfigurationsResource DeliveryConfigurations { get; private set; }
@@ -7009,10 +6998,10 @@ namespace OrderCloud.SDK
 		public Task<ListPage<TOrderPromotion>> ListPromotionsAsync<TOrderPromotion>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TOrderPromotion : OrderPromotion => Request("v1", "cart", "promotions").WithOAuthBearerToken(accessToken).SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<TOrderPromotion>>();
 		public Task<ListPage<OrderPromotion>> ListPromotionsAsync(Action<ListOptionsBuilder<OrderPromotion>> buildListOpts, string accessToken = null) => ListPromotionsAsync<OrderPromotion>(buildListOpts, accessToken);
 		public Task<ListPage<TOrderPromotion>> ListPromotionsAsync<TOrderPromotion>(Action<ListOptionsBuilder<TOrderPromotion>> buildListOpts, string accessToken = null) where TOrderPromotion : OrderPromotion => Request("v1", "cart", "promotions").WithOAuthBearerToken(accessToken).SetListOptions(buildListOpts).GetJsonAsync<ListPage<TOrderPromotion>>();
-		public Task<ListPage<OrderPromotion>> ListEligiblePromotionsAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) => ListEligiblePromotionsAsync<OrderPromotion>(search, searchOn, sortBy, page, pageSize, filters, accessToken);
-		public Task<ListPage<TOrderPromotion>> ListEligiblePromotionsAsync<TOrderPromotion>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TOrderPromotion : OrderPromotion => Request("v1", "cart", "eligiblepromotions").WithOAuthBearerToken(accessToken).SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<TOrderPromotion>>();
-		public Task<ListPage<OrderPromotion>> ListEligiblePromotionsAsync(Action<ListOptionsBuilder<OrderPromotion>> buildListOpts, string accessToken = null) => ListEligiblePromotionsAsync<OrderPromotion>(buildListOpts, accessToken);
-		public Task<ListPage<TOrderPromotion>> ListEligiblePromotionsAsync<TOrderPromotion>(Action<ListOptionsBuilder<TOrderPromotion>> buildListOpts, string accessToken = null) where TOrderPromotion : OrderPromotion => Request("v1", "cart", "eligiblepromotions").WithOAuthBearerToken(accessToken).SetListOptions(buildListOpts).GetJsonAsync<ListPage<TOrderPromotion>>();
+		public Task<ListPage<EligiblePromotion>> ListEligiblePromotionsAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) => ListEligiblePromotionsAsync<EligiblePromotion>(search, searchOn, sortBy, page, pageSize, filters, accessToken);
+		public Task<ListPage<TEligiblePromotion>> ListEligiblePromotionsAsync<TEligiblePromotion>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TEligiblePromotion : EligiblePromotion => Request("v1", "cart", "eligiblepromotions").WithOAuthBearerToken(accessToken).SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<TEligiblePromotion>>();
+		public Task<ListPage<EligiblePromotion>> ListEligiblePromotionsAsync(Action<ListOptionsBuilder<EligiblePromotion>> buildListOpts, string accessToken = null) => ListEligiblePromotionsAsync<EligiblePromotion>(buildListOpts, accessToken);
+		public Task<ListPage<TEligiblePromotion>> ListEligiblePromotionsAsync<TEligiblePromotion>(Action<ListOptionsBuilder<TEligiblePromotion>> buildListOpts, string accessToken = null) where TEligiblePromotion : EligiblePromotion => Request("v1", "cart", "eligiblepromotions").WithOAuthBearerToken(accessToken).SetListOptions(buildListOpts).GetJsonAsync<ListPage<TEligiblePromotion>>();
 		public Task<OrderPromotion> AddPromotionAsync(string promoCode, string accessToken = null) => AddPromotionAsync<OrderPromotion>(promoCode, accessToken);
 		public Task<TOrderPromotion> AddPromotionAsync<TOrderPromotion>(string promoCode, string accessToken = null) where TOrderPromotion : OrderPromotion => Request("v1", "cart", "promotions", promoCode).WithOAuthBearerToken(accessToken).PostAsync(null).ReceiveJson<TOrderPromotion>();
 		public Task DeletePromotionAsync(string promoCode, string accessToken = null) => Request("v1", "cart", "promotions", promoCode).WithOAuthBearerToken(accessToken).DeleteAsync();
@@ -7107,12 +7096,6 @@ namespace OrderCloud.SDK
 		public Task<ListPage<CategoryBundleAssignment>> ListBundleAssignmentsAsync(string catalogID, string categoryID = null, string bundleID = null, int page = 1, int pageSize = 20, string accessToken = null) => Request("v1", "catalogs", catalogID, "categories", "bundleassignments").WithOAuthBearerToken(accessToken).SetQueryParams(new { categoryID, bundleID, page, pageSize }).GetJsonAsync<ListPage<CategoryBundleAssignment>>();
 		public Task SaveBundleAssignmentAsync(string catalogID, CategoryBundleAssignment categoryBundleAssignment, string accessToken = null) => Request("v1", "catalogs", catalogID, "categories", "bundleassignments").WithOAuthBearerToken(accessToken).PostJsonAsync(ValidateModel(categoryBundleAssignment));
 		public Task DeleteBundleAssignmentAsync(string catalogID, string categoryID, string bundleID, string accessToken = null) => Request("v1", "catalogs", catalogID, "categories", categoryID, "bundleassignments", bundleID).WithOAuthBearerToken(accessToken).DeleteAsync();
-	}
-
-	public class CertsResource : OrderCloudResource, ICertsResource
-	{
-		internal CertsResource(OrderCloudClient client) : base(client) { }
-		public Task<PublicKey> GetPublicKeyAsync(string ID, string accessToken = null) => Request("oauth", "certs", ID).WithOAuthBearerToken(accessToken).GetJsonAsync<PublicKey>();
 	}
 
 	public class CostCentersResource : OrderCloudResource, ICostCentersResource
@@ -7675,10 +7658,10 @@ namespace OrderCloud.SDK
 		public Task<TOrder> PatchBillingAddressAsync<TOrder>(OrderDirection direction, string orderID, PartialAddress partialAddress, string accessToken = null) where TOrder : Order => Request("v1", "orders", direction, orderID, "billto").WithOAuthBearerToken(accessToken).PatchJsonAsync(ValidateModel(partialAddress)).ReceiveJson<TOrder>();
 		public Task<Order> PatchFromUserAsync(OrderDirection direction, string orderID, PartialUser partialUser, string accessToken = null) => PatchFromUserAsync<Order>(direction, orderID, partialUser, accessToken);
 		public Task<TOrder> PatchFromUserAsync<TOrder>(OrderDirection direction, string orderID, PartialUser partialUser, string accessToken = null) where TOrder : Order => Request("v1", "orders", direction, orderID, "fromuser").WithOAuthBearerToken(accessToken).PatchJsonAsync(ValidateModel(partialUser)).ReceiveJson<TOrder>();
-		public Task<ListPage<OrderPromotion>> ListEligiblePromotionsAsync(OrderDirection direction, string orderID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) => ListEligiblePromotionsAsync<OrderPromotion>(direction, orderID, search, searchOn, sortBy, page, pageSize, filters, accessToken);
-		public Task<ListPage<TOrderPromotion>> ListEligiblePromotionsAsync<TOrderPromotion>(OrderDirection direction, string orderID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TOrderPromotion : OrderPromotion => Request("v1", "orders", direction, orderID, "eligiblepromotions").WithOAuthBearerToken(accessToken).SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<TOrderPromotion>>();
-		public Task<ListPage<OrderPromotion>> ListEligiblePromotionsAsync(OrderDirection direction, string orderID, Action<ListOptionsBuilder<OrderPromotion>> buildListOpts, string accessToken = null) => ListEligiblePromotionsAsync<OrderPromotion>(direction, orderID, buildListOpts, accessToken);
-		public Task<ListPage<TOrderPromotion>> ListEligiblePromotionsAsync<TOrderPromotion>(OrderDirection direction, string orderID, Action<ListOptionsBuilder<TOrderPromotion>> buildListOpts, string accessToken = null) where TOrderPromotion : OrderPromotion => Request("v1", "orders", direction, orderID, "eligiblepromotions").WithOAuthBearerToken(accessToken).SetListOptions(buildListOpts).GetJsonAsync<ListPage<TOrderPromotion>>();
+		public Task<ListPage<EligiblePromotion>> ListEligiblePromotionsAsync(OrderDirection direction, string orderID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) => ListEligiblePromotionsAsync<EligiblePromotion>(direction, orderID, search, searchOn, sortBy, page, pageSize, filters, accessToken);
+		public Task<ListPage<TEligiblePromotion>> ListEligiblePromotionsAsync<TEligiblePromotion>(OrderDirection direction, string orderID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TEligiblePromotion : EligiblePromotion => Request("v1", "orders", direction, orderID, "eligiblepromotions").WithOAuthBearerToken(accessToken).SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<TEligiblePromotion>>();
+		public Task<ListPage<EligiblePromotion>> ListEligiblePromotionsAsync(OrderDirection direction, string orderID, Action<ListOptionsBuilder<EligiblePromotion>> buildListOpts, string accessToken = null) => ListEligiblePromotionsAsync<EligiblePromotion>(direction, orderID, buildListOpts, accessToken);
+		public Task<ListPage<TEligiblePromotion>> ListEligiblePromotionsAsync<TEligiblePromotion>(OrderDirection direction, string orderID, Action<ListOptionsBuilder<TEligiblePromotion>> buildListOpts, string accessToken = null) where TEligiblePromotion : EligiblePromotion => Request("v1", "orders", direction, orderID, "eligiblepromotions").WithOAuthBearerToken(accessToken).SetListOptions(buildListOpts).GetJsonAsync<ListPage<TEligiblePromotion>>();
 		public Task<OrderPromotion> AddPromotionAsync(OrderDirection direction, string orderID, string promoCode, string accessToken = null) => AddPromotionAsync<OrderPromotion>(direction, orderID, promoCode, accessToken);
 		public Task<TOrderPromotion> AddPromotionAsync<TOrderPromotion>(OrderDirection direction, string orderID, string promoCode, string accessToken = null) where TOrderPromotion : OrderPromotion => Request("v1", "orders", direction, orderID, "promotions", promoCode).WithOAuthBearerToken(accessToken).PostAsync(null).ReceiveJson<TOrderPromotion>();
 		public Task<ListPage<OrderPromotion>> ListPromotionsAsync(OrderDirection direction, string orderID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) => ListPromotionsAsync<OrderPromotion>(direction, orderID, search, searchOn, sortBy, page, pageSize, filters, accessToken);
