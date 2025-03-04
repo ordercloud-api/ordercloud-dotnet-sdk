@@ -756,6 +756,69 @@ namespace OrderCloud.SDK
 		[Required]
 		public string ServiceEndpoint { get => GetProp<string>("ServiceEndpoint"); set => SetProp<string>("ServiceEndpoint", value); }
 	}
+	public class EligiblePromotion : OrderCloudModel
+	{
+		/// <summary>Amount of the eligible promotion.</summary>
+		[ApiReadOnly]
+		public decimal Amount { get => GetProp<decimal>("Amount"); set => SetProp<decimal>("Amount", value); }
+		/// <summary>ID of the eligible promotion. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 2.</summary>
+		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
+		/// <summary>If true, certain eligible expression requirements must be met, and the PromotionDiscount will be applied at the line item level.</summary>
+		public bool LineItemLevel { get => GetProp<bool>("LineItemLevel"); set => SetProp<bool>("LineItemLevel", value); }
+		/// <summary>Must be unique. Entered by buyer when adding promo to order.</summary>
+		[Required]
+		public string Code { get => GetProp<string>("Code"); set => SetProp<string>("Code", value); }
+		/// <summary>Name of the eligible promotion. Max length 100 characters. Searchable: priority level 2. Sortable: priority level 1.</summary>
+		public string Name { get => GetProp<string>("Name"); set => SetProp<string>("Name", value); }
+		/// <summary>Limit the total number of orders this promotion can be applied to across all users.</summary>
+		public int? RedemptionLimit { get => GetProp<int?>("RedemptionLimit"); set => SetProp<int?>("RedemptionLimit", value); }
+		/// <summary>Limit the total number of orders this promotion can be applied to per user.</summary>
+		public int? RedemptionLimitPerUser { get => GetProp<int?>("RedemptionLimitPerUser"); set => SetProp<int?>("RedemptionLimitPerUser", value); }
+		/// <summary>The number of times this promotion has been applied to an order.</summary>
+		[ApiReadOnly]
+		public int RedemptionCount { get => GetProp<int>("RedemptionCount"); set => SetProp<int>("RedemptionCount", value); }
+		/// <summary>Can only be used when LineItemLevel is true and ItemLimitPerOrder does not have a value. When defined the ValueExpression will be the discount applied to each qualifying quantity of eligible items. When no ItemSortBy is defined, items will be sorted by DateAdded ascending.</summary>
+		public int? QuantityLimitPerOrder { get => GetProp<int?>("QuantityLimitPerOrder"); set => SetProp<int?>("QuantityLimitPerOrder", value); }
+		/// <summary>Can only be used when LineItemLevel is true and QuantityLimitPerOrder does not have a value. Limits the number of items the promotion will apply to when eligible. When no ItemSortBy is defined, items will be sorted by DateAdded ascending.</summary>
+		public int? ItemLimitPerOrder { get => GetProp<int?>("ItemLimitPerOrder"); set => SetProp<int?>("ItemLimitPerOrder", value); }
+		/// <summary>Comma delimited list of properties to sort by. Can only be used when ItemLimitPerOrder is true. Used to determine the order in which the promotion is applied to the specified limit of items. Use ! to reverse sort order on a property.</summary>
+		public string ItemSortBy { get => GetProp<string>("ItemSortBy"); set => SetProp<string>("ItemSortBy", value); }
+		/// <summary>Description of the eligible promotion. Max length 2000 characters. Searchable: priority level 4.</summary>
+		public string Description { get => GetProp<string>("Description"); set => SetProp<string>("Description", value); }
+		/// <summary>Terms, conditions, and other legal jargon.</summary>
+		public string FinePrint { get => GetProp<string>("FinePrint"); set => SetProp<string>("FinePrint", value); }
+		/// <summary>Start date of the eligible promotion. Sortable.</summary>
+		public DateTimeOffset? StartDate { get => GetProp<DateTimeOffset?>("StartDate"); set => SetProp<DateTimeOffset?>("StartDate", value); }
+		/// <summary>Expiration date of the eligible promotion. Sortable.</summary>
+		public DateTimeOffset? ExpirationDate { get => GetProp<DateTimeOffset?>("ExpirationDate"); set => SetProp<DateTimeOffset?>("ExpirationDate", value); }
+		/// <summary>The expression evaluated to determine if an item or order is eligible for a promotion. See Rules Engine documentation for formatting details.</summary>
+		[Required]
+		public string EligibleExpression { get => GetProp<string>("EligibleExpression"); set => SetProp<string>("EligibleExpression", value); }
+		/// <summary>The expression evaluated to determine the discount amount of an eligible promotion. See Rules Engine documentation for formatting details.</summary>
+		public string ValueExpression { get => GetProp<string>("ValueExpression"); set => SetProp<string>("ValueExpression", value); }
+		/// <summary>If true, the promotion can be applied to an order that already other promotions applied, as long as they can also be combined.</summary>
+		public bool CanCombine { get => GetProp<bool>("CanCombine"); set => SetProp<bool>("CanCombine", value); }
+		/// <summary>Allow promo to be used by all buyers in your Marketplace without creating explicit assignments.</summary>
+		public bool AllowAllBuyers { get => GetProp<bool>("AllowAllBuyers"); set => SetProp<bool>("AllowAllBuyers", value); }
+		/// <summary>ID of the organization that owns the Promotion. Only the Marketplace Owner can override the OwnerID on create.</summary>
+		public string OwnerID { get => GetProp<string>("OwnerID"); set => SetProp<string>("OwnerID", value); }
+		/// <summary>Auto apply of the eligible promotion. Sortable.</summary>
+		public bool AutoApply { get => GetProp<bool>("AutoApply", false); set => SetProp<bool>("AutoApply", value); }
+		/// <summary>Active of the eligible promotion. Sortable.</summary>
+		public bool Active { get => GetProp<bool>("Active", true); set => SetProp<bool>("Active", value); }
+		/// <summary>Use integration of the eligible promotion.</summary>
+		public bool UseIntegration { get => GetProp<bool>("UseIntegration"); set => SetProp<bool>("UseIntegration", value); }
+		/// <summary>Used to control the order in which promotions are applied when calling the auto apply endpoint.</summary>
+		public int? Priority { get => GetProp<int?>("Priority"); set => SetProp<int?>("Priority", value); }
+		/// <summary>Container for extended (custom) properties of the eligible promotion.</summary>
+		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
+	}
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic EligiblePromotion class instead.</typeparam>
+	public class EligiblePromotion<Txp> : EligiblePromotion
+	{
+		/// <summary>Container for extended (custom) properties of the eligible promotion.</summary>
+		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
+	}
 	public class EntitySyncConfig : OrderCloudModel
 	{
 		/// <summary>ID of the delivery config. Required.</summary>
@@ -2071,7 +2134,8 @@ namespace OrderCloud.SDK
 	/// <typeparam name="TOrderSubmitResponse">Specific type of the OrderSubmitResponse property. If not using a custom type, specify OrderSubmitResponse.</typeparam>
 	/// <typeparam name="TOrderSubmitForApprovalResponse">Specific type of the OrderSubmitForApprovalResponse property. If not using a custom type, specify OrderSubmitForApprovalResponse.</typeparam>
 	/// <typeparam name="TOrderApprovedResponse">Specific type of the OrderApprovedResponse property. If not using a custom type, specify OrderApprovedResponse.</typeparam>
-	public class OrderWorksheet<TOrder, TLineItems, TOrderPromotions, TSubscription, TShipEstimateResponse, TOrderCalculateResponse, TOrderSubmitResponse, TOrderSubmitForApprovalResponse, TOrderApprovedResponse> : OrderWorksheet
+	/// <typeparam name="TSubscriptionIntegrationResponse">Specific type of the SubscriptionIntegrationResponse property. If not using a custom type, specify SubscriptionIntegrationResponse.</typeparam>
+	public class OrderWorksheet<TOrder, TLineItems, TOrderPromotions, TSubscription, TShipEstimateResponse, TOrderCalculateResponse, TOrderSubmitResponse, TOrderSubmitForApprovalResponse, TOrderApprovedResponse, TSubscriptionIntegrationResponse> : OrderWorksheet
 		where TOrder : Order
 		where TLineItems : LineItem
 		where TOrderPromotions : OrderPromotion
@@ -2081,6 +2145,7 @@ namespace OrderCloud.SDK
 		where TOrderSubmitResponse : OrderSubmitResponse
 		where TOrderSubmitForApprovalResponse : OrderSubmitForApprovalResponse
 		where TOrderApprovedResponse : OrderApprovedResponse
+		where TSubscriptionIntegrationResponse : SubscriptionIntegrationResponse
 	{
 		/// <summary>Order of the order worksheet.</summary>
 		public new TOrder Order { get => GetProp<TOrder>("Order"); set => SetProp<TOrder>("Order", value); }
@@ -2100,6 +2165,8 @@ namespace OrderCloud.SDK
 		public new TOrderSubmitForApprovalResponse OrderSubmitForApprovalResponse { get => GetProp<TOrderSubmitForApprovalResponse>("OrderSubmitForApprovalResponse"); set => SetProp<TOrderSubmitForApprovalResponse>("OrderSubmitForApprovalResponse", value); }
 		/// <summary>Order approved response of the order worksheet.</summary>
 		public new TOrderApprovedResponse OrderApprovedResponse { get => GetProp<TOrderApprovedResponse>("OrderApprovedResponse"); set => SetProp<TOrderApprovedResponse>("OrderApprovedResponse", value); }
+		/// <summary>Subscription integration response of the order worksheet.</summary>
+		public new TSubscriptionIntegrationResponse SubscriptionIntegrationResponse { get => GetProp<TSubscriptionIntegrationResponse>("SubscriptionIntegrationResponse"); set => SetProp<TSubscriptionIntegrationResponse>("SubscriptionIntegrationResponse", value); }
 	}
 	public class PasswordConfig : OrderCloudModel
 	{
@@ -2713,21 +2780,6 @@ namespace OrderCloud.SDK
 		/// <summary>Overrides the promotion's calculated discount to this amount.</summary>
 		public decimal Amount { get => GetProp<decimal>("Amount"); set => SetProp<decimal>("Amount", value); }
 	}
-	public class PublicKey : OrderCloudModel
-	{
-		/// <summary>Kty of the public key.</summary>
-		public string kty { get => GetProp<string>("kty"); set => SetProp<string>("kty", value); }
-		/// <summary>N of the public key.</summary>
-		public string n { get => GetProp<string>("n"); set => SetProp<string>("n", value); }
-		/// <summary>E of the public key.</summary>
-		public string e { get => GetProp<string>("e"); set => SetProp<string>("e", value); }
-		/// <summary>Alg of the public key.</summary>
-		public string alg { get => GetProp<string>("alg"); set => SetProp<string>("alg", value); }
-		/// <summary>Use of the public key.</summary>
-		public string use { get => GetProp<string>("use"); set => SetProp<string>("use", value); }
-		/// <summary>Kid of the public key.</summary>
-		public string kid { get => GetProp<string>("kid"); set => SetProp<string>("kid", value); }
-	}
 	public class SearchIngestion : OrderCloudModel
 	{
 		/// <summary>Domain of the search ingestion. Required.</summary>
@@ -3190,6 +3242,16 @@ namespace OrderCloud.SDK
 		public int? HttpStatusCode { get => GetProp<int?>("HttpStatusCode"); set => SetProp<int?>("HttpStatusCode", value); }
 		/// <summary>Unhandled error body of the subscription integration response.</summary>
 		public string UnhandledErrorBody { get => GetProp<string>("UnhandledErrorBody"); set => SetProp<string>("UnhandledErrorBody", value); }
+		/// <summary>Container for extended (custom) properties of the subscription integration response.</summary>
+		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
+		/// <summary>Succeeded of the subscription integration response.</summary>
+		public bool Succeeded { get => GetProp<bool>("Succeeded"); set => SetProp<bool>("Succeeded", value); }
+	}
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic SubscriptionIntegrationResponse class instead.</typeparam>
+	public class SubscriptionIntegrationResponse<Txp> : SubscriptionIntegrationResponse
+	{
+		/// <summary>Container for extended (custom) properties of the subscription integration response.</summary>
+		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
 	}
 	public class SubscriptionPayment : OrderCloudModel
 	{
