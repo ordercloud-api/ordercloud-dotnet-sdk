@@ -1650,6 +1650,9 @@ namespace OrderCloud.SDK
 		/// <summary>Date created of the user. Sortable.</summary>
 		[ApiReadOnly]
 		public DateTimeOffset? DateCreated { get => GetProp<DateTimeOffset?>("DateCreated"); set => SetProp<DateTimeOffset?>("DateCreated", value); }
+		/// <summary>Accurate within a few minutes. Includes impersonation activity.</summary>
+		[ApiReadOnly]
+		public DateTimeOffset? LastActive { get => GetProp<DateTimeOffset?>("LastActive"); set => SetProp<DateTimeOffset?>("LastActive", value); }
 		/// <summary>Can be used in conjunction with SecurityProfile.PasswordConfig to enforce password reset schedules.</summary>
 		[ApiReadOnly]
 		public DateTimeOffset? PasswordLastSetDate { get => GetProp<DateTimeOffset?>("PasswordLastSetDate"); set => SetProp<DateTimeOffset?>("PasswordLastSetDate", value); }
@@ -2314,9 +2317,9 @@ namespace OrderCloud.SDK
 		public bool ApplyTax { get => GetProp<bool>("ApplyTax"); set => SetProp<bool>("ApplyTax", value); }
 		/// <summary>For reference only for calculating shipping cost, does not influence any OrderCloud behavior.</summary>
 		public bool ApplyShipping { get => GetProp<bool>("ApplyShipping"); set => SetProp<bool>("ApplyShipping", value); }
-		/// <summary>The minimum quantity allowed per order.</summary>
+		/// <summary>The minimum LineItem Quantity when UseCumulativeQuantity is false.</summary>
 		public int? MinQuantity { get => GetProp<int?>("MinQuantity", 1); set => SetProp<int?>("MinQuantity", value); }
-		/// <summary>The maximum quantity allowed per order.</summary>
+		/// <summary>The maximum LineItem Quantity when UseCumulativeQuantity is false.</summary>
 		public int? MaxQuantity { get => GetProp<int?>("MaxQuantity"); set => SetProp<int?>("MaxQuantity", value); }
 		/// <summary>If true, LineItem quantities will be aggregated by productID when determining which price break applies, and when Min/Max quantities are met. Else, each LineItem is treated separately.</summary>
 		public bool UseCumulativeQuantity { get => GetProp<bool>("UseCumulativeQuantity"); set => SetProp<bool>("UseCumulativeQuantity", value); }
@@ -3357,6 +3360,9 @@ namespace OrderCloud.SDK
 		/// <summary>Date created of the user. Sortable.</summary>
 		[ApiReadOnly]
 		public DateTimeOffset? DateCreated { get => GetProp<DateTimeOffset?>("DateCreated"); set => SetProp<DateTimeOffset?>("DateCreated", value); }
+		/// <summary>Accurate within a few minutes. Includes impersonation activity.</summary>
+		[ApiReadOnly]
+		public DateTimeOffset? LastActive { get => GetProp<DateTimeOffset?>("LastActive"); set => SetProp<DateTimeOffset?>("LastActive", value); }
 		/// <summary>Can be used in conjunction with SecurityProfile.PasswordConfig to enforce password reset schedules.</summary>
 		[ApiReadOnly]
 		public DateTimeOffset? PasswordLastSetDate { get => GetProp<DateTimeOffset?>("PasswordLastSetDate"); set => SetProp<DateTimeOffset?>("PasswordLastSetDate", value); }
