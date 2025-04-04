@@ -143,6 +143,8 @@ namespace OrderCloud.SDK
 		public string AppName { get => GetProp<string>("AppName"); set => SetProp<string>("AppName", value); }
 		/// <summary>Refresh token duration of the api client. Must be between 0 and 524160.</summary>
 		public int RefreshTokenDuration { get => GetProp<int>("RefreshTokenDuration"); set => SetProp<int>("RefreshTokenDuration", value); }
+		/// <summary>Specifies the duration of anonymous tokens, expressed in minutes. This value is only used if the ApiClient is configured for anonymous shopping. The default is 10080 (7 days).</summary>
+		public int? AnonymousTokenDuration { get => GetProp<int?>("AnonymousTokenDuration"); set => SetProp<int?>("AnonymousTokenDuration", value); }
 		/// <summary>Optionally set a user that will be used when authenticating with a Client Credentials grant type flow. This grant type is often used for anonymous browsing on buyer applications and authentication on server integration layers.</summary>
 		public string DefaultContextUserName { get => GetProp<string>("DefaultContextUserName"); set => SetProp<string>("DefaultContextUserName", value); }
 		/// <summary>Container for extended (custom) properties of the api client.</summary>
@@ -2801,6 +2803,27 @@ namespace OrderCloud.SDK
 		[Required]
 		[ApiWriteOnly]
 		public string ApiKey { get => GetProp<string>("ApiKey"); set => SetProp<string>("ApiKey", value); }
+		/// <summary>Content of the search ingestion.</summary>
+		public SearchIngestionContent Content { get => GetProp<SearchIngestionContent>("Content"); set => SetProp<SearchIngestionContent>("Content", value); }
+	}
+	public class SearchIngestionContent : OrderCloudModel
+	{
+		/// <summary>Supported search ingestion locales.</summary>
+		[Required]
+		public IList<string> Locales { get => GetProp<IList<string>>("Locales", new List<string>()); set => SetProp<IList<string>>("Locales", value); }
+		/// <summary>Http of the search ingestion content.</summary>
+		public SearchIngestionHttpContent Http { get => GetProp<SearchIngestionHttpContent>("Http"); set => SetProp<SearchIngestionHttpContent>("Http", value); }
+	}
+	public class SearchIngestionHttpContent : OrderCloudModel
+	{
+		/// <summary>Endpoint of the search ingestion http content. Required.</summary>
+		[Required]
+		public string Endpoint { get => GetProp<string>("Endpoint"); set => SetProp<string>("Endpoint", value); }
+		/// <summary>Security feature that allows your middleware to verify the digital signature in the request header to ensure you only accept trusted data.</summary>
+		public string CustomAuthHeaderName { get => GetProp<string>("CustomAuthHeaderName"); set => SetProp<string>("CustomAuthHeaderName", value); }
+		/// <summary>The header value that can be passed to your middleware.</summary>
+		[ApiWriteOnly]
+		public string CustomAuthHeaderValue { get => GetProp<string>("CustomAuthHeaderValue"); set => SetProp<string>("CustomAuthHeaderValue", value); }
 	}
 	public class SecurityProfile : OrderCloudModel
 	{
@@ -3670,6 +3693,8 @@ namespace OrderCloud.SDK
 	{ }
 	public class PartialPromotionIntegration : PromotionIntegration, IPartial { }
 	public class PartialSearchIngestion : SearchIngestion, IPartial { }
+	public class PartialSearchIngestionContent : SearchIngestionContent, IPartial { }
+	public class PartialSearchIngestionHttpContent : SearchIngestionHttpContent, IPartial { }
 	public class PartialSecurityProfile : SecurityProfile, IPartial { }
 	public class PartialSellerApprovalRule : SellerApprovalRule, IPartial { }
 	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic PartialSellerApprovalRule class instead.</typeparam>
