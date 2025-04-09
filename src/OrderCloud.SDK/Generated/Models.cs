@@ -832,6 +832,8 @@ namespace OrderCloud.SDK
 		/// <summary>Sync entity deleted of the entity sync config. Required.</summary>
 		[Required]
 		public bool SyncEntityDeleted { get => GetProp<bool>("SyncEntityDeleted"); set => SetProp<bool>("SyncEntityDeleted", value); }
+		/// <summary>Paused of the entity sync config.</summary>
+		public bool Paused { get => GetProp<bool>("Paused"); set => SetProp<bool>("Paused", value); }
 	}
 	public class ErrorConfig : OrderCloudModel
 	{
@@ -2693,6 +2695,8 @@ namespace OrderCloud.SDK
 		public string DeliveryConfigID { get => GetProp<string>("DeliveryConfigID"); set => SetProp<string>("DeliveryConfigID", value); }
 		/// <summary>Config data of the product sync config.</summary>
 		public object ConfigData { get => GetProp<object>("ConfigData"); set => SetProp<object>("ConfigData", value); }
+		/// <summary>Paused of the product sync config.</summary>
+		public bool Paused { get => GetProp<bool>("Paused"); set => SetProp<bool>("Paused", value); }
 	}
 	public class Promotion : OrderCloudModel
 	{
@@ -3583,6 +3587,7 @@ namespace OrderCloud.SDK
 	public class PartialDeliveryConfig : DeliveryConfig, IPartial { }
 	public class PartialDeliveryTargets : DeliveryTargets, IPartial { }
 	public class PartialDiscoverEvent : DiscoverEvent, IPartial { }
+	public class PartialEntitySyncConfig : EntitySyncConfig, IPartial { }
 	public class PartialErrorConfig : ErrorConfig, IPartial { }
 	public class PartialEventHubConfig : EventHubConfig, IPartial { }
 	/// <summary>Features in beta are subject to change and are not available in production.</summary>

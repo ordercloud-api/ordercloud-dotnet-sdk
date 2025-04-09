@@ -1736,6 +1736,10 @@ namespace OrderCloud.SDK
 		/// <param name="entitySyncConfig">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<EntitySyncConfig> SaveCategoriesAsync(EntitySyncConfig entitySyncConfig, string accessToken = null);
+		/// <summary>Partially update the entity sync delivery configuration for Categories Partially update the entity sync delivery configuration for Categories</summary>
+		/// <param name="partialEntitySyncConfig">The object that will be partially serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<EntitySyncConfig> PatchCategoriesAsync(PartialEntitySyncConfig partialEntitySyncConfig, string accessToken = null);
 		/// <summary>Get the entity sync delivery configuration for Suppliers Get the entity sync delivery configuration for Suppliers</summary>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<EntitySyncConfig> GetSuppliersAsync(string accessToken = null);
@@ -1746,6 +1750,10 @@ namespace OrderCloud.SDK
 		/// <param name="entitySyncConfig">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<EntitySyncConfig> SaveSuppliersAsync(EntitySyncConfig entitySyncConfig, string accessToken = null);
+		/// <summary>Partially update the entity sync delivery configuration for Suppliers Partially update the entity sync delivery configuration for Suppliers</summary>
+		/// <param name="partialEntitySyncConfig">The object that will be partially serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<EntitySyncConfig> PatchSuppliersAsync(PartialEntitySyncConfig partialEntitySyncConfig, string accessToken = null);
 		/// <summary>Get the entity sync delivery configuration for BuyerUsers Get the entity sync delivery configuration for BuyerUsers</summary>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<EntitySyncConfig> GetBuyerUsersAsync(string accessToken = null);
@@ -1756,6 +1764,10 @@ namespace OrderCloud.SDK
 		/// <param name="entitySyncConfig">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<EntitySyncConfig> SaveBuyerUsersAsync(EntitySyncConfig entitySyncConfig, string accessToken = null);
+		/// <summary>Partially update the entity sync delivery configuration for BuyerUsers Partially update the entity sync delivery configuration for BuyerUsers</summary>
+		/// <param name="partialEntitySyncConfig">The object that will be partially serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<EntitySyncConfig> PatchBuyerUsersAsync(PartialEntitySyncConfig partialEntitySyncConfig, string accessToken = null);
 		/// <summary>Get the entity sync delivery configuration for SupplierUsers Get the entity sync delivery configuration for SupplierUsers</summary>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<EntitySyncConfig> GetSupplierUsersAsync(string accessToken = null);
@@ -1766,6 +1778,10 @@ namespace OrderCloud.SDK
 		/// <param name="entitySyncConfig">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<EntitySyncConfig> SaveSupplierUsersAsync(EntitySyncConfig entitySyncConfig, string accessToken = null);
+		/// <summary>Partially update the entity sync delivery configuration for SupplierUsers Partially update the entity sync delivery configuration for SupplierUsers</summary>
+		/// <param name="partialEntitySyncConfig">The object that will be partially serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<EntitySyncConfig> PatchSupplierUsersAsync(PartialEntitySyncConfig partialEntitySyncConfig, string accessToken = null);
 		/// <summary>Get the entity sync delivery configuration for AdminUsers Get the entity sync delivery configuration for AdminUsers</summary>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<EntitySyncConfig> GetAdminUsersAsync(string accessToken = null);
@@ -1776,6 +1792,10 @@ namespace OrderCloud.SDK
 		/// <param name="entitySyncConfig">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<EntitySyncConfig> SaveAdminUsersAsync(EntitySyncConfig entitySyncConfig, string accessToken = null);
+		/// <summary>Partially update the entity sync delivery configuration for AdminUsers Partially update the entity sync delivery configuration for AdminUsers</summary>
+		/// <param name="partialEntitySyncConfig">The object that will be partially serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<EntitySyncConfig> PatchAdminUsersAsync(PartialEntitySyncConfig partialEntitySyncConfig, string accessToken = null);
 		/// <summary>Get the entity sync delivery configuration for Buyers Get the entity sync delivery configuration for Buyers</summary>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<EntitySyncConfig> GetBuyersAsync(string accessToken = null);
@@ -1786,6 +1806,10 @@ namespace OrderCloud.SDK
 		/// <param name="entitySyncConfig">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<EntitySyncConfig> SaveBuyersAsync(EntitySyncConfig entitySyncConfig, string accessToken = null);
+		/// <summary>Partially update the entity sync delivery configuration for Buyers Partially update the entity sync delivery configuration for Buyers</summary>
+		/// <param name="partialEntitySyncConfig">The object that will be partially serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<EntitySyncConfig> PatchBuyersAsync(PartialEntitySyncConfig partialEntitySyncConfig, string accessToken = null);
 		/// <summary>Get the entity sync delivery configuration for BuyerUserGroups Get the entity sync delivery configuration for BuyerUserGroups</summary>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<EntitySyncConfig> GetBuyerUserGroupsAsync(string accessToken = null);
@@ -1796,6 +1820,10 @@ namespace OrderCloud.SDK
 		/// <param name="entitySyncConfig">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<EntitySyncConfig> SaveUserGroupsAsync(EntitySyncConfig entitySyncConfig, string accessToken = null);
+		/// <summary>Partially update the entity sync delivery configuration for BuyerUserGroups Partially update the entity sync delivery configuration for BuyerUserGroups</summary>
+		/// <param name="partialEntitySyncConfig">The object that will be partially serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<EntitySyncConfig> PatchBuyerUserGroupsAsync(PartialEntitySyncConfig partialEntitySyncConfig, string accessToken = null);
 		/// <summary>Get the entity sync delivery configuration for InventoryRecords Get the entity sync delivery configuration for InventoryRecords</summary>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<EntitySyncConfig> GetInventoryRecordsAsync(string accessToken = null);
@@ -1806,6 +1834,10 @@ namespace OrderCloud.SDK
 		/// <param name="entitySyncConfig">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<EntitySyncConfig> SaveInventoryRecordsAsync(EntitySyncConfig entitySyncConfig, string accessToken = null);
+		/// <summary>Partially update the entity sync delivery configuration for InventoryRecords Partially update the entity sync delivery configuration for InventoryRecords</summary>
+		/// <param name="partialEntitySyncConfig">The object that will be partially serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<EntitySyncConfig> PatchInventoryRecordsAsync(PartialEntitySyncConfig partialEntitySyncConfig, string accessToken = null);
 	}
 
 	public interface IErrorConfigsResource
@@ -7158,27 +7190,35 @@ namespace OrderCloud.SDK
 		public Task<EntitySyncConfig> GetCategoriesAsync(string accessToken = null) => Request("v1", "integrations", "entitysync", "categories").WithOAuthBearerToken(accessToken).GetJsonAsync<EntitySyncConfig>();
 		public Task DeleteCategoriesAsync(string accessToken = null) => Request("v1", "integrations", "entitysync", "categories").WithOAuthBearerToken(accessToken).DeleteAsync();
 		public Task<EntitySyncConfig> SaveCategoriesAsync(EntitySyncConfig entitySyncConfig, string accessToken = null) => Request("v1", "integrations", "entitysync", "categories").WithOAuthBearerToken(accessToken).PutJsonAsync(ValidateModel(entitySyncConfig)).ReceiveJson<EntitySyncConfig>();
+		public Task<EntitySyncConfig> PatchCategoriesAsync(PartialEntitySyncConfig partialEntitySyncConfig, string accessToken = null) => Request("v1", "integrations", "entitysync", "categories").WithOAuthBearerToken(accessToken).PatchJsonAsync(ValidateModel(partialEntitySyncConfig)).ReceiveJson<EntitySyncConfig>();
 		public Task<EntitySyncConfig> GetSuppliersAsync(string accessToken = null) => Request("v1", "integrations", "entitysync", "suppliers").WithOAuthBearerToken(accessToken).GetJsonAsync<EntitySyncConfig>();
 		public Task DeleteSuppliersAsync(string accessToken = null) => Request("v1", "integrations", "entitysync", "suppliers").WithOAuthBearerToken(accessToken).DeleteAsync();
 		public Task<EntitySyncConfig> SaveSuppliersAsync(EntitySyncConfig entitySyncConfig, string accessToken = null) => Request("v1", "integrations", "entitysync", "suppliers").WithOAuthBearerToken(accessToken).PutJsonAsync(ValidateModel(entitySyncConfig)).ReceiveJson<EntitySyncConfig>();
+		public Task<EntitySyncConfig> PatchSuppliersAsync(PartialEntitySyncConfig partialEntitySyncConfig, string accessToken = null) => Request("v1", "integrations", "entitysync", "suppliers").WithOAuthBearerToken(accessToken).PatchJsonAsync(ValidateModel(partialEntitySyncConfig)).ReceiveJson<EntitySyncConfig>();
 		public Task<EntitySyncConfig> GetBuyerUsersAsync(string accessToken = null) => Request("v1", "integrations", "entitysync", "buyers", "users").WithOAuthBearerToken(accessToken).GetJsonAsync<EntitySyncConfig>();
 		public Task DeleteBuyerUsersAsync(string accessToken = null) => Request("v1", "integrations", "entitysync", "buyers", "users").WithOAuthBearerToken(accessToken).DeleteAsync();
 		public Task<EntitySyncConfig> SaveBuyerUsersAsync(EntitySyncConfig entitySyncConfig, string accessToken = null) => Request("v1", "integrations", "entitysync", "buyers", "users").WithOAuthBearerToken(accessToken).PutJsonAsync(ValidateModel(entitySyncConfig)).ReceiveJson<EntitySyncConfig>();
+		public Task<EntitySyncConfig> PatchBuyerUsersAsync(PartialEntitySyncConfig partialEntitySyncConfig, string accessToken = null) => Request("v1", "integrations", "entitysync", "buyers", "users").WithOAuthBearerToken(accessToken).PatchJsonAsync(ValidateModel(partialEntitySyncConfig)).ReceiveJson<EntitySyncConfig>();
 		public Task<EntitySyncConfig> GetSupplierUsersAsync(string accessToken = null) => Request("v1", "integrations", "entitysync", "suppliers", "users").WithOAuthBearerToken(accessToken).GetJsonAsync<EntitySyncConfig>();
 		public Task DeleteSupplierUsersAsync(string accessToken = null) => Request("v1", "integrations", "entitysync", "suppliers", "users").WithOAuthBearerToken(accessToken).DeleteAsync();
 		public Task<EntitySyncConfig> SaveSupplierUsersAsync(EntitySyncConfig entitySyncConfig, string accessToken = null) => Request("v1", "integrations", "entitysync", "suppliers", "users").WithOAuthBearerToken(accessToken).PutJsonAsync(ValidateModel(entitySyncConfig)).ReceiveJson<EntitySyncConfig>();
+		public Task<EntitySyncConfig> PatchSupplierUsersAsync(PartialEntitySyncConfig partialEntitySyncConfig, string accessToken = null) => Request("v1", "integrations", "entitysync", "suppliers", "users").WithOAuthBearerToken(accessToken).PatchJsonAsync(ValidateModel(partialEntitySyncConfig)).ReceiveJson<EntitySyncConfig>();
 		public Task<EntitySyncConfig> GetAdminUsersAsync(string accessToken = null) => Request("v1", "integrations", "entitysync", "adminusers").WithOAuthBearerToken(accessToken).GetJsonAsync<EntitySyncConfig>();
 		public Task DeleteAdminUsersAsync(string accessToken = null) => Request("v1", "integrations", "entitysync", "adminusers").WithOAuthBearerToken(accessToken).DeleteAsync();
 		public Task<EntitySyncConfig> SaveAdminUsersAsync(EntitySyncConfig entitySyncConfig, string accessToken = null) => Request("v1", "integrations", "entitysync", "adminusers").WithOAuthBearerToken(accessToken).PutJsonAsync(ValidateModel(entitySyncConfig)).ReceiveJson<EntitySyncConfig>();
+		public Task<EntitySyncConfig> PatchAdminUsersAsync(PartialEntitySyncConfig partialEntitySyncConfig, string accessToken = null) => Request("v1", "integrations", "entitysync", "adminusers").WithOAuthBearerToken(accessToken).PatchJsonAsync(ValidateModel(partialEntitySyncConfig)).ReceiveJson<EntitySyncConfig>();
 		public Task<EntitySyncConfig> GetBuyersAsync(string accessToken = null) => Request("v1", "integrations", "entitysync", "buyers").WithOAuthBearerToken(accessToken).GetJsonAsync<EntitySyncConfig>();
 		public Task DeleteBuyersAsync(string accessToken = null) => Request("v1", "integrations", "entitysync", "buyers").WithOAuthBearerToken(accessToken).DeleteAsync();
 		public Task<EntitySyncConfig> SaveBuyersAsync(EntitySyncConfig entitySyncConfig, string accessToken = null) => Request("v1", "integrations", "entitysync", "buyers").WithOAuthBearerToken(accessToken).PutJsonAsync(ValidateModel(entitySyncConfig)).ReceiveJson<EntitySyncConfig>();
+		public Task<EntitySyncConfig> PatchBuyersAsync(PartialEntitySyncConfig partialEntitySyncConfig, string accessToken = null) => Request("v1", "integrations", "entitysync", "buyers").WithOAuthBearerToken(accessToken).PatchJsonAsync(ValidateModel(partialEntitySyncConfig)).ReceiveJson<EntitySyncConfig>();
 		public Task<EntitySyncConfig> GetBuyerUserGroupsAsync(string accessToken = null) => Request("v1", "integrations", "entitysync", "buyers", "usergroups").WithOAuthBearerToken(accessToken).GetJsonAsync<EntitySyncConfig>();
 		public Task DeleteUserGroupsAsync(string accessToken = null) => Request("v1", "integrations", "entitysync", "buyers", "usergroups").WithOAuthBearerToken(accessToken).DeleteAsync();
 		public Task<EntitySyncConfig> SaveUserGroupsAsync(EntitySyncConfig entitySyncConfig, string accessToken = null) => Request("v1", "integrations", "entitysync", "buyers", "usergroups").WithOAuthBearerToken(accessToken).PutJsonAsync(ValidateModel(entitySyncConfig)).ReceiveJson<EntitySyncConfig>();
+		public Task<EntitySyncConfig> PatchBuyerUserGroupsAsync(PartialEntitySyncConfig partialEntitySyncConfig, string accessToken = null) => Request("v1", "integrations", "entitysync", "buyers", "usergroups").WithOAuthBearerToken(accessToken).PatchJsonAsync(ValidateModel(partialEntitySyncConfig)).ReceiveJson<EntitySyncConfig>();
 		public Task<EntitySyncConfig> GetInventoryRecordsAsync(string accessToken = null) => Request("v1", "integrations", "entitysync", "products", "inventoryrecords").WithOAuthBearerToken(accessToken).GetJsonAsync<EntitySyncConfig>();
 		public Task DeleteInventoryRecordsAsync(string accessToken = null) => Request("v1", "integrations", "entitysync", "products", "inventoryrecords").WithOAuthBearerToken(accessToken).DeleteAsync();
 		public Task<EntitySyncConfig> SaveInventoryRecordsAsync(EntitySyncConfig entitySyncConfig, string accessToken = null) => Request("v1", "integrations", "entitysync", "products", "inventoryrecords").WithOAuthBearerToken(accessToken).PutJsonAsync(ValidateModel(entitySyncConfig)).ReceiveJson<EntitySyncConfig>();
+		public Task<EntitySyncConfig> PatchInventoryRecordsAsync(PartialEntitySyncConfig partialEntitySyncConfig, string accessToken = null) => Request("v1", "integrations", "entitysync", "products", "inventoryrecords").WithOAuthBearerToken(accessToken).PatchJsonAsync(ValidateModel(partialEntitySyncConfig)).ReceiveJson<EntitySyncConfig>();
 	}
 
 	public class ErrorConfigsResource : OrderCloudResource, IErrorConfigsResource
