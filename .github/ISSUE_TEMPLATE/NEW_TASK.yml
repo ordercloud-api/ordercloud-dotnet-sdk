@@ -1,0 +1,26 @@
+name: New Task
+description: Create a new task for this project.
+title: "[Task]: "
+type: "Task"
+projects: ["ordercloud-api/4"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please be as thorough as possible in order to expedite development time!
+  - type: textarea
+    id: description
+    attributes:
+      label: What needs to get done?
+      description: Describe the work
+      placeholder: Please be thorough!
+    validations:
+      required: true
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct
+      description: By submitting this issue, you agree to follow our [Code of Conduct](https://www.sitecore.com/legal/compliance). 
+      options:
+        - label: I agree to follow this project's Code of Conduct
+          required: true
