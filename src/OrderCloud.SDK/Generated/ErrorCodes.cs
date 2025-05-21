@@ -183,6 +183,27 @@ namespace OrderCloud.SDK
 			/// <summary>The error or validation message cannot be sent because the associated delivery configuration is disabled.</summary>
 			public const string DeliveryConfigDisabled = "ErrorConfig.DeliveryConfigDisabled";
 		}
+		public static class Synchronize
+		{
+			/// <summary>EntitySync for AdminUsers is not configured or the delivery configuration is disabled.</summary>
+			public const string EntitySyncForAdminUsersNotEnabled = "Synchronize.EntitySyncForAdminUsersNotEnabled";
+			/// <summary>EntitySync for Categories is not configured or the delivery configuration is disabled.</summary>
+			public const string EntitySyncForCategoryNotEnabled = "Synchronize.EntitySyncForCategoryNotEnabled";
+			/// <summary>EntitySync for Buyer is not configured or the delivery configuration is disabled.</summary>
+			public const string EntitySyncForBuyerNotEnabled = "Synchronize.EntitySyncForBuyerNotEnabled";
+			/// <summary>EntitySync for BuyerUserGroup is not configured or the delivery configuration is disabled.</summary>
+			public const string EntitySyncForBuyerUserGroupNotEnabled = "Synchronize.EntitySyncForBuyerUserGroupNotEnabled";
+			/// <summary>EntitySync for BuyerUsers is not configured or the delivery configuration is disabled.</summary>
+			public const string EntitySyncForBuyerUsersNotEnabled = "Synchronize.EntitySyncForBuyerUsersNotEnabled";
+			/// <summary>EntitySync for InventoryRecords is not configured or the delivery configuration is disabled.</summary>
+			public const string EntitySyncForInventoryRecordNotEnabled = "Synchronize.EntitySyncForInventoryRecordNotEnabled";
+			/// <summary>EntitySync for Supplier is not configured or the delivery configuration is disabled.</summary>
+			public const string EntitySyncForSupplierNotEnabled = "Synchronize.EntitySyncForSupplierNotEnabled";
+			/// <summary>EntitySync for SupplierUsers is not configured or the delivery configuration is disabled.</summary>
+			public const string EntitySyncForSupplierUsersNotEnabled = "Synchronize.EntitySyncForSupplierUsersNotEnabled ";
+			/// <summary>ProductSync is not configured or the delivery configuration is disabled.</summary>
+			public const string ProductSyncNotEnabled = "Synchronize.ProductSyncNotEnabled";
+		}
 		public static class Expression
 		{
 			/// <summary>Function has invalid number of arguments.</summary>
@@ -351,6 +372,15 @@ namespace OrderCloud.SDK
 			public const string UrlRequired = "MessageSenders.UrlRequired";
 			/// <summary>SharedKey is required when no delivery configuration is specified.</summary>
 			public const string SharedKeyRequired = "MessageSenders.SharedKeyRequired";
+		}
+		public static class OneTimePasswordRequest
+		{
+			/// <summary>Username or email is required.</summary>
+			public const string UsernameOrEmailRequired = "OneTimePasswordRequest.UsernameOrEmailRequired";
+			/// <summary>No one-time password was sent because accounts associated with this username or email are locked, inactive, or do not have an associated email.</summary>
+			public const string OTPNotSent = "OneTimePasswordRequest.OTPNotSent";
+			/// <summary>No users with the supplied username or email could be found for the specified API client.</summary>
+			public const string UserNotFoundForClient = "OneTimePasswordRequest.UserNotFoundForClient";
 		}
 		public static class Order
 		{

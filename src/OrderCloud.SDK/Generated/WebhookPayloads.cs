@@ -1651,6 +1651,16 @@ namespace OrderCloud.SDK
 			public class PatchCategories<TConfigData, TEntitySyncConfig> : WebhookPayload<TEntitySyncConfig, TEntitySyncConfig, object, TConfigData>
 				where TEntitySyncConfig : EntitySyncConfig
 			{ }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/integrations/entitysync/categories/sync.</summary>
+			[SentOn("POST", "v1/integrations/entitysync/categories/sync")]
+			public class SyncCategory : WebhookPayload<SyncCategory, object, object, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/integrations/entitysync/categories/sync.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TSyncCategory">Specific type of the SyncCategory. If not using a custom type, specify SyncCategory.</typeparam>
+			[SentOn("POST", "v1/integrations/entitysync/categories/sync")]
+			public class SyncCategory<TConfigData, TSyncCategory> : WebhookPayload<TSyncCategory, object, object, TConfigData>
+				where TSyncCategory : SyncCategory
+			{ }
 			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/integrations/entitysync/suppliers.</summary>
 			[SentOn("DELETE", "v1/integrations/entitysync/suppliers")]
 			public class DeleteSuppliers : WebhookPayload<object, object, object, dynamic> { }
@@ -1678,6 +1688,16 @@ namespace OrderCloud.SDK
 			[SentOn("PATCH", "v1/integrations/entitysync/suppliers")]
 			public class PatchSuppliers<TConfigData, TEntitySyncConfig> : WebhookPayload<TEntitySyncConfig, TEntitySyncConfig, object, TConfigData>
 				where TEntitySyncConfig : EntitySyncConfig
+			{ }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/integrations/entitysync/supplier/sync.</summary>
+			[SentOn("POST", "v1/integrations/entitysync/supplier/sync")]
+			public class SyncSupplier : WebhookPayload<SyncSupplier, object, object, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/integrations/entitysync/supplier/sync.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TSyncSupplier">Specific type of the SyncSupplier. If not using a custom type, specify SyncSupplier.</typeparam>
+			[SentOn("POST", "v1/integrations/entitysync/supplier/sync")]
+			public class SyncSupplier<TConfigData, TSyncSupplier> : WebhookPayload<TSyncSupplier, object, object, TConfigData>
+				where TSyncSupplier : SyncSupplier
 			{ }
 			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/integrations/entitysync/buyers/users.</summary>
 			[SentOn("DELETE", "v1/integrations/entitysync/buyers/users")]
@@ -1707,6 +1727,16 @@ namespace OrderCloud.SDK
 			public class PatchBuyerUsers<TConfigData, TEntitySyncConfig> : WebhookPayload<TEntitySyncConfig, TEntitySyncConfig, object, TConfigData>
 				where TEntitySyncConfig : EntitySyncConfig
 			{ }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/integrations/entitysync/buyers/users/sync.</summary>
+			[SentOn("POST", "v1/integrations/entitysync/buyers/users/sync")]
+			public class SyncBuyerUser : WebhookPayload<SyncBuyerUser, object, object, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/integrations/entitysync/buyers/users/sync.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TSyncBuyerUser">Specific type of the SyncBuyerUser. If not using a custom type, specify SyncBuyerUser.</typeparam>
+			[SentOn("POST", "v1/integrations/entitysync/buyers/users/sync")]
+			public class SyncBuyerUser<TConfigData, TSyncBuyerUser> : WebhookPayload<TSyncBuyerUser, object, object, TConfigData>
+				where TSyncBuyerUser : SyncBuyerUser
+			{ }
 			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/integrations/entitysync/suppliers/users.</summary>
 			[SentOn("DELETE", "v1/integrations/entitysync/suppliers/users")]
 			public class DeleteSupplierUsers : WebhookPayload<object, object, object, dynamic> { }
@@ -1734,6 +1764,16 @@ namespace OrderCloud.SDK
 			[SentOn("PATCH", "v1/integrations/entitysync/suppliers/users")]
 			public class PatchSupplierUsers<TConfigData, TEntitySyncConfig> : WebhookPayload<TEntitySyncConfig, TEntitySyncConfig, object, TConfigData>
 				where TEntitySyncConfig : EntitySyncConfig
+			{ }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/integrations/entitysync/suppliers/users/sync.</summary>
+			[SentOn("POST", "v1/integrations/entitysync/suppliers/users/sync")]
+			public class SyncSupplierUser : WebhookPayload<SyncSupplierUser, object, object, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/integrations/entitysync/suppliers/users/sync.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TSyncSupplierUser">Specific type of the SyncSupplierUser. If not using a custom type, specify SyncSupplierUser.</typeparam>
+			[SentOn("POST", "v1/integrations/entitysync/suppliers/users/sync")]
+			public class SyncSupplierUser<TConfigData, TSyncSupplierUser> : WebhookPayload<TSyncSupplierUser, object, object, TConfigData>
+				where TSyncSupplierUser : SyncSupplierUser
 			{ }
 			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/integrations/entitysync/adminusers.</summary>
 			[SentOn("DELETE", "v1/integrations/entitysync/adminusers")]
@@ -1763,6 +1803,16 @@ namespace OrderCloud.SDK
 			public class PatchAdminUsers<TConfigData, TEntitySyncConfig> : WebhookPayload<TEntitySyncConfig, TEntitySyncConfig, object, TConfigData>
 				where TEntitySyncConfig : EntitySyncConfig
 			{ }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/integrations/entitysync/adminusers/sync.</summary>
+			[SentOn("POST", "v1/integrations/entitysync/adminusers/sync")]
+			public class SyncAdminUser : WebhookPayload<SyncAdminUser, object, object, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/integrations/entitysync/adminusers/sync.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TSyncAdminUser">Specific type of the SyncAdminUser. If not using a custom type, specify SyncAdminUser.</typeparam>
+			[SentOn("POST", "v1/integrations/entitysync/adminusers/sync")]
+			public class SyncAdminUser<TConfigData, TSyncAdminUser> : WebhookPayload<TSyncAdminUser, object, object, TConfigData>
+				where TSyncAdminUser : SyncAdminUser
+			{ }
 			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/integrations/entitysync/buyers.</summary>
 			[SentOn("DELETE", "v1/integrations/entitysync/buyers")]
 			public class DeleteBuyers : WebhookPayload<object, object, object, dynamic> { }
@@ -1790,6 +1840,16 @@ namespace OrderCloud.SDK
 			[SentOn("PATCH", "v1/integrations/entitysync/buyers")]
 			public class PatchBuyers<TConfigData, TEntitySyncConfig> : WebhookPayload<TEntitySyncConfig, TEntitySyncConfig, object, TConfigData>
 				where TEntitySyncConfig : EntitySyncConfig
+			{ }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/integrations/entitysync/buyers/sync.</summary>
+			[SentOn("POST", "v1/integrations/entitysync/buyers/sync")]
+			public class SyncBuyer : WebhookPayload<SyncBuyer, object, object, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/integrations/entitysync/buyers/sync.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TSyncBuyer">Specific type of the SyncBuyer. If not using a custom type, specify SyncBuyer.</typeparam>
+			[SentOn("POST", "v1/integrations/entitysync/buyers/sync")]
+			public class SyncBuyer<TConfigData, TSyncBuyer> : WebhookPayload<TSyncBuyer, object, object, TConfigData>
+				where TSyncBuyer : SyncBuyer
 			{ }
 			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/integrations/entitysync/buyers/usergroups.</summary>
 			[SentOn("DELETE", "v1/integrations/entitysync/buyers/usergroups")]
@@ -1819,6 +1879,16 @@ namespace OrderCloud.SDK
 			public class PatchBuyerUserGroups<TConfigData, TEntitySyncConfig> : WebhookPayload<TEntitySyncConfig, TEntitySyncConfig, object, TConfigData>
 				where TEntitySyncConfig : EntitySyncConfig
 			{ }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/integrations/entitysync/buyers/usergroups/sync.</summary>
+			[SentOn("POST", "v1/integrations/entitysync/buyers/usergroups/sync")]
+			public class SyncBuyerUserGroup : WebhookPayload<SyncBuyerUserGroup, object, object, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/integrations/entitysync/buyers/usergroups/sync.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TSyncBuyerUserGroup">Specific type of the SyncBuyerUserGroup. If not using a custom type, specify SyncBuyerUserGroup.</typeparam>
+			[SentOn("POST", "v1/integrations/entitysync/buyers/usergroups/sync")]
+			public class SyncBuyerUserGroup<TConfigData, TSyncBuyerUserGroup> : WebhookPayload<TSyncBuyerUserGroup, object, object, TConfigData>
+				where TSyncBuyerUserGroup : SyncBuyerUserGroup
+			{ }
 			/// <summary>Webhook payload sent by OrderCloud on DELETE v1/integrations/entitysync/products/inventoryrecords.</summary>
 			[SentOn("DELETE", "v1/integrations/entitysync/products/inventoryrecords")]
 			public class DeleteInventoryRecords : WebhookPayload<object, object, object, dynamic> { }
@@ -1846,6 +1916,16 @@ namespace OrderCloud.SDK
 			[SentOn("PATCH", "v1/integrations/entitysync/products/inventoryrecords")]
 			public class PatchInventoryRecords<TConfigData, TEntitySyncConfig> : WebhookPayload<TEntitySyncConfig, TEntitySyncConfig, object, TConfigData>
 				where TEntitySyncConfig : EntitySyncConfig
+			{ }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/integrations/entitysync/products/inventoryrecords/sync.</summary>
+			[SentOn("POST", "v1/integrations/entitysync/products/inventoryrecords/sync")]
+			public class SyncInventoryRecord : WebhookPayload<SyncInventoryRecord, object, object, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/integrations/entitysync/products/inventoryrecords/sync.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TSyncInventoryRecord">Specific type of the SyncInventoryRecord. If not using a custom type, specify SyncInventoryRecord.</typeparam>
+			[SentOn("POST", "v1/integrations/entitysync/products/inventoryrecords/sync")]
+			public class SyncInventoryRecord<TConfigData, TSyncInventoryRecord> : WebhookPayload<TSyncInventoryRecord, object, object, TConfigData>
+				where TSyncInventoryRecord : SyncInventoryRecord
 			{ }
 		}
 		public static class ErrorConfigs
@@ -1921,6 +2001,16 @@ namespace OrderCloud.SDK
 			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, use the non-generic payload type instead.</typeparam>
 			[SentOn("POST", "v1/username/retrieve")]
 			public class RetrieveUsername<TConfigData> : WebhookPayload<object, object, object, TConfigData>
+			{ }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/password/onetimepassword.</summary>
+			[SentOn("POST", "v1/password/onetimepassword")]
+			public class SendOneTimePassword : WebhookPayload<OneTimePasswordRequest, object, object, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/password/onetimepassword.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TOneTimePasswordRequest">Specific type of the OneTimePasswordRequest. If not using a custom type, specify OneTimePasswordRequest.</typeparam>
+			[SentOn("POST", "v1/password/onetimepassword")]
+			public class SendOneTimePassword<TConfigData, TOneTimePasswordRequest> : WebhookPayload<TOneTimePasswordRequest, object, object, TConfigData>
+				where TOneTimePasswordRequest : OneTimePasswordRequest
 			{ }
 		}
 		/// <summary>Features in beta are subject to change and are not available in production.</summary>
@@ -4053,12 +4143,14 @@ namespace OrderCloud.SDK
 			}
 			/// <summary>Webhook payload sent by OrderCloud on POST v1/products/{productID}/variants/generate.</summary>
 			[SentOn("POST", "v1/products/{productID}/variants/generate")]
-			public class GenerateVariants : WebhookPayload<object, Product, GenerateVariantsRouteParams, dynamic> { }
+			public class GenerateVariants : WebhookPayload<VariantOverrides, Product, GenerateVariantsRouteParams, dynamic> { }
 			/// <summary>Webhook payload sent by OrderCloud on POST v1/products/{productID}/variants/generate.</summary>
 			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TVariantOverrides">Specific type of the VariantOverrides. If not using a custom type, specify VariantOverrides.</typeparam>
 			/// <typeparam name="TProduct">Specific type of the Product. If not using a custom type, specify Product.</typeparam>
 			[SentOn("POST", "v1/products/{productID}/variants/generate")]
-			public class GenerateVariants<TConfigData, TProduct> : WebhookPayload<object, TProduct, GenerateVariantsRouteParams, TConfigData>
+			public class GenerateVariants<TConfigData, TVariantOverrides, TProduct> : WebhookPayload<TVariantOverrides, TProduct, GenerateVariantsRouteParams, TConfigData>
+				where TVariantOverrides : VariantOverrides
 				where TProduct : Product
 			{ }
 			/// <summary>Type used to represent route parameter name/value pairs for v1/products/{productID}/variants/generate.</summary>
@@ -4180,6 +4272,16 @@ namespace OrderCloud.SDK
 			[SentOn("PATCH", "v1/integrations/productsync")]
 			public class Patch<TConfigData, TProductSyncConfig> : WebhookPayload<TProductSyncConfig, TProductSyncConfig, object, TConfigData>
 				where TProductSyncConfig : ProductSyncConfig
+			{ }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/integrations/productsync/sync.</summary>
+			[SentOn("POST", "v1/integrations/productsync/sync")]
+			public class Sync : WebhookPayload<SyncProduct, object, object, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/integrations/productsync/sync.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TSyncProduct">Specific type of the SyncProduct. If not using a custom type, specify SyncProduct.</typeparam>
+			[SentOn("POST", "v1/integrations/productsync/sync")]
+			public class Sync<TConfigData, TSyncProduct> : WebhookPayload<TSyncProduct, object, object, TConfigData>
+				where TSyncProduct : SyncProduct
 			{ }
 		}
 		public static class PromotionIntegrations
