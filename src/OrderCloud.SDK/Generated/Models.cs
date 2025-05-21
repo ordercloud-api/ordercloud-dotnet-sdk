@@ -10,7 +10,7 @@ namespace OrderCloud.SDK
 	public enum ApprovalType { Order, OrderReturn }
 	public enum CommerceRole { Buyer, Seller, Supplier }
 	public enum IntegrationEventType { OrderCheckout, OpenIDConnect, OrderReturn, AddToCart }
-	public enum MessageType { OrderDeclined, OrderSubmitted, ShipmentCreated, ForgottenPassword, ForgottenUsername, OrderSubmittedForYourApproval, OrderSubmittedForApproval, OrderApproved, OrderSubmittedForYourApprovalHasBeenApproved, OrderSubmittedForYourApprovalHasBeenDeclined, NewUserInvitation, OrderReturnDeclined, OrderReturnSubmitted, OrderReturnSubmittedForYourApproval, OrderReturnSubmittedForApproval, OrderReturnApproved, OrderReturnSubmittedForYourApprovalHasBeenApproved, OrderReturnSubmittedForYourApprovalHasBeenDeclined, OrderReturnCompleted, SubscriptionReminder, ProductCollectionInvitationAccepted, ProductCollectionInvitationDeclined }
+	public enum MessageType { OrderDeclined, OrderSubmitted, ShipmentCreated, ForgottenPassword, ForgottenUsername, OrderSubmittedForYourApproval, OrderSubmittedForApproval, OrderApproved, OrderSubmittedForYourApprovalHasBeenApproved, OrderSubmittedForYourApprovalHasBeenDeclined, NewUserInvitation, OrderReturnDeclined, OrderReturnSubmitted, OrderReturnSubmittedForYourApproval, OrderReturnSubmittedForApproval, OrderReturnApproved, OrderReturnSubmittedForYourApprovalHasBeenApproved, OrderReturnSubmittedForYourApprovalHasBeenDeclined, OrderReturnCompleted, SubscriptionReminder, ProductCollectionInvitationAccepted, ProductCollectionInvitationDeclined, OneTimePassword }
 	public enum OrderDirection { Incoming, Outgoing, All }
 	public enum OrderStatus { Unsubmitted, AwaitingApproval, Declined, Open, Completed, Canceled }
 	public enum PartyType { User, Group, Company }
@@ -1528,7 +1528,7 @@ namespace OrderCloud.SDK
 		/// <summary>Message config description of the message cc listener assignment.</summary>
 		[ApiReadOnly]
 		public string MessageConfigDescription { get => GetProp<string>("MessageConfigDescription"); set => SetProp<string>("MessageConfigDescription", value); }
-		/// <summary>Message type of the message cc listener assignment. Required. Possible values: OrderDeclined, OrderSubmitted, ShipmentCreated, ForgottenPassword, ForgottenUsername, OrderSubmittedForYourApproval, OrderSubmittedForApproval, OrderApproved, OrderSubmittedForYourApprovalHasBeenApproved, OrderSubmittedForYourApprovalHasBeenDeclined, NewUserInvitation, OrderReturnDeclined, OrderReturnSubmitted, OrderReturnSubmittedForYourApproval, OrderReturnSubmittedForApproval, OrderReturnApproved, OrderReturnSubmittedForYourApprovalHasBeenApproved, OrderReturnSubmittedForYourApprovalHasBeenDeclined, OrderReturnCompleted, SubscriptionReminder, ProductCollectionInvitationAccepted, ProductCollectionInvitationDeclined.</summary>
+		/// <summary>Message type of the message cc listener assignment. Required. Possible values: OrderDeclined, OrderSubmitted, ShipmentCreated, ForgottenPassword, ForgottenUsername, OrderSubmittedForYourApproval, OrderSubmittedForApproval, OrderApproved, OrderSubmittedForYourApprovalHasBeenApproved, OrderSubmittedForYourApprovalHasBeenDeclined, NewUserInvitation, OrderReturnDeclined, OrderReturnSubmitted, OrderReturnSubmittedForYourApproval, OrderReturnSubmittedForApproval, OrderReturnApproved, OrderReturnSubmittedForYourApprovalHasBeenApproved, OrderReturnSubmittedForYourApprovalHasBeenDeclined, OrderReturnCompleted, SubscriptionReminder, ProductCollectionInvitationAccepted, ProductCollectionInvitationDeclined, OneTimePassword.</summary>
 		[Required]
 		public MessageType MessageType { get => GetProp<MessageType>("MessageType"); set => SetProp<MessageType>("MessageType", value); }
 		/// <summary>ID of the buyer. Searchable: priority level 0. Sortable: priority level 0.</summary>
@@ -1666,6 +1666,16 @@ namespace OrderCloud.SDK
 	{
 		/// <summary>Container for extended (custom) properties of the user.</summary>
 		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
+	}
+	public class OneTimePasswordRequest : OrderCloudModel
+	{
+		/// <summary>ID of the client. Required.</summary>
+		[Required]
+		public string ClientID { get => GetProp<string>("ClientID"); set => SetProp<string>("ClientID", value); }
+		/// <summary>Username of the one time password request.</summary>
+		public string Username { get => GetProp<string>("Username"); set => SetProp<string>("Username", value); }
+		/// <summary>Email of the one time password request.</summary>
+		public string Email { get => GetProp<string>("Email"); set => SetProp<string>("Email", value); }
 	}
 	public class OpenIdConnect : OrderCloudModel
 	{
@@ -3322,6 +3332,75 @@ namespace OrderCloud.SDK
 		/// <summary>Name of the buyer. Max length 100 characters. Searchable: priority level 2. Sortable: priority level 1.</summary>
 		public string Name { get => GetProp<string>("Name"); set => SetProp<string>("Name", value); }
 	}
+	public class SyncAdminUser : OrderCloudModel
+	{
+		/// <summary>ID of the user. Required.</summary>
+		[Required]
+		public string UserID { get => GetProp<string>("UserID"); set => SetProp<string>("UserID", value); }
+	}
+	public class SyncBuyer : OrderCloudModel
+	{
+		/// <summary>ID of the buyer. Required.</summary>
+		[Required]
+		public string BuyerID { get => GetProp<string>("BuyerID"); set => SetProp<string>("BuyerID", value); }
+	}
+	public class SyncBuyerUser : OrderCloudModel
+	{
+		/// <summary>ID of the buyer. Required.</summary>
+		[Required]
+		public string BuyerID { get => GetProp<string>("BuyerID"); set => SetProp<string>("BuyerID", value); }
+		/// <summary>ID of the user. Required.</summary>
+		[Required]
+		public string UserID { get => GetProp<string>("UserID"); set => SetProp<string>("UserID", value); }
+	}
+	public class SyncBuyerUserGroup : OrderCloudModel
+	{
+		/// <summary>ID of the buyer. Required.</summary>
+		[Required]
+		public string BuyerID { get => GetProp<string>("BuyerID"); set => SetProp<string>("BuyerID", value); }
+		/// <summary>ID of the user group. Required.</summary>
+		[Required]
+		public string UserGroupID { get => GetProp<string>("UserGroupID"); set => SetProp<string>("UserGroupID", value); }
+	}
+	public class SyncCategory : OrderCloudModel
+	{
+		/// <summary>ID of the catalog. Required.</summary>
+		[Required]
+		public string CatalogID { get => GetProp<string>("CatalogID"); set => SetProp<string>("CatalogID", value); }
+		/// <summary>ID of the category. Required.</summary>
+		[Required]
+		public string CategoryID { get => GetProp<string>("CategoryID"); set => SetProp<string>("CategoryID", value); }
+	}
+	public class SyncInventoryRecord : OrderCloudModel
+	{
+		/// <summary>ID of the product. Required.</summary>
+		[Required]
+		public string ProductID { get => GetProp<string>("ProductID"); set => SetProp<string>("ProductID", value); }
+		/// <summary>ID of the inventory record. Required.</summary>
+		[Required]
+		public string InventoryRecordID { get => GetProp<string>("InventoryRecordID"); set => SetProp<string>("InventoryRecordID", value); }
+	}
+	public class SyncProduct : OrderCloudModel
+	{
+		/// <summary>ID of the product. Required.</summary>
+		[Required]
+		public string ProductID { get => GetProp<string>("ProductID"); set => SetProp<string>("ProductID", value); }
+	}
+	public class SyncSupplier : OrderCloudModel
+	{
+		/// <summary>ID of the supplier. Required.</summary>
+		[Required]
+		public string SupplierID { get => GetProp<string>("SupplierID"); set => SetProp<string>("SupplierID", value); }
+	}
+	public class SyncSupplierUser : OrderCloudModel
+	{
+		/// <summary>ID of the supplier. Required.</summary>
+		[Required]
+		public string SupplierID { get => GetProp<string>("SupplierID"); set => SetProp<string>("SupplierID", value); }
+		/// <summary>ID of the user. Required.</summary>
+		[Required]
+		public string UserID { get => GetProp<string>("UserID"); set => SetProp<string>("UserID", value); }
+	}
 	public class TokenPasswordReset : OrderCloudModel
 	{
 		/// <summary>New password of the token password reset. Required.</summary>
@@ -3468,6 +3547,11 @@ namespace OrderCloud.SDK
 		/// <summary>Last updated of the variant inventory.</summary>
 		[ApiReadOnly]
 		public DateTimeOffset LastUpdated { get => GetProp<DateTimeOffset>("LastUpdated"); set => SetProp<DateTimeOffset>("LastUpdated", value); }
+	}
+	public class VariantOverrides : OrderCloudModel
+	{
+		/// <summary>Overrides the Active value inherited from the product when generating variants. Default is true.</summary>
+		public bool Active { get => GetProp<bool>("Active"); set => SetProp<bool>("Active", value); }
 	}
 	public class VariantSpec : OrderCloudModel
 	{
