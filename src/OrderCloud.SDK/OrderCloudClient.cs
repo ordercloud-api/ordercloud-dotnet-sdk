@@ -59,6 +59,11 @@ namespace OrderCloud.SDK
 		/// Sends a token request to the OrderCloud authorization server using the OAuth2 refresh_token grant flow.
 		/// </summary>
 		Task<TokenResponse> RefreshTokenAsync(string clientID, string refreshToken);
+
+		/// <summary>
+		/// Get a single cert public key. Returns a JSON Web Key (JWK). Can be used for validating the token was signed by OrderCloud.
+		/// </summary>
+		Task<PublicKey> GetPublicKeyAsync(string ID, string accessToken = null);
 	}
 
 	public partial class OrderCloudClient : IDisposable
@@ -151,6 +156,12 @@ namespace OrderCloud.SDK
 				client_secret = clientSecret
 			};
 			return AuthenticateAsync(req);
+		}
+
+		public async Task<PublicKey> GetPublicKeyAsync(string ID, string accessToken = null) {
+			return await Request("oauth", "certs", ID)
+				.WithOAuthBearerToken(accessToken)
+				.GetJsonAsync<PublicKey>();
 		}
 
 		public void Dispose() => TokenResponse = null;

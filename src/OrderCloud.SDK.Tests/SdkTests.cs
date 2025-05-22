@@ -328,6 +328,15 @@ namespace OrderCloud.SDK.Tests
 			Assert.AreEqual(response.HttpStatus, HttpStatusCode.GatewayTimeout);
 		}
 
+
+		[Test]
+		public async Task can_get_public_key() {
+			using (var httpTest = new HttpTest()) {
+				await GetClient().GetPublicKeyAsync("keyid");
+				httpTest.ShouldHaveCalled("https://fake.com/oauth/certs/keyid");
+			}
+		}
+
 		private OrderCloudClient GetClient() => new OrderCloudClient(new OrderCloudClientConfig {
 			ApiUrl = "https://fake.com",
 			AuthUrl = "https://fake.com",
