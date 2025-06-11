@@ -671,7 +671,7 @@ namespace OrderCloud.SDK
 			public const string ExpirationPrecedsStart = "Promotion.ExpirationPrecedsStart";
 			/// <summary>Promotion is expired.</summary>
 			public const string Expired = "Promotion.Expired";
-			/// <summary>Promotion cannot be used on this order.</summary>
+			/// <summary>Order does not meet eligibility requirements for this promotion.</summary>
 			public const string NotEligible = "Promotion.NotEligible";
 			/// <summary>Promotion is not yet valid.</summary>
 			public const string NotYetValid = "Promotion.NotYetValid";

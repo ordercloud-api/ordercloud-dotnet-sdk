@@ -37,6 +37,15 @@ namespace OrderCloud.SDK
 		/// <summary>Access token of the access token basic.</summary>
 		public string access_token { get => GetProp<string>("access_token"); set => SetProp<string>("access_token", value); }
 	}
+	public class AddedPromo : OrderCloudModel
+	{
+		/// <summary>ID of the added promo. Can only contain characters Aa-Zz, 0-9, -, and _.</summary>
+		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
+		/// <summary>ID of the line item. Can only contain characters Aa-Zz, 0-9, -, and _.</summary>
+		public string LineItemID { get => GetProp<string>("LineItemID"); set => SetProp<string>("LineItemID", value); }
+		/// <summary>Amount of the added promo.</summary>
+		public decimal Amount { get => GetProp<decimal>("Amount"); set => SetProp<decimal>("Amount", value); }
+	}
 	public class Address : OrderCloudModel
 	{
 		/// <summary>ID of the address. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 2.</summary>
@@ -1027,13 +1036,16 @@ namespace OrderCloud.SDK
 		public decimal TaxCost { get => GetProp<decimal>("TaxCost"); set => SetProp<decimal>("TaxCost", value); }
 		/// <summary>Gratuity of the extended order. Must be at least 0. Sortable.</summary>
 		public decimal Gratuity { get => GetProp<decimal>("Gratuity", 0); set => SetProp<decimal>("Gratuity", value); }
+		/// <summary>Fees associated with order or line items</summary>
+		[ApiReadOnly]
+		public decimal Fees { get => GetProp<decimal>("Fees", 0); set => SetProp<decimal>("Fees", value); }
 		/// <summary>Sum of all Promotion.Amounts applied to the order.</summary>
 		[ApiReadOnly]
 		public decimal PromotionDiscount { get => GetProp<decimal>("PromotionDiscount"); set => SetProp<decimal>("PromotionDiscount", value); }
 		/// <summary>Inherited from the user placing the order.</summary>
 		[ApiReadOnly]
 		public string Currency { get => GetProp<string>("Currency"); set => SetProp<string>("Currency", value); }
-		/// <summary>Subtotal + TaxCost + ShippingCost + Gratuity - PromotionDiscount</summary>
+		/// <summary>Subtotal + TaxCost + ShippingCost + Gratuity + Fees - PromotionDiscount</summary>
 		[ApiReadOnly]
 		public decimal Total { get => GetProp<decimal>("Total"); set => SetProp<decimal>("Total", value); }
 		/// <summary>True if this Order has been passed from the Buyer to the Marketplace Owner.</summary>
@@ -1771,13 +1783,16 @@ namespace OrderCloud.SDK
 		public decimal TaxCost { get => GetProp<decimal>("TaxCost"); set => SetProp<decimal>("TaxCost", value); }
 		/// <summary>Gratuity of the order. Must be at least 0. Sortable.</summary>
 		public decimal Gratuity { get => GetProp<decimal>("Gratuity", 0); set => SetProp<decimal>("Gratuity", value); }
+		/// <summary>Fees associated with order or line items</summary>
+		[ApiReadOnly]
+		public decimal Fees { get => GetProp<decimal>("Fees", 0); set => SetProp<decimal>("Fees", value); }
 		/// <summary>Sum of all Promotion.Amounts applied to the order.</summary>
 		[ApiReadOnly]
 		public decimal PromotionDiscount { get => GetProp<decimal>("PromotionDiscount"); set => SetProp<decimal>("PromotionDiscount", value); }
 		/// <summary>Inherited from the user placing the order.</summary>
 		[ApiReadOnly]
 		public string Currency { get => GetProp<string>("Currency"); set => SetProp<string>("Currency", value); }
-		/// <summary>Subtotal + TaxCost + ShippingCost + Gratuity - PromotionDiscount</summary>
+		/// <summary>Subtotal + TaxCost + ShippingCost + Gratuity + Fees - PromotionDiscount</summary>
 		[ApiReadOnly]
 		public decimal Total { get => GetProp<decimal>("Total"); set => SetProp<decimal>("Total", value); }
 		/// <summary>True if this Order has been passed from the Buyer to the Marketplace Owner.</summary>
@@ -1872,6 +1887,8 @@ namespace OrderCloud.SDK
 		public decimal? ShippingTotal { get => GetProp<decimal?>("ShippingTotal"); set => SetProp<decimal?>("ShippingTotal", value); }
 		/// <summary>Tax total of the order calculate response.</summary>
 		public decimal? TaxTotal { get => GetProp<decimal?>("TaxTotal"); set => SetProp<decimal?>("TaxTotal", value); }
+		/// <summary>Fee total of the order calculate response.</summary>
+		public decimal? FeeTotal { get => GetProp<decimal?>("FeeTotal"); set => SetProp<decimal?>("FeeTotal", value); }
 		/// <summary>Http status code of the order calculate response.</summary>
 		public int? HttpStatusCode { get => GetProp<int?>("HttpStatusCode"); set => SetProp<int?>("HttpStatusCode", value); }
 		/// <summary>Unhandled error body of the order calculate response.</summary>
@@ -1997,7 +2014,7 @@ namespace OrderCloud.SDK
 		/// <summary>Last updated of the order return. Sortable.</summary>
 		[ApiReadOnly]
 		public DateTimeOffset LastUpdated { get => GetProp<DateTimeOffset>("LastUpdated"); set => SetProp<DateTimeOffset>("LastUpdated", value); }
-		/// <summary>Refund amount of the order return.</summary>
+		/// <summary>Sum of all RefundAmounts for Items. This value can be overridden by a user with the OrderAdmin role. To remove the override set the value to null.</summary>
 		public decimal? RefundAmount { get => GetProp<decimal?>("RefundAmount"); set => SetProp<decimal?>("RefundAmount", value); }
 		/// <summary>Comments of the order return. Max length 2000 characters.</summary>
 		public string Comments { get => GetProp<string>("Comments"); set => SetProp<string>("Comments", value); }
@@ -2798,6 +2815,24 @@ namespace OrderCloud.SDK
 		public string PromotionID { get => GetProp<string>("PromotionID"); set => SetProp<string>("PromotionID", value); }
 		/// <summary>Overrides the promotion's calculated discount to this amount.</summary>
 		public decimal Amount { get => GetProp<decimal>("Amount"); set => SetProp<decimal>("Amount", value); }
+	}
+	public class RefreshPromosResponse : OrderCloudModel
+	{
+		/// <summary>Promotions that were auto-applied.</summary>
+		public IList<AddedPromo> PromosAdded { get => GetProp<IList<AddedPromo>>("PromosAdded", new List<AddedPromo>()); set => SetProp<IList<AddedPromo>>("PromosAdded", value); }
+		/// <summary>Promotions that were removed due to ineligibility or other reason.</summary>
+		public IList<RemovedPromo> PromosRemoved { get => GetProp<IList<RemovedPromo>>("PromosRemoved", new List<RemovedPromo>()); set => SetProp<IList<RemovedPromo>>("PromosRemoved", value); }
+	}
+	public class RemovedPromo : OrderCloudModel
+	{
+		/// <summary>Error code of the removed promo.</summary>
+		public string ErrorCode { get => GetProp<string>("ErrorCode"); set => SetProp<string>("ErrorCode", value); }
+		/// <summary>ID of the removed promo. Can only contain characters Aa-Zz, 0-9, -, and _.</summary>
+		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
+		/// <summary>ID of the line item. Can only contain characters Aa-Zz, 0-9, -, and _.</summary>
+		public string LineItemID { get => GetProp<string>("LineItemID"); set => SetProp<string>("LineItemID", value); }
+		/// <summary>Reason of the removed promo.</summary>
+		public string Reason { get => GetProp<string>("Reason"); set => SetProp<string>("Reason", value); }
 	}
 	public class SearchIngestion : OrderCloudModel
 	{

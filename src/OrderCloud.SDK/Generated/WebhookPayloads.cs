@@ -919,6 +919,16 @@ namespace OrderCloud.SDK
 			public class ApplyPromotions<TConfigData, TOrder> : WebhookPayload<object, TOrder, object, TConfigData>
 				where TOrder : Order
 			{ }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/cart/refreshpromotions.</summary>
+			[SentOn("POST", "v1/cart/refreshpromotions")]
+			public class RefreshPromotions : WebhookPayload<object, RefreshPromosResponse, object, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/cart/refreshpromotions.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TRefreshPromosResponse">Specific type of the RefreshPromosResponse. If not using a custom type, specify RefreshPromosResponse.</typeparam>
+			[SentOn("POST", "v1/cart/refreshpromotions")]
+			public class RefreshPromotions<TConfigData, TRefreshPromosResponse> : WebhookPayload<object, TRefreshPromosResponse, object, TConfigData>
+				where TRefreshPromosResponse : RefreshPromosResponse
+			{ }
 			/// <summary>Webhook payload sent by OrderCloud on PATCH v1/cart/fromuser.</summary>
 			[SentOn("PATCH", "v1/cart/fromuser")]
 			public class PatchFromUser : WebhookPayload<User, Order, object, dynamic> { }
@@ -3805,6 +3815,22 @@ namespace OrderCloud.SDK
 			{ }
 			/// <summary>Type used to represent route parameter name/value pairs for v1/orders/{direction}/{orderID}/applypromotions.</summary>
 			public class ApplyPromotionsRouteParams
+			{
+				public OrderDirection Direction { get; set; }
+				public string OrderID { get; set; }
+			}
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/orders/{direction}/{orderID}/refreshpromotions.</summary>
+			[SentOn("POST", "v1/orders/{direction}/{orderID}/refreshpromotions")]
+			public class RefreshPromotions : WebhookPayload<object, RefreshPromosResponse, RefreshPromotionsRouteParams, dynamic> { }
+			/// <summary>Webhook payload sent by OrderCloud on POST v1/orders/{direction}/{orderID}/refreshpromotions.</summary>
+			/// <typeparam name="TConfigData">Specific type of the ConfigData. If not using a custom type, specify dynamic.</typeparam>
+			/// <typeparam name="TRefreshPromosResponse">Specific type of the RefreshPromosResponse. If not using a custom type, specify RefreshPromosResponse.</typeparam>
+			[SentOn("POST", "v1/orders/{direction}/{orderID}/refreshpromotions")]
+			public class RefreshPromotions<TConfigData, TRefreshPromosResponse> : WebhookPayload<object, TRefreshPromosResponse, RefreshPromotionsRouteParams, TConfigData>
+				where TRefreshPromosResponse : RefreshPromosResponse
+			{ }
+			/// <summary>Type used to represent route parameter name/value pairs for v1/orders/{direction}/{orderID}/refreshpromotions.</summary>
+			public class RefreshPromotionsRouteParams
 			{
 				public OrderDirection Direction { get; set; }
 				public string OrderID { get; set; }
