@@ -1048,12 +1048,15 @@ namespace OrderCloud.SDK
 		/// <param name="promoCode">Promo code of the cart.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task DeletePromotionAsync(string promoCode, string accessToken = null);
-		/// <summary>AutoApply eligible promotions. Apply up to 100 eligible promotions to the cart.</summary>
+		/// <summary>Auto-apply promotions to the cart. Apply up to 100 eligible promotions where AutoApply=true.</summary>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Order> ApplyPromotionsAsync(string accessToken = null);
-		/// <summary>AutoApply eligible promotions. Apply up to 100 eligible promotions to the cart.</summary>
+		/// <summary>Auto-apply promotions to the cart. Apply up to 100 eligible promotions where AutoApply=true.</summary>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TOrder> ApplyPromotionsAsync<TOrder>(string accessToken = null) where TOrder : Order;
+		/// <summary>Refresh promotions on the cart. Re-calculates promotion discounts, removes promotions that are no longer valid, and adds eligible promotions where AutoApply=true (up to limit of 100)</summary>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<RefreshPromosResponse> RefreshPromotionsAsync(string accessToken = null);
 		/// <summary>Update cart FromUser. Only FirstName, LastName, and Email can be updated. Primarily used to facilitate guest checkout scenarios.</summary>
 		/// <param name="partialUser">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -4505,16 +4508,21 @@ namespace OrderCloud.SDK
 		/// <param name="promoCode">Promo code of the order.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TOrder> RemovePromotionAsync<TOrder>(OrderDirection direction, string orderID, string promoCode, string accessToken = null) where TOrder : Order;
-		/// <summary>AutoApply eligible promotions. Apply up to 100 eligible promotions to an order.</summary>
+		/// <summary>Auto-apply promotions to an order. Apply up to 100 eligible promotions where AutoApply=true.</summary>
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Order> ApplyPromotionsAsync(OrderDirection direction, string orderID, string accessToken = null);
-		/// <summary>AutoApply eligible promotions. Apply up to 100 eligible promotions to an order.</summary>
+		/// <summary>Auto-apply promotions to an order. Apply up to 100 eligible promotions where AutoApply=true.</summary>
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TOrder> ApplyPromotionsAsync<TOrder>(OrderDirection direction, string orderID, string accessToken = null) where TOrder : Order;
+		/// <summary>Refresh promotions on an order. Re-calculates promotion discounts, removes promotions that are no longer valid, and adds eligible promotions where AutoApply=true (up to limit of 100)</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <param name="orderID">ID of the order.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<RefreshPromosResponse> RefreshPromotionsAsync(OrderDirection direction, string orderID, string accessToken = null);
 		/// <summary>Validate an order in its current state.</summary>
 		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
 		/// <param name="orderID">ID of the order.</param>
@@ -7081,6 +7089,7 @@ namespace OrderCloud.SDK
 		public Task DeletePromotionAsync(string promoCode, string accessToken = null) => Request("v1", "cart", "promotions", promoCode).WithOAuthBearerToken(accessToken).DeleteAsync();
 		public Task<Order> ApplyPromotionsAsync(string accessToken = null) => ApplyPromotionsAsync<Order>(accessToken);
 		public Task<TOrder> ApplyPromotionsAsync<TOrder>(string accessToken = null) where TOrder : Order => Request("v1", "cart", "applypromotions").WithOAuthBearerToken(accessToken).PostAsync(null).ReceiveJson<TOrder>();
+		public Task<RefreshPromosResponse> RefreshPromotionsAsync(string accessToken = null) => Request("v1", "cart", "refreshpromotions").WithOAuthBearerToken(accessToken).PostAsync(null).ReceiveJson<RefreshPromosResponse>();
 		public Task<Order> PatchFromUserAsync(PartialUser partialUser, string accessToken = null) => PatchFromUserAsync<Order>(partialUser, accessToken);
 		public Task<TOrder> PatchFromUserAsync<TOrder>(PartialUser partialUser, string accessToken = null) where TOrder : Order => Request("v1", "cart", "fromuser").WithOAuthBearerToken(accessToken).PatchJsonAsync(ValidateModel(partialUser)).ReceiveJson<TOrder>();
 		public Task<ListPage<Payment>> ListPaymentsAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) => ListPaymentsAsync<Payment>(search, searchOn, sortBy, page, pageSize, filters, accessToken);
@@ -7763,6 +7772,7 @@ namespace OrderCloud.SDK
 		public Task<TOrder> RemovePromotionAsync<TOrder>(OrderDirection direction, string orderID, string promoCode, string accessToken = null) where TOrder : Order => Request("v1", "orders", direction, orderID, "promotions", promoCode).WithOAuthBearerToken(accessToken).DeleteAsync().ReceiveJson<TOrder>();
 		public Task<Order> ApplyPromotionsAsync(OrderDirection direction, string orderID, string accessToken = null) => ApplyPromotionsAsync<Order>(direction, orderID, accessToken);
 		public Task<TOrder> ApplyPromotionsAsync<TOrder>(OrderDirection direction, string orderID, string accessToken = null) where TOrder : Order => Request("v1", "orders", direction, orderID, "applypromotions").WithOAuthBearerToken(accessToken).PostAsync(null).ReceiveJson<TOrder>();
+		public Task<RefreshPromosResponse> RefreshPromotionsAsync(OrderDirection direction, string orderID, string accessToken = null) => Request("v1", "orders", direction, orderID, "refreshpromotions").WithOAuthBearerToken(accessToken).PostAsync(null).ReceiveJson<RefreshPromosResponse>();
 		public Task ValidateAsync(OrderDirection direction, string orderID, string accessToken = null) => Request("v1", "orders", direction, orderID, "validate").WithOAuthBearerToken(accessToken).PostAsync(null);
 	}
 
