@@ -39,12 +39,67 @@ namespace OrderCloud.SDK
 	}
 	public class AddedPromo : OrderCloudModel
 	{
-		/// <summary>ID of the added promo. Can only contain characters Aa-Zz, 0-9, -, and _.</summary>
-		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
 		/// <summary>ID of the line item. Can only contain characters Aa-Zz, 0-9, -, and _.</summary>
 		public string LineItemID { get => GetProp<string>("LineItemID"); set => SetProp<string>("LineItemID", value); }
 		/// <summary>Amount of the added promo.</summary>
 		public decimal Amount { get => GetProp<decimal>("Amount"); set => SetProp<decimal>("Amount", value); }
+		/// <summary>ID of the added promo. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 2.</summary>
+		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
+		/// <summary>If true, certain eligible expression requirements must be met, and the PromotionDiscount will be applied at the line item level.</summary>
+		public bool LineItemLevel { get => GetProp<bool>("LineItemLevel"); set => SetProp<bool>("LineItemLevel", value); }
+		/// <summary>Must be unique. Entered by buyer when adding promo to order.</summary>
+		[Required]
+		public string Code { get => GetProp<string>("Code"); set => SetProp<string>("Code", value); }
+		/// <summary>Name of the added promo. Max length 100 characters. Searchable: priority level 2. Sortable: priority level 1.</summary>
+		public string Name { get => GetProp<string>("Name"); set => SetProp<string>("Name", value); }
+		/// <summary>Limit the total number of orders this promotion can be applied to across all users.</summary>
+		public int? RedemptionLimit { get => GetProp<int?>("RedemptionLimit"); set => SetProp<int?>("RedemptionLimit", value); }
+		/// <summary>Limit the total number of orders this promotion can be applied to per user.</summary>
+		public int? RedemptionLimitPerUser { get => GetProp<int?>("RedemptionLimitPerUser"); set => SetProp<int?>("RedemptionLimitPerUser", value); }
+		/// <summary>The number of times this promotion has been applied to an order.</summary>
+		[ApiReadOnly]
+		public int RedemptionCount { get => GetProp<int>("RedemptionCount"); set => SetProp<int>("RedemptionCount", value); }
+		/// <summary>Can only be used when LineItemLevel is true and ItemLimitPerOrder does not have a value. When defined the ValueExpression will be the discount applied to each qualifying quantity of eligible items. When no ItemSortBy is defined, items will be sorted by DateAdded ascending.</summary>
+		public int? QuantityLimitPerOrder { get => GetProp<int?>("QuantityLimitPerOrder"); set => SetProp<int?>("QuantityLimitPerOrder", value); }
+		/// <summary>Can only be used when LineItemLevel is true and QuantityLimitPerOrder does not have a value. Limits the number of items the promotion will apply to when eligible. When no ItemSortBy is defined, items will be sorted by DateAdded ascending.</summary>
+		public int? ItemLimitPerOrder { get => GetProp<int?>("ItemLimitPerOrder"); set => SetProp<int?>("ItemLimitPerOrder", value); }
+		/// <summary>Comma delimited list of properties to sort by. Can only be used when ItemLimitPerOrder is true. Used to determine the order in which the promotion is applied to the specified limit of items. Use ! to reverse sort order on a property.</summary>
+		public string ItemSortBy { get => GetProp<string>("ItemSortBy"); set => SetProp<string>("ItemSortBy", value); }
+		/// <summary>Description of the added promo. Max length 2000 characters. Searchable: priority level 4.</summary>
+		public string Description { get => GetProp<string>("Description"); set => SetProp<string>("Description", value); }
+		/// <summary>Terms, conditions, and other legal jargon.</summary>
+		public string FinePrint { get => GetProp<string>("FinePrint"); set => SetProp<string>("FinePrint", value); }
+		/// <summary>Start date of the added promo. Sortable.</summary>
+		public DateTimeOffset? StartDate { get => GetProp<DateTimeOffset?>("StartDate"); set => SetProp<DateTimeOffset?>("StartDate", value); }
+		/// <summary>Expiration date of the added promo. Sortable.</summary>
+		public DateTimeOffset? ExpirationDate { get => GetProp<DateTimeOffset?>("ExpirationDate"); set => SetProp<DateTimeOffset?>("ExpirationDate", value); }
+		/// <summary>The expression evaluated to determine if an item or order is eligible for a promotion. See Rules Engine documentation for formatting details.</summary>
+		[Required]
+		public string EligibleExpression { get => GetProp<string>("EligibleExpression"); set => SetProp<string>("EligibleExpression", value); }
+		/// <summary>The expression evaluated to determine the discount amount of an eligible promotion. See Rules Engine documentation for formatting details.</summary>
+		public string ValueExpression { get => GetProp<string>("ValueExpression"); set => SetProp<string>("ValueExpression", value); }
+		/// <summary>If true, the promotion can be applied to an order that already other promotions applied, as long as they can also be combined.</summary>
+		public bool CanCombine { get => GetProp<bool>("CanCombine"); set => SetProp<bool>("CanCombine", value); }
+		/// <summary>Allow promo to be used by all buyers in your Marketplace without creating explicit assignments.</summary>
+		public bool AllowAllBuyers { get => GetProp<bool>("AllowAllBuyers"); set => SetProp<bool>("AllowAllBuyers", value); }
+		/// <summary>ID of the organization that owns the Promotion. Only the Marketplace Owner can override the OwnerID on create.</summary>
+		public string OwnerID { get => GetProp<string>("OwnerID"); set => SetProp<string>("OwnerID", value); }
+		/// <summary>Auto apply of the added promo. Sortable.</summary>
+		public bool AutoApply { get => GetProp<bool>("AutoApply", false); set => SetProp<bool>("AutoApply", value); }
+		/// <summary>Active of the added promo. Sortable.</summary>
+		public bool Active { get => GetProp<bool>("Active", true); set => SetProp<bool>("Active", value); }
+		/// <summary>Use integration of the added promo.</summary>
+		public bool UseIntegration { get => GetProp<bool>("UseIntegration"); set => SetProp<bool>("UseIntegration", value); }
+		/// <summary>Used to control the order in which promotions are applied when calling the auto apply endpoint.</summary>
+		public int? Priority { get => GetProp<int?>("Priority"); set => SetProp<int?>("Priority", value); }
+		/// <summary>Container for extended (custom) properties of the added promo.</summary>
+		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
+	}
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic AddedPromo class instead.</typeparam>
+	public class AddedPromo<Txp> : AddedPromo
+	{
+		/// <summary>Container for extended (custom) properties of the added promo.</summary>
+		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
 	}
 	public class Address : OrderCloudModel
 	{
@@ -2823,16 +2878,84 @@ namespace OrderCloud.SDK
 		/// <summary>Promotions that were removed due to ineligibility or other reason.</summary>
 		public IList<RemovedPromo> PromosRemoved { get => GetProp<IList<RemovedPromo>>("PromosRemoved", new List<RemovedPromo>()); set => SetProp<IList<RemovedPromo>>("PromosRemoved", value); }
 	}
+	/// <typeparam name="TPromosAdded">Specific type of the PromosAdded property. If not using a custom type, specify AddedPromo.</typeparam>
+	/// <typeparam name="TPromosRemoved">Specific type of the PromosRemoved property. If not using a custom type, specify RemovedPromo.</typeparam>
+	public class RefreshPromosResponse<TPromosAdded, TPromosRemoved> : RefreshPromosResponse
+		where TPromosAdded : AddedPromo
+		where TPromosRemoved : RemovedPromo
+	{
+		/// <summary>Promotions that were auto-applied.</summary>
+		public new IList<TPromosAdded> PromosAdded { get => GetProp<IList<TPromosAdded>>("PromosAdded", new List<TPromosAdded>()); set => SetProp<IList<TPromosAdded>>("PromosAdded", value); }
+		/// <summary>Promotions that were removed due to ineligibility or other reason.</summary>
+		public new IList<TPromosRemoved> PromosRemoved { get => GetProp<IList<TPromosRemoved>>("PromosRemoved", new List<TPromosRemoved>()); set => SetProp<IList<TPromosRemoved>>("PromosRemoved", value); }
+	}
 	public class RemovedPromo : OrderCloudModel
 	{
 		/// <summary>Error code of the removed promo.</summary>
 		public string ErrorCode { get => GetProp<string>("ErrorCode"); set => SetProp<string>("ErrorCode", value); }
-		/// <summary>ID of the removed promo. Can only contain characters Aa-Zz, 0-9, -, and _.</summary>
-		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
-		/// <summary>ID of the line item. Can only contain characters Aa-Zz, 0-9, -, and _.</summary>
-		public string LineItemID { get => GetProp<string>("LineItemID"); set => SetProp<string>("LineItemID", value); }
 		/// <summary>Reason of the removed promo.</summary>
 		public string Reason { get => GetProp<string>("Reason"); set => SetProp<string>("Reason", value); }
+		/// <summary>ID of the line item. Can only contain characters Aa-Zz, 0-9, -, and _.</summary>
+		public string LineItemID { get => GetProp<string>("LineItemID"); set => SetProp<string>("LineItemID", value); }
+		/// <summary>Amount of the removed promo.</summary>
+		public decimal Amount { get => GetProp<decimal>("Amount"); set => SetProp<decimal>("Amount", value); }
+		/// <summary>ID of the removed promo. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 2.</summary>
+		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
+		/// <summary>If true, certain eligible expression requirements must be met, and the PromotionDiscount will be applied at the line item level.</summary>
+		public bool LineItemLevel { get => GetProp<bool>("LineItemLevel"); set => SetProp<bool>("LineItemLevel", value); }
+		/// <summary>Must be unique. Entered by buyer when adding promo to order.</summary>
+		[Required]
+		public string Code { get => GetProp<string>("Code"); set => SetProp<string>("Code", value); }
+		/// <summary>Name of the removed promo. Max length 100 characters. Searchable: priority level 2. Sortable: priority level 1.</summary>
+		public string Name { get => GetProp<string>("Name"); set => SetProp<string>("Name", value); }
+		/// <summary>Limit the total number of orders this promotion can be applied to across all users.</summary>
+		public int? RedemptionLimit { get => GetProp<int?>("RedemptionLimit"); set => SetProp<int?>("RedemptionLimit", value); }
+		/// <summary>Limit the total number of orders this promotion can be applied to per user.</summary>
+		public int? RedemptionLimitPerUser { get => GetProp<int?>("RedemptionLimitPerUser"); set => SetProp<int?>("RedemptionLimitPerUser", value); }
+		/// <summary>The number of times this promotion has been applied to an order.</summary>
+		[ApiReadOnly]
+		public int RedemptionCount { get => GetProp<int>("RedemptionCount"); set => SetProp<int>("RedemptionCount", value); }
+		/// <summary>Can only be used when LineItemLevel is true and ItemLimitPerOrder does not have a value. When defined the ValueExpression will be the discount applied to each qualifying quantity of eligible items. When no ItemSortBy is defined, items will be sorted by DateAdded ascending.</summary>
+		public int? QuantityLimitPerOrder { get => GetProp<int?>("QuantityLimitPerOrder"); set => SetProp<int?>("QuantityLimitPerOrder", value); }
+		/// <summary>Can only be used when LineItemLevel is true and QuantityLimitPerOrder does not have a value. Limits the number of items the promotion will apply to when eligible. When no ItemSortBy is defined, items will be sorted by DateAdded ascending.</summary>
+		public int? ItemLimitPerOrder { get => GetProp<int?>("ItemLimitPerOrder"); set => SetProp<int?>("ItemLimitPerOrder", value); }
+		/// <summary>Comma delimited list of properties to sort by. Can only be used when ItemLimitPerOrder is true. Used to determine the order in which the promotion is applied to the specified limit of items. Use ! to reverse sort order on a property.</summary>
+		public string ItemSortBy { get => GetProp<string>("ItemSortBy"); set => SetProp<string>("ItemSortBy", value); }
+		/// <summary>Description of the removed promo. Max length 2000 characters. Searchable: priority level 4.</summary>
+		public string Description { get => GetProp<string>("Description"); set => SetProp<string>("Description", value); }
+		/// <summary>Terms, conditions, and other legal jargon.</summary>
+		public string FinePrint { get => GetProp<string>("FinePrint"); set => SetProp<string>("FinePrint", value); }
+		/// <summary>Start date of the removed promo. Sortable.</summary>
+		public DateTimeOffset? StartDate { get => GetProp<DateTimeOffset?>("StartDate"); set => SetProp<DateTimeOffset?>("StartDate", value); }
+		/// <summary>Expiration date of the removed promo. Sortable.</summary>
+		public DateTimeOffset? ExpirationDate { get => GetProp<DateTimeOffset?>("ExpirationDate"); set => SetProp<DateTimeOffset?>("ExpirationDate", value); }
+		/// <summary>The expression evaluated to determine if an item or order is eligible for a promotion. See Rules Engine documentation for formatting details.</summary>
+		[Required]
+		public string EligibleExpression { get => GetProp<string>("EligibleExpression"); set => SetProp<string>("EligibleExpression", value); }
+		/// <summary>The expression evaluated to determine the discount amount of an eligible promotion. See Rules Engine documentation for formatting details.</summary>
+		public string ValueExpression { get => GetProp<string>("ValueExpression"); set => SetProp<string>("ValueExpression", value); }
+		/// <summary>If true, the promotion can be applied to an order that already other promotions applied, as long as they can also be combined.</summary>
+		public bool CanCombine { get => GetProp<bool>("CanCombine"); set => SetProp<bool>("CanCombine", value); }
+		/// <summary>Allow promo to be used by all buyers in your Marketplace without creating explicit assignments.</summary>
+		public bool AllowAllBuyers { get => GetProp<bool>("AllowAllBuyers"); set => SetProp<bool>("AllowAllBuyers", value); }
+		/// <summary>ID of the organization that owns the Promotion. Only the Marketplace Owner can override the OwnerID on create.</summary>
+		public string OwnerID { get => GetProp<string>("OwnerID"); set => SetProp<string>("OwnerID", value); }
+		/// <summary>Auto apply of the removed promo. Sortable.</summary>
+		public bool AutoApply { get => GetProp<bool>("AutoApply", false); set => SetProp<bool>("AutoApply", value); }
+		/// <summary>Active of the removed promo. Sortable.</summary>
+		public bool Active { get => GetProp<bool>("Active", true); set => SetProp<bool>("Active", value); }
+		/// <summary>Use integration of the removed promo.</summary>
+		public bool UseIntegration { get => GetProp<bool>("UseIntegration"); set => SetProp<bool>("UseIntegration", value); }
+		/// <summary>Used to control the order in which promotions are applied when calling the auto apply endpoint.</summary>
+		public int? Priority { get => GetProp<int?>("Priority"); set => SetProp<int?>("Priority", value); }
+		/// <summary>Container for extended (custom) properties of the removed promo.</summary>
+		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
+	}
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic RemovedPromo class instead.</typeparam>
+	public class RemovedPromo<Txp> : RemovedPromo
+	{
+		/// <summary>Container for extended (custom) properties of the removed promo.</summary>
+		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
 	}
 	public class SearchIngestion : OrderCloudModel
 	{
