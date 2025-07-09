@@ -68,52 +68,52 @@ namespace OrderCloud.SDK
 
 	public interface IAddressesResource
 	{
-		/// <summary>Get a single address.</summary>
+		/// <summary>Retrieve an address.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="addressID">ID of the address.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Address> GetAsync(string buyerID, string addressID, string accessToken = null);
-		/// <summary>Get a single address.</summary>
+		/// <summary>Retrieve an address.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="addressID">ID of the address.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TAddress> GetAsync<TAddress>(string buyerID, string addressID, string accessToken = null) where TAddress : Address;
-		/// <summary>Get a list of addresses.</summary>
+		/// <summary>List addresses.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Address>> ListAsync(string buyerID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of addresses.</summary>
+		/// <summary>List addresses.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TAddress>> ListAsync<TAddress>(string buyerID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TAddress : Address;
-		/// <summary>Get a list of addresses.</summary>
+		/// <summary>List addresses.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Address>> ListAsync(string buyerID, Action<ListOptionsBuilder<Address>> buildListOpts, string accessToken = null);
-		/// <summary>Get a list of addresses.</summary>
+		/// <summary>List addresses.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TAddress>> ListAsync<TAddress>(string buyerID, Action<ListOptionsBuilder<TAddress>> buildListOpts, string accessToken = null) where TAddress : Address;
-		/// <summary>Create a new address. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <summary>Create an address.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="address">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Address> CreateAsync(string buyerID, Address address, string accessToken = null);
-		/// <summary>Create a new address. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <summary>Create an address.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="address">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -147,7 +147,7 @@ namespace OrderCloud.SDK
 		/// <param name="partialAddress">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TAddress> PatchAsync<TAddress>(string buyerID, string addressID, PartialAddress partialAddress, string accessToken = null) where TAddress : Address;
-		/// <summary>Get a list of address assignments.</summary>
+		/// <summary>List address assignments.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="addressID">ID of the address.</param>
 		/// <param name="userID">ID of the user.</param>
@@ -155,8 +155,8 @@ namespace OrderCloud.SDK
 		/// <param name="level">Level of the address assignment. Possible values: User, Group, Company.</param>
 		/// <param name="isShipping">Is shipping of the address assignment.</param>
 		/// <param name="isBilling">Is billing of the address assignment.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<AddressAssignment>> ListAssignmentsAsync(string buyerID, string addressID = null, string userID = null, string userGroupID = null, PartyType? level = null, bool? isShipping = null, bool? isBilling = null, int? page = null, int? pageSize = null, string accessToken = null);
 		/// <summary>Delete an address assignment.</summary>
@@ -175,45 +175,45 @@ namespace OrderCloud.SDK
 
 	public interface IAdminAddressesResource
 	{
-		/// <summary>Get a single admin address.</summary>
+		/// <summary>Retrieve an admin address.</summary>
 		/// <param name="addressID">ID of the address.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Address> GetAsync(string addressID, string accessToken = null);
-		/// <summary>Get a single admin address.</summary>
+		/// <summary>Retrieve an admin address.</summary>
 		/// <param name="addressID">ID of the address.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TAddress> GetAsync<TAddress>(string addressID, string accessToken = null) where TAddress : Address;
-		/// <summary>Get a list of admin addresses.</summary>
+		/// <summary>List admin addresses.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Address>> ListAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of admin addresses.</summary>
+		/// <summary>List admin addresses.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TAddress>> ListAsync<TAddress>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TAddress : Address;
-		/// <summary>Get a list of admin addresses.</summary>
+		/// <summary>List admin addresses.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Address>> ListAsync(Action<ListOptionsBuilder<Address>> buildListOpts, string accessToken = null);
-		/// <summary>Get a list of admin addresses.</summary>
+		/// <summary>List admin addresses.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TAddress>> ListAsync<TAddress>(Action<ListOptionsBuilder<TAddress>> buildListOpts, string accessToken = null) where TAddress : Address;
-		/// <summary>Create a new admin address. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <summary>Create an admin address.</summary>
 		/// <param name="address">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Address> CreateAsync(Address address, string accessToken = null);
-		/// <summary>Create a new admin address. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <summary>Create an admin address.</summary>
 		/// <param name="address">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TAddress> CreateAsync<TAddress>(Address address, string accessToken = null) where TAddress : Address;
@@ -245,45 +245,45 @@ namespace OrderCloud.SDK
 
 	public interface IAdminUserGroupsResource
 	{
-		/// <summary>Get a single admin user group.</summary>
+		/// <summary>Retrieve an admin user group.</summary>
 		/// <param name="userGroupID">ID of the user group.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<UserGroup> GetAsync(string userGroupID, string accessToken = null);
-		/// <summary>Get a single admin user group.</summary>
+		/// <summary>Retrieve an admin user group.</summary>
 		/// <param name="userGroupID">ID of the user group.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TUserGroup> GetAsync<TUserGroup>(string userGroupID, string accessToken = null) where TUserGroup : UserGroup;
-		/// <summary>Get a list of admin user groups.</summary>
+		/// <summary>List admin user groups.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<UserGroup>> ListAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of admin user groups.</summary>
+		/// <summary>List admin user groups.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TUserGroup>> ListAsync<TUserGroup>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TUserGroup : UserGroup;
-		/// <summary>Get a list of admin user groups.</summary>
+		/// <summary>List admin user groups.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<UserGroup>> ListAsync(Action<ListOptionsBuilder<UserGroup>> buildListOpts, string accessToken = null);
-		/// <summary>Get a list of admin user groups.</summary>
+		/// <summary>List admin user groups.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TUserGroup>> ListAsync<TUserGroup>(Action<ListOptionsBuilder<TUserGroup>> buildListOpts, string accessToken = null) where TUserGroup : UserGroup;
-		/// <summary>Create a new admin user group. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <summary>Create an admin user group.</summary>
 		/// <param name="userGroup">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<UserGroup> CreateAsync(UserGroup userGroup, string accessToken = null);
-		/// <summary>Create a new admin user group. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <summary>Create an admin user group.</summary>
 		/// <param name="userGroup">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TUserGroup> CreateAsync<TUserGroup>(UserGroup userGroup, string accessToken = null) where TUserGroup : UserGroup;
@@ -311,11 +311,11 @@ namespace OrderCloud.SDK
 		/// <param name="partialUserGroup">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TUserGroup> PatchAsync<TUserGroup>(string userGroupID, PartialUserGroup partialUserGroup, string accessToken = null) where TUserGroup : UserGroup;
-		/// <summary>Get a list of admin user group user assignments.</summary>
+		/// <summary>List admin user group user assignments.</summary>
 		/// <param name="userGroupID">ID of the user group.</param>
 		/// <param name="userID">ID of the user.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<UserGroupAssignment>> ListUserAssignmentsAsync(string userGroupID = null, string userID = null, int page = 1, int pageSize = 20, string accessToken = null);
 		/// <summary>Delete an admin user group user assignment.</summary>
@@ -331,45 +331,45 @@ namespace OrderCloud.SDK
 
 	public interface IAdminUsersResource
 	{
-		/// <summary>Get a single admin user.</summary>
+		/// <summary>Retrieve an admin user.</summary>
 		/// <param name="userID">ID of the user.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<User> GetAsync(string userID, string accessToken = null);
-		/// <summary>Get a single admin user.</summary>
+		/// <summary>Retrieve an admin user.</summary>
 		/// <param name="userID">ID of the user.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TUser> GetAsync<TUser>(string userID, string accessToken = null) where TUser : User;
-		/// <summary>Get a list of admin users.</summary>
+		/// <summary>List admin users.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<User>> ListAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of admin users.</summary>
+		/// <summary>List admin users.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TUser>> ListAsync<TUser>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TUser : User;
-		/// <summary>Get a list of admin users.</summary>
+		/// <summary>List admin users.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<User>> ListAsync(Action<ListOptionsBuilder<User>> buildListOpts, string accessToken = null);
-		/// <summary>Get a list of admin users.</summary>
+		/// <summary>List admin users.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TUser>> ListAsync<TUser>(Action<ListOptionsBuilder<TUser>> buildListOpts, string accessToken = null) where TUser : User;
-		/// <summary>Create a new admin user. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <summary>Create an admin user.</summary>
 		/// <param name="user">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<User> CreateAsync(User user, string accessToken = null);
-		/// <summary>Create a new admin user. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <summary>Create an admin user.</summary>
 		/// <param name="user">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TUser> CreateAsync<TUser>(User user, string accessToken = null) where TUser : User;
@@ -397,11 +397,11 @@ namespace OrderCloud.SDK
 		/// <param name="partialUser">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TUser> PatchAsync<TUser>(string userID, PartialUser partialUser, string accessToken = null) where TUser : User;
-		/// <summary>Unlock a user account.</summary>
+		/// <summary>Unlock a user account</summary>
 		/// <param name="userID">ID of the user.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task UnlockUserAccountAsync(string userID, string accessToken = null);
-		/// <summary>Revoke a user tokens. Revokes all security tokens of specified user.</summary>
+		/// <summary>Revoke a user tokens Revokes all security tokens of specified user.</summary>
 		/// <param name="userID">ID of the user.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task RevokeUserTokensAsync(string userID, string accessToken = null);
@@ -409,126 +409,126 @@ namespace OrderCloud.SDK
 
 	public interface IApiClientsResource
 	{
-		/// <summary>Get a single API client.</summary>
+		/// <summary>Retrieve an API client.</summary>
 		/// <param name="apiClientID">ID of the api client.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ApiClient> GetAsync(string apiClientID, string accessToken = null);
-		/// <summary>Get a single API client.</summary>
+		/// <summary>Retrieve an API client.</summary>
 		/// <param name="apiClientID">ID of the api client.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TApiClient> GetAsync<TApiClient>(string apiClientID, string accessToken = null) where TApiClient : ApiClient;
-		/// <summary>Get a list of API clients.</summary>
+		/// <summary>List API clients.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<ApiClient>> ListAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of API clients.</summary>
+		/// <summary>List API clients.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TApiClient>> ListAsync<TApiClient>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TApiClient : ApiClient;
-		/// <summary>Get a list of API clients.</summary>
+		/// <summary>List API clients.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<ApiClient>> ListAsync(Action<ListOptionsBuilder<ApiClient>> buildListOpts, string accessToken = null);
-		/// <summary>Get a list of API clients.</summary>
+		/// <summary>List API clients.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TApiClient>> ListAsync<TApiClient>(Action<ListOptionsBuilder<TApiClient>> buildListOpts, string accessToken = null) where TApiClient : ApiClient;
-		/// <summary>Create a new API client. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <summary>Create an API client.</summary>
 		/// <param name="apiClient">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ApiClient> CreateAsync(ApiClient apiClient, string accessToken = null);
-		/// <summary>Create a new API client. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <summary>Create an API client.</summary>
 		/// <param name="apiClient">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TApiClient> CreateAsync<TApiClient>(ApiClient apiClient, string accessToken = null) where TApiClient : ApiClient;
-		/// <summary>Update an API client. If an object with the same ID already exists, it will be overwritten.</summary>
+		/// <summary>Create or update an API client. If an object with the same ID already exists, it will be overwritten.</summary>
 		/// <param name="apiClientID">ID of the api client.</param>
 		/// <param name="apiClient">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ApiClient> SaveAsync(string apiClientID, ApiClient apiClient, string accessToken = null);
-		/// <summary>Update an API client. If an object with the same ID already exists, it will be overwritten.</summary>
+		/// <summary>Create or update an API client. If an object with the same ID already exists, it will be overwritten.</summary>
 		/// <param name="apiClientID">ID of the api client.</param>
 		/// <param name="apiClient">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TApiClient> SaveAsync<TApiClient>(string apiClientID, ApiClient apiClient, string accessToken = null) where TApiClient : ApiClient;
-		/// <summary>Delete a API client.</summary>
+		/// <summary>Delete an API client.</summary>
 		/// <param name="apiClientID">ID of the api client.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task DeleteAsync(string apiClientID, string accessToken = null);
-		/// <summary>Get a list of API client assignments.</summary>
+		/// <summary>List API client assignments.</summary>
 		/// <param name="apiClientID">ID of the api client.</param>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="supplierID">ID of the supplier.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<ApiClientAssignment>> ListAssignmentsAsync(string apiClientID = null, string buyerID = null, string supplierID = null, int page = 1, int pageSize = 20, string accessToken = null);
-		/// <summary>Partially update a API client.</summary>
+		/// <summary>Partially update an API client.</summary>
 		/// <param name="apiClientID">ID of the api client.</param>
 		/// <param name="partialApiClient">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ApiClient> PatchAsync(string apiClientID, PartialApiClient partialApiClient, string accessToken = null);
-		/// <summary>Partially update a API client.</summary>
+		/// <summary>Partially update an API client.</summary>
 		/// <param name="apiClientID">ID of the api client.</param>
 		/// <param name="partialApiClient">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TApiClient> PatchAsync<TApiClient>(string apiClientID, PartialApiClient partialApiClient, string accessToken = null) where TApiClient : ApiClient;
-		/// <summary>Create or update a API client assignment.</summary>
+		/// <summary>Create or update an API client assignment.</summary>
 		/// <param name="apiClientAssignment">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task SaveAssignmentAsync(ApiClientAssignment apiClientAssignment, string accessToken = null);
-		/// <summary>Delete a API client buyer assignment.</summary>
+		/// <summary>Delete an API client buyer assignment.</summary>
 		/// <param name="apiClientID">ID of the api client.</param>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task DeleteBuyerAssignmentAsync(string apiClientID, string buyerID, string accessToken = null);
-		/// <summary>Delete a API client supplier assignment.</summary>
+		/// <summary>Delete an API client supplier assignment.</summary>
 		/// <param name="apiClientID">ID of the api client.</param>
 		/// <param name="supplierID">ID of the supplier.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task DeleteSupplierAssignmentAsync(string apiClientID, string supplierID, string accessToken = null);
-		/// <summary>Get a single API client secret.</summary>
+		/// <summary>Retrieve an API client secret.</summary>
 		/// <param name="apiClientID">ID of the api client.</param>
 		/// <param name="apiClientSecretID">ID of the api client secret.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ApiClientSecret> GetSecretAsync(string apiClientID, string apiClientSecretID, string accessToken = null);
-		/// <summary>Get a list of API client secrets.</summary>
+		/// <summary>List API client secrets.</summary>
 		/// <param name="apiClientID">ID of the api client.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<ApiClientSecret>> ListSecretsAsync(string apiClientID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of API client secrets.</summary>
+		/// <summary>List API client secrets.</summary>
 		/// <param name="apiClientID">ID of the api client.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<ApiClientSecret>> ListSecretsAsync(string apiClientID, Action<ListOptionsBuilder<ApiClientSecret>> buildListOpts, string accessToken = null);
-		/// <summary>Create a new API client secret.</summary>
+		/// <summary>Create an API client secret.</summary>
 		/// <param name="apiClientID">ID of the api client.</param>
 		/// <param name="apiClientSecret">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ApiClientSecretCreateResponse> CreateSecretAsync(string apiClientID, ApiClientSecret apiClientSecret, string accessToken = null);
-		/// <summary>Partially update a API client secret.</summary>
+		/// <summary>Partially update an API client secret.</summary>
 		/// <param name="apiClientID">ID of the api client.</param>
 		/// <param name="apiClientSecretID">ID of the api client secret.</param>
 		/// <param name="partialApiClientSecret">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ApiClientSecret> PatchSecretAsync(string apiClientID, string apiClientSecretID, PartialApiClientSecret partialApiClientSecret, string accessToken = null);
-		/// <summary>Delete a API client secret.</summary>
+		/// <summary>Delete an API client secret.</summary>
 		/// <param name="apiClientID">ID of the api client.</param>
 		/// <param name="apiClientSecretID">ID of the api client secret.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -537,52 +537,52 @@ namespace OrderCloud.SDK
 
 	public interface IApprovalRulesResource
 	{
-		/// <summary>Get a single approval rule.</summary>
+		/// <summary>Retrieve an approval rule.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="approvalRuleID">ID of the approval rule.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ApprovalRule> GetAsync(string buyerID, string approvalRuleID, string accessToken = null);
-		/// <summary>Get a single approval rule.</summary>
+		/// <summary>Retrieve an approval rule.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="approvalRuleID">ID of the approval rule.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TApprovalRule> GetAsync<TApprovalRule>(string buyerID, string approvalRuleID, string accessToken = null) where TApprovalRule : ApprovalRule;
-		/// <summary>Get a list of approval rules.</summary>
+		/// <summary>List approval rules.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<ApprovalRule>> ListAsync(string buyerID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of approval rules.</summary>
+		/// <summary>List approval rules.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TApprovalRule>> ListAsync<TApprovalRule>(string buyerID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TApprovalRule : ApprovalRule;
-		/// <summary>Get a list of approval rules.</summary>
+		/// <summary>List approval rules.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<ApprovalRule>> ListAsync(string buyerID, Action<ListOptionsBuilder<ApprovalRule>> buildListOpts, string accessToken = null);
-		/// <summary>Get a list of approval rules.</summary>
+		/// <summary>List approval rules.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TApprovalRule>> ListAsync<TApprovalRule>(string buyerID, Action<ListOptionsBuilder<TApprovalRule>> buildListOpts, string accessToken = null) where TApprovalRule : ApprovalRule;
-		/// <summary>Create a new approval rule. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <summary>Create an approval rule.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="approvalRule">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ApprovalRule> CreateAsync(string buyerID, ApprovalRule approvalRule, string accessToken = null);
-		/// <summary>Create a new approval rule. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <summary>Create an approval rule.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="approvalRule">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -620,22 +620,22 @@ namespace OrderCloud.SDK
 
 	public interface IBundleLineItemsResource
 	{
-		/// <summary>Create a new bundle line item. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>Create a bundle line item.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="bundleID">ID of the bundle.</param>
 		/// <param name="bundleItems">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<LineItem> CreateAsync(OrderDirection direction, string orderID, string bundleID, BundleItems bundleItems = null, string accessToken = null);
-		/// <summary>Create a new bundle line item. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>Create a bundle line item.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="bundleID">ID of the bundle.</param>
 		/// <param name="bundleItems">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TLineItem> CreateAsync<TLineItem>(OrderDirection direction, string orderID, string bundleID, BundleItems bundleItems = null, string accessToken = null) where TLineItem : LineItem;
 		/// <summary>Delete a bundle line item.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="bundleID">ID of the bundle.</param>
 		/// <param name="bundleItemID">ID of the bundle item.</param>
@@ -645,59 +645,59 @@ namespace OrderCloud.SDK
 
 	public interface IBundlesResource
 	{
-		/// <summary>Get a single bundle.</summary>
+		/// <summary>Retrieve a bundle.</summary>
 		/// <param name="bundleID">ID of the bundle.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Bundle> GetAsync(string bundleID, string accessToken = null);
-		/// <summary>Get a single bundle.</summary>
+		/// <summary>Retrieve a bundle.</summary>
 		/// <param name="bundleID">ID of the bundle.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TBundle> GetAsync<TBundle>(string bundleID, string accessToken = null) where TBundle : Bundle;
-		/// <summary>Get a list of bundles.</summary>
+		/// <summary>List bundles.</summary>
 		/// <param name="catalogID">ID of the catalog.</param>
 		/// <param name="categoryID">ID of the category.</param>
 		/// <param name="supplierID">ID of the supplier.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
-		/// <param name="searchType">Type of search to perform. Possible values: AnyTerm (default), AllTermsAnyField, AllTermsSameField, ExactPhrase, ExactPhrasePrefix.</param>
+		/// <param name="searchType">Type of search to perform.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPageWithFacets<Bundle>> ListAsync(string catalogID = null, string categoryID = null, string supplierID = null, string search = null, string searchOn = null, SearchType searchType = SearchType.AnyTerm, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of bundles.</summary>
+		/// <summary>List bundles.</summary>
 		/// <param name="catalogID">ID of the catalog.</param>
 		/// <param name="categoryID">ID of the category.</param>
 		/// <param name="supplierID">ID of the supplier.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
-		/// <param name="searchType">Type of search to perform. Possible values: AnyTerm (default), AllTermsAnyField, AllTermsSameField, ExactPhrase, ExactPhrasePrefix.</param>
+		/// <param name="searchType">Type of search to perform.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPageWithFacets<TBundle>> ListAsync<TBundle>(string catalogID = null, string categoryID = null, string supplierID = null, string search = null, string searchOn = null, SearchType searchType = SearchType.AnyTerm, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TBundle : Bundle;
-		/// <summary>Get a list of bundles.</summary>
+		/// <summary>List bundles.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="catalogID">ID of the catalog.</param>
 		/// <param name="categoryID">ID of the category.</param>
 		/// <param name="supplierID">ID of the supplier.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPageWithFacets<Bundle>> ListAsync(Action<ListOptionsBuilder2<Bundle>> buildListOpts, string catalogID = null, string categoryID = null, string supplierID = null, string accessToken = null);
-		/// <summary>Get a list of bundles.</summary>
+		/// <summary>List bundles.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="catalogID">ID of the catalog.</param>
 		/// <param name="categoryID">ID of the category.</param>
 		/// <param name="supplierID">ID of the supplier.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPageWithFacets<TBundle>> ListAsync<TBundle>(Action<ListOptionsBuilder2<TBundle>> buildListOpts, string catalogID = null, string categoryID = null, string supplierID = null, string accessToken = null) where TBundle : Bundle;
-		/// <summary>Create a new bundle. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <summary>Create a bundle.</summary>
 		/// <param name="bundle">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Bundle> CreateAsync(Bundle bundle, string accessToken = null);
-		/// <summary>Create a new bundle. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <summary>Create a bundle.</summary>
 		/// <param name="bundle">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TBundle> CreateAsync<TBundle>(Bundle bundle, string accessToken = null) where TBundle : Bundle;
@@ -729,11 +729,11 @@ namespace OrderCloud.SDK
 		/// <param name="bundleProductAssignment">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task SaveProductAssignmentAsync(BundleProductAssignment bundleProductAssignment, string accessToken = null);
-		/// <summary>Get a list of bundle product assignments.</summary>
+		/// <summary>List bundle product assignments.</summary>
 		/// <param name="bundleID">ID of the bundle.</param>
 		/// <param name="productID">ID of the product.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<BundleProductAssignment>> ListProductAssignmentsAsync(string bundleID = null, string productID = null, int page = 1, int pageSize = 20, string accessToken = null);
 		/// <summary>Delete a bundle product assignment.</summary>
@@ -741,14 +741,14 @@ namespace OrderCloud.SDK
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task DeleteProductAssignmentAsync(string bundleID, string productID, string accessToken = null);
-		/// <summary>Get a list of bundle assignments.</summary>
+		/// <summary>List bundle assignments.</summary>
 		/// <param name="bundleID">ID of the bundle.</param>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="userID">ID of the user.</param>
 		/// <param name="userGroupID">ID of the user group.</param>
 		/// <param name="level">Level of the bundle assignment. Possible values: User, Group, Company.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<BundleAssignment>> ListAssignmentsAsync(string bundleID = null, string buyerID = null, string userID = null, string userGroupID = null, PartyType? level = null, int? page = null, int? pageSize = null, string accessToken = null);
 		/// <summary>Create or update a bundle assignment.</summary>
@@ -767,13 +767,13 @@ namespace OrderCloud.SDK
 
 	public interface IBundleSubscriptionItemsResource
 	{
-		/// <summary>Create a new bundle subscription item. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <summary>Create a bundle subscription item.</summary>
 		/// <param name="subscriptionID">ID of the subscription.</param>
 		/// <param name="bundleID">ID of the bundle.</param>
 		/// <param name="bundleItems">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<LineItem> CreateAsync(string subscriptionID, string bundleID, BundleItems bundleItems = null, string accessToken = null);
-		/// <summary>Create a new bundle subscription item. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <summary>Create a bundle subscription item.</summary>
 		/// <param name="subscriptionID">ID of the subscription.</param>
 		/// <param name="bundleID">ID of the bundle.</param>
 		/// <param name="bundleItems">The object that will be serialized to JSON and sent in the request body.</param>
@@ -789,45 +789,45 @@ namespace OrderCloud.SDK
 
 	public interface IBuyersResource
 	{
-		/// <summary>Get a single buyer.</summary>
+		/// <summary>Retrieve a buyer.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Buyer> GetAsync(string buyerID, string accessToken = null);
-		/// <summary>Get a single buyer.</summary>
+		/// <summary>Retrieve a buyer.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TBuyer> GetAsync<TBuyer>(string buyerID, string accessToken = null) where TBuyer : Buyer;
-		/// <summary>Get a list of buyers.</summary>
+		/// <summary>List buyers.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Buyer>> ListAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of buyers.</summary>
+		/// <summary>List buyers.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TBuyer>> ListAsync<TBuyer>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TBuyer : Buyer;
-		/// <summary>Get a list of buyers.</summary>
+		/// <summary>List buyers.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Buyer>> ListAsync(Action<ListOptionsBuilder<Buyer>> buildListOpts, string accessToken = null);
-		/// <summary>Get a list of buyers.</summary>
+		/// <summary>List buyers.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TBuyer>> ListAsync<TBuyer>(Action<ListOptionsBuilder<TBuyer>> buildListOpts, string accessToken = null) where TBuyer : Buyer;
-		/// <summary>Create a new buyer. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <summary>Create a buyer.</summary>
 		/// <param name="buyer">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Buyer> CreateAsync(Buyer buyer, string accessToken = null);
-		/// <summary>Create a new buyer. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <summary>Create a buyer.</summary>
 		/// <param name="buyer">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TBuyer> CreateAsync<TBuyer>(Buyer buyer, string accessToken = null) where TBuyer : Buyer;
@@ -855,17 +855,17 @@ namespace OrderCloud.SDK
 		/// <param name="partialBuyer">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TBuyer> PatchAsync<TBuyer>(string buyerID, PartialBuyer partialBuyer, string accessToken = null) where TBuyer : Buyer;
-		/// <summary>Get a list of buyer buyer sellers.</summary>
+		/// <summary>List sellers this buyer can purchase from</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<BuyerSupplier>> ListBuyerSellersAsync(string buyerID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of buyer buyer sellers.</summary>
+		/// <summary>List sellers this buyer can purchase from</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -874,10 +874,10 @@ namespace OrderCloud.SDK
 
 	public interface ICartResource
 	{
-		/// <summary>Get a single cart. If the ID of the Order returned is null, the cart has not yet been interacted with. Once an item is added, the Order.ID will be populated.</summary>
+		/// <summary>Retrieve a cart. If the ID of the Order returned is null, the cart has not yet been interacted with. Once an item is added, the Order.ID will be populated.</summary>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Order> GetAsync(string accessToken = null);
-		/// <summary>Get a single cart. If the ID of the Order returned is null, the cart has not yet been interacted with. Once an item is added, the Order.ID will be populated.</summary>
+		/// <summary>Retrieve a cart. If the ID of the Order returned is null, the cart has not yet been interacted with. Once an item is added, the Order.ID will be populated.</summary>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TOrder> GetAsync<TOrder>(string accessToken = null) where TOrder : Order;
 		/// <summary>Create or update a cart. If an object with the same ID already exists, it will be overwritten.</summary>
@@ -891,7 +891,7 @@ namespace OrderCloud.SDK
 		/// <summary>Delete a cart. Empties the cart. Any promotions, payments or other items associated with the cart will also be removed.</summary>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task DeleteAsync(string accessToken = null);
-		/// <summary>Set an active cart.</summary>
+		/// <summary>Set an active cart</summary>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task SetActiveCartAsync(string orderID, string accessToken = null);
@@ -903,45 +903,45 @@ namespace OrderCloud.SDK
 		/// <param name="partialOrder">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TOrder> PatchAsync<TOrder>(PartialOrder partialOrder, string accessToken = null) where TOrder : Order;
-		/// <summary>Get a list of cart line items.</summary>
+		/// <summary>List cart line items.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<LineItem>> ListLineItemsAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of cart line items.</summary>
+		/// <summary>List cart line items.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TLineItem>> ListLineItemsAsync<TLineItem>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TLineItem : LineItem;
-		/// <summary>Get a list of cart line items.</summary>
+		/// <summary>List cart line items.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<LineItem>> ListLineItemsAsync(Action<ListOptionsBuilder<LineItem>> buildListOpts, string accessToken = null);
-		/// <summary>Get a list of cart line items.</summary>
+		/// <summary>List cart line items.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TLineItem>> ListLineItemsAsync<TLineItem>(Action<ListOptionsBuilder<TLineItem>> buildListOpts, string accessToken = null) where TLineItem : LineItem;
-		/// <summary>Get a single cart line item.</summary>
+		/// <summary>Retrieve a cart line item.</summary>
 		/// <param name="lineItemID">ID of the line item.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<LineItem> GetLineItemAsync(string lineItemID, string accessToken = null);
-		/// <summary>Get a single cart line item.</summary>
+		/// <summary>Retrieve a cart line item.</summary>
 		/// <param name="lineItemID">ID of the line item.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TLineItem> GetLineItemAsync<TLineItem>(string lineItemID, string accessToken = null) where TLineItem : LineItem;
-		/// <summary>Create a new cart line item. Adds a line item to the cart</summary>
+		/// <summary>Create a cart line item. Adds a line item to the cart</summary>
 		/// <param name="lineItem">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<LineItem> CreateLineItemAsync(LineItem lineItem, string accessToken = null);
-		/// <summary>Create a new cart line item. Adds a line item to the cart</summary>
+		/// <summary>Create a cart line item. Adds a line item to the cart</summary>
 		/// <param name="lineItem">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TLineItem> CreateLineItemAsync<TLineItem>(LineItem lineItem, string accessToken = null) where TLineItem : LineItem;
@@ -969,12 +969,12 @@ namespace OrderCloud.SDK
 		/// <param name="lineItemID">ID of the line item.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task DeleteLineItemAsync(string lineItemID, string accessToken = null);
-		/// <summary>Create a new cart bundle item. Adds bundle line items to the cart</summary>
+		/// <summary>Create a cart bundle item. Adds bundle line items to the cart</summary>
 		/// <param name="bundleID">ID of the bundle.</param>
 		/// <param name="bundleItems">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<LineItem> CreateBundleItemAsync(string bundleID, BundleItems bundleItems = null, string accessToken = null);
-		/// <summary>Create a new cart bundle item. Adds bundle line items to the cart</summary>
+		/// <summary>Create a cart bundle item. Adds bundle line items to the cart</summary>
 		/// <param name="bundleID">ID of the bundle.</param>
 		/// <param name="bundleItems">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -984,63 +984,63 @@ namespace OrderCloud.SDK
 		/// <param name="bundleItemID">ID of the bundle item.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task DeleteBundleItemAsync(string bundleID, string bundleItemID, string accessToken = null);
-		/// <summary>Get a list of cart promotions.</summary>
+		/// <summary>List cart promotions.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<OrderPromotion>> ListPromotionsAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of cart promotions.</summary>
+		/// <summary>List cart promotions.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TOrderPromotion>> ListPromotionsAsync<TOrderPromotion>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TOrderPromotion : OrderPromotion;
-		/// <summary>Get a list of cart promotions.</summary>
+		/// <summary>List cart promotions.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<OrderPromotion>> ListPromotionsAsync(Action<ListOptionsBuilder<OrderPromotion>> buildListOpts, string accessToken = null);
-		/// <summary>Get a list of cart promotions.</summary>
+		/// <summary>List cart promotions.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TOrderPromotion>> ListPromotionsAsync<TOrderPromotion>(Action<ListOptionsBuilder<TOrderPromotion>> buildListOpts, string accessToken = null) where TOrderPromotion : OrderPromotion;
-		/// <summary>List eligible promotions. Get a list of promotions eligible for the cart.</summary>
+		/// <summary>List eligible promotions for the cart</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<EligiblePromotion>> ListEligiblePromotionsAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>List eligible promotions. Get a list of promotions eligible for the cart.</summary>
+		/// <summary>List eligible promotions for the cart</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TEligiblePromotion>> ListEligiblePromotionsAsync<TEligiblePromotion>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TEligiblePromotion : EligiblePromotion;
-		/// <summary>List eligible promotions. Get a list of promotions eligible for the cart.</summary>
+		/// <summary>List eligible promotions for the cart</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<EligiblePromotion>> ListEligiblePromotionsAsync(Action<ListOptionsBuilder<EligiblePromotion>> buildListOpts, string accessToken = null);
-		/// <summary>List eligible promotions. Get a list of promotions eligible for the cart.</summary>
+		/// <summary>List eligible promotions for the cart</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TEligiblePromotion>> ListEligiblePromotionsAsync<TEligiblePromotion>(Action<ListOptionsBuilder<TEligiblePromotion>> buildListOpts, string accessToken = null) where TEligiblePromotion : EligiblePromotion;
-		/// <summary>Add a promotion.</summary>
+		/// <summary>Add a promotion</summary>
 		/// <param name="promoCode">Promo code of the order promotion.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<OrderPromotion> AddPromotionAsync(string promoCode, string accessToken = null);
-		/// <summary>Add a promotion.</summary>
+		/// <summary>Add a promotion</summary>
 		/// <param name="promoCode">Promo code of the order promotion.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TOrderPromotion> AddPromotionAsync<TOrderPromotion>(string promoCode, string accessToken = null) where TOrderPromotion : OrderPromotion;
@@ -1048,65 +1048,65 @@ namespace OrderCloud.SDK
 		/// <param name="promoCode">Promo code of the cart.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task DeletePromotionAsync(string promoCode, string accessToken = null);
-		/// <summary>Auto-apply promotions to the cart. Apply up to 100 eligible promotions where AutoApply=true.</summary>
+		/// <summary>Auto-apply promotions to the cart Apply up to 100 eligible promotions where AutoApply=true.</summary>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Order> ApplyPromotionsAsync(string accessToken = null);
-		/// <summary>Auto-apply promotions to the cart. Apply up to 100 eligible promotions where AutoApply=true.</summary>
+		/// <summary>Auto-apply promotions to the cart Apply up to 100 eligible promotions where AutoApply=true.</summary>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TOrder> ApplyPromotionsAsync<TOrder>(string accessToken = null) where TOrder : Order;
-		/// <summary>Refresh promotions on the cart. Re-calculates promotion discounts, removes promotions that are no longer valid, and adds eligible promotions where AutoApply=true (up to limit of 100)</summary>
+		/// <summary>Refresh promotions on the cart Re-calculates promotion discounts, removes promotions that are no longer valid, and adds eligible promotions where AutoApply=true (up to limit of 100)</summary>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<RefreshPromosResponse> RefreshPromotionsAsync(string accessToken = null);
-		/// <summary>Refresh promotions on the cart. Re-calculates promotion discounts, removes promotions that are no longer valid, and adds eligible promotions where AutoApply=true (up to limit of 100)</summary>
+		/// <summary>Refresh promotions on the cart Re-calculates promotion discounts, removes promotions that are no longer valid, and adds eligible promotions where AutoApply=true (up to limit of 100)</summary>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TRefreshPromosResponse> RefreshPromotionsAsync<TRefreshPromosResponse>(string accessToken = null) where TRefreshPromosResponse : RefreshPromosResponse;
-		/// <summary>Update cart FromUser. Only FirstName, LastName, and Email can be updated. Primarily used to facilitate guest checkout scenarios.</summary>
+		/// <summary>Partially update a cart from user. Only FirstName, LastName, and Email can be updated. Primarily used to facilitate guest checkout scenarios.</summary>
 		/// <param name="partialUser">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Order> PatchFromUserAsync(PartialUser partialUser, string accessToken = null);
-		/// <summary>Update cart FromUser. Only FirstName, LastName, and Email can be updated. Primarily used to facilitate guest checkout scenarios.</summary>
+		/// <summary>Partially update a cart from user. Only FirstName, LastName, and Email can be updated. Primarily used to facilitate guest checkout scenarios.</summary>
 		/// <param name="partialUser">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TOrder> PatchFromUserAsync<TOrder>(PartialUser partialUser, string accessToken = null) where TOrder : Order;
-		/// <summary>Get a list of cart payments.</summary>
+		/// <summary>List cart payments.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Payment>> ListPaymentsAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of cart payments.</summary>
+		/// <summary>List cart payments.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TPayment>> ListPaymentsAsync<TPayment>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TPayment : Payment;
-		/// <summary>Get a list of cart payments.</summary>
+		/// <summary>List cart payments.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Payment>> ListPaymentsAsync(Action<ListOptionsBuilder<Payment>> buildListOpts, string accessToken = null);
-		/// <summary>Get a list of cart payments.</summary>
+		/// <summary>List cart payments.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TPayment>> ListPaymentsAsync<TPayment>(Action<ListOptionsBuilder<TPayment>> buildListOpts, string accessToken = null) where TPayment : Payment;
-		/// <summary>Get a single cart payment.</summary>
+		/// <summary>Retrieve a cart payment.</summary>
 		/// <param name="paymentID">ID of the payment.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Payment> GetPaymentAsync(string paymentID, string accessToken = null);
-		/// <summary>Get a single cart payment.</summary>
+		/// <summary>Retrieve a cart payment.</summary>
 		/// <param name="paymentID">ID of the payment.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TPayment> GetPaymentAsync<TPayment>(string paymentID, string accessToken = null) where TPayment : Payment;
-		/// <summary>Create a new cart payment.</summary>
+		/// <summary>Create a cart payment.</summary>
 		/// <param name="payment">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Payment> CreatePaymentAsync(Payment payment, string accessToken = null);
-		/// <summary>Create a new cart payment.</summary>
+		/// <summary>Create a cart payment.</summary>
 		/// <param name="payment">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TPayment> CreatePaymentAsync<TPayment>(Payment payment, string accessToken = null) where TPayment : Payment;
@@ -1124,12 +1124,12 @@ namespace OrderCloud.SDK
 		/// <param name="paymentID">ID of the payment.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task DeletePaymentAsync(string paymentID, string accessToken = null);
-		/// <summary>Create a new cart payment transaction.</summary>
+		/// <summary>Create a cart payment transaction.</summary>
 		/// <param name="paymentID">ID of the payment.</param>
 		/// <param name="paymentTransaction">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Payment> CreatePaymentTransactionAsync(string paymentID, PaymentTransaction paymentTransaction, string accessToken = null);
-		/// <summary>Create a new cart payment transaction.</summary>
+		/// <summary>Create a cart payment transaction.</summary>
 		/// <param name="paymentID">ID of the payment.</param>
 		/// <param name="paymentTransaction">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -1139,46 +1139,46 @@ namespace OrderCloud.SDK
 		/// <param name="transactionID">ID of the transaction.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task DeletePaymentTransactionAsync(string paymentID, string transactionID, string accessToken = null);
-		/// <summary>Submit the cart.</summary>
+		/// <summary>Submit the cart</summary>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Order> SubmitAsync(string accessToken = null);
-		/// <summary>Submit the cart.</summary>
+		/// <summary>Submit the cart</summary>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TOrder> SubmitAsync<TOrder>(string accessToken = null) where TOrder : Order;
-		/// <summary>Validate the cart in it's current state.</summary>
+		/// <summary>Validate the cart in it's current state</summary>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task ValidateAsync(string accessToken = null);
-		/// <summary>Calculate the cart.</summary>
+		/// <summary>Calculate the cart</summary>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<OrderWorksheet> CalculateAsync(string accessToken = null);
-		/// <summary>Calculate the cart.</summary>
+		/// <summary>Calculate the cart</summary>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TOrderWorksheet> CalculateAsync<TOrderWorksheet>(string accessToken = null) where TOrderWorksheet : OrderWorksheet;
-		/// <summary>Get a single cart order worksheet.</summary>
+		/// <summary>Retrieve a cart order worksheet.</summary>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<OrderWorksheet> GetOrderWorksheetAsync(string accessToken = null);
-		/// <summary>Get a single cart order worksheet.</summary>
+		/// <summary>Retrieve a cart order worksheet.</summary>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TOrderWorksheet> GetOrderWorksheetAsync<TOrderWorksheet>(string accessToken = null) where TOrderWorksheet : OrderWorksheet;
-		/// <summary>Estimate shipping cost.</summary>
+		/// <summary>Estimate shipping cost</summary>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<OrderWorksheet> EstimateShippingAsync(string accessToken = null);
-		/// <summary>Estimate shipping cost.</summary>
+		/// <summary>Estimate shipping cost</summary>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TOrderWorksheet> EstimateShippingAsync<TOrderWorksheet>(string accessToken = null) where TOrderWorksheet : OrderWorksheet;
-		/// <summary>Select a ship method.</summary>
+		/// <summary>Select a ship method</summary>
 		/// <param name="orderShipMethodSelection">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<OrderWorksheet> SelectShipMethodsAsync(OrderShipMethodSelection orderShipMethodSelection, string accessToken = null);
-		/// <summary>Select a ship method.</summary>
+		/// <summary>Select a ship method</summary>
 		/// <param name="orderShipMethodSelection">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TOrderWorksheet> SelectShipMethodsAsync<TOrderWorksheet>(OrderShipMethodSelection orderShipMethodSelection, string accessToken = null) where TOrderWorksheet : OrderWorksheet;
-		/// <summary>Set a shipping address.</summary>
+		/// <summary>Set a shipping address</summary>
 		/// <param name="address">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Order> SetShippingAddressAsync(Address address, string accessToken = null);
-		/// <summary>Set a shipping address.</summary>
+		/// <summary>Set a shipping address</summary>
 		/// <param name="address">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TOrder> SetShippingAddressAsync<TOrder>(Address address, string accessToken = null) where TOrder : Order;
@@ -1190,11 +1190,11 @@ namespace OrderCloud.SDK
 		/// <param name="partialAddress">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TOrder> PatchShippingAddressAsync<TOrder>(PartialAddress partialAddress, string accessToken = null) where TOrder : Order;
-		/// <summary>Set a billing address. Use only when the address is not to be saved/reused. To use a saved address (i.e. from the Addresses resource), PATCH the order's BillingAddressID property instead.</summary>
+		/// <summary>Set a billing address Use only when the address is not to be saved/reused. To use a saved address (i.e. from the Addresses resource), PATCH the order's BillingAddressID property instead.</summary>
 		/// <param name="address">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Order> SetBillingAddressAsync(Address address, string accessToken = null);
-		/// <summary>Set a billing address. Use only when the address is not to be saved/reused. To use a saved address (i.e. from the Addresses resource), PATCH the order's BillingAddressID property instead.</summary>
+		/// <summary>Set a billing address Use only when the address is not to be saved/reused. To use a saved address (i.e. from the Addresses resource), PATCH the order's BillingAddressID property instead.</summary>
 		/// <param name="address">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TOrder> SetBillingAddressAsync<TOrder>(Address address, string accessToken = null) where TOrder : Order;
@@ -1210,45 +1210,45 @@ namespace OrderCloud.SDK
 
 	public interface ICatalogsResource
 	{
-		/// <summary>Get a single catalog.</summary>
+		/// <summary>Retrieve a catalog.</summary>
 		/// <param name="catalogID">ID of the catalog.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Catalog> GetAsync(string catalogID, string accessToken = null);
-		/// <summary>Get a single catalog.</summary>
+		/// <summary>Retrieve a catalog.</summary>
 		/// <param name="catalogID">ID of the catalog.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TCatalog> GetAsync<TCatalog>(string catalogID, string accessToken = null) where TCatalog : Catalog;
-		/// <summary>Get a list of catalogs.</summary>
+		/// <summary>List catalogs.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Catalog>> ListAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of catalogs.</summary>
+		/// <summary>List catalogs.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TCatalog>> ListAsync<TCatalog>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TCatalog : Catalog;
-		/// <summary>Get a list of catalogs.</summary>
+		/// <summary>List catalogs.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Catalog>> ListAsync(Action<ListOptionsBuilder<Catalog>> buildListOpts, string accessToken = null);
-		/// <summary>Get a list of catalogs.</summary>
+		/// <summary>List catalogs.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TCatalog>> ListAsync<TCatalog>(Action<ListOptionsBuilder<TCatalog>> buildListOpts, string accessToken = null) where TCatalog : Catalog;
-		/// <summary>Create a new catalog. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <summary>Create a catalog.</summary>
 		/// <param name="catalog">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Catalog> CreateAsync(Catalog catalog, string accessToken = null);
-		/// <summary>Create a new catalog. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <summary>Create a catalog.</summary>
 		/// <param name="catalog">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TCatalog> CreateAsync<TCatalog>(Catalog catalog, string accessToken = null) where TCatalog : Catalog;
@@ -1276,11 +1276,11 @@ namespace OrderCloud.SDK
 		/// <param name="partialCatalog">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TCatalog> PatchAsync<TCatalog>(string catalogID, PartialCatalog partialCatalog, string accessToken = null) where TCatalog : Catalog;
-		/// <summary>Get a list of catalog assignments.</summary>
+		/// <summary>List catalog assignments.</summary>
 		/// <param name="catalogID">ID of the catalog.</param>
 		/// <param name="buyerID">ID of the buyer.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<CatalogAssignment>> ListAssignmentsAsync(string catalogID = null, string buyerID = null, int page = 1, int pageSize = 20, string accessToken = null);
 		/// <summary>Create or update a catalog assignment.</summary>
@@ -1292,11 +1292,11 @@ namespace OrderCloud.SDK
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task DeleteAssignmentAsync(string catalogID, string buyerID, string accessToken = null);
-		/// <summary>Get a list of catalog product assignments.</summary>
+		/// <summary>List catalog product assignments.</summary>
 		/// <param name="catalogID">ID of the catalog.</param>
 		/// <param name="productID">ID of the product.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<ProductCatalogAssignment>> ListProductAssignmentsAsync(string catalogID = null, string productID = null, int page = 1, int pageSize = 20, string accessToken = null);
 		/// <summary>Create or update a catalog product assignment.</summary>
@@ -1308,11 +1308,11 @@ namespace OrderCloud.SDK
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task DeleteProductAssignmentAsync(string catalogID, string productID, string accessToken = null);
-		/// <summary>Get a list of catalog bundle assignments.</summary>
+		/// <summary>List catalog bundle assignments.</summary>
 		/// <param name="catalogID">ID of the catalog.</param>
 		/// <param name="bundleID">ID of the bundle.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<BundleCatalogAssignment>> ListBundleAssignmentsAsync(string catalogID = null, string bundleID = null, int page = 1, int pageSize = 20, string accessToken = null);
 		/// <summary>Create or update a catalog bundle assignment.</summary>
@@ -1328,57 +1328,57 @@ namespace OrderCloud.SDK
 
 	public interface ICategoriesResource
 	{
-		/// <summary>Get a single category.</summary>
+		/// <summary>Retrieve a category.</summary>
 		/// <param name="catalogID">ID of the catalog.</param>
 		/// <param name="categoryID">ID of the category.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Category> GetAsync(string catalogID, string categoryID, string accessToken = null);
-		/// <summary>Get a single category.</summary>
+		/// <summary>Retrieve a category.</summary>
 		/// <param name="catalogID">ID of the catalog.</param>
 		/// <param name="categoryID">ID of the category.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TCategory> GetAsync<TCategory>(string catalogID, string categoryID, string accessToken = null) where TCategory : Category;
-		/// <summary>Get a list of categories.</summary>
+		/// <summary>List categories.</summary>
 		/// <param name="catalogID">ID of the catalog.</param>
 		/// <param name="depth">Depth of the category.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Category>> ListAsync(string catalogID, string depth = "1", string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of categories.</summary>
+		/// <summary>List categories.</summary>
 		/// <param name="catalogID">ID of the catalog.</param>
 		/// <param name="depth">Depth of the category.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TCategory>> ListAsync<TCategory>(string catalogID, string depth = "1", string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TCategory : Category;
-		/// <summary>Get a list of categories.</summary>
+		/// <summary>List categories.</summary>
 		/// <param name="catalogID">ID of the catalog.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="depth">Depth of the category.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Category>> ListAsync(string catalogID, Action<ListOptionsBuilder<Category>> buildListOpts, string depth = "1", string accessToken = null);
-		/// <summary>Get a list of categories.</summary>
+		/// <summary>List categories.</summary>
 		/// <param name="catalogID">ID of the catalog.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="depth">Depth of the category.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TCategory>> ListAsync<TCategory>(string catalogID, Action<ListOptionsBuilder<TCategory>> buildListOpts, string depth = "1", string accessToken = null) where TCategory : Category;
-		/// <summary>Create a new category. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <summary>Create a category. Setting adjustListOrders to true will increase ListOrder for all categories with the same or higher ListOrder.</summary>
 		/// <param name="catalogID">ID of the catalog.</param>
 		/// <param name="category">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="adjustListOrders">Adjust list orders of the category.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Category> CreateAsync(string catalogID, Category category, bool adjustListOrders = false, string accessToken = null);
-		/// <summary>Create a new category. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <summary>Create a category. Setting adjustListOrders to true will increase ListOrder for all categories with the same or higher ListOrder.</summary>
 		/// <param name="catalogID">ID of the catalog.</param>
 		/// <param name="category">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="adjustListOrders">Adjust list orders of the category.</param>
@@ -1417,15 +1417,15 @@ namespace OrderCloud.SDK
 		/// <param name="adjustListOrders">Adjust list orders of the partial 1.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TCategory> PatchAsync<TCategory>(string catalogID, string categoryID, PartialCategory partialCategory, bool adjustListOrders = false, string accessToken = null) where TCategory : Category;
-		/// <summary>Get a list of category assignments.</summary>
+		/// <summary>List category assignments.</summary>
 		/// <param name="catalogID">ID of the catalog.</param>
 		/// <param name="categoryID">ID of the category.</param>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="userID">ID of the user.</param>
 		/// <param name="userGroupID">ID of the user group.</param>
 		/// <param name="level">Level of the category assignment. Possible values: User, Group, Company.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<CategoryAssignment>> ListAssignmentsAsync(string catalogID, string categoryID = null, string buyerID = null, string userID = null, string userGroupID = null, PartyType? level = null, int? page = null, int? pageSize = null, string accessToken = null);
 		/// <summary>Delete a category assignment.</summary>
@@ -1441,12 +1441,12 @@ namespace OrderCloud.SDK
 		/// <param name="categoryAssignment">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task SaveAssignmentAsync(string catalogID, CategoryAssignment categoryAssignment, string accessToken = null);
-		/// <summary>Get a list of category product assignments.</summary>
+		/// <summary>List category product assignments.</summary>
 		/// <param name="catalogID">ID of the catalog.</param>
 		/// <param name="categoryID">ID of the category.</param>
 		/// <param name="productID">ID of the product.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<CategoryProductAssignment>> ListProductAssignmentsAsync(string catalogID, string categoryID = null, string productID = null, int page = 1, int pageSize = 20, string accessToken = null);
 		/// <summary>Create or update a category product assignment.</summary>
@@ -1460,12 +1460,12 @@ namespace OrderCloud.SDK
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task DeleteProductAssignmentAsync(string catalogID, string categoryID, string productID, string accessToken = null);
-		/// <summary>Get a list of category bundle assignments.</summary>
+		/// <summary>List category bundle assignments.</summary>
 		/// <param name="catalogID">ID of the catalog.</param>
 		/// <param name="categoryID">ID of the category.</param>
 		/// <param name="bundleID">ID of the bundle.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<CategoryBundleAssignment>> ListBundleAssignmentsAsync(string catalogID, string categoryID = null, string bundleID = null, int page = 1, int pageSize = 20, string accessToken = null);
 		/// <summary>Create or update a category bundle assignment.</summary>
@@ -1483,52 +1483,52 @@ namespace OrderCloud.SDK
 
 	public interface ICostCentersResource
 	{
-		/// <summary>Get a single cost center.</summary>
+		/// <summary>Retrieve a cost center.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="costCenterID">ID of the cost center.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<CostCenter> GetAsync(string buyerID, string costCenterID, string accessToken = null);
-		/// <summary>Get a single cost center.</summary>
+		/// <summary>Retrieve a cost center.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="costCenterID">ID of the cost center.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TCostCenter> GetAsync<TCostCenter>(string buyerID, string costCenterID, string accessToken = null) where TCostCenter : CostCenter;
-		/// <summary>Get a list of cost centers.</summary>
+		/// <summary>List cost centers.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<CostCenter>> ListAsync(string buyerID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of cost centers.</summary>
+		/// <summary>List cost centers.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TCostCenter>> ListAsync<TCostCenter>(string buyerID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TCostCenter : CostCenter;
-		/// <summary>Get a list of cost centers.</summary>
+		/// <summary>List cost centers.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<CostCenter>> ListAsync(string buyerID, Action<ListOptionsBuilder<CostCenter>> buildListOpts, string accessToken = null);
-		/// <summary>Get a list of cost centers.</summary>
+		/// <summary>List cost centers.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TCostCenter>> ListAsync<TCostCenter>(string buyerID, Action<ListOptionsBuilder<TCostCenter>> buildListOpts, string accessToken = null) where TCostCenter : CostCenter;
-		/// <summary>Create a new cost center. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <summary>Create a cost center.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="costCenter">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<CostCenter> CreateAsync(string buyerID, CostCenter costCenter, string accessToken = null);
-		/// <summary>Create a new cost center. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <summary>Create a cost center.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="costCenter">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -1562,14 +1562,14 @@ namespace OrderCloud.SDK
 		/// <param name="partialCostCenter">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TCostCenter> PatchAsync<TCostCenter>(string buyerID, string costCenterID, PartialCostCenter partialCostCenter, string accessToken = null) where TCostCenter : CostCenter;
-		/// <summary>Get a list of cost center assignments.</summary>
+		/// <summary>List cost center assignments.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="costCenterID">ID of the cost center.</param>
 		/// <param name="userID">ID of the user.</param>
 		/// <param name="userGroupID">ID of the user group.</param>
 		/// <param name="level">Level of the cost center assignment. Possible values: User, Group, Company.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<CostCenterAssignment>> ListAssignmentsAsync(string buyerID, string costCenterID = null, string userID = null, string userGroupID = null, PartyType? level = null, int? page = null, int? pageSize = null, string accessToken = null);
 		/// <summary>Delete a cost center assignment.</summary>
@@ -1588,52 +1588,52 @@ namespace OrderCloud.SDK
 
 	public interface ICreditCardsResource
 	{
-		/// <summary>Get a single credit card.</summary>
+		/// <summary>Retrieve a credit card.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="creditCardID">ID of the credit card.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<CreditCard> GetAsync(string buyerID, string creditCardID, string accessToken = null);
-		/// <summary>Get a single credit card.</summary>
+		/// <summary>Retrieve a credit card.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="creditCardID">ID of the credit card.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TCreditCard> GetAsync<TCreditCard>(string buyerID, string creditCardID, string accessToken = null) where TCreditCard : CreditCard;
-		/// <summary>Get a list of credit cards.</summary>
+		/// <summary>List credit cards.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<CreditCard>> ListAsync(string buyerID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of credit cards.</summary>
+		/// <summary>List credit cards.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TCreditCard>> ListAsync<TCreditCard>(string buyerID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TCreditCard : CreditCard;
-		/// <summary>Get a list of credit cards.</summary>
+		/// <summary>List credit cards.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<CreditCard>> ListAsync(string buyerID, Action<ListOptionsBuilder<CreditCard>> buildListOpts, string accessToken = null);
-		/// <summary>Get a list of credit cards.</summary>
+		/// <summary>List credit cards.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TCreditCard>> ListAsync<TCreditCard>(string buyerID, Action<ListOptionsBuilder<TCreditCard>> buildListOpts, string accessToken = null) where TCreditCard : CreditCard;
-		/// <summary>Create a new credit card. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <summary>Create a credit card.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="creditCard">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<CreditCard> CreateAsync(string buyerID, CreditCard creditCard, string accessToken = null);
-		/// <summary>Create a new credit card. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <summary>Create a credit card.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="creditCard">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -1667,14 +1667,14 @@ namespace OrderCloud.SDK
 		/// <param name="partialCreditCard">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TCreditCard> PatchAsync<TCreditCard>(string buyerID, string creditCardID, PartialCreditCard partialCreditCard, string accessToken = null) where TCreditCard : CreditCard;
-		/// <summary>Get a list of credit card assignments.</summary>
+		/// <summary>List credit card assignments.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="creditCardID">ID of the credit card.</param>
 		/// <param name="userID">ID of the user.</param>
 		/// <param name="userGroupID">ID of the user group.</param>
 		/// <param name="level">Level of the credit card assignment. Possible values: User, Group, Company.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<CreditCardAssignment>> ListAssignmentsAsync(string buyerID, string creditCardID = null, string userID = null, string userGroupID = null, PartyType? level = null, int? page = null, int? pageSize = null, string accessToken = null);
 		/// <summary>Create or update a credit card assignment.</summary>
@@ -1693,24 +1693,24 @@ namespace OrderCloud.SDK
 
 	public interface IDeliveryConfigurationsResource
 	{
-		/// <summary>Get a single delivery configuration.</summary>
+		/// <summary>Retrieve a delivery configuration.</summary>
 		/// <param name="deliveryConfigID">ID of the delivery config.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<DeliveryConfig> GetAsync(string deliveryConfigID, string accessToken = null);
-		/// <summary>Get a list of delivery configurations.</summary>
+		/// <summary>List delivery configurations.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<DeliveryConfig>> ListAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of delivery configurations.</summary>
+		/// <summary>List delivery configurations.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<DeliveryConfig>> ListAsync(Action<ListOptionsBuilder<DeliveryConfig>> buildListOpts, string accessToken = null);
-		/// <summary>Create a new delivery configuration. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <summary>Create a delivery configuration.</summary>
 		/// <param name="deliveryConfig">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<DeliveryConfig> CreateAsync(DeliveryConfig deliveryConfig, string accessToken = null);
@@ -1732,147 +1732,147 @@ namespace OrderCloud.SDK
 
 	public interface IEntitySyncsResource
 	{
-		/// <summary>Get the entity sync delivery configuration for Categories Get the entity sync delivery configuration for Categories</summary>
+		/// <summary>Retrieve the entity sync delivery configuration for categories Get the entity sync delivery configuration for Categories</summary>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<EntitySyncConfig> GetCategoriesAsync(string accessToken = null);
-		/// <summary>Delete the entity sync delivery configuration for Categories Delete the entity sync delivery configuration for Categories</summary>
+		/// <summary>Delete the entity sync delivery configuration for categories Delete the entity sync delivery configuration for Categories</summary>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task DeleteCategoriesAsync(string accessToken = null);
-		/// <summary>Create or update the entity sync delivery configuration for Categories Create or update the entity sync delivery configuration for Categories</summary>
+		/// <summary>Create or update the entity sync delivery configuration for categories Create or update the entity sync delivery configuration for Categories</summary>
 		/// <param name="entitySyncConfig">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<EntitySyncConfig> SaveCategoriesAsync(EntitySyncConfig entitySyncConfig, string accessToken = null);
-		/// <summary>Partially update the entity sync delivery configuration for Categories Partially update the entity sync delivery configuration for Categories</summary>
+		/// <summary>Partially update the entity sync delivery configuration for categories Partially update the entity sync delivery configuration for Categories</summary>
 		/// <param name="partialEntitySyncConfig">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<EntitySyncConfig> PatchCategoriesAsync(PartialEntitySyncConfig partialEntitySyncConfig, string accessToken = null);
-		/// <summary>Sync a category.</summary>
+		/// <summary>Sync a category</summary>
 		/// <param name="syncCategory">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task SyncCategoryAsync(SyncCategory syncCategory, string accessToken = null);
-		/// <summary>Get the entity sync delivery configuration for Suppliers Get the entity sync delivery configuration for Suppliers</summary>
+		/// <summary>Retrieve the entity sync delivery configuration for suppliers Get the entity sync delivery configuration for Suppliers</summary>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<EntitySyncConfig> GetSuppliersAsync(string accessToken = null);
-		/// <summary>Delete the entity sync delivery configuration for Suppliers Delete the entity sync delivery configuration for Suppliers</summary>
+		/// <summary>Delete the entity sync delivery configuration for suppliers Delete the entity sync delivery configuration for Suppliers</summary>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task DeleteSuppliersAsync(string accessToken = null);
-		/// <summary>Create or update the entity sync delivery configuration for Suppliers Create or update the entity sync delivery configuration for Suppliers</summary>
+		/// <summary>Create or update the entity sync delivery configuration for suppliers Create or update the entity sync delivery configuration for Suppliers</summary>
 		/// <param name="entitySyncConfig">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<EntitySyncConfig> SaveSuppliersAsync(EntitySyncConfig entitySyncConfig, string accessToken = null);
-		/// <summary>Partially update the entity sync delivery configuration for Suppliers Partially update the entity sync delivery configuration for Suppliers</summary>
+		/// <summary>Partially update the entity sync delivery configuration for suppliers Partially update the entity sync delivery configuration for Suppliers</summary>
 		/// <param name="partialEntitySyncConfig">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<EntitySyncConfig> PatchSuppliersAsync(PartialEntitySyncConfig partialEntitySyncConfig, string accessToken = null);
-		/// <summary>Sync a supplier.</summary>
+		/// <summary>Sync a supplier</summary>
 		/// <param name="syncSupplier">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task SyncSupplierAsync(SyncSupplier syncSupplier, string accessToken = null);
-		/// <summary>Get the entity sync delivery configuration for BuyerUsers Get the entity sync delivery configuration for BuyerUsers</summary>
+		/// <summary>Retrieve the entity sync delivery configuration for buyer users Get the entity sync delivery configuration for BuyerUsers</summary>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<EntitySyncConfig> GetBuyerUsersAsync(string accessToken = null);
-		/// <summary>Delete the entity sync delivery configuration for BuyerUsers Delete the entity sync delivery configuration for BuyerUsers</summary>
+		/// <summary>Delete the entity sync delivery configuration for buyer users Delete the entity sync delivery configuration for BuyerUsers</summary>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task DeleteBuyerUsersAsync(string accessToken = null);
-		/// <summary>Create or update the entity sync delivery configuration for BuyerUsers Create or update the entity sync delivery configuration for BuyerUsers</summary>
+		/// <summary>Create or update the entity sync delivery configuration for buyer users Create or update the entity sync delivery configuration for BuyerUsers</summary>
 		/// <param name="entitySyncConfig">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<EntitySyncConfig> SaveBuyerUsersAsync(EntitySyncConfig entitySyncConfig, string accessToken = null);
-		/// <summary>Partially update the entity sync delivery configuration for BuyerUsers Partially update the entity sync delivery configuration for BuyerUsers</summary>
+		/// <summary>Partially update the entity sync delivery configuration for buyer users Partially update the entity sync delivery configuration for BuyerUsers</summary>
 		/// <param name="partialEntitySyncConfig">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<EntitySyncConfig> PatchBuyerUsersAsync(PartialEntitySyncConfig partialEntitySyncConfig, string accessToken = null);
-		/// <summary>Sync a buyer user.</summary>
+		/// <summary>Sync a buyer user</summary>
 		/// <param name="syncBuyerUser">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task SyncBuyerUserAsync(SyncBuyerUser syncBuyerUser, string accessToken = null);
-		/// <summary>Get the entity sync delivery configuration for SupplierUsers Get the entity sync delivery configuration for SupplierUsers</summary>
+		/// <summary>Retrieve the entity sync delivery configuration for supplier users Get the entity sync delivery configuration for SupplierUsers</summary>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<EntitySyncConfig> GetSupplierUsersAsync(string accessToken = null);
-		/// <summary>Delete the entity sync delivery configuration for SupplierUsers Delete the entity sync delivery configuration for SupplierUsers</summary>
+		/// <summary>Delete the entity sync delivery configuration for supplier users Delete the entity sync delivery configuration for SupplierUsers</summary>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task DeleteSupplierUsersAsync(string accessToken = null);
-		/// <summary>Create or update the entity sync delivery configuration for SupplierUsers Create or update the entity sync delivery configuration for SupplierUsers</summary>
+		/// <summary>Create or update the entity sync delivery configuration for supplier users Create or update the entity sync delivery configuration for SupplierUsers</summary>
 		/// <param name="entitySyncConfig">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<EntitySyncConfig> SaveSupplierUsersAsync(EntitySyncConfig entitySyncConfig, string accessToken = null);
-		/// <summary>Partially update the entity sync delivery configuration for SupplierUsers Partially update the entity sync delivery configuration for SupplierUsers</summary>
+		/// <summary>Partially update the entity sync delivery configuration for supplier users Partially update the entity sync delivery configuration for SupplierUsers</summary>
 		/// <param name="partialEntitySyncConfig">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<EntitySyncConfig> PatchSupplierUsersAsync(PartialEntitySyncConfig partialEntitySyncConfig, string accessToken = null);
-		/// <summary>Sync a supplier user.</summary>
+		/// <summary>Sync a supplier user</summary>
 		/// <param name="syncSupplierUser">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task SyncSupplierUserAsync(SyncSupplierUser syncSupplierUser, string accessToken = null);
-		/// <summary>Get the entity sync delivery configuration for AdminUsers Get the entity sync delivery configuration for AdminUsers</summary>
+		/// <summary>Retrieve the entity sync delivery configuration for admin users Get the entity sync delivery configuration for AdminUsers</summary>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<EntitySyncConfig> GetAdminUsersAsync(string accessToken = null);
-		/// <summary>Delete the entity sync delivery configuration for AdminUsers Delete the entity sync delivery configuration for AdminUsers</summary>
+		/// <summary>Delete the entity sync delivery configuration for admin users Delete the entity sync delivery configuration for AdminUsers</summary>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task DeleteAdminUsersAsync(string accessToken = null);
-		/// <summary>Create or update the entity sync delivery configuration for AdminUsers Create or update the entity sync delivery configuration for AdminUsers</summary>
+		/// <summary>Create or update the entity sync delivery configuration for admin users Create or update the entity sync delivery configuration for AdminUsers</summary>
 		/// <param name="entitySyncConfig">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<EntitySyncConfig> SaveAdminUsersAsync(EntitySyncConfig entitySyncConfig, string accessToken = null);
-		/// <summary>Partially update the entity sync delivery configuration for AdminUsers Partially update the entity sync delivery configuration for AdminUsers</summary>
+		/// <summary>Partially update the entity sync delivery configuration for admin users Partially update the entity sync delivery configuration for AdminUsers</summary>
 		/// <param name="partialEntitySyncConfig">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<EntitySyncConfig> PatchAdminUsersAsync(PartialEntitySyncConfig partialEntitySyncConfig, string accessToken = null);
-		/// <summary>Sync an admin user.</summary>
+		/// <summary>Sync an admin user</summary>
 		/// <param name="syncAdminUser">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task SyncAdminUserAsync(SyncAdminUser syncAdminUser, string accessToken = null);
-		/// <summary>Get the entity sync delivery configuration for Buyers Get the entity sync delivery configuration for Buyers</summary>
+		/// <summary>Retrieve the entity sync delivery configuration for buyers Get the entity sync delivery configuration for Buyers</summary>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<EntitySyncConfig> GetBuyersAsync(string accessToken = null);
-		/// <summary>Delete the entity sync delivery configuration for Buyers Delete the entity sync delivery configuration for Buyers</summary>
+		/// <summary>Delete the entity sync delivery configuration for buyers Delete the entity sync delivery configuration for Buyers</summary>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task DeleteBuyersAsync(string accessToken = null);
-		/// <summary>Create or update the entity sync delivery configuration for Buyers Create or update the entity sync delivery configuration for Buyers</summary>
+		/// <summary>Create or update the entity sync delivery configuration for buyers Create or update the entity sync delivery configuration for Buyers</summary>
 		/// <param name="entitySyncConfig">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<EntitySyncConfig> SaveBuyersAsync(EntitySyncConfig entitySyncConfig, string accessToken = null);
-		/// <summary>Partially update the entity sync delivery configuration for Buyers Partially update the entity sync delivery configuration for Buyers</summary>
+		/// <summary>Partially update the entity sync delivery configuration for buyers Partially update the entity sync delivery configuration for Buyers</summary>
 		/// <param name="partialEntitySyncConfig">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<EntitySyncConfig> PatchBuyersAsync(PartialEntitySyncConfig partialEntitySyncConfig, string accessToken = null);
-		/// <summary>Sync a buyer.</summary>
+		/// <summary>Sync a buyer</summary>
 		/// <param name="syncBuyer">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task SyncBuyerAsync(SyncBuyer syncBuyer, string accessToken = null);
-		/// <summary>Get the entity sync delivery configuration for BuyerUserGroups Get the entity sync delivery configuration for BuyerUserGroups</summary>
+		/// <summary>Retrieve the entity sync delivery configuration for buyer user groups Get the entity sync delivery configuration for BuyerUserGroups</summary>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<EntitySyncConfig> GetBuyerUserGroupsAsync(string accessToken = null);
-		/// <summary>Delete the entity sync delivery configuration for BuyerUserGroups Delete the entity sync delivery configuration for BuyerUserGroups</summary>
+		/// <summary>Delete the entity sync delivery configuration for buyer user groups Delete the entity sync delivery configuration for BuyerUserGroups</summary>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task DeleteUserGroupsAsync(string accessToken = null);
-		/// <summary>Create or update the entity sync delivery configuration for BuyerUserGroups Create or update the entity sync delivery configuration for BuyerUserGroups</summary>
+		/// <summary>Create or update the entity sync delivery configuration for buyer user groups Create or update the entity sync delivery configuration for BuyerUserGroups</summary>
 		/// <param name="entitySyncConfig">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<EntitySyncConfig> SaveUserGroupsAsync(EntitySyncConfig entitySyncConfig, string accessToken = null);
-		/// <summary>Partially update the entity sync delivery configuration for BuyerUserGroups Partially update the entity sync delivery configuration for BuyerUserGroups</summary>
+		/// <summary>Partially update the entity sync delivery configuration for buyer user groups Partially update the entity sync delivery configuration for BuyerUserGroups</summary>
 		/// <param name="partialEntitySyncConfig">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<EntitySyncConfig> PatchBuyerUserGroupsAsync(PartialEntitySyncConfig partialEntitySyncConfig, string accessToken = null);
-		/// <summary>Sync a buyer user group.</summary>
+		/// <summary>Sync a buyer user group</summary>
 		/// <param name="syncBuyerUserGroup">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task SyncBuyerUserGroupAsync(SyncBuyerUserGroup syncBuyerUserGroup, string accessToken = null);
-		/// <summary>Get the entity sync delivery configuration for InventoryRecords Get the entity sync delivery configuration for InventoryRecords</summary>
+		/// <summary>Retrieve the entity sync delivery configuration for inventory records Get the entity sync delivery configuration for InventoryRecords</summary>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<EntitySyncConfig> GetInventoryRecordsAsync(string accessToken = null);
-		/// <summary>Delete the entity sync delivery configuration for InventoryRecords Delete the entity sync delivery configuration for InventoryRecords</summary>
+		/// <summary>Delete the entity sync delivery configuration for inventory records Delete the entity sync delivery configuration for InventoryRecords</summary>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task DeleteInventoryRecordsAsync(string accessToken = null);
-		/// <summary>Create or update the entity sync delivery configuration for InventoryRecords Create or update the entity sync delivery configuration for InventoryRecords</summary>
+		/// <summary>Create or update the entity sync delivery configuration for inventory records Create or update the entity sync delivery configuration for InventoryRecords</summary>
 		/// <param name="entitySyncConfig">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<EntitySyncConfig> SaveInventoryRecordsAsync(EntitySyncConfig entitySyncConfig, string accessToken = null);
-		/// <summary>Partially update the entity sync delivery configuration for InventoryRecords Partially update the entity sync delivery configuration for InventoryRecords</summary>
+		/// <summary>Partially update the entity sync delivery configuration for inventory records Partially update the entity sync delivery configuration for InventoryRecords</summary>
 		/// <param name="partialEntitySyncConfig">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<EntitySyncConfig> PatchInventoryRecordsAsync(PartialEntitySyncConfig partialEntitySyncConfig, string accessToken = null);
-		/// <summary>Sync an inventory record.</summary>
+		/// <summary>Sync an inventory record</summary>
 		/// <param name="syncInventoryRecord">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task SyncInventoryRecordAsync(SyncInventoryRecord syncInventoryRecord, string accessToken = null);
@@ -1880,7 +1880,7 @@ namespace OrderCloud.SDK
 
 	public interface IErrorConfigsResource
 	{
-		/// <summary>Get a single error config.</summary>
+		/// <summary>Retrieve an error config.</summary>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ErrorConfig> GetAsync(string accessToken = null);
 		/// <summary>Delete an error config.</summary>
@@ -1894,28 +1894,28 @@ namespace OrderCloud.SDK
 		/// <param name="partialErrorConfig">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ErrorConfig> PatchAsync(PartialErrorConfig partialErrorConfig, string accessToken = null);
-		/// <summary>Validates an error config.</summary>
+		/// <summary>Validates an error config</summary>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task ValidateAsync(string accessToken = null);
 	}
 
 	public interface IForgottenCredentialsResource
 	{
-		/// <summary>Send a verification code. Sends a temporary verification code via email, which must subsequently be passed in a Reset Password call. The verification code expires in 120 minutes.</summary>
+		/// <summary>Send a verification code Sends a temporary verification code via email, which must subsequently be passed in a Reset Password call. The verification code expires in 120 minutes.</summary>
 		/// <param name="passwordResetRequest">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task SendVerificationCodeAsync(PasswordResetRequest passwordResetRequest, string accessToken = null);
-		/// <summary>Reset a password by verification code.</summary>
+		/// <summary>Reset a password by verification code</summary>
 		/// <param name="verificationCode">Verification code of the password reset.</param>
 		/// <param name="passwordReset">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task ResetPasswordByVerificationCodeAsync(string verificationCode, PasswordReset passwordReset, string accessToken = null);
-		/// <summary>Retrieve a username. Sends an email with username for every username associated with an email. Always returns a 200 success regardless of if email doesn’t exist in the clientID.</summary>
+		/// <summary>Retrieve a username Sends an email with username for every username associated with an email. Always returns a 200 success regardless of if email doesn’t exist in the clientID.</summary>
 		/// <param name="clientID">ID of the client.</param>
 		/// <param name="email">Email of the forgotten credentials.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task RetrieveUsernameAsync(string clientID, string email, string accessToken = null);
-		/// <summary>Send an one time password.</summary>
+		/// <summary>Send an one time password</summary>
 		/// <param name="oneTimePasswordRequest">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task SendOneTimePasswordAsync(OneTimePasswordRequest oneTimePasswordRequest, string accessToken = null);
@@ -1924,7 +1924,7 @@ namespace OrderCloud.SDK
 	/// <summary>Features in beta are subject to change and are not available in production.</summary>
 	public interface IGroupOrdersResource
 	{
-		/// <summary>Features in beta are subject to change and are not available in production. Get a single group order token.</summary>
+		/// <summary>Features in beta are subject to change and are not available in production. Retrieve a group order token.</summary>
 		/// <param name="invitationID">ID of the invitation.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<AccessToken> GetTokenAsync(string invitationID, string accessToken = null);
@@ -1932,24 +1932,24 @@ namespace OrderCloud.SDK
 
 	public interface IImpersonationConfigsResource
 	{
-		/// <summary>Get a single impersonation config.</summary>
+		/// <summary>Retrieve an impersonation config.</summary>
 		/// <param name="impersonationConfigID">ID of the impersonation config.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ImpersonationConfig> GetAsync(string impersonationConfigID, string accessToken = null);
-		/// <summary>Get a list of impersonation configs.</summary>
+		/// <summary>List impersonation configs.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<ImpersonationConfig>> ListAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of impersonation configs.</summary>
+		/// <summary>List impersonation configs.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<ImpersonationConfig>> ListAsync(Action<ListOptionsBuilder<ImpersonationConfig>> buildListOpts, string accessToken = null);
-		/// <summary>Create a new impersonation config. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <summary>Create an impersonation config.</summary>
 		/// <param name="impersonationConfig">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ImpersonationConfig> CreateAsync(ImpersonationConfig impersonationConfig, string accessToken = null);
@@ -1971,24 +1971,24 @@ namespace OrderCloud.SDK
 
 	public interface IIncrementorsResource
 	{
-		/// <summary>Get a single incrementor.</summary>
+		/// <summary>Retrieve an incrementor.</summary>
 		/// <param name="incrementorID">ID of the incrementor.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Incrementor> GetAsync(string incrementorID, string accessToken = null);
-		/// <summary>Get a list of incrementors.</summary>
+		/// <summary>List incrementors.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Incrementor>> ListAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of incrementors.</summary>
+		/// <summary>List incrementors.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Incrementor>> ListAsync(Action<ListOptionsBuilder<Incrementor>> buildListOpts, string accessToken = null);
-		/// <summary>Create a new incrementor. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <summary>Create an incrementor.</summary>
 		/// <param name="incrementor">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Incrementor> CreateAsync(Incrementor incrementor, string accessToken = null);
@@ -2010,24 +2010,24 @@ namespace OrderCloud.SDK
 
 	public interface IIntegrationEventsResource
 	{
-		/// <summary>Get a single integration event.</summary>
+		/// <summary>Retrieve an integration event.</summary>
 		/// <param name="integrationEventID">ID of the integration event.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<IntegrationEvent> GetAsync(string integrationEventID, string accessToken = null);
-		/// <summary>Get a list of integration events.</summary>
+		/// <summary>List integration events.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<IntegrationEvent>> ListAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of integration events.</summary>
+		/// <summary>List integration events.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<IntegrationEvent>> ListAsync(Action<ListOptionsBuilder<IntegrationEvent>> buildListOpts, string accessToken = null);
-		/// <summary>Create a new integration event. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <summary>Create an integration event.</summary>
 		/// <param name="integrationEvent">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<IntegrationEvent> CreateAsync(IntegrationEvent integrationEvent, string accessToken = null);
@@ -2045,45 +2045,45 @@ namespace OrderCloud.SDK
 		/// <param name="partialIntegrationEvent">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<IntegrationEvent> PatchAsync(string integrationEventID, PartialIntegrationEvent partialIntegrationEvent, string accessToken = null);
-		/// <summary>Estimate shipping cost.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>Estimate shipping cost</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<OrderWorksheet> EstimateShippingAsync(OrderDirection direction, string orderID, string accessToken = null);
-		/// <summary>Estimate shipping cost.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>Estimate shipping cost</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TOrderWorksheet> EstimateShippingAsync<TOrderWorksheet>(OrderDirection direction, string orderID, string accessToken = null) where TOrderWorksheet : OrderWorksheet;
-		/// <summary>Select a ship method.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>Select a ship method</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="orderShipMethodSelection">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<OrderWorksheet> SelectShipmethodsAsync(OrderDirection direction, string orderID, OrderShipMethodSelection orderShipMethodSelection, string accessToken = null);
-		/// <summary>Select a ship method.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>Select a ship method</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="orderShipMethodSelection">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TOrderWorksheet> SelectShipmethodsAsync<TOrderWorksheet>(OrderDirection direction, string orderID, OrderShipMethodSelection orderShipMethodSelection, string accessToken = null) where TOrderWorksheet : OrderWorksheet;
-		/// <summary>Get a single order worksheet.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>Get a single order worksheet</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<OrderWorksheet> GetWorksheetAsync(OrderDirection direction, string orderID, string accessToken = null);
-		/// <summary>Get a single order worksheet.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>Get a single order worksheet</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TOrderWorksheet> GetWorksheetAsync<TOrderWorksheet>(OrderDirection direction, string orderID, string accessToken = null) where TOrderWorksheet : OrderWorksheet;
-		/// <summary>Calculate an order.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>Calculate an order</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<OrderWorksheet> CalculateAsync(OrderDirection direction, string orderID, string accessToken = null);
-		/// <summary>Calculate an order.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>Calculate an order</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TOrderWorksheet> CalculateAsync<TOrderWorksheet>(OrderDirection direction, string orderID, string accessToken = null) where TOrderWorksheet : OrderWorksheet;
@@ -2091,7 +2091,7 @@ namespace OrderCloud.SDK
 
 	public interface IInventoryIntegrationsResource
 	{
-		/// <summary>Get a single inventory integration.</summary>
+		/// <summary>Retrieve an inventory integration.</summary>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<InventoryIntegration> GetAsync(string accessToken = null);
 		/// <summary>Delete an inventory integration.</summary>
@@ -2109,52 +2109,56 @@ namespace OrderCloud.SDK
 
 	public interface IInventoryRecordsResource
 	{
-		/// <summary>Get a single inventory record.</summary>
+		/// <summary>Retrieve an inventory record.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="inventoryRecordID">ID of the inventory record.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<InventoryRecord> GetAsync(string productID, string inventoryRecordID, string accessToken = null);
-		/// <summary>Get a single inventory record.</summary>
+		/// <summary>Retrieve an inventory record.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="inventoryRecordID">ID of the inventory record.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TInventoryRecord> GetAsync<TInventoryRecord>(string productID, string inventoryRecordID, string accessToken = null) where TInventoryRecord : InventoryRecord;
-		/// <summary>Get a list of inventory records.</summary>
+		/// <summary>List inventory records.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="includeAddress">Include address of the inventory record.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
-		Task<ListPage<InventoryRecord>> ListAsync(string productID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of inventory records.</summary>
+		Task<ListPage<InventoryRecord>> ListAsync(string productID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, bool? includeAddress = null, string accessToken = null);
+		/// <summary>List inventory records.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="includeAddress">Include address of the inventory record.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
-		Task<ListPage<TInventoryRecord>> ListAsync<TInventoryRecord>(string productID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TInventoryRecord : InventoryRecord;
-		/// <summary>Get a list of inventory records.</summary>
+		Task<ListPage<TInventoryRecord>> ListAsync<TInventoryRecord>(string productID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, bool? includeAddress = null, string accessToken = null) where TInventoryRecord : InventoryRecord;
+		/// <summary>List inventory records.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
+		/// <param name="includeAddress">Include address of the inventory record.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
-		Task<ListPage<InventoryRecord>> ListAsync(string productID, Action<ListOptionsBuilder<InventoryRecord>> buildListOpts, string accessToken = null);
-		/// <summary>Get a list of inventory records.</summary>
+		Task<ListPage<InventoryRecord>> ListAsync(string productID, Action<ListOptionsBuilder<InventoryRecord>> buildListOpts, bool? includeAddress = null, string accessToken = null);
+		/// <summary>List inventory records.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
+		/// <param name="includeAddress">Include address of the inventory record.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
-		Task<ListPage<TInventoryRecord>> ListAsync<TInventoryRecord>(string productID, Action<ListOptionsBuilder<TInventoryRecord>> buildListOpts, string accessToken = null) where TInventoryRecord : InventoryRecord;
-		/// <summary>Create a new inventory record. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		Task<ListPage<TInventoryRecord>> ListAsync<TInventoryRecord>(string productID, Action<ListOptionsBuilder<TInventoryRecord>> buildListOpts, bool? includeAddress = null, string accessToken = null) where TInventoryRecord : InventoryRecord;
+		/// <summary>Create an inventory record.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="inventoryRecord">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<InventoryRecord> CreateAsync(string productID, InventoryRecord inventoryRecord, string accessToken = null);
-		/// <summary>Create a new inventory record. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <summary>Create an inventory record.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="inventoryRecord">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -2188,107 +2192,111 @@ namespace OrderCloud.SDK
 		/// <param name="partialInventoryRecord">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TInventoryRecord> PatchAsync<TInventoryRecord>(string productID, string inventoryRecordID, PartialInventoryRecord partialInventoryRecord, string accessToken = null) where TInventoryRecord : InventoryRecord;
-		/// <summary>Get a list of variant inventory records.</summary>
+		/// <summary>Get a list of variant inventory records</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="variantID">ID of the variant.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="includeAddress">Include address of the inventory record.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
-		Task<ListPage<InventoryRecord>> ListVariantAsync(string productID, string variantID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of variant inventory records.</summary>
+		Task<ListPage<InventoryRecord>> ListVariantAsync(string productID, string variantID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, bool? includeAddress = null, string accessToken = null);
+		/// <summary>Get a list of variant inventory records</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="variantID">ID of the variant.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="includeAddress">Include address of the inventory record.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
-		Task<ListPage<TInventoryRecord>> ListVariantAsync<TInventoryRecord>(string productID, string variantID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TInventoryRecord : InventoryRecord;
-		/// <summary>Get a list of variant inventory records.</summary>
+		Task<ListPage<TInventoryRecord>> ListVariantAsync<TInventoryRecord>(string productID, string variantID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, bool? includeAddress = null, string accessToken = null) where TInventoryRecord : InventoryRecord;
+		/// <summary>Get a list of variant inventory records</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="variantID">ID of the variant.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
+		/// <param name="includeAddress">Include address of the inventory record.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
-		Task<ListPage<InventoryRecord>> ListVariantAsync(string productID, string variantID, Action<ListOptionsBuilder<InventoryRecord>> buildListOpts, string accessToken = null);
-		/// <summary>Get a list of variant inventory records.</summary>
+		Task<ListPage<InventoryRecord>> ListVariantAsync(string productID, string variantID, Action<ListOptionsBuilder<InventoryRecord>> buildListOpts, bool? includeAddress = null, string accessToken = null);
+		/// <summary>Get a list of variant inventory records</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="variantID">ID of the variant.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
+		/// <param name="includeAddress">Include address of the inventory record.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
-		Task<ListPage<TInventoryRecord>> ListVariantAsync<TInventoryRecord>(string productID, string variantID, Action<ListOptionsBuilder<TInventoryRecord>> buildListOpts, string accessToken = null) where TInventoryRecord : InventoryRecord;
-		/// <summary>Get a single variant inventory record.</summary>
+		Task<ListPage<TInventoryRecord>> ListVariantAsync<TInventoryRecord>(string productID, string variantID, Action<ListOptionsBuilder<TInventoryRecord>> buildListOpts, bool? includeAddress = null, string accessToken = null) where TInventoryRecord : InventoryRecord;
+		/// <summary>Get a single variant inventory record</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="variantID">ID of the variant.</param>
 		/// <param name="inventoryRecordID">ID of the inventory record.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<InventoryRecord> GetVariantAsync(string productID, string variantID, string inventoryRecordID, string accessToken = null);
-		/// <summary>Get a single variant inventory record.</summary>
+		/// <summary>Get a single variant inventory record</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="variantID">ID of the variant.</param>
 		/// <param name="inventoryRecordID">ID of the inventory record.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TInventoryRecord> GetVariantAsync<TInventoryRecord>(string productID, string variantID, string inventoryRecordID, string accessToken = null) where TInventoryRecord : InventoryRecord;
-		/// <summary>Create a new variant inventory record.</summary>
+		/// <summary>Create a new variant inventory record</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="variantID">ID of the variant.</param>
 		/// <param name="inventoryRecord">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<InventoryRecord> CreateVariantAsync(string productID, string variantID, InventoryRecord inventoryRecord, string accessToken = null);
-		/// <summary>Create a new variant inventory record.</summary>
+		/// <summary>Create a new variant inventory record</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="variantID">ID of the variant.</param>
 		/// <param name="inventoryRecord">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TInventoryRecord> CreateVariantAsync<TInventoryRecord>(string productID, string variantID, InventoryRecord inventoryRecord, string accessToken = null) where TInventoryRecord : InventoryRecord;
-		/// <summary>Create or update a variant inventory record.</summary>
+		/// <summary>Create or update a variant inventory record</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="variantID">ID of the variant.</param>
 		/// <param name="inventoryRecordID">ID of the inventory record.</param>
 		/// <param name="inventoryRecord">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<InventoryRecord> SaveVariantAsync(string productID, string variantID, string inventoryRecordID, InventoryRecord inventoryRecord, string accessToken = null);
-		/// <summary>Create or update a variant inventory record.</summary>
+		/// <summary>Create or update a variant inventory record</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="variantID">ID of the variant.</param>
 		/// <param name="inventoryRecordID">ID of the inventory record.</param>
 		/// <param name="inventoryRecord">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TInventoryRecord> SaveVariantAsync<TInventoryRecord>(string productID, string variantID, string inventoryRecordID, InventoryRecord inventoryRecord, string accessToken = null) where TInventoryRecord : InventoryRecord;
-		/// <summary>Partially update a variant inventory record.</summary>
+		/// <summary>Partially update a variant inventory record</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="variantID">ID of the variant.</param>
 		/// <param name="inventoryRecordID">ID of the inventory record.</param>
 		/// <param name="partialInventoryRecord">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<InventoryRecord> PatchVariantAsync(string productID, string variantID, string inventoryRecordID, PartialInventoryRecord partialInventoryRecord, string accessToken = null);
-		/// <summary>Partially update a variant inventory record.</summary>
+		/// <summary>Partially update a variant inventory record</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="variantID">ID of the variant.</param>
 		/// <param name="inventoryRecordID">ID of the inventory record.</param>
 		/// <param name="partialInventoryRecord">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TInventoryRecord> PatchVariantAsync<TInventoryRecord>(string productID, string variantID, string inventoryRecordID, PartialInventoryRecord partialInventoryRecord, string accessToken = null) where TInventoryRecord : InventoryRecord;
-		/// <summary>Delete a variant inventory record.</summary>
+		/// <summary>Delete a variant inventory record</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="variantID">ID of the variant.</param>
 		/// <param name="inventoryRecordID">ID of the inventory record.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task DeleteVariantAsync(string productID, string variantID, string inventoryRecordID, string accessToken = null);
-		/// <summary>Get a list of inventory record assignments.</summary>
+		/// <summary>List inventory record assignments.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="inventoryRecordID">ID of the inventory record.</param>
 		/// <param name="userID">ID of the user.</param>
 		/// <param name="userGroupID">ID of the user group.</param>
 		/// <param name="level">Level of the inventory record assignment. Possible values: User, Group, Company.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<InventoryRecordAssignment>> ListAssignmentsAsync(string productID, string buyerID = null, string inventoryRecordID = null, string userID = null, string userGroupID = null, PartyType? level = null, int? page = null, int? pageSize = null, string accessToken = null);
 		/// <summary>Create or update an inventory record assignment.</summary>
@@ -2304,7 +2312,7 @@ namespace OrderCloud.SDK
 		/// <param name="userGroupID">ID of the user group.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task DeleteAssignmentAsync(string productID, string inventoryRecordID, string buyerID, string userID = null, string userGroupID = null, string accessToken = null);
-		/// <summary>Get a list of inventory record variant assignments.</summary>
+		/// <summary>List inventory record variant assignments.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="variantID">ID of the variant.</param>
 		/// <param name="buyerID">ID of the buyer.</param>
@@ -2312,8 +2320,8 @@ namespace OrderCloud.SDK
 		/// <param name="userID">ID of the user.</param>
 		/// <param name="userGroupID">ID of the user group.</param>
 		/// <param name="level">Level of the inventory record assignment. Possible values: User, Group, Company.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<InventoryRecordAssignment>> ListVariantAssignmentsAsync(string productID, string variantID, string buyerID = null, string inventoryRecordID = null, string userID = null, string userGroupID = null, PartyType? level = null, int? page = null, int? pageSize = null, string accessToken = null);
 		/// <summary>Create or update an inventory record variant assignment.</summary>
@@ -2335,158 +2343,158 @@ namespace OrderCloud.SDK
 
 	public interface ILineItemsResource
 	{
-		/// <summary>Get a single line item.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>Retrieve a line item.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="lineItemID">ID of the line item.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<LineItem> GetAsync(OrderDirection direction, string orderID, string lineItemID, string accessToken = null);
-		/// <summary>Get a single line item.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>Retrieve a line item.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="lineItemID">ID of the line item.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TLineItem> GetAsync<TLineItem>(OrderDirection direction, string orderID, string lineItemID, string accessToken = null) where TLineItem : LineItem;
-		/// <summary>Get a list of line items.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>List line items.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<LineItem>> ListAsync(OrderDirection direction, string orderID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of line items.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>List line items.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TLineItem>> ListAsync<TLineItem>(OrderDirection direction, string orderID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TLineItem : LineItem;
-		/// <summary>Get a list of line items.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>List line items.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<LineItem>> ListAsync(OrderDirection direction, string orderID, Action<ListOptionsBuilder<LineItem>> buildListOpts, string accessToken = null);
-		/// <summary>Get a list of line items.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>List line items.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TLineItem>> ListAsync<TLineItem>(OrderDirection direction, string orderID, Action<ListOptionsBuilder<TLineItem>> buildListOpts, string accessToken = null) where TLineItem : LineItem;
-		/// <summary>Create a new line item. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>Create a line item.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="lineItem">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<LineItem> CreateAsync(OrderDirection direction, string orderID, LineItem lineItem, string accessToken = null);
-		/// <summary>Create a new line item. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>Create a line item.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="lineItem">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TLineItem> CreateAsync<TLineItem>(OrderDirection direction, string orderID, LineItem lineItem, string accessToken = null) where TLineItem : LineItem;
 		/// <summary>Create or update a line item. If an object with the same ID already exists, it will be overwritten.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="lineItemID">ID of the line item.</param>
 		/// <param name="lineItem">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<LineItem> SaveAsync(OrderDirection direction, string orderID, string lineItemID, LineItem lineItem, string accessToken = null);
 		/// <summary>Create or update a line item. If an object with the same ID already exists, it will be overwritten.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="lineItemID">ID of the line item.</param>
 		/// <param name="lineItem">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TLineItem> SaveAsync<TLineItem>(OrderDirection direction, string orderID, string lineItemID, LineItem lineItem, string accessToken = null) where TLineItem : LineItem;
 		/// <summary>Delete a line item.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="lineItemID">ID of the line item.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task DeleteAsync(OrderDirection direction, string orderID, string lineItemID, string accessToken = null);
 		/// <summary>Partially update a line item.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="lineItemID">ID of the line item.</param>
 		/// <param name="partialLineItem">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<LineItem> PatchAsync(OrderDirection direction, string orderID, string lineItemID, PartialLineItem partialLineItem, string accessToken = null);
 		/// <summary>Partially update a line item.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="lineItemID">ID of the line item.</param>
 		/// <param name="partialLineItem">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TLineItem> PatchAsync<TLineItem>(OrderDirection direction, string orderID, string lineItemID, PartialLineItem partialLineItem, string accessToken = null) where TLineItem : LineItem;
-		/// <summary>Set a shipping address.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>Set a shipping address</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="lineItemID">ID of the line item.</param>
 		/// <param name="address">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<LineItem> SetShippingAddressAsync(OrderDirection direction, string orderID, string lineItemID, Address address, string accessToken = null);
-		/// <summary>Set a shipping address.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>Set a shipping address</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="lineItemID">ID of the line item.</param>
 		/// <param name="address">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TLineItem> SetShippingAddressAsync<TLineItem>(OrderDirection direction, string orderID, string lineItemID, Address address, string accessToken = null) where TLineItem : LineItem;
 		/// <summary>Partially update a line item shipping address.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="lineItemID">ID of the line item.</param>
 		/// <param name="partialAddress">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<LineItem> PatchShippingAddressAsync(OrderDirection direction, string orderID, string lineItemID, PartialAddress partialAddress, string accessToken = null);
 		/// <summary>Partially update a line item shipping address.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="lineItemID">ID of the line item.</param>
 		/// <param name="partialAddress">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TLineItem> PatchShippingAddressAsync<TLineItem>(OrderDirection direction, string orderID, string lineItemID, PartialAddress partialAddress, string accessToken = null) where TLineItem : LineItem;
-		/// <summary>Get a list of line item across orders.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>List line item across orders.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="supplierID">ID of the supplier.</param>
 		/// <param name="from">Lower bound of date range that the order was created.</param>
 		/// <param name="to">Upper bound of date range that the order was created.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
-		/// <param name="searchType">Type of search to perform. Possible values: AnyTerm (default), AllTermsAnyField, AllTermsSameField, ExactPhrase, ExactPhrasePrefix.</param>
+		/// <param name="searchType">Type of search to perform.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<ExtendedLineItem>> ListAcrossOrdersAsync(OrderDirection direction, string buyerID = null, string supplierID = null, DateTimeOffset? from = null, DateTimeOffset? to = null, string search = null, string searchOn = null, SearchType searchType = SearchType.AnyTerm, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of line item across orders.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>List line item across orders.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="supplierID">ID of the supplier.</param>
 		/// <param name="from">Lower bound of date range that the order was created.</param>
 		/// <param name="to">Upper bound of date range that the order was created.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
-		/// <param name="searchType">Type of search to perform. Possible values: AnyTerm (default), AllTermsAnyField, AllTermsSameField, ExactPhrase, ExactPhrasePrefix.</param>
+		/// <param name="searchType">Type of search to perform.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TExtendedLineItem>> ListAcrossOrdersAsync<TExtendedLineItem>(OrderDirection direction, string buyerID = null, string supplierID = null, DateTimeOffset? from = null, DateTimeOffset? to = null, string search = null, string searchOn = null, SearchType searchType = SearchType.AnyTerm, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TExtendedLineItem : ExtendedLineItem;
-		/// <summary>Get a list of line item across orders.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>List line item across orders.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="supplierID">ID of the supplier.</param>
@@ -2494,8 +2502,8 @@ namespace OrderCloud.SDK
 		/// <param name="to">Upper bound of date range that the order was created.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<ExtendedLineItem>> ListAcrossOrdersAsync(OrderDirection direction, Action<ListOptionsBuilder2<ExtendedLineItem>> buildListOpts, string buyerID = null, string supplierID = null, DateTimeOffset? from = null, DateTimeOffset? to = null, string accessToken = null);
-		/// <summary>Get a list of line item across orders.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>List line item across orders.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="supplierID">ID of the supplier.</param>
@@ -2507,24 +2515,24 @@ namespace OrderCloud.SDK
 
 	public interface ILocalesResource
 	{
-		/// <summary>Get a single locale.</summary>
+		/// <summary>Retrieve a locale.</summary>
 		/// <param name="localeID">ID of the locale.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Locale> GetAsync(string localeID, string accessToken = null);
-		/// <summary>Get a list of locales.</summary>
+		/// <summary>List locales.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Locale>> ListAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of locales.</summary>
+		/// <summary>List locales.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Locale>> ListAsync(Action<ListOptionsBuilder<Locale>> buildListOpts, string accessToken = null);
-		/// <summary>Create a new locale. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <summary>Create a locale.</summary>
 		/// <param name="locale">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Locale> CreateAsync(Locale locale, string accessToken = null);
@@ -2542,14 +2550,14 @@ namespace OrderCloud.SDK
 		/// <param name="partialLocale">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Locale> PatchAsync(string localeID, PartialLocale partialLocale, string accessToken = null);
-		/// <summary>Get a list of locale assignments.</summary>
+		/// <summary>List locale assignments.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="localeID">ID of the locale.</param>
 		/// <param name="userID">ID of the user.</param>
 		/// <param name="userGroupID">ID of the user group.</param>
 		/// <param name="level">Level of the locale assignment. Possible values: User, Group, Company.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<LocaleAssignment>> ListAssignmentsAsync(string buyerID = null, string localeID = null, string userID = null, string userGroupID = null, PartyType? level = null, int? page = null, int? pageSize = null, string accessToken = null);
 		/// <summary>Create or update a locale assignment. Do not assign a user multiple groups with different assigned locales. That is considered a misconfiguration, and will yield unexpected results.</summary>
@@ -2567,128 +2575,128 @@ namespace OrderCloud.SDK
 
 	public interface IMeResource
 	{
-		/// <summary>Get the Current Authenticated User</summary>
+		/// <summary>Get the currently authenticated user</summary>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<MeUser> GetAsync(string accessToken = null);
-		/// <summary>Get the Current Authenticated User</summary>
+		/// <summary>Get the currently authenticated user</summary>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TMeUser> GetAsync<TMeUser>(string accessToken = null) where TMeUser : MeUser;
-		/// <summary>Update the Currently Authenticated User If an object with the same ID already exists, it will be overwritten.</summary>
+		/// <summary>Update the currently authenticated user If an object with the same ID already exists, it will be overwritten.</summary>
 		/// <param name="meUser">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<MeUser> SaveAsync(MeUser meUser, string accessToken = null);
-		/// <summary>Update the Currently Authenticated User If an object with the same ID already exists, it will be overwritten.</summary>
+		/// <summary>Update the currently authenticated user If an object with the same ID already exists, it will be overwritten.</summary>
 		/// <param name="meUser">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TMeUser> SaveAsync<TMeUser>(MeUser meUser, string accessToken = null) where TMeUser : MeUser;
-		/// <summary>Patch the Currently Authenticated User.</summary>
+		/// <summary>Patch the currently authenticated user</summary>
 		/// <param name="partialMeUser">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<MeUser> PatchAsync(PartialMeUser partialMeUser, string accessToken = null);
-		/// <summary>Patch the Currently Authenticated User.</summary>
+		/// <summary>Patch the currently authenticated user</summary>
 		/// <param name="partialMeUser">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TMeUser> PatchAsync<TMeUser>(PartialMeUser partialMeUser, string accessToken = null) where TMeUser : MeUser;
-		/// <summary>Get a list of cost centers visible to this user. Only available to Buyer Users.</summary>
+		/// <summary>List cost centers visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<CostCenter>> ListCostCentersAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of cost centers visible to this user. Only available to Buyer Users.</summary>
+		/// <summary>List cost centers visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TCostCenter>> ListCostCentersAsync<TCostCenter>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TCostCenter : CostCenter;
-		/// <summary>Get a list of cost centers visible to this user. Only available to Buyer Users.</summary>
+		/// <summary>List cost centers visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<CostCenter>> ListCostCentersAsync(Action<ListOptionsBuilder<CostCenter>> buildListOpts, string accessToken = null);
-		/// <summary>Get a list of cost centers visible to this user. Only available to Buyer Users.</summary>
+		/// <summary>List cost centers visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TCostCenter>> ListCostCentersAsync<TCostCenter>(Action<ListOptionsBuilder<TCostCenter>> buildListOpts, string accessToken = null) where TCostCenter : CostCenter;
-		/// <summary>Get a list of user groups visible to this user. Only available to Buyer Users.</summary>
+		/// <summary>List user groups visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<UserGroup>> ListUserGroupsAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of user groups visible to this user. Only available to Buyer Users.</summary>
+		/// <summary>List user groups visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TUserGroup>> ListUserGroupsAsync<TUserGroup>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TUserGroup : UserGroup;
-		/// <summary>Get a list of user groups visible to this user. Only available to Buyer Users.</summary>
+		/// <summary>List user groups visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<UserGroup>> ListUserGroupsAsync(Action<ListOptionsBuilder<UserGroup>> buildListOpts, string accessToken = null);
-		/// <summary>Get a list of user groups visible to this user. Only available to Buyer Users.</summary>
+		/// <summary>List user groups visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TUserGroup>> ListUserGroupsAsync<TUserGroup>(Action<ListOptionsBuilder<TUserGroup>> buildListOpts, string accessToken = null) where TUserGroup : UserGroup;
-		/// <summary>Get a list of addresses visible to this user. Only available to Buyer Users.</summary>
+		/// <summary>List addresses visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<BuyerAddress>> ListAddressesAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of addresses visible to this user. Only available to Buyer Users.</summary>
+		/// <summary>List addresses visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TBuyerAddress>> ListAddressesAsync<TBuyerAddress>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TBuyerAddress : BuyerAddress;
-		/// <summary>Get a list of addresses visible to this user. Only available to Buyer Users.</summary>
+		/// <summary>List addresses visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<BuyerAddress>> ListAddressesAsync(Action<ListOptionsBuilder<BuyerAddress>> buildListOpts, string accessToken = null);
-		/// <summary>Get a list of addresses visible to this user. Only available to Buyer Users.</summary>
+		/// <summary>List addresses visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TBuyerAddress>> ListAddressesAsync<TBuyerAddress>(Action<ListOptionsBuilder<TBuyerAddress>> buildListOpts, string accessToken = null) where TBuyerAddress : BuyerAddress;
-		/// <summary>Create a new address. Only available to Buyer Users. Addresses created using this endpoint are considered private, and only accessible to the user who created them.</summary>
+		/// <summary>Create an address. Only available to Buyer Users. Addresses created using this endpoint are considered private, and only accessible to the user who created them.</summary>
 		/// <param name="buyerAddress">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<BuyerAddress> CreateAddressAsync(BuyerAddress buyerAddress, string accessToken = null);
-		/// <summary>Create a new address. Only available to Buyer Users. Addresses created using this endpoint are considered private, and only accessible to the user who created them.</summary>
+		/// <summary>Create an address. Only available to Buyer Users. Addresses created using this endpoint are considered private, and only accessible to the user who created them.</summary>
 		/// <param name="buyerAddress">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TBuyerAddress> CreateAddressAsync<TBuyerAddress>(BuyerAddress buyerAddress, string accessToken = null) where TBuyerAddress : BuyerAddress;
-		/// <summary>Get a single address. Only available to Buyer Users.</summary>
+		/// <summary>Retrieve an address. Only available to Buyer Users.</summary>
 		/// <param name="addressID">ID of the address.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<BuyerAddress> GetAddressAsync(string addressID, string accessToken = null);
-		/// <summary>Get a single address. Only available to Buyer Users.</summary>
+		/// <summary>Retrieve an address. Only available to Buyer Users.</summary>
 		/// <param name="addressID">ID of the address.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TBuyerAddress> GetAddressAsync<TBuyerAddress>(string addressID, string accessToken = null) where TBuyerAddress : BuyerAddress;
-		/// <summary>Update an address. Only available to Buyer Users.</summary>
+		/// <summary>Update an address Only available to Buyer Users.</summary>
 		/// <param name="addressID">ID of the address.</param>
 		/// <param name="buyerAddress">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<BuyerAddress> SaveAddressAsync(string addressID, BuyerAddress buyerAddress, string accessToken = null);
-		/// <summary>Update an address. Only available to Buyer Users.</summary>
+		/// <summary>Update an address Only available to Buyer Users.</summary>
 		/// <param name="addressID">ID of the address.</param>
 		/// <param name="buyerAddress">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -2702,54 +2710,54 @@ namespace OrderCloud.SDK
 		/// <param name="addressID">ID of the address.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task DeleteAddressAsync(string addressID, string accessToken = null);
-		/// <summary>Create a new credit card. Only available to Buyer Users. Credit Cards created using this endpoint are considered private, and only accessible to the user who created them.</summary>
+		/// <summary>Create a credit card. Only available to Buyer Users. Credit Cards created using this endpoint are considered private, and only accessible to the user who created them.</summary>
 		/// <param name="buyerCreditCard">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<BuyerCreditCard> CreateCreditCardAsync(BuyerCreditCard buyerCreditCard, string accessToken = null);
-		/// <summary>Create a new credit card. Only available to Buyer Users. Credit Cards created using this endpoint are considered private, and only accessible to the user who created them.</summary>
+		/// <summary>Create a credit card. Only available to Buyer Users. Credit Cards created using this endpoint are considered private, and only accessible to the user who created them.</summary>
 		/// <param name="buyerCreditCard">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TBuyerCreditCard> CreateCreditCardAsync<TBuyerCreditCard>(BuyerCreditCard buyerCreditCard, string accessToken = null) where TBuyerCreditCard : BuyerCreditCard;
-		/// <summary>Get a list of credit cards visible to this user. Only available to Buyer Users.</summary>
+		/// <summary>List credit cards visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<BuyerCreditCard>> ListCreditCardsAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of credit cards visible to this user. Only available to Buyer Users.</summary>
+		/// <summary>List credit cards visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TBuyerCreditCard>> ListCreditCardsAsync<TBuyerCreditCard>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TBuyerCreditCard : BuyerCreditCard;
-		/// <summary>Get a list of credit cards visible to this user. Only available to Buyer Users.</summary>
+		/// <summary>List credit cards visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<BuyerCreditCard>> ListCreditCardsAsync(Action<ListOptionsBuilder<BuyerCreditCard>> buildListOpts, string accessToken = null);
-		/// <summary>Get a list of credit cards visible to this user. Only available to Buyer Users.</summary>
+		/// <summary>List credit cards visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TBuyerCreditCard>> ListCreditCardsAsync<TBuyerCreditCard>(Action<ListOptionsBuilder<TBuyerCreditCard>> buildListOpts, string accessToken = null) where TBuyerCreditCard : BuyerCreditCard;
-		/// <summary>Get a single credit card. Only available to Buyer Users.</summary>
+		/// <summary>Retrieve a credit card. Only available to Buyer Users.</summary>
 		/// <param name="creditcardID">ID of the creditcard.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<BuyerCreditCard> GetCreditCardAsync(string creditcardID, string accessToken = null);
-		/// <summary>Get a single credit card. Only available to Buyer Users.</summary>
+		/// <summary>Retrieve a credit card. Only available to Buyer Users.</summary>
 		/// <param name="creditcardID">ID of the creditcard.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TBuyerCreditCard> GetCreditCardAsync<TBuyerCreditCard>(string creditcardID, string accessToken = null) where TBuyerCreditCard : BuyerCreditCard;
-		/// <summary>Update a credit card. Only available to Buyer Users.</summary>
+		/// <summary>Update a credit card Only available to Buyer Users.</summary>
 		/// <param name="creditcardID">ID of the creditcard.</param>
 		/// <param name="buyerCreditCard">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<BuyerCreditCard> SaveCreditCardAsync(string creditcardID, BuyerCreditCard buyerCreditCard, string accessToken = null);
-		/// <summary>Update a credit card. Only available to Buyer Users.</summary>
+		/// <summary>Update a credit card Only available to Buyer Users.</summary>
 		/// <param name="creditcardID">ID of the creditcard.</param>
 		/// <param name="buyerCreditCard">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -2763,83 +2771,83 @@ namespace OrderCloud.SDK
 		/// <param name="creditcardID">ID of the creditcard.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task DeleteCreditCardAsync(string creditcardID, string accessToken = null);
-		/// <summary>Get a list of categories visible to this user. Only available to Buyer Users.</summary>
+		/// <summary>List categories visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="depth">Indicates how deep down the hierarchy to return results. Valid values are a number of 1 or greater, or 'all'. Relative to ParentID if specified. Default is 1.</param>
 		/// <param name="catalogID">The user’s default CatalogID will be used to return categories if you do not pass another CatalogID explicitly. Listing categories across multiple catalogs is not supported.</param>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Category>> ListCategoriesAsync(string depth = "1", string catalogID = null, string productID = null, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of categories visible to this user. Only available to Buyer Users.</summary>
+		/// <summary>List categories visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="depth">Indicates how deep down the hierarchy to return results. Valid values are a number of 1 or greater, or 'all'. Relative to ParentID if specified. Default is 1.</param>
 		/// <param name="catalogID">The user’s default CatalogID will be used to return categories if you do not pass another CatalogID explicitly. Listing categories across multiple catalogs is not supported.</param>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TCategory>> ListCategoriesAsync<TCategory>(string depth = "1", string catalogID = null, string productID = null, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TCategory : Category;
-		/// <summary>Get a list of categories visible to this user. Only available to Buyer Users.</summary>
+		/// <summary>List categories visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="depth">Indicates how deep down the hierarchy to return results. Valid values are a number of 1 or greater, or 'all'. Relative to ParentID if specified. Default is 1.</param>
 		/// <param name="catalogID">The user’s default CatalogID will be used to return categories if you do not pass another CatalogID explicitly. Listing categories across multiple catalogs is not supported.</param>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Category>> ListCategoriesAsync(Action<ListOptionsBuilder<Category>> buildListOpts, string depth = "1", string catalogID = null, string productID = null, string accessToken = null);
-		/// <summary>Get a list of categories visible to this user. Only available to Buyer Users.</summary>
+		/// <summary>List categories visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="depth">Indicates how deep down the hierarchy to return results. Valid values are a number of 1 or greater, or 'all'. Relative to ParentID if specified. Default is 1.</param>
 		/// <param name="catalogID">The user’s default CatalogID will be used to return categories if you do not pass another CatalogID explicitly. Listing categories across multiple catalogs is not supported.</param>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TCategory>> ListCategoriesAsync<TCategory>(Action<ListOptionsBuilder<TCategory>> buildListOpts, string depth = "1", string catalogID = null, string productID = null, string accessToken = null) where TCategory : Category;
-		/// <summary>Get a single category. Only available to Buyer Users.</summary>
+		/// <summary>Retrieve a category. Only available to Buyer Users.</summary>
 		/// <param name="categoryID">ID of the category.</param>
 		/// <param name="catalogID">ID of the catalog.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Category> GetCategoryAsync(string categoryID, string catalogID, string accessToken = null);
-		/// <summary>Get a single category. Only available to Buyer Users.</summary>
+		/// <summary>Retrieve a category. Only available to Buyer Users.</summary>
 		/// <param name="categoryID">ID of the category.</param>
 		/// <param name="catalogID">ID of the catalog.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TCategory> GetCategoryAsync<TCategory>(string categoryID, string catalogID, string accessToken = null) where TCategory : Category;
-		/// <summary>Get a list of products visible to this user. Only available to Buyer Users.</summary>
+		/// <summary>List products visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="catalogID">ID of the catalog.</param>
 		/// <param name="categoryID">ID of the category.</param>
 		/// <param name="depth">Indicates how deep down the category hierarchy to return results. Valid values are a number of 1 or greater, or 'all'. Relative to CategoryID if specified, otherwise top level of the Catalog. Default is 'all'.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
-		/// <param name="searchType">Type of search to perform. Possible values: AnyTerm (default), AllTermsAnyField, AllTermsSameField, ExactPhrase, ExactPhrasePrefix.</param>
+		/// <param name="searchType">Type of search to perform.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="sellerID">ID of the seller.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPageWithFacets<BuyerProduct>> ListProductsAsync(string catalogID = null, string categoryID = null, string depth = null, string search = null, string searchOn = null, SearchType searchType = SearchType.AnyTerm, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string sellerID = null, string accessToken = null);
-		/// <summary>Get a list of products visible to this user. Only available to Buyer Users.</summary>
+		/// <summary>List products visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="catalogID">ID of the catalog.</param>
 		/// <param name="categoryID">ID of the category.</param>
 		/// <param name="depth">Indicates how deep down the category hierarchy to return results. Valid values are a number of 1 or greater, or 'all'. Relative to CategoryID if specified, otherwise top level of the Catalog. Default is 'all'.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
-		/// <param name="searchType">Type of search to perform. Possible values: AnyTerm (default), AllTermsAnyField, AllTermsSameField, ExactPhrase, ExactPhrasePrefix.</param>
+		/// <param name="searchType">Type of search to perform.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="sellerID">ID of the seller.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPageWithFacets<TBuyerProduct>> ListProductsAsync<TBuyerProduct>(string catalogID = null, string categoryID = null, string depth = null, string search = null, string searchOn = null, SearchType searchType = SearchType.AnyTerm, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string sellerID = null, string accessToken = null) where TBuyerProduct : BuyerProduct;
-		/// <summary>Get a list of products visible to this user. Only available to Buyer Users.</summary>
+		/// <summary>List products visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="catalogID">ID of the catalog.</param>
 		/// <param name="categoryID">ID of the category.</param>
@@ -2847,7 +2855,7 @@ namespace OrderCloud.SDK
 		/// <param name="sellerID">ID of the seller.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPageWithFacets<BuyerProduct>> ListProductsAsync(Action<ListOptionsBuilder2<BuyerProduct>> buildListOpts, string catalogID = null, string categoryID = null, string depth = null, string sellerID = null, string accessToken = null);
-		/// <summary>Get a list of products visible to this user. Only available to Buyer Users.</summary>
+		/// <summary>List products visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="catalogID">ID of the catalog.</param>
 		/// <param name="categoryID">ID of the category.</param>
@@ -2855,479 +2863,487 @@ namespace OrderCloud.SDK
 		/// <param name="sellerID">ID of the seller.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPageWithFacets<TBuyerProduct>> ListProductsAsync<TBuyerProduct>(Action<ListOptionsBuilder2<TBuyerProduct>> buildListOpts, string catalogID = null, string categoryID = null, string depth = null, string sellerID = null, string accessToken = null) where TBuyerProduct : BuyerProduct;
-		/// <summary>Get a single product. Only available to Buyer Users.</summary>
+		/// <summary>Retrieve a product. Only available to Buyer Users.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="sellerID">ID of the seller.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<BuyerProduct> GetProductAsync(string productID, string sellerID = null, string accessToken = null);
-		/// <summary>Get a single product. Only available to Buyer Users.</summary>
+		/// <summary>Retrieve a product. Only available to Buyer Users.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="sellerID">ID of the seller.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TBuyerProduct> GetProductAsync<TBuyerProduct>(string productID, string sellerID = null, string accessToken = null) where TBuyerProduct : BuyerProduct;
-		/// <summary>Get a list of specs visible to this user. Only available to Buyer Users.</summary>
+		/// <summary>List specs visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="catalogID">ID of the catalog.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Spec>> ListSpecsAsync(string productID, string catalogID = null, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of specs visible to this user. Only available to Buyer Users.</summary>
+		/// <summary>List specs visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="catalogID">ID of the catalog.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TSpec>> ListSpecsAsync<TSpec>(string productID, string catalogID = null, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TSpec : Spec;
-		/// <summary>Get a list of specs visible to this user. Only available to Buyer Users.</summary>
+		/// <summary>List specs visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="catalogID">ID of the catalog.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Spec>> ListSpecsAsync(string productID, Action<ListOptionsBuilder<Spec>> buildListOpts, string catalogID = null, string accessToken = null);
-		/// <summary>Get a list of specs visible to this user. Only available to Buyer Users.</summary>
+		/// <summary>List specs visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="catalogID">ID of the catalog.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TSpec>> ListSpecsAsync<TSpec>(string productID, Action<ListOptionsBuilder<TSpec>> buildListOpts, string catalogID = null, string accessToken = null) where TSpec : Spec;
-		/// <summary>Get a single spec. Only available to Buyer Users.</summary>
+		/// <summary>Retrieve a spec. Only available to Buyer Users.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="specID">ID of the spec.</param>
 		/// <param name="catalogID">ID of the catalog.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Spec> GetSpecAsync(string productID, string specID, string catalogID = null, string accessToken = null);
-		/// <summary>Get a single spec. Only available to Buyer Users.</summary>
+		/// <summary>Retrieve a spec. Only available to Buyer Users.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="specID">ID of the spec.</param>
 		/// <param name="catalogID">ID of the catalog.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TSpec> GetSpecAsync<TSpec>(string productID, string specID, string catalogID = null, string accessToken = null) where TSpec : Spec;
-		/// <summary>Get a list of variants visible to this user. Only available to Buyer Users.</summary>
+		/// <summary>List variants visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Variant>> ListVariantsAsync(string productID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of variants visible to this user. Only available to Buyer Users.</summary>
+		/// <summary>List variants visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TVariant>> ListVariantsAsync<TVariant>(string productID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TVariant : Variant;
-		/// <summary>Get a list of variants visible to this user. Only available to Buyer Users.</summary>
+		/// <summary>List variants visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Variant>> ListVariantsAsync(string productID, Action<ListOptionsBuilder<Variant>> buildListOpts, string accessToken = null);
-		/// <summary>Get a list of variants visible to this user. Only available to Buyer Users.</summary>
+		/// <summary>List variants visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TVariant>> ListVariantsAsync<TVariant>(string productID, Action<ListOptionsBuilder<TVariant>> buildListOpts, string accessToken = null) where TVariant : Variant;
-		/// <summary>Get a single variant. Only available to Buyer Users.</summary>
+		/// <summary>Retrieve a variant. Only available to Buyer Users.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="variantID">ID of the variant.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Variant> GetVariantAsync(string productID, string variantID, string accessToken = null);
-		/// <summary>Get a single variant. Only available to Buyer Users.</summary>
+		/// <summary>Retrieve a variant. Only available to Buyer Users.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="variantID">ID of the variant.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TVariant> GetVariantAsync<TVariant>(string productID, string variantID, string accessToken = null) where TVariant : Variant;
-		/// <summary>Get a list of product inventory records visible to this user. Only available to Buyer Users.</summary>
+		/// <summary>List product inventory records visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="includeAddress">Include address of the inventory record.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
-		Task<ListPage<InventoryRecord>> ListProductInventoryRecordsAsync(string productID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of product inventory records visible to this user. Only available to Buyer Users.</summary>
+		Task<ListPage<InventoryRecord>> ListProductInventoryRecordsAsync(string productID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, bool? includeAddress = null, string accessToken = null);
+		/// <summary>List product inventory records visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="includeAddress">Include address of the inventory record.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
-		Task<ListPage<TInventoryRecord>> ListProductInventoryRecordsAsync<TInventoryRecord>(string productID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TInventoryRecord : InventoryRecord;
-		/// <summary>Get a list of product inventory records visible to this user. Only available to Buyer Users.</summary>
+		Task<ListPage<TInventoryRecord>> ListProductInventoryRecordsAsync<TInventoryRecord>(string productID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, bool? includeAddress = null, string accessToken = null) where TInventoryRecord : InventoryRecord;
+		/// <summary>List product inventory records visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
+		/// <param name="includeAddress">Include address of the inventory record.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
-		Task<ListPage<InventoryRecord>> ListProductInventoryRecordsAsync(string productID, Action<ListOptionsBuilder<InventoryRecord>> buildListOpts, string accessToken = null);
-		/// <summary>Get a list of product inventory records visible to this user. Only available to Buyer Users.</summary>
+		Task<ListPage<InventoryRecord>> ListProductInventoryRecordsAsync(string productID, Action<ListOptionsBuilder<InventoryRecord>> buildListOpts, bool? includeAddress = null, string accessToken = null);
+		/// <summary>List product inventory records visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
+		/// <param name="includeAddress">Include address of the inventory record.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
-		Task<ListPage<TInventoryRecord>> ListProductInventoryRecordsAsync<TInventoryRecord>(string productID, Action<ListOptionsBuilder<TInventoryRecord>> buildListOpts, string accessToken = null) where TInventoryRecord : InventoryRecord;
-		/// <summary>Get a list of variant inventory records visible to this user. Only available to Buyer Users.</summary>
+		Task<ListPage<TInventoryRecord>> ListProductInventoryRecordsAsync<TInventoryRecord>(string productID, Action<ListOptionsBuilder<TInventoryRecord>> buildListOpts, bool? includeAddress = null, string accessToken = null) where TInventoryRecord : InventoryRecord;
+		/// <summary>List variant inventory records visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="variantID">ID of the variant.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="includeAddress">Include address of the inventory record.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
-		Task<ListPage<InventoryRecord>> ListVariantInventoryRecordsAsync(string productID, string variantID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of variant inventory records visible to this user. Only available to Buyer Users.</summary>
+		Task<ListPage<InventoryRecord>> ListVariantInventoryRecordsAsync(string productID, string variantID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, bool? includeAddress = null, string accessToken = null);
+		/// <summary>List variant inventory records visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="variantID">ID of the variant.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
+		/// <param name="includeAddress">Include address of the inventory record.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
-		Task<ListPage<TInventoryRecord>> ListVariantInventoryRecordsAsync<TInventoryRecord>(string productID, string variantID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TInventoryRecord : InventoryRecord;
-		/// <summary>Get a list of variant inventory records visible to this user. Only available to Buyer Users.</summary>
+		Task<ListPage<TInventoryRecord>> ListVariantInventoryRecordsAsync<TInventoryRecord>(string productID, string variantID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, bool? includeAddress = null, string accessToken = null) where TInventoryRecord : InventoryRecord;
+		/// <summary>List variant inventory records visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="variantID">ID of the variant.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
+		/// <param name="includeAddress">Include address of the inventory record.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
-		Task<ListPage<InventoryRecord>> ListVariantInventoryRecordsAsync(string productID, string variantID, Action<ListOptionsBuilder<InventoryRecord>> buildListOpts, string accessToken = null);
-		/// <summary>Get a list of variant inventory records visible to this user. Only available to Buyer Users.</summary>
+		Task<ListPage<InventoryRecord>> ListVariantInventoryRecordsAsync(string productID, string variantID, Action<ListOptionsBuilder<InventoryRecord>> buildListOpts, bool? includeAddress = null, string accessToken = null);
+		/// <summary>List variant inventory records visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="variantID">ID of the variant.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
+		/// <param name="includeAddress">Include address of the inventory record.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
-		Task<ListPage<TInventoryRecord>> ListVariantInventoryRecordsAsync<TInventoryRecord>(string productID, string variantID, Action<ListOptionsBuilder<TInventoryRecord>> buildListOpts, string accessToken = null) where TInventoryRecord : InventoryRecord;
-		/// <summary>Get a list of orders visible to this user. List orders created by this user.</summary>
+		Task<ListPage<TInventoryRecord>> ListVariantInventoryRecordsAsync<TInventoryRecord>(string productID, string variantID, Action<ListOptionsBuilder<TInventoryRecord>> buildListOpts, bool? includeAddress = null, string accessToken = null) where TInventoryRecord : InventoryRecord;
+		/// <summary>List orders visible to this user. List orders created by this user.</summary>
 		/// <param name="from">Lower bound of date range that the order was created (if outgoing) or submitted (if incoming).</param>
 		/// <param name="to">Upper bound of date range that the order was created (if outgoing) or submitted (if incoming).</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
-		/// <param name="searchType">Type of search to perform. Possible values: AnyTerm (default), AllTermsAnyField, AllTermsSameField, ExactPhrase, ExactPhrasePrefix.</param>
+		/// <param name="searchType">Type of search to perform.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Order>> ListOrdersAsync(DateTimeOffset? from = null, DateTimeOffset? to = null, string search = null, string searchOn = null, SearchType searchType = SearchType.AnyTerm, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of orders visible to this user. List orders created by this user.</summary>
+		/// <summary>List orders visible to this user. List orders created by this user.</summary>
 		/// <param name="from">Lower bound of date range that the order was created (if outgoing) or submitted (if incoming).</param>
 		/// <param name="to">Upper bound of date range that the order was created (if outgoing) or submitted (if incoming).</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
-		/// <param name="searchType">Type of search to perform. Possible values: AnyTerm (default), AllTermsAnyField, AllTermsSameField, ExactPhrase, ExactPhrasePrefix.</param>
+		/// <param name="searchType">Type of search to perform.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TOrder>> ListOrdersAsync<TOrder>(DateTimeOffset? from = null, DateTimeOffset? to = null, string search = null, string searchOn = null, SearchType searchType = SearchType.AnyTerm, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TOrder : Order;
-		/// <summary>Get a list of orders visible to this user. List orders created by this user.</summary>
+		/// <summary>List orders visible to this user. List orders created by this user.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="from">Lower bound of date range that the order was created (if outgoing) or submitted (if incoming).</param>
 		/// <param name="to">Upper bound of date range that the order was created (if outgoing) or submitted (if incoming).</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Order>> ListOrdersAsync(Action<ListOptionsBuilder2<Order>> buildListOpts, DateTimeOffset? from = null, DateTimeOffset? to = null, string accessToken = null);
-		/// <summary>Get a list of orders visible to this user. List orders created by this user.</summary>
+		/// <summary>List orders visible to this user. List orders created by this user.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="from">Lower bound of date range that the order was created (if outgoing) or submitted (if incoming).</param>
 		/// <param name="to">Upper bound of date range that the order was created (if outgoing) or submitted (if incoming).</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TOrder>> ListOrdersAsync<TOrder>(Action<ListOptionsBuilder2<TOrder>> buildListOpts, DateTimeOffset? from = null, DateTimeOffset? to = null, string accessToken = null) where TOrder : Order;
-		/// <summary>Get a list of orders that this user can approve.</summary>
+		/// <summary>Get a list of orders that this user can approve</summary>
 		/// <param name="from">Lower bound of date range that the order was created (if outgoing) or submitted (if incoming).</param>
 		/// <param name="to">Upper bound of date range that the order was created (if outgoing) or submitted (if incoming).</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Order>> ListApprovableOrdersAsync(DateTimeOffset? from = null, DateTimeOffset? to = null, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of orders that this user can approve.</summary>
+		/// <summary>Get a list of orders that this user can approve</summary>
 		/// <param name="from">Lower bound of date range that the order was created (if outgoing) or submitted (if incoming).</param>
 		/// <param name="to">Upper bound of date range that the order was created (if outgoing) or submitted (if incoming).</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TOrder>> ListApprovableOrdersAsync<TOrder>(DateTimeOffset? from = null, DateTimeOffset? to = null, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TOrder : Order;
-		/// <summary>Get a list of orders that this user can approve.</summary>
+		/// <summary>Get a list of orders that this user can approve</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="from">Lower bound of date range that the order was created (if outgoing) or submitted (if incoming).</param>
 		/// <param name="to">Upper bound of date range that the order was created (if outgoing) or submitted (if incoming).</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Order>> ListApprovableOrdersAsync(Action<ListOptionsBuilder<Order>> buildListOpts, DateTimeOffset? from = null, DateTimeOffset? to = null, string accessToken = null);
-		/// <summary>Get a list of orders that this user can approve.</summary>
+		/// <summary>Get a list of orders that this user can approve</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="from">Lower bound of date range that the order was created (if outgoing) or submitted (if incoming).</param>
 		/// <param name="to">Upper bound of date range that the order was created (if outgoing) or submitted (if incoming).</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TOrder>> ListApprovableOrdersAsync<TOrder>(Action<ListOptionsBuilder<TOrder>> buildListOpts, DateTimeOffset? from = null, DateTimeOffset? to = null, string accessToken = null) where TOrder : Order;
-		/// <summary>Transfer an order. If a user begins an order as the anonymous shopper and later logs in, use this endpoint to transfer that order to them.</summary>
+		/// <summary>Transfer an anon user order If a user begins an order as the anonymous shopper and later logs in, use this endpoint to transfer that order to them.</summary>
 		/// <param name="anonUserToken">Anon user token of the me.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task TransferAnonUserOrderAsync(string anonUserToken, string accessToken = null);
-		/// <summary>Reset a password by token.</summary>
+		/// <summary>Reset a password by token</summary>
 		/// <param name="tokenPasswordReset">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task ResetPasswordByTokenAsync(TokenPasswordReset tokenPasswordReset, string accessToken = null);
-		/// <summary>Get a list of promotions visible to this user. Only available to Buyer Users.</summary>
+		/// <summary>List promotions visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Promotion>> ListPromotionsAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of promotions visible to this user. Only available to Buyer Users.</summary>
+		/// <summary>List promotions visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TPromotion>> ListPromotionsAsync<TPromotion>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TPromotion : Promotion;
-		/// <summary>Get a list of promotions visible to this user. Only available to Buyer Users.</summary>
+		/// <summary>List promotions visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Promotion>> ListPromotionsAsync(Action<ListOptionsBuilder<Promotion>> buildListOpts, string accessToken = null);
-		/// <summary>Get a list of promotions visible to this user. Only available to Buyer Users.</summary>
+		/// <summary>List promotions visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TPromotion>> ListPromotionsAsync<TPromotion>(Action<ListOptionsBuilder<TPromotion>> buildListOpts, string accessToken = null) where TPromotion : Promotion;
-		/// <summary>Get a single promotion. Only available to Buyer Users.</summary>
+		/// <summary>Retrieve a promotion. Only available to Buyer Users.</summary>
 		/// <param name="promotionID">ID of the promotion.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Promotion> GetPromotionAsync(string promotionID, string accessToken = null);
-		/// <summary>Get a single promotion. Only available to Buyer Users.</summary>
+		/// <summary>Retrieve a promotion. Only available to Buyer Users.</summary>
 		/// <param name="promotionID">ID of the promotion.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TPromotion> GetPromotionAsync<TPromotion>(string promotionID, string accessToken = null) where TPromotion : Promotion;
-		/// <summary>Get a list of spending accounts visible to this user. Only available to Buyer Users.</summary>
+		/// <summary>List spending accounts visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<SpendingAccount>> ListSpendingAccountsAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of spending accounts visible to this user. Only available to Buyer Users.</summary>
+		/// <summary>List spending accounts visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TSpendingAccount>> ListSpendingAccountsAsync<TSpendingAccount>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TSpendingAccount : SpendingAccount;
-		/// <summary>Get a list of spending accounts visible to this user. Only available to Buyer Users.</summary>
+		/// <summary>List spending accounts visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<SpendingAccount>> ListSpendingAccountsAsync(Action<ListOptionsBuilder<SpendingAccount>> buildListOpts, string accessToken = null);
-		/// <summary>Get a list of spending accounts visible to this user. Only available to Buyer Users.</summary>
+		/// <summary>List spending accounts visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TSpendingAccount>> ListSpendingAccountsAsync<TSpendingAccount>(Action<ListOptionsBuilder<TSpendingAccount>> buildListOpts, string accessToken = null) where TSpendingAccount : SpendingAccount;
-		/// <summary>Get a single spending account. Only available to Buyer Users.</summary>
+		/// <summary>Retrieve a spending account. Only available to Buyer Users.</summary>
 		/// <param name="spendingAccountID">ID of the spending account.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<SpendingAccount> GetSpendingAccountAsync(string spendingAccountID, string accessToken = null);
-		/// <summary>Get a single spending account. Only available to Buyer Users.</summary>
+		/// <summary>Retrieve a spending account. Only available to Buyer Users.</summary>
 		/// <param name="spendingAccountID">ID of the spending account.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TSpendingAccount> GetSpendingAccountAsync<TSpendingAccount>(string spendingAccountID, string accessToken = null) where TSpendingAccount : SpendingAccount;
-		/// <summary>Get a list of shipments visible to this user. Only available to Buyer Users.</summary>
+		/// <summary>List shipments visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Shipment>> ListShipmentsAsync(string orderID = null, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of shipments visible to this user. Only available to Buyer Users.</summary>
+		/// <summary>List shipments visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TShipment>> ListShipmentsAsync<TShipment>(string orderID = null, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TShipment : Shipment;
-		/// <summary>Get a list of shipments visible to this user. Only available to Buyer Users.</summary>
+		/// <summary>List shipments visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Shipment>> ListShipmentsAsync(Action<ListOptionsBuilder<Shipment>> buildListOpts, string orderID = null, string accessToken = null);
-		/// <summary>Get a list of shipments visible to this user. Only available to Buyer Users.</summary>
+		/// <summary>List shipments visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TShipment>> ListShipmentsAsync<TShipment>(Action<ListOptionsBuilder<TShipment>> buildListOpts, string orderID = null, string accessToken = null) where TShipment : Shipment;
-		/// <summary>Get a single shipment. Only available to Buyer Users.</summary>
+		/// <summary>Retrieve a shipment. Only available to Buyer Users.</summary>
 		/// <param name="shipmentID">ID of the shipment.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Shipment> GetShipmentAsync(string shipmentID, string accessToken = null);
-		/// <summary>Get a single shipment. Only available to Buyer Users.</summary>
+		/// <summary>Retrieve a shipment. Only available to Buyer Users.</summary>
 		/// <param name="shipmentID">ID of the shipment.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TShipment> GetShipmentAsync<TShipment>(string shipmentID, string accessToken = null) where TShipment : Shipment;
-		/// <summary>Get a list of shipment items visible to this user. Only available to Buyer Users.</summary>
+		/// <summary>List shipment items visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="shipmentID">ID of the shipment.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<ShipmentItem>> ListShipmentItemsAsync(string shipmentID, string orderID = null, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of shipment items visible to this user. Only available to Buyer Users.</summary>
+		/// <summary>List shipment items visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="shipmentID">ID of the shipment.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TShipmentItem>> ListShipmentItemsAsync<TShipmentItem>(string shipmentID, string orderID = null, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TShipmentItem : ShipmentItem;
-		/// <summary>Get a list of shipment items visible to this user. Only available to Buyer Users.</summary>
+		/// <summary>List shipment items visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="shipmentID">ID of the shipment.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<ShipmentItem>> ListShipmentItemsAsync(string shipmentID, Action<ListOptionsBuilder<ShipmentItem>> buildListOpts, string orderID = null, string accessToken = null);
-		/// <summary>Get a list of shipment items visible to this user. Only available to Buyer Users.</summary>
+		/// <summary>List shipment items visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="shipmentID">ID of the shipment.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TShipmentItem>> ListShipmentItemsAsync<TShipmentItem>(string shipmentID, Action<ListOptionsBuilder<TShipmentItem>> buildListOpts, string orderID = null, string accessToken = null) where TShipmentItem : ShipmentItem;
-		/// <summary>Register a User.</summary>
+		/// <summary>Register a user</summary>
 		/// <param name="meUser">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="anonUserToken">Anon user token of the user.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<AccessTokenBasic> RegisterAsync(MeUser meUser, string anonUserToken, string accessToken = null);
-		/// <summary>Get a list of catalogs visible to this user. Only available to Buyer Users.</summary>
+		/// <summary>List catalogs visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="sellerID">ID of the seller.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Catalog>> ListCatalogsAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string sellerID = null, string accessToken = null);
-		/// <summary>Get a list of catalogs visible to this user. Only available to Buyer Users.</summary>
+		/// <summary>List catalogs visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="sellerID">ID of the seller.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TCatalog>> ListCatalogsAsync<TCatalog>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string sellerID = null, string accessToken = null) where TCatalog : Catalog;
-		/// <summary>Get a list of catalogs visible to this user. Only available to Buyer Users.</summary>
+		/// <summary>List catalogs visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="sellerID">ID of the seller.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Catalog>> ListCatalogsAsync(Action<ListOptionsBuilder<Catalog>> buildListOpts, string sellerID = null, string accessToken = null);
-		/// <summary>Get a list of catalogs visible to this user. Only available to Buyer Users.</summary>
+		/// <summary>List catalogs visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="sellerID">ID of the seller.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TCatalog>> ListCatalogsAsync<TCatalog>(Action<ListOptionsBuilder<TCatalog>> buildListOpts, string sellerID = null, string accessToken = null) where TCatalog : Catalog;
-		/// <summary>Get a single catalog. Only available to Buyer Users.</summary>
+		/// <summary>Retrieve a catalog. Only available to Buyer Users.</summary>
 		/// <param name="catalogID">ID of the catalog.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Catalog> GetCatalogAsync(string catalogID, string accessToken = null);
-		/// <summary>Get a single catalog. Only available to Buyer Users.</summary>
+		/// <summary>Retrieve a catalog. Only available to Buyer Users.</summary>
 		/// <param name="catalogID">ID of the catalog.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TCatalog> GetCatalogAsync<TCatalog>(string catalogID, string accessToken = null) where TCatalog : Catalog;
-		/// <summary>Get a list of sellers this user can purchase from. Organizations you can place orders directly to.</summary>
+		/// <summary>Get a list of sellers this user can purchase from Organizations you can place orders directly to.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<BuyerSupplier>> ListBuyerSellersAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of sellers this user can purchase from. Organizations you can place orders directly to.</summary>
+		/// <summary>Get a list of sellers this user can purchase from Organizations you can place orders directly to.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<BuyerSupplier>> ListBuyerSellersAsync(Action<ListOptionsBuilder<BuyerSupplier>> buildListOpts, string accessToken = null);
-		/// <summary>Create a new product collection. Only available to Buyer Users.</summary>
+		/// <summary>Create a product collection. Only available to Buyer Users.</summary>
 		/// <param name="productCollection">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ProductCollection> CreateProductCollectionAsync(ProductCollection productCollection, string accessToken = null);
-		/// <summary>Create a new product collection. Only available to Buyer Users.</summary>
+		/// <summary>Create a product collection. Only available to Buyer Users.</summary>
 		/// <param name="productCollection">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TProductCollection> CreateProductCollectionAsync<TProductCollection>(ProductCollection productCollection, string accessToken = null) where TProductCollection : ProductCollection;
-		/// <summary>Get a single product collection. Only available to Buyer Users.</summary>
+		/// <summary>Retrieve a product collection. Only available to Buyer Users.</summary>
 		/// <param name="productCollectionID">ID of the product collection.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ProductCollection> GetProductCollectionAsync(string productCollectionID, string accessToken = null);
-		/// <summary>Get a single product collection. Only available to Buyer Users.</summary>
+		/// <summary>Retrieve a product collection. Only available to Buyer Users.</summary>
 		/// <param name="productCollectionID">ID of the product collection.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TProductCollection> GetProductCollectionAsync<TProductCollection>(string productCollectionID, string accessToken = null) where TProductCollection : ProductCollection;
-		/// <summary>Get a list of product collections visible to this user. Only available to Buyer Users.</summary>
+		/// <summary>List product collections visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<ProductCollection>> ListProductCollectionsAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of product collections visible to this user. Only available to Buyer Users.</summary>
+		/// <summary>List product collections visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TProductCollection>> ListProductCollectionsAsync<TProductCollection>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TProductCollection : ProductCollection;
-		/// <summary>Get a list of product collections visible to this user. Only available to Buyer Users.</summary>
+		/// <summary>List product collections visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<ProductCollection>> ListProductCollectionsAsync(Action<ListOptionsBuilder<ProductCollection>> buildListOpts, string accessToken = null);
-		/// <summary>Get a list of product collections visible to this user. Only available to Buyer Users.</summary>
+		/// <summary>List product collections visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TProductCollection>> ListProductCollectionsAsync<TProductCollection>(Action<ListOptionsBuilder<TProductCollection>> buildListOpts, string accessToken = null) where TProductCollection : ProductCollection;
@@ -3355,39 +3371,39 @@ namespace OrderCloud.SDK
 		/// <param name="productCollectionID">ID of the product collection.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task DeleteProductCollectionAsync(string productCollectionID, string accessToken = null);
-		/// <summary>Get a list of product collection entries visible to this user. Only available to Buyer Users.</summary>
+		/// <summary>List product collection entries visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="productCollectionID">ID of the product collection.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
-		/// <param name="searchType">Type of search to perform. Possible values: AnyTerm (default), AllTermsAnyField, AllTermsSameField, ExactPhrase, ExactPhrasePrefix.</param>
+		/// <param name="searchType">Type of search to perform.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPageWithFacets<ProductCollectionBuyerProduct>> ListProductCollectionEntriesAsync(string productCollectionID, string search = null, string searchOn = null, SearchType searchType = SearchType.AnyTerm, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of product collection entries visible to this user. Only available to Buyer Users.</summary>
+		/// <summary>List product collection entries visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="productCollectionID">ID of the product collection.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
-		/// <param name="searchType">Type of search to perform. Possible values: AnyTerm (default), AllTermsAnyField, AllTermsSameField, ExactPhrase, ExactPhrasePrefix.</param>
+		/// <param name="searchType">Type of search to perform.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPageWithFacets<TProductCollectionBuyerProduct>> ListProductCollectionEntriesAsync<TProductCollectionBuyerProduct>(string productCollectionID, string search = null, string searchOn = null, SearchType searchType = SearchType.AnyTerm, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TProductCollectionBuyerProduct : ProductCollectionBuyerProduct;
-		/// <summary>Get a list of product collection entries visible to this user. Only available to Buyer Users.</summary>
+		/// <summary>List product collection entries visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="productCollectionID">ID of the product collection.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPageWithFacets<ProductCollectionBuyerProduct>> ListProductCollectionEntriesAsync(string productCollectionID, Action<ListOptionsBuilder2<ProductCollectionBuyerProduct>> buildListOpts, string accessToken = null);
-		/// <summary>Get a list of product collection entries visible to this user. Only available to Buyer Users.</summary>
+		/// <summary>List product collection entries visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="productCollectionID">ID of the product collection.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPageWithFacets<TProductCollectionBuyerProduct>> ListProductCollectionEntriesAsync<TProductCollectionBuyerProduct>(string productCollectionID, Action<ListOptionsBuilder2<TProductCollectionBuyerProduct>> buildListOpts, string accessToken = null) where TProductCollectionBuyerProduct : ProductCollectionBuyerProduct;
-		/// <summary>Create a new product collection entry. Only available to Buyer Users.</summary>
+		/// <summary>Create a product collection entry. Only available to Buyer Users.</summary>
 		/// <param name="productCollectionID">ID of the product collection.</param>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -3402,12 +3418,12 @@ namespace OrderCloud.SDK
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task DeleteProductCollectionEntryAsync(string productCollectionID, string productID, string accessToken = null);
-		/// <summary>Create a new product collection invitation. Only available to Buyer Users.</summary>
+		/// <summary>Create a product collection invitation. Only available to Buyer Users.</summary>
 		/// <param name="productCollectionID">ID of the product collection.</param>
 		/// <param name="productCollectionInvitation">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ProductCollectionInvitation> CreateProductCollectionInvitationAsync(string productCollectionID, ProductCollectionInvitation productCollectionInvitation, string accessToken = null);
-		/// <summary>Create a new product collection invitation. Only available to Buyer Users.</summary>
+		/// <summary>Create a product collection invitation. Only available to Buyer Users.</summary>
 		/// <param name="productCollectionID">ID of the product collection.</param>
 		/// <param name="productCollectionInvitation">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -3429,97 +3445,97 @@ namespace OrderCloud.SDK
 		/// <param name="invitationID">ID of the invitation.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task DeleteProductCollectionInvitationAsync(string productCollectionID, string invitationID, string accessToken = null);
-		/// <summary>Get a single product collection invitation. Only available to Buyer Users.</summary>
+		/// <summary>Retrieve a product collection invitation. Only available to Buyer Users.</summary>
 		/// <param name="productCollectionID">ID of the product collection.</param>
 		/// <param name="invitationID">ID of the invitation.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ProductCollectionInvitation> GetProductCollectionInvitationAsync(string productCollectionID, string invitationID, string accessToken = null);
-		/// <summary>Get a single product collection invitation. Only available to Buyer Users.</summary>
+		/// <summary>Retrieve a product collection invitation. Only available to Buyer Users.</summary>
 		/// <param name="productCollectionID">ID of the product collection.</param>
 		/// <param name="invitationID">ID of the invitation.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TProductCollectionInvitation> GetProductCollectionInvitationAsync<TProductCollectionInvitation>(string productCollectionID, string invitationID, string accessToken = null) where TProductCollectionInvitation : ProductCollectionInvitation;
-		/// <summary>Get a list of product collection invitations visible to this user. Only available to Buyer Users.</summary>
+		/// <summary>List product collection invitations visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="productCollectionID">ID of the product collection.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
-		/// <param name="searchType">Type of search to perform. Possible values: AnyTerm (default), AllTermsAnyField, AllTermsSameField, ExactPhrase, ExactPhrasePrefix.</param>
+		/// <param name="searchType">Type of search to perform.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<ProductCollectionInvitation>> ListProductCollectionInvitationsAsync(string productCollectionID, string search = null, string searchOn = null, SearchType searchType = SearchType.AnyTerm, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of product collection invitations visible to this user. Only available to Buyer Users.</summary>
+		/// <summary>List product collection invitations visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="productCollectionID">ID of the product collection.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
-		/// <param name="searchType">Type of search to perform. Possible values: AnyTerm (default), AllTermsAnyField, AllTermsSameField, ExactPhrase, ExactPhrasePrefix.</param>
+		/// <param name="searchType">Type of search to perform.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TProductCollectionInvitation>> ListProductCollectionInvitationsAsync<TProductCollectionInvitation>(string productCollectionID, string search = null, string searchOn = null, SearchType searchType = SearchType.AnyTerm, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TProductCollectionInvitation : ProductCollectionInvitation;
-		/// <summary>Get a list of product collection invitations visible to this user. Only available to Buyer Users.</summary>
+		/// <summary>List product collection invitations visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="productCollectionID">ID of the product collection.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<ProductCollectionInvitation>> ListProductCollectionInvitationsAsync(string productCollectionID, Action<ListOptionsBuilder2<ProductCollectionInvitation>> buildListOpts, string accessToken = null);
-		/// <summary>Get a list of product collection invitations visible to this user. Only available to Buyer Users.</summary>
+		/// <summary>List product collection invitations visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="productCollectionID">ID of the product collection.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TProductCollectionInvitation>> ListProductCollectionInvitationsAsync<TProductCollectionInvitation>(string productCollectionID, Action<ListOptionsBuilder2<TProductCollectionInvitation>> buildListOpts, string accessToken = null) where TProductCollectionInvitation : ProductCollectionInvitation;
-		/// <summary>Accept a product collection invitation.</summary>
+		/// <summary>Accept a product collection invitation</summary>
 		/// <param name="productCollectionID">ID of the product collection.</param>
 		/// <param name="invitationID">ID of the invitation.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task AcceptProductCollectionInvitationAsync(string productCollectionID, string invitationID, string accessToken = null);
-		/// <summary>Decline a product collection invitation.</summary>
+		/// <summary>Decline a product collection invitation</summary>
 		/// <param name="productCollectionID">ID of the product collection.</param>
 		/// <param name="invitationID">ID of the invitation.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task DeclineProductCollectionInvitationAsync(string productCollectionID, string invitationID, string accessToken = null);
-		/// <summary>Get a list of subscriptions visible to this user.</summary>
+		/// <summary>List subscriptions visible to this user.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Subscription>> ListSubscriptionsAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of subscriptions visible to this user.</summary>
+		/// <summary>List subscriptions visible to this user.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TSubscription>> ListSubscriptionsAsync<TSubscription>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TSubscription : Subscription;
-		/// <summary>Get a list of subscriptions visible to this user.</summary>
+		/// <summary>List subscriptions visible to this user.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Subscription>> ListSubscriptionsAsync(Action<ListOptionsBuilder<Subscription>> buildListOpts, string accessToken = null);
-		/// <summary>Get a list of subscriptions visible to this user.</summary>
+		/// <summary>List subscriptions visible to this user.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TSubscription>> ListSubscriptionsAsync<TSubscription>(Action<ListOptionsBuilder<TSubscription>> buildListOpts, string accessToken = null) where TSubscription : Subscription;
-		/// <summary>Get a single subscription.</summary>
+		/// <summary>Retrieve a subscription.</summary>
 		/// <param name="subscriptionID">ID of the subscription.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Subscription> GetSubscriptionAsync(string subscriptionID, string accessToken = null);
-		/// <summary>Get a single subscription.</summary>
+		/// <summary>Retrieve a subscription.</summary>
 		/// <param name="subscriptionID">ID of the subscription.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TSubscription> GetSubscriptionAsync<TSubscription>(string subscriptionID, string accessToken = null) where TSubscription : Subscription;
-		/// <summary>Create a new subscription.</summary>
+		/// <summary>Create a subscription.</summary>
 		/// <param name="subscription">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Subscription> CreateSubscriptionAsync(Subscription subscription, string accessToken = null);
-		/// <summary>Create a new subscription.</summary>
+		/// <summary>Create a subscription.</summary>
 		/// <param name="subscription">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TSubscription> CreateSubscriptionAsync<TSubscription>(Subscription subscription, string accessToken = null) where TSubscription : Subscription;
@@ -3547,52 +3563,52 @@ namespace OrderCloud.SDK
 		/// <param name="subscriptionID">ID of the subscription.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task DeleteSubscriptionAsync(string subscriptionID, string accessToken = null);
-		/// <summary>Get a list of subscription items visible to this user.</summary>
+		/// <summary>List subscription items visible to this user.</summary>
 		/// <param name="subscriptionID">ID of the subscription.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<LineItem>> ListSubscriptionItemsAsync(string subscriptionID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of subscription items visible to this user.</summary>
+		/// <summary>List subscription items visible to this user.</summary>
 		/// <param name="subscriptionID">ID of the subscription.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TLineItem>> ListSubscriptionItemsAsync<TLineItem>(string subscriptionID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TLineItem : LineItem;
-		/// <summary>Get a list of subscription items visible to this user.</summary>
+		/// <summary>List subscription items visible to this user.</summary>
 		/// <param name="subscriptionID">ID of the subscription.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<LineItem>> ListSubscriptionItemsAsync(string subscriptionID, Action<ListOptionsBuilder<LineItem>> buildListOpts, string accessToken = null);
-		/// <summary>Get a list of subscription items visible to this user.</summary>
+		/// <summary>List subscription items visible to this user.</summary>
 		/// <param name="subscriptionID">ID of the subscription.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TLineItem>> ListSubscriptionItemsAsync<TLineItem>(string subscriptionID, Action<ListOptionsBuilder<TLineItem>> buildListOpts, string accessToken = null) where TLineItem : LineItem;
-		/// <summary>Get a single subscription item.</summary>
+		/// <summary>Retrieve a subscription item.</summary>
 		/// <param name="subscriptionID">ID of the subscription.</param>
 		/// <param name="subscriptionItemID">ID of the subscription item.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<LineItem> GetSubscriptionItemAsync(string subscriptionID, string subscriptionItemID, string accessToken = null);
-		/// <summary>Get a single subscription item.</summary>
+		/// <summary>Retrieve a subscription item.</summary>
 		/// <param name="subscriptionID">ID of the subscription.</param>
 		/// <param name="subscriptionItemID">ID of the subscription item.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TLineItem> GetSubscriptionItemAsync<TLineItem>(string subscriptionID, string subscriptionItemID, string accessToken = null) where TLineItem : LineItem;
-		/// <summary>Create a new subscription item.</summary>
+		/// <summary>Create a subscription item.</summary>
 		/// <param name="subscriptionID">ID of the subscription.</param>
 		/// <param name="lineItem">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<LineItem> CreateSubscriptionItemAsync(string subscriptionID, LineItem lineItem, string accessToken = null);
-		/// <summary>Create a new subscription item.</summary>
+		/// <summary>Create a subscription item.</summary>
 		/// <param name="subscriptionID">ID of the subscription.</param>
 		/// <param name="lineItem">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -3626,13 +3642,13 @@ namespace OrderCloud.SDK
 		/// <param name="subscriptionItemID">ID of the subscription item.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task DeleteSubscriptionItemAsync(string subscriptionID, string subscriptionItemID, string accessToken = null);
-		/// <summary>Create a new subscription bundle item.</summary>
+		/// <summary>Create a subscription bundle item.</summary>
 		/// <param name="subscriptionID">ID of the subscription.</param>
 		/// <param name="bundleID">ID of the bundle.</param>
 		/// <param name="bundleItems">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<LineItem> CreateSubscriptionBundleItemAsync(string subscriptionID, string bundleID, BundleItems bundleItems = null, string accessToken = null);
-		/// <summary>Create a new subscription bundle item.</summary>
+		/// <summary>Create a subscription bundle item.</summary>
 		/// <param name="subscriptionID">ID of the subscription.</param>
 		/// <param name="bundleID">ID of the bundle.</param>
 		/// <param name="bundleItems">The object that will be serialized to JSON and sent in the request body.</param>
@@ -3644,45 +3660,45 @@ namespace OrderCloud.SDK
 		/// <param name="bundleItemID">ID of the bundle item.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task DeleteSubscriptionBundleItemAsync(string subscriptionID, string bundleID, string bundleItemID, string accessToken = null);
-		/// <summary>Features in beta are subject to change and are not available in production. Get a list of group order invitations visible to this user.</summary>
+		/// <summary>Features in beta are subject to change and are not available in production. List group order invitations visible to this user.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<GroupOrderInvitation>> ListGroupOrderInvitationsAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Features in beta are subject to change and are not available in production. Get a list of group order invitations visible to this user.</summary>
+		/// <summary>Features in beta are subject to change and are not available in production. List group order invitations visible to this user.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TGroupOrderInvitation>> ListGroupOrderInvitationsAsync<TGroupOrderInvitation>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TGroupOrderInvitation : GroupOrderInvitation;
-		/// <summary>Features in beta are subject to change and are not available in production. Get a list of group order invitations visible to this user.</summary>
+		/// <summary>Features in beta are subject to change and are not available in production. List group order invitations visible to this user.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<GroupOrderInvitation>> ListGroupOrderInvitationsAsync(Action<ListOptionsBuilder<GroupOrderInvitation>> buildListOpts, string accessToken = null);
-		/// <summary>Features in beta are subject to change and are not available in production. Get a list of group order invitations visible to this user.</summary>
+		/// <summary>Features in beta are subject to change and are not available in production. List group order invitations visible to this user.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TGroupOrderInvitation>> ListGroupOrderInvitationsAsync<TGroupOrderInvitation>(Action<ListOptionsBuilder<TGroupOrderInvitation>> buildListOpts, string accessToken = null) where TGroupOrderInvitation : GroupOrderInvitation;
-		/// <summary>Features in beta are subject to change and are not available in production. Get a single group order invitation.</summary>
+		/// <summary>Features in beta are subject to change and are not available in production. Retrieve a group order invitation.</summary>
 		/// <param name="invitationID">ID of the invitation.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<GroupOrderInvitation> GetGroupOrderInvitationAsync(string invitationID, string accessToken = null);
-		/// <summary>Features in beta are subject to change and are not available in production. Get a single group order invitation.</summary>
+		/// <summary>Features in beta are subject to change and are not available in production. Retrieve a group order invitation.</summary>
 		/// <param name="invitationID">ID of the invitation.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TGroupOrderInvitation> GetGroupOrderInvitationAsync<TGroupOrderInvitation>(string invitationID, string accessToken = null) where TGroupOrderInvitation : GroupOrderInvitation;
-		/// <summary>Features in beta are subject to change and are not available in production. Create a new group order invitation.</summary>
+		/// <summary>Features in beta are subject to change and are not available in production. Create a group order invitation.</summary>
 		/// <param name="groupOrderInvitation">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<GroupOrderInvitation> CreateGroupOrderInvitationAsync(GroupOrderInvitation groupOrderInvitation, string accessToken = null);
-		/// <summary>Features in beta are subject to change and are not available in production. Create a new group order invitation.</summary>
+		/// <summary>Features in beta are subject to change and are not available in production. Create a group order invitation.</summary>
 		/// <param name="groupOrderInvitation">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TGroupOrderInvitation> CreateGroupOrderInvitationAsync<TGroupOrderInvitation>(GroupOrderInvitation groupOrderInvitation, string accessToken = null) where TGroupOrderInvitation : GroupOrderInvitation;
@@ -3700,32 +3716,32 @@ namespace OrderCloud.SDK
 		/// <param name="invitationID">ID of the invitation.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task DeleteGroupOrderInvitationAsync(string invitationID, string accessToken = null);
-		/// <summary>Get a list of product sellers visible to this user. Only available to Buyer Users.</summary>
+		/// <summary>List product sellers visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<ProductSeller>> ListProductSellersAsync(string productID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of product sellers visible to this user. Only available to Buyer Users.</summary>
+		/// <summary>List product sellers visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TProductSeller>> ListProductSellersAsync<TProductSeller>(string productID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TProductSeller : ProductSeller;
-		/// <summary>Get a list of product sellers visible to this user. Only available to Buyer Users.</summary>
+		/// <summary>List product sellers visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<ProductSeller>> ListProductSellersAsync(string productID, Action<ListOptionsBuilder<ProductSeller>> buildListOpts, string accessToken = null);
-		/// <summary>Get a list of product sellers visible to this user. Only available to Buyer Users.</summary>
+		/// <summary>List product sellers visible to this user. Only available to Buyer Users.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -3737,45 +3753,45 @@ namespace OrderCloud.SDK
 
 	public interface IMessageSendersResource
 	{
-		/// <summary>Get a single message sender.</summary>
+		/// <summary>Retrieve a message sender.</summary>
 		/// <param name="messageSenderID">ID of the message sender.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<MessageSender> GetAsync(string messageSenderID, string accessToken = null);
-		/// <summary>Get a single message sender.</summary>
+		/// <summary>Retrieve a message sender.</summary>
 		/// <param name="messageSenderID">ID of the message sender.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TMessageSender> GetAsync<TMessageSender>(string messageSenderID, string accessToken = null) where TMessageSender : MessageSender;
-		/// <summary>Get a list of message senders.</summary>
+		/// <summary>List message senders.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<MessageSender>> ListAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of message senders.</summary>
+		/// <summary>List message senders.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TMessageSender>> ListAsync<TMessageSender>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TMessageSender : MessageSender;
-		/// <summary>Get a list of message senders.</summary>
+		/// <summary>List message senders.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<MessageSender>> ListAsync(Action<ListOptionsBuilder<MessageSender>> buildListOpts, string accessToken = null);
-		/// <summary>Get a list of message senders.</summary>
+		/// <summary>List message senders.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TMessageSender>> ListAsync<TMessageSender>(Action<ListOptionsBuilder<TMessageSender>> buildListOpts, string accessToken = null) where TMessageSender : MessageSender;
-		/// <summary>Create a new message sender. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <summary>Create a message sender.</summary>
 		/// <param name="messageSender">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<MessageSender> CreateAsync(MessageSender messageSender, string accessToken = null);
-		/// <summary>Create a new message sender. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <summary>Create a message sender.</summary>
 		/// <param name="messageSender">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TMessageSender> CreateAsync<TMessageSender>(MessageSender messageSender, string accessToken = null) where TMessageSender : MessageSender;
@@ -3803,14 +3819,14 @@ namespace OrderCloud.SDK
 		/// <param name="partialMessageSender">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TMessageSender> PatchAsync<TMessageSender>(string messageSenderID, PartialMessageSender partialMessageSender, string accessToken = null) where TMessageSender : MessageSender;
-		/// <summary>Get a list of message sender assignments.</summary>
+		/// <summary>List message sender assignments.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="messageSenderID">ID of the message sender.</param>
 		/// <param name="userID">ID of the user.</param>
 		/// <param name="userGroupID">ID of the user group.</param>
 		/// <param name="level">Level of the message sender assignment. Possible values: User, Group, Company.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="supplierID">ID of the supplier.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<MessageSenderAssignment>> ListAssignmentsAsync(string buyerID = null, string messageSenderID = null, string userID = null, string userGroupID = null, PartyType? level = null, int? page = null, int? pageSize = null, string supplierID = null, string accessToken = null);
@@ -3826,16 +3842,16 @@ namespace OrderCloud.SDK
 		/// <param name="messageSenderAssignment">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task SaveAssignmentAsync(MessageSenderAssignment messageSenderAssignment, string accessToken = null);
-		/// <summary>Get a list of message sender cc listener assignments.</summary>
+		/// <summary>List message sender cc listener assignments.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<MessageCCListenerAssignment>> ListCCListenerAssignmentsAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of message sender cc listener assignments.</summary>
+		/// <summary>List message sender cc listener assignments.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<MessageCCListenerAssignment>> ListCCListenerAssignmentsAsync(Action<ListOptionsBuilder<MessageCCListenerAssignment>> buildListOpts, string accessToken = null);
@@ -3847,37 +3863,37 @@ namespace OrderCloud.SDK
 
 	public interface IOpenIdConnectsResource
 	{
-		/// <summary>Get a single OpenID Connect.</summary>
+		/// <summary>Retrieve an OpenID Connect.</summary>
 		/// <param name="openidconnectID">ID of the openidconnect.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<OpenIdConnect> GetAsync(string openidconnectID, string accessToken = null);
-		/// <summary>Get a list of OpenID Connects.</summary>
+		/// <summary>List OpenID Connects.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<OpenIdConnect>> ListAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of OpenID Connects.</summary>
+		/// <summary>List OpenID Connects.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<OpenIdConnect>> ListAsync(Action<ListOptionsBuilder<OpenIdConnect>> buildListOpts, string accessToken = null);
-		/// <summary>Create a new OpenID Connect. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <summary>Create an OpenID Connect.</summary>
 		/// <param name="openIdConnect">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<OpenIdConnect> CreateAsync(OpenIdConnect openIdConnect, string accessToken = null);
-		/// <summary>Create or update a OpenID Connect. If an object with the same ID already exists, it will be overwritten.</summary>
+		/// <summary>Create or update an OpenID Connect. If an object with the same ID already exists, it will be overwritten.</summary>
 		/// <param name="openidconnectID">ID of the openidconnect.</param>
 		/// <param name="openIdConnect">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<OpenIdConnect> SaveAsync(string openidconnectID, OpenIdConnect openIdConnect, string accessToken = null);
-		/// <summary>Delete a OpenID Connect.</summary>
+		/// <summary>Delete an OpenID Connect.</summary>
 		/// <param name="openidconnectID">ID of the openidconnect.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task DeleteAsync(string openidconnectID, string accessToken = null);
-		/// <summary>Partially update a OpenID Connect.</summary>
+		/// <summary>Partially update an OpenID Connect.</summary>
 		/// <param name="openidconnectID">ID of the openidconnect.</param>
 		/// <param name="partialOpenIdConnect">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -3886,49 +3902,49 @@ namespace OrderCloud.SDK
 
 	public interface IOrderReturnsResource
 	{
-		/// <summary>Get a single order return.</summary>
+		/// <summary>Retrieve an order return.</summary>
 		/// <param name="returnID">ID of the return.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<OrderReturn> GetAsync(string returnID, string accessToken = null);
-		/// <summary>Get a single order return.</summary>
+		/// <summary>Retrieve an order return.</summary>
 		/// <param name="returnID">ID of the return.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TOrderReturn> GetAsync<TOrderReturn>(string returnID, string accessToken = null) where TOrderReturn : OrderReturn;
-		/// <summary>Get a list of order returns.</summary>
+		/// <summary>List order returns.</summary>
 		/// <param name="approvable">Only returns orders awaiting the user's approval if true.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<OrderReturn>> ListAsync(bool approvable = false, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of order returns.</summary>
+		/// <summary>List order returns.</summary>
 		/// <param name="approvable">Only returns orders awaiting the user's approval if true.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TOrderReturn>> ListAsync<TOrderReturn>(bool approvable = false, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TOrderReturn : OrderReturn;
-		/// <summary>Get a list of order returns.</summary>
+		/// <summary>List order returns.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="approvable">Only returns orders awaiting the user's approval if true.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<OrderReturn>> ListAsync(Action<ListOptionsBuilder<OrderReturn>> buildListOpts, bool approvable = false, string accessToken = null);
-		/// <summary>Get a list of order returns.</summary>
+		/// <summary>List order returns.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="approvable">Only returns orders awaiting the user's approval if true.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TOrderReturn>> ListAsync<TOrderReturn>(Action<ListOptionsBuilder<TOrderReturn>> buildListOpts, bool approvable = false, string accessToken = null) where TOrderReturn : OrderReturn;
-		/// <summary>Create a new order return. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <summary>Create an order return.</summary>
 		/// <param name="orderReturn">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<OrderReturn> CreateAsync(OrderReturn orderReturn, string accessToken = null);
-		/// <summary>Create a new order return. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <summary>Create an order return.</summary>
 		/// <param name="orderReturn">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TOrderReturn> CreateAsync<TOrderReturn>(OrderReturn orderReturn, string accessToken = null) where TOrderReturn : OrderReturn;
@@ -3966,106 +3982,106 @@ namespace OrderCloud.SDK
 		/// <param name="lineItemID">ID of the line item.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TOrderReturn> DeleteItemAsync<TOrderReturn>(string returnID, string lineItemID, string accessToken = null) where TOrderReturn : OrderReturn;
-		/// <summary>Cancel an OrderReturn.</summary>
+		/// <summary>Cancel an order return</summary>
 		/// <param name="returnID">ID of the return.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<OrderReturn> CancelAsync(string returnID, string accessToken = null);
-		/// <summary>Cancel an OrderReturn.</summary>
+		/// <summary>Cancel an order return</summary>
 		/// <param name="returnID">ID of the return.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TOrderReturn> CancelAsync<TOrderReturn>(string returnID, string accessToken = null) where TOrderReturn : OrderReturn;
-		/// <summary>Complete an OrderReturn. Use only when an order return won't have an associated payment. You will not to reopen an order return after completing it.</summary>
+		/// <summary>Complete an order return Use only when an order return won't have an associated payment. You will not to reopen an order return after completing it.</summary>
 		/// <param name="returnID">ID of the return.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<OrderReturn> CompleteAsync(string returnID, string accessToken = null);
-		/// <summary>Complete an OrderReturn. Use only when an order return won't have an associated payment. You will not to reopen an order return after completing it.</summary>
+		/// <summary>Complete an order return Use only when an order return won't have an associated payment. You will not to reopen an order return after completing it.</summary>
 		/// <param name="returnID">ID of the return.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TOrderReturn> CompleteAsync<TOrderReturn>(string returnID, string accessToken = null) where TOrderReturn : OrderReturn;
-		/// <summary>Submit an order return.</summary>
+		/// <summary>Submit an order return</summary>
 		/// <param name="returnID">ID of the return.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<OrderReturn> SubmitAsync(string returnID, string accessToken = null);
-		/// <summary>Submit an order return.</summary>
+		/// <summary>Submit an order return</summary>
 		/// <param name="returnID">ID of the return.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TOrderReturn> SubmitAsync<TOrderReturn>(string returnID, string accessToken = null) where TOrderReturn : OrderReturn;
-		/// <summary>Get a list of order return approvals. Returns all Approvals associated with the Order Return.</summary>
+		/// <summary>List order return approvals. Returns all Approvals associated with the Order Return.</summary>
 		/// <param name="returnID">ID of the return.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<OrderReturnApproval>> ListApprovalsAsync(string returnID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of order return approvals. Returns all Approvals associated with the Order Return.</summary>
+		/// <summary>List order return approvals. Returns all Approvals associated with the Order Return.</summary>
 		/// <param name="returnID">ID of the return.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TOrderReturnApproval>> ListApprovalsAsync<TOrderReturnApproval>(string returnID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TOrderReturnApproval : OrderReturnApproval;
-		/// <summary>Get a list of order return approvals. Returns all Approvals associated with the Order Return.</summary>
+		/// <summary>List order return approvals. Returns all Approvals associated with the Order Return.</summary>
 		/// <param name="returnID">ID of the return.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<OrderReturnApproval>> ListApprovalsAsync(string returnID, Action<ListOptionsBuilder<OrderReturnApproval>> buildListOpts, string accessToken = null);
-		/// <summary>Get a list of order return approvals. Returns all Approvals associated with the Order Return.</summary>
+		/// <summary>List order return approvals. Returns all Approvals associated with the Order Return.</summary>
 		/// <param name="returnID">ID of the return.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TOrderReturnApproval>> ListApprovalsAsync<TOrderReturnApproval>(string returnID, Action<ListOptionsBuilder<TOrderReturnApproval>> buildListOpts, string accessToken = null) where TOrderReturnApproval : OrderReturnApproval;
-		/// <summary>Get a list of order return eligible approvers. Returns all Users who can approve or decline this order return (but have not done so).</summary>
+		/// <summary>List order return eligible approvers. Returns all Users who can approve or decline this order return (but have not done so).</summary>
 		/// <param name="returnID">ID of the return.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<User>> ListEligibleApproversAsync(string returnID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of order return eligible approvers. Returns all Users who can approve or decline this order return (but have not done so).</summary>
+		/// <summary>List order return eligible approvers. Returns all Users who can approve or decline this order return (but have not done so).</summary>
 		/// <param name="returnID">ID of the return.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TUser>> ListEligibleApproversAsync<TUser>(string returnID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TUser : User;
-		/// <summary>Get a list of order return eligible approvers. Returns all Users who can approve or decline this order return (but have not done so).</summary>
+		/// <summary>List order return eligible approvers. Returns all Users who can approve or decline this order return (but have not done so).</summary>
 		/// <param name="returnID">ID of the return.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<User>> ListEligibleApproversAsync(string returnID, Action<ListOptionsBuilder<User>> buildListOpts, string accessToken = null);
-		/// <summary>Get a list of order return eligible approvers. Returns all Users who can approve or decline this order return (but have not done so).</summary>
+		/// <summary>List order return eligible approvers. Returns all Users who can approve or decline this order return (but have not done so).</summary>
 		/// <param name="returnID">ID of the return.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TUser>> ListEligibleApproversAsync<TUser>(string returnID, Action<ListOptionsBuilder<TUser>> buildListOpts, string accessToken = null) where TUser : User;
-		/// <summary>Approve an order return.</summary>
+		/// <summary>Approve an order return</summary>
 		/// <param name="returnID">ID of the return.</param>
 		/// <param name="approvalInfo">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<OrderReturn> ApproveAsync(string returnID, ApprovalInfo approvalInfo = null, string accessToken = null);
-		/// <summary>Approve an order return.</summary>
+		/// <summary>Approve an order return</summary>
 		/// <param name="returnID">ID of the return.</param>
 		/// <param name="approvalInfo">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TOrderReturn> ApproveAsync<TOrderReturn>(string returnID, ApprovalInfo approvalInfo = null, string accessToken = null) where TOrderReturn : OrderReturn;
-		/// <summary>Decline an order return.</summary>
+		/// <summary>Decline an order return</summary>
 		/// <param name="returnID">ID of the return.</param>
 		/// <param name="approvalInfo">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<OrderReturn> DeclineAsync(string returnID, ApprovalInfo approvalInfo = null, string accessToken = null);
-		/// <summary>Decline an order return.</summary>
+		/// <summary>Decline an order return</summary>
 		/// <param name="returnID">ID of the return.</param>
 		/// <param name="approvalInfo">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -4074,48 +4090,48 @@ namespace OrderCloud.SDK
 
 	public interface IOrdersResource
 	{
-		/// <summary>Get a single order.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>Retrieve an order.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Order> GetAsync(OrderDirection direction, string orderID, string accessToken = null);
-		/// <summary>Get a single order.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>Retrieve an order.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TOrder> GetAsync<TOrder>(OrderDirection direction, string orderID, string accessToken = null) where TOrder : Order;
-		/// <summary>Get a list of orders.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>List orders.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="supplierID">ID of the supplier.</param>
 		/// <param name="from">Lower bound of date range that the order was created.</param>
 		/// <param name="to">Upper bound of date range that the order was created.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
-		/// <param name="searchType">Type of search to perform. Possible values: AnyTerm (default), AllTermsAnyField, AllTermsSameField, ExactPhrase, ExactPhrasePrefix.</param>
+		/// <param name="searchType">Type of search to perform.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Order>> ListAsync(OrderDirection direction, string buyerID = null, string supplierID = null, DateTimeOffset? from = null, DateTimeOffset? to = null, string search = null, string searchOn = null, SearchType searchType = SearchType.AnyTerm, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of orders.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>List orders.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="supplierID">ID of the supplier.</param>
 		/// <param name="from">Lower bound of date range that the order was created.</param>
 		/// <param name="to">Upper bound of date range that the order was created.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
-		/// <param name="searchType">Type of search to perform. Possible values: AnyTerm (default), AllTermsAnyField, AllTermsSameField, ExactPhrase, ExactPhrasePrefix.</param>
+		/// <param name="searchType">Type of search to perform.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TOrder>> ListAsync<TOrder>(OrderDirection direction, string buyerID = null, string supplierID = null, DateTimeOffset? from = null, DateTimeOffset? to = null, string search = null, string searchOn = null, SearchType searchType = SearchType.AnyTerm, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TOrder : Order;
-		/// <summary>Get a list of orders.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>List orders.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="supplierID">ID of the supplier.</param>
@@ -4123,8 +4139,8 @@ namespace OrderCloud.SDK
 		/// <param name="to">Upper bound of date range that the order was created.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Order>> ListAsync(OrderDirection direction, Action<ListOptionsBuilder2<Order>> buildListOpts, string buyerID = null, string supplierID = null, DateTimeOffset? from = null, DateTimeOffset? to = null, string accessToken = null);
-		/// <summary>Get a list of orders.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>List orders.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="supplierID">ID of the supplier.</param>
@@ -4132,407 +4148,407 @@ namespace OrderCloud.SDK
 		/// <param name="to">Upper bound of date range that the order was created.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TOrder>> ListAsync<TOrder>(OrderDirection direction, Action<ListOptionsBuilder2<TOrder>> buildListOpts, string buyerID = null, string supplierID = null, DateTimeOffset? from = null, DateTimeOffset? to = null, string accessToken = null) where TOrder : Order;
-		/// <summary>Create a new order. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>Create an order.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="order">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Order> CreateAsync(OrderDirection direction, Order order = null, string accessToken = null);
-		/// <summary>Create a new order. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>Create an order.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="order">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TOrder> CreateAsync<TOrder>(OrderDirection direction, Order order = null, string accessToken = null) where TOrder : Order;
 		/// <summary>Create or update an order. If an object with the same ID already exists, it will be overwritten.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="order">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Order> SaveAsync(OrderDirection direction, string orderID, Order order, string accessToken = null);
 		/// <summary>Create or update an order. If an object with the same ID already exists, it will be overwritten.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="order">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TOrder> SaveAsync<TOrder>(OrderDirection direction, string orderID, Order order, string accessToken = null) where TOrder : Order;
 		/// <summary>Delete an order.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task DeleteAsync(OrderDirection direction, string orderID, string accessToken = null);
-		/// <summary>Get a list of order approvals. Returns all Approvals associated with the Order.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>List order approvals. Returns all Approvals associated with the Order.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<OrderApproval>> ListApprovalsAsync(OrderDirection direction, string orderID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of order approvals. Returns all Approvals associated with the Order.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>List order approvals. Returns all Approvals associated with the Order.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TOrderApproval>> ListApprovalsAsync<TOrderApproval>(OrderDirection direction, string orderID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TOrderApproval : OrderApproval;
-		/// <summary>Get a list of order approvals. Returns all Approvals associated with the Order.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>List order approvals. Returns all Approvals associated with the Order.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<OrderApproval>> ListApprovalsAsync(OrderDirection direction, string orderID, Action<ListOptionsBuilder<OrderApproval>> buildListOpts, string accessToken = null);
-		/// <summary>Get a list of order approvals. Returns all Approvals associated with the Order.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>List order approvals. Returns all Approvals associated with the Order.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TOrderApproval>> ListApprovalsAsync<TOrderApproval>(OrderDirection direction, string orderID, Action<ListOptionsBuilder<TOrderApproval>> buildListOpts, string accessToken = null) where TOrderApproval : OrderApproval;
-		/// <summary>Get a list of order eligible approvers. Returns all Users who can approve or decline this order (but have not done so).</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>List order eligible approvers. Returns all Users who can approve or decline this order (but have not done so).</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<User>> ListEligibleApproversAsync(OrderDirection direction, string orderID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of order eligible approvers. Returns all Users who can approve or decline this order (but have not done so).</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>List order eligible approvers. Returns all Users who can approve or decline this order (but have not done so).</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TUser>> ListEligibleApproversAsync<TUser>(OrderDirection direction, string orderID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TUser : User;
-		/// <summary>Get a list of order eligible approvers. Returns all Users who can approve or decline this order (but have not done so).</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>List order eligible approvers. Returns all Users who can approve or decline this order (but have not done so).</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<User>> ListEligibleApproversAsync(OrderDirection direction, string orderID, Action<ListOptionsBuilder<User>> buildListOpts, string accessToken = null);
-		/// <summary>Get a list of order eligible approvers. Returns all Users who can approve or decline this order (but have not done so).</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>List order eligible approvers. Returns all Users who can approve or decline this order (but have not done so).</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TUser>> ListEligibleApproversAsync<TUser>(OrderDirection direction, string orderID, Action<ListOptionsBuilder<TUser>> buildListOpts, string accessToken = null) where TUser : User;
 		/// <summary>Partially update an order.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="partialOrder">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Order> PatchAsync(OrderDirection direction, string orderID, PartialOrder partialOrder, string accessToken = null);
 		/// <summary>Partially update an order.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="partialOrder">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TOrder> PatchAsync<TOrder>(OrderDirection direction, string orderID, PartialOrder partialOrder, string accessToken = null) where TOrder : Order;
-		/// <summary>Submit an order.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>Submit an order</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Order> SubmitAsync(OrderDirection direction, string orderID, string accessToken = null);
-		/// <summary>Submit an order.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>Submit an order</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TOrder> SubmitAsync<TOrder>(OrderDirection direction, string orderID, string accessToken = null) where TOrder : Order;
-		/// <summary>Approve an order.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>Approve an order</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="orderApprovalInfo">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Order> ApproveAsync(OrderDirection direction, string orderID, OrderApprovalInfo orderApprovalInfo = null, string accessToken = null);
-		/// <summary>Approve an order.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>Approve an order</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="orderApprovalInfo">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TOrder> ApproveAsync<TOrder>(OrderDirection direction, string orderID, OrderApprovalInfo orderApprovalInfo = null, string accessToken = null) where TOrder : Order;
-		/// <summary>Decline an order.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>Decline an order</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="orderApprovalInfo">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Order> DeclineAsync(OrderDirection direction, string orderID, OrderApprovalInfo orderApprovalInfo = null, string accessToken = null);
-		/// <summary>Decline an order.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>Decline an order</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="orderApprovalInfo">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TOrder> DeclineAsync<TOrder>(OrderDirection direction, string orderID, OrderApprovalInfo orderApprovalInfo = null, string accessToken = null) where TOrder : Order;
-		/// <summary>Cancel an order.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>Cancel an order</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Order> CancelAsync(OrderDirection direction, string orderID, string accessToken = null);
-		/// <summary>Cancel an order.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>Cancel an order</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TOrder> CancelAsync<TOrder>(OrderDirection direction, string orderID, string accessToken = null) where TOrder : Order;
-		/// <summary>Split an order. Creates, but does not submit, 0 or more outgoing Orders to Suppliers, one for each unique Product.DefaultSupplierID on this Order.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>Split an order Creates, but does not submit, 0 or more outgoing Orders to Suppliers, one for each unique Product.DefaultSupplierID on this Order.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<OrderSplitResult> SplitAsync(OrderDirection direction, string orderID, string accessToken = null);
-		/// <summary>Split an order. Creates, but does not submit, 0 or more outgoing Orders to Suppliers, one for each unique Product.DefaultSupplierID on this Order.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>Split an order Creates, but does not submit, 0 or more outgoing Orders to Suppliers, one for each unique Product.DefaultSupplierID on this Order.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TOrderSplitResult> SplitAsync<TOrderSplitResult>(OrderDirection direction, string orderID, string accessToken = null) where TOrderSplitResult : OrderSplitResult;
-		/// <summary>Forward an order. Creates and submits 0 or more outgoing Orders to Suppliers, one for each unique Product.DefaultSupplierID on this Order.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>Forward an order Creates and submits 0 or more outgoing Orders to Suppliers, one for each unique Product.DefaultSupplierID on this Order.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<OrderSplitResult> ForwardAsync(OrderDirection direction, string orderID, string accessToken = null);
-		/// <summary>Forward an order. Creates and submits 0 or more outgoing Orders to Suppliers, one for each unique Product.DefaultSupplierID on this Order.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>Forward an order Creates and submits 0 or more outgoing Orders to Suppliers, one for each unique Product.DefaultSupplierID on this Order.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TOrderSplitResult> ForwardAsync<TOrderSplitResult>(OrderDirection direction, string orderID, string accessToken = null) where TOrderSplitResult : OrderSplitResult;
-		/// <summary>Complete an order. Use only when an order doesn't need a shipment. You will not be able to ship or reopen an order after completing it.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>Complete an order Use only when an order doesn't need a shipment. You will not be able to ship or reopen an order after completing it.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Order> CompleteAsync(OrderDirection direction, string orderID, string accessToken = null);
-		/// <summary>Complete an order. Use only when an order doesn't need a shipment. You will not be able to ship or reopen an order after completing it.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>Complete an order Use only when an order doesn't need a shipment. You will not be able to ship or reopen an order after completing it.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TOrder> CompleteAsync<TOrder>(OrderDirection direction, string orderID, string accessToken = null) where TOrder : Order;
-		/// <summary>Create a new shipment containing all items on an order.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>Create a new shipment containing all items on an order</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="shipment">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Order> ShipAsync(OrderDirection direction, string orderID, Shipment shipment, string accessToken = null);
-		/// <summary>Create a new shipment containing all items on an order.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>Create a new shipment containing all items on an order</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="shipment">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TOrder> ShipAsync<TOrder>(OrderDirection direction, string orderID, Shipment shipment, string accessToken = null) where TOrder : Order;
-		/// <summary>List shipments for an order.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>List shipments for an order</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Shipment>> ListShipmentsAsync(OrderDirection direction, string orderID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>List shipments for an order.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>List shipments for an order</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TShipment>> ListShipmentsAsync<TShipment>(OrderDirection direction, string orderID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TShipment : Shipment;
-		/// <summary>List shipments for an order.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>List shipments for an order</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Shipment>> ListShipmentsAsync(OrderDirection direction, string orderID, Action<ListOptionsBuilder<Shipment>> buildListOpts, string accessToken = null);
-		/// <summary>List shipments for an order.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>List shipments for an order</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TShipment>> ListShipmentsAsync<TShipment>(OrderDirection direction, string orderID, Action<ListOptionsBuilder<TShipment>> buildListOpts, string accessToken = null) where TShipment : Shipment;
-		/// <summary>Set a shipping address.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>Set a shipping address</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="address">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Order> SetShippingAddressAsync(OrderDirection direction, string orderID, Address address, string accessToken = null);
-		/// <summary>Set a shipping address.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>Set a shipping address</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="address">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TOrder> SetShippingAddressAsync<TOrder>(OrderDirection direction, string orderID, Address address, string accessToken = null) where TOrder : Order;
 		/// <summary>Partially update an order shipping address. Not allowed on unsubmitted orders where ShippingAddressID has been set. In that case, use the Addresses resource to update the saved address.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="partialAddress">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Order> PatchShippingAddressAsync(OrderDirection direction, string orderID, PartialAddress partialAddress, string accessToken = null);
 		/// <summary>Partially update an order shipping address. Not allowed on unsubmitted orders where ShippingAddressID has been set. In that case, use the Addresses resource to update the saved address.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="partialAddress">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TOrder> PatchShippingAddressAsync<TOrder>(OrderDirection direction, string orderID, PartialAddress partialAddress, string accessToken = null) where TOrder : Order;
-		/// <summary>Set a billing address. Use only when the address is not to be saved/reused. To use a saved address (i.e. from the Addresses resource), PATCH the order's BillingAddressID property instead.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>Set a billing address Use only when the address is not to be saved/reused. To use a saved address (i.e. from the Addresses resource), PATCH the order's BillingAddressID property instead.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="address">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Order> SetBillingAddressAsync(OrderDirection direction, string orderID, Address address, string accessToken = null);
-		/// <summary>Set a billing address. Use only when the address is not to be saved/reused. To use a saved address (i.e. from the Addresses resource), PATCH the order's BillingAddressID property instead.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>Set a billing address Use only when the address is not to be saved/reused. To use a saved address (i.e. from the Addresses resource), PATCH the order's BillingAddressID property instead.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="address">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TOrder> SetBillingAddressAsync<TOrder>(OrderDirection direction, string orderID, Address address, string accessToken = null) where TOrder : Order;
 		/// <summary>Partially update an order billing address. Not allowed on unsubmitted orders where BillingAddressID has been set. In that case, use the Addresses resource to update the saved address.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="partialAddress">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Order> PatchBillingAddressAsync(OrderDirection direction, string orderID, PartialAddress partialAddress, string accessToken = null);
 		/// <summary>Partially update an order billing address. Not allowed on unsubmitted orders where BillingAddressID has been set. In that case, use the Addresses resource to update the saved address.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="partialAddress">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TOrder> PatchBillingAddressAsync<TOrder>(OrderDirection direction, string orderID, PartialAddress partialAddress, string accessToken = null) where TOrder : Order;
-		/// <summary>Update order FromUser. Only FirstName, LastName, and Email can be updated. Primarily used to facilitate guest checkout scenarios.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>Partially update an order from user. Only FirstName, LastName, and Email can be updated. Primarily used to facilitate guest checkout scenarios.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="partialUser">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Order> PatchFromUserAsync(OrderDirection direction, string orderID, PartialUser partialUser, string accessToken = null);
-		/// <summary>Update order FromUser. Only FirstName, LastName, and Email can be updated. Primarily used to facilitate guest checkout scenarios.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>Partially update an order from user. Only FirstName, LastName, and Email can be updated. Primarily used to facilitate guest checkout scenarios.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="partialUser">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TOrder> PatchFromUserAsync<TOrder>(OrderDirection direction, string orderID, PartialUser partialUser, string accessToken = null) where TOrder : Order;
-		/// <summary>List eligible promotions. Get a list of promotions eligible for an order.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>List eligible promotions for an order</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<EligiblePromotion>> ListEligiblePromotionsAsync(OrderDirection direction, string orderID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>List eligible promotions. Get a list of promotions eligible for an order.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>List eligible promotions for an order</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TEligiblePromotion>> ListEligiblePromotionsAsync<TEligiblePromotion>(OrderDirection direction, string orderID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TEligiblePromotion : EligiblePromotion;
-		/// <summary>List eligible promotions. Get a list of promotions eligible for an order.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>List eligible promotions for an order</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<EligiblePromotion>> ListEligiblePromotionsAsync(OrderDirection direction, string orderID, Action<ListOptionsBuilder<EligiblePromotion>> buildListOpts, string accessToken = null);
-		/// <summary>List eligible promotions. Get a list of promotions eligible for an order.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>List eligible promotions for an order</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TEligiblePromotion>> ListEligiblePromotionsAsync<TEligiblePromotion>(OrderDirection direction, string orderID, Action<ListOptionsBuilder<TEligiblePromotion>> buildListOpts, string accessToken = null) where TEligiblePromotion : EligiblePromotion;
-		/// <summary>Add a promotion to an order.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>Add a promotion to an order</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="promoCode">Promo code of the order promotion.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<OrderPromotion> AddPromotionAsync(OrderDirection direction, string orderID, string promoCode, string accessToken = null);
-		/// <summary>Add a promotion to an order.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>Add a promotion to an order</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="promoCode">Promo code of the order promotion.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TOrderPromotion> AddPromotionAsync<TOrderPromotion>(OrderDirection direction, string orderID, string promoCode, string accessToken = null) where TOrderPromotion : OrderPromotion;
-		/// <summary>Get a list of order promotions.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>List order promotions.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<OrderPromotion>> ListPromotionsAsync(OrderDirection direction, string orderID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of order promotions.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>List order promotions.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TOrderPromotion>> ListPromotionsAsync<TOrderPromotion>(OrderDirection direction, string orderID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TOrderPromotion : OrderPromotion;
-		/// <summary>Get a list of order promotions.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>List order promotions.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<OrderPromotion>> ListPromotionsAsync(OrderDirection direction, string orderID, Action<ListOptionsBuilder<OrderPromotion>> buildListOpts, string accessToken = null);
-		/// <summary>Get a list of order promotions.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>List order promotions.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TOrderPromotion>> ListPromotionsAsync<TOrderPromotion>(OrderDirection direction, string orderID, Action<ListOptionsBuilder<TOrderPromotion>> buildListOpts, string accessToken = null) where TOrderPromotion : OrderPromotion;
-		/// <summary>Remove a promotion from an order.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>Remove a promotion from an order</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="promoCode">Promo code of the order.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Order> RemovePromotionAsync(OrderDirection direction, string orderID, string promoCode, string accessToken = null);
-		/// <summary>Remove a promotion from an order.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>Remove a promotion from an order</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="promoCode">Promo code of the order.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TOrder> RemovePromotionAsync<TOrder>(OrderDirection direction, string orderID, string promoCode, string accessToken = null) where TOrder : Order;
-		/// <summary>Auto-apply promotions to an order. Apply up to 100 eligible promotions where AutoApply=true.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>Auto-apply promotions to an order Apply up to 100 eligible promotions where AutoApply=true.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Order> ApplyPromotionsAsync(OrderDirection direction, string orderID, string accessToken = null);
-		/// <summary>Auto-apply promotions to an order. Apply up to 100 eligible promotions where AutoApply=true.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>Auto-apply promotions to an order Apply up to 100 eligible promotions where AutoApply=true.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TOrder> ApplyPromotionsAsync<TOrder>(OrderDirection direction, string orderID, string accessToken = null) where TOrder : Order;
-		/// <summary>Refresh promotions on an order. Re-calculates promotion discounts, removes promotions that are no longer valid, and adds eligible promotions where AutoApply=true (up to limit of 100)</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>Refresh promotions on an order Re-calculates promotion discounts, removes promotions that are no longer valid, and adds eligible promotions where AutoApply=true (up to limit of 100)</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<RefreshPromosResponse> RefreshPromotionsAsync(OrderDirection direction, string orderID, string accessToken = null);
-		/// <summary>Refresh promotions on an order. Re-calculates promotion discounts, removes promotions that are no longer valid, and adds eligible promotions where AutoApply=true (up to limit of 100)</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>Refresh promotions on an order Re-calculates promotion discounts, removes promotions that are no longer valid, and adds eligible promotions where AutoApply=true (up to limit of 100)</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TRefreshPromosResponse> RefreshPromotionsAsync<TRefreshPromosResponse>(OrderDirection direction, string orderID, string accessToken = null) where TRefreshPromosResponse : RefreshPromosResponse;
-		/// <summary>Validate an order in its current state.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>Validate an order in its current state</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task ValidateAsync(OrderDirection direction, string orderID, string accessToken = null);
@@ -4540,7 +4556,7 @@ namespace OrderCloud.SDK
 
 	public interface IOrderSyncsResource
 	{
-		/// <summary>Get a single order sync.</summary>
+		/// <summary>Retrieve an order sync.</summary>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<OrderSyncConfig> GetAsync(string accessToken = null);
 		/// <summary>Delete an order sync.</summary>
@@ -4558,100 +4574,100 @@ namespace OrderCloud.SDK
 
 	public interface IPaymentsResource
 	{
-		/// <summary>Get a single payment.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>Retrieve a payment.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="paymentID">ID of the payment.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Payment> GetAsync(OrderDirection direction, string orderID, string paymentID, string accessToken = null);
-		/// <summary>Get a single payment.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>Retrieve a payment.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="paymentID">ID of the payment.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TPayment> GetAsync<TPayment>(OrderDirection direction, string orderID, string paymentID, string accessToken = null) where TPayment : Payment;
-		/// <summary>Get a list of payments.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>List payments.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Payment>> ListAsync(OrderDirection direction, string orderID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of payments.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>List payments.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TPayment>> ListAsync<TPayment>(OrderDirection direction, string orderID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TPayment : Payment;
-		/// <summary>Get a list of payments.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>List payments.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Payment>> ListAsync(OrderDirection direction, string orderID, Action<ListOptionsBuilder<Payment>> buildListOpts, string accessToken = null);
-		/// <summary>Get a list of payments.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>List payments.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TPayment>> ListAsync<TPayment>(OrderDirection direction, string orderID, Action<ListOptionsBuilder<TPayment>> buildListOpts, string accessToken = null) where TPayment : Payment;
-		/// <summary>Create a new payment. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>Create a payment.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="payment">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Payment> CreateAsync(OrderDirection direction, string orderID, Payment payment, string accessToken = null);
-		/// <summary>Create a new payment. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>Create a payment.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="payment">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TPayment> CreateAsync<TPayment>(OrderDirection direction, string orderID, Payment payment, string accessToken = null) where TPayment : Payment;
 		/// <summary>Delete a payment.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="paymentID">ID of the payment.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task DeleteAsync(OrderDirection direction, string orderID, string paymentID, string accessToken = null);
 		/// <summary>Partially update a payment.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="paymentID">ID of the payment.</param>
 		/// <param name="partialPayment">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Payment> PatchAsync(OrderDirection direction, string orderID, string paymentID, PartialPayment partialPayment, string accessToken = null);
 		/// <summary>Partially update a payment.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="paymentID">ID of the payment.</param>
 		/// <param name="partialPayment">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TPayment> PatchAsync<TPayment>(OrderDirection direction, string orderID, string paymentID, PartialPayment partialPayment, string accessToken = null) where TPayment : Payment;
-		/// <summary>Create a new payment transaction.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>Create a payment transaction.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="paymentID">ID of the payment.</param>
 		/// <param name="paymentTransaction">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Payment> CreateTransactionAsync(OrderDirection direction, string orderID, string paymentID, PaymentTransaction paymentTransaction, string accessToken = null);
-		/// <summary>Create a new payment transaction.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <summary>Create a payment transaction.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="paymentID">ID of the payment.</param>
 		/// <param name="paymentTransaction">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TPayment> CreateTransactionAsync<TPayment>(OrderDirection direction, string orderID, string paymentID, PaymentTransaction paymentTransaction, string accessToken = null) where TPayment : Payment;
 		/// <summary>Delete a payment transaction.</summary>
-		/// <param name="direction">Direction of the order, from the current user's perspective. Possible values: incoming, outgoing, all.</param>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="paymentID">ID of the payment.</param>
 		/// <param name="transactionID">ID of the transaction.</param>
@@ -4661,45 +4677,45 @@ namespace OrderCloud.SDK
 
 	public interface IPriceSchedulesResource
 	{
-		/// <summary>Get a single price schedule.</summary>
+		/// <summary>Retrieve a price schedule.</summary>
 		/// <param name="priceScheduleID">ID of the price schedule.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<PriceSchedule> GetAsync(string priceScheduleID, string accessToken = null);
-		/// <summary>Get a single price schedule.</summary>
+		/// <summary>Retrieve a price schedule.</summary>
 		/// <param name="priceScheduleID">ID of the price schedule.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TPriceSchedule> GetAsync<TPriceSchedule>(string priceScheduleID, string accessToken = null) where TPriceSchedule : PriceSchedule;
-		/// <summary>Get a list of price schedules.</summary>
+		/// <summary>List price schedules.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<PriceSchedule>> ListAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of price schedules.</summary>
+		/// <summary>List price schedules.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TPriceSchedule>> ListAsync<TPriceSchedule>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TPriceSchedule : PriceSchedule;
-		/// <summary>Get a list of price schedules.</summary>
+		/// <summary>List price schedules.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<PriceSchedule>> ListAsync(Action<ListOptionsBuilder<PriceSchedule>> buildListOpts, string accessToken = null);
-		/// <summary>Get a list of price schedules.</summary>
+		/// <summary>List price schedules.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TPriceSchedule>> ListAsync<TPriceSchedule>(Action<ListOptionsBuilder<TPriceSchedule>> buildListOpts, string accessToken = null) where TPriceSchedule : PriceSchedule;
-		/// <summary>Create a new price schedule. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <summary>Create a price schedule.</summary>
 		/// <param name="priceSchedule">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<PriceSchedule> CreateAsync(PriceSchedule priceSchedule, string accessToken = null);
-		/// <summary>Create a new price schedule. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <summary>Create a price schedule.</summary>
 		/// <param name="priceSchedule">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TPriceSchedule> CreateAsync<TPriceSchedule>(PriceSchedule priceSchedule, string accessToken = null) where TPriceSchedule : PriceSchedule;
@@ -4746,77 +4762,77 @@ namespace OrderCloud.SDK
 
 	public interface IProductCollectionsResource
 	{
-		/// <summary>Get a single product collection.</summary>
+		/// <summary>Retrieve a product collection.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="productCollectionID">ID of the product collection.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ProductCollection> GetAsync(string buyerID, string productCollectionID, string accessToken = null);
-		/// <summary>Get a single product collection.</summary>
+		/// <summary>Retrieve a product collection.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="productCollectionID">ID of the product collection.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TProductCollection> GetAsync<TProductCollection>(string buyerID, string productCollectionID, string accessToken = null) where TProductCollection : ProductCollection;
-		/// <summary>Get a list of product collections.</summary>
+		/// <summary>List product collections.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<ProductCollection>> ListAsync(string buyerID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of product collections.</summary>
+		/// <summary>List product collections.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TProductCollection>> ListAsync<TProductCollection>(string buyerID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TProductCollection : ProductCollection;
-		/// <summary>Get a list of product collections.</summary>
+		/// <summary>List product collections.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<ProductCollection>> ListAsync(string buyerID, Action<ListOptionsBuilder<ProductCollection>> buildListOpts, string accessToken = null);
-		/// <summary>Get a list of product collections.</summary>
+		/// <summary>List product collections.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TProductCollection>> ListAsync<TProductCollection>(string buyerID, Action<ListOptionsBuilder<TProductCollection>> buildListOpts, string accessToken = null) where TProductCollection : ProductCollection;
-		/// <summary>Get a list of product collection entries.</summary>
+		/// <summary>List product collection entries.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="productCollectionID">ID of the product collection.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
-		/// <param name="searchType">Type of search to perform. Possible values: AnyTerm (default), AllTermsAnyField, AllTermsSameField, ExactPhrase, ExactPhrasePrefix.</param>
+		/// <param name="searchType">Type of search to perform.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPageWithFacets<ProductCollectionProduct>> ListEntriesAsync(string buyerID, string productCollectionID, string search = null, string searchOn = null, SearchType searchType = SearchType.AnyTerm, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of product collection entries.</summary>
+		/// <summary>List product collection entries.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="productCollectionID">ID of the product collection.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
-		/// <param name="searchType">Type of search to perform. Possible values: AnyTerm (default), AllTermsAnyField, AllTermsSameField, ExactPhrase, ExactPhrasePrefix.</param>
+		/// <param name="searchType">Type of search to perform.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPageWithFacets<TProductCollectionProduct>> ListEntriesAsync<TProductCollectionProduct>(string buyerID, string productCollectionID, string search = null, string searchOn = null, SearchType searchType = SearchType.AnyTerm, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TProductCollectionProduct : ProductCollectionProduct;
-		/// <summary>Get a list of product collection entries.</summary>
+		/// <summary>List product collection entries.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="productCollectionID">ID of the product collection.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPageWithFacets<ProductCollectionProduct>> ListEntriesAsync(string buyerID, string productCollectionID, Action<ListOptionsBuilder2<ProductCollectionProduct>> buildListOpts, string accessToken = null);
-		/// <summary>Get a list of product collection entries.</summary>
+		/// <summary>List product collection entries.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="productCollectionID">ID of the product collection.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
@@ -4826,45 +4842,45 @@ namespace OrderCloud.SDK
 
 	public interface IProductFacetsResource
 	{
-		/// <summary>Get a single product facet.</summary>
+		/// <summary>Retrieve a product facet.</summary>
 		/// <param name="productFacetID">ID of the product facet.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ProductFacet> GetAsync(string productFacetID, string accessToken = null);
-		/// <summary>Get a single product facet.</summary>
+		/// <summary>Retrieve a product facet.</summary>
 		/// <param name="productFacetID">ID of the product facet.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TProductFacet> GetAsync<TProductFacet>(string productFacetID, string accessToken = null) where TProductFacet : ProductFacet;
-		/// <summary>Get a list of product facets.</summary>
+		/// <summary>List product facets.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<ProductFacet>> ListAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of product facets.</summary>
+		/// <summary>List product facets.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TProductFacet>> ListAsync<TProductFacet>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TProductFacet : ProductFacet;
-		/// <summary>Get a list of product facets.</summary>
+		/// <summary>List product facets.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<ProductFacet>> ListAsync(Action<ListOptionsBuilder<ProductFacet>> buildListOpts, string accessToken = null);
-		/// <summary>Get a list of product facets.</summary>
+		/// <summary>List product facets.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TProductFacet>> ListAsync<TProductFacet>(Action<ListOptionsBuilder<TProductFacet>> buildListOpts, string accessToken = null) where TProductFacet : ProductFacet;
-		/// <summary>Create a new product facet. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <summary>Create a product facet.</summary>
 		/// <param name="productFacet">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ProductFacet> CreateAsync(ProductFacet productFacet, string accessToken = null);
-		/// <summary>Create a new product facet. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <summary>Create a product facet.</summary>
 		/// <param name="productFacet">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TProductFacet> CreateAsync<TProductFacet>(ProductFacet productFacet, string accessToken = null) where TProductFacet : ProductFacet;
@@ -4896,59 +4912,59 @@ namespace OrderCloud.SDK
 
 	public interface IProductsResource
 	{
-		/// <summary>Get a single product.</summary>
+		/// <summary>Retrieve a product.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Product> GetAsync(string productID, string accessToken = null);
-		/// <summary>Get a single product.</summary>
+		/// <summary>Retrieve a product.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TProduct> GetAsync<TProduct>(string productID, string accessToken = null) where TProduct : Product;
-		/// <summary>Get a list of products.</summary>
+		/// <summary>List products.</summary>
 		/// <param name="catalogID">ID of the catalog.</param>
 		/// <param name="categoryID">ID of the category.</param>
 		/// <param name="supplierID">ID of the supplier.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
-		/// <param name="searchType">Type of search to perform. Possible values: AnyTerm (default), AllTermsAnyField, AllTermsSameField, ExactPhrase, ExactPhrasePrefix.</param>
+		/// <param name="searchType">Type of search to perform.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPageWithFacets<Product>> ListAsync(string catalogID = null, string categoryID = null, string supplierID = null, string search = null, string searchOn = null, SearchType searchType = SearchType.AnyTerm, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of products.</summary>
+		/// <summary>List products.</summary>
 		/// <param name="catalogID">ID of the catalog.</param>
 		/// <param name="categoryID">ID of the category.</param>
 		/// <param name="supplierID">ID of the supplier.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
-		/// <param name="searchType">Type of search to perform. Possible values: AnyTerm (default), AllTermsAnyField, AllTermsSameField, ExactPhrase, ExactPhrasePrefix.</param>
+		/// <param name="searchType">Type of search to perform.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPageWithFacets<TProduct>> ListAsync<TProduct>(string catalogID = null, string categoryID = null, string supplierID = null, string search = null, string searchOn = null, SearchType searchType = SearchType.AnyTerm, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TProduct : Product;
-		/// <summary>Get a list of products.</summary>
+		/// <summary>List products.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="catalogID">ID of the catalog.</param>
 		/// <param name="categoryID">ID of the category.</param>
 		/// <param name="supplierID">ID of the supplier.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPageWithFacets<Product>> ListAsync(Action<ListOptionsBuilder2<Product>> buildListOpts, string catalogID = null, string categoryID = null, string supplierID = null, string accessToken = null);
-		/// <summary>Get a list of products.</summary>
+		/// <summary>List products.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="catalogID">ID of the catalog.</param>
 		/// <param name="categoryID">ID of the category.</param>
 		/// <param name="supplierID">ID of the supplier.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPageWithFacets<TProduct>> ListAsync<TProduct>(Action<ListOptionsBuilder2<TProduct>> buildListOpts, string catalogID = null, string categoryID = null, string supplierID = null, string accessToken = null) where TProduct : Product;
-		/// <summary>Create a new product. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <summary>Create a product.</summary>
 		/// <param name="product">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Product> CreateAsync(Product product, string accessToken = null);
-		/// <summary>Create a new product. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <summary>Create a product.</summary>
 		/// <param name="product">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TProduct> CreateAsync<TProduct>(Product product, string accessToken = null) where TProduct : Product;
@@ -4976,55 +4992,55 @@ namespace OrderCloud.SDK
 		/// <param name="partialProduct">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TProduct> PatchAsync<TProduct>(string productID, PartialProduct partialProduct, string accessToken = null) where TProduct : Product;
-		/// <summary>Generate variants.</summary>
+		/// <summary>Generate variants</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="variantOverrides">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="overwriteExisting">Overwrite existing of the product.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Product> GenerateVariantsAsync(string productID, VariantOverrides variantOverrides = null, bool overwriteExisting = false, string accessToken = null);
-		/// <summary>Generate variants.</summary>
+		/// <summary>Generate variants</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="variantOverrides">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="overwriteExisting">Overwrite existing of the product.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TProduct> GenerateVariantsAsync<TProduct>(string productID, VariantOverrides variantOverrides = null, bool overwriteExisting = false, string accessToken = null) where TProduct : Product;
-		/// <summary>Get a list of product variants.</summary>
+		/// <summary>List product variants.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Variant>> ListVariantsAsync(string productID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of product variants.</summary>
+		/// <summary>List product variants.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TVariant>> ListVariantsAsync<TVariant>(string productID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TVariant : Variant;
-		/// <summary>Get a list of product variants.</summary>
+		/// <summary>List product variants.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Variant>> ListVariantsAsync(string productID, Action<ListOptionsBuilder<Variant>> buildListOpts, string accessToken = null);
-		/// <summary>Get a list of product variants.</summary>
+		/// <summary>List product variants.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TVariant>> ListVariantsAsync<TVariant>(string productID, Action<ListOptionsBuilder<TVariant>> buildListOpts, string accessToken = null) where TVariant : Variant;
-		/// <summary>Update a product variant. Update a product variant.</summary>
+		/// <summary>Update a product variant Update a product variant.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="variantID">ID of the variant.</param>
 		/// <param name="variant">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Variant> SaveVariantAsync(string productID, string variantID, Variant variant, string accessToken = null);
-		/// <summary>Update a product variant. Update a product variant.</summary>
+		/// <summary>Update a product variant Update a product variant.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="variantID">ID of the variant.</param>
 		/// <param name="variant">The object that will be serialized to JSON and sent in the request body.</param>
@@ -5042,72 +5058,72 @@ namespace OrderCloud.SDK
 		/// <param name="partialVariant">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TVariant> PatchVariantAsync<TVariant>(string productID, string variantID, PartialVariant partialVariant, string accessToken = null) where TVariant : Variant;
-		/// <summary>Get a single product variant.</summary>
+		/// <summary>Retrieve a product variant.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="variantID">ID of the variant.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Variant> GetVariantAsync(string productID, string variantID, string accessToken = null);
-		/// <summary>Get a single product variant.</summary>
+		/// <summary>Retrieve a product variant.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="variantID">ID of the variant.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TVariant> GetVariantAsync<TVariant>(string productID, string variantID, string accessToken = null) where TVariant : Variant;
-		/// <summary>Get a list of product specs.</summary>
+		/// <summary>List product specs.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Spec>> ListSpecsAsync(string productID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of product specs.</summary>
+		/// <summary>List product specs.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TSpec>> ListSpecsAsync<TSpec>(string productID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TSpec : Spec;
-		/// <summary>Get a list of product specs.</summary>
+		/// <summary>List product specs.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Spec>> ListSpecsAsync(string productID, Action<ListOptionsBuilder<Spec>> buildListOpts, string accessToken = null);
-		/// <summary>Get a list of product specs.</summary>
+		/// <summary>List product specs.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TSpec>> ListSpecsAsync<TSpec>(string productID, Action<ListOptionsBuilder<TSpec>> buildListOpts, string accessToken = null) where TSpec : Spec;
-		/// <summary>Get a list of product suppliers.</summary>
+		/// <summary>List product suppliers.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<ProductSupplier>> ListSuppliersAsync(string productID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of product suppliers.</summary>
+		/// <summary>List product suppliers.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TProductSupplier>> ListSuppliersAsync<TProductSupplier>(string productID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TProductSupplier : ProductSupplier;
-		/// <summary>Get a list of product suppliers.</summary>
+		/// <summary>List product suppliers.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<ProductSupplier>> ListSuppliersAsync(string productID, Action<ListOptionsBuilder<ProductSupplier>> buildListOpts, string accessToken = null);
-		/// <summary>Get a list of product suppliers.</summary>
+		/// <summary>List product suppliers.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -5118,7 +5134,7 @@ namespace OrderCloud.SDK
 		/// <param name="defaultPriceScheduleID">ID of the default price schedule.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task SaveSupplierAsync(string productID, string supplierID, string defaultPriceScheduleID = null, string accessToken = null);
-		/// <summary>Remove a product supplier.</summary>
+		/// <summary>Remove a product supplier</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="supplierID">ID of the supplier.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -5127,15 +5143,15 @@ namespace OrderCloud.SDK
 		/// <param name="productAssignment">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task SaveAssignmentAsync(ProductAssignment productAssignment, string accessToken = null);
-		/// <summary>Get a list of product assignments.</summary>
+		/// <summary>List product assignments.</summary>
 		/// <param name="productID">ID of the product.</param>
 		/// <param name="priceScheduleID">ID of the price schedule.</param>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="userID">ID of the user.</param>
 		/// <param name="userGroupID">ID of the user group.</param>
 		/// <param name="level">Level of the product assignment. Possible values: User, Group, Company.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<ProductAssignment>> ListAssignmentsAsync(string productID = null, string priceScheduleID = null, string buyerID = null, string userID = null, string userGroupID = null, PartyType? level = null, int? page = null, int? pageSize = null, string accessToken = null);
 		/// <summary>Delete a product assignment.</summary>
@@ -5150,7 +5166,7 @@ namespace OrderCloud.SDK
 
 	public interface IProductSyncsResource
 	{
-		/// <summary>Get a single product sync.</summary>
+		/// <summary>Retrieve a product sync.</summary>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ProductSyncConfig> GetAsync(string accessToken = null);
 		/// <summary>Delete a product sync.</summary>
@@ -5164,7 +5180,7 @@ namespace OrderCloud.SDK
 		/// <param name="partialProductSyncConfig">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ProductSyncConfig> PatchAsync(PartialProductSyncConfig partialProductSyncConfig, string accessToken = null);
-		/// <summary>Sync a product.</summary>
+		/// <summary>Sync a product</summary>
 		/// <param name="syncProduct">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task SyncAsync(SyncProduct syncProduct, string accessToken = null);
@@ -5172,7 +5188,7 @@ namespace OrderCloud.SDK
 
 	public interface IPromotionIntegrationsResource
 	{
-		/// <summary>Get a single promotion integration.</summary>
+		/// <summary>Retrieve a promotion integration.</summary>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<PromotionIntegration> GetAsync(string accessToken = null);
 		/// <summary>Delete a promotion integration.</summary>
@@ -5190,45 +5206,45 @@ namespace OrderCloud.SDK
 
 	public interface IPromotionsResource
 	{
-		/// <summary>Get a single promotion.</summary>
+		/// <summary>Retrieve a promotion.</summary>
 		/// <param name="promotionID">ID of the promotion.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Promotion> GetAsync(string promotionID, string accessToken = null);
-		/// <summary>Get a single promotion.</summary>
+		/// <summary>Retrieve a promotion.</summary>
 		/// <param name="promotionID">ID of the promotion.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TPromotion> GetAsync<TPromotion>(string promotionID, string accessToken = null) where TPromotion : Promotion;
-		/// <summary>Get a list of promotions.</summary>
+		/// <summary>List promotions.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Promotion>> ListAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of promotions.</summary>
+		/// <summary>List promotions.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TPromotion>> ListAsync<TPromotion>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TPromotion : Promotion;
-		/// <summary>Get a list of promotions.</summary>
+		/// <summary>List promotions.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Promotion>> ListAsync(Action<ListOptionsBuilder<Promotion>> buildListOpts, string accessToken = null);
-		/// <summary>Get a list of promotions.</summary>
+		/// <summary>List promotions.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TPromotion>> ListAsync<TPromotion>(Action<ListOptionsBuilder<TPromotion>> buildListOpts, string accessToken = null) where TPromotion : Promotion;
-		/// <summary>Create a new promotion. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <summary>Create a promotion.</summary>
 		/// <param name="promotion">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Promotion> CreateAsync(Promotion promotion, string accessToken = null);
-		/// <summary>Create a new promotion. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <summary>Create a promotion.</summary>
 		/// <param name="promotion">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TPromotion> CreateAsync<TPromotion>(Promotion promotion, string accessToken = null) where TPromotion : Promotion;
@@ -5256,14 +5272,14 @@ namespace OrderCloud.SDK
 		/// <param name="partialPromotion">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TPromotion> PatchAsync<TPromotion>(string promotionID, PartialPromotion partialPromotion, string accessToken = null) where TPromotion : Promotion;
-		/// <summary>Get a list of promotion assignments.</summary>
+		/// <summary>List promotion assignments.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="promotionID">ID of the promotion.</param>
 		/// <param name="userID">ID of the user.</param>
 		/// <param name="userGroupID">ID of the user group.</param>
 		/// <param name="level">Level of the promotion assignment. Possible values: User, Group, Company.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<PromotionAssignment>> ListAssignmentsAsync(string buyerID = null, string promotionID = null, string userID = null, string userGroupID = null, PartyType? level = null, int? page = null, int? pageSize = null, string accessToken = null);
 		/// <summary>Create or update a promotion assignment.</summary>
@@ -5281,24 +5297,24 @@ namespace OrderCloud.SDK
 
 	public interface ISecurityProfilesResource
 	{
-		/// <summary>Get a single security profile.</summary>
+		/// <summary>Retrieve a security profile.</summary>
 		/// <param name="securityProfileID">ID of the security profile.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<SecurityProfile> GetAsync(string securityProfileID, string accessToken = null);
-		/// <summary>Get a list of security profiles.</summary>
+		/// <summary>List security profiles.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<SecurityProfile>> ListAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of security profiles.</summary>
+		/// <summary>List security profiles.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<SecurityProfile>> ListAsync(Action<ListOptionsBuilder<SecurityProfile>> buildListOpts, string accessToken = null);
-		/// <summary>Create a new security profile. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <summary>Create a security profile.</summary>
 		/// <param name="securityProfile">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<SecurityProfile> CreateAsync(SecurityProfile securityProfile, string accessToken = null);
@@ -5316,7 +5332,7 @@ namespace OrderCloud.SDK
 		/// <param name="partialSecurityProfile">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<SecurityProfile> PatchAsync(string securityProfileID, PartialSecurityProfile partialSecurityProfile, string accessToken = null);
-		/// <summary>Get a list of security profile assignments.</summary>
+		/// <summary>List security profile assignments.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="supplierID">ID of the supplier.</param>
 		/// <param name="securityProfileID">ID of the security profile.</param>
@@ -5324,8 +5340,8 @@ namespace OrderCloud.SDK
 		/// <param name="userGroupID">ID of the user group.</param>
 		/// <param name="commerceRole">Commerce role of the security profile assignment. Possible values: Buyer, Seller, Supplier.</param>
 		/// <param name="level">Level of the security profile assignment. Possible values: User, Group, Company.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<SecurityProfileAssignment>> ListAssignmentsAsync(string buyerID = null, string supplierID = null, string securityProfileID = null, string userID = null, string userGroupID = null, CommerceRole? commerceRole = null, PartyType? level = null, int? page = null, int? pageSize = null, string accessToken = null);
 		/// <summary>Delete a security profile assignment.</summary>
@@ -5344,45 +5360,45 @@ namespace OrderCloud.SDK
 
 	public interface ISellerApprovalRulesResource
 	{
-		/// <summary>Get a single seller approval rule.</summary>
+		/// <summary>Retrieve a seller approval rule.</summary>
 		/// <param name="approvalRuleID">ID of the approval rule.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<SellerApprovalRule> GetAsync(string approvalRuleID, string accessToken = null);
-		/// <summary>Get a single seller approval rule.</summary>
+		/// <summary>Retrieve a seller approval rule.</summary>
 		/// <param name="approvalRuleID">ID of the approval rule.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TSellerApprovalRule> GetAsync<TSellerApprovalRule>(string approvalRuleID, string accessToken = null) where TSellerApprovalRule : SellerApprovalRule;
-		/// <summary>Get a list of seller approval rules.</summary>
+		/// <summary>List seller approval rules.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<SellerApprovalRule>> ListAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of seller approval rules.</summary>
+		/// <summary>List seller approval rules.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TSellerApprovalRule>> ListAsync<TSellerApprovalRule>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TSellerApprovalRule : SellerApprovalRule;
-		/// <summary>Get a list of seller approval rules.</summary>
+		/// <summary>List seller approval rules.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<SellerApprovalRule>> ListAsync(Action<ListOptionsBuilder<SellerApprovalRule>> buildListOpts, string accessToken = null);
-		/// <summary>Get a list of seller approval rules.</summary>
+		/// <summary>List seller approval rules.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TSellerApprovalRule>> ListAsync<TSellerApprovalRule>(Action<ListOptionsBuilder<TSellerApprovalRule>> buildListOpts, string accessToken = null) where TSellerApprovalRule : SellerApprovalRule;
-		/// <summary>Create a new seller approval rule. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <summary>Create a seller approval rule.</summary>
 		/// <param name="sellerApprovalRule">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<SellerApprovalRule> CreateAsync(SellerApprovalRule sellerApprovalRule, string accessToken = null);
-		/// <summary>Create a new seller approval rule. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <summary>Create a seller approval rule.</summary>
 		/// <param name="sellerApprovalRule">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TSellerApprovalRule> CreateAsync<TSellerApprovalRule>(SellerApprovalRule sellerApprovalRule, string accessToken = null) where TSellerApprovalRule : SellerApprovalRule;
@@ -5414,49 +5430,49 @@ namespace OrderCloud.SDK
 
 	public interface IShipmentsResource
 	{
-		/// <summary>Get a single shipment.</summary>
+		/// <summary>Retrieve a shipment.</summary>
 		/// <param name="shipmentID">ID of the shipment.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Shipment> GetAsync(string shipmentID, string accessToken = null);
-		/// <summary>Get a single shipment.</summary>
+		/// <summary>Retrieve a shipment.</summary>
 		/// <param name="shipmentID">ID of the shipment.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TShipment> GetAsync<TShipment>(string shipmentID, string accessToken = null) where TShipment : Shipment;
-		/// <summary>Get a list of shipments.</summary>
+		/// <summary>List shipments.</summary>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Shipment>> ListAsync(string orderID = null, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of shipments.</summary>
+		/// <summary>List shipments.</summary>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TShipment>> ListAsync<TShipment>(string orderID = null, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TShipment : Shipment;
-		/// <summary>Get a list of shipments.</summary>
+		/// <summary>List shipments.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Shipment>> ListAsync(Action<ListOptionsBuilder<Shipment>> buildListOpts, string orderID = null, string accessToken = null);
-		/// <summary>Get a list of shipments.</summary>
+		/// <summary>List shipments.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TShipment>> ListAsync<TShipment>(Action<ListOptionsBuilder<TShipment>> buildListOpts, string orderID = null, string accessToken = null) where TShipment : Shipment;
-		/// <summary>Create a new shipment. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <summary>Create a shipment.</summary>
 		/// <param name="shipment">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Shipment> CreateAsync(Shipment shipment, string accessToken = null);
-		/// <summary>Create a new shipment. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <summary>Create a shipment.</summary>
 		/// <param name="shipment">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TShipment> CreateAsync<TShipment>(Shipment shipment, string accessToken = null) where TShipment : Shipment;
@@ -5484,63 +5500,63 @@ namespace OrderCloud.SDK
 		/// <param name="partialShipment">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TShipment> PatchAsync<TShipment>(string shipmentID, PartialShipment partialShipment, string accessToken = null) where TShipment : Shipment;
-		/// <summary>Set a ship to address. Use only when the address is not to be saved/reused. To use a saved address (i.e. from the Addresses resource), PATCH the shipment's ToAddressID property instead.</summary>
+		/// <summary>Set a ship to address Use only when the address is not to be saved/reused. To use a saved address (i.e. from the Addresses resource), PATCH the shipment's ToAddressID property instead.</summary>
 		/// <param name="shipmentID">ID of the shipment.</param>
 		/// <param name="address">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Shipment> SetShipToAddressAsync(string shipmentID, Address address, string accessToken = null);
-		/// <summary>Set a ship to address. Use only when the address is not to be saved/reused. To use a saved address (i.e. from the Addresses resource), PATCH the shipment's ToAddressID property instead.</summary>
+		/// <summary>Set a ship to address Use only when the address is not to be saved/reused. To use a saved address (i.e. from the Addresses resource), PATCH the shipment's ToAddressID property instead.</summary>
 		/// <param name="shipmentID">ID of the shipment.</param>
 		/// <param name="address">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TShipment> SetShipToAddressAsync<TShipment>(string shipmentID, Address address, string accessToken = null) where TShipment : Shipment;
-		/// <summary>Set a ship from address. Use only when the address is not to be saved/reused. To use a saved address (i.e. from the Addresses resource), PATCH the shipment's FromAddressID property instead.</summary>
+		/// <summary>Set a ship from address Use only when the address is not to be saved/reused. To use a saved address (i.e. from the Addresses resource), PATCH the shipment's FromAddressID property instead.</summary>
 		/// <param name="shipmentID">ID of the shipment.</param>
 		/// <param name="address">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Shipment> SetShipFromAddressAsync(string shipmentID, Address address, string accessToken = null);
-		/// <summary>Set a ship from address. Use only when the address is not to be saved/reused. To use a saved address (i.e. from the Addresses resource), PATCH the shipment's FromAddressID property instead.</summary>
+		/// <summary>Set a ship from address Use only when the address is not to be saved/reused. To use a saved address (i.e. from the Addresses resource), PATCH the shipment's FromAddressID property instead.</summary>
 		/// <param name="shipmentID">ID of the shipment.</param>
 		/// <param name="address">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TShipment> SetShipFromAddressAsync<TShipment>(string shipmentID, Address address, string accessToken = null) where TShipment : Shipment;
-		/// <summary>Get a list of shipment items.</summary>
+		/// <summary>List shipment items.</summary>
 		/// <param name="shipmentID">ID of the shipment.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<ShipmentItem>> ListItemsAsync(string shipmentID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of shipment items.</summary>
+		/// <summary>List shipment items.</summary>
 		/// <param name="shipmentID">ID of the shipment.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TShipmentItem>> ListItemsAsync<TShipmentItem>(string shipmentID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TShipmentItem : ShipmentItem;
-		/// <summary>Get a list of shipment items.</summary>
+		/// <summary>List shipment items.</summary>
 		/// <param name="shipmentID">ID of the shipment.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<ShipmentItem>> ListItemsAsync(string shipmentID, Action<ListOptionsBuilder<ShipmentItem>> buildListOpts, string accessToken = null);
-		/// <summary>Get a list of shipment items.</summary>
+		/// <summary>List shipment items.</summary>
 		/// <param name="shipmentID">ID of the shipment.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TShipmentItem>> ListItemsAsync<TShipmentItem>(string shipmentID, Action<ListOptionsBuilder<TShipmentItem>> buildListOpts, string accessToken = null) where TShipmentItem : ShipmentItem;
-		/// <summary>Get a single shipment item.</summary>
+		/// <summary>Retrieve a shipment item.</summary>
 		/// <param name="shipmentID">ID of the shipment.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="lineItemID">ID of the line item.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ShipmentItem> GetItemAsync(string shipmentID, string orderID, string lineItemID, string accessToken = null);
-		/// <summary>Get a single shipment item.</summary>
+		/// <summary>Retrieve a shipment item.</summary>
 		/// <param name="shipmentID">ID of the shipment.</param>
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="lineItemID">ID of the line item.</param>
@@ -5566,45 +5582,45 @@ namespace OrderCloud.SDK
 
 	public interface ISpecsResource
 	{
-		/// <summary>Get a single spec.</summary>
+		/// <summary>Retrieve a spec.</summary>
 		/// <param name="specID">ID of the spec.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Spec> GetAsync(string specID, string accessToken = null);
-		/// <summary>Get a single spec.</summary>
+		/// <summary>Retrieve a spec.</summary>
 		/// <param name="specID">ID of the spec.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TSpec> GetAsync<TSpec>(string specID, string accessToken = null) where TSpec : Spec;
-		/// <summary>Get a list of specs.</summary>
+		/// <summary>List specs.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Spec>> ListAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of specs.</summary>
+		/// <summary>List specs.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TSpec>> ListAsync<TSpec>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TSpec : Spec;
-		/// <summary>Get a list of specs.</summary>
+		/// <summary>List specs.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Spec>> ListAsync(Action<ListOptionsBuilder<Spec>> buildListOpts, string accessToken = null);
-		/// <summary>Get a list of specs.</summary>
+		/// <summary>List specs.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TSpec>> ListAsync<TSpec>(Action<ListOptionsBuilder<TSpec>> buildListOpts, string accessToken = null) where TSpec : Spec;
-		/// <summary>Create a new spec. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <summary>Create a spec.</summary>
 		/// <param name="spec">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Spec> CreateAsync(Spec spec, string accessToken = null);
-		/// <summary>Create a new spec. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <summary>Create a spec.</summary>
 		/// <param name="spec">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TSpec> CreateAsync<TSpec>(Spec spec, string accessToken = null) where TSpec : Spec;
@@ -5632,16 +5648,16 @@ namespace OrderCloud.SDK
 		/// <param name="partialSpec">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TSpec> PatchAsync<TSpec>(string specID, PartialSpec partialSpec, string accessToken = null) where TSpec : Spec;
-		/// <summary>Get a list of spec product assignments.</summary>
+		/// <summary>List spec product assignments.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<SpecProductAssignment>> ListProductAssignmentsAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of spec product assignments.</summary>
+		/// <summary>List spec product assignments.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<SpecProductAssignment>> ListProductAssignmentsAsync(Action<ListOptionsBuilder<SpecProductAssignment>> buildListOpts, string accessToken = null);
@@ -5654,42 +5670,42 @@ namespace OrderCloud.SDK
 		/// <param name="specProductAssignment">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task SaveProductAssignmentAsync(SpecProductAssignment specProductAssignment, string accessToken = null);
-		/// <summary>Create a new spec option. A Spec can have multiple Options-- for example, if the spec is called 'Color', the options might be 'Blue', 'Red', and 'Green'.</summary>
+		/// <summary>Create a spec option. A Spec can have multiple Options-- for example, if the spec is called 'Color', the options might be 'Blue', 'Red', and 'Green'.</summary>
 		/// <param name="specID">ID of the spec.</param>
 		/// <param name="specOption">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<SpecOption> CreateOptionAsync(string specID, SpecOption specOption, string accessToken = null);
-		/// <summary>Create a new spec option. A Spec can have multiple Options-- for example, if the spec is called 'Color', the options might be 'Blue', 'Red', and 'Green'.</summary>
+		/// <summary>Create a spec option. A Spec can have multiple Options-- for example, if the spec is called 'Color', the options might be 'Blue', 'Red', and 'Green'.</summary>
 		/// <param name="specID">ID of the spec.</param>
 		/// <param name="specOption">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TSpecOption> CreateOptionAsync<TSpecOption>(string specID, SpecOption specOption, string accessToken = null) where TSpecOption : SpecOption;
-		/// <summary>Get a list of spec options.</summary>
+		/// <summary>List spec options.</summary>
 		/// <param name="specID">ID of the spec.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<SpecOption>> ListOptionsAsync(string specID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of spec options.</summary>
+		/// <summary>List spec options.</summary>
 		/// <param name="specID">ID of the spec.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TSpecOption>> ListOptionsAsync<TSpecOption>(string specID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TSpecOption : SpecOption;
-		/// <summary>Get a list of spec options.</summary>
+		/// <summary>List spec options.</summary>
 		/// <param name="specID">ID of the spec.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<SpecOption>> ListOptionsAsync(string specID, Action<ListOptionsBuilder<SpecOption>> buildListOpts, string accessToken = null);
-		/// <summary>Get a list of spec options.</summary>
+		/// <summary>List spec options.</summary>
 		/// <param name="specID">ID of the spec.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -5718,12 +5734,12 @@ namespace OrderCloud.SDK
 		/// <param name="partialSpecOption">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TSpecOption> PatchOptionAsync<TSpecOption>(string specID, string optionID, PartialSpecOption partialSpecOption, string accessToken = null) where TSpecOption : SpecOption;
-		/// <summary>Get a single spec option.</summary>
+		/// <summary>Retrieve a spec option.</summary>
 		/// <param name="specID">ID of the spec.</param>
 		/// <param name="optionID">ID of the option.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<SpecOption> GetOptionAsync(string specID, string optionID, string accessToken = null);
-		/// <summary>Get a single spec option.</summary>
+		/// <summary>Retrieve a spec option.</summary>
 		/// <param name="specID">ID of the spec.</param>
 		/// <param name="optionID">ID of the option.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -5737,52 +5753,52 @@ namespace OrderCloud.SDK
 
 	public interface ISpendingAccountsResource
 	{
-		/// <summary>Get a single spending account.</summary>
+		/// <summary>Retrieve a spending account.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="spendingAccountID">ID of the spending account.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<SpendingAccount> GetAsync(string buyerID, string spendingAccountID, string accessToken = null);
-		/// <summary>Get a single spending account.</summary>
+		/// <summary>Retrieve a spending account.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="spendingAccountID">ID of the spending account.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TSpendingAccount> GetAsync<TSpendingAccount>(string buyerID, string spendingAccountID, string accessToken = null) where TSpendingAccount : SpendingAccount;
-		/// <summary>Get a list of spending accounts.</summary>
+		/// <summary>List spending accounts.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<SpendingAccount>> ListAsync(string buyerID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of spending accounts.</summary>
+		/// <summary>List spending accounts.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TSpendingAccount>> ListAsync<TSpendingAccount>(string buyerID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TSpendingAccount : SpendingAccount;
-		/// <summary>Get a list of spending accounts.</summary>
+		/// <summary>List spending accounts.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<SpendingAccount>> ListAsync(string buyerID, Action<ListOptionsBuilder<SpendingAccount>> buildListOpts, string accessToken = null);
-		/// <summary>Get a list of spending accounts.</summary>
+		/// <summary>List spending accounts.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TSpendingAccount>> ListAsync<TSpendingAccount>(string buyerID, Action<ListOptionsBuilder<TSpendingAccount>> buildListOpts, string accessToken = null) where TSpendingAccount : SpendingAccount;
-		/// <summary>Create a new spending account. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <summary>Create a spending account.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="spendingAccount">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<SpendingAccount> CreateAsync(string buyerID, SpendingAccount spendingAccount, string accessToken = null);
-		/// <summary>Create a new spending account. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <summary>Create a spending account.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="spendingAccount">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -5816,14 +5832,14 @@ namespace OrderCloud.SDK
 		/// <param name="partialSpendingAccount">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TSpendingAccount> PatchAsync<TSpendingAccount>(string buyerID, string spendingAccountID, PartialSpendingAccount partialSpendingAccount, string accessToken = null) where TSpendingAccount : SpendingAccount;
-		/// <summary>Get a list of spending account assignments.</summary>
+		/// <summary>List spending account assignments.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="spendingAccountID">ID of the spending account.</param>
 		/// <param name="userID">ID of the user.</param>
 		/// <param name="userGroupID">ID of the user group.</param>
 		/// <param name="level">Level of the spending account assignment. Possible values: User, Group, Company.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<SpendingAccountAssignment>> ListAssignmentsAsync(string buyerID, string spendingAccountID = null, string userID = null, string userGroupID = null, PartyType? level = null, int? page = null, int? pageSize = null, string accessToken = null);
 		/// <summary>Create or update a spending account assignment.</summary>
@@ -5842,10 +5858,10 @@ namespace OrderCloud.SDK
 
 	public interface ISubscriptionIntegrationsResource
 	{
-		/// <summary>Get a single subscription integration.</summary>
+		/// <summary>Retrieve a subscription integration.</summary>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<SubscriptionIntegration> GetAsync(string accessToken = null);
-		/// <summary>Get a single subscription integration.</summary>
+		/// <summary>Retrieve a subscription integration.</summary>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TSubscriptionIntegration> GetAsync<TSubscriptionIntegration>(string accessToken = null) where TSubscriptionIntegration : SubscriptionIntegration;
 		/// <summary>Delete a subscription integration.</summary>
@@ -5871,52 +5887,52 @@ namespace OrderCloud.SDK
 
 	public interface ISubscriptionItemsResource
 	{
-		/// <summary>Get a single subscription item.</summary>
+		/// <summary>Retrieve a subscription item.</summary>
 		/// <param name="subscriptionID">ID of the subscription.</param>
 		/// <param name="subscriptionItemID">ID of the subscription item.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<LineItem> GetAsync(string subscriptionID, string subscriptionItemID, string accessToken = null);
-		/// <summary>Get a single subscription item.</summary>
+		/// <summary>Retrieve a subscription item.</summary>
 		/// <param name="subscriptionID">ID of the subscription.</param>
 		/// <param name="subscriptionItemID">ID of the subscription item.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TLineItem> GetAsync<TLineItem>(string subscriptionID, string subscriptionItemID, string accessToken = null) where TLineItem : LineItem;
-		/// <summary>Get a list of subscription items.</summary>
+		/// <summary>List subscription items.</summary>
 		/// <param name="subscriptionID">ID of the subscription.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<LineItem>> ListAsync(string subscriptionID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of subscription items.</summary>
+		/// <summary>List subscription items.</summary>
 		/// <param name="subscriptionID">ID of the subscription.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TLineItem>> ListAsync<TLineItem>(string subscriptionID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TLineItem : LineItem;
-		/// <summary>Get a list of subscription items.</summary>
+		/// <summary>List subscription items.</summary>
 		/// <param name="subscriptionID">ID of the subscription.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<LineItem>> ListAsync(string subscriptionID, Action<ListOptionsBuilder<LineItem>> buildListOpts, string accessToken = null);
-		/// <summary>Get a list of subscription items.</summary>
+		/// <summary>List subscription items.</summary>
 		/// <param name="subscriptionID">ID of the subscription.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TLineItem>> ListAsync<TLineItem>(string subscriptionID, Action<ListOptionsBuilder<TLineItem>> buildListOpts, string accessToken = null) where TLineItem : LineItem;
-		/// <summary>Create a new subscription item. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <summary>Create a subscription item.</summary>
 		/// <param name="subscriptionID">ID of the subscription.</param>
 		/// <param name="lineItem">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<LineItem> CreateAsync(string subscriptionID, LineItem lineItem, string accessToken = null);
-		/// <summary>Create a new subscription item. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <summary>Create a subscription item.</summary>
 		/// <param name="subscriptionID">ID of the subscription.</param>
 		/// <param name="lineItem">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -5954,45 +5970,45 @@ namespace OrderCloud.SDK
 
 	public interface ISubscriptionsResource
 	{
-		/// <summary>Get a single subscription.</summary>
+		/// <summary>Retrieve a subscription.</summary>
 		/// <param name="subscriptionID">ID of the subscription.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Subscription> GetAsync(string subscriptionID, string accessToken = null);
-		/// <summary>Get a single subscription.</summary>
+		/// <summary>Retrieve a subscription.</summary>
 		/// <param name="subscriptionID">ID of the subscription.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TSubscription> GetAsync<TSubscription>(string subscriptionID, string accessToken = null) where TSubscription : Subscription;
-		/// <summary>Get a list of subscriptions.</summary>
+		/// <summary>List subscriptions.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Subscription>> ListAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of subscriptions.</summary>
+		/// <summary>List subscriptions.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TSubscription>> ListAsync<TSubscription>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TSubscription : Subscription;
-		/// <summary>Get a list of subscriptions.</summary>
+		/// <summary>List subscriptions.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Subscription>> ListAsync(Action<ListOptionsBuilder<Subscription>> buildListOpts, string accessToken = null);
-		/// <summary>Get a list of subscriptions.</summary>
+		/// <summary>List subscriptions.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TSubscription>> ListAsync<TSubscription>(Action<ListOptionsBuilder<TSubscription>> buildListOpts, string accessToken = null) where TSubscription : Subscription;
-		/// <summary>Create a new subscription. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <summary>Create a subscription.</summary>
 		/// <param name="subscription">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Subscription> CreateAsync(Subscription subscription, string accessToken = null);
-		/// <summary>Create a new subscription. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <summary>Create a subscription.</summary>
 		/// <param name="subscription">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TSubscription> CreateAsync<TSubscription>(Subscription subscription, string accessToken = null) where TSubscription : Subscription;
@@ -6024,52 +6040,52 @@ namespace OrderCloud.SDK
 
 	public interface ISupplierAddressesResource
 	{
-		/// <summary>Get a single supplier address.</summary>
+		/// <summary>Retrieve a supplier address.</summary>
 		/// <param name="supplierID">ID of the supplier.</param>
 		/// <param name="addressID">ID of the address.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Address> GetAsync(string supplierID, string addressID, string accessToken = null);
-		/// <summary>Get a single supplier address.</summary>
+		/// <summary>Retrieve a supplier address.</summary>
 		/// <param name="supplierID">ID of the supplier.</param>
 		/// <param name="addressID">ID of the address.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TAddress> GetAsync<TAddress>(string supplierID, string addressID, string accessToken = null) where TAddress : Address;
-		/// <summary>Get a list of supplier addresses.</summary>
+		/// <summary>List supplier addresses.</summary>
 		/// <param name="supplierID">ID of the supplier.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Address>> ListAsync(string supplierID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of supplier addresses.</summary>
+		/// <summary>List supplier addresses.</summary>
 		/// <param name="supplierID">ID of the supplier.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TAddress>> ListAsync<TAddress>(string supplierID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TAddress : Address;
-		/// <summary>Get a list of supplier addresses.</summary>
+		/// <summary>List supplier addresses.</summary>
 		/// <param name="supplierID">ID of the supplier.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Address>> ListAsync(string supplierID, Action<ListOptionsBuilder<Address>> buildListOpts, string accessToken = null);
-		/// <summary>Get a list of supplier addresses.</summary>
+		/// <summary>List supplier addresses.</summary>
 		/// <param name="supplierID">ID of the supplier.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TAddress>> ListAsync<TAddress>(string supplierID, Action<ListOptionsBuilder<TAddress>> buildListOpts, string accessToken = null) where TAddress : Address;
-		/// <summary>Create a new supplier address. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <summary>Create a supplier address.</summary>
 		/// <param name="supplierID">ID of the supplier.</param>
 		/// <param name="address">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Address> CreateAsync(string supplierID, Address address, string accessToken = null);
-		/// <summary>Create a new supplier address. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <summary>Create a supplier address.</summary>
 		/// <param name="supplierID">ID of the supplier.</param>
 		/// <param name="address">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -6107,45 +6123,45 @@ namespace OrderCloud.SDK
 
 	public interface ISuppliersResource
 	{
-		/// <summary>Get a single supplier.</summary>
+		/// <summary>Retrieve a supplier.</summary>
 		/// <param name="supplierID">ID of the supplier.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Supplier> GetAsync(string supplierID, string accessToken = null);
-		/// <summary>Get a single supplier.</summary>
+		/// <summary>Retrieve a supplier.</summary>
 		/// <param name="supplierID">ID of the supplier.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TSupplier> GetAsync<TSupplier>(string supplierID, string accessToken = null) where TSupplier : Supplier;
-		/// <summary>Get a list of suppliers.</summary>
+		/// <summary>List suppliers.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Supplier>> ListAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of suppliers.</summary>
+		/// <summary>List suppliers.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TSupplier>> ListAsync<TSupplier>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TSupplier : Supplier;
-		/// <summary>Get a list of suppliers.</summary>
+		/// <summary>List suppliers.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Supplier>> ListAsync(Action<ListOptionsBuilder<Supplier>> buildListOpts, string accessToken = null);
-		/// <summary>Get a list of suppliers.</summary>
+		/// <summary>List suppliers.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TSupplier>> ListAsync<TSupplier>(Action<ListOptionsBuilder<TSupplier>> buildListOpts, string accessToken = null) where TSupplier : Supplier;
-		/// <summary>Create a new supplier. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <summary>Create a supplier.</summary>
 		/// <param name="supplier">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Supplier> CreateAsync(Supplier supplier, string accessToken = null);
-		/// <summary>Create a new supplier. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <summary>Create a supplier.</summary>
 		/// <param name="supplier">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TSupplier> CreateAsync<TSupplier>(Supplier supplier, string accessToken = null) where TSupplier : Supplier;
@@ -6173,17 +6189,17 @@ namespace OrderCloud.SDK
 		/// <param name="partialSupplier">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TSupplier> PatchAsync<TSupplier>(string supplierID, PartialSupplier partialSupplier, string accessToken = null) where TSupplier : Supplier;
-		/// <summary>Get a list of supplier buyers.</summary>
+		/// <summary>List supplier buyers.</summary>
 		/// <param name="supplierID">ID of the supplier.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<SupplierBuyer>> ListBuyersAsync(string supplierID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of supplier buyers.</summary>
+		/// <summary>List supplier buyers.</summary>
 		/// <param name="supplierID">ID of the supplier.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -6202,52 +6218,52 @@ namespace OrderCloud.SDK
 
 	public interface ISupplierUserGroupsResource
 	{
-		/// <summary>Get a single supplier user group.</summary>
+		/// <summary>Retrieve a supplier user group.</summary>
 		/// <param name="supplierID">ID of the supplier.</param>
 		/// <param name="userGroupID">ID of the user group.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<UserGroup> GetAsync(string supplierID, string userGroupID, string accessToken = null);
-		/// <summary>Get a single supplier user group.</summary>
+		/// <summary>Retrieve a supplier user group.</summary>
 		/// <param name="supplierID">ID of the supplier.</param>
 		/// <param name="userGroupID">ID of the user group.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TUserGroup> GetAsync<TUserGroup>(string supplierID, string userGroupID, string accessToken = null) where TUserGroup : UserGroup;
-		/// <summary>Get a list of supplier user groups.</summary>
+		/// <summary>List supplier user groups.</summary>
 		/// <param name="supplierID">ID of the supplier.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<UserGroup>> ListAsync(string supplierID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of supplier user groups.</summary>
+		/// <summary>List supplier user groups.</summary>
 		/// <param name="supplierID">ID of the supplier.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TUserGroup>> ListAsync<TUserGroup>(string supplierID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TUserGroup : UserGroup;
-		/// <summary>Get a list of supplier user groups.</summary>
+		/// <summary>List supplier user groups.</summary>
 		/// <param name="supplierID">ID of the supplier.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<UserGroup>> ListAsync(string supplierID, Action<ListOptionsBuilder<UserGroup>> buildListOpts, string accessToken = null);
-		/// <summary>Get a list of supplier user groups.</summary>
+		/// <summary>List supplier user groups.</summary>
 		/// <param name="supplierID">ID of the supplier.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TUserGroup>> ListAsync<TUserGroup>(string supplierID, Action<ListOptionsBuilder<TUserGroup>> buildListOpts, string accessToken = null) where TUserGroup : UserGroup;
-		/// <summary>Create a new supplier user group. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <summary>Create a supplier user group.</summary>
 		/// <param name="supplierID">ID of the supplier.</param>
 		/// <param name="userGroup">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<UserGroup> CreateAsync(string supplierID, UserGroup userGroup, string accessToken = null);
-		/// <summary>Create a new supplier user group. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <summary>Create a supplier user group.</summary>
 		/// <param name="supplierID">ID of the supplier.</param>
 		/// <param name="userGroup">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -6281,12 +6297,12 @@ namespace OrderCloud.SDK
 		/// <param name="partialUserGroup">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TUserGroup> PatchAsync<TUserGroup>(string supplierID, string userGroupID, PartialUserGroup partialUserGroup, string accessToken = null) where TUserGroup : UserGroup;
-		/// <summary>Get a list of supplier user group user assignments.</summary>
+		/// <summary>List supplier user group user assignments.</summary>
 		/// <param name="supplierID">ID of the supplier.</param>
 		/// <param name="userGroupID">ID of the user group.</param>
 		/// <param name="userID">ID of the user.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<UserGroupAssignment>> ListUserAssignmentsAsync(string supplierID, string userGroupID = null, string userID = null, int page = 1, int pageSize = 20, string accessToken = null);
 		/// <summary>Delete a supplier user group user assignment.</summary>
@@ -6304,56 +6320,56 @@ namespace OrderCloud.SDK
 
 	public interface ISupplierUsersResource
 	{
-		/// <summary>Get a single supplier user.</summary>
+		/// <summary>Retrieve a supplier user.</summary>
 		/// <param name="supplierID">ID of the supplier.</param>
 		/// <param name="userID">ID of the user.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<User> GetAsync(string supplierID, string userID, string accessToken = null);
-		/// <summary>Get a single supplier user.</summary>
+		/// <summary>Retrieve a supplier user.</summary>
 		/// <param name="supplierID">ID of the supplier.</param>
 		/// <param name="userID">ID of the user.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TUser> GetAsync<TUser>(string supplierID, string userID, string accessToken = null) where TUser : User;
-		/// <summary>Get a list of supplier users.</summary>
+		/// <summary>List supplier users.</summary>
 		/// <param name="supplierID">ID of the supplier.</param>
 		/// <param name="userGroupID">ID of the user group.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<User>> ListAsync(string supplierID, string userGroupID = null, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of supplier users.</summary>
+		/// <summary>List supplier users.</summary>
 		/// <param name="supplierID">ID of the supplier.</param>
 		/// <param name="userGroupID">ID of the user group.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TUser>> ListAsync<TUser>(string supplierID, string userGroupID = null, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TUser : User;
-		/// <summary>Get a list of supplier users.</summary>
+		/// <summary>List supplier users.</summary>
 		/// <param name="supplierID">ID of the supplier.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="userGroupID">ID of the user group.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<User>> ListAsync(string supplierID, Action<ListOptionsBuilder<User>> buildListOpts, string userGroupID = null, string accessToken = null);
-		/// <summary>Get a list of supplier users.</summary>
+		/// <summary>List supplier users.</summary>
 		/// <param name="supplierID">ID of the supplier.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="userGroupID">ID of the user group.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TUser>> ListAsync<TUser>(string supplierID, Action<ListOptionsBuilder<TUser>> buildListOpts, string userGroupID = null, string accessToken = null) where TUser : User;
-		/// <summary>Create a new supplier user. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <summary>Create a supplier user.</summary>
 		/// <param name="supplierID">ID of the supplier.</param>
 		/// <param name="user">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<User> CreateAsync(string supplierID, User user, string accessToken = null);
-		/// <summary>Create a new supplier user. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <summary>Create a supplier user.</summary>
 		/// <param name="supplierID">ID of the supplier.</param>
 		/// <param name="user">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -6387,12 +6403,12 @@ namespace OrderCloud.SDK
 		/// <param name="partialUser">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TUser> PatchAsync<TUser>(string supplierID, string userID, PartialUser partialUser, string accessToken = null) where TUser : User;
-		/// <summary>Unlock a user account.</summary>
+		/// <summary>Unlock a user account</summary>
 		/// <param name="supplierID">ID of the supplier.</param>
 		/// <param name="userID">ID of the user.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task UnlockUserAccountAsync(string supplierID, string userID, string accessToken = null);
-		/// <summary>Revoke a user tokens. Revokes all security tokens of specified supplier user.</summary>
+		/// <summary>Revoke a user tokens Revokes all security tokens of specified supplier user.</summary>
 		/// <param name="supplierID">ID of the supplier.</param>
 		/// <param name="userID">ID of the user.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -6401,24 +6417,24 @@ namespace OrderCloud.SDK
 
 	public interface ITrackingEventsResource
 	{
-		/// <summary>Get a single tracking event.</summary>
+		/// <summary>Retrieve a tracking event.</summary>
 		/// <param name="eventID">ID of the event.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TrackingEvent> GetAsync(string eventID, string accessToken = null);
-		/// <summary>Get a list of tracking events.</summary>
+		/// <summary>List tracking events.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TrackingEvent>> ListAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of tracking events.</summary>
+		/// <summary>List tracking events.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TrackingEvent>> ListAsync(Action<ListOptionsBuilder<TrackingEvent>> buildListOpts, string accessToken = null);
-		/// <summary>Create a new tracking event. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <summary>Create a tracking event.</summary>
 		/// <param name="trackingEvent">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TrackingEvent> CreateAsync(TrackingEvent trackingEvent, string accessToken = null);
@@ -6440,52 +6456,52 @@ namespace OrderCloud.SDK
 
 	public interface IUserGroupsResource
 	{
-		/// <summary>Get a single user group.</summary>
+		/// <summary>Retrieve a user group.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="userGroupID">ID of the user group.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<UserGroup> GetAsync(string buyerID, string userGroupID, string accessToken = null);
-		/// <summary>Get a single user group.</summary>
+		/// <summary>Retrieve a user group.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="userGroupID">ID of the user group.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TUserGroup> GetAsync<TUserGroup>(string buyerID, string userGroupID, string accessToken = null) where TUserGroup : UserGroup;
-		/// <summary>Get a list of user groups.</summary>
+		/// <summary>List user groups.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<UserGroup>> ListAsync(string buyerID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of user groups.</summary>
+		/// <summary>List user groups.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TUserGroup>> ListAsync<TUserGroup>(string buyerID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TUserGroup : UserGroup;
-		/// <summary>Get a list of user groups.</summary>
+		/// <summary>List user groups.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<UserGroup>> ListAsync(string buyerID, Action<ListOptionsBuilder<UserGroup>> buildListOpts, string accessToken = null);
-		/// <summary>Get a list of user groups.</summary>
+		/// <summary>List user groups.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TUserGroup>> ListAsync<TUserGroup>(string buyerID, Action<ListOptionsBuilder<TUserGroup>> buildListOpts, string accessToken = null) where TUserGroup : UserGroup;
-		/// <summary>Create a new user group. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <summary>Create a user group.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="userGroup">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<UserGroup> CreateAsync(string buyerID, UserGroup userGroup, string accessToken = null);
-		/// <summary>Create a new user group. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <summary>Create a user group.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="userGroup">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -6519,12 +6535,12 @@ namespace OrderCloud.SDK
 		/// <param name="partialUserGroup">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TUserGroup> PatchAsync<TUserGroup>(string buyerID, string userGroupID, PartialUserGroup partialUserGroup, string accessToken = null) where TUserGroup : UserGroup;
-		/// <summary>Get a list of user group user assignments.</summary>
+		/// <summary>List user group user assignments.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="userGroupID">ID of the user group.</param>
 		/// <param name="userID">ID of the user.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<UserGroupAssignment>> ListUserAssignmentsAsync(string buyerID, string userGroupID = null, string userID = null, int page = 1, int pageSize = 20, string accessToken = null);
 		/// <summary>Delete a user group user assignment.</summary>
@@ -6542,56 +6558,56 @@ namespace OrderCloud.SDK
 
 	public interface IUsersResource
 	{
-		/// <summary>Get a single user.</summary>
+		/// <summary>Retrieve a user.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="userID">ID of the user.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<User> GetAsync(string buyerID, string userID, string accessToken = null);
-		/// <summary>Get a single user.</summary>
+		/// <summary>Retrieve a user.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="userID">ID of the user.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TUser> GetAsync<TUser>(string buyerID, string userID, string accessToken = null) where TUser : User;
-		/// <summary>Get a list of users.</summary>
+		/// <summary>List users.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="userGroupID">ID of the user group.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<User>> ListAsync(string buyerID, string userGroupID = null, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of users.</summary>
+		/// <summary>List users.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="userGroupID">ID of the user group.</param>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TUser>> ListAsync<TUser>(string buyerID, string userGroupID = null, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TUser : User;
-		/// <summary>Get a list of users.</summary>
+		/// <summary>List users.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="userGroupID">ID of the user group.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<User>> ListAsync(string buyerID, Action<ListOptionsBuilder<User>> buildListOpts, string userGroupID = null, string accessToken = null);
-		/// <summary>Get a list of users.</summary>
+		/// <summary>List users.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="userGroupID">ID of the user group.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TUser>> ListAsync<TUser>(string buyerID, Action<ListOptionsBuilder<TUser>> buildListOpts, string userGroupID = null, string accessToken = null) where TUser : User;
-		/// <summary>Create a new user. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <summary>Create a user.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="user">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<User> CreateAsync(string buyerID, User user, string accessToken = null);
-		/// <summary>Create a new user. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <summary>Create a user.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="user">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -6613,29 +6629,29 @@ namespace OrderCloud.SDK
 		/// <param name="userID">ID of the user.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task DeleteAsync(string buyerID, string userID, string accessToken = null);
-		/// <summary>Get a list of user across buyers.</summary>
+		/// <summary>List user across buyers.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<User>> ListAcrossBuyersAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of user across buyers.</summary>
+		/// <summary>List user across buyers.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TUser>> ListAcrossBuyersAsync<TUser>(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TUser : User;
-		/// <summary>Get a list of user across buyers.</summary>
+		/// <summary>List user across buyers.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<User>> ListAcrossBuyersAsync(Action<ListOptionsBuilder<User>> buildListOpts, string accessToken = null);
-		/// <summary>Get a list of user across buyers.</summary>
+		/// <summary>List user across buyers.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<TUser>> ListAcrossBuyersAsync<TUser>(Action<ListOptionsBuilder<TUser>> buildListOpts, string accessToken = null) where TUser : User;
@@ -6651,32 +6667,32 @@ namespace OrderCloud.SDK
 		/// <param name="partialUser">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TUser> PatchAsync<TUser>(string buyerID, string userID, PartialUser partialUser, string accessToken = null) where TUser : User;
-		/// <summary>Move a user to a different buyer.</summary>
+		/// <summary>Move a user to a different buyer</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="userID">ID of the user.</param>
 		/// <param name="newBuyerID">ID of the new buyer.</param>
 		/// <param name="orders">Orders of the user. Possible values: None, Unsubmitted, All.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<User> MoveAsync(string buyerID, string userID, string newBuyerID, UserOrderMoveOption orders, string accessToken = null);
-		/// <summary>Move a user to a different buyer.</summary>
+		/// <summary>Move a user to a different buyer</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="userID">ID of the user.</param>
 		/// <param name="newBuyerID">ID of the new buyer.</param>
 		/// <param name="orders">Orders of the user. Possible values: None, Unsubmitted, All.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TUser> MoveAsync<TUser>(string buyerID, string userID, string newBuyerID, UserOrderMoveOption orders, string accessToken = null) where TUser : User;
-		/// <summary>Get a single user access token.</summary>
+		/// <summary>Retrieve a user access token.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="userID">ID of the user.</param>
 		/// <param name="impersonateTokenRequest">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<AccessToken> GetAccessTokenAsync(string buyerID, string userID, ImpersonateTokenRequest impersonateTokenRequest, string accessToken = null);
-		/// <summary>Unlock a user account.</summary>
+		/// <summary>Unlock a user account</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="userID">ID of the user.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task UnlockUserAccountAsync(string buyerID, string userID, string accessToken = null);
-		/// <summary>Revoke a user tokens. Revokes all security tokens of specified buyer user.</summary>
+		/// <summary>Revoke a user tokens Revokes all security tokens of specified buyer user.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="userID">ID of the user.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
@@ -6685,24 +6701,24 @@ namespace OrderCloud.SDK
 
 	public interface IWebhooksResource
 	{
-		/// <summary>Get a single webhook.</summary>
+		/// <summary>Retrieve a webhook.</summary>
 		/// <param name="webhookID">ID of the webhook.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Webhook> GetAsync(string webhookID, string accessToken = null);
-		/// <summary>Get a list of webhooks.</summary>
+		/// <summary>List webhooks.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Webhook>> ListAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of webhooks.</summary>
+		/// <summary>List webhooks.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<Webhook>> ListAsync(Action<ListOptionsBuilder<Webhook>> buildListOpts, string accessToken = null);
-		/// <summary>Create a new webhook. If ID is provided and an object with that ID already exists, a 409 (conflict) error is returned.</summary>
+		/// <summary>Create a webhook.</summary>
 		/// <param name="webhook">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<Webhook> CreateAsync(Webhook webhook, string accessToken = null);
@@ -6724,16 +6740,16 @@ namespace OrderCloud.SDK
 
 	public interface IXpIndicesResource
 	{
-		/// <summary>Get a list of XP indices.</summary>
+		/// <summary>List XP indices.</summary>
 		/// <param name="search">Word or phrase to search for.</param>
 		/// <param name="searchOn">Comma-delimited list of fields to search on.</param>
 		/// <param name="sortBy">Comma-delimited list of fields to sort by.</param>
-		/// <param name="page">Page of results to return. Default: 1. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
-		/// <param name="pageSize">Number of results to return per page. Default: 20, max: 100.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
 		/// <param name="filters">An object or dictionary representing key/value pairs to apply as filters. Valid keys are top-level properties of the returned model or 'xp.???'</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<XpIndex>> ListAsync(string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null);
-		/// <summary>Get a list of XP indices.</summary>
+		/// <summary>List XP indices.</summary>
 		/// <param name="buildListOpts">A lambda or function for specifying various list options fluently.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<ListPage<XpIndex>> ListAsync(Action<ListOptionsBuilder<XpIndex>> buildListOpts, string accessToken = null);
@@ -6742,7 +6758,7 @@ namespace OrderCloud.SDK
 		/// <param name="key">Key of the xp index.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task DeleteAsync(XpThingType thingType, string key, string accessToken = null);
-		/// <summary>Create or Update an XP index.</summary>
+		/// <summary>Create or update an xp index</summary>
 		/// <param name="xpIndex">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task PutAsync(XpIndex xpIndex, string accessToken = null);
@@ -7372,10 +7388,10 @@ namespace OrderCloud.SDK
 		internal InventoryRecordsResource(OrderCloudClient client) : base(client) { }
 		public Task<InventoryRecord> GetAsync(string productID, string inventoryRecordID, string accessToken = null) => GetAsync<InventoryRecord>(productID, inventoryRecordID, accessToken);
 		public Task<TInventoryRecord> GetAsync<TInventoryRecord>(string productID, string inventoryRecordID, string accessToken = null) where TInventoryRecord : InventoryRecord => Request("v1", "products", productID, "inventoryrecords", inventoryRecordID).WithOAuthBearerToken(accessToken).GetJsonAsync<TInventoryRecord>();
-		public Task<ListPage<InventoryRecord>> ListAsync(string productID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) => ListAsync<InventoryRecord>(productID, search, searchOn, sortBy, page, pageSize, filters, accessToken);
-		public Task<ListPage<TInventoryRecord>> ListAsync<TInventoryRecord>(string productID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TInventoryRecord : InventoryRecord => Request("v1", "products", productID, "inventoryrecords").WithOAuthBearerToken(accessToken).SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<TInventoryRecord>>();
-		public Task<ListPage<InventoryRecord>> ListAsync(string productID, Action<ListOptionsBuilder<InventoryRecord>> buildListOpts, string accessToken = null) => ListAsync<InventoryRecord>(productID, buildListOpts, accessToken);
-		public Task<ListPage<TInventoryRecord>> ListAsync<TInventoryRecord>(string productID, Action<ListOptionsBuilder<TInventoryRecord>> buildListOpts, string accessToken = null) where TInventoryRecord : InventoryRecord => Request("v1", "products", productID, "inventoryrecords").WithOAuthBearerToken(accessToken).SetListOptions(buildListOpts).GetJsonAsync<ListPage<TInventoryRecord>>();
+		public Task<ListPage<InventoryRecord>> ListAsync(string productID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, bool? includeAddress = null, string accessToken = null) => ListAsync<InventoryRecord>(productID, search, searchOn, sortBy, page, pageSize, filters, includeAddress, accessToken);
+		public Task<ListPage<TInventoryRecord>> ListAsync<TInventoryRecord>(string productID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, bool? includeAddress = null, string accessToken = null) where TInventoryRecord : InventoryRecord => Request("v1", "products", productID, "inventoryrecords").WithOAuthBearerToken(accessToken).SetQueryParams(new { search, searchOn, sortBy, page, pageSize, includeAddress }).SetQueryParams(filters).GetJsonAsync<ListPage<TInventoryRecord>>();
+		public Task<ListPage<InventoryRecord>> ListAsync(string productID, Action<ListOptionsBuilder<InventoryRecord>> buildListOpts, bool? includeAddress = null, string accessToken = null) => ListAsync<InventoryRecord>(productID, buildListOpts, includeAddress, accessToken);
+		public Task<ListPage<TInventoryRecord>> ListAsync<TInventoryRecord>(string productID, Action<ListOptionsBuilder<TInventoryRecord>> buildListOpts, bool? includeAddress = null, string accessToken = null) where TInventoryRecord : InventoryRecord => Request("v1", "products", productID, "inventoryrecords").WithOAuthBearerToken(accessToken).SetQueryParams(new { includeAddress }).SetListOptions(buildListOpts).GetJsonAsync<ListPage<TInventoryRecord>>();
 		public Task<InventoryRecord> CreateAsync(string productID, InventoryRecord inventoryRecord, string accessToken = null) => CreateAsync<InventoryRecord>(productID, inventoryRecord, accessToken);
 		public Task<TInventoryRecord> CreateAsync<TInventoryRecord>(string productID, InventoryRecord inventoryRecord, string accessToken = null) where TInventoryRecord : InventoryRecord => Request("v1", "products", productID, "inventoryrecords").WithOAuthBearerToken(accessToken).PostJsonAsync(ValidateModel(inventoryRecord)).ReceiveJson<TInventoryRecord>();
 		public Task DeleteAsync(string productID, string inventoryRecordID, string accessToken = null) => Request("v1", "products", productID, "inventoryrecords", inventoryRecordID).WithOAuthBearerToken(accessToken).DeleteAsync();
@@ -7383,10 +7399,10 @@ namespace OrderCloud.SDK
 		public Task<TInventoryRecord> SaveAsync<TInventoryRecord>(string productID, string inventoryRecordID, InventoryRecord inventoryRecord, string accessToken = null) where TInventoryRecord : InventoryRecord => Request("v1", "products", productID, "inventoryrecords", inventoryRecordID).WithOAuthBearerToken(accessToken).PutJsonAsync(ValidateModel(inventoryRecord)).ReceiveJson<TInventoryRecord>();
 		public Task<InventoryRecord> PatchAsync(string productID, string inventoryRecordID, PartialInventoryRecord partialInventoryRecord, string accessToken = null) => PatchAsync<InventoryRecord>(productID, inventoryRecordID, partialInventoryRecord, accessToken);
 		public Task<TInventoryRecord> PatchAsync<TInventoryRecord>(string productID, string inventoryRecordID, PartialInventoryRecord partialInventoryRecord, string accessToken = null) where TInventoryRecord : InventoryRecord => Request("v1", "products", productID, "inventoryrecords", inventoryRecordID).WithOAuthBearerToken(accessToken).PatchJsonAsync(ValidateModel(partialInventoryRecord)).ReceiveJson<TInventoryRecord>();
-		public Task<ListPage<InventoryRecord>> ListVariantAsync(string productID, string variantID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) => ListVariantAsync<InventoryRecord>(productID, variantID, search, searchOn, sortBy, page, pageSize, filters, accessToken);
-		public Task<ListPage<TInventoryRecord>> ListVariantAsync<TInventoryRecord>(string productID, string variantID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TInventoryRecord : InventoryRecord => Request("v1", "products", productID, "variants", variantID, "inventoryrecords").WithOAuthBearerToken(accessToken).SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<TInventoryRecord>>();
-		public Task<ListPage<InventoryRecord>> ListVariantAsync(string productID, string variantID, Action<ListOptionsBuilder<InventoryRecord>> buildListOpts, string accessToken = null) => ListVariantAsync<InventoryRecord>(productID, variantID, buildListOpts, accessToken);
-		public Task<ListPage<TInventoryRecord>> ListVariantAsync<TInventoryRecord>(string productID, string variantID, Action<ListOptionsBuilder<TInventoryRecord>> buildListOpts, string accessToken = null) where TInventoryRecord : InventoryRecord => Request("v1", "products", productID, "variants", variantID, "inventoryrecords").WithOAuthBearerToken(accessToken).SetListOptions(buildListOpts).GetJsonAsync<ListPage<TInventoryRecord>>();
+		public Task<ListPage<InventoryRecord>> ListVariantAsync(string productID, string variantID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, bool? includeAddress = null, string accessToken = null) => ListVariantAsync<InventoryRecord>(productID, variantID, search, searchOn, sortBy, page, pageSize, filters, includeAddress, accessToken);
+		public Task<ListPage<TInventoryRecord>> ListVariantAsync<TInventoryRecord>(string productID, string variantID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, bool? includeAddress = null, string accessToken = null) where TInventoryRecord : InventoryRecord => Request("v1", "products", productID, "variants", variantID, "inventoryrecords").WithOAuthBearerToken(accessToken).SetQueryParams(new { search, searchOn, sortBy, page, pageSize, includeAddress }).SetQueryParams(filters).GetJsonAsync<ListPage<TInventoryRecord>>();
+		public Task<ListPage<InventoryRecord>> ListVariantAsync(string productID, string variantID, Action<ListOptionsBuilder<InventoryRecord>> buildListOpts, bool? includeAddress = null, string accessToken = null) => ListVariantAsync<InventoryRecord>(productID, variantID, buildListOpts, includeAddress, accessToken);
+		public Task<ListPage<TInventoryRecord>> ListVariantAsync<TInventoryRecord>(string productID, string variantID, Action<ListOptionsBuilder<TInventoryRecord>> buildListOpts, bool? includeAddress = null, string accessToken = null) where TInventoryRecord : InventoryRecord => Request("v1", "products", productID, "variants", variantID, "inventoryrecords").WithOAuthBearerToken(accessToken).SetQueryParams(new { includeAddress }).SetListOptions(buildListOpts).GetJsonAsync<ListPage<TInventoryRecord>>();
 		public Task<InventoryRecord> GetVariantAsync(string productID, string variantID, string inventoryRecordID, string accessToken = null) => GetVariantAsync<InventoryRecord>(productID, variantID, inventoryRecordID, accessToken);
 		public Task<TInventoryRecord> GetVariantAsync<TInventoryRecord>(string productID, string variantID, string inventoryRecordID, string accessToken = null) where TInventoryRecord : InventoryRecord => Request("v1", "products", productID, "variants", variantID, "inventoryrecords", inventoryRecordID).WithOAuthBearerToken(accessToken).GetJsonAsync<TInventoryRecord>();
 		public Task<InventoryRecord> CreateVariantAsync(string productID, string variantID, InventoryRecord inventoryRecord, string accessToken = null) => CreateVariantAsync<InventoryRecord>(productID, variantID, inventoryRecord, accessToken);
@@ -7510,14 +7526,14 @@ namespace OrderCloud.SDK
 		public Task<ListPage<TVariant>> ListVariantsAsync<TVariant>(string productID, Action<ListOptionsBuilder<TVariant>> buildListOpts, string accessToken = null) where TVariant : Variant => Request("v1", "me", "products", productID, "variants").WithOAuthBearerToken(accessToken).SetListOptions(buildListOpts).GetJsonAsync<ListPage<TVariant>>();
 		public Task<Variant> GetVariantAsync(string productID, string variantID, string accessToken = null) => GetVariantAsync<Variant>(productID, variantID, accessToken);
 		public Task<TVariant> GetVariantAsync<TVariant>(string productID, string variantID, string accessToken = null) where TVariant : Variant => Request("v1", "me", "products", productID, "variants", variantID).WithOAuthBearerToken(accessToken).GetJsonAsync<TVariant>();
-		public Task<ListPage<InventoryRecord>> ListProductInventoryRecordsAsync(string productID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) => ListProductInventoryRecordsAsync<InventoryRecord>(productID, search, searchOn, sortBy, page, pageSize, filters, accessToken);
-		public Task<ListPage<TInventoryRecord>> ListProductInventoryRecordsAsync<TInventoryRecord>(string productID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TInventoryRecord : InventoryRecord => Request("v1", "me", "products", productID, "inventoryrecords").WithOAuthBearerToken(accessToken).SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<TInventoryRecord>>();
-		public Task<ListPage<InventoryRecord>> ListProductInventoryRecordsAsync(string productID, Action<ListOptionsBuilder<InventoryRecord>> buildListOpts, string accessToken = null) => ListProductInventoryRecordsAsync<InventoryRecord>(productID, buildListOpts, accessToken);
-		public Task<ListPage<TInventoryRecord>> ListProductInventoryRecordsAsync<TInventoryRecord>(string productID, Action<ListOptionsBuilder<TInventoryRecord>> buildListOpts, string accessToken = null) where TInventoryRecord : InventoryRecord => Request("v1", "me", "products", productID, "inventoryrecords").WithOAuthBearerToken(accessToken).SetListOptions(buildListOpts).GetJsonAsync<ListPage<TInventoryRecord>>();
-		public Task<ListPage<InventoryRecord>> ListVariantInventoryRecordsAsync(string productID, string variantID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) => ListVariantInventoryRecordsAsync<InventoryRecord>(productID, variantID, search, searchOn, sortBy, page, pageSize, filters, accessToken);
-		public Task<ListPage<TInventoryRecord>> ListVariantInventoryRecordsAsync<TInventoryRecord>(string productID, string variantID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TInventoryRecord : InventoryRecord => Request("v1", "me", "products", productID, "variants", variantID, "inventoryrecords").WithOAuthBearerToken(accessToken).SetQueryParams(new { search, searchOn, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<TInventoryRecord>>();
-		public Task<ListPage<InventoryRecord>> ListVariantInventoryRecordsAsync(string productID, string variantID, Action<ListOptionsBuilder<InventoryRecord>> buildListOpts, string accessToken = null) => ListVariantInventoryRecordsAsync<InventoryRecord>(productID, variantID, buildListOpts, accessToken);
-		public Task<ListPage<TInventoryRecord>> ListVariantInventoryRecordsAsync<TInventoryRecord>(string productID, string variantID, Action<ListOptionsBuilder<TInventoryRecord>> buildListOpts, string accessToken = null) where TInventoryRecord : InventoryRecord => Request("v1", "me", "products", productID, "variants", variantID, "inventoryrecords").WithOAuthBearerToken(accessToken).SetListOptions(buildListOpts).GetJsonAsync<ListPage<TInventoryRecord>>();
+		public Task<ListPage<InventoryRecord>> ListProductInventoryRecordsAsync(string productID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, bool? includeAddress = null, string accessToken = null) => ListProductInventoryRecordsAsync<InventoryRecord>(productID, search, searchOn, sortBy, page, pageSize, filters, includeAddress, accessToken);
+		public Task<ListPage<TInventoryRecord>> ListProductInventoryRecordsAsync<TInventoryRecord>(string productID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, bool? includeAddress = null, string accessToken = null) where TInventoryRecord : InventoryRecord => Request("v1", "me", "products", productID, "inventoryrecords").WithOAuthBearerToken(accessToken).SetQueryParams(new { search, searchOn, sortBy, page, pageSize, includeAddress }).SetQueryParams(filters).GetJsonAsync<ListPage<TInventoryRecord>>();
+		public Task<ListPage<InventoryRecord>> ListProductInventoryRecordsAsync(string productID, Action<ListOptionsBuilder<InventoryRecord>> buildListOpts, bool? includeAddress = null, string accessToken = null) => ListProductInventoryRecordsAsync<InventoryRecord>(productID, buildListOpts, includeAddress, accessToken);
+		public Task<ListPage<TInventoryRecord>> ListProductInventoryRecordsAsync<TInventoryRecord>(string productID, Action<ListOptionsBuilder<TInventoryRecord>> buildListOpts, bool? includeAddress = null, string accessToken = null) where TInventoryRecord : InventoryRecord => Request("v1", "me", "products", productID, "inventoryrecords").WithOAuthBearerToken(accessToken).SetQueryParams(new { includeAddress }).SetListOptions(buildListOpts).GetJsonAsync<ListPage<TInventoryRecord>>();
+		public Task<ListPage<InventoryRecord>> ListVariantInventoryRecordsAsync(string productID, string variantID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, bool? includeAddress = null, string accessToken = null) => ListVariantInventoryRecordsAsync<InventoryRecord>(productID, variantID, search, searchOn, sortBy, page, pageSize, filters, includeAddress, accessToken);
+		public Task<ListPage<TInventoryRecord>> ListVariantInventoryRecordsAsync<TInventoryRecord>(string productID, string variantID, string search = null, string searchOn = null, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, bool? includeAddress = null, string accessToken = null) where TInventoryRecord : InventoryRecord => Request("v1", "me", "products", productID, "variants", variantID, "inventoryrecords").WithOAuthBearerToken(accessToken).SetQueryParams(new { search, searchOn, sortBy, page, pageSize, includeAddress }).SetQueryParams(filters).GetJsonAsync<ListPage<TInventoryRecord>>();
+		public Task<ListPage<InventoryRecord>> ListVariantInventoryRecordsAsync(string productID, string variantID, Action<ListOptionsBuilder<InventoryRecord>> buildListOpts, bool? includeAddress = null, string accessToken = null) => ListVariantInventoryRecordsAsync<InventoryRecord>(productID, variantID, buildListOpts, includeAddress, accessToken);
+		public Task<ListPage<TInventoryRecord>> ListVariantInventoryRecordsAsync<TInventoryRecord>(string productID, string variantID, Action<ListOptionsBuilder<TInventoryRecord>> buildListOpts, bool? includeAddress = null, string accessToken = null) where TInventoryRecord : InventoryRecord => Request("v1", "me", "products", productID, "variants", variantID, "inventoryrecords").WithOAuthBearerToken(accessToken).SetQueryParams(new { includeAddress }).SetListOptions(buildListOpts).GetJsonAsync<ListPage<TInventoryRecord>>();
 		public Task<ListPage<Order>> ListOrdersAsync(DateTimeOffset? from = null, DateTimeOffset? to = null, string search = null, string searchOn = null, SearchType searchType = SearchType.AnyTerm, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) => ListOrdersAsync<Order>(from, to, search, searchOn, searchType, sortBy, page, pageSize, filters, accessToken);
 		public Task<ListPage<TOrder>> ListOrdersAsync<TOrder>(DateTimeOffset? from = null, DateTimeOffset? to = null, string search = null, string searchOn = null, SearchType searchType = SearchType.AnyTerm, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TOrder : Order => Request("v1", "me", "orders").WithOAuthBearerToken(accessToken).SetQueryParams(new { from, to, search, searchOn, searchType, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<TOrder>>();
 		public Task<ListPage<Order>> ListOrdersAsync(Action<ListOptionsBuilder2<Order>> buildListOpts, DateTimeOffset? from = null, DateTimeOffset? to = null, string accessToken = null) => ListOrdersAsync<Order>(buildListOpts, from, to, accessToken);

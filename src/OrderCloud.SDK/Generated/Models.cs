@@ -207,8 +207,8 @@ namespace OrderCloud.SDK
 		public string AppName { get => GetProp<string>("AppName"); set => SetProp<string>("AppName", value); }
 		/// <summary>Refresh token duration of the api client. Must be between 0 and 524160.</summary>
 		public int RefreshTokenDuration { get => GetProp<int>("RefreshTokenDuration"); set => SetProp<int>("RefreshTokenDuration", value); }
-		/// <summary>Specifies the duration of anonymous tokens, expressed in minutes. This value is only used if the ApiClient is configured for anonymous shopping. The default is 10080 (7 days).</summary>
-		public int? AnonymousTokenDuration { get => GetProp<int?>("AnonymousTokenDuration"); set => SetProp<int?>("AnonymousTokenDuration", value); }
+		/// <summary>Specifies the duration of anonymous tokens, expressed in minutes. This value is only used if the ApiClient is configured for anonymous shopping.</summary>
+		public int? AnonymousTokenDuration { get => GetProp<int?>("AnonymousTokenDuration", 10080); set => SetProp<int?>("AnonymousTokenDuration", value); }
 		/// <summary>Optionally set a user that will be used when authenticating with a Client Credentials grant type flow. This grant type is often used for anonymous browsing on buyer applications and authentication on server integration layers.</summary>
 		public string DefaultContextUserName { get => GetProp<string>("DefaultContextUserName"); set => SetProp<string>("DefaultContextUserName", value); }
 		/// <summary>Container for extended (custom) properties of the api client.</summary>
@@ -1276,7 +1276,7 @@ namespace OrderCloud.SDK
 		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
 		/// <summary>ID of the owner.</summary>
 		public string OwnerID { get => GetProp<string>("OwnerID"); set => SetProp<string>("OwnerID", value); }
-		/// <summary>Allow inventory record to be used by all buyers in your Marketplace without creating explicit assignments, defaults to true.</summary>
+		/// <summary>Allow inventory record to be used by all buyers in your Marketplace without creating explicit assignments.</summary>
 		public bool AllowAllBuyers { get => GetProp<bool>("AllowAllBuyers", true); set => SetProp<bool>("AllowAllBuyers", value); }
 		/// <summary>Address of the inventory record.</summary>
 		[ApiReadOnly]
@@ -1629,8 +1629,8 @@ namespace OrderCloud.SDK
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 		/// <summary>ID of the delivery config.</summary>
 		public string DeliveryConfigID { get => GetProp<string>("DeliveryConfigID"); set => SetProp<string>("DeliveryConfigID", value); }
-		/// <summary>Allow MessageSender to send to all buyers in your marketplace without creating explicit assignments, defaults to false.</summary>
-		public bool AllowAllBuyers { get => GetProp<bool>("AllowAllBuyers"); set => SetProp<bool>("AllowAllBuyers", value); }
+		/// <summary>Allow MessageSender to send to all buyers in your marketplace without creating explicit assignments.</summary>
+		public bool AllowAllBuyers { get => GetProp<bool>("AllowAllBuyers", false); set => SetProp<bool>("AllowAllBuyers", value); }
 	}
 	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic MessageSender class instead.</typeparam>
 	public class MessageSender<Txp> : MessageSender
@@ -2712,7 +2712,7 @@ namespace OrderCloud.SDK
 		public string XpPath { get => GetProp<string>("XpPath"); set => SetProp<string>("XpPath", value); }
 		/// <summary>List order of the product facet. Sortable: priority level 1.</summary>
 		public int ListOrder { get => GetProp<int>("ListOrder"); set => SetProp<int>("ListOrder", value); }
-		/// <summary>Minimum count required or a facet value to be returned in list metadata. Default is 1. If you want zero-count values returned, set this to 0.</summary>
+		/// <summary>Minimum count required or a facet value to be returned in list metadata. If you want zero-count values returned, set this to 0.</summary>
 		public int MinCount { get => GetProp<int>("MinCount", 1); set => SetProp<int>("MinCount", value); }
 		/// <summary>Container for extended (custom) properties of the product facet.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
@@ -2779,6 +2779,8 @@ namespace OrderCloud.SDK
 		public object ConfigData { get => GetProp<object>("ConfigData"); set => SetProp<object>("ConfigData", value); }
 		/// <summary>Paused of the product sync config.</summary>
 		public bool Paused { get => GetProp<bool>("Paused"); set => SetProp<bool>("Paused", value); }
+		/// <summary>Exclude price schedules of the product sync config.</summary>
+		public bool ExcludePriceSchedules { get => GetProp<bool>("ExcludePriceSchedules"); set => SetProp<bool>("ExcludePriceSchedules", value); }
 	}
 	public class Promotion : OrderCloudModel
 	{
@@ -3008,7 +3010,7 @@ namespace OrderCloud.SDK
 		public IList<ApiRole> Roles { get => GetProp<IList<ApiRole>>("Roles", new List<ApiRole>()); set => SetProp<IList<ApiRole>>("Roles", value); }
 		/// <summary>Custom roles of the security profile.</summary>
 		public IList<string> CustomRoles { get => GetProp<IList<string>>("CustomRoles", new List<string>()); set => SetProp<IList<string>>("CustomRoles", value); }
-		/// <summary>When PasswordConfig.ExpireInDays has a value, the user will be required to go through the PW reset flow once that number of days has passed.</summary>
+		/// <summary>Password config of the security profile.</summary>
 		public PasswordConfig PasswordConfig { get => GetProp<PasswordConfig>("PasswordConfig"); set => SetProp<PasswordConfig>("PasswordConfig", value); }
 	}
 	public class SecurityProfileAssignment : OrderCloudModel
@@ -3708,8 +3710,8 @@ namespace OrderCloud.SDK
 	}
 	public class VariantOverrides : OrderCloudModel
 	{
-		/// <summary>Overrides the Active value inherited from the product when generating variants. Default is true.</summary>
-		public bool Active { get => GetProp<bool>("Active"); set => SetProp<bool>("Active", value); }
+		/// <summary>Overrides the Active value inherited from the product when generating variants.</summary>
+		public bool Active { get => GetProp<bool>("Active", true); set => SetProp<bool>("Active", value); }
 	}
 	public class VariantSpec : OrderCloudModel
 	{
