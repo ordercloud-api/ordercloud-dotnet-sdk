@@ -4152,12 +4152,12 @@ namespace OrderCloud.SDK
 		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="order">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
-		Task<Order> CreateAsync(OrderDirection direction, Order order = null, string accessToken = null);
+		Task<Order> CreateAsync(OrderDirection direction, Order order, string accessToken = null);
 		/// <summary>Create an order.</summary>
 		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="order">The object that will be serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
-		Task<TOrder> CreateAsync<TOrder>(OrderDirection direction, Order order = null, string accessToken = null) where TOrder : Order;
+		Task<TOrder> CreateAsync<TOrder>(OrderDirection direction, Order order, string accessToken = null) where TOrder : Order;
 		/// <summary>Create or update an order. If an object with the same ID already exists, it will be overwritten.</summary>
 		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
@@ -7738,8 +7738,8 @@ namespace OrderCloud.SDK
 		public Task<ListPage<TOrder>> ListAsync<TOrder>(OrderDirection direction, string buyerID = null, string supplierID = null, DateTimeOffset? from = null, DateTimeOffset? to = null, string search = null, string searchOn = null, SearchType searchType = SearchType.AnyTerm, string sortBy = null, int page = 1, int pageSize = 20, object filters = null, string accessToken = null) where TOrder : Order => Request("v1", "orders", direction).WithOAuthBearerToken(accessToken).SetQueryParams(new { buyerID, supplierID, from, to, search, searchOn, searchType, sortBy, page, pageSize }).SetQueryParams(filters).GetJsonAsync<ListPage<TOrder>>();
 		public Task<ListPage<Order>> ListAsync(OrderDirection direction, Action<ListOptionsBuilder2<Order>> buildListOpts, string buyerID = null, string supplierID = null, DateTimeOffset? from = null, DateTimeOffset? to = null, string accessToken = null) => ListAsync<Order>(direction, buildListOpts, buyerID, supplierID, from, to, accessToken);
 		public Task<ListPage<TOrder>> ListAsync<TOrder>(OrderDirection direction, Action<ListOptionsBuilder2<TOrder>> buildListOpts, string buyerID = null, string supplierID = null, DateTimeOffset? from = null, DateTimeOffset? to = null, string accessToken = null) where TOrder : Order => Request("v1", "orders", direction).WithOAuthBearerToken(accessToken).SetQueryParams(new { buyerID, supplierID, from, to }).SetListOptions(buildListOpts).GetJsonAsync<ListPage<TOrder>>();
-		public Task<Order> CreateAsync(OrderDirection direction, Order order = null, string accessToken = null) => CreateAsync<Order>(direction, order, accessToken);
-		public Task<TOrder> CreateAsync<TOrder>(OrderDirection direction, Order order = null, string accessToken = null) where TOrder : Order => Request("v1", "orders", direction).WithOAuthBearerToken(accessToken).PostJsonAsync(ValidateModel(order)).ReceiveJson<TOrder>();
+		public Task<Order> CreateAsync(OrderDirection direction, Order order, string accessToken = null) => CreateAsync<Order>(direction, order, accessToken);
+		public Task<TOrder> CreateAsync<TOrder>(OrderDirection direction, Order order, string accessToken = null) where TOrder : Order => Request("v1", "orders", direction).WithOAuthBearerToken(accessToken).PostJsonAsync(ValidateModel(order)).ReceiveJson<TOrder>();
 		public Task<Order> SaveAsync(OrderDirection direction, string orderID, Order order, string accessToken = null) => SaveAsync<Order>(direction, orderID, order, accessToken);
 		public Task<TOrder> SaveAsync<TOrder>(OrderDirection direction, string orderID, Order order, string accessToken = null) where TOrder : Order => Request("v1", "orders", direction, orderID).WithOAuthBearerToken(accessToken).PutJsonAsync(ValidateModel(order)).ReceiveJson<TOrder>();
 		public Task DeleteAsync(OrderDirection direction, string orderID, string accessToken = null) => Request("v1", "orders", direction, orderID).WithOAuthBearerToken(accessToken).DeleteAsync();
