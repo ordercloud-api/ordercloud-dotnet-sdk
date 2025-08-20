@@ -183,27 +183,6 @@ namespace OrderCloud.SDK
 			/// <summary>The error or validation message cannot be sent because the associated delivery configuration is disabled.</summary>
 			public const string DeliveryConfigDisabled = "ErrorConfig.DeliveryConfigDisabled";
 		}
-		public static class Synchronize
-		{
-			/// <summary>EntitySync for AdminUsers is not configured or the delivery configuration is disabled.</summary>
-			public const string EntitySyncForAdminUsersNotEnabled = "Synchronize.EntitySyncForAdminUsersNotEnabled";
-			/// <summary>EntitySync for Categories is not configured or the delivery configuration is disabled.</summary>
-			public const string EntitySyncForCategoryNotEnabled = "Synchronize.EntitySyncForCategoryNotEnabled";
-			/// <summary>EntitySync for Buyer is not configured or the delivery configuration is disabled.</summary>
-			public const string EntitySyncForBuyerNotEnabled = "Synchronize.EntitySyncForBuyerNotEnabled";
-			/// <summary>EntitySync for BuyerUserGroup is not configured or the delivery configuration is disabled.</summary>
-			public const string EntitySyncForBuyerUserGroupNotEnabled = "Synchronize.EntitySyncForBuyerUserGroupNotEnabled";
-			/// <summary>EntitySync for BuyerUsers is not configured or the delivery configuration is disabled.</summary>
-			public const string EntitySyncForBuyerUsersNotEnabled = "Synchronize.EntitySyncForBuyerUsersNotEnabled";
-			/// <summary>EntitySync for InventoryRecords is not configured or the delivery configuration is disabled.</summary>
-			public const string EntitySyncForInventoryRecordNotEnabled = "Synchronize.EntitySyncForInventoryRecordNotEnabled";
-			/// <summary>EntitySync for Supplier is not configured or the delivery configuration is disabled.</summary>
-			public const string EntitySyncForSupplierNotEnabled = "Synchronize.EntitySyncForSupplierNotEnabled";
-			/// <summary>EntitySync for SupplierUsers is not configured or the delivery configuration is disabled.</summary>
-			public const string EntitySyncForSupplierUsersNotEnabled = "Synchronize.EntitySyncForSupplierUsersNotEnabled ";
-			/// <summary>ProductSync is not configured or the delivery configuration is disabled.</summary>
-			public const string ProductSyncNotEnabled = "Synchronize.ProductSyncNotEnabled";
-		}
 		public static class Expression
 		{
 			/// <summary>Function has invalid number of arguments.</summary>
@@ -377,10 +356,6 @@ namespace OrderCloud.SDK
 		{
 			/// <summary>Username or email is required.</summary>
 			public const string UsernameOrEmailRequired = "OneTimePasswordRequest.UsernameOrEmailRequired";
-			/// <summary>No one-time password was sent because accounts associated with this username or email are locked, inactive, or do not have an associated email.</summary>
-			public const string OTPNotSent = "OneTimePasswordRequest.OTPNotSent";
-			/// <summary>No users with the supplied username or email could be found for the specified API client.</summary>
-			public const string UserNotFoundForClient = "OneTimePasswordRequest.UserNotFoundForClient";
 		}
 		public static class Order
 		{
@@ -696,20 +671,14 @@ namespace OrderCloud.SDK
 		}
 		public static class PromotionIntegration
 		{
-			/// <summary>Failed to evaluate integration promotion.</summary>
+			/// <summary>A failed or invalid response was returned from the promotion integration.</summary>
 			public const string FailedToEvaluate = "PromotionIntegration.FailedToEvaluate";
-			/// <summary>Promotion integration returned the error.</summary>
-			public const string EvaluationErrorReturned = "PromotionIntegration.EvaluationErrorReturned";
 			/// <summary>Cannot delete a promotion integration if promotions exist where ValueExpression = null.</summary>
 			public const string CannotDeletePromotionIntegration = "PromotionIntegration.CannotDeletePromotionIntegration";
-			/// <summary>PromotionID in the response does not match any PromosRequested ID in the Promotion Integration payload.</summary>
-			public const string PromotionIDMismatch = "PromotionIntegration.PromotionIDMismatch";
-			/// <summary>LineItemId is required for LineItemLevel promotion.</summary>
+			/// <summary>LineItemID is required on the accepted promotion because it is an item-level promotion.</summary>
 			public const string LineItemIdRequired = "PromotionIntegration.LineItemIdRequired";
-			/// <summary>LineItemId must be null for not LineItemLevel promotion.</summary>
+			/// <summary>LineItemID is not allowed on the accepted promotion because it is an order-level promotion.</summary>
 			public const string LineItemIdMustBeNull = "PromotionIntegration.LineItemIdMustBeNull";
-			/// <summary>Promotion cannot be used on this order.</summary>
-			public const string NotEligible = "PromotionIntegration.NotEligible";
 		}
 		public static class Registration
 		{
@@ -792,6 +761,27 @@ namespace OrderCloud.SDK
 			public const string DefaultContextUser = "SubscriptionIntegration.DefaultContextUser";
 			/// <summary>You have exceeded the maximum number of subscription integration runs per hour.</summary>
 			public const string ExceedsSelfServiceLimit = "SubscriptionIntegration.ExceedsSelfServiceLimit";
+		}
+		public static class Synchronize
+		{
+			/// <summary>EntitySync for AdminUsers is not configured or the delivery configuration is disabled.</summary>
+			public const string EntitySyncForAdminUsersNotEnabled = "Synchronize.EntitySyncForAdminUsersNotEnabled";
+			/// <summary>EntitySync for Categories is not configured or the delivery configuration is disabled.</summary>
+			public const string EntitySyncForCategoryNotEnabled = "Synchronize.EntitySyncForCategoryNotEnabled";
+			/// <summary>EntitySync for Buyer is not configured or the delivery configuration is disabled.</summary>
+			public const string EntitySyncForBuyerNotEnabled = "Synchronize.EntitySyncForBuyerNotEnabled";
+			/// <summary>EntitySync for BuyerUserGroup is not configured or the delivery configuration is disabled.</summary>
+			public const string EntitySyncForBuyerUserGroupNotEnabled = "Synchronize.EntitySyncForBuyerUserGroupNotEnabled";
+			/// <summary>EntitySync for BuyerUsers is not configured or the delivery configuration is disabled.</summary>
+			public const string EntitySyncForBuyerUsersNotEnabled = "Synchronize.EntitySyncForBuyerUsersNotEnabled";
+			/// <summary>EntitySync for InventoryRecords is not configured or the delivery configuration is disabled.</summary>
+			public const string EntitySyncForInventoryRecordNotEnabled = "Synchronize.EntitySyncForInventoryRecordNotEnabled";
+			/// <summary>EntitySync for Supplier is not configured or the delivery configuration is disabled.</summary>
+			public const string EntitySyncForSupplierNotEnabled = "Synchronize.EntitySyncForSupplierNotEnabled";
+			/// <summary>EntitySync for SupplierUsers is not configured or the delivery configuration is disabled.</summary>
+			public const string EntitySyncForSupplierUsersNotEnabled = "Synchronize.EntitySyncForSupplierUsersNotEnabled";
+			/// <summary>ProductSync is not configured or the delivery configuration is disabled.</summary>
+			public const string ProductSyncNotEnabled = "Synchronize.ProductSyncNotEnabled";
 		}
 		public static class TrackingEvent
 		{

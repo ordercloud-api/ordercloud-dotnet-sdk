@@ -357,7 +357,7 @@ namespace OrderCloud.SDK.Tests
 			public int Bar { get; set; }
 		}
 
-		class CustomUser : User<CustomXP> { }
+		class CustomUser : OrderUser<CustomXP> { }
 		class CustomAddress : Address<CustomXP> { }
 		class CustomLineItem : LineItem<CustomXP, LineItemProduct, LineItemVariant, CustomAddress, CustomAddress> { }
 		class CustomOrder : Order<CustomXP, CustomUser, CustomAddress> { }

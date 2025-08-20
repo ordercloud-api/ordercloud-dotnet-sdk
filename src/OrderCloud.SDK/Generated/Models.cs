@@ -1039,7 +1039,7 @@ namespace OrderCloud.SDK
 		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
 		/// <summary>User placing the order.</summary>
 		[ApiReadOnly]
-		public User FromUser { get => GetProp<User>("FromUser"); set => SetProp<User>("FromUser", value); }
+		public OrderUser FromUser { get => GetProp<OrderUser>("FromUser"); set => SetProp<OrderUser>("FromUser", value); }
 		/// <summary>ID of the Buyer placing the order, or the marketplace owner when an order is being forwarded. Mainly useful to the marketplace owner or supplier receiving it.</summary>
 		public string FromCompanyID { get => GetProp<string>("FromCompanyID"); set => SetProp<string>("FromCompanyID", value); }
 		/// <summary>ID of the marketplace owner or supplier receiving the order, only writable on create. Mainly useful to the user placing it.</summary>
@@ -1114,11 +1114,11 @@ namespace OrderCloud.SDK
 	}
 	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, specify dynamic.</typeparam>
 	/// <typeparam name="TLineItems">Specific type of the LineItems property. If not using a custom type, specify LineItem.</typeparam>
-	/// <typeparam name="TFromUser">Specific type of the FromUser property. If not using a custom type, specify User.</typeparam>
+	/// <typeparam name="TFromUser">Specific type of the FromUser property. If not using a custom type, specify OrderUser.</typeparam>
 	/// <typeparam name="TBillingAddress">Specific type of the BillingAddress property. If not using a custom type, specify Address.</typeparam>
 	public class ExtendedOrder<Txp, TLineItems, TFromUser, TBillingAddress> : ExtendedOrder
 		where TLineItems : LineItem
-		where TFromUser : User
+		where TFromUser : OrderUser
 		where TBillingAddress : Address
 	{
 		/// <summary>Container for extended (custom) properties of the extended order.</summary>
@@ -1786,7 +1786,7 @@ namespace OrderCloud.SDK
 		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
 		/// <summary>User placing the order.</summary>
 		[ApiReadOnly]
-		public User FromUser { get => GetProp<User>("FromUser"); set => SetProp<User>("FromUser", value); }
+		public OrderUser FromUser { get => GetProp<OrderUser>("FromUser"); set => SetProp<OrderUser>("FromUser", value); }
 		/// <summary>ID of the Buyer placing the order, or the marketplace owner when an order is being forwarded. Mainly useful to the marketplace owner or supplier receiving it.</summary>
 		public string FromCompanyID { get => GetProp<string>("FromCompanyID"); set => SetProp<string>("FromCompanyID", value); }
 		/// <summary>ID of the marketplace owner or supplier receiving the order, only writable on create. Mainly useful to the user placing it.</summary>
@@ -1860,10 +1860,10 @@ namespace OrderCloud.SDK
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
 	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, specify dynamic.</typeparam>
-	/// <typeparam name="TFromUser">Specific type of the FromUser property. If not using a custom type, specify User.</typeparam>
+	/// <typeparam name="TFromUser">Specific type of the FromUser property. If not using a custom type, specify OrderUser.</typeparam>
 	/// <typeparam name="TBillingAddress">Specific type of the BillingAddress property. If not using a custom type, specify Address.</typeparam>
 	public class Order<Txp, TFromUser, TBillingAddress> : Order
-		where TFromUser : User
+		where TFromUser : OrderUser
 		where TBillingAddress : Address
 	{
 		/// <summary>Container for extended (custom) properties of the order.</summary>
@@ -2190,6 +2190,59 @@ namespace OrderCloud.SDK
 		public string DeliveryConfigID { get => GetProp<string>("DeliveryConfigID"); set => SetProp<string>("DeliveryConfigID", value); }
 		/// <summary>Config data of the order sync config.</summary>
 		public object ConfigData { get => GetProp<object>("ConfigData"); set => SetProp<object>("ConfigData", value); }
+	}
+	public class OrderUser : OrderCloudModel
+	{
+		/// <summary>ID of the order user. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable.</summary>
+		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
+		/// <summary>ID of the company.</summary>
+		[ApiReadOnly]
+		public string CompanyID { get => GetProp<string>("CompanyID"); set => SetProp<string>("CompanyID", value); }
+		/// <summary>Must be unique across all organizations.</summary>
+		[Required]
+		public string Username { get => GetProp<string>("Username"); set => SetProp<string>("Username", value); }
+		/// <summary>Password of the order user.</summary>
+		[ApiWriteOnly]
+		public string Password { get => GetProp<string>("Password"); set => SetProp<string>("Password", value); }
+		/// <summary>First name of the order user. Required. Max length 100 characters. Searchable: priority level 4. Sortable: priority level 2.</summary>
+		[Required]
+		public string FirstName { get => GetProp<string>("FirstName"); set => SetProp<string>("FirstName", value); }
+		/// <summary>Last name of the order user. Required. Max length 100 characters. Searchable: priority level 3. Sortable: priority level 1.</summary>
+		[Required]
+		public string LastName { get => GetProp<string>("LastName"); set => SetProp<string>("LastName", value); }
+		/// <summary>Email of the order user. Required. Max length 200 characters. Searchable: priority level 5. Sortable.</summary>
+		[Required]
+		public string Email { get => GetProp<string>("Email"); set => SetProp<string>("Email", value); }
+		/// <summary>Phone of the order user. Max length 100 characters.</summary>
+		public string Phone { get => GetProp<string>("Phone"); set => SetProp<string>("Phone", value); }
+		/// <summary>Terms accepted of the order user.</summary>
+		public DateTimeOffset? TermsAccepted { get => GetProp<DateTimeOffset?>("TermsAccepted"); set => SetProp<DateTimeOffset?>("TermsAccepted", value); }
+		/// <summary>If false, authentication is prohibited.</summary>
+		[Required]
+		public bool Active { get => GetProp<bool>("Active"); set => SetProp<bool>("Active", value); }
+		/// <summary>Container for extended (custom) properties of the order user.</summary>
+		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
+		/// <summary>List of roles currently available to the user via all security profile assignments.</summary>
+		[ApiReadOnly]
+		public IReadOnlyList<string> AvailableRoles { get => GetProp<IReadOnlyList<string>>("AvailableRoles"); set => SetProp<IReadOnlyList<string>>("AvailableRoles", value); }
+		/// <summary>Most specific locale assigned to the user, if any.</summary>
+		[ApiReadOnly]
+		public Locale Locale { get => GetProp<Locale>("Locale"); set => SetProp<Locale>("Locale", value); }
+		/// <summary>Date created of the order user. Sortable.</summary>
+		[ApiReadOnly]
+		public DateTimeOffset? DateCreated { get => GetProp<DateTimeOffset?>("DateCreated"); set => SetProp<DateTimeOffset?>("DateCreated", value); }
+		/// <summary>Accurate within a few minutes. Includes impersonation activity.</summary>
+		[ApiReadOnly]
+		public DateTimeOffset? LastActive { get => GetProp<DateTimeOffset?>("LastActive"); set => SetProp<DateTimeOffset?>("LastActive", value); }
+		/// <summary>Can be used in conjunction with SecurityProfile.PasswordConfig to enforce password reset schedules.</summary>
+		[ApiReadOnly]
+		public DateTimeOffset? PasswordLastSetDate { get => GetProp<DateTimeOffset?>("PasswordLastSetDate"); set => SetProp<DateTimeOffset?>("PasswordLastSetDate", value); }
+	}
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic OrderUser class instead.</typeparam>
+	public class OrderUser<Txp> : OrderUser
+	{
+		/// <summary>Container for extended (custom) properties of the order user.</summary>
+		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
 	}
 	public class OrderWorksheet : OrderCloudModel
 	{
@@ -3588,6 +3641,9 @@ namespace OrderCloud.SDK
 	}
 	public class User : OrderCloudModel
 	{
+		/// <summary>Number of times the user failed authentication due to incorrect password since last successful attempt, or since being unlocked.</summary>
+		[ApiReadOnly]
+		public int FailedLoginAttempts { get => GetProp<int>("FailedLoginAttempts"); set => SetProp<int>("FailedLoginAttempts", value); }
 		/// <summary>ID of the user. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable.</summary>
 		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
 		/// <summary>ID of the company.</summary>
@@ -3891,10 +3947,10 @@ namespace OrderCloud.SDK
 	public class PartialOpenIdConnect : OpenIdConnect, IPartial { }
 	public class PartialOrder : Order, IPartial { }
 	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, specify dynamic.</typeparam>
-	/// <typeparam name="TFromUser">Specific type of the FromUser property. If not using a custom type, specify User.</typeparam>
+	/// <typeparam name="TFromUser">Specific type of the FromUser property. If not using a custom type, specify OrderUser.</typeparam>
 	/// <typeparam name="TBillingAddress">Specific type of the BillingAddress property. If not using a custom type, specify Address.</typeparam>
 	public class PartialOrder<Txp, TFromUser, TBillingAddress> : PartialOrder
-		where TFromUser : User
+		where TFromUser : OrderUser
 		where TBillingAddress : Address
 	{ }
 	public class PartialOrderReturn : OrderReturn, IPartial { }
@@ -3903,6 +3959,10 @@ namespace OrderCloud.SDK
 	{ }
 	public class PartialOrderReturnItem : OrderReturnItem, IPartial { }
 	public class PartialOrderSyncConfig : OrderSyncConfig, IPartial { }
+	public class PartialOrderUser : OrderUser, IPartial { }
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic PartialOrderUser class instead.</typeparam>
+	public class PartialOrderUser<Txp> : PartialOrderUser
+	{ }
 	public class PartialPasswordConfig : PasswordConfig, IPartial { }
 	public class PartialPayment : Payment, IPartial { }
 	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, specify dynamic.</typeparam>
