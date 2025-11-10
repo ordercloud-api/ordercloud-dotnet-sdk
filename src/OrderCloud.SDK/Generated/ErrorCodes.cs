@@ -257,7 +257,7 @@ namespace OrderCloud.SDK
 			public const string IncompatibleEventType = "IntegrationEvent.IncompatibleEventType";
 			/// <summary>Something went wrong when we called your integration event, check your custom code and try again.</summary>
 			public const string BadRequest = "IntegrationEvent.BadRequest";
-			/// <summary>IntegrationEvents require at least one ApiClient to be configured with AllowSeller = true in order to generate an elevated role token.</summary>
+			/// <summary>IntegrationEvents require at least one active ApiClient with AllowSeller = true in order to generate an elevated role token.</summary>
 			public const string AllowSellerApiClientRequired = "IntegrationEvent.AllowSellerApiClientRequired";
 			/// <summary>You must estimate shipping costs prior to setting your shipping method.</summary>
 			public const string MustCalculateShipping = "IntegrationEvent.MustCalculateShipping";

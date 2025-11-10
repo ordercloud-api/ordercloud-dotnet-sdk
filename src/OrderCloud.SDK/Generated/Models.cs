@@ -3221,10 +3221,10 @@ namespace OrderCloud.SDK
 	}
 	public class ShipmentItem : OrderCloudModel
 	{
-		/// <summary>ID of the order. Required.</summary>
+		/// <summary>ID of the order. Required. Sortable.</summary>
 		[Required]
 		public string OrderID { get => GetProp<string>("OrderID"); set => SetProp<string>("OrderID", value); }
-		/// <summary>ID of the line item. Required.</summary>
+		/// <summary>ID of the line item. Required. Sortable.</summary>
 		[Required]
 		public string LineItemID { get => GetProp<string>("LineItemID"); set => SetProp<string>("LineItemID", value); }
 		/// <summary>Quantity shipped of the shipment item. Required.</summary>
