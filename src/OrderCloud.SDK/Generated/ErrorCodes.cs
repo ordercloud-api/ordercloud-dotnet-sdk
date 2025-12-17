@@ -264,6 +264,13 @@ namespace OrderCloud.SDK
 			/// <summary>There are no ShipEstimates in your ShipEstimateResponse. Estimate Shipping needs to return at least one ShipEstimate before saving a shipping method.</summary>
 			public const string MustHaveShipEstimates = "IntegrationEvent.MustHaveShipEstimates";
 		}
+		public static class Integration
+		{
+			/// <summary>CustomAuthHeaderName is required when CustomAuthHeaderValue is provided.</summary>
+			public const string CustomAuthHeaderNameRequired = "Integration.CustomAuthHeaderNameRequired";
+			/// <summary>CustomAuthHeaderValue is required when CustomAuthHeaderName is provided.</summary>
+			public const string CustomAuthHeaderValueRequired = "Integration.CustomAuthHeaderValueRequired";
+		}
 		public static class Inventory
 		{
 			/// <summary>Insufficient inventory for this product.</summary>
@@ -426,8 +433,8 @@ namespace OrderCloud.SDK
 			public const string CannotCancelUnsubmitted = "OrderReturn.CannotCancelUnsubmitted";
 			/// <summary>Cannot complete an order return with this status. OrderReturn status must be Open.</summary>
 			public const string CannotCompleteBadStatus = "OrderReturn.CannotCompleteBadStatus";
-			/// <summary>Cannot submit an order return with no refund amount.</summary>
-			public const string CannotCompleteNoRefund = "OrderReturn.CannotCompleteNoRefund";
+			/// <summary>Cannot complete an order return with a null or negative RefundAmount.</summary>
+			public const string CannotCompleteInvalidAmount = "OrderReturn.CannotCompleteInvalidAmount";
 			/// <summary>Product is not eligible to return.</summary>
 			public const string ProductNotEligibleToReturn = "OrderReturn.ProductNotEligibleToReturn";
 			/// <summary>OrderReturn payment value must be negative.</summary>
@@ -709,6 +716,8 @@ namespace OrderCloud.SDK
 			public const string CannotProvideSupplierID = "SecurityProfile.CannotProvideSupplierID";
 			/// <summary>Cannot specify MinimumCharacterCount of less than 10.</summary>
 			public const string InvalidPasswordConfiguration = "SecurityProfile.InvalidPasswordConfiguration";
+			/// <summary>Security profiles from external role groups are read-only.</summary>
+			public const string ExternalRoleGroupReadOnly = "SecurityProfile.ExternalRoleGroupReadOnly";
 		}
 		public static class Seller
 		{

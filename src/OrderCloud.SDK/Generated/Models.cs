@@ -3065,6 +3065,9 @@ namespace OrderCloud.SDK
 		public IList<string> CustomRoles { get => GetProp<IList<string>>("CustomRoles", new List<string>()); set => SetProp<IList<string>>("CustomRoles", value); }
 		/// <summary>Password config of the security profile.</summary>
 		public PasswordConfig PasswordConfig { get => GetProp<PasswordConfig>("PasswordConfig"); set => SetProp<PasswordConfig>("PasswordConfig", value); }
+		/// <summary>Is external role group of the security profile.</summary>
+		[ApiReadOnly]
+		public bool IsExternalRoleGroup { get => GetProp<bool>("IsExternalRoleGroup"); set => SetProp<bool>("IsExternalRoleGroup", value); }
 	}
 	public class SecurityProfileAssignment : OrderCloudModel
 	{
@@ -3450,6 +3453,9 @@ namespace OrderCloud.SDK
 		public string BillingAddressID { get => GetProp<string>("BillingAddressID"); set => SetProp<string>("BillingAddressID", value); }
 		/// <summary>ID of the shipping address.</summary>
 		public string ShippingAddressID { get => GetProp<string>("ShippingAddressID"); set => SetProp<string>("ShippingAddressID", value); }
+		/// <summary>Tentative subtotal of next subscription order. Based on current known pricing; avoid if product or pricing is provided by an external integration.</summary>
+		[ApiReadOnly]
+		public decimal ProjectedSubtotal { get => GetProp<decimal>("ProjectedSubtotal"); set => SetProp<decimal>("ProjectedSubtotal", value); }
 		/// <summary>Container for extended (custom) properties of the subscription.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
