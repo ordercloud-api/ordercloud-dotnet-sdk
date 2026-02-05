@@ -64,7 +64,15 @@ namespace OrderCloud.SDK
 		/// Get a single cert public key. Returns a JSON Web Key (JWK). Can be used for validating the token was signed by OrderCloud.
 		/// </summary>
 		Task<PublicKey> GetPublicKeyAsync(string ID, string accessToken = null);
-	}
+
+        /// <summary>
+        /// Creates an authenticated request that can be sent using Flurl semantics. Normally not needed since the SDK
+        /// provides higher-level strongly-typed methods for all public endpoints, but if there's ever a need to call
+        /// an undocumented endpoint, or the SDK version is behind the API version, this provides lower-level access.
+        /// </summary>
+        IFlurlRequest Request(params object[] pathSegments);
+
+    }
 
 	public partial class OrderCloudClient : IDisposable
 	{
@@ -168,12 +176,8 @@ namespace OrderCloud.SDK
 
 		internal bool EnableModelValidation { get; set; } = true;
 
-		/// <summary>
-		/// Creates an authenticated request that can be sent using Flurl semantics. Normally not needed since the SDK
-		/// provides higher-level strongly-typed methods for all public endpoints, but if there's ever a need to call
-		/// an undocumented endpoint, or the SDK version is behind the API version, this provides lower-level access.
-		/// </summary>
-		public IFlurlRequest Request(params object[] pathSegments) => ApiClient
+        /// <inheritdoc/>
+        public IFlurlRequest Request(params object[] pathSegments) => ApiClient
 			.Request(pathSegments)
 			.ConfigureRequest(settings => {
 				settings.BeforeCallAsync = EnsureTokenAsync;
