@@ -1757,7 +1757,7 @@ namespace OrderCloud.SDK
 		/// <summary>A secret string from the Identity Provider that grants access to get JWT tokens.</summary>
 		[Required]
 		public string ConnectClientSecret { get => GetProp<string>("ConnectClientSecret"); set => SetProp<string>("ConnectClientSecret", value); }
-		/// <summary>A URL on your front-end ordering site where users will be redirected after they authenticate through the Identity Provider. The string "{token}" will be replaced with a valid OrderCloud JWT.</summary>
+		/// <summary>A URL on your front-end ordering site where users will be redirected after they authenticate through the Identity Provider. Supports placeholders: {0} = OrderCloud access token, {1} = IdP access token, {2} = appStartPath, {3} = OrderCloud refresh token, {4} = IdP refresh token (if available).</summary>
 		[Required]
 		public string AppStartUrl { get => GetProp<string>("AppStartUrl"); set => SetProp<string>("AppStartUrl", value); }
 		/// <summary>A publicly known URL from the Identity Provider that redirects to a resource where users enter personal credentials.</summary>
@@ -3428,13 +3428,13 @@ namespace OrderCloud.SDK
 		/// <summary>Next order date of the subscription. The hourly process that creates subscription orders will query for subscriptions with a NextOrderDate between now and five hours ago.</summary>
 		[Required]
 		public DateTimeOffset? NextOrderDate { get => GetProp<DateTimeOffset?>("NextOrderDate"); set => SetProp<DateTimeOffset?>("NextOrderDate", value); }
-		/// <summary>Last order date of the subscription. Sortable: priority level 2.</summary>
+		/// <summary>Last order date of the subscription. Sortable.</summary>
 		[ApiReadOnly]
 		public DateTimeOffset? LastOrderDate { get => GetProp<DateTimeOffset?>("LastOrderDate"); set => SetProp<DateTimeOffset?>("LastOrderDate", value); }
 		/// <summary>Date that subscription order reminder message sender will be triggered if used. Value is the result of NextOrderDate less NotificationDays on the subscription integration.</summary>
 		[ApiReadOnly]
 		public DateTimeOffset? NotificationDate { get => GetProp<DateTimeOffset?>("NotificationDate"); set => SetProp<DateTimeOffset?>("NotificationDate", value); }
-		/// <summary>Date created of the subscription. Sortable: priority level 3.</summary>
+		/// <summary>Date created of the subscription. Sortable.</summary>
 		[ApiReadOnly]
 		public DateTimeOffset? DateCreated { get => GetProp<DateTimeOffset?>("DateCreated"); set => SetProp<DateTimeOffset?>("DateCreated", value); }
 		/// <summary>End date of the subscription. Sortable.</summary>
