@@ -802,8 +802,8 @@ namespace OrderCloud.SDK
 		public AzureTableConfig AzureTable { get => GetProp<AzureTableConfig>("AzureTable"); set => SetProp<AzureTableConfig>("AzureTable", value); }
 		/// <summary>Cosmos db of the delivery target.</summary>
 		public CosmosDbConfig CosmosDb { get => GetProp<CosmosDbConfig>("CosmosDb"); set => SetProp<CosmosDbConfig>("CosmosDb", value); }
-		/// <summary>Mandrill of the delivery target.</summary>
-		public MandrillConfig Mandrill { get => GetProp<MandrillConfig>("Mandrill"); set => SetProp<MandrillConfig>("Mandrill", value); }
+		/// <summary>Mailchimp of the delivery target.</summary>
+		public MailchimpConfig Mailchimp { get => GetProp<MailchimpConfig>("Mailchimp"); set => SetProp<MailchimpConfig>("Mailchimp", value); }
 		/// <summary>Message sender of the delivery target.</summary>
 		public MessageSenderConfig MessageSender { get => GetProp<MessageSenderConfig>("MessageSender"); set => SetProp<MessageSenderConfig>("MessageSender", value); }
 		/// <summary>Content hub of the delivery target.</summary>
@@ -1562,10 +1562,9 @@ namespace OrderCloud.SDK
 		/// <summary>ID of the user group. Sortable: priority level 3.</summary>
 		public string UserGroupID { get => GetProp<string>("UserGroupID"); set => SetProp<string>("UserGroupID", value); }
 	}
-	public class MandrillConfig : OrderCloudModel
+	public class MailchimpConfig : OrderCloudModel
 	{
-		/// <summary>Api key of the mandrill config. Required. Max length 50 characters.</summary>
-		[Required]
+		/// <summary>The Mailchimp API key. If this property is not set, the default OrderCloud Mailchimp instance is used. The default instance is intended for test purposes only.</summary>
 		[ApiWriteOnly]
 		public string ApiKey { get => GetProp<string>("ApiKey"); set => SetProp<string>("ApiKey", value); }
 	}
@@ -1619,15 +1618,12 @@ namespace OrderCloud.SDK
 		public IList<MessageType> MessageTypes { get => GetProp<IList<MessageType>>("MessageTypes", new List<MessageType>()); set => SetProp<IList<MessageType>>("MessageTypes", value); }
 		/// <summary>Description of the message sender.</summary>
 		public string Description { get => GetProp<string>("Description"); set => SetProp<string>("Description", value); }
-		/// <summary>URL the message sender will POST data to, likely a route within your middleware.</summary>
-		public string URL { get => GetProp<string>("URL"); set => SetProp<string>("URL", value); }
 		/// <summary>If additional data not provided by the message sender is needed, provide any elevated roles needed to make additional calls.</summary>
 		public IList<ApiRole> ElevatedRoles { get => GetProp<IList<ApiRole>>("ElevatedRoles", new List<ApiRole>()); set => SetProp<IList<ApiRole>>("ElevatedRoles", value); }
-		/// <summary>Security feature that allows your middleware to verify the digital signature in the request header to ensure you only accept trusted data.</summary>
-		public string SharedKey { get => GetProp<string>("SharedKey"); set => SetProp<string>("SharedKey", value); }
 		/// <summary>Container for extended (custom) properties of the message sender.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
-		/// <summary>ID of the delivery config.</summary>
+		/// <summary>ID of the delivery config. Required.</summary>
+		[Required]
 		public string DeliveryConfigID { get => GetProp<string>("DeliveryConfigID"); set => SetProp<string>("DeliveryConfigID", value); }
 		/// <summary>Allow message sender to trigger for all buyers without creating explicit assignments.</summary>
 		public bool AllowAllBuyers { get => GetProp<bool>("AllowAllBuyers", false); set => SetProp<bool>("AllowAllBuyers", value); }
@@ -1757,7 +1753,7 @@ namespace OrderCloud.SDK
 		/// <summary>A secret string from the Identity Provider that grants access to get JWT tokens.</summary>
 		[Required]
 		public string ConnectClientSecret { get => GetProp<string>("ConnectClientSecret"); set => SetProp<string>("ConnectClientSecret", value); }
-		/// <summary>A URL on your front-end ordering site where users will be redirected after they authenticate through the Identity Provider. The string "{token}" will be replaced with a valid OrderCloud JWT.</summary>
+		/// <summary>A URL on your front-end ordering site where users will be redirected after they authenticate through the Identity Provider. Supports placeholders: {0} = OrderCloud access token, {1} = IdP access token, {2} = appStartPath, {3} = OrderCloud refresh token, {4} = IdP refresh token (if available).</summary>
 		[Required]
 		public string AppStartUrl { get => GetProp<string>("AppStartUrl"); set => SetProp<string>("AppStartUrl", value); }
 		/// <summary>A publicly known URL from the Identity Provider that redirects to a resource where users enter personal credentials.</summary>
@@ -3428,13 +3424,13 @@ namespace OrderCloud.SDK
 		/// <summary>Next order date of the subscription. The hourly process that creates subscription orders will query for subscriptions with a NextOrderDate between now and five hours ago.</summary>
 		[Required]
 		public DateTimeOffset? NextOrderDate { get => GetProp<DateTimeOffset?>("NextOrderDate"); set => SetProp<DateTimeOffset?>("NextOrderDate", value); }
-		/// <summary>Last order date of the subscription. Sortable: priority level 2.</summary>
+		/// <summary>Last order date of the subscription. Sortable.</summary>
 		[ApiReadOnly]
 		public DateTimeOffset? LastOrderDate { get => GetProp<DateTimeOffset?>("LastOrderDate"); set => SetProp<DateTimeOffset?>("LastOrderDate", value); }
 		/// <summary>Date that subscription order reminder message sender will be triggered if used. Value is the result of NextOrderDate less NotificationDays on the subscription integration.</summary>
 		[ApiReadOnly]
 		public DateTimeOffset? NotificationDate { get => GetProp<DateTimeOffset?>("NotificationDate"); set => SetProp<DateTimeOffset?>("NotificationDate", value); }
-		/// <summary>Date created of the subscription. Sortable: priority level 3.</summary>
+		/// <summary>Date created of the subscription. Sortable.</summary>
 		[ApiReadOnly]
 		public DateTimeOffset? DateCreated { get => GetProp<DateTimeOffset?>("DateCreated"); set => SetProp<DateTimeOffset?>("DateCreated", value); }
 		/// <summary>End date of the subscription. Sortable.</summary>
@@ -3937,7 +3933,7 @@ namespace OrderCloud.SDK
 	public class PartialLineItemVariant<Txp> : PartialLineItemVariant
 	{ }
 	public class PartialLocale : Locale, IPartial { }
-	public class PartialMandrillConfig : MandrillConfig, IPartial { }
+	public class PartialMailchimpConfig : MailchimpConfig, IPartial { }
 	public class PartialMeBuyer : MeBuyer, IPartial { }
 	public class PartialMeSeller : MeSeller, IPartial { }
 	public class PartialMessageSender : MessageSender, IPartial { }

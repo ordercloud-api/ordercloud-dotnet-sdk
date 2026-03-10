@@ -88,7 +88,7 @@ namespace OrderCloud.SDK
 		});
 
 		protected virtual IFlurlClient ApiClient => _clientFac.Get(Config.ApiUrl);
-		protected virtual IFlurlClient AuthClient => _clientFac.Get(Config.AuthUrl);
+		protected virtual IFlurlClient AuthClient => _clientFac.Get(Config.ApiUrl);
 
 		public OrderCloudClient() : this(new OrderCloudClientConfig()) { }
 
