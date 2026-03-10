@@ -32,13 +32,9 @@ namespace OrderCloud.SDK
 		/// </summary>
 		public GrantType GrantType { get; set; }
 		/// <summary>
-		/// The root URL of the OrderCloud API. You should not need to change this from the default.
+		/// The base URL of the OrderCloud API you're targeting. This URL can be found on your dashboard or in the upper right hand context menu of your OrderCloud application in Sitecore Portal.
 		/// </summary>
 		public string ApiUrl { get; set; } = "https://api.ordercloud.io";
-		/// <summary>
-		/// The root URL of the OrderCloud authorization server. You should not need to change this from the default.
-		/// </summary>
-		public string AuthUrl { get; set; } = "https://auth.ordercloud.io";
 		/// <summary>
 		/// The OAuth2 client ID. Always required.
 		/// </summary>

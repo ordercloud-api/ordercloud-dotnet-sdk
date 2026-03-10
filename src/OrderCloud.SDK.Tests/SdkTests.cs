@@ -113,8 +113,7 @@ namespace OrderCloud.SDK.Tests
 		public async Task can_provide_alternative_token() {
 			// prove that auth credentials are no longer required like in earlier versions
 			var cli = new OrderCloudClient(new OrderCloudClientConfig {
-				ApiUrl = "https://fake.com",
-				AuthUrl = "https://fake.com"
+				ApiUrl = "https://fake.com"
 			});
 
 			using (var httpTest = new HttpTest()) {
@@ -127,7 +126,6 @@ namespace OrderCloud.SDK.Tests
 		public async Task missing_bearer_token_obtains_new_token() {
 			var cli = new OrderCloudClient(new OrderCloudClientConfig {
 				ApiUrl = "https://fake.com",
-				AuthUrl = "https://fake.com",
 				ClientId = "client-id",
 				ClientSecret = "client-secret",
 			});
@@ -339,7 +337,6 @@ namespace OrderCloud.SDK.Tests
 
 		private OrderCloudClient GetClient() => new OrderCloudClient(new OrderCloudClientConfig {
 			ApiUrl = "https://fake.com",
-			AuthUrl = "https://fake.com",
 			ClientId = "xyz",
 			Username = "u",
 			Password = "p"

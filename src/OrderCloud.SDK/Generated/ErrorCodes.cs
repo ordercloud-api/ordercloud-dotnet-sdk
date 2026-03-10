@@ -352,13 +352,6 @@ namespace OrderCloud.SDK
 			/// <summary>You are allowed only a single language/currency combination per marketplace.</summary>
 			public const string DuplicateLanguageAndCurrency = "Locale.DuplicateLanguageAndCurrency";
 		}
-		public static class MessageSenders
-		{
-			/// <summary>Url is required when no delivery configuration is specified.</summary>
-			public const string UrlRequired = "MessageSenders.UrlRequired";
-			/// <summary>SharedKey is required when no delivery configuration is specified.</summary>
-			public const string SharedKeyRequired = "MessageSenders.SharedKeyRequired";
-		}
 		public static class OneTimePasswordRequest
 		{
 			/// <summary>Username or email is required.</summary>

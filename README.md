@@ -19,6 +19,7 @@ The OrderCloud.io SDK for .NET is a client library for building solutions target
 ```c#
 using OrderCloud.SDK;
 
+// authentication relies on an ApiUrl which must be set in OrderCloudClientConfig.cs
 var client = new OrderCloudClient(new OrderCloudClientConfig {
     ClientId = "my-client-id",
     
@@ -44,9 +45,9 @@ foreach (var order in orders.Items) {
 
 ## Authenticating
 
-OrderCloud.io uses OAuth2 for authentication and authorization. In a nutshell, you provide a set of credentials, acquire a temporary access token, and provide that token in the HTTP headers on subsequent API calls. Using the SDK, you have a few options to simplify this process, depending on the scenario:
+OrderCloud.io uses OAuth2 for authentication and authorization. In a nutshell, you provide an ApiUrl, and a set of credentials, acquire a temporary access token, and provide that token in the HTTP headers on subsequent API calls. Using the SDK, you have a few options to simplify this process, depending on the scenario:
 
-1. Configure `OrderCloudClient` with a set of credentials, as in the [example](#example) above. This is ideal for scheduled batch jobs, and you should prefer the client credentials grant (shared secret) flow since this processing isn't usually triggered by or on behalf of a particular user. With this method, you don't need to explicitly authenticate or keep track of access tokens - the SDK will acquire, cache, and refresh tokens implicitly as needed. Just configure the client and start making calls. (And please, please, _PLEASE_ keep shared secrets and user credentials securly locked down, such as with [Azure Key Vault](https://azure.microsoft.com/en-us/services/key-vault/).)
+1. Configure `OrderCloudClient` with a set of credentials, as in the [example](#example) above. This is ideal for any processes happening outside of your user experience layer, since this processing isn't usually triggered by or on behalf of a particular user. With this method, you don't need to explicitly authenticate or keep track of access tokens - the SDK will acquire, cache, and refresh tokens implicitly as needed. Just configure the client and start making calls. (And please, please, _PLEASE_ keep shared secrets and user credentials securly locked down, such as with [Azure Key Vault](https://azure.microsoft.com/en-us/services/key-vault/).)
 
 2. Use an existing access token. A typical use case is when a user has already authenticated with OrderCloud in a front-end app and you want some custom endpoint to perform actions on behalf of that user. _Do not pass the user's credentials to your custom endpoint_. Instead, pass their token (always over SSL). Every method in the SDK that calls an OrderCloud endpoint takes an optional `accessToken` argument, allowing you to ignore any configured credentials and use the ad-hoc token:
 
