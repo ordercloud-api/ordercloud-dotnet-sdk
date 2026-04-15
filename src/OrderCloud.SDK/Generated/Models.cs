@@ -13,14 +13,14 @@ namespace OrderCloud.SDK
 	public enum MessageType { OrderDeclined, OrderSubmitted, ShipmentCreated, ForgottenPassword, ForgottenUsername, OrderSubmittedForYourApproval, OrderSubmittedForApproval, OrderApproved, OrderSubmittedForYourApprovalHasBeenApproved, OrderSubmittedForYourApprovalHasBeenDeclined, NewUserInvitation, OrderReturnDeclined, OrderReturnSubmitted, OrderReturnSubmittedForYourApproval, OrderReturnSubmittedForApproval, OrderReturnApproved, OrderReturnSubmittedForYourApprovalHasBeenApproved, OrderReturnSubmittedForYourApprovalHasBeenDeclined, OrderReturnCompleted, SubscriptionReminder, ProductCollectionInvitationAccepted, ProductCollectionInvitationDeclined, OneTimePassword }
 	public enum OrderDirection { Incoming, Outgoing, All }
 	public enum OrderStatus { Unsubmitted, AwaitingApproval, Declined, Open, Completed, Canceled }
-	public enum PartyType { User, Group, Company }
+	public enum PartyType { User, Group, Company, BuyerGroup }
 	public enum PaymentType { PurchaseOrder, CreditCard, SpendingAccount }
 	public enum PriceMarkupType { NoMarkup, AmountPerQuantity, AmountTotal, Percentage }
 	public enum SearchType { AnyTerm, AllTermsAnyField, AllTermsSameField, ExactPhrase, ExactPhrasePrefix }
 	public enum SubscriptionInterval { Days, Weeks, Months }
 	public enum TrackingEventType { UserLoggedIn, LineItemAdded, LineItemUpdated, OrderSubmitted }
 	public enum UserOrderMoveOption { None, Unsubmitted, All }
-	public enum XpThingType { Address, Variant, Order, OrderReturn, LineItem, CostCenter, CreditCard, Payment, Spec, SpecOption, UserGroup, Company, Category, PriceSchedule, Shipment, SpendingAccount, User, Promotion, ApprovalRule, SellerApprovalRule, Catalog, ProductFacet, MessageSender, InventoryRecord, ProductCollection, Subscription, GroupOrderInvitation }
+	public enum XpThingType { Address, Variant, Order, OrderReturn, LineItem, CostCenter, CreditCard, Payment, Spec, SpecOption, UserGroup, Company, Category, PriceSchedule, Shipment, SpendingAccount, User, Promotion, ApprovalRule, SellerApprovalRule, Catalog, ProductFacet, MessageSender, InventoryRecord, ProductCollection, Subscription, GroupOrderInvitation, BuyerGroup, Discount }
 	public class AccessToken : OrderCloudModel
 	{
 		/// <summary>Access token of the access token.</summary>
@@ -413,7 +413,9 @@ namespace OrderCloud.SDK
 		/// <summary>Name of the buyer. Required. Max length 100 characters. Searchable: priority level 1. Sortable.</summary>
 		[Required]
 		public string Name { get => GetProp<string>("Name"); set => SetProp<string>("Name", value); }
-		/// <summary>If null on POST a new default catalog will be created for the buyer. Used in buyer product queries to allow filtering on categories without explicitly providing a CatalogID.</summary>
+		/// <summary>ID of the group. Sortable.</summary>
+		public string GroupID { get => GetProp<string>("GroupID"); set => SetProp<string>("GroupID", value); }
+		/// <summary>Allows filtering products by category without explicitly providing a CatalogID. Inherits from buyer group if not specified. If neither is specified when buyer is created, a new catalog is automatically created.</summary>
 		public string DefaultCatalogID { get => GetProp<string>("DefaultCatalogID"); set => SetProp<string>("DefaultCatalogID", value); }
 		/// <summary>If false, all user authentication is blocked.</summary>
 		public bool Active { get => GetProp<bool>("Active"); set => SetProp<bool>("Active", value); }
@@ -510,11 +512,95 @@ namespace OrderCloud.SDK
 		/// <summary>Container for extended (custom) properties of the credit card.</summary>
 		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
 	}
+	public class BuyerGroup : OrderCloudModel
+	{
+		/// <summary>ID of the group. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 2.</summary>
+		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
+		/// <summary>Name of the group. Required. Max length 100 characters. Searchable: priority level 2. Sortable: priority level 1.</summary>
+		[Required]
+		public string Name { get => GetProp<string>("Name"); set => SetProp<string>("Name", value); }
+		/// <summary>Description of the group. Max length 2000 characters. Searchable: priority level 3.</summary>
+		public string Description { get => GetProp<string>("Description"); set => SetProp<string>("Description", value); }
+		/// <summary>If null at the individual buyer level, and buyer is a member of this group, buyer inherits this default catalog.</summary>
+		public string DefaultCatalogID { get => GetProp<string>("DefaultCatalogID"); set => SetProp<string>("DefaultCatalogID", value); }
+		/// <summary>Container for extended (custom) properties of the group.</summary>
+		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
+	}
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic BuyerGroup class instead.</typeparam>
+	public class BuyerGroup<Txp> : BuyerGroup
+	{
+		/// <summary>Container for extended (custom) properties of the group.</summary>
+		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
+	}
+	public class BuyerPriceBreak : OrderCloudModel
+	{
+		/// <summary>Calculated discounted prices. Only populated when a discount applies to this price break.</summary>
+		public DiscountedPrices Discounted { get => GetProp<DiscountedPrices>("Discounted"); set => SetProp<DiscountedPrices>("Discounted", value); }
+		/// <summary>Most commonly 1, except when offering tiered/bulk pricing.</summary>
+		[Required]
+		public int Quantity { get => GetProp<int>("Quantity"); set => SetProp<int>("Quantity", value); }
+		/// <summary>Price per unit.</summary>
+		[Required]
+		public decimal Price { get => GetProp<decimal>("Price"); set => SetProp<decimal>("Price", value); }
+		/// <summary>Sale Price per unit. If the current date/time is within the PriceSchedule SaleStart and SaleEnd, this SalePrice will be used.</summary>
+		public decimal? SalePrice { get => GetProp<decimal?>("SalePrice"); set => SetProp<decimal?>("SalePrice", value); }
+		/// <summary>Subscription Price per unit. If set, this price is used when a subscription order is created.</summary>
+		public decimal? SubscriptionPrice { get => GetProp<decimal?>("SubscriptionPrice"); set => SetProp<decimal?>("SubscriptionPrice", value); }
+		/// <summary>Bundle Price per unit. If set, this price is used when an item being added to an order is part of a bundle.</summary>
+		public decimal? BundlePrice { get => GetProp<decimal?>("BundlePrice"); set => SetProp<decimal?>("BundlePrice", value); }
+	}
+	public class BuyerPriceSchedule : OrderCloudModel
+	{
+		/// <summary>Price breaks of the price schedule.</summary>
+		public IList<BuyerPriceBreak> PriceBreaks { get => GetProp<IList<BuyerPriceBreak>>("PriceBreaks", new List<BuyerPriceBreak>()); set => SetProp<IList<BuyerPriceBreak>>("PriceBreaks", value); }
+		/// <summary>The best applicable discount for this buyer. Only populated when a discount applies.</summary>
+		public Discount Discount { get => GetProp<Discount>("Discount"); set => SetProp<Discount>("Discount", value); }
+		/// <summary>ID of the organization that owns the PriceSchedule. Only the marketplace owner can override the OwnerID on create.</summary>
+		public string OwnerID { get => GetProp<string>("OwnerID"); set => SetProp<string>("OwnerID", value); }
+		/// <summary>ID of the price schedule. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 2.</summary>
+		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
+		/// <summary>Name of the price schedule. Required. Max length 100 characters. Searchable: priority level 2. Sortable: priority level 1.</summary>
+		[Required]
+		public string Name { get => GetProp<string>("Name"); set => SetProp<string>("Name", value); }
+		/// <summary>For reference only for calculating tax, does not influence any OrderCloud behavior.</summary>
+		public bool ApplyTax { get => GetProp<bool>("ApplyTax"); set => SetProp<bool>("ApplyTax", value); }
+		/// <summary>For reference only for calculating shipping cost, does not influence any OrderCloud behavior.</summary>
+		public bool ApplyShipping { get => GetProp<bool>("ApplyShipping"); set => SetProp<bool>("ApplyShipping", value); }
+		/// <summary>The minimum line item Quantity when UseCumulativeQuantity is false.</summary>
+		public int? MinQuantity { get => GetProp<int?>("MinQuantity", 1); set => SetProp<int?>("MinQuantity", value); }
+		/// <summary>The maximum line item Quantity when UseCumulativeQuantity is false.</summary>
+		public int? MaxQuantity { get => GetProp<int?>("MaxQuantity"); set => SetProp<int?>("MaxQuantity", value); }
+		/// <summary>If true, line item quantities will be aggregated by productID when determining which price break applies, and when Min/Max quantities are met. Else, each line item is treated separately.</summary>
+		public bool UseCumulativeQuantity { get => GetProp<bool>("UseCumulativeQuantity"); set => SetProp<bool>("UseCumulativeQuantity", value); }
+		/// <summary>If true, this product can only be ordered in quantities that exactly match one of the price breaks on this schedule.</summary>
+		public bool RestrictedQuantity { get => GetProp<bool>("RestrictedQuantity"); set => SetProp<bool>("RestrictedQuantity", value); }
+		/// <summary>We recommend using ISO-4217 currency codes for compatibility with tax and payment processors.</summary>
+		public string Currency { get => GetProp<string>("Currency"); set => SetProp<string>("Currency", value); }
+		/// <summary>Starting date/time for PriceBreak.SalePrice to be used as the price for the LineItem. Requires that the PriceBreak.SalePrice value is set.</summary>
+		public DateTimeOffset? SaleStart { get => GetProp<DateTimeOffset?>("SaleStart", null); set => SetProp<DateTimeOffset?>("SaleStart", value); }
+		/// <summary>Ending date/time for PriceBreak.SalePrice to be used as the price for the LineItem. Requires that the PriceBreak.SalePrice value is set.</summary>
+		public DateTimeOffset? SaleEnd { get => GetProp<DateTimeOffset?>("SaleEnd", null); set => SetProp<DateTimeOffset?>("SaleEnd", value); }
+		/// <summary>True when at least one PriceBreak has a SalePrice defined, and the current time is between the SaleStart and SaleEnd date.</summary>
+		[ApiReadOnly]
+		public bool IsOnSale { get => GetProp<bool>("IsOnSale"); set => SetProp<bool>("IsOnSale", value); }
+		/// <summary>Container for extended (custom) properties of the price schedule.</summary>
+		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
+	}
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, specify dynamic.</typeparam>
+	/// <typeparam name="TDiscount">Specific type of the Discount property. If not using a custom type, specify Discount.</typeparam>
+	public class BuyerPriceSchedule<Txp, TDiscount> : BuyerPriceSchedule
+		where TDiscount : Discount
+	{
+		/// <summary>Container for extended (custom) properties of the price schedule.</summary>
+		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
+		/// <summary>The best applicable discount for this buyer. Only populated when a discount applies.</summary>
+		public new TDiscount Discount { get => GetProp<TDiscount>("Discount"); set => SetProp<TDiscount>("Discount", value); }
+	}
 	public class BuyerProduct : OrderCloudModel
 	{
 		/// <summary>Price schedule of the product.</summary>
 		[ApiReadOnly]
-		public PriceSchedule PriceSchedule { get => GetProp<PriceSchedule>("PriceSchedule"); set => SetProp<PriceSchedule>("PriceSchedule", value); }
+		public BuyerPriceSchedule PriceSchedule { get => GetProp<BuyerPriceSchedule>("PriceSchedule"); set => SetProp<BuyerPriceSchedule>("PriceSchedule", value); }
 		/// <summary>ID of the product. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 3.</summary>
 		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
 		/// <summary>ID of the parent product. If not null, IsParent should be false</summary>
@@ -564,9 +650,9 @@ namespace OrderCloud.SDK
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
 	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, specify dynamic.</typeparam>
-	/// <typeparam name="TPriceSchedule">Specific type of the PriceSchedule property. If not using a custom type, specify PriceSchedule.</typeparam>
+	/// <typeparam name="TPriceSchedule">Specific type of the PriceSchedule property. If not using a custom type, specify BuyerPriceSchedule.</typeparam>
 	public class BuyerProduct<Txp, TPriceSchedule> : BuyerProduct
-		where TPriceSchedule : PriceSchedule
+		where TPriceSchedule : BuyerPriceSchedule
 	{
 		/// <summary>Container for extended (custom) properties of the product.</summary>
 		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
@@ -611,9 +697,10 @@ namespace OrderCloud.SDK
 		/// <summary>ID of the catalog. Required. Sortable: priority level 1.</summary>
 		[Required]
 		public string CatalogID { get => GetProp<string>("CatalogID"); set => SetProp<string>("CatalogID", value); }
-		/// <summary>ID of the buyer. Required.</summary>
-		[Required]
+		/// <summary>ID of the buyer.</summary>
 		public string BuyerID { get => GetProp<string>("BuyerID"); set => SetProp<string>("BuyerID", value); }
+		/// <summary>ID of the buyer group.</summary>
+		public string BuyerGroupID { get => GetProp<string>("BuyerGroupID"); set => SetProp<string>("BuyerGroupID", value); }
 		/// <summary>View all categories of the catalog assignment.</summary>
 		public bool ViewAllCategories { get => GetProp<bool>("ViewAllCategories"); set => SetProp<bool>("ViewAllCategories", value); }
 		/// <summary>View all products of the catalog assignment.</summary>
@@ -809,6 +896,64 @@ namespace OrderCloud.SDK
 		/// <summary>Content hub of the delivery target.</summary>
 		public ContentHubConfig ContentHub { get => GetProp<ContentHubConfig>("ContentHub"); set => SetProp<ContentHubConfig>("ContentHub", value); }
 	}
+	public class Discount : OrderCloudModel
+	{
+		/// <summary>ID of the discount. Can only contain characters Aa-Zz, 0-9, -, and _. Sortable: priority level 1.</summary>
+		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
+		/// <summary>Description of the discount. Max length 2000 characters.</summary>
+		public string Description { get => GetProp<string>("Description"); set => SetProp<string>("Description", value); }
+		/// <summary>Quantity-based percentage discount tiers. Each tier specifies a minimum quantity and percentage discount amount.</summary>
+		[Required]
+		public IList<DiscountBreak> DiscountBreaks { get => GetProp<IList<DiscountBreak>>("DiscountBreaks", new List<DiscountBreak>()); set => SetProp<IList<DiscountBreak>>("DiscountBreaks", value); }
+		/// <summary>Product filter of the discount. Max length 1000 characters.</summary>
+		public string ProductFilter { get => GetProp<string>("ProductFilter"); set => SetProp<string>("ProductFilter", value); }
+		/// <summary>ID of the catalog. Sortable.</summary>
+		public string CatalogID { get => GetProp<string>("CatalogID"); set => SetProp<string>("CatalogID", value); }
+		/// <summary>ID of the category. Sortable.</summary>
+		public string CategoryID { get => GetProp<string>("CategoryID"); set => SetProp<string>("CategoryID", value); }
+		/// <summary>ID of the product. Sortable.</summary>
+		public string ProductID { get => GetProp<string>("ProductID"); set => SetProp<string>("ProductID", value); }
+		/// <summary>Container for extended (custom) properties of the discount.</summary>
+		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
+	}
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic Discount class instead.</typeparam>
+	public class Discount<Txp> : Discount
+	{
+		/// <summary>Container for extended (custom) properties of the discount.</summary>
+		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
+	}
+	public class DiscountAssignment : OrderCloudModel
+	{
+		/// <summary>ID of the discount. Required. Sortable: priority level 1.</summary>
+		[Required]
+		public string DiscountID { get => GetProp<string>("DiscountID"); set => SetProp<string>("DiscountID", value); }
+		/// <summary>When specified, BuyerID and UserGroupID must be null.</summary>
+		public string BuyerGroupID { get => GetProp<string>("BuyerGroupID"); set => SetProp<string>("BuyerGroupID", value); }
+		/// <summary>Required when BuyerGroupID is null.</summary>
+		public string BuyerID { get => GetProp<string>("BuyerID"); set => SetProp<string>("BuyerID", value); }
+		/// <summary>Optional. Only valid when BuyerID is specified.</summary>
+		public string UserGroupID { get => GetProp<string>("UserGroupID"); set => SetProp<string>("UserGroupID", value); }
+	}
+	public class DiscountBreak : OrderCloudModel
+	{
+		/// <summary>Minimum quantity required for this discount tier.</summary>
+		[Required]
+		public int Quantity { get => GetProp<int>("Quantity"); set => SetProp<int>("Quantity", value); }
+		/// <summary>Percentage discount (e.g., 10.5 for 10.5% off). Must be between 0 and 100.</summary>
+		[Required]
+		public decimal Amount { get => GetProp<decimal>("Amount"); set => SetProp<decimal>("Amount", value); }
+	}
+	public class DiscountedPrices : OrderCloudModel
+	{
+		/// <summary>Discounted price per unit.</summary>
+		public decimal Price { get => GetProp<decimal>("Price"); set => SetProp<decimal>("Price", value); }
+		/// <summary>Discounted sale price per unit.</summary>
+		public decimal? SalePrice { get => GetProp<decimal?>("SalePrice"); set => SetProp<decimal?>("SalePrice", value); }
+		/// <summary>Discounted subscription price per unit.</summary>
+		public decimal? SubscriptionPrice { get => GetProp<decimal?>("SubscriptionPrice"); set => SetProp<decimal?>("SubscriptionPrice", value); }
+		/// <summary>Discounted bundle price per unit.</summary>
+		public decimal? BundlePrice { get => GetProp<decimal?>("BundlePrice"); set => SetProp<decimal?>("BundlePrice", value); }
+	}
 	public class DiscoverEvent : OrderCloudModel
 	{
 		/// <summary>ID of the client. Required.</summary>
@@ -945,7 +1090,13 @@ namespace OrderCloud.SDK
 		/// <summary>Sum of all line item level promotion discount amounts applied.</summary>
 		[ApiReadOnly]
 		public decimal PromotionDiscount { get => GetProp<decimal>("PromotionDiscount"); set => SetProp<decimal>("PromotionDiscount", value); }
-		/// <summary>LineSubtotal - PromotionDiscount</summary>
+		/// <summary>Discount amount from discount assignments applied to this line item.</summary>
+		[ApiReadOnly]
+		public decimal BaseDiscount { get => GetProp<decimal>("BaseDiscount"); set => SetProp<decimal>("BaseDiscount", value); }
+		/// <summary>ID of the discount applied to this line item.</summary>
+		[ApiReadOnly]
+		public string DiscountID { get => GetProp<string>("DiscountID"); set => SetProp<string>("DiscountID", value); }
+		/// <summary>LineSubtotal - BaseDiscount - PromotionDiscount</summary>
 		[ApiReadOnly]
 		public decimal LineTotal { get => GetProp<decimal>("LineTotal"); set => SetProp<decimal>("LineTotal", value); }
 		/// <summary>UnitPrice x Quantity</summary>
@@ -1094,13 +1245,16 @@ namespace OrderCloud.SDK
 		/// <summary>Fees associated with order or line items</summary>
 		[ApiReadOnly]
 		public decimal Fees { get => GetProp<decimal>("Fees", 0); set => SetProp<decimal>("Fees", value); }
+		/// <summary>Sum of all discount amounts from discount assignments applied to line items on this order.</summary>
+		[ApiReadOnly]
+		public decimal BaseDiscount { get => GetProp<decimal>("BaseDiscount"); set => SetProp<decimal>("BaseDiscount", value); }
 		/// <summary>Sum of all promotion amounts applied to the order.</summary>
 		[ApiReadOnly]
 		public decimal PromotionDiscount { get => GetProp<decimal>("PromotionDiscount"); set => SetProp<decimal>("PromotionDiscount", value); }
 		/// <summary>Inherited from the user placing the order.</summary>
 		[ApiReadOnly]
 		public string Currency { get => GetProp<string>("Currency"); set => SetProp<string>("Currency", value); }
-		/// <summary>Subtotal + TaxCost + ShippingCost + Gratuity + Fees - PromotionDiscount</summary>
+		/// <summary>Subtotal - BaseDiscount - PromotionDiscount + TaxCost + ShippingCost + Gratuity + Fees</summary>
 		[ApiReadOnly]
 		public decimal Total { get => GetProp<decimal>("Total"); set => SetProp<decimal>("Total", value); }
 		/// <summary>True if this order has been passed from the Buyer to the marketplace owner or supplier.</summary>
@@ -1360,7 +1514,13 @@ namespace OrderCloud.SDK
 		/// <summary>Sum of all line item level promotion discount amounts applied.</summary>
 		[ApiReadOnly]
 		public decimal PromotionDiscount { get => GetProp<decimal>("PromotionDiscount"); set => SetProp<decimal>("PromotionDiscount", value); }
-		/// <summary>LineSubtotal - PromotionDiscount</summary>
+		/// <summary>Discount amount from discount assignments applied to this line item.</summary>
+		[ApiReadOnly]
+		public decimal BaseDiscount { get => GetProp<decimal>("BaseDiscount"); set => SetProp<decimal>("BaseDiscount", value); }
+		/// <summary>ID of the discount applied to this line item.</summary>
+		[ApiReadOnly]
+		public string DiscountID { get => GetProp<string>("DiscountID"); set => SetProp<string>("DiscountID", value); }
+		/// <summary>LineSubtotal - BaseDiscount - PromotionDiscount</summary>
 		[ApiReadOnly]
 		public decimal LineTotal { get => GetProp<decimal>("LineTotal"); set => SetProp<decimal>("LineTotal", value); }
 		/// <summary>UnitPrice x Quantity</summary>
@@ -1837,13 +1997,16 @@ namespace OrderCloud.SDK
 		/// <summary>Fees associated with order or line items</summary>
 		[ApiReadOnly]
 		public decimal Fees { get => GetProp<decimal>("Fees", 0); set => SetProp<decimal>("Fees", value); }
+		/// <summary>Sum of all discount amounts from discount assignments applied to line items on this order.</summary>
+		[ApiReadOnly]
+		public decimal BaseDiscount { get => GetProp<decimal>("BaseDiscount"); set => SetProp<decimal>("BaseDiscount", value); }
 		/// <summary>Sum of all promotion amounts applied to the order.</summary>
 		[ApiReadOnly]
 		public decimal PromotionDiscount { get => GetProp<decimal>("PromotionDiscount"); set => SetProp<decimal>("PromotionDiscount", value); }
 		/// <summary>Inherited from the user placing the order.</summary>
 		[ApiReadOnly]
 		public string Currency { get => GetProp<string>("Currency"); set => SetProp<string>("Currency", value); }
-		/// <summary>Subtotal + TaxCost + ShippingCost + Gratuity + Fees - PromotionDiscount</summary>
+		/// <summary>Subtotal - BaseDiscount - PromotionDiscount + TaxCost + ShippingCost + Gratuity + Fees</summary>
 		[ApiReadOnly]
 		public decimal Total { get => GetProp<decimal>("Total"); set => SetProp<decimal>("Total", value); }
 		/// <summary>True if this order has been passed from the Buyer to the marketplace owner or supplier.</summary>
@@ -2441,6 +2604,8 @@ namespace OrderCloud.SDK
 	}
 	public class PriceSchedule : OrderCloudModel
 	{
+		/// <summary>Price breaks of the price schedule.</summary>
+		public IList<PriceBreak> PriceBreaks { get => GetProp<IList<PriceBreak>>("PriceBreaks", new List<PriceBreak>()); set => SetProp<IList<PriceBreak>>("PriceBreaks", value); }
 		/// <summary>ID of the organization that owns the PriceSchedule. Only the marketplace owner can override the OwnerID on create.</summary>
 		public string OwnerID { get => GetProp<string>("OwnerID"); set => SetProp<string>("OwnerID", value); }
 		/// <summary>ID of the price schedule. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 2.</summary>
@@ -2460,8 +2625,6 @@ namespace OrderCloud.SDK
 		public bool UseCumulativeQuantity { get => GetProp<bool>("UseCumulativeQuantity"); set => SetProp<bool>("UseCumulativeQuantity", value); }
 		/// <summary>If true, this product can only be ordered in quantities that exactly match one of the price breaks on this schedule.</summary>
 		public bool RestrictedQuantity { get => GetProp<bool>("RestrictedQuantity"); set => SetProp<bool>("RestrictedQuantity", value); }
-		/// <summary>Price breaks of the price schedule.</summary>
-		public IList<PriceBreak> PriceBreaks { get => GetProp<IList<PriceBreak>>("PriceBreaks", new List<PriceBreak>()); set => SetProp<IList<PriceBreak>>("PriceBreaks", value); }
 		/// <summary>We recommend using ISO-4217 currency codes for compatibility with tax and payment processors.</summary>
 		public string Currency { get => GetProp<string>("Currency"); set => SetProp<string>("Currency", value); }
 		/// <summary>Starting date/time for PriceBreak.SalePrice to be used as the price for the LineItem. Requires that the PriceBreak.SalePrice value is set.</summary>
@@ -2592,7 +2755,7 @@ namespace OrderCloud.SDK
 		public DateTimeOffset? DateAdded { get => GetProp<DateTimeOffset?>("DateAdded"); set => SetProp<DateTimeOffset?>("DateAdded", value); }
 		/// <summary>Price schedule of the product collection buyer product.</summary>
 		[ApiReadOnly]
-		public PriceSchedule PriceSchedule { get => GetProp<PriceSchedule>("PriceSchedule"); set => SetProp<PriceSchedule>("PriceSchedule", value); }
+		public BuyerPriceSchedule PriceSchedule { get => GetProp<BuyerPriceSchedule>("PriceSchedule"); set => SetProp<BuyerPriceSchedule>("PriceSchedule", value); }
 		/// <summary>ID of the product collection buyer product. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 3.</summary>
 		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
 		/// <summary>ID of the parent product. If not null, IsParent should be false</summary>
@@ -2642,9 +2805,9 @@ namespace OrderCloud.SDK
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
 	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, specify dynamic.</typeparam>
-	/// <typeparam name="TPriceSchedule">Specific type of the PriceSchedule property. If not using a custom type, specify PriceSchedule.</typeparam>
+	/// <typeparam name="TPriceSchedule">Specific type of the PriceSchedule property. If not using a custom type, specify BuyerPriceSchedule.</typeparam>
 	public class ProductCollectionBuyerProduct<Txp, TPriceSchedule> : ProductCollectionBuyerProduct
-		where TPriceSchedule : PriceSchedule
+		where TPriceSchedule : BuyerPriceSchedule
 	{
 		/// <summary>Container for extended (custom) properties of the product collection buyer product.</summary>
 		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
@@ -2775,7 +2938,7 @@ namespace OrderCloud.SDK
 	public class ProductSeller : OrderCloudModel
 	{
 		/// <summary>Price schedule of the product seller.</summary>
-		public PriceSchedule PriceSchedule { get => GetProp<PriceSchedule>("PriceSchedule"); set => SetProp<PriceSchedule>("PriceSchedule", value); }
+		public BuyerPriceSchedule PriceSchedule { get => GetProp<BuyerPriceSchedule>("PriceSchedule"); set => SetProp<BuyerPriceSchedule>("PriceSchedule", value); }
 		/// <summary>ID of the product seller. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 2.</summary>
 		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
 		/// <summary>Name of the product seller. Max length 100 characters. Searchable: priority level 2. Sortable: priority level 1.</summary>
@@ -2783,7 +2946,7 @@ namespace OrderCloud.SDK
 	}
 	/// <typeparam name="TPriceSchedule">Specific type of the PriceSchedule property. If not using a custom type, use the non-generic ProductSeller class instead.</typeparam>
 	public class ProductSeller<TPriceSchedule> : ProductSeller
-		where TPriceSchedule : PriceSchedule
+		where TPriceSchedule : BuyerPriceSchedule
 	{
 		/// <summary>Price schedule of the product seller.</summary>
 		public new TPriceSchedule PriceSchedule { get => GetProp<TPriceSchedule>("PriceSchedule"); set => SetProp<TPriceSchedule>("PriceSchedule", value); }
@@ -3061,9 +3224,6 @@ namespace OrderCloud.SDK
 		public IList<string> CustomRoles { get => GetProp<IList<string>>("CustomRoles", new List<string>()); set => SetProp<IList<string>>("CustomRoles", value); }
 		/// <summary>Password config of the security profile.</summary>
 		public PasswordConfig PasswordConfig { get => GetProp<PasswordConfig>("PasswordConfig"); set => SetProp<PasswordConfig>("PasswordConfig", value); }
-		/// <summary>Is external role group of the security profile.</summary>
-		[ApiReadOnly]
-		public bool IsExternalRoleGroup { get => GetProp<bool>("IsExternalRoleGroup"); set => SetProp<bool>("IsExternalRoleGroup", value); }
 	}
 	public class SecurityProfileAssignment : OrderCloudModel
 	{
@@ -3828,7 +3988,7 @@ namespace OrderCloud.SDK
 	}
 	public class XpIndex : OrderCloudModel
 	{
-		/// <summary>Thing type of the xp index. Searchable: priority level 0. Sortable: priority level 0. Possible values: Address, Variant, Order, OrderReturn, LineItem, CostCenter, CreditCard, Payment, Spec, SpecOption, UserGroup, Company, Category, PriceSchedule, Shipment, SpendingAccount, User, Promotion, ApprovalRule, SellerApprovalRule, Catalog, ProductFacet, MessageSender, InventoryRecord, ProductCollection, Subscription, GroupOrderInvitation.</summary>
+		/// <summary>Thing type of the xp index. Searchable: priority level 0. Sortable: priority level 0. Possible values: Address, Variant, Order, OrderReturn, LineItem, CostCenter, CreditCard, Payment, Spec, SpecOption, UserGroup, Company, Category, PriceSchedule, Shipment, SpendingAccount, User, Promotion, ApprovalRule, SellerApprovalRule, Catalog, ProductFacet, MessageSender, InventoryRecord, ProductCollection, Subscription, GroupOrderInvitation, BuyerGroup, Discount.</summary>
 		public XpThingType ThingType { get => GetProp<XpThingType>("ThingType"); set => SetProp<XpThingType>("ThingType", value); }
 		/// <summary>Key of the xp index. Searchable: priority level 1. Sortable: priority level 1.</summary>
 		public string Key { get => GetProp<string>("Key"); set => SetProp<string>("Key", value); }
@@ -3868,6 +4028,10 @@ namespace OrderCloud.SDK
 	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic PartialBuyerCreditCard class instead.</typeparam>
 	public class PartialBuyerCreditCard<Txp> : PartialBuyerCreditCard
 	{ }
+	public class PartialBuyerGroup : BuyerGroup, IPartial { }
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic PartialBuyerGroup class instead.</typeparam>
+	public class PartialBuyerGroup<Txp> : PartialBuyerGroup
+	{ }
 	public class PartialCatalog : Catalog, IPartial { }
 	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic PartialCatalog class instead.</typeparam>
 	public class PartialCatalog<Txp> : PartialCatalog
@@ -3888,6 +4052,11 @@ namespace OrderCloud.SDK
 	{ }
 	public class PartialDeliveryConfig : DeliveryConfig, IPartial { }
 	public class PartialDeliveryTargets : DeliveryTargets, IPartial { }
+	public class PartialDiscount : Discount, IPartial { }
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic PartialDiscount class instead.</typeparam>
+	public class PartialDiscount<Txp> : PartialDiscount
+	{ }
+	public class PartialDiscountBreak : DiscountBreak, IPartial { }
 	public class PartialDiscoverEvent : DiscoverEvent, IPartial { }
 	public class PartialEntitySyncConfig : EntitySyncConfig, IPartial { }
 	public class PartialErrorConfig : ErrorConfig, IPartial { }

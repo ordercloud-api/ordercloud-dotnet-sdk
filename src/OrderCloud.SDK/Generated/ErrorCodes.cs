@@ -137,6 +137,11 @@ namespace OrderCloud.SDK
 			/// <summary>Address must be defined as either a billing or a shipping address.</summary>
 			public const string MustBeBillingOrShipping = "BuyerAddress.MustBeBillingOrShipping";
 		}
+		public static class BuyerGroup
+		{
+			/// <summary>Only the Marketplace Owner can manage Buyer Groups.</summary>
+			public const string OnlyMpoCanManage = "BuyerGroup.OnlyMpoCanManage";
+		}
 		public static class Catalog
 		{
 			/// <summary>This catalog is a default catalog for one or more buyers and cannot currently be deleted.</summary>
@@ -149,6 +154,10 @@ namespace OrderCloud.SDK
 			public const string CannotAssignProduct = "Catalog.CannotAssignProduct";
 			/// <summary>Cannot assign a child product to a catalog.</summary>
 			public const string CannotAssignChildProduct = "Catalog.CannotAssignChildProduct";
+			/// <summary>Cannot set ViewAllCategories to false when it is true at the BuyerGroup level.</summary>
+			public const string CannotDisableViewAllCategories = "Catalog.CannotDisableViewAllCategories";
+			/// <summary>Cannot set ViewAllProducts to false when it is true at the BuyerGroup level.</summary>
+			public const string CannotDisableViewAllProducts = "Catalog.CannotDisableViewAllProducts";
 		}
 		public static class Category
 		{
@@ -430,7 +439,7 @@ namespace OrderCloud.SDK
 			public const string CannotCompleteInvalidAmount = "OrderReturn.CannotCompleteInvalidAmount";
 			/// <summary>Product is not eligible to return.</summary>
 			public const string ProductNotEligibleToReturn = "OrderReturn.ProductNotEligibleToReturn";
-			/// <summary>OrderReturn payment value must be negative.</summary>
+			/// <summary>OrderReturn payment value must be negative or zero.</summary>
 			public const string PaymentValueMustBeNegative = "OrderReturn.PaymentValueMustBeNegative";
 			/// <summary>The total of the refunds for this OrderReturn cannot exceed the RefundAmount.</summary>
 			public const string TotalRefundsExceedRefundAmount = "OrderReturn.TotalRefundsExceedRefundAmount";
@@ -471,6 +480,10 @@ namespace OrderCloud.SDK
 			public const string RequiresBuyer = "PartyAssignment.RequiresBuyer";
 			/// <summary>User-level assignments not allowed for this object.</summary>
 			public const string UserLevelNotAllowed = "PartyAssignment.UserLevelNotAllowed";
+			/// <summary>Must provide either BuyerID or BuyerGroupID.</summary>
+			public const string MustProvideBuyerOrBuyerGroup = "PartyAssignment.MustProvideBuyerOrBuyerGroup";
+			/// <summary>Cannot provide both BuyerID and BuyerGroupID. Resource is only assignable to one or the other.</summary>
+			public const string CannotProvideBuyerAndBuyerGroup = "PartyAssignment.CannotProvideBuyerAndBuyerGroup";
 		}
 		public static class PasswordReset
 		{
@@ -517,7 +530,7 @@ namespace OrderCloud.SDK
 			public const string SpendingAccountIdMissing = "Payment.SpendingAccountIdMissing";
 			/// <summary>You cannot delete a Spending Account that has been used as a Payment.</summary>
 			public const string CannotDeleteSpendingAccount = "Payment.CannotDeleteSpendingAccount";
-			/// <summary>When creating a payment Amount must be null or greater than zero.</summary>
+			/// <summary>When creating a payment Amount must be null or greater than or equal to zero.</summary>
 			public const string AmountGreaterThanZero = "Payment.AmountGreaterThanZero";
 		}
 		public static class PriceSchedule
@@ -709,8 +722,6 @@ namespace OrderCloud.SDK
 			public const string CannotProvideSupplierID = "SecurityProfile.CannotProvideSupplierID";
 			/// <summary>Cannot specify MinimumCharacterCount of less than 10.</summary>
 			public const string InvalidPasswordConfiguration = "SecurityProfile.InvalidPasswordConfiguration";
-			/// <summary>Security profiles from external role groups are read-only.</summary>
-			public const string ExternalRoleGroupReadOnly = "SecurityProfile.ExternalRoleGroupReadOnly";
 		}
 		public static class Seller
 		{
