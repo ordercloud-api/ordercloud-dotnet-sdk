@@ -305,7 +305,7 @@ namespace OrderCloud.SDK.Tests
 
 			httpTest.RespondWith("<>", 502); // auth response with 500 level error code with response that could cause stackoverflow exception if it gets deserialized
 
-			AsyncTestDelegate del = async () => await GetClient().Me.GetAsync(); // Will ThrowAuthExceptionAsync
+			Func<Task> del = async () => await GetClient().Me.GetAsync(); // Will ThrowAuthExceptionAsync
 
 			var response = Assert.ThrowsAsync<OrderCloudException>(del);
 			Assert.NotNull(response);
@@ -319,7 +319,7 @@ namespace OrderCloud.SDK.Tests
 			httpTest.RespondWith("{}"); // auth response
 			httpTest.RespondWith("<>", 504); // api response that could cause stackoverflow exception if it gets deserialized
 
-			AsyncTestDelegate del = async () => await GetClient().Me.GetAsync(); //Will ThrowApiExceptionAsync
+			Func<Task> del = async () => await GetClient().Me.GetAsync(); //Will ThrowApiExceptionAsync
 
 			var response = Assert.ThrowsAsync<OrderCloudException>(del);
 			Assert.NotNull(response);

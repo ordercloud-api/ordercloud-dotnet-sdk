@@ -5,7 +5,7 @@ using System.Dynamic;
 namespace OrderCloud.SDK
 {
 	public enum AccessLevel { Private, Public, Shareable }
-	public enum ApiRole { ApiClientAdmin, ApiClientReader, AddressAdmin, AddressReader, AdminAddressAdmin, AdminAddressReader, AdminUserAdmin, AdminUserGroupAdmin, AdminUserGroupReader, AdminUserReader, ApprovalRuleAdmin, ApprovalRuleReader, BundleAdmin, BundleAssignmentAdmin, BundleReader, BuyerAdmin, BuyerImpersonation, BuyerReader, BuyerUserAdmin, BuyerUserReader, CatalogAdmin, CatalogReader, CategoryAdmin, CategoryReader, CostCenterAdmin, CostCenterReader, CreditCardAdmin, CreditCardReader, EntitySyncConfigAdmin, FullAccess, IncrementorAdmin, IncrementorReader, LocaleReader, LocaleAdmin, MeAddressAdmin, MeAdmin, MeCreditCardAdmin, MessageConfigAssignmentAdmin, MeSubscriptionAdmin, MeXpAdmin, OrderAdmin, OrderReader, OverrideShipping, OverrideTax, OverrideUnitPrice, PasswordReset, PriceScheduleAdmin, PriceScheduleReader, ProductAdmin, ProductAssignmentAdmin, ProductCollectionReader, ProductFacetAdmin, ProductFacetReader, ProductReader, ProductSyncConfigAdmin, PromotionAdmin, PromotionReader, SecurityProfileAdmin, SecurityProfileReader, SetSecurityProfile, ShipmentAdmin, ShipmentReader, Shopper, SpendingAccountAdmin, SpendingAccountReader, SubscriptionAdmin, SubscriptionReader, SupplierAddressAdmin, SupplierAddressReader, SupplierAdmin, SupplierReader, SupplierUserAdmin, SupplierUserGroupAdmin, SupplierUserGroupReader, SupplierUserReader, UnsubmittedOrderReader, UserGroupAdmin, UserGroupReader, OpenIDConnectReader, OpenIDConnectAdmin, MessageSenderReader, MessageSenderAdmin, XpIndexAdmin, WebhookReader, WebhookAdmin, IntegrationEventReader, IntegrationEventAdmin, TrackingEventReader, TrackingEventAdmin, DeliveryConfigAdmin, OrderSyncConfigAdmin, ErrorConfigAdmin }
+	public enum ApiRole { ApiClientAdmin, ApiClientReader, AddressAdmin, AddressReader, AdminAddressAdmin, AdminAddressReader, AdminUserAdmin, AdminUserGroupAdmin, AdminUserGroupReader, AdminUserReader, ApprovalRuleAdmin, ApprovalRuleReader, BulkReader, BundleAdmin, BundleAssignmentAdmin, BundleReader, BuyerAdmin, BuyerImpersonation, BuyerReader, BuyerUserAdmin, BuyerUserReader, CatalogAdmin, CatalogReader, CategoryAdmin, CategoryReader, CostCenterAdmin, CostCenterReader, CreditCardAdmin, CreditCardReader, EntitySyncConfigAdmin, FullAccess, IncrementorAdmin, IncrementorReader, LocaleReader, LocaleAdmin, MeAddressAdmin, MeAdmin, MeCreditCardAdmin, MessageConfigAssignmentAdmin, MeSubscriptionAdmin, MeXpAdmin, OrderAdmin, OrderReader, OverrideShipping, OverrideTax, OverrideUnitPrice, PasswordReset, PriceScheduleAdmin, PriceScheduleReader, ProductAdmin, ProductAssignmentAdmin, ProductCollectionReader, ProductFacetAdmin, ProductFacetReader, ProductReader, ProductSyncConfigAdmin, PromotionAdmin, PromotionReader, SecurityProfileAdmin, SecurityProfileReader, SetSecurityProfile, ShipmentAdmin, ShipmentReader, Shopper, SpendingAccountAdmin, SpendingAccountReader, SubscriptionAdmin, SubscriptionReader, SupplierAddressAdmin, SupplierAddressReader, SupplierAdmin, SupplierReader, SupplierUserAdmin, SupplierUserGroupAdmin, SupplierUserGroupReader, SupplierUserReader, UnsubmittedOrderReader, UserGroupAdmin, UserGroupReader, OpenIDConnectReader, OpenIDConnectAdmin, MessageSenderReader, MessageSenderAdmin, XpIndexAdmin, WebhookReader, WebhookAdmin, IntegrationEventReader, IntegrationEventAdmin, TrackingEventReader, TrackingEventAdmin, DeliveryConfigAdmin, OrderSyncConfigAdmin, ErrorConfigAdmin }
 	public enum ApprovalStatus { Pending, Approved, Declined }
 	public enum ApprovalType { Order, OrderReturn }
 	public enum CommerceRole { Buyer, Seller, Supplier }
@@ -47,8 +47,7 @@ namespace OrderCloud.SDK
 		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
 		/// <summary>If true, certain eligible expression requirements must be met, and the PromotionDiscount will be applied at the line item level.</summary>
 		public bool LineItemLevel { get => GetProp<bool>("LineItemLevel"); set => SetProp<bool>("LineItemLevel", value); }
-		/// <summary>Must be unique. Entered by buyer when adding promo to order.</summary>
-		[Required]
+		/// <summary>Must be unique within a marketplace. Entered by buyer when adding promo to order. Required when GeneratedCodeCount is 0.</summary>
 		public string Code { get => GetProp<string>("Code"); set => SetProp<string>("Code", value); }
 		/// <summary>Name of the added promo. Max length 100 characters. Searchable: priority level 2. Sortable: priority level 1.</summary>
 		public string Name { get => GetProp<string>("Name"); set => SetProp<string>("Name", value); }
@@ -92,6 +91,12 @@ namespace OrderCloud.SDK
 		public bool UseIntegration { get => GetProp<bool>("UseIntegration"); set => SetProp<bool>("UseIntegration", value); }
 		/// <summary>Used to control the order in which promotions are applied when calling the auto apply or refresh endpoint.</summary>
 		public int? Priority { get => GetProp<int?>("Priority"); set => SetProp<int?>("Priority", value); }
+		/// <summary>Features in beta are subject to change and are not available in production. Number of platform-generated single-use codes for this promotion. Mutually exclusive with Code.</summary>
+		public int GeneratedCodeCount { get => GetProp<int>("GeneratedCodeCount"); set => SetProp<int>("GeneratedCodeCount", value); }
+		/// <summary>Features in beta are subject to change and are not available in production. Character length of each generated code (excluding prefix). Required when GeneratedCodeCount > 0.</summary>
+		public int? GeneratedCodeLength { get => GetProp<int?>("GeneratedCodeLength"); set => SetProp<int?>("GeneratedCodeLength", value); }
+		/// <summary>Features in beta are subject to change and are not available in production. Optional prefix prepended to generated codes, separated by a dash.</summary>
+		public string GeneratedCodePrefix { get => GetProp<string>("GeneratedCodePrefix"); set => SetProp<string>("GeneratedCodePrefix", value); }
 		/// <summary>Container for extended (custom) properties of the added promo.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
@@ -289,6 +294,15 @@ namespace OrderCloud.SDK
 		public string Name { get => GetProp<string>("Name"); set => SetProp<string>("Name", value); }
 		/// <summary>Expiration of the api client secret create response.</summary>
 		public DateTimeOffset? Expiration { get => GetProp<DateTimeOffset?>("Expiration"); set => SetProp<DateTimeOffset?>("Expiration", value); }
+	}
+	public class ApiError : OrderCloudModel
+	{
+		/// <summary>Error code of the api error.</summary>
+		public string ErrorCode { get => GetProp<string>("ErrorCode"); set => SetProp<string>("ErrorCode", value); }
+		/// <summary>Message of the api error.</summary>
+		public string Message { get => GetProp<string>("Message"); set => SetProp<string>("Message", value); }
+		/// <summary>Data of the api error.</summary>
+		public object Data { get => GetProp<object>("Data"); set => SetProp<object>("Data", value); }
 	}
 	public class ApprovalInfo : OrderCloudModel
 	{
@@ -512,6 +526,13 @@ namespace OrderCloud.SDK
 		/// <summary>Container for extended (custom) properties of the credit card.</summary>
 		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
 	}
+	public class BuyerDiscount : OrderCloudModel
+	{
+		/// <summary>ID of the discount.</summary>
+		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
+		/// <summary>Description of the discount.</summary>
+		public string Description { get => GetProp<string>("Description"); set => SetProp<string>("Description", value); }
+	}
 	public class BuyerGroup : OrderCloudModel
 	{
 		/// <summary>ID of the group. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 2.</summary>
@@ -554,7 +575,7 @@ namespace OrderCloud.SDK
 		/// <summary>Price breaks of the price schedule.</summary>
 		public IList<BuyerPriceBreak> PriceBreaks { get => GetProp<IList<BuyerPriceBreak>>("PriceBreaks", new List<BuyerPriceBreak>()); set => SetProp<IList<BuyerPriceBreak>>("PriceBreaks", value); }
 		/// <summary>The best applicable discount for this buyer. Only populated when a discount applies.</summary>
-		public Discount Discount { get => GetProp<Discount>("Discount"); set => SetProp<Discount>("Discount", value); }
+		public BuyerDiscount Discount { get => GetProp<BuyerDiscount>("Discount"); set => SetProp<BuyerDiscount>("Discount", value); }
 		/// <summary>ID of the organization that owns the PriceSchedule. Only the marketplace owner can override the OwnerID on create.</summary>
 		public string OwnerID { get => GetProp<string>("OwnerID"); set => SetProp<string>("OwnerID", value); }
 		/// <summary>ID of the price schedule. Can only contain characters Aa-Zz, 0-9, -, and _. Searchable: priority level 1. Sortable: priority level 2.</summary>
@@ -586,15 +607,11 @@ namespace OrderCloud.SDK
 		/// <summary>Container for extended (custom) properties of the price schedule.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
-	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, specify dynamic.</typeparam>
-	/// <typeparam name="TDiscount">Specific type of the Discount property. If not using a custom type, specify Discount.</typeparam>
-	public class BuyerPriceSchedule<Txp, TDiscount> : BuyerPriceSchedule
-		where TDiscount : Discount
+	/// <typeparam name="Txp">Specific type of the xp property. If not using a custom type, use the non-generic BuyerPriceSchedule class instead.</typeparam>
+	public class BuyerPriceSchedule<Txp> : BuyerPriceSchedule
 	{
 		/// <summary>Container for extended (custom) properties of the price schedule.</summary>
 		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
-		/// <summary>The best applicable discount for this buyer. Only populated when a discount applies.</summary>
-		public new TDiscount Discount { get => GetProp<TDiscount>("Discount"); set => SetProp<TDiscount>("Discount", value); }
 	}
 	public class BuyerProduct : OrderCloudModel
 	{
@@ -913,6 +930,8 @@ namespace OrderCloud.SDK
 		public string CategoryID { get => GetProp<string>("CategoryID"); set => SetProp<string>("CategoryID", value); }
 		/// <summary>ID of the product. Sortable.</summary>
 		public string ProductID { get => GetProp<string>("ProductID"); set => SetProp<string>("ProductID", value); }
+		/// <summary>Controls precedence when multiple discounts apply to the same user and product. Lower number = higher precedence (1 beats 2). Null is applied last.</summary>
+		public int? Priority { get => GetProp<int?>("Priority"); set => SetProp<int?>("Priority", value); }
 		/// <summary>Container for extended (custom) properties of the discount.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
@@ -953,6 +972,8 @@ namespace OrderCloud.SDK
 		public decimal? SubscriptionPrice { get => GetProp<decimal?>("SubscriptionPrice"); set => SetProp<decimal?>("SubscriptionPrice", value); }
 		/// <summary>Discounted bundle price per unit.</summary>
 		public decimal? BundlePrice { get => GetProp<decimal?>("BundlePrice"); set => SetProp<decimal?>("BundlePrice", value); }
+		/// <summary>The discount percentage applied (e.g., 10 for 10% off).</summary>
+		public decimal Percent { get => GetProp<decimal>("Percent"); set => SetProp<decimal>("Percent", value); }
 	}
 	public class DiscoverEvent : OrderCloudModel
 	{
@@ -976,8 +997,7 @@ namespace OrderCloud.SDK
 		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
 		/// <summary>If true, certain eligible expression requirements must be met, and the PromotionDiscount will be applied at the line item level.</summary>
 		public bool LineItemLevel { get => GetProp<bool>("LineItemLevel"); set => SetProp<bool>("LineItemLevel", value); }
-		/// <summary>Must be unique. Entered by buyer when adding promo to order.</summary>
-		[Required]
+		/// <summary>Must be unique within a marketplace. Entered by buyer when adding promo to order. Required when GeneratedCodeCount is 0.</summary>
 		public string Code { get => GetProp<string>("Code"); set => SetProp<string>("Code", value); }
 		/// <summary>Name of the eligible promotion. Max length 100 characters. Searchable: priority level 2. Sortable: priority level 1.</summary>
 		public string Name { get => GetProp<string>("Name"); set => SetProp<string>("Name", value); }
@@ -1021,6 +1041,12 @@ namespace OrderCloud.SDK
 		public bool UseIntegration { get => GetProp<bool>("UseIntegration"); set => SetProp<bool>("UseIntegration", value); }
 		/// <summary>Used to control the order in which promotions are applied when calling the auto apply or refresh endpoint.</summary>
 		public int? Priority { get => GetProp<int?>("Priority"); set => SetProp<int?>("Priority", value); }
+		/// <summary>Features in beta are subject to change and are not available in production. Number of platform-generated single-use codes for this promotion. Mutually exclusive with Code.</summary>
+		public int GeneratedCodeCount { get => GetProp<int>("GeneratedCodeCount"); set => SetProp<int>("GeneratedCodeCount", value); }
+		/// <summary>Features in beta are subject to change and are not available in production. Character length of each generated code (excluding prefix). Required when GeneratedCodeCount > 0.</summary>
+		public int? GeneratedCodeLength { get => GetProp<int?>("GeneratedCodeLength"); set => SetProp<int?>("GeneratedCodeLength", value); }
+		/// <summary>Features in beta are subject to change and are not available in production. Optional prefix prepended to generated codes, separated by a dash.</summary>
+		public string GeneratedCodePrefix { get => GetProp<string>("GeneratedCodePrefix"); set => SetProp<string>("GeneratedCodePrefix", value); }
 		/// <summary>Container for extended (custom) properties of the eligible promotion.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
@@ -2140,8 +2166,7 @@ namespace OrderCloud.SDK
 		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
 		/// <summary>If true, certain eligible expression requirements must be met, and the PromotionDiscount will be applied at the line item level.</summary>
 		public bool LineItemLevel { get => GetProp<bool>("LineItemLevel"); set => SetProp<bool>("LineItemLevel", value); }
-		/// <summary>Must be unique. Entered by buyer when adding promo to order.</summary>
-		[Required]
+		/// <summary>Must be unique within a marketplace. Entered by buyer when adding promo to order. Required when GeneratedCodeCount is 0.</summary>
 		public string Code { get => GetProp<string>("Code"); set => SetProp<string>("Code", value); }
 		/// <summary>Name of the order promotion. Max length 100 characters. Searchable: priority level 2. Sortable: priority level 1.</summary>
 		public string Name { get => GetProp<string>("Name"); set => SetProp<string>("Name", value); }
@@ -2185,6 +2210,12 @@ namespace OrderCloud.SDK
 		public bool UseIntegration { get => GetProp<bool>("UseIntegration"); set => SetProp<bool>("UseIntegration", value); }
 		/// <summary>Used to control the order in which promotions are applied when calling the auto apply or refresh endpoint.</summary>
 		public int? Priority { get => GetProp<int?>("Priority"); set => SetProp<int?>("Priority", value); }
+		/// <summary>Features in beta are subject to change and are not available in production. Number of platform-generated single-use codes for this promotion. Mutually exclusive with Code.</summary>
+		public int GeneratedCodeCount { get => GetProp<int>("GeneratedCodeCount"); set => SetProp<int>("GeneratedCodeCount", value); }
+		/// <summary>Features in beta are subject to change and are not available in production. Character length of each generated code (excluding prefix). Required when GeneratedCodeCount > 0.</summary>
+		public int? GeneratedCodeLength { get => GetProp<int?>("GeneratedCodeLength"); set => SetProp<int?>("GeneratedCodeLength", value); }
+		/// <summary>Features in beta are subject to change and are not available in production. Optional prefix prepended to generated codes, separated by a dash.</summary>
+		public string GeneratedCodePrefix { get => GetProp<string>("GeneratedCodePrefix"); set => SetProp<string>("GeneratedCodePrefix", value); }
 		/// <summary>Container for extended (custom) properties of the order promotion.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
@@ -2193,6 +2224,20 @@ namespace OrderCloud.SDK
 	{
 		/// <summary>Container for extended (custom) properties of the order promotion.</summary>
 		public new Txp xp { get => GetProp<Txp>("xp"); set => SetProp<Txp>("xp", value); }
+	}
+	public class OrderRepeatResponse : OrderCloudModel
+	{
+		/// <summary>The new unsubmitted order created from the original.</summary>
+		public Order Order { get => GetProp<Order>("Order"); set => SetProp<Order>("Order", value); }
+		/// <summary>Products from the original order that could not be added to the new order.</summary>
+		public IList<UnavailableLineItem> UnavailableItems { get => GetProp<IList<UnavailableLineItem>>("UnavailableItems", new List<UnavailableLineItem>()); set => SetProp<IList<UnavailableLineItem>>("UnavailableItems", value); }
+	}
+	/// <typeparam name="TOrder">Specific type of the Order property. If not using a custom type, use the non-generic OrderRepeatResponse class instead.</typeparam>
+	public class OrderRepeatResponse<TOrder> : OrderRepeatResponse
+		where TOrder : Order
+	{
+		/// <summary>The new unsubmitted order created from the original.</summary>
+		public new TOrder Order { get => GetProp<TOrder>("Order"); set => SetProp<TOrder>("Order", value); }
 	}
 	public class OrderReturn : OrderCloudModel
 	{
@@ -3000,8 +3045,7 @@ namespace OrderCloud.SDK
 		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
 		/// <summary>If true, certain eligible expression requirements must be met, and the PromotionDiscount will be applied at the line item level.</summary>
 		public bool LineItemLevel { get => GetProp<bool>("LineItemLevel"); set => SetProp<bool>("LineItemLevel", value); }
-		/// <summary>Must be unique. Entered by buyer when adding promo to order.</summary>
-		[Required]
+		/// <summary>Must be unique within a marketplace. Entered by buyer when adding promo to order. Required when GeneratedCodeCount is 0.</summary>
 		public string Code { get => GetProp<string>("Code"); set => SetProp<string>("Code", value); }
 		/// <summary>Name of the promotion. Max length 100 characters. Searchable: priority level 2. Sortable: priority level 1.</summary>
 		public string Name { get => GetProp<string>("Name"); set => SetProp<string>("Name", value); }
@@ -3045,6 +3089,12 @@ namespace OrderCloud.SDK
 		public bool UseIntegration { get => GetProp<bool>("UseIntegration"); set => SetProp<bool>("UseIntegration", value); }
 		/// <summary>Used to control the order in which promotions are applied when calling the auto apply or refresh endpoint.</summary>
 		public int? Priority { get => GetProp<int?>("Priority"); set => SetProp<int?>("Priority", value); }
+		/// <summary>Features in beta are subject to change and are not available in production. Number of platform-generated single-use codes for this promotion. Mutually exclusive with Code.</summary>
+		public int GeneratedCodeCount { get => GetProp<int>("GeneratedCodeCount"); set => SetProp<int>("GeneratedCodeCount", value); }
+		/// <summary>Features in beta are subject to change and are not available in production. Character length of each generated code (excluding prefix). Required when GeneratedCodeCount > 0.</summary>
+		public int? GeneratedCodeLength { get => GetProp<int?>("GeneratedCodeLength"); set => SetProp<int?>("GeneratedCodeLength", value); }
+		/// <summary>Features in beta are subject to change and are not available in production. Optional prefix prepended to generated codes, separated by a dash.</summary>
+		public string GeneratedCodePrefix { get => GetProp<string>("GeneratedCodePrefix"); set => SetProp<string>("GeneratedCodePrefix", value); }
 		/// <summary>Container for extended (custom) properties of the promotion.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
@@ -3064,6 +3114,14 @@ namespace OrderCloud.SDK
 		public string BuyerID { get => GetProp<string>("BuyerID"); set => SetProp<string>("BuyerID", value); }
 		/// <summary>ID of the user group. Sortable: priority level 4.</summary>
 		public string UserGroupID { get => GetProp<string>("UserGroupID"); set => SetProp<string>("UserGroupID", value); }
+	}
+	/// <summary>Features in beta are subject to change and are not available in production.</summary>
+	public class PromotionCode : OrderCloudModel
+	{
+		/// <summary>Code of the promotion code.</summary>
+		public string Code { get => GetProp<string>("Code"); set => SetProp<string>("Code", value); }
+		/// <summary>Redeemed of the promotion code.</summary>
+		public bool Redeemed { get => GetProp<bool>("Redeemed"); set => SetProp<bool>("Redeemed", value); }
 	}
 	public class PromotionIntegration : OrderCloudModel
 	{
@@ -3117,8 +3175,7 @@ namespace OrderCloud.SDK
 		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
 		/// <summary>If true, certain eligible expression requirements must be met, and the PromotionDiscount will be applied at the line item level.</summary>
 		public bool LineItemLevel { get => GetProp<bool>("LineItemLevel"); set => SetProp<bool>("LineItemLevel", value); }
-		/// <summary>Must be unique. Entered by buyer when adding promo to order.</summary>
-		[Required]
+		/// <summary>Must be unique within a marketplace. Entered by buyer when adding promo to order. Required when GeneratedCodeCount is 0.</summary>
 		public string Code { get => GetProp<string>("Code"); set => SetProp<string>("Code", value); }
 		/// <summary>Name of the removed promo. Max length 100 characters. Searchable: priority level 2. Sortable: priority level 1.</summary>
 		public string Name { get => GetProp<string>("Name"); set => SetProp<string>("Name", value); }
@@ -3162,6 +3219,12 @@ namespace OrderCloud.SDK
 		public bool UseIntegration { get => GetProp<bool>("UseIntegration"); set => SetProp<bool>("UseIntegration", value); }
 		/// <summary>Used to control the order in which promotions are applied when calling the auto apply or refresh endpoint.</summary>
 		public int? Priority { get => GetProp<int?>("Priority"); set => SetProp<int?>("Priority", value); }
+		/// <summary>Features in beta are subject to change and are not available in production. Number of platform-generated single-use codes for this promotion. Mutually exclusive with Code.</summary>
+		public int GeneratedCodeCount { get => GetProp<int>("GeneratedCodeCount"); set => SetProp<int>("GeneratedCodeCount", value); }
+		/// <summary>Features in beta are subject to change and are not available in production. Character length of each generated code (excluding prefix). Required when GeneratedCodeCount > 0.</summary>
+		public int? GeneratedCodeLength { get => GetProp<int?>("GeneratedCodeLength"); set => SetProp<int?>("GeneratedCodeLength", value); }
+		/// <summary>Features in beta are subject to change and are not available in production. Optional prefix prepended to generated codes, separated by a dash.</summary>
+		public string GeneratedCodePrefix { get => GetProp<string>("GeneratedCodePrefix"); set => SetProp<string>("GeneratedCodePrefix", value); }
 		/// <summary>Container for extended (custom) properties of the removed promo.</summary>
 		public dynamic xp { get => GetProp<dynamic>("xp", new ExpandoObject()); set => SetProp<dynamic>("xp", value); }
 	}
@@ -3737,6 +3800,12 @@ namespace OrderCloud.SDK
 		[Required]
 		public string UserGroupID { get => GetProp<string>("UserGroupID"); set => SetProp<string>("UserGroupID", value); }
 	}
+	public class SyncCatalog : OrderCloudModel
+	{
+		/// <summary>ID of the catalog. Required.</summary>
+		[Required]
+		public string CatalogID { get => GetProp<string>("CatalogID"); set => SetProp<string>("CatalogID", value); }
+	}
 	public class SyncCategory : OrderCloudModel
 	{
 		/// <summary>ID of the catalog. Required.</summary>
@@ -3800,6 +3869,13 @@ namespace OrderCloud.SDK
 		/// <summary>ID of the delivery config. Required.</summary>
 		[Required]
 		public string DeliveryConfigID { get => GetProp<string>("DeliveryConfigID"); set => SetProp<string>("DeliveryConfigID", value); }
+	}
+	public class UnavailableLineItem : OrderCloudModel
+	{
+		/// <summary>ID of the product or bundle that could not be added to the new order.</summary>
+		public string ProductID { get => GetProp<string>("ProductID"); set => SetProp<string>("ProductID", value); }
+		/// <summary>The error indicating why the item could not be added.</summary>
+		public ApiError Error { get => GetProp<ApiError>("Error"); set => SetProp<ApiError>("Error", value); }
 	}
 	public class User : OrderCloudModel
 	{

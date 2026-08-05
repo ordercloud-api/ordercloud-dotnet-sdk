@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -43,10 +43,8 @@ namespace OrderCloud.SDK
 		public ApiError[] Errors { get; set; }
 	}
 
-	public class ApiError
+	public class BulkItemError : ApiError
 	{
-		public string ErrorCode { get; set; }
-		public string Message { get; set; }
-		public object Data { get; set; }
+		public int ItemIndex { get; set; }
 	}
 }

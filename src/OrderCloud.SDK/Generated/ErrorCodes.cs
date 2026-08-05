@@ -106,6 +106,21 @@ namespace OrderCloud.SDK
 			/// <summary>Cannot PATCH a billing address that was set by ID. Either PATCH the saved address at /addresses/{{id}}, or PUT a complete address at /billto.</summary>
 			public const string CannotPatchSetByID = "BillingAddress.CannotPatchSetByID";
 		}
+		public static class Bulk
+		{
+			/// <summary>Product not found.</summary>
+			public const string ProductNotFound = "Bulk.ProductNotFound";
+			/// <summary>Variant not found.</summary>
+			public const string VariantNotFound = "Bulk.VariantNotFound";
+			/// <summary>InventoryRecordNotFound not found.</summary>
+			public const string InventoryRecordNotFound = "Bulk.InventoryRecordNotFound";
+			/// <summary>Product.Inventory must be configured.</summary>
+			public const string InventoryNotConfigured = "Bulk.InventoryNotConfigured";
+			/// <summary>VariantID is required when Product.Inventory.VariantLevelTracking is true.</summary>
+			public const string VariantIDRequired = "Bulk.VariantIDRequired";
+			/// <summary>VariantID is not allowed when Product.Inventory.VariantLevelTracking is false.</summary>
+			public const string VariantIDNotAllowed = "Bulk.VariantIDNotAllowed";
+		}
 		public static class Bundle
 		{
 			/// <summary>Cannot assign a product to a bundle with a different OwnerID.</summary>
@@ -181,6 +196,11 @@ namespace OrderCloud.SDK
 			public const string CannotDeleteConfigInUse = "DeliveryConfig.CannotDeleteConfigInUse";
 			/// <summary>The requested synchronization cannot be performed because the associated delivery configuration is disabled.</summary>
 			public const string ConfigurationDisabled = "DeliveryConfig.ConfigurationDisabled";
+		}
+		public static class Discount
+		{
+			/// <summary>CategoryID requires a corresponding CatalogID.</summary>
+			public const string CategoryRequiresCatalog = "Discount.CategoryRequiresCatalog";
 		}
 		public static class EntitySyncConfig
 		{
@@ -422,6 +442,12 @@ namespace OrderCloud.SDK
 			public const string CannotMixSubmittedAndUnsubmitted = "Order.CannotMixSubmittedAndUnsubmitted";
 			/// <summary>Order status must be Unsubmitted or Awaiting Approval to apply a promotion.</summary>
 			public const string CannotApplyPromoBadStatus = "Order.CannotApplyPromoBadStatus";
+			/// <summary>Cannot repeat an order placed by a different user.</summary>
+			public const string CannotRepeatOtherUsersOrder = "Order.CannotRepeatOtherUsersOrder";
+			/// <summary>Order must be in a submitted state to repeat.</summary>
+			public const string MustBeSubmittedToRepeat = "Order.MustBeSubmittedToRepeat";
+			/// <summary>None of the original order's line items are currently available.</summary>
+			public const string RepeatNoAvailableItems = "Order.RepeatNoAvailableItems";
 		}
 		public static class OrderReturn
 		{
@@ -644,6 +670,10 @@ namespace OrderCloud.SDK
 			public const string OnlyOneConfigPerMarketplace = "ProductSyncConfig.OnlyOneConfigPerMarketplace";
 			/// <summary>The requested operation is not available because an administrative lock has been placed on product synchronization for this marketplace. Please contact support.</summary>
 			public const string AdminLockout = "ProductSyncConfig.AdminLockout";
+			/// <summary>Must specify between 1 and 5 catalogs for product synchronization.</summary>
+			public const string InvalidCatalogCount = "ProductSyncConfig.InvalidCatalogCount";
+			/// <summary>Category filtering is only supported when synchronizing a single catalog.</summary>
+			public const string CategoryFilterRequiresSingleCatalog = "ProductSyncConfig.CategoryFilterRequiresSingleCatalog";
 		}
 		public static class Promotion
 		{
@@ -681,6 +711,14 @@ namespace OrderCloud.SDK
 			public const string ValueExpressionCanBeNullIfUseIntegration = "Promotion.ValueExpressionCanBeNullIfUseIntegration";
 			/// <summary>UseIntegration must be false if ValueExpression is not null.</summary>
 			public const string UseIntegrationMustBeFalse = "Promotion.UseIntegrationMustBeFalse";
+			/// <summary>GeneratedCodeCount cannot be greater than 0 when Code is set.</summary>
+			public const string CannotGenerateCodesWithCode = "Promotion.CannotGenerateCodesWithCode";
+			/// <summary>GeneratedCodeCount cannot be greater than 0 when AutoApply is true.</summary>
+			public const string CannotGenerateCodesForAutoApply = "Promotion.CannotGenerateCodesForAutoApply";
+			/// <summary>Code is required when GeneratedCodeCount is 0.</summary>
+			public const string CodeRequired = "Promotion.CodeRequired";
+			/// <summary>GeneratedCodeLength is required when GeneratedCodeCount is greater than 0.</summary>
+			public const string GeneratedCodeLengthRequired = "Promotion.GeneratedCodeLengthRequired";
 		}
 		public static class PromotionIntegration
 		{
@@ -779,6 +817,8 @@ namespace OrderCloud.SDK
 		{
 			/// <summary>EntitySync for AdminUsers is not configured or the delivery configuration is disabled.</summary>
 			public const string EntitySyncForAdminUsersNotEnabled = "Synchronize.EntitySyncForAdminUsersNotEnabled";
+			/// <summary>EntitySync for Catalogs is not configured or the delivery configuration is disabled.</summary>
+			public const string EntitySyncForCatalogNotEnabled = "Synchronize.EntitySyncForCatalogNotEnabled";
 			/// <summary>EntitySync for Categories is not configured or the delivery configuration is disabled.</summary>
 			public const string EntitySyncForCategoryNotEnabled = "Synchronize.EntitySyncForCategoryNotEnabled";
 			/// <summary>EntitySync for Buyer is not configured or the delivery configuration is disabled.</summary>
