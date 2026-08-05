@@ -789,7 +789,6 @@ namespace OrderCloud.SDK
 		Task DeleteAsync(string subscriptionID, string bundleID, string bundleItemID, string accessToken = null);
 	}
 
-	/// <summary>Features in beta are subject to change and are not available in production.</summary>
 	public interface IBuyerGroupsResource
 	{
 		/// <summary>Retrieve a buyer group.</summary>
@@ -1899,6 +1898,24 @@ namespace OrderCloud.SDK
 
 	public interface IEntitySyncsResource
 	{
+		/// <summary>Retrieve the entity sync delivery configuration for catalogs Get the entity sync delivery configuration for Catalogs</summary>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<EntitySyncConfig> GetCatalogsAsync(string accessToken = null);
+		/// <summary>Delete the entity sync delivery configuration for catalogs Delete the entity sync delivery configuration for Catalogs</summary>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task DeleteCatalogsAsync(string accessToken = null);
+		/// <summary>Create or update the entity sync delivery configuration for catalogs Create or update the entity sync delivery configuration for Catalogs</summary>
+		/// <param name="entitySyncConfig">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<EntitySyncConfig> SaveCatalogsAsync(EntitySyncConfig entitySyncConfig, string accessToken = null);
+		/// <summary>Partially update the entity sync delivery configuration for catalogs Partially update the entity sync delivery configuration for Catalogs</summary>
+		/// <param name="partialEntitySyncConfig">The object that will be partially serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<EntitySyncConfig> PatchCatalogsAsync(PartialEntitySyncConfig partialEntitySyncConfig, string accessToken = null);
+		/// <summary>Sync a catalog</summary>
+		/// <param name="syncCatalog">The object that will be serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task SyncCatalogAsync(SyncCatalog syncCatalog, string accessToken = null);
 		/// <summary>Retrieve the entity sync delivery configuration for categories Get the entity sync delivery configuration for Categories</summary>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<EntitySyncConfig> GetCategoriesAsync(string accessToken = null);
@@ -4486,6 +4503,18 @@ namespace OrderCloud.SDK
 		/// <param name="orderID">ID of the order.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TOrderSplitResult> ForwardAsync<TOrderSplitResult>(OrderDirection direction, string orderID, string accessToken = null) where TOrderSplitResult : OrderSplitResult;
+		/// <summary>Repeat an order Creates a new unsubmitted order from a previously submitted order, copying available line items with recalculated prices.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
+		/// <param name="orderID">ID of the order.</param>
+		/// <param name="partialOrder">The object that will be partially serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<OrderRepeatResponse> RepeatAsync(OrderDirection direction, string orderID, PartialOrder partialOrder = null, string accessToken = null);
+		/// <summary>Repeat an order Creates a new unsubmitted order from a previously submitted order, copying available line items with recalculated prices.</summary>
+		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
+		/// <param name="orderID">ID of the order.</param>
+		/// <param name="partialOrder">The object that will be partially serialized to JSON and sent in the request body.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<TOrderRepeatResponse> RepeatAsync<TOrderRepeatResponse>(OrderDirection direction, string orderID, PartialOrder partialOrder = null, string accessToken = null) where TOrderRepeatResponse : OrderRepeatResponse;
 		/// <summary>Complete an order Use only when an order doesn't need a shipment. You will not be able to ship or reopen an order after completing it.</summary>
 		/// <param name="direction">Direction of the order, from the current user's perspective.</param>
 		/// <param name="orderID">ID of the order.</param>
@@ -5439,6 +5468,12 @@ namespace OrderCloud.SDK
 		/// <param name="partialPromotion">The object that will be partially serialized to JSON and sent in the request body.</param>
 		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
 		Task<TPromotion> PatchAsync<TPromotion>(string promotionID, PartialPromotion partialPromotion, string accessToken = null) where TPromotion : Promotion;
+		/// <summary>Features in beta are subject to change and are not available in production. List promotion codes. List generated codes for a promotion. Only applicable when GeneratedCodeCount > 0.</summary>
+		/// <param name="promotionID">ID of the promotion.</param>
+		/// <param name="page">Page of results to return. When paginating through many items (> page 30), we recommend the "Last ID" method, as outlined in the Advanced Querying documentation.</param>
+		/// <param name="pageSize">Number of results to return per page.</param>
+		/// <param name="accessToken">Optional. Use to provide an existing token instead of authenticating implicitly.</param>
+		Task<ListPage<PromotionCode>> ListCodesAsync(string promotionID, int page = 1, int pageSize = 20, string accessToken = null);
 		/// <summary>List promotion assignments.</summary>
 		/// <param name="buyerID">ID of the buyer.</param>
 		/// <param name="promotionID">ID of the promotion.</param>
@@ -7473,6 +7508,11 @@ namespace OrderCloud.SDK
 	public class EntitySyncsResource : OrderCloudResource, IEntitySyncsResource
 	{
 		internal EntitySyncsResource(OrderCloudClient client) : base(client) { }
+		public Task<EntitySyncConfig> GetCatalogsAsync(string accessToken = null) => Request("v1", "integrations", "entitysync", "catalogs").WithOAuthBearerToken(accessToken).GetJsonAsync<EntitySyncConfig>();
+		public Task DeleteCatalogsAsync(string accessToken = null) => Request("v1", "integrations", "entitysync", "catalogs").WithOAuthBearerToken(accessToken).DeleteAsync();
+		public Task<EntitySyncConfig> SaveCatalogsAsync(EntitySyncConfig entitySyncConfig, string accessToken = null) => Request("v1", "integrations", "entitysync", "catalogs").WithOAuthBearerToken(accessToken).PutJsonAsync(ValidateModel(entitySyncConfig)).ReceiveJson<EntitySyncConfig>();
+		public Task<EntitySyncConfig> PatchCatalogsAsync(PartialEntitySyncConfig partialEntitySyncConfig, string accessToken = null) => Request("v1", "integrations", "entitysync", "catalogs").WithOAuthBearerToken(accessToken).PatchJsonAsync(ValidateModel(partialEntitySyncConfig)).ReceiveJson<EntitySyncConfig>();
+		public Task SyncCatalogAsync(SyncCatalog syncCatalog, string accessToken = null) => Request("v1", "integrations", "entitysync", "catalogs", "sync").WithOAuthBearerToken(accessToken).PostJsonAsync(ValidateModel(syncCatalog));
 		public Task<EntitySyncConfig> GetCategoriesAsync(string accessToken = null) => Request("v1", "integrations", "entitysync", "categories").WithOAuthBearerToken(accessToken).GetJsonAsync<EntitySyncConfig>();
 		public Task DeleteCategoriesAsync(string accessToken = null) => Request("v1", "integrations", "entitysync", "categories").WithOAuthBearerToken(accessToken).DeleteAsync();
 		public Task<EntitySyncConfig> SaveCategoriesAsync(EntitySyncConfig entitySyncConfig, string accessToken = null) => Request("v1", "integrations", "entitysync", "categories").WithOAuthBearerToken(accessToken).PutJsonAsync(ValidateModel(entitySyncConfig)).ReceiveJson<EntitySyncConfig>();
@@ -7975,6 +8015,8 @@ namespace OrderCloud.SDK
 		public Task<TOrderSplitResult> SplitAsync<TOrderSplitResult>(OrderDirection direction, string orderID, string accessToken = null) where TOrderSplitResult : OrderSplitResult => Request("v1", "orders", direction, orderID, "split").WithOAuthBearerToken(accessToken).PostAsync(null).ReceiveJson<TOrderSplitResult>();
 		public Task<OrderSplitResult> ForwardAsync(OrderDirection direction, string orderID, string accessToken = null) => ForwardAsync<OrderSplitResult>(direction, orderID, accessToken);
 		public Task<TOrderSplitResult> ForwardAsync<TOrderSplitResult>(OrderDirection direction, string orderID, string accessToken = null) where TOrderSplitResult : OrderSplitResult => Request("v1", "orders", direction, orderID, "forward").WithOAuthBearerToken(accessToken).PostAsync(null).ReceiveJson<TOrderSplitResult>();
+		public Task<OrderRepeatResponse> RepeatAsync(OrderDirection direction, string orderID, PartialOrder partialOrder = null, string accessToken = null) => RepeatAsync<OrderRepeatResponse>(direction, orderID, partialOrder, accessToken);
+		public Task<TOrderRepeatResponse> RepeatAsync<TOrderRepeatResponse>(OrderDirection direction, string orderID, PartialOrder partialOrder = null, string accessToken = null) where TOrderRepeatResponse : OrderRepeatResponse => Request("v1", "orders", direction, orderID, "repeat").WithOAuthBearerToken(accessToken).PostJsonAsync(ValidateModel(partialOrder)).ReceiveJson<TOrderRepeatResponse>();
 		public Task<Order> CompleteAsync(OrderDirection direction, string orderID, string accessToken = null) => CompleteAsync<Order>(direction, orderID, accessToken);
 		public Task<TOrder> CompleteAsync<TOrder>(OrderDirection direction, string orderID, string accessToken = null) where TOrder : Order => Request("v1", "orders", direction, orderID, "complete").WithOAuthBearerToken(accessToken).PostAsync(null).ReceiveJson<TOrder>();
 		public Task<Order> ShipAsync(OrderDirection direction, string orderID, Shipment shipment, string accessToken = null) => ShipAsync<Order>(direction, orderID, shipment, accessToken);
@@ -8172,6 +8214,7 @@ namespace OrderCloud.SDK
 		public Task DeleteAsync(string promotionID, string accessToken = null) => Request("v1", "promotions", promotionID).WithOAuthBearerToken(accessToken).DeleteAsync();
 		public Task<Promotion> PatchAsync(string promotionID, PartialPromotion partialPromotion, string accessToken = null) => PatchAsync<Promotion>(promotionID, partialPromotion, accessToken);
 		public Task<TPromotion> PatchAsync<TPromotion>(string promotionID, PartialPromotion partialPromotion, string accessToken = null) where TPromotion : Promotion => Request("v1", "promotions", promotionID).WithOAuthBearerToken(accessToken).PatchJsonAsync(ValidateModel(partialPromotion)).ReceiveJson<TPromotion>();
+		public Task<ListPage<PromotionCode>> ListCodesAsync(string promotionID, int page = 1, int pageSize = 20, string accessToken = null) => Request("v1", "promotions", promotionID, "codes").WithOAuthBearerToken(accessToken).SetQueryParams(new { page, pageSize }).GetJsonAsync<ListPage<PromotionCode>>();
 		public Task<ListPage<PromotionAssignment>> ListAssignmentsAsync(string buyerID = null, string promotionID = null, string userID = null, string userGroupID = null, PartyType? level = null, int? page = null, int? pageSize = null, string accessToken = null) => Request("v1", "promotions", "assignments").WithOAuthBearerToken(accessToken).SetQueryParams(new { buyerID, promotionID, userID, userGroupID, level, page, pageSize }).GetJsonAsync<ListPage<PromotionAssignment>>();
 		public Task SaveAssignmentAsync(PromotionAssignment promotionAssignment, string accessToken = null) => Request("v1", "promotions", "assignments").WithOAuthBearerToken(accessToken).PostJsonAsync(ValidateModel(promotionAssignment));
 		public Task DeleteAssignmentAsync(string promotionID, string buyerID, string userID = null, string userGroupID = null, string accessToken = null) => Request("v1", "promotions", promotionID, "assignments").WithOAuthBearerToken(accessToken).SetQueryParams(new { buyerID, userID, userGroupID }).DeleteAsync();
