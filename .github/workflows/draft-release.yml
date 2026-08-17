@@ -5,12 +5,17 @@ on:
     branches: [ "master" ]
   workflow_dispatch: # manual trigger
 
+permissions:
+  contents: write
+
 jobs:
   build_test_pack:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
       uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
 
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
@@ -25,30 +30,48 @@ jobs:
 
     - name: Test
       run: dotnet test -c Release --no-build --verbosity normal
-      
-    # Compare version from csproj with latest release tag.
-    # If different, create a draft release.
-      
+
+    # If csproj version differs from the latest GitHub release, publish a release
+    # (nupkg attached). That triggers publish.yml / NuGet Trusted Publishing.
+
     - name: Get csproj version
       id: csproj_ver
       uses: KageKirin/get-csproj-version@v1.0.0
       with:
         file: src/OrderCloud.SDK/OrderCloud.SDK.csproj
-        
+
     - name: Get latest release tag
       id: release_ver
       uses: InsonusK/get-latest-release@v1.0.1
       with:
-        myToken: ${{ github.token }} #required to see drafts
+        myToken: ${{ github.token }}
         exclude_types: prerelease
         view_top: 1
-        
+
     - name: Output versions
       run: |
         echo "csproj version: ${{ steps.csproj_ver.outputs.version }}"
         echo "latest release: ${{ steps.release_ver.outputs.tag_name }}"
-      
-    - name: Draft release
+
+    - name: Build release notes
+      id: notes
+      env:
+        CSPROJ_VER: ${{ steps.csproj_ver.outputs.version }}
+        RELEASE_VER: ${{ steps.release_ver.outputs.tag_name }}
+      if: env.CSPROJ_VER != env.RELEASE_VER
+      run: |
+        {
+          echo "body<<EOF"
+          echo "- Updates for latest OrderCloud API version"
+          if [ -n "$RELEASE_VER" ] && git rev-parse "$RELEASE_VER" >/dev/null 2>&1; then
+            echo
+            echo "### Commits since $RELEASE_VER"
+            git log --oneline "${RELEASE_VER}..HEAD" --no-merges | head -20 || true
+          fi
+          echo "EOF"
+        } >> "$GITHUB_OUTPUT"
+
+    - name: Create and publish release
       env:
         CSPROJ_VER: ${{ steps.csproj_ver.outputs.version }}
         RELEASE_VER: ${{ steps.release_ver.outputs.tag_name }}
@@ -56,6 +79,8 @@ jobs:
       uses: ncipollo/release-action@v1.10.0
       with:
         tag: ${{ env.CSPROJ_VER }}
-        body: "- Updates for latest OrderCloud API version"
+        name: ${{ env.CSPROJ_VER }}
+        body: ${{ steps.notes.outputs.body }}
         artifacts: "**/*.nupkg"
-        draft: true
+        draft: false
+        skipIfReleaseExists: true

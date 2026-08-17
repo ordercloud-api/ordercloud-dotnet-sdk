@@ -3,24 +3,53 @@ name: Publish
 on:
   release:
     types: [published]
-  workflow_dispatch: #manual trigger
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Release tag to publish (e.g. 0.19.2). Required for workflow_dispatch.
+        required: true
+        type: string
 
 jobs:
   publish:
     runs-on: ubuntu-latest
+    # No GitHub Environment yet — nuget.org Trusted Publishing policy has Environment blank.
+    # When adding nuget-prod: set environment here AND on the nuget.org policy.
+    permissions:
+      id-token: write
+      contents: read
 
     steps:
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: 8.0.x
-          
+
+      - name: Resolve release tag
+        id: tag
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+          INPUT_TAG: ${{ inputs.tag }}
+        run: |
+          if [ "$EVENT_NAME" = "release" ]; then
+            echo "name=$RELEASE_TAG" >> "$GITHUB_OUTPUT"
+          else
+            echo "name=$INPUT_TAG" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Download package
         uses: robinraju/release-downloader@v1.4
         with:
-          latest: true
+          tag: ${{ steps.tag.outputs.name }}
           filename: "*.nupkg"
           token: ${{ github.token }}
-          
+
+      - name: NuGet login (OIDC → temp API key)
+        uses: NuGet/login@v1
+        id: login
+        with:
+          user: ${{ secrets.NUGET_USER }}
+
       - name: Publish to NuGet
-        run: dotnet nuget push "*.nupkg" --api-key ${{secrets.nuget_api_key}} --source https://api.nuget.org/v3/index.json --skip-duplicate
+        run: dotnet nuget push "*.nupkg" --api-key "${{ steps.login.outputs.NUGET_API_KEY }}" --source https://api.nuget.org/v3/index.json --skip-duplicate
