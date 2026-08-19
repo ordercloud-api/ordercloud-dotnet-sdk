@@ -30,7 +30,7 @@ jobs:
 
     steps:
       - name: Setup .NET
-        uses: actions/setup-dotnet@v3
+        uses: actions/setup-dotnet@v5
         with:
           dotnet-version: 8.0.x
 
@@ -48,10 +48,10 @@ jobs:
           fi
 
       - name: Download package
-        uses: robinraju/release-downloader@v1.4
+        uses: robinraju/release-downloader@v1.13
         with:
           tag: ${{ steps.tag.outputs.name }}
-          filename: "*.nupkg"
+          fileName: "*.nupkg"
           token: ${{ github.token }}
 
       - name: NuGet login (OIDC → temp API key)
