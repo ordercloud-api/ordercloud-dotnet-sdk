@@ -1,4 +1,4 @@
-name: Draft Release
+name: Release
 
 on:
   push:
@@ -7,10 +7,14 @@ on:
 
 permissions:
   contents: write
+  id-token: write
 
 jobs:
   build_test_pack:
     runs-on: ubuntu-latest
+    outputs:
+      publish: ${{ steps.decide.outputs.publish }}
+      tag: ${{ steps.csproj_ver.outputs.version }}
     steps:
     - name: Checkout
       uses: actions/checkout@v3
@@ -31,9 +35,6 @@ jobs:
     - name: Test
       run: dotnet test -c Release --no-build --verbosity normal
 
-    # If csproj version differs from the latest GitHub release, publish a release
-    # (nupkg attached). That triggers publish.yml / NuGet Trusted Publishing.
-
     - name: Get csproj version
       id: csproj_ver
       uses: KageKirin/get-csproj-version@v1.0.0
@@ -53,12 +54,27 @@ jobs:
         echo "csproj version: ${{ steps.csproj_ver.outputs.version }}"
         echo "latest release: ${{ steps.release_ver.outputs.tag_name }}"
 
-    - name: Build release notes
-      id: notes
+    # A release created with GITHUB_TOKEN does not start other workflows
+    # (https://docs.github.com/en/actions/how-tos/write-workflows/choose-when-workflows-run/trigger-a-workflow#triggering-a-workflow-from-a-workflow).
+    # Call publish.yml via workflow_call instead of relying on the release event.
+    - name: Decide whether to publish
+      id: decide
       env:
         CSPROJ_VER: ${{ steps.csproj_ver.outputs.version }}
         RELEASE_VER: ${{ steps.release_ver.outputs.tag_name }}
-      if: env.CSPROJ_VER != env.RELEASE_VER
+      run: |
+        if [ "$CSPROJ_VER" != "$RELEASE_VER" ]; then
+          echo "publish=true" >> "$GITHUB_OUTPUT"
+        else
+          echo "publish=false" >> "$GITHUB_OUTPUT"
+        fi
+
+    - name: Build release notes
+      id: notes
+      if: steps.decide.outputs.publish == 'true'
+      env:
+        CSPROJ_VER: ${{ steps.csproj_ver.outputs.version }}
+        RELEASE_VER: ${{ steps.release_ver.outputs.tag_name }}
       run: |
         {
           echo "body<<EOF"
@@ -72,10 +88,9 @@ jobs:
         } >> "$GITHUB_OUTPUT"
 
     - name: Create and publish release
+      if: steps.decide.outputs.publish == 'true'
       env:
         CSPROJ_VER: ${{ steps.csproj_ver.outputs.version }}
-        RELEASE_VER: ${{ steps.release_ver.outputs.tag_name }}
-      if: env.CSPROJ_VER != env.RELEASE_VER
       uses: ncipollo/release-action@v1.10.0
       with:
         tag: ${{ env.CSPROJ_VER }}
@@ -84,3 +99,16 @@ jobs:
         artifacts: "**/*.nupkg"
         draft: false
         skipIfReleaseExists: true
+
+  # Same pipeline, not a GITHUB_TOKEN-triggered release event. Keeps nuget.org
+  # Trusted Publishing policy pointed at publish.yml.
+  publish:
+    needs: build_test_pack
+    if: needs.build_test_pack.outputs.publish == 'true'
+    uses: ./.github/workflows/publish.yml
+    with:
+      tag: ${{ needs.build_test_pack.outputs.tag }}
+    secrets: inherit
+    permissions:
+      id-token: write
+      contents: read
