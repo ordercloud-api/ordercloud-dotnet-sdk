@@ -1,26 +1,65 @@
 name: Publish
 
 on:
+  # Human-created GitHub releases (UI) still fire this. Releases created by
+  # GITHUB_TOKEN in the Release workflow do not; that path calls this file via
+  # workflow_call instead.
   release:
     types: [published]
-  workflow_dispatch: #manual trigger
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Release tag to publish (e.g. 0.19.2). Required for workflow_dispatch.
+        required: true
+        type: string
+  workflow_call:
+    inputs:
+      tag:
+        description: Release tag whose nupkg should be pushed to NuGet.
+        required: true
+        type: string
 
 jobs:
   publish:
     runs-on: ubuntu-latest
+    # No GitHub Environment yet — nuget.org Trusted Publishing policy has Environment blank.
+    # When adding nuget-prod: set environment here AND on the nuget.org policy.
+    permissions:
+      id-token: write
+      contents: read
 
     steps:
       - name: Setup .NET
-        uses: actions/setup-dotnet@v3
+        uses: actions/setup-dotnet@v5
         with:
           dotnet-version: 8.0.x
-          
+
+      - name: Resolve release tag
+        id: tag
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+          INPUT_TAG: ${{ inputs.tag }}
+        run: |
+          if [ "$EVENT_NAME" = "release" ]; then
+            echo "name=$RELEASE_TAG" >> "$GITHUB_OUTPUT"
+          else
+            echo "name=$INPUT_TAG" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Download package
-        uses: robinraju/release-downloader@v1.4
+        uses: robinraju/release-downloader@v1.13
         with:
-          latest: true
-          filename: "*.nupkg"
+          tag: ${{ steps.tag.outputs.name }}
+          fileName: "*.nupkg"
           token: ${{ github.token }}
-          
+
+      - name: NuGet login (OIDC → temp API key)
+        # Pin to commit SHA (v1.2.0). Tags like v1 can be moved; the SHA cannot.
+        uses: NuGet/login@8d196754b4036150537f80ac539e15c2f1028841
+        id: login
+        with:
+          user: ${{ secrets.NUGET_USER }}
+
       - name: Publish to NuGet
-        run: dotnet nuget push "*.nupkg" --api-key ${{secrets.nuget_api_key}} --source https://api.nuget.org/v3/index.json --skip-duplicate
+        run: dotnet nuget push "*.nupkg" --api-key "${{ steps.login.outputs.NUGET_API_KEY }}" --source https://api.nuget.org/v3/index.json --skip-duplicate
