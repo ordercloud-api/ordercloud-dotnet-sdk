@@ -200,8 +200,6 @@ namespace OrderCloud.SDK
 		/// <summary>Used for OAuth 2.0 workflows and impersonation.</summary>
 		[ApiReadOnly]
 		public string ID { get => GetProp<string>("ID"); set => SetProp<string>("ID", value); }
-		/// <summary>Enables the OAuth 2.0 client credentials grant type. Required on all OAuth workflows when present.</summary>
-		public string ClientSecret { get => GetProp<string>("ClientSecret"); set => SetProp<string>("ClientSecret", value); }
 		/// <summary>Access token duration of the api client. Required. Must be between 10 and 600.</summary>
 		[Required]
 		public int AccessTokenDuration { get => GetProp<int>("AccessTokenDuration"); set => SetProp<int>("AccessTokenDuration", value); }
