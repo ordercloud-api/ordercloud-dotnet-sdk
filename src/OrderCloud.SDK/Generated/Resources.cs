@@ -1804,7 +1804,6 @@ namespace OrderCloud.SDK
 		Task<DeliveryConfig> PatchAsync(string deliveryConfigID, PartialDeliveryConfig partialDeliveryConfig, string accessToken = null);
 	}
 
-	/// <summary>Features in beta are subject to change and are not available in production.</summary>
 	public interface IDiscountsResource
 	{
 		/// <summary>Retrieve a discount.</summary>
