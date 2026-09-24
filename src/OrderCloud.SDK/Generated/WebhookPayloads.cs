@@ -1687,7 +1687,6 @@ namespace OrderCloud.SDK
 				public string DeliveryConfigID { get; set; }
 			}
 		}
-		/// <summary>Features in beta are subject to change and are not available in production.</summary>
 		public static class Discounts
 		{
 			/// <summary>Webhook payload sent by OrderCloud on POST v1/discounts.</summary>
